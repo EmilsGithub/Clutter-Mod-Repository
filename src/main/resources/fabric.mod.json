@@ -3,13 +3,13 @@
 	"id": "clutter",
 	"version": "${version}",
 	"name": "Clutter",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Aims to add decoration blocks while still keeping to the 'vanilla' style.",
 	"authors": [
 		"EmilSG"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://www.curseforge.com/minecraft/mc-mods/clutter",
+		"sources": "https://github.com/EmilsGithub/Clutter-1.19.3"
 	},
 	"license": "MIT",
 	"icon": "assets/clutter/icon.png",

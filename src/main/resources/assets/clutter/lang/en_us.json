@@ -1,0 +1,9 @@
+{
+  "block.clutter.copper_lantern": "Copper Lantern",
+  "block.clutter.copper_chain": "Copper Chain",
+  "block.clutter.copper_bars": "Copper Bars",
+
+  "item.clutter.copper_nugget": "Copper Nugget",
+
+  "itemgroup.clutter": "Clutter"
+}

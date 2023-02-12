@@ -1,0 +1,9 @@
+
+{
+  "replace": false,
+  "values": [
+    "clutter:copper_lantern",
+    "clutter:copper_bars",
+    "clutter:copper_chain"
+  ]
+}
