@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "s": {
+      "tag": "minecraft:wooden_slabs"
+    },
+    "a": {
+      "item": "minecraft:apple"
+    }
+  },
+  "pattern": [
+    "sas",
+    "sss"
+  ],
+  "result": {
+    "item": "clutter:apple_food_box"
+  }
+}

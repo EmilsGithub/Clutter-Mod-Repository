@@ -2,6 +2,10 @@
   "block.clutter.copper_lantern": "Copper Lantern",
   "block.clutter.copper_chain": "Copper Chain",
   "block.clutter.copper_bars": "Copper Bars",
+  "block.clutter.carrot_vegetable_box": "Carrot Vegetable Box",
+  "block.clutter.potato_vegetable_box": "Potato Vegetable Box",
+  "block.clutter.beetroot_vegetable_box": "Beetroot Vegetable Box",
+  "block.clutter.apple_vegetable_box": "Apple Vegetable Box",
 
   "item.clutter.copper_nugget": "Copper Nugget",
 

@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-
+    "clutter:carrot_food_box",
+    "clutter:potato_food_box",
+    "clutter:beetroot_food_box",
+    "clutter:apple_food_box"
   ]
 }

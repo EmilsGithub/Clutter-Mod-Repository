@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "clutter:block/potato_food_box",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "clutter:block/potato_food_box"
+    },
+    "facing=west": {
+      "model": "clutter:block/potato_food_box",
+      "y": 90
+    },
+    "facing=east": {
+      "model": "clutter:block/potato_food_box",
+      "y": 270
+    }
+  }
+}

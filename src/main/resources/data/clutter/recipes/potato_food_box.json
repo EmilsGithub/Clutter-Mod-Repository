@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "s": {
+      "tag": "minecraft:wooden_slabs"
+    },
+    "p": {
+      "item": "minecraft:potato"
+    }
+  },
+  "pattern": [
+    "sps",
+    "sss"
+  ],
+  "result": {
+    "item": "clutter:potato_food_box"
+  }
+}

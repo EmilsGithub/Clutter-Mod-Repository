@@ -1,0 +1,9 @@
+{
+	"parent": "clutter:block/food_box_parent",
+	"textures": {
+		"0": "clutter:block/food_box_side",
+		"1": "clutter:block/food_box_bottom",
+		"2": "clutter:block/apple_food_box_top",
+		"particle": "clutter:block/food_box_bottom"
+	}
+}
