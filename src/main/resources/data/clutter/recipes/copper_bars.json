@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "#": {
-      "item": "minecraft:copper_ingot"
+      "tag": "c:copper_ingots"
     }
   },
   "pattern": [

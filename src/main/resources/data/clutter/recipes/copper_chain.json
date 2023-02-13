@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "C": {
-      "item": "minecraft:copper_ingot"
+      "tag": "c:copper_ingots"
     },
     "N": {
       "tag": "c:copper_nuggets"
