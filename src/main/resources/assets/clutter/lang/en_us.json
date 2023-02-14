@@ -1,11 +1,17 @@
 {
+  "block.clutter.iron_button": "Iron Button",
+  "block.clutter.copper_button": "Copper Button",
   "block.clutter.copper_lantern": "Copper Lantern",
   "block.clutter.copper_chain": "Copper Chain",
   "block.clutter.copper_bars": "Copper Bars",
-  "block.clutter.carrot_vegetable_box": "Carrot Vegetable Box",
-  "block.clutter.potato_vegetable_box": "Potato Vegetable Box",
-  "block.clutter.beetroot_vegetable_box": "Beetroot Vegetable Box",
-  "block.clutter.apple_vegetable_box": "Apple Vegetable Box",
+  "block.clutter.copper_door": "Copper Door",
+  "block.clutter.copper_trapdoor": "Copper Trapdoor",
+  "block.clutter.copper_pressure_plate": "Copper Pressure Plate",
+  "block.clutter.carrot_food_box": "Carrot Food Box",
+  "block.clutter.potato_food_box": "Potato Food Box",
+  "block.clutter.beetroot_food_box": "Beetroot Food Box",
+  "block.clutter.apple_food_box": "Apple Food Box",
+  "block.clutter.food_box": "Food Box",
 
   "item.clutter.copper_nugget": "Copper Nugget",
 

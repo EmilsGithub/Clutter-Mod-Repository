@@ -1,17 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#F#",
+    "###"
+  ],
   "key": {
-    "s": {
-      "tag": "minecraft:wooden_slabs"
-    },
-    "p": {
+    "#": {
       "item": "minecraft:potato"
+    },
+    "F": {
+      "item": "clutter:food_box"
     }
   },
-  "pattern": [
-    "sps",
-    "sss"
-  ],
   "result": {
     "item": "clutter:potato_food_box"
   }

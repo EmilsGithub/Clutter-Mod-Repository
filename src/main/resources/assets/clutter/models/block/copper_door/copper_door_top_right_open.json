@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top_right_open",
+  "textures": {
+    "bottom": "clutter:block/copper_door_bottom",
+    "top": "clutter:block/copper_door_top"
+  }
+}
