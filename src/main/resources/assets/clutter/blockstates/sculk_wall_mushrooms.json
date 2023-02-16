@@ -1,0 +1,42 @@
+{
+  "variants": {
+    "facing=north": [
+      {
+        "model": "clutter:block/wall_mushrooms/sculk_wall_mushrooms"
+      },
+      {
+        "model": "clutter:block/wall_mushrooms/sculk_wall_mushrooms2"
+      }
+    ],
+    "facing=south": [
+      {
+        "model": "clutter:block/wall_mushrooms/sculk_wall_mushrooms",
+        "y": 180
+      },
+      {
+        "model": "clutter:block/wall_mushrooms/sculk_wall_mushrooms2",
+        "y": 180
+      }
+    ],
+    "facing=west": [
+      {
+        "model": "clutter:block/wall_mushrooms/sculk_wall_mushrooms",
+        "y": 270
+      },
+      {
+        "model": "clutter:block/wall_mushrooms/sculk_wall_mushrooms2",
+        "y": 270
+      }
+    ],
+    "facing=east": [
+      {
+        "model": "clutter:block/wall_mushrooms/sculk_wall_mushrooms",
+        "y": 90
+      },
+      {
+        "model": "clutter:block/wall_mushrooms/sculk_wall_mushrooms2",
+        "y": 90
+      }
+    ]
+  }
+}

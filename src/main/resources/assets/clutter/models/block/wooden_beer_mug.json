@@ -1,0 +1,7 @@
+{
+	"parent": "clutter:block/wooden_mug",
+	"textures": {
+		"1": "clutter:block/wooden_beer_mug",
+		"particle": "clutter:block/wooden_beer_mug"
+	}
+}

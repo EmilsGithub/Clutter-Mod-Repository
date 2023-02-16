@@ -18,5 +18,6 @@ public class Clutter implements ModInitializer {
 		ModItemGroup.registerItemGroups();
 		ModItems.registerModItems();
 		ModBlocks.registerModBlocks();
+
 	}
 }

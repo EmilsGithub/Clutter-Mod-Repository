@@ -3,6 +3,7 @@ package net.emilsg.clutter;
 import net.emilsg.clutter.block.ModBlocks;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.renderer.v1.material.MaterialFinder;
 import net.minecraft.client.render.RenderLayer;
 
 public class ClutterClient implements ClientModInitializer {
@@ -18,5 +19,6 @@ public class ClutterClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), ModBlocks.APPLE_FOOD_BOX);
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), ModBlocks.COPPER_TRAPDOOR);
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), ModBlocks.COPPER_DOOR);
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), ModBlocks.WOODEN_MUG);
     }
 }

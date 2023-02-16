@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "clutter:brown_wall_mushrooms"
+    }
+  ],
+  "result": {
+    "item": "minecraft:brown_mushroom"
+  }
+}

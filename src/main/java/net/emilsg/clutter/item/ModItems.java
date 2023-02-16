@@ -9,6 +9,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
+
 public class ModItems {
 
     public static final Item COPPER_NUGGET = registerItem("copper_nugget", new Item(new FabricItemSettings()));

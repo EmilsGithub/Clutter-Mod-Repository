@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "clutter:sculk_mushroom"
+    }
+  ],
+  "result": {
+    "item": "clutter:sculk_wall_mushrooms"
+  }
+}

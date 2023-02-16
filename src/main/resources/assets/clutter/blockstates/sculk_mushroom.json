@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "clutter:block/sculk_mushroom"
+      },
+      {
+        "model": "clutter:block/sculk_mushroom2"
+      }
+    ]
+  }
+}
