@@ -1,6 +1,7 @@
 package net.emilsg.clutter.block;
 
 import net.emilsg.clutter.Clutter;
+import net.emilsg.clutter.block.custom.ChimneyBlock;
 import net.emilsg.clutter.block.custom.FoodBoxBlock;
 import net.emilsg.clutter.block.custom.ModMushroomPlantBlock;
 import net.emilsg.clutter.block.custom.MugBlock;
@@ -23,6 +24,8 @@ public class ModBlocks {
     public static final Block BROWN_WALL_MUSHROOMS = registerBlock("brown_wall_mushrooms", new LadderBlock(FabricBlockSettings.copy(Blocks.VINE)), ModItemGroup.CLUTTER);
     public static final Block SCULK_WALL_MUSHROOMS = registerBlock("sculk_wall_mushrooms", new LadderBlock(FabricBlockSettings.copy(Blocks.VINE).luminance(state -> 5)), ModItemGroup.CLUTTER);
     public static final Block SCULK_MUSHROOM = registerBlock("sculk_mushroom", new ModMushroomPlantBlock(FabricBlockSettings.copy(Blocks.DANDELION).luminance(state -> 5)), ModItemGroup.CLUTTER);
+
+    public static final Block COBBLESTONE_CHIMNEY = registerBlock("cobblestone_chimney", new ChimneyBlock(FabricBlockSettings.copy(Blocks.COBBLESTONE_WALL).luminance(state -> 12)), ModItemGroup.CLUTTER);
 
     public static final Block WOODEN_BEER_MUG = registerBlock("wooden_beer_mug", new MugBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS)), ModItemGroup.CLUTTER);
     public static final Block WOODEN_MUG = registerBlock("wooden_mug", new MugBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS)), ModItemGroup.CLUTTER);
