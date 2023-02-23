@@ -1,10 +1,7 @@
 package net.emilsg.clutter.block;
 
 import net.emilsg.clutter.Clutter;
-import net.emilsg.clutter.block.custom.ChimneyBlock;
-import net.emilsg.clutter.block.custom.FoodBoxBlock;
-import net.emilsg.clutter.block.custom.ModMushroomPlantBlock;
-import net.emilsg.clutter.block.custom.MugBlock;
+import net.emilsg.clutter.block.custom.*;
 import net.emilsg.clutter.item.ModItemGroup;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
@@ -25,7 +22,43 @@ public class ModBlocks {
     public static final Block SCULK_WALL_MUSHROOMS = registerBlock("sculk_wall_mushrooms", new LadderBlock(FabricBlockSettings.copy(Blocks.VINE).luminance(state -> 5)), ModItemGroup.CLUTTER);
     public static final Block SCULK_MUSHROOM = registerBlock("sculk_mushroom", new ModMushroomPlantBlock(FabricBlockSettings.copy(Blocks.DANDELION).luminance(state -> 5)), ModItemGroup.CLUTTER);
 
-    public static final Block COBBLESTONE_CHIMNEY = registerBlock("cobblestone_chimney", new ChimneyBlock(FabricBlockSettings.copy(Blocks.COBBLESTONE_WALL).luminance(state -> 12)), ModItemGroup.CLUTTER);
+    public static final Block COBBLESTONE_CHIMNEY = registerBlock("cobblestone_chimney", new ChimneyBlock(FabricBlockSettings.copy(Blocks.COBBLESTONE_WALL)), ModItemGroup.CLUTTER);
+    public static final Block BRICK_CHIMNEY = registerBlock("brick_chimney", new ChimneyBlock(FabricBlockSettings.copy(Blocks.BRICK_WALL)), ModItemGroup.CLUTTER);
+    public static final Block STONE_BRICK_CHIMNEY = registerBlock("stone_brick_chimney", new ChimneyBlock(FabricBlockSettings.copy(Blocks.STONE_BRICK_WALL)), ModItemGroup.CLUTTER);
+    public static final Block MOSSY_STONE_BRICK_CHIMNEY = registerBlock("mossy_stone_brick_chimney", new ChimneyBlock(FabricBlockSettings.copy(Blocks.MOSSY_STONE_BRICK_WALL)), ModItemGroup.CLUTTER);
+    public static final Block DEEPSLATE_BRICK_CHIMNEY = registerBlock("deepslate_brick_chimney", new ChimneyBlock(FabricBlockSettings.copy(Blocks.DEEPSLATE_BRICK_WALL)), ModItemGroup.CLUTTER);
+    public static final Block MUD_BRICK_CHIMNEY = registerBlock("mud_brick_chimney", new ChimneyBlock(FabricBlockSettings.copy(Blocks.MUD_BRICK_WALL)), ModItemGroup.CLUTTER);
+    public static final Block NETHER_BRICK_CHIMNEY = registerBlock("nether_brick_chimney", new ChimneyBlock(FabricBlockSettings.copy(Blocks.NETHER_BRICK_WALL)), ModItemGroup.CLUTTER);
+    public static final Block RED_NETHER_BRICK_CHIMNEY = registerBlock("red_nether_brick_chimney", new ChimneyBlock(FabricBlockSettings.copy(Blocks.RED_NETHER_BRICK_WALL)), ModItemGroup.CLUTTER);
+    public static final Block POLISHED_BLACKSTONE_BRICK_CHIMNEY = registerBlock("polished_blackstone_brick_chimney", new ChimneyBlock(FabricBlockSettings.copy(Blocks.POLISHED_BLACKSTONE_BRICK_WALL)), ModItemGroup.CLUTTER);
+    public static final Block END_STONE_BRICK_CHIMNEY = registerBlock("end_stone_brick_chimney", new ChimneyBlock(FabricBlockSettings.copy(Blocks.END_STONE_BRICK_WALL)), ModItemGroup.CLUTTER);
+    public static final Block DEEPSLATE_TILE_CHIMNEY = registerBlock("deepslate_tile_chimney", new ChimneyBlock(FabricBlockSettings.copy(Blocks.DEEPSLATE_TILE_WALL)), ModItemGroup.CLUTTER);
+
+    public static final Block OAK_WINDOW_SILL = registerBlock("oak_window_sill", new WindowSillBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS)), ModItemGroup.CLUTTER);
+    public static final Block DARK_OAK_WINDOW_SILL = registerBlock("dark_oak_window_sill", new WindowSillBlock(FabricBlockSettings.copy(Blocks.DARK_OAK_PLANKS)), ModItemGroup.CLUTTER);
+    public static final Block BIRCH_WINDOW_SILL = registerBlock("birch_window_sill", new WindowSillBlock(FabricBlockSettings.copy(Blocks.BIRCH_PLANKS)), ModItemGroup.CLUTTER);
+    public static final Block JUNGLE_WINDOW_SILL = registerBlock("jungle_window_sill", new WindowSillBlock(FabricBlockSettings.copy(Blocks.JUNGLE_PLANKS)), ModItemGroup.CLUTTER);
+    public static final Block ACACIA_WINDOW_SILL = registerBlock("acacia_window_sill", new WindowSillBlock(FabricBlockSettings.copy(Blocks.ACACIA_PLANKS)), ModItemGroup.CLUTTER);
+    public static final Block SPRUCE_WINDOW_SILL = registerBlock("spruce_window_sill", new WindowSillBlock(FabricBlockSettings.copy(Blocks.SPRUCE_PLANKS)), ModItemGroup.CLUTTER);
+    public static final Block CRIMSON_WINDOW_SILL = registerBlock("crimson_window_sill", new WindowSillBlock(FabricBlockSettings.copy(Blocks.CRIMSON_PLANKS)), ModItemGroup.CLUTTER);
+    public static final Block WARPED_WINDOW_SILL = registerBlock("warped_window_sill", new WindowSillBlock(FabricBlockSettings.copy(Blocks.WARPED_PLANKS)), ModItemGroup.CLUTTER);
+    public static final Block MANGROVE_WINDOW_SILL = registerBlock("mangrove_window_sill", new WindowSillBlock(FabricBlockSettings.copy(Blocks.MANGROVE_PLANKS)), ModItemGroup.CLUTTER);
+
+    public static final Block OAK_WALL_BOOKSHELF = registerBlock("oak_wall_bookshelf", new WallBookshelfBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).luminance(WallBookshelfBlock.createLightLevelFromLitBlockState(10))), ModItemGroup.CLUTTER);
+    public static final Block DARK_OAK_WALL_BOOKSHELF = registerBlock("dark_oak_wall_bookshelf", new WallBookshelfBlock(FabricBlockSettings.copy(Blocks.DARK_OAK_PLANKS).luminance(WallBookshelfBlock.createLightLevelFromLitBlockState(10))), ModItemGroup.CLUTTER);
+    public static final Block BIRCH_WALL_BOOKSHELF = registerBlock("birch_wall_bookshelf", new WallBookshelfBlock(FabricBlockSettings.copy(Blocks.BIRCH_PLANKS).luminance(WallBookshelfBlock.createLightLevelFromLitBlockState(10))), ModItemGroup.CLUTTER);
+    public static final Block JUNGLE_WALL_BOOKSHELF = registerBlock("jungle_wall_bookshelf", new WallBookshelfBlock(FabricBlockSettings.copy(Blocks.JUNGLE_PLANKS).luminance(WallBookshelfBlock.createLightLevelFromLitBlockState(10))), ModItemGroup.CLUTTER);
+    public static final Block ACACIA_WALL_BOOKSHELF = registerBlock("acacia_wall_bookshelf", new WallBookshelfBlock(FabricBlockSettings.copy(Blocks.ACACIA_PLANKS).luminance(WallBookshelfBlock.createLightLevelFromLitBlockState(10))), ModItemGroup.CLUTTER);
+    public static final Block SPRUCE_WALL_BOOKSHELF = registerBlock("spruce_wall_bookshelf", new WallBookshelfBlock(FabricBlockSettings.copy(Blocks.SPRUCE_PLANKS).luminance(WallBookshelfBlock.createLightLevelFromLitBlockState(10))), ModItemGroup.CLUTTER);
+    public static final Block CRIMSON_WALL_BOOKSHELF = registerBlock("crimson_wall_bookshelf", new WallBookshelfBlock(FabricBlockSettings.copy(Blocks.CRIMSON_PLANKS).luminance(WallBookshelfBlock.createLightLevelFromLitBlockState(10))), ModItemGroup.CLUTTER);
+    public static final Block WARPED_WALL_BOOKSHELF = registerBlock("warped_wall_bookshelf", new WallBookshelfBlock(FabricBlockSettings.copy(Blocks.WARPED_PLANKS).luminance(WallBookshelfBlock.createLightLevelFromLitBlockState(10))), ModItemGroup.CLUTTER);
+    public static final Block MANGROVE_WALL_BOOKSHELF = registerBlock("mangrove_wall_bookshelf", new WallBookshelfBlock(FabricBlockSettings.copy(Blocks.MANGROVE_PLANKS).luminance(WallBookshelfBlock.createLightLevelFromLitBlockState(10))), ModItemGroup.CLUTTER);
+
+
+
+
+
+
 
     public static final Block WOODEN_BEER_MUG = registerBlock("wooden_beer_mug", new MugBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS)), ModItemGroup.CLUTTER);
     public static final Block WOODEN_MUG = registerBlock("wooden_mug", new MugBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS)), ModItemGroup.CLUTTER);
@@ -44,9 +77,6 @@ public class ModBlocks {
     public static final Block POTATO_FOOD_BOX = registerBlock("potato_food_box", new FoodBoxBlock(FabricBlockSettings.copy(Blocks.OAK_SLAB)), ModItemGroup.CLUTTER);
     public static final Block BEETROOT_FOOD_BOX = registerBlock("beetroot_food_box", new FoodBoxBlock(FabricBlockSettings.copy(Blocks.OAK_SLAB)), ModItemGroup.CLUTTER);
     public static final Block APPLE_FOOD_BOX = registerBlock("apple_food_box", new FoodBoxBlock(FabricBlockSettings.copy(Blocks.OAK_SLAB)), ModItemGroup.CLUTTER);
-
-
-
 
     private static Block registerBlock(String name, Block block, ItemGroup group) {
         registerBlockItem(name, block, group);

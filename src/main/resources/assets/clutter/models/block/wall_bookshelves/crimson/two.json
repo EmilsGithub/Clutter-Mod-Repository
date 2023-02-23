@@ -1,0 +1,7 @@
+{
+	"parent": "clutter:block/wall_bookshelves/wall_bookshelf_parent_two",
+	"textures": {
+		"0": "minecraft:block/crimson_planks",
+		"particle": "minecraft:block/crimson_planks"
+	}
+}

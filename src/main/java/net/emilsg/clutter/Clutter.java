@@ -1,6 +1,7 @@
 package net.emilsg.clutter;
 
 import net.emilsg.clutter.block.ModBlocks;
+import net.emilsg.clutter.block.entity.ModBlockEntities;
 import net.emilsg.clutter.item.ModItemGroup;
 import net.emilsg.clutter.item.ModItems;
 import net.fabricmc.api.ModInitializer;
@@ -18,6 +19,7 @@ public class Clutter implements ModInitializer {
 		ModItemGroup.registerItemGroups();
 		ModItems.registerModItems();
 		ModBlocks.registerModBlocks();
+		ModBlockEntities.registerBlockEntities();
 
 	}
 }

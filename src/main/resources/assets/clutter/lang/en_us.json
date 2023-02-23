@@ -19,6 +19,38 @@
   "block.clutter.sculk_wall_mushrooms": "Sculk Wall Mushrooms",
   "block.clutter.sculk_mushroom": "Sculk Mushroom",
 
+  "block.clutter.cobblestone_chimney": "Cobblestone Chimney",
+  "block.clutter.brick_chimney": "Brick Chimney",
+  "block.clutter.stone_brick_chimney": "Stone Brick Chimney",
+  "block.clutter.mossy_stone_brick_chimney": "Mossy Stone Brick Chimney",
+  "block.clutter.deepslate_brick_chimney": "Deepslate Brick Chimney",
+  "block.clutter.mud_brick_chimney": "Mud Brick Chimney",
+  "block.clutter.nether_brick_chimney": "Nether Brick Chimney",
+  "block.clutter.red_nether_brick_chimney": "Red Nether Brick Chimney",
+  "block.clutter.polished_blackstone_brick_chimney": "Polished Blackstone Chimney",
+  "block.clutter.end_stone_brick_chimney": "End Stone Brick Chimney",
+  "block.clutter.deepslate_tile_chimney": "Deepslate Tile Chimney",
+
+  "block.clutter.oak_window_sill": "Oak Window Sill",
+  "block.clutter.dark_oak_window_sill": "Dark Oak Window Sill",
+  "block.clutter.acacia_window_sill": "Acacia Window Sill",
+  "block.clutter.birch_window_sill": "Birch Window Sill",
+  "block.clutter.crimson_window_sill": "Crimson Window Sill",
+  "block.clutter.jungle_window_sill": "Jungle Window Sill",
+  "block.clutter.mangrove_window_sill": "Mangrove Window Sill",
+  "block.clutter.spruce_window_sill": "Spruce Window Sill",
+  "block.clutter.warped_window_sill": "Warped Window Sill",
+
+  "block.clutter.oak_wall_bookshelf": "Oak Wall Bookshelf",
+  "block.clutter.dark_oak_wall_bookshelf": "Dark Oak Wall Bookshelf",
+  "block.clutter.acacia_wall_bookshelf": "Acacia Wall Bookshelf",
+  "block.clutter.birch_wall_bookshelf": "Birch Wall Bookshelf",
+  "block.clutter.crimson_wall_bookshelf": "Crimson Wall Bookshelf",
+  "block.clutter.jungle_wall_bookshelf": "Jungle Wall Bookshelf",
+  "block.clutter.mangrove_wall_bookshelf": "Mangrove Wall Bookshelf",
+  "block.clutter.spruce_wall_bookshelf": "Spruce Wall Bookshelf",
+  "block.clutter.warped_wall_bookshelf": "Warped Wall Bookshelf",
+
   "item.clutter.copper_nugget": "Copper Nugget",
 
   "itemgroup.clutter": "Clutter"

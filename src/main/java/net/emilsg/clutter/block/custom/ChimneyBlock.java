@@ -1,5 +1,7 @@
 package net.emilsg.clutter.block.custom;
 
+import net.emilsg.clutter.block.entity.ChimneyBlockEntity;
+import net.emilsg.clutter.block.entity.ModBlockEntities;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -11,10 +13,6 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.registry.tag.FluidTags;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
@@ -28,7 +26,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
-public class ChimneyBlock extends Block implements FluidFillable, Waterloggable{
+public class ChimneyBlock extends BlockWithEntity implements FluidFillable, Waterloggable{
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
     protected static final VoxelShape SHAPE = VoxelShapes.union(
             Block.createCuboidShape(2.0, 0.0, 2.0, 14.0, 13.0, 14.0),
@@ -79,15 +77,20 @@ public class ChimneyBlock extends Block implements FluidFillable, Waterloggable{
     }
 
     @Override
+    public BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.MODEL;
+    }
+
+    @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-            ChimneyBlock.spawnSmokeParticles(world, pos, true, state);
+        ChimneyBlock.spawnSmokeParticles(world, pos, true, state);
     }
 
     public static void spawnSmokeParticles(World world, BlockPos pos, boolean lotsOfSmoke, BlockState state) {
         Random random = world.getRandom();
         DefaultParticleType defaultParticleType = ParticleTypes.CAMPFIRE_COSY_SMOKE;
-        if (!state.get(WATERLOGGED)) {
-            world.addImportantParticle(defaultParticleType, true, (double) pos.getX() + 0.5 + random.nextDouble() / 3.0 * (double) (random.nextBoolean() ? 1 : -1), (double) pos.getY() + random.nextDouble() + random.nextDouble() + 0.5, (double) pos.getZ() + 0.5 + random.nextDouble() / 3.0 * (double) (random.nextBoolean() ? 1 : -1), 0.0, 0.07, 0.0);
+            if (!state.get(WATERLOGGED)) {
+                world.addImportantParticle(defaultParticleType, true, (double) pos.getX() + 0.5 + random.nextDouble() / 3.0 * (double) (random.nextBoolean() ? 1 : -1), (double) pos.getY() + random.nextDouble() + random.nextDouble() + 0.5, (double) pos.getZ() + 0.5 + random.nextDouble() / 3.0 * (double) (random.nextBoolean() ? 1 : -1), 0.0, 0.07, 0.0);
             if (lotsOfSmoke) {
                 world.addParticle(ParticleTypes.SMOKE, (double) pos.getX() + 0.5 + random.nextDouble() / 4.0 * (double) (random.nextBoolean() ? 1 : -1), (double) pos.getY() + 0.4, (double) pos.getZ() + 0.5 + random.nextDouble() / 4.0 * (double) (random.nextBoolean() ? 1 : -1), 0.0, 0.005, 0.0);
             }
@@ -112,5 +115,17 @@ public class ChimneyBlock extends Block implements FluidFillable, Waterloggable{
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(WATERLOGGED);
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+        return new ChimneyBlockEntity(pos, state);
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+        return world.isClient() && type == ModBlockEntities.CHIMNEY ? ChimneyBlockEntity::clientTick : null;
     }
 }

@@ -1,0 +1,8 @@
+{
+	"parent": "clutter:block/chimneys/chimney_parent",
+	"textures": {
+		"2": "minecraft:block/polished_blackstone_bricks",
+		"3": "clutter:block/chimney_top",
+		"particle": "minecraft:block/polished_blackstone_bricks"
+	}
+}

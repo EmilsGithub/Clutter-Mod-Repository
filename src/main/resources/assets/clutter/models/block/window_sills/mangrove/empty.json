@@ -1,0 +1,7 @@
+{
+	"parent": "clutter:block/window_sills/window_sill_parent_empty",
+	"textures": {
+		"0": "minecraft:block/mangrove_planks",
+		"particle": "minecraft:block/mangrove_planks"
+	}
+}

@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "clutter:block/cobblestone_chimney"
+      "model": "clutter:block/chimneys/cobblestone_chimney"
     }
   }
 }

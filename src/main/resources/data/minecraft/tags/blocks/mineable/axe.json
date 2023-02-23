@@ -7,6 +7,26 @@
     "clutter:beetroot_food_box",
     "clutter:apple_food_box",
     "clutter:wooden_mug",
-    "clutter:wooden_beer_mug"
+    "clutter:wooden_beer_mug",
+
+    "clutter:oak_wall_bookshelf",
+    "clutter:dark_oak_wall_bookshelf",
+    "clutter:mangrove_wall_bookshelf",
+    "clutter:jungle_wall_bookshelf",
+    "clutter:acacia_wall_bookshelf",
+    "clutter:crimson_wall_bookshelf",
+    "clutter:warped_wall_bookshelf",
+    "clutter:spruce_wall_bookshelf",
+    "clutter:birch_wall_bookshelf",
+
+    "clutter:oak_window_sill",
+    "clutter:dark_oak_window_sill",
+    "clutter:mangrove_window_sill",
+    "clutter:jungle_window_sill",
+    "clutter:acacia_window_sill",
+    "clutter:crimson_window_sill",
+    "clutter:warped_window_sill",
+    "clutter:spruce_window_sill",
+    "clutter:birch_window_sill"
   ]
 }

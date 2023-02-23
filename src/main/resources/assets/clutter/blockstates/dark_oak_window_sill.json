@@ -1,0 +1,304 @@
+{
+  "variants":{
+    "current_model=0,facing=north":{
+      "model":"clutter:block/window_sills/dark_oak/empty"
+    },
+    "current_model=0,facing=south":{
+      "model":"clutter:block/window_sills/dark_oak/empty",
+      "y": 180
+    },
+    "current_model=0,facing=east":{
+      "model":"clutter:block/window_sills/dark_oak/empty",
+      "y": 90
+    },
+    "current_model=0,facing=west":{
+      "model":"clutter:block/window_sills/dark_oak/empty",
+      "y": 270
+    },
+    "current_model=1,facing=north":{
+      "model":"clutter:block/window_sills/dark_oak/poppy"
+    },
+    "current_model=1,facing=south":{
+      "model":"clutter:block/window_sills/dark_oak/poppy",
+      "y": 180
+    },
+    "current_model=1,facing=east":{
+      "model":"clutter:block/window_sills/dark_oak/poppy",
+      "y": 90
+    },
+    "current_model=1,facing=west":{
+      "model":"clutter:block/window_sills/dark_oak/poppy",
+      "y": 270
+    },
+    "current_model=2,facing=north":{
+      "model":"clutter:block/window_sills/dark_oak/dandelion"
+    },
+    "current_model=2,facing=south":{
+      "model":"clutter:block/window_sills/dark_oak/dandelion",
+      "y": 180
+    },
+    "current_model=2,facing=east":{
+      "model":"clutter:block/window_sills/dark_oak/dandelion",
+      "y": 90
+    },
+    "current_model=2,facing=west":{
+      "model":"clutter:block/window_sills/dark_oak/dandelion",
+      "y": 270
+    },
+    "current_model=3,facing=north":{
+      "model":"clutter:block/window_sills/dark_oak/cornflower"
+    },
+    "current_model=3,facing=south":{
+      "model":"clutter:block/window_sills/dark_oak/cornflower",
+      "y": 180
+    },
+    "current_model=3,facing=east":{
+      "model":"clutter:block/window_sills/dark_oak/cornflower",
+      "y": 90
+    },
+    "current_model=3,facing=west":{
+      "model":"clutter:block/window_sills/dark_oak/cornflower",
+      "y": 270
+    },
+    "current_model=4,facing=north":{
+      "model":"clutter:block/window_sills/dark_oak/lily_of_the_valley"
+    },
+    "current_model=4,facing=south":{
+      "model":"clutter:block/window_sills/dark_oak/lily_of_the_valley",
+      "y": 180
+    },
+    "current_model=4,facing=east":{
+      "model":"clutter:block/window_sills/dark_oak/lily_of_the_valley",
+      "y": 90
+    },
+    "current_model=4,facing=west":{
+      "model":"clutter:block/window_sills/dark_oak/lily_of_the_valley",
+      "y": 270
+    },
+    "current_model=5,facing=north":{
+      "model":"clutter:block/window_sills/dark_oak/allium"
+    },
+    "current_model=5,facing=south":{
+      "model":"clutter:block/window_sills/dark_oak/allium",
+      "y": 180
+    },
+    "current_model=5,facing=east":{
+      "model":"clutter:block/window_sills/dark_oak/allium",
+      "y": 90
+    },
+    "current_model=5,facing=west":{
+      "model":"clutter:block/window_sills/dark_oak/allium",
+      "y": 270
+    },
+    "current_model=6,facing=north":{
+      "model":"clutter:block/window_sills/dark_oak/blue_orchid"
+    },
+    "current_model=6,facing=south":{
+      "model":"clutter:block/window_sills/dark_oak/blue_orchid",
+      "y": 180
+    },
+    "current_model=6,facing=east":{
+      "model":"clutter:block/window_sills/dark_oak/blue_orchid",
+      "y": 90
+    },
+    "current_model=6,facing=west":{
+      "model":"clutter:block/window_sills/dark_oak/blue_orchid",
+      "y": 270
+    },
+    "current_model=7,facing=north":{
+      "model":"clutter:block/window_sills/dark_oak/azure_bluet"
+    },
+    "current_model=7,facing=south":{
+      "model":"clutter:block/window_sills/dark_oak/azure_bluet",
+      "y": 180
+    },
+    "current_model=7,facing=east":{
+      "model":"clutter:block/window_sills/dark_oak/azure_bluet",
+      "y": 90
+    },
+    "current_model=7,facing=west":{
+      "model":"clutter:block/window_sills/dark_oak/azure_bluet",
+      "y": 270
+    },
+    "current_model=8,facing=north":{
+      "model":"clutter:block/window_sills/dark_oak/oxeye_daisy"
+    },
+    "current_model=8,facing=south":{
+      "model":"clutter:block/window_sills/dark_oak/oxeye_daisy",
+      "y": 180
+    },
+    "current_model=8,facing=east":{
+      "model":"clutter:block/window_sills/dark_oak/oxeye_daisy",
+      "y": 90
+    },
+    "current_model=8,facing=west":{
+      "model":"clutter:block/window_sills/dark_oak/oxeye_daisy",
+      "y": 270
+    },
+    "current_model=9,facing=north":{
+      "model":"clutter:block/window_sills/dark_oak/red_tulip"
+    },
+    "current_model=9,facing=south":{
+      "model":"clutter:block/window_sills/dark_oak/red_tulip",
+      "y": 180
+    },
+    "current_model=9,facing=east":{
+      "model":"clutter:block/window_sills/dark_oak/red_tulip",
+      "y": 90
+    },
+    "current_model=9,facing=west":{
+      "model":"clutter:block/window_sills/dark_oak/red_tulip",
+      "y": 270
+    },
+    "current_model=10,facing=north":{
+      "model":"clutter:block/window_sills/dark_oak/orange_tulip"
+    },
+    "current_model=10,facing=south":{
+      "model":"clutter:block/window_sills/dark_oak/orange_tulip",
+      "y": 180
+    },
+    "current_model=10,facing=east":{
+      "model":"clutter:block/window_sills/dark_oak/orange_tulip",
+      "y": 90
+    },
+    "current_model=10,facing=west":{
+      "model":"clutter:block/window_sills/dark_oak/orange_tulip",
+      "y": 270
+    },
+    "current_model=11,facing=north":{
+      "model":"clutter:block/window_sills/dark_oak/white_tulip"
+    },
+    "current_model=11,facing=south":{
+      "model":"clutter:block/window_sills/dark_oak/white_tulip",
+      "y": 180
+    },
+    "current_model=11,facing=east":{
+      "model":"clutter:block/window_sills/dark_oak/white_tulip",
+      "y": 90
+    },
+    "current_model=11,facing=west":{
+      "model":"clutter:block/window_sills/dark_oak/white_tulip",
+      "y": 270
+    },
+    "current_model=12,facing=north":{
+      "model":"clutter:block/window_sills/dark_oak/pink_tulip"
+    },
+    "current_model=12,facing=south":{
+      "model":"clutter:block/window_sills/dark_oak/pink_tulip",
+      "y": 180
+    },
+    "current_model=12,facing=east":{
+      "model":"clutter:block/window_sills/dark_oak/pink_tulip",
+      "y": 90
+    },
+    "current_model=12,facing=west":{
+      "model":"clutter:block/window_sills/dark_oak/pink_tulip",
+      "y": 270
+    },
+    "current_model=13,facing=north":{
+      "model":"clutter:block/window_sills/dark_oak/dead_bush"
+    },
+    "current_model=13,facing=south":{
+      "model":"clutter:block/window_sills/dark_oak/dead_bush",
+      "y": 180
+    },
+    "current_model=13,facing=east":{
+      "model":"clutter:block/window_sills/dark_oak/dead_bush",
+      "y": 90
+    },
+    "current_model=13,facing=west":{
+      "model":"clutter:block/window_sills/dark_oak/dead_bush",
+      "y": 270
+    },
+    "current_model=14,facing=north":{
+      "model":"clutter:block/window_sills/dark_oak/fern"
+    },
+    "current_model=14,facing=south":{
+      "model":"clutter:block/window_sills/dark_oak/fern",
+      "y": 180
+    },
+    "current_model=14,facing=east":{
+      "model":"clutter:block/window_sills/dark_oak/fern",
+      "y": 90
+    },
+    "current_model=14,facing=west":{
+      "model":"clutter:block/window_sills/dark_oak/fern",
+      "y": 270
+    },
+    "current_model=15,facing=north":{
+      "model":"clutter:block/window_sills/dark_oak/brown_mushroom"
+    },
+    "current_model=15,facing=south":{
+      "model":"clutter:block/window_sills/dark_oak/brown_mushroom",
+      "y": 180
+    },
+    "current_model=15,facing=east":{
+      "model":"clutter:block/window_sills/dark_oak/brown_mushroom",
+      "y": 90
+    },
+    "current_model=15,facing=west":{
+      "model":"clutter:block/window_sills/dark_oak/brown_mushroom",
+      "y": 270
+    },
+    "current_model=16,facing=north":{
+      "model":"clutter:block/window_sills/dark_oak/red_mushroom"
+    },
+    "current_model=16,facing=south":{
+      "model":"clutter:block/window_sills/dark_oak/red_mushroom",
+      "y": 180
+    },
+    "current_model=16,facing=east":{
+      "model":"clutter:block/window_sills/dark_oak/red_mushroom",
+      "y": 90
+    },
+    "current_model=16,facing=west":{
+      "model":"clutter:block/window_sills/dark_oak/red_mushroom",
+      "y": 270
+    },
+    "current_model=17,facing=north":{
+      "model":"clutter:block/window_sills/dark_oak/crimson_fungus"
+    },
+    "current_model=17,facing=south":{
+      "model":"clutter:block/window_sills/dark_oak/crimson_fungus",
+      "y": 180
+    },
+    "current_model=17,facing=east":{
+      "model":"clutter:block/window_sills/dark_oak/crimson_fungus",
+      "y": 90
+    },
+    "current_model=17,facing=west":{
+      "model":"clutter:block/window_sills/dark_oak/crimson_fungus",
+      "y": 270
+    },
+    "current_model=18,facing=north":{
+      "model":"clutter:block/window_sills/dark_oak/warped_fungus"
+    },
+    "current_model=18,facing=south":{
+      "model":"clutter:block/window_sills/dark_oak/warped_fungus",
+      "y": 180
+    },
+    "current_model=18,facing=east":{
+      "model":"clutter:block/window_sills/dark_oak/warped_fungus",
+      "y": 90
+    },
+    "current_model=18,facing=west":{
+      "model":"clutter:block/window_sills/dark_oak/warped_fungus",
+      "y": 270
+    },
+    "current_model=19,facing=north":{
+      "model":"clutter:block/window_sills/dark_oak/wither_rose"
+    },
+    "current_model=19,facing=south":{
+      "model":"clutter:block/window_sills/dark_oak/wither_rose",
+      "y": 180
+    },
+    "current_model=19,facing=east":{
+      "model":"clutter:block/window_sills/dark_oak/wither_rose",
+      "y": 90
+    },
+    "current_model=19,facing=west":{
+      "model":"clutter:block/window_sills/dark_oak/wither_rose",
+      "y": 270
+    }
+  }
+}

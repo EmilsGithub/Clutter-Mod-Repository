@@ -1,0 +1,9 @@
+{
+	"parent": "clutter:block/window_sills/window_sill_parent",
+	"textures": {
+		"0": "minecraft:block/birch_planks",
+		"2": "clutter:block/window_sill_flower_pot",
+		"3": "minecraft:block/poppy",
+		"particle": "minecraft:block/birch_planks"
+	}
+}

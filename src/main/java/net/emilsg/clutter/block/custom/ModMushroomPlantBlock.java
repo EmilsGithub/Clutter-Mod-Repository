@@ -50,6 +50,5 @@ public class ModMushroomPlantBlock extends PlantBlock implements Fertilizable {
 
     @Override
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
-
     }
 }

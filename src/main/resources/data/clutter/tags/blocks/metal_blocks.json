@@ -1,0 +1,12 @@
+{
+  "values": [
+    "clutter:iron_button",
+    "clutter:copper_button",
+    "clutter:copper_lantern",
+    "clutter:copper_bars",
+    "clutter:copper_chain",
+    "clutter:copper_door",
+    "clutter:copper_trapdoor",
+    "clutter:copper_pressure_plate"
+  ]
+}
