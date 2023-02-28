@@ -1,0 +1,244 @@
+{
+  "variants":{
+    "current_model=0,facing=north":{
+      "model":"clutter:block/armchairs/white"
+    },
+    "current_model=0,facing=south":{
+      "model":"clutter:block/armchairs/white",
+      "y": 180
+    },
+    "current_model=0,facing=east":{
+      "model":"clutter:block/armchairs/white",
+      "y": 90
+    },
+    "current_model=0,facing=west":{
+      "model":"clutter:block/armchairs/white",
+      "y": 270
+    },
+    "current_model=1,facing=north":{
+      "model":"clutter:block/armchairs/blue"
+    },
+    "current_model=1,facing=south":{
+      "model":"clutter:block/armchairs/blue",
+      "y": 180
+    },
+    "current_model=1,facing=east":{
+      "model":"clutter:block/armchairs/blue",
+      "y": 90
+    },
+    "current_model=1,facing=west":{
+      "model":"clutter:block/armchairs/blue",
+      "y": 270
+    },
+    "current_model=2,facing=north":{
+      "model":"clutter:block/armchairs/brown"
+    },
+    "current_model=2,facing=south":{
+      "model":"clutter:block/armchairs/brown",
+      "y": 180
+    },
+    "current_model=2,facing=east":{
+      "model":"clutter:block/armchairs/brown",
+      "y": 90
+    },
+    "current_model=2,facing=west":{
+      "model":"clutter:block/armchairs/brown",
+      "y": 270
+    },
+    "current_model=3,facing=north":{
+      "model":"clutter:block/armchairs/cyan"
+    },
+    "current_model=3,facing=south":{
+      "model":"clutter:block/armchairs/cyan",
+      "y": 180
+    },
+    "current_model=3,facing=east":{
+      "model":"clutter:block/armchairs/cyan",
+      "y": 90
+    },
+    "current_model=3,facing=west":{
+      "model":"clutter:block/armchairs/cyan",
+      "y": 270
+    },
+    "current_model=4,facing=north":{
+      "model":"clutter:block/armchairs/gray"
+    },
+    "current_model=4,facing=south":{
+      "model":"clutter:block/armchairs/gray",
+      "y": 180
+    },
+    "current_model=4,facing=east":{
+      "model":"clutter:block/armchairs/gray",
+      "y": 90
+    },
+    "current_model=4,facing=west":{
+      "model":"clutter:block/armchairs/gray",
+      "y": 270
+    },
+    "current_model=5,facing=north":{
+      "model":"clutter:block/armchairs/green"
+    },
+    "current_model=5,facing=south":{
+      "model":"clutter:block/armchairs/green",
+      "y": 180
+    },
+    "current_model=5,facing=east":{
+      "model":"clutter:block/armchairs/green",
+      "y": 90
+    },
+    "current_model=5,facing=west":{
+      "model":"clutter:block/armchairs/green",
+      "y": 270
+    },
+    "current_model=6,facing=north":{
+      "model":"clutter:block/armchairs/light_blue"
+    },
+    "current_model=6,facing=south":{
+      "model":"clutter:block/armchairs/light_blue",
+      "y": 180
+    },
+    "current_model=6,facing=east":{
+      "model":"clutter:block/armchairs/light_blue",
+      "y": 90
+    },
+    "current_model=6,facing=west":{
+      "model":"clutter:block/armchairs/light_blue",
+      "y": 270
+    },
+    "current_model=7,facing=north":{
+      "model":"clutter:block/armchairs/light_gray"
+    },
+    "current_model=7,facing=south":{
+      "model":"clutter:block/armchairs/light_gray",
+      "y": 180
+    },
+    "current_model=7,facing=east":{
+      "model":"clutter:block/armchairs/light_gray",
+      "y": 90
+    },
+    "current_model=7,facing=west":{
+      "model":"clutter:block/armchairs/light_gray",
+      "y": 270
+    },
+    "current_model=8,facing=north":{
+      "model":"clutter:block/armchairs/lime"
+    },
+    "current_model=8,facing=south":{
+      "model":"clutter:block/armchairs/lime",
+      "y": 180
+    },
+    "current_model=8,facing=east":{
+      "model":"clutter:block/armchairs/lime",
+      "y": 90
+    },
+    "current_model=8,facing=west":{
+      "model":"clutter:block/armchairs/lime",
+      "y": 270
+    },
+    "current_model=9,facing=north":{
+      "model":"clutter:block/armchairs/magenta"
+    },
+    "current_model=9,facing=south":{
+      "model":"clutter:block/armchairs/magenta",
+      "y": 180
+    },
+    "current_model=9,facing=east":{
+      "model":"clutter:block/armchairs/magenta",
+      "y": 90
+    },
+    "current_model=9,facing=west":{
+      "model":"clutter:block/armchairs/magenta",
+      "y": 270
+    },
+    "current_model=10,facing=north":{
+      "model":"clutter:block/armchairs/orange"
+    },
+    "current_model=10,facing=south":{
+      "model":"clutter:block/armchairs/orange",
+      "y": 180
+    },
+    "current_model=10,facing=east":{
+      "model":"clutter:block/armchairs/orange",
+      "y": 90
+    },
+    "current_model=10,facing=west":{
+      "model":"clutter:block/armchairs/orange",
+      "y": 270
+    },
+    "current_model=11,facing=north":{
+      "model":"clutter:block/armchairs/pink"
+    },
+    "current_model=11,facing=south":{
+      "model":"clutter:block/armchairs/pink",
+      "y": 180
+    },
+    "current_model=11,facing=east":{
+      "model":"clutter:block/armchairs/pink",
+      "y": 90
+    },
+    "current_model=11,facing=west":{
+      "model":"clutter:block/armchairs/pink",
+      "y": 270
+    },
+    "current_model=12,facing=north":{
+      "model":"clutter:block/armchairs/purple"
+    },
+    "current_model=12,facing=south":{
+      "model":"clutter:block/armchairs/purple",
+      "y": 180
+    },
+    "current_model=12,facing=east":{
+      "model":"clutter:block/armchairs/purple",
+      "y": 90
+    },
+    "current_model=12,facing=west":{
+      "model":"clutter:block/armchairs/purple",
+      "y": 270
+    },
+    "current_model=13,facing=north":{
+      "model":"clutter:block/armchairs/red"
+    },
+    "current_model=13,facing=south":{
+      "model":"clutter:block/armchairs/red",
+      "y": 180
+    },
+    "current_model=13,facing=east":{
+      "model":"clutter:block/armchairs/red",
+      "y": 90
+    },
+    "current_model=13,facing=west":{
+      "model":"clutter:block/armchairs/red",
+      "y": 270
+    },
+    "current_model=14,facing=north":{
+      "model":"clutter:block/armchairs/black"
+    },
+    "current_model=14,facing=south":{
+      "model":"clutter:block/armchairs/black",
+      "y": 180
+    },
+    "current_model=14,facing=east":{
+      "model":"clutter:block/armchairs/black",
+      "y": 90
+    },
+    "current_model=14,facing=west":{
+      "model":"clutter:block/armchairs/black",
+      "y": 270
+    },
+    "current_model=15,facing=north":{
+      "model":"clutter:block/armchairs/yellow"
+    },
+    "current_model=15,facing=south":{
+      "model":"clutter:block/armchairs/yellow",
+      "y": 180
+    },
+    "current_model=15,facing=east":{
+      "model":"clutter:block/armchairs/yellow",
+      "y": 90
+    },
+    "current_model=15,facing=west":{
+      "model":"clutter:block/armchairs/yellow",
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  P",
+    "###"
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:flower_pot"
+    },
+    "#": {
+      "item": "minecraft:warped_slab"
+    }
+  },
+  "result": {
+    "item": "clutter:warped_window_sill",
+    "count": 1
+  }
+}

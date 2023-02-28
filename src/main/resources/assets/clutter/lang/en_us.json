@@ -25,9 +25,13 @@
   "block.clutter.mossy_stone_brick_chimney": "Mossy Stone Brick Chimney",
   "block.clutter.deepslate_brick_chimney": "Deepslate Brick Chimney",
   "block.clutter.mud_brick_chimney": "Mud Brick Chimney",
+  "block.clutter.andesite_chimney": "Andesite Chimney",
+  "block.clutter.granite_chimney": "Granite Chimney",
+  "block.clutter.diorite_chimney": "Diorite Chimney",
   "block.clutter.nether_brick_chimney": "Nether Brick Chimney",
   "block.clutter.red_nether_brick_chimney": "Red Nether Brick Chimney",
-  "block.clutter.polished_blackstone_brick_chimney": "Polished Blackstone Chimney",
+  "block.clutter.polished_blackstone_brick_chimney": "Polished Blackstone Brick Chimney",
+  "block.clutter.blackstone_chimney": "Blackstone Chimney",
   "block.clutter.end_stone_brick_chimney": "End Stone Brick Chimney",
   "block.clutter.deepslate_tile_chimney": "Deepslate Tile Chimney",
 
@@ -51,7 +55,12 @@
   "block.clutter.spruce_wall_bookshelf": "Spruce Wall Bookshelf",
   "block.clutter.warped_wall_bookshelf": "Warped Wall Bookshelf",
 
+  "block.clutter.armchair": "Armchair",
+  "block.clutter.floor_seating": "Floor Seating",
+
   "item.clutter.copper_nugget": "Copper Nugget",
+
+  "block.clutter.cycle_blockstate_tooltip.tooltip": "Shift Right-Click To Cycle Variant",
 
   "itemgroup.clutter": "Clutter"
 }

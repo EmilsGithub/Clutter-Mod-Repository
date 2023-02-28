@@ -1,13 +1,12 @@
 {
 	"credit": "Made with Blockbench",
-	"parent": "block/block",
 	"ambientocclusion": false,
 	"textures": {
-		"0": "block/oak_planks",
-		"1": "block/lantern",
+		"0": "minecraft:block/oak_planks",
+		"1": "minecraft:block/lantern",
 		"2": "clutter:block/books_three",
 		"3": "clutter:block/book_pages",
-		"particle": "block/oak_planks"
+		"particle": "minecraft:block/oak_planks"
 	},
 	"elements": [
 		{

@@ -10,6 +10,10 @@
     "clutter:red_nether_brick_chimney",
     "clutter:polished_blackstone_brick_chimney",
     "clutter:end_stone_brick_chimney",
-    "clutter:deepslate_tile_chimney"
+    "clutter:deepslate_tile_chimney",
+    "clutter:andesite_chimney",
+    "clutter:diorite_chimney",
+    "clutter:granite_chimney",
+    "clutter:blackstone_chimney"
   ]
 }

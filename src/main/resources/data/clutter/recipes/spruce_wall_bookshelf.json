@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BBB",
+    "###"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:book"
+    },
+    "#": {
+      "item": "minecraft:spruce_slab"
+    }
+  },
+  "result": {
+    "item": "clutter:spruce_wall_bookshelf",
+    "count": 1
+  }
+}

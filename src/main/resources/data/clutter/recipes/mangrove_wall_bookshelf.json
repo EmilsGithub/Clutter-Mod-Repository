@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BBB",
+    "###"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:book"
+    },
+    "#": {
+      "item": "minecraft:mangrove_slab"
+    }
+  },
+  "result": {
+    "item": "clutter:mangrove_wall_bookshelf",
+    "count": 1
+  }
+}

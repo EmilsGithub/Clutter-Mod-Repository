@@ -46,63 +46,63 @@
       "y": 270
     },
     "current_model=3,facing=north":{
-      "model":"clutter:block/wall_bookshelves/birch/cornflower"
+      "model":"clutter:block/wall_bookshelves/birch/four"
     },
     "current_model=3,facing=south":{
-      "model":"clutter:block/wall_bookshelves/birch/cornflower",
+      "model":"clutter:block/wall_bookshelves/birch/four",
       "y": 180
     },
     "current_model=3,facing=east":{
-      "model":"clutter:block/wall_bookshelves/birch/cornflower",
+      "model":"clutter:block/wall_bookshelves/birch/four",
       "y": 90
     },
     "current_model=3,facing=west":{
-      "model":"clutter:block/wall_bookshelves/birch/cornflower",
+      "model":"clutter:block/wall_bookshelves/birch/four",
       "y": 270
     },
     "current_model=4,facing=north":{
-      "model":"clutter:block/wall_bookshelves/birch/lily_of_the_valley"
+      "model":"clutter:block/wall_bookshelves/birch/five"
     },
     "current_model=4,facing=south":{
-      "model":"clutter:block/wall_bookshelves/birch/lily_of_the_valley",
+      "model":"clutter:block/wall_bookshelves/birch/five",
       "y": 180
     },
     "current_model=4,facing=east":{
-      "model":"clutter:block/wall_bookshelves/birch/lily_of_the_valley",
+      "model":"clutter:block/wall_bookshelves/birch/five",
       "y": 90
     },
     "current_model=4,facing=west":{
-      "model":"clutter:block/wall_bookshelves/birch/lily_of_the_valley",
+      "model":"clutter:block/wall_bookshelves/birch/five",
       "y": 270
     },
     "current_model=5,facing=north":{
-      "model":"clutter:block/wall_bookshelves/birch/allium"
+      "model":"clutter:block/wall_bookshelves/birch/six"
     },
     "current_model=5,facing=south":{
-      "model":"clutter:block/wall_bookshelves/birch/allium",
+      "model":"clutter:block/wall_bookshelves/birch/six",
       "y": 180
     },
     "current_model=5,facing=east":{
-      "model":"clutter:block/wall_bookshelves/birch/allium",
+      "model":"clutter:block/wall_bookshelves/birch/six",
       "y": 90
     },
     "current_model=5,facing=west":{
-      "model":"clutter:block/wall_bookshelves/birch/allium",
+      "model":"clutter:block/wall_bookshelves/birch/six",
       "y": 270
     },
     "current_model=6,facing=north":{
-      "model":"clutter:block/wall_bookshelves/birch/blue_orchid"
+      "model":"clutter:block/wall_bookshelves/birch/seven"
     },
     "current_model=6,facing=south":{
-      "model":"clutter:block/wall_bookshelves/birch/blue_orchid",
+      "model":"clutter:block/wall_bookshelves/birch/seven",
       "y": 180
     },
     "current_model=6,facing=east":{
-      "model":"clutter:block/wall_bookshelves/birch/blue_orchid",
+      "model":"clutter:block/wall_bookshelves/birch/seven",
       "y": 90
     },
     "current_model=6,facing=west":{
-      "model":"clutter:block/wall_bookshelves/birch/blue_orchid",
+      "model":"clutter:block/wall_bookshelves/birch/seven",
       "y": 270
     }
   }

@@ -1,10 +1,17 @@
 package net.emilsg.clutter;
 
 import net.emilsg.clutter.block.ModBlocks;
+import net.emilsg.clutter.block.entity.SeatEntity;
+import net.emilsg.clutter.util.Sit;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.block.Block;
+import net.minecraft.client.render.Frustum;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.entity.EntityRenderer;
+import net.minecraft.client.render.entity.EntityRendererFactory;
+import net.minecraft.util.Identifier;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,6 +19,8 @@ import java.util.List;
 public class ClutterClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
+        EntityRendererRegistry.register(Sit.SEAT, EmptyRenderer::new);
+
         List<Block> blocksToRender = Arrays.asList(
                 ModBlocks.COPPER_LANTERN,
                 ModBlocks.COPPER_CHAIN,
@@ -56,6 +65,22 @@ public class ClutterClient implements ClientModInitializer {
         );
 
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), blocksToRender.toArray(new Block[blocksToRender.size()]));
+    }
+
+    private static class EmptyRenderer extends EntityRenderer<SeatEntity> {
+        protected EmptyRenderer(EntityRendererFactory.Context ctx) {
+            super(ctx);
+        }
+
+        @Override
+        public boolean shouldRender(SeatEntity entity, Frustum frustum, double d, double e, double f) {
+            return false;
+        }
+
+        @Override
+        public Identifier getTexture(SeatEntity entity) {
+            return null;
+        }
     }
 
 }

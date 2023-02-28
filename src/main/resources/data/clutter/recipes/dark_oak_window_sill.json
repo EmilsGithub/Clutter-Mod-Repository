@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  P",
+    "###"
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:flower_pot"
+    },
+    "#": {
+      "item": "minecraft:dark_oak_slab"
+    }
+  },
+  "result": {
+    "item": "clutter:dark_oak_window_sill",
+    "count": 1
+  }
+}

@@ -4,6 +4,7 @@ import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.block.entity.ModBlockEntities;
 import net.emilsg.clutter.item.ModItemGroup;
 import net.emilsg.clutter.item.ModItems;
+import net.emilsg.clutter.util.Sit;
 import net.fabricmc.api.ModInitializer;
 
 import org.slf4j.Logger;
@@ -20,6 +21,6 @@ public class Clutter implements ModInitializer {
 		ModItems.registerModItems();
 		ModBlocks.registerModBlocks();
 		ModBlockEntities.registerBlockEntities();
-
+		Sit.sitUtil();
 	}
 }

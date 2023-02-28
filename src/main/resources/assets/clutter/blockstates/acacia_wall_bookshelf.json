@@ -46,63 +46,63 @@
       "y": 270
     },
     "current_model=3,facing=north":{
-      "model":"clutter:block/wall_bookshelves/acacia/cornflower"
+      "model":"clutter:block/wall_bookshelves/acacia/four"
     },
     "current_model=3,facing=south":{
-      "model":"clutter:block/wall_bookshelves/acacia/cornflower",
+      "model":"clutter:block/wall_bookshelves/acacia/four",
       "y": 180
     },
     "current_model=3,facing=east":{
-      "model":"clutter:block/wall_bookshelves/acacia/cornflower",
+      "model":"clutter:block/wall_bookshelves/acacia/four",
       "y": 90
     },
     "current_model=3,facing=west":{
-      "model":"clutter:block/wall_bookshelves/acacia/cornflower",
+      "model":"clutter:block/wall_bookshelves/acacia/four",
       "y": 270
     },
     "current_model=4,facing=north":{
-      "model":"clutter:block/wall_bookshelves/acacia/lily_of_the_valley"
+      "model":"clutter:block/wall_bookshelves/acacia/five"
     },
     "current_model=4,facing=south":{
-      "model":"clutter:block/wall_bookshelves/acacia/lily_of_the_valley",
+      "model":"clutter:block/wall_bookshelves/acacia/five",
       "y": 180
     },
     "current_model=4,facing=east":{
-      "model":"clutter:block/wall_bookshelves/acacia/lily_of_the_valley",
+      "model":"clutter:block/wall_bookshelves/acacia/five",
       "y": 90
     },
     "current_model=4,facing=west":{
-      "model":"clutter:block/wall_bookshelves/acacia/lily_of_the_valley",
+      "model":"clutter:block/wall_bookshelves/acacia/five",
       "y": 270
     },
     "current_model=5,facing=north":{
-      "model":"clutter:block/wall_bookshelves/acacia/allium"
+      "model":"clutter:block/wall_bookshelves/acacia/six"
     },
     "current_model=5,facing=south":{
-      "model":"clutter:block/wall_bookshelves/acacia/allium",
+      "model":"clutter:block/wall_bookshelves/acacia/six",
       "y": 180
     },
     "current_model=5,facing=east":{
-      "model":"clutter:block/wall_bookshelves/acacia/allium",
+      "model":"clutter:block/wall_bookshelves/acacia/six",
       "y": 90
     },
     "current_model=5,facing=west":{
-      "model":"clutter:block/wall_bookshelves/acacia/allium",
+      "model":"clutter:block/wall_bookshelves/acacia/six",
       "y": 270
     },
     "current_model=6,facing=north":{
-      "model":"clutter:block/wall_bookshelves/acacia/blue_orchid"
+      "model":"clutter:block/wall_bookshelves/acacia/seven"
     },
     "current_model=6,facing=south":{
-      "model":"clutter:block/wall_bookshelves/acacia/blue_orchid",
+      "model":"clutter:block/wall_bookshelves/acacia/seven",
       "y": 180
     },
     "current_model=6,facing=east":{
-      "model":"clutter:block/wall_bookshelves/acacia/blue_orchid",
+      "model":"clutter:block/wall_bookshelves/acacia/seven",
       "y": 90
     },
     "current_model=6,facing=west":{
-      "model":"clutter:block/wall_bookshelves/acacia/blue_orchid",
+      "model":"clutter:block/wall_bookshelves/acacia/seven",
       "y": 270
     }
   }

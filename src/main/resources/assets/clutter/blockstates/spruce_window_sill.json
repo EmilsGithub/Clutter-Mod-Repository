@@ -1,18 +1,18 @@
 {
   "variants":{
     "current_model=0,facing=north":{
-      "model":"clutter:block/window_sills/spruce/empty"
+      "model":"clutter:block/window_sills/spruce/wither_rose"
     },
     "current_model=0,facing=south":{
-      "model":"clutter:block/window_sills/spruce/empty",
+      "model":"clutter:block/window_sills/spruce/wither_rose",
       "y": 180
     },
     "current_model=0,facing=east":{
-      "model":"clutter:block/window_sills/spruce/empty",
+      "model":"clutter:block/window_sills/spruce/wither_rose",
       "y": 90
     },
     "current_model=0,facing=west":{
-      "model":"clutter:block/window_sills/spruce/empty",
+      "model":"clutter:block/window_sills/spruce/wither_rose",
       "y": 270
     },
     "current_model=1,facing=north":{
@@ -286,18 +286,18 @@
       "y": 270
     },
     "current_model=19,facing=north":{
-      "model":"clutter:block/window_sills/spruce/wither_rose"
+      "model":"clutter:block/window_sills/spruce/empty"
     },
     "current_model=19,facing=south":{
-      "model":"clutter:block/window_sills/spruce/wither_rose",
+      "model":"clutter:block/window_sills/spruce/empty",
       "y": 180
     },
     "current_model=19,facing=east":{
-      "model":"clutter:block/window_sills/spruce/wither_rose",
+      "model":"clutter:block/window_sills/spruce/empty",
       "y": 90
     },
     "current_model=19,facing=west":{
-      "model":"clutter:block/window_sills/spruce/wither_rose",
+      "model":"clutter:block/window_sills/spruce/empty",
       "y": 270
     }
   }

@@ -4,7 +4,7 @@
 	"textures": {
 		"0": "minecraft:block/oak_planks",
 		"2": "clutter:block/window_sill_flower_pot",
-		"3": "minecraft:block/poppy",
+		"3": "clutter:block/none",
 		"particle": "minecraft:block/oak_planks"
 	},
 	"elements": [
@@ -53,42 +53,43 @@
 			}
 		}
 	],
+	"gui_light": "front",
 	"display": {
 		"thirdperson_righthand": {
-			"rotation": [90, -45, 0],
-			"translation": [0, 0, 1],
-			"scale": [0.4, 0.4, 0.4]
+			"rotation": [0, 90, 0],
+			"translation": [1.5, -3, -2.75],
+			"scale": [0.33, 0.33, 0.33]
 		},
 		"thirdperson_lefthand": {
-			"rotation": [90, -45, 0],
-			"translation": [0, 0, 1],
-			"scale": [0.4, 0.4, 0.4]
+			"rotation": [0, 90, 0],
+			"translation": [1.5, -3, -2.75],
+			"scale": [0.33, 0.33, 0.33]
 		},
 		"firstperson_righthand": {
-			"rotation": [0, 45, 0],
-			"translation": [0, 0, 0],
+			"translation": [0, -5.25, 0],
 			"scale": [0.5, 0.5, 0.5]
 		},
 		"firstperson_lefthand": {
-			"rotation": [0, 45, 0],
-			"translation": [0, 0, 0],
+			"translation": [0, -5.25, 0],
 			"scale": [0.5, 0.5, 0.5]
 		},
 		"ground": {
-			"translation": [0, 3, 0],
-			"scale": [0.25, 0.25, 0.25]
+			"translation": [0, -4.25, 0],
+			"scale": [0.33, 0.33, 0.33]
 		},
 		"gui": {
-			"rotation": [26, 45, 0],
+			"rotation": [-160, 135, 180],
+			"translation": [1.75, -6, 0],
 			"scale": [0.6, 0.6, 0.6]
 		},
 		"head": {
-			"translation": [0, 5.25, 0]
+			"rotation": [0, 180, 0],
+			"translation": [0, -1.75, -4]
 		},
 		"fixed": {
-			"rotation": [0, 0, 0],
-			"translation": [0, 0.25, 0],
-			"scale": [0.5, 0.5, 0.5]
+			"rotation": [0, -180, 0],
+			"translation": [0, -6, -5],
+			"scale": [0.75, 0.75, 0.75]
 		}
 	}
 }

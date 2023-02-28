@@ -3,7 +3,7 @@
 	"package": "net.emilsg.clutter.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
-		"ExampleMixin"
+		"EnchantingTableMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

@@ -1,0 +1,7 @@
+{
+	"parent": "clutter:block/armchairs/armchair",
+	"textures": {
+		"1": "minecraft:block/brown_wool",
+		"particle": "minecraft:block/brown_wool"
+	}
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# #",
+    "# #",
+    "# #"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:mossy_stone_bricks"
+    }
+  },
+  "result": {
+    "item": "clutter:mossy_stone_brick_chimney",
+    "count": 2
+  }
+}

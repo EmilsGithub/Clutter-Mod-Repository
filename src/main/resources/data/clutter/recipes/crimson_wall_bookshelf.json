@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BBB",
+    "###"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:book"
+    },
+    "#": {
+      "item": "minecraft:crimson_slab"
+    }
+  },
+  "result": {
+    "item": "clutter:crimson_wall_bookshelf",
+    "count": 1
+  }
+}

@@ -46,63 +46,63 @@
       "y": 270
     },
     "current_model=3,facing=north":{
-      "model":"clutter:block/wall_bookshelves/spruce/cornflower"
+      "model":"clutter:block/wall_bookshelves/spruce/four"
     },
     "current_model=3,facing=south":{
-      "model":"clutter:block/wall_bookshelves/spruce/cornflower",
+      "model":"clutter:block/wall_bookshelves/spruce/four",
       "y": 180
     },
     "current_model=3,facing=east":{
-      "model":"clutter:block/wall_bookshelves/spruce/cornflower",
+      "model":"clutter:block/wall_bookshelves/spruce/four",
       "y": 90
     },
     "current_model=3,facing=west":{
-      "model":"clutter:block/wall_bookshelves/spruce/cornflower",
+      "model":"clutter:block/wall_bookshelves/spruce/four",
       "y": 270
     },
     "current_model=4,facing=north":{
-      "model":"clutter:block/wall_bookshelves/spruce/lily_of_the_valley"
+      "model":"clutter:block/wall_bookshelves/spruce/five"
     },
     "current_model=4,facing=south":{
-      "model":"clutter:block/wall_bookshelves/spruce/lily_of_the_valley",
+      "model":"clutter:block/wall_bookshelves/spruce/five",
       "y": 180
     },
     "current_model=4,facing=east":{
-      "model":"clutter:block/wall_bookshelves/spruce/lily_of_the_valley",
+      "model":"clutter:block/wall_bookshelves/spruce/five",
       "y": 90
     },
     "current_model=4,facing=west":{
-      "model":"clutter:block/wall_bookshelves/spruce/lily_of_the_valley",
+      "model":"clutter:block/wall_bookshelves/spruce/five",
       "y": 270
     },
     "current_model=5,facing=north":{
-      "model":"clutter:block/wall_bookshelves/spruce/allium"
+      "model":"clutter:block/wall_bookshelves/spruce/six"
     },
     "current_model=5,facing=south":{
-      "model":"clutter:block/wall_bookshelves/spruce/allium",
+      "model":"clutter:block/wall_bookshelves/spruce/six",
       "y": 180
     },
     "current_model=5,facing=east":{
-      "model":"clutter:block/wall_bookshelves/spruce/allium",
+      "model":"clutter:block/wall_bookshelves/spruce/six",
       "y": 90
     },
     "current_model=5,facing=west":{
-      "model":"clutter:block/wall_bookshelves/spruce/allium",
+      "model":"clutter:block/wall_bookshelves/spruce/six",
       "y": 270
     },
     "current_model=6,facing=north":{
-      "model":"clutter:block/wall_bookshelves/spruce/blue_orchid"
+      "model":"clutter:block/wall_bookshelves/spruce/seven"
     },
     "current_model=6,facing=south":{
-      "model":"clutter:block/wall_bookshelves/spruce/blue_orchid",
+      "model":"clutter:block/wall_bookshelves/spruce/seven",
       "y": 180
     },
     "current_model=6,facing=east":{
-      "model":"clutter:block/wall_bookshelves/spruce/blue_orchid",
+      "model":"clutter:block/wall_bookshelves/spruce/seven",
       "y": 90
     },
     "current_model=6,facing=west":{
-      "model":"clutter:block/wall_bookshelves/spruce/blue_orchid",
+      "model":"clutter:block/wall_bookshelves/spruce/seven",
       "y": 270
     }
   }
