@@ -17,8 +17,8 @@ public class OxidizableDoorBlock extends DoorBlock implements Oxidizable {
 
     private final OxidationLevel oxidationLevel;
 
-    public OxidizableDoorBlock(OxidationLevel oxidationLevel, Settings settings, SoundEvent closeSound, SoundEvent openSound) {
-        super(settings, closeSound, openSound);
+    public OxidizableDoorBlock(OxidationLevel oxidationLevel, Settings settings) {
+        super(settings);
         this.oxidationLevel = oxidationLevel;
     }
 

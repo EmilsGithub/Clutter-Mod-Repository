@@ -4,22 +4,18 @@ import net.emilsg.clutter.Clutter;
 import net.emilsg.clutter.block.custom.*;
 import net.emilsg.clutter.item.ModItemGroup;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.OxidizableBlocksRegistry;
 import net.minecraft.block.*;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
-import net.minecraft.world.BlockView;
+import net.minecraft.util.registry.Registry;
 
 public class ModBlocks {
 
@@ -73,27 +69,27 @@ public class ModBlocks {
     public static final Block MAGENTA_BUNK_BED = registerBlock("magenta_bunk_bed", new BunkBedBlock(DyeColor.MAGENTA, FabricBlockSettings.copy(Blocks.MAGENTA_BED)), ModItemGroup.CLUTTER);
     public static final Block PINK_BUNK_BED = registerBlock("pink_bunk_bed", new BunkBedBlock(DyeColor.PINK, FabricBlockSettings.copy(Blocks.PINK_BED)), ModItemGroup.CLUTTER);
 
-    public static final Block DEEPSLATE_SILVER_ORE = registerBlock("deepslate_silver_ore", new ExperienceDroppingBlock(FabricBlockSettings.of(Material.STONE).strength(4.5f, 3.0f).requiresTool().mapColor(MapColor.DEEPSLATE_GRAY), UniformIntProvider.create(4, 8)), ModItemGroup.CLUTTER);
-    public static final Block SILVER_DOOR = registerBlock("silver_door", new DoorBlock(FabricBlockSettings.of(Material.METAL, MapColor.LIGHT_GRAY).requiresTool().strength(3.0f).sounds(BlockSoundGroup.METAL).nonOpaque(), SoundEvents.BLOCK_IRON_DOOR_CLOSE, SoundEvents.BLOCK_IRON_DOOR_OPEN), ModItemGroup.CLUTTER);
-    public static final Block SILVER_ORE = registerBlock("silver_ore", new ExperienceDroppingBlock(FabricBlockSettings.of(Material.STONE).strength(3.0f, 3.0f).requiresTool(), UniformIntProvider.create(4, 8)), ModItemGroup.CLUTTER);
+    public static final Block DEEPSLATE_SILVER_ORE = registerBlock("deepslate_silver_ore", new OreBlock(FabricBlockSettings.of(Material.STONE).strength(4.5f, 3.0f).requiresTool().mapColor(MapColor.DEEPSLATE_GRAY), UniformIntProvider.create(4, 8)), ModItemGroup.CLUTTER);
+    public static final Block SILVER_DOOR = registerBlock("silver_door", new DoorBlock(FabricBlockSettings.of(Material.METAL, MapColor.LIGHT_GRAY).requiresTool().strength(3.0f).sounds(BlockSoundGroup.METAL).nonOpaque()), ModItemGroup.CLUTTER);
+    public static final Block SILVER_ORE = registerBlock("silver_ore", new OreBlock(FabricBlockSettings.of(Material.STONE).strength(3.0f, 3.0f).requiresTool(), UniformIntProvider.create(4, 8)), ModItemGroup.CLUTTER);
     public static final Block RAW_SILVER_BLOCK = registerBlock("raw_silver_block", new Block(FabricBlockSettings.copy(Blocks.RAW_GOLD_BLOCK).mapColor(MapColor.LIGHT_GRAY)), ModItemGroup.CLUTTER);
     public static final Block SILVER_BLOCK = registerBlock("silver_block", new Block(FabricBlockSettings.copy(Blocks.GOLD_BLOCK).mapColor(MapColor.LIGHT_GRAY)), ModItemGroup.CLUTTER);
-    public static final Block SILVER_BUTTON = registerBlock("silver_button", new ButtonBlock(FabricBlockSettings.copy(Blocks.STONE_BUTTON), 80, false, SoundEvents.BLOCK_STONE_BUTTON_CLICK_OFF, SoundEvents.BLOCK_STONE_BUTTON_CLICK_ON), ModItemGroup.CLUTTER);
+    public static final Block SILVER_BUTTON = registerBlock("silver_button", new StoneButtonBlock(FabricBlockSettings.copy(Blocks.STONE_BUTTON)), ModItemGroup.CLUTTER);
     public static final Block SILVER_CANDELABRA = registerBlock("silver_candelabra", new CandelabraBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK).luminance(CandelabraBlock.createLightLevelFromLitBlockState(12))), ModItemGroup.CLUTTER);
     public static final Block SILVER_CHAIN = registerBlock("silver_chain", new ChainBlock(FabricBlockSettings.copy(Blocks.CHAIN)), ModItemGroup.CLUTTER);
     public static final Block SILVER_CHANDELIER = registerBlock("silver_chandelier", new ChandelierBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK).luminance(ChandelierBlock.createLightLevelFromLitBlockState(12))), ModItemGroup.CLUTTER);
     public static final Block SILVER_LANTERN = registerBlock("silver_lantern", new LanternBlock(FabricBlockSettings.copy(Blocks.LANTERN)), ModItemGroup.CLUTTER);
     public static final Block SILVER_SOUL_LANTERN = registerBlock("silver_soul_lantern", new LanternBlock(FabricBlockSettings.copy(Blocks.SOUL_LANTERN)), ModItemGroup.CLUTTER);
-    public static final Block SILVER_TRAPDOOR = registerBlock("silver_trapdoor", new ModTrapdoorBlock(FabricBlockSettings.copy(Blocks.IRON_TRAPDOOR), SoundEvents.BLOCK_IRON_TRAPDOOR_CLOSE, SoundEvents.BLOCK_IRON_TRAPDOOR_OPEN), ModItemGroup.CLUTTER);
+    public static final Block SILVER_TRAPDOOR = registerBlock("silver_trapdoor", new ModTrapdoorBlock(FabricBlockSettings.copy(Blocks.IRON_TRAPDOOR)), ModItemGroup.CLUTTER);
 
     public static final Block COPPER_BARS = registerBlock("copper_bars", new OxidizablePaneBlock(Oxidizable.OxidationLevel.UNAFFECTED, FabricBlockSettings.of(Material.METAL, MapColor.ORANGE).requiresTool().strength(3.0f, 6.0f).sounds(BlockSoundGroup.COPPER)), ModItemGroup.CLUTTER);
     public static final Block EXPOSED_COPPER_BARS = registerBlock("exposed_copper_bars", new OxidizablePaneBlock(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.of(Material.METAL, MapColor.TERRACOTTA_LIGHT_GRAY).requiresTool().strength(3.0f, 6.0f).sounds(BlockSoundGroup.COPPER)), ModItemGroup.CLUTTER);
     public static final Block WEATHERED_COPPER_BARS = registerBlock("weathered_copper_bars", new OxidizablePaneBlock(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.of(Material.METAL, MapColor.DARK_AQUA).requiresTool().strength(3.0f, 6.0f).sounds(BlockSoundGroup.COPPER)), ModItemGroup.CLUTTER);
     public static final Block OXIDIZED_COPPER_BARS = registerBlock("oxidized_copper_bars", new OxidizablePaneBlock(Oxidizable.OxidationLevel.OXIDIZED, FabricBlockSettings.of(Material.METAL, MapColor.TEAL).requiresTool().strength(3.0f, 6.0f).sounds(BlockSoundGroup.COPPER)), ModItemGroup.CLUTTER);
-    public static final Block COPPER_BUTTON = registerBlock("copper_button", new OxidizableButtonBlock(Oxidizable.OxidationLevel.UNAFFECTED, FabricBlockSettings.copy(Blocks.STONE_BUTTON), 10, false, SoundEvents.BLOCK_STONE_BUTTON_CLICK_OFF, SoundEvents.BLOCK_STONE_BUTTON_CLICK_ON), ModItemGroup.CLUTTER);
-    public static final Block EXPOSED_COPPER_BUTTON = registerBlock("exposed_copper_button", new OxidizableButtonBlock(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.copy(Blocks.STONE_BUTTON), 20, false, SoundEvents.BLOCK_STONE_BUTTON_CLICK_OFF, SoundEvents.BLOCK_STONE_BUTTON_CLICK_ON), ModItemGroup.CLUTTER);
-    public static final Block WEATHERED_COPPER_BUTTON = registerBlock("weathered_copper_button", new OxidizableButtonBlock(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.copy(Blocks.STONE_BUTTON), 30, false, SoundEvents.BLOCK_STONE_BUTTON_CLICK_OFF, SoundEvents.BLOCK_STONE_BUTTON_CLICK_ON), ModItemGroup.CLUTTER);
-    public static final Block OXIDIZED_COPPER_BUTTON = registerBlock("oxidized_copper_button", new OxidizableButtonBlock(Oxidizable.OxidationLevel.OXIDIZED, FabricBlockSettings.copy(Blocks.STONE_BUTTON), 40, false, SoundEvents.BLOCK_STONE_BUTTON_CLICK_OFF, SoundEvents.BLOCK_STONE_BUTTON_CLICK_ON), ModItemGroup.CLUTTER);
+    public static final Block COPPER_BUTTON = registerBlock("copper_button", new OxidizableButtonBlock(Oxidizable.OxidationLevel.UNAFFECTED, FabricBlockSettings.copy(Blocks.STONE_BUTTON)), ModItemGroup.CLUTTER);
+    public static final Block EXPOSED_COPPER_BUTTON = registerBlock("exposed_copper_button", new OxidizableButtonBlock(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.copy(Blocks.STONE_BUTTON)), ModItemGroup.CLUTTER);
+    public static final Block WEATHERED_COPPER_BUTTON = registerBlock("weathered_copper_button", new OxidizableButtonBlock(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.copy(Blocks.STONE_BUTTON)), ModItemGroup.CLUTTER);
+    public static final Block OXIDIZED_COPPER_BUTTON = registerBlock("oxidized_copper_button", new OxidizableButtonBlock(Oxidizable.OxidationLevel.OXIDIZED, FabricBlockSettings.copy(Blocks.STONE_BUTTON)), ModItemGroup.CLUTTER);
     public static final Block COPPER_CANDELABRA = registerBlock("copper_candelabra", new OxidizableCandelabraBlock(Oxidizable.OxidationLevel.UNAFFECTED,FabricBlockSettings.copy(Blocks.COPPER_BLOCK).luminance(CandelabraBlock.createLightLevelFromLitBlockState(12))), ModItemGroup.CLUTTER);
     public static final Block EXPOSED_COPPER_CANDELABRA = registerBlock("exposed_copper_candelabra", new OxidizableCandelabraBlock(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.copy(Blocks.EXPOSED_COPPER).luminance(CandelabraBlock.createLightLevelFromLitBlockState(12))), ModItemGroup.CLUTTER);
     public static final Block WEATHERED_COPPER_CANDELABRA = registerBlock("weathered_copper_candelabra", new OxidizableCandelabraBlock(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.copy(Blocks.WEATHERED_COPPER).luminance(CandelabraBlock.createLightLevelFromLitBlockState(12))), ModItemGroup.CLUTTER);
@@ -106,10 +102,10 @@ public class ModBlocks {
     public static final Block EXPOSED_COPPER_CHAIN = registerBlock("exposed_copper_chain", new OxidizableChainBlock(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.copy(Blocks.CHAIN)), ModItemGroup.CLUTTER);
     public static final Block WEATHERED_COPPER_CHAIN = registerBlock("weathered_copper_chain", new OxidizableChainBlock(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.copy(Blocks.CHAIN)), ModItemGroup.CLUTTER);
     public static final Block OXIDIZED_COPPER_CHAIN = registerBlock("oxidized_copper_chain", new OxidizableChainBlock(Oxidizable.OxidationLevel.OXIDIZED, FabricBlockSettings.copy(Blocks.CHAIN)), ModItemGroup.CLUTTER);
-    public static final Block COPPER_DOOR = registerBlock("copper_door", new OxidizableDoorBlock(Oxidizable.OxidationLevel.UNAFFECTED, FabricBlockSettings.of(Material.METAL, MapColor.ORANGE).requiresTool().strength(5.0f).sounds(BlockSoundGroup.METAL).nonOpaque(), SoundEvents.BLOCK_IRON_DOOR_CLOSE, SoundEvents.BLOCK_IRON_DOOR_OPEN), ModItemGroup.CLUTTER);
-    public static final Block EXPOSED_COPPER_DOOR = registerBlock("exposed_copper_door", new OxidizableDoorBlock(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.of(Material.METAL, MapColor.TERRACOTTA_LIGHT_GRAY).requiresTool().strength(5.0f).sounds(BlockSoundGroup.METAL).nonOpaque(), SoundEvents.BLOCK_IRON_DOOR_CLOSE, SoundEvents.BLOCK_IRON_DOOR_OPEN), ModItemGroup.CLUTTER);
-    public static final Block WEATHERED_COPPER_DOOR = registerBlock("weathered_copper_door", new OxidizableDoorBlock(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.of(Material.METAL, MapColor.DARK_AQUA).requiresTool().strength(5.0f).sounds(BlockSoundGroup.METAL).nonOpaque(), SoundEvents.BLOCK_IRON_DOOR_CLOSE, SoundEvents.BLOCK_IRON_DOOR_OPEN), ModItemGroup.CLUTTER);
-    public static final Block OXIDIZED_COPPER_DOOR = registerBlock("oxidized_copper_door", new OxidizableDoorBlock(Oxidizable.OxidationLevel.OXIDIZED, FabricBlockSettings.of(Material.METAL, MapColor.TEAL).requiresTool().strength(5.0f).sounds(BlockSoundGroup.METAL).nonOpaque(), SoundEvents.BLOCK_IRON_DOOR_CLOSE, SoundEvents.BLOCK_IRON_DOOR_OPEN), ModItemGroup.CLUTTER);
+    public static final Block COPPER_DOOR = registerBlock("copper_door", new OxidizableDoorBlock(Oxidizable.OxidationLevel.UNAFFECTED, FabricBlockSettings.of(Material.METAL, MapColor.ORANGE).requiresTool().strength(5.0f).sounds(BlockSoundGroup.METAL).nonOpaque()), ModItemGroup.CLUTTER);
+    public static final Block EXPOSED_COPPER_DOOR = registerBlock("exposed_copper_door", new OxidizableDoorBlock(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.of(Material.METAL, MapColor.TERRACOTTA_LIGHT_GRAY).requiresTool().strength(5.0f).sounds(BlockSoundGroup.METAL).nonOpaque()), ModItemGroup.CLUTTER);
+    public static final Block WEATHERED_COPPER_DOOR = registerBlock("weathered_copper_door", new OxidizableDoorBlock(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.of(Material.METAL, MapColor.DARK_AQUA).requiresTool().strength(5.0f).sounds(BlockSoundGroup.METAL).nonOpaque()), ModItemGroup.CLUTTER);
+    public static final Block OXIDIZED_COPPER_DOOR = registerBlock("oxidized_copper_door", new OxidizableDoorBlock(Oxidizable.OxidationLevel.OXIDIZED, FabricBlockSettings.of(Material.METAL, MapColor.TEAL).requiresTool().strength(5.0f).sounds(BlockSoundGroup.METAL).nonOpaque()), ModItemGroup.CLUTTER);
     public static final Block COPPER_LANTERN = registerBlock("copper_lantern", new OxidizableLanternBlock(Oxidizable.OxidationLevel.UNAFFECTED, FabricBlockSettings.copy(Blocks.LANTERN)), ModItemGroup.CLUTTER);
     public static final Block EXPOSED_COPPER_LANTERN = registerBlock("exposed_copper_lantern", new OxidizableLanternBlock(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.copy(Blocks.LANTERN)), ModItemGroup.CLUTTER);
     public static final Block WEATHERED_COPPER_LANTERN = registerBlock("weathered_copper_lantern", new OxidizableLanternBlock(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.copy(Blocks.LANTERN)), ModItemGroup.CLUTTER);
@@ -118,23 +114,23 @@ public class ModBlocks {
     public static final Block EXPOSED_COPPER_SOUL_LANTERN = registerBlock("exposed_copper_soul_lantern", new OxidizableLanternBlock(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.copy(Blocks.SOUL_LANTERN)), ModItemGroup.CLUTTER);
     public static final Block WEATHERED_COPPER_SOUL_LANTERN = registerBlock("weathered_copper_soul_lantern", new OxidizableLanternBlock(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.copy(Blocks.SOUL_LANTERN)), ModItemGroup.CLUTTER);
     public static final Block OXIDIZED_COPPER_SOUL_LANTERN = registerBlock("oxidized_copper_soul_lantern", new OxidizableLanternBlock(Oxidizable.OxidationLevel.OXIDIZED, FabricBlockSettings.copy(Blocks.SOUL_LANTERN)), ModItemGroup.CLUTTER);
-    public static final Block COPPER_PRESSURE_PLATE = registerBlock("copper_pressure_plate", new OxidizablePressurePlateBlock(Oxidizable.OxidationLevel.UNAFFECTED, PressurePlateBlock.ActivationRule.MOBS, FabricBlockSettings.copy(Blocks.OAK_PRESSURE_PLATE), SoundEvents.BLOCK_STONE_PRESSURE_PLATE_CLICK_OFF, SoundEvents.BLOCK_STONE_PRESSURE_PLATE_CLICK_ON), ModItemGroup.CLUTTER);
-    public static final Block EXPOSED_COPPER_PRESSURE_PLATE = registerBlock("exposed_copper_pressure_plate", new OxidizablePressurePlateBlock(Oxidizable.OxidationLevel.EXPOSED, PressurePlateBlock.ActivationRule.MOBS, FabricBlockSettings.copy(Blocks.OAK_PRESSURE_PLATE), SoundEvents.BLOCK_STONE_PRESSURE_PLATE_CLICK_OFF, SoundEvents.BLOCK_STONE_PRESSURE_PLATE_CLICK_ON), ModItemGroup.CLUTTER);
-    public static final Block WEATHERED_COPPER_PRESSURE_PLATE = registerBlock("weathered_copper_pressure_plate", new OxidizablePressurePlateBlock(Oxidizable.OxidationLevel.WEATHERED, PressurePlateBlock.ActivationRule.MOBS, FabricBlockSettings.copy(Blocks.OAK_PRESSURE_PLATE), SoundEvents.BLOCK_STONE_PRESSURE_PLATE_CLICK_OFF, SoundEvents.BLOCK_STONE_PRESSURE_PLATE_CLICK_ON), ModItemGroup.CLUTTER);
-    public static final Block OXIDIZED_COPPER_PRESSURE_PLATE = registerBlock("oxidized_copper_pressure_plate", new OxidizablePressurePlateBlock(Oxidizable.OxidationLevel.OXIDIZED, PressurePlateBlock.ActivationRule.MOBS, FabricBlockSettings.copy(Blocks.OAK_PRESSURE_PLATE), SoundEvents.BLOCK_STONE_PRESSURE_PLATE_CLICK_OFF, SoundEvents.BLOCK_STONE_PRESSURE_PLATE_CLICK_ON), ModItemGroup.CLUTTER);
-    public static final Block COPPER_TRAPDOOR = registerBlock("copper_trapdoor", new OxidizableTrapdoorBlock(Oxidizable.OxidationLevel.UNAFFECTED, FabricBlockSettings.copy(Blocks.IRON_TRAPDOOR), SoundEvents.BLOCK_IRON_TRAPDOOR_CLOSE, SoundEvents.BLOCK_IRON_TRAPDOOR_OPEN), ModItemGroup.CLUTTER);
-    public static final Block EXPOSED_COPPER_TRAPDOOR = registerBlock("exposed_copper_trapdoor", new OxidizableTrapdoorBlock(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.copy(Blocks.IRON_TRAPDOOR), SoundEvents.BLOCK_IRON_TRAPDOOR_CLOSE, SoundEvents.BLOCK_IRON_TRAPDOOR_OPEN), ModItemGroup.CLUTTER);
-    public static final Block WEATHERED_COPPER_TRAPDOOR = registerBlock("weathered_copper_trapdoor", new OxidizableTrapdoorBlock(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.copy(Blocks.IRON_TRAPDOOR), SoundEvents.BLOCK_IRON_TRAPDOOR_CLOSE, SoundEvents.BLOCK_IRON_TRAPDOOR_OPEN), ModItemGroup.CLUTTER);
-    public static final Block OXIDIZED_COPPER_TRAPDOOR = registerBlock("oxidized_copper_trapdoor", new OxidizableTrapdoorBlock(Oxidizable.OxidationLevel.OXIDIZED, FabricBlockSettings.copy(Blocks.IRON_TRAPDOOR), SoundEvents.BLOCK_IRON_TRAPDOOR_CLOSE, SoundEvents.BLOCK_IRON_TRAPDOOR_OPEN), ModItemGroup.CLUTTER);
+    public static final Block COPPER_PRESSURE_PLATE = registerBlock("copper_pressure_plate", new OxidizablePressurePlateBlock(Oxidizable.OxidationLevel.UNAFFECTED, PressurePlateBlock.ActivationRule.MOBS, FabricBlockSettings.copy(Blocks.OAK_PRESSURE_PLATE)), ModItemGroup.CLUTTER);
+    public static final Block EXPOSED_COPPER_PRESSURE_PLATE = registerBlock("exposed_copper_pressure_plate", new OxidizablePressurePlateBlock(Oxidizable.OxidationLevel.EXPOSED, PressurePlateBlock.ActivationRule.MOBS, FabricBlockSettings.copy(Blocks.OAK_PRESSURE_PLATE)), ModItemGroup.CLUTTER);
+    public static final Block WEATHERED_COPPER_PRESSURE_PLATE = registerBlock("weathered_copper_pressure_plate", new OxidizablePressurePlateBlock(Oxidizable.OxidationLevel.WEATHERED, PressurePlateBlock.ActivationRule.MOBS, FabricBlockSettings.copy(Blocks.OAK_PRESSURE_PLATE)), ModItemGroup.CLUTTER);
+    public static final Block OXIDIZED_COPPER_PRESSURE_PLATE = registerBlock("oxidized_copper_pressure_plate", new OxidizablePressurePlateBlock(Oxidizable.OxidationLevel.OXIDIZED, PressurePlateBlock.ActivationRule.MOBS, FabricBlockSettings.copy(Blocks.OAK_PRESSURE_PLATE)), ModItemGroup.CLUTTER);
+    public static final Block COPPER_TRAPDOOR = registerBlock("copper_trapdoor", new OxidizableTrapdoorBlock(Oxidizable.OxidationLevel.UNAFFECTED, FabricBlockSettings.copy(Blocks.IRON_TRAPDOOR)), ModItemGroup.CLUTTER);
+    public static final Block EXPOSED_COPPER_TRAPDOOR = registerBlock("exposed_copper_trapdoor", new OxidizableTrapdoorBlock(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.copy(Blocks.IRON_TRAPDOOR)), ModItemGroup.CLUTTER);
+    public static final Block WEATHERED_COPPER_TRAPDOOR = registerBlock("weathered_copper_trapdoor", new OxidizableTrapdoorBlock(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.copy(Blocks.IRON_TRAPDOOR)), ModItemGroup.CLUTTER);
+    public static final Block OXIDIZED_COPPER_TRAPDOOR = registerBlock("oxidized_copper_trapdoor", new OxidizableTrapdoorBlock(Oxidizable.OxidationLevel.OXIDIZED, FabricBlockSettings.copy(Blocks.IRON_TRAPDOOR)), ModItemGroup.CLUTTER);
 
     public static final Block WAXED_COPPER_BARS = registerBlock("waxed_copper_bars", new PaneBlock(FabricBlockSettings.copy(ModBlocks.COPPER_BARS)), ModItemGroup.CLUTTER);
     public static final Block WAXED_EXPOSED_COPPER_BARS = registerBlock("waxed_exposed_copper_bars", new PaneBlock(FabricBlockSettings.copy(ModBlocks.EXPOSED_COPPER_BARS)), ModItemGroup.CLUTTER);
     public static final Block WAXED_WEATHERED_COPPER_BARS = registerBlock("waxed_weathered_copper_bars", new PaneBlock(FabricBlockSettings.copy(ModBlocks.WEATHERED_COPPER_BARS)), ModItemGroup.CLUTTER);
     public static final Block WAXED_OXIDIZED_COPPER_BARS = registerBlock("waxed_oxidized_copper_bars", new PaneBlock(FabricBlockSettings.copy(ModBlocks.OXIDIZED_COPPER_BARS)), ModItemGroup.CLUTTER);
-    public static final Block WAXED_COPPER_BUTTON = registerBlock("waxed_copper_button", new ButtonBlock(FabricBlockSettings.copy(Blocks.STONE_BUTTON), 10, false, SoundEvents.BLOCK_STONE_BUTTON_CLICK_OFF, SoundEvents.BLOCK_STONE_BUTTON_CLICK_ON), ModItemGroup.CLUTTER);
-    public static final Block WAXED_EXPOSED_COPPER_BUTTON = registerBlock("waxed_exposed_copper_button", new ButtonBlock(FabricBlockSettings.copy(Blocks.STONE_BUTTON), 20, false, SoundEvents.BLOCK_STONE_BUTTON_CLICK_OFF, SoundEvents.BLOCK_STONE_BUTTON_CLICK_ON), ModItemGroup.CLUTTER);
-    public static final Block WAXED_WEATHERED_COPPER_BUTTON = registerBlock("waxed_weathered_copper_button", new ButtonBlock(FabricBlockSettings.copy(Blocks.STONE_BUTTON), 30, false, SoundEvents.BLOCK_STONE_BUTTON_CLICK_OFF, SoundEvents.BLOCK_STONE_BUTTON_CLICK_ON), ModItemGroup.CLUTTER);
-    public static final Block WAXED_OXIDIZED_COPPER_BUTTON = registerBlock("waxed_oxidized_copper_button", new ButtonBlock(FabricBlockSettings.copy(Blocks.STONE_BUTTON), 40, false, SoundEvents.BLOCK_STONE_BUTTON_CLICK_OFF, SoundEvents.BLOCK_STONE_BUTTON_CLICK_ON), ModItemGroup.CLUTTER);
+    public static final Block WAXED_COPPER_BUTTON = registerBlock("waxed_copper_button", new StoneButtonBlock(FabricBlockSettings.copy(Blocks.STONE_BUTTON)), ModItemGroup.CLUTTER);
+    public static final Block WAXED_EXPOSED_COPPER_BUTTON = registerBlock("waxed_exposed_copper_button", new StoneButtonBlock(FabricBlockSettings.copy(Blocks.STONE_BUTTON)), ModItemGroup.CLUTTER);
+    public static final Block WAXED_WEATHERED_COPPER_BUTTON = registerBlock("waxed_weathered_copper_button", new StoneButtonBlock(FabricBlockSettings.copy(Blocks.STONE_BUTTON)), ModItemGroup.CLUTTER);
+    public static final Block WAXED_OXIDIZED_COPPER_BUTTON = registerBlock("waxed_oxidized_copper_button", new StoneButtonBlock(FabricBlockSettings.copy(Blocks.STONE_BUTTON)), ModItemGroup.CLUTTER);
     public static final Block WAXED_COPPER_CANDELABRA = registerBlock("waxed_copper_candelabra", new CandelabraBlock(FabricBlockSettings.copy(ModBlocks.COPPER_CANDELABRA)), ModItemGroup.CLUTTER);
     public static final Block WAXED_EXPOSED_COPPER_CANDELABRA = registerBlock("waxed_exposed_copper_candelabra", new CandelabraBlock(FabricBlockSettings.copy(ModBlocks.EXPOSED_COPPER_CANDELABRA)), ModItemGroup.CLUTTER);
     public static final Block WAXED_WEATHERED_COPPER_CANDELABRA = registerBlock("waxed_weathered_copper_candelabra", new CandelabraBlock(FabricBlockSettings.copy(ModBlocks.WEATHERED_COPPER_CANDELABRA)), ModItemGroup.CLUTTER);
@@ -147,10 +143,10 @@ public class ModBlocks {
     public static final Block WAXED_EXPOSED_COPPER_CHAIN = registerBlock("waxed_exposed_copper_chain", new ChainBlock(FabricBlockSettings.copy(ModBlocks.EXPOSED_COPPER_CHAIN)), ModItemGroup.CLUTTER);
     public static final Block WAXED_WEATHERED_COPPER_CHAIN = registerBlock("waxed_weathered_copper_chain", new ChainBlock(FabricBlockSettings.copy(ModBlocks.WEATHERED_COPPER_CHAIN)), ModItemGroup.CLUTTER);
     public static final Block WAXED_OXIDIZED_COPPER_CHAIN = registerBlock("waxed_oxidized_copper_chain", new ChainBlock(FabricBlockSettings.copy(ModBlocks.OXIDIZED_COPPER_CHAIN)), ModItemGroup.CLUTTER);
-    public static final Block WAXED_COPPER_DOOR = registerBlock("waxed_copper_door", new DoorBlock(FabricBlockSettings.copy(ModBlocks.COPPER_DOOR), SoundEvents.BLOCK_IRON_DOOR_CLOSE, SoundEvents.BLOCK_IRON_DOOR_OPEN), ModItemGroup.CLUTTER);
-    public static final Block WAXED_EXPOSED_COPPER_DOOR = registerBlock("waxed_exposed_copper_door", new DoorBlock(FabricBlockSettings.copy(ModBlocks.EXPOSED_COPPER_DOOR), SoundEvents.BLOCK_IRON_DOOR_CLOSE, SoundEvents.BLOCK_IRON_DOOR_OPEN), ModItemGroup.CLUTTER);
-    public static final Block WAXED_WEATHERED_COPPER_DOOR = registerBlock("waxed_weathered_copper_door", new DoorBlock(FabricBlockSettings.copy(ModBlocks.WEATHERED_COPPER_DOOR), SoundEvents.BLOCK_IRON_DOOR_CLOSE, SoundEvents.BLOCK_IRON_DOOR_OPEN), ModItemGroup.CLUTTER);
-    public static final Block WAXED_OXIDIZED_COPPER_DOOR = registerBlock("waxed_oxidized_copper_door", new DoorBlock(FabricBlockSettings.copy(ModBlocks.OXIDIZED_COPPER_DOOR), SoundEvents.BLOCK_IRON_DOOR_CLOSE, SoundEvents.BLOCK_IRON_DOOR_OPEN), ModItemGroup.CLUTTER);
+    public static final Block WAXED_COPPER_DOOR = registerBlock("waxed_copper_door", new DoorBlock(FabricBlockSettings.copy(ModBlocks.COPPER_DOOR)), ModItemGroup.CLUTTER);
+    public static final Block WAXED_EXPOSED_COPPER_DOOR = registerBlock("waxed_exposed_copper_door", new DoorBlock(FabricBlockSettings.copy(ModBlocks.EXPOSED_COPPER_DOOR)), ModItemGroup.CLUTTER);
+    public static final Block WAXED_WEATHERED_COPPER_DOOR = registerBlock("waxed_weathered_copper_door", new DoorBlock(FabricBlockSettings.copy(ModBlocks.WEATHERED_COPPER_DOOR)), ModItemGroup.CLUTTER);
+    public static final Block WAXED_OXIDIZED_COPPER_DOOR = registerBlock("waxed_oxidized_copper_door", new DoorBlock(FabricBlockSettings.copy(ModBlocks.OXIDIZED_COPPER_DOOR)), ModItemGroup.CLUTTER);
     public static final Block WAXED_COPPER_LANTERN = registerBlock("waxed_copper_lantern", new LanternBlock(FabricBlockSettings.copy(Blocks.LANTERN)), ModItemGroup.CLUTTER);
     public static final Block WAXED_EXPOSED_COPPER_LANTERN = registerBlock("waxed_exposed_copper_lantern", new LanternBlock(FabricBlockSettings.copy(Blocks.LANTERN)), ModItemGroup.CLUTTER);
     public static final Block WAXED_WEATHERED_COPPER_LANTERN = registerBlock("waxed_weathered_copper_lantern", new LanternBlock(FabricBlockSettings.copy(Blocks.LANTERN)), ModItemGroup.CLUTTER);
@@ -159,25 +155,25 @@ public class ModBlocks {
     public static final Block WAXED_EXPOSED_COPPER_SOUL_LANTERN = registerBlock("waxed_exposed_copper_soul_lantern", new LanternBlock(FabricBlockSettings.copy(Blocks.SOUL_LANTERN)), ModItemGroup.CLUTTER);
     public static final Block WAXED_WEATHERED_COPPER_SOUL_LANTERN = registerBlock("waxed_weathered_copper_soul_lantern", new LanternBlock(FabricBlockSettings.copy(Blocks.SOUL_LANTERN)), ModItemGroup.CLUTTER);
     public static final Block WAXED_OXIDIZED_COPPER_SOUL_LANTERN = registerBlock("waxed_oxidized_copper_soul_lantern", new LanternBlock(FabricBlockSettings.copy(Blocks.SOUL_LANTERN)), ModItemGroup.CLUTTER);
-    public static final Block WAXED_COPPER_PRESSURE_PLATE = registerBlock("waxed_copper_pressure_plate", new PressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, FabricBlockSettings.copy(ModBlocks.COPPER_PRESSURE_PLATE), SoundEvents.BLOCK_STONE_PRESSURE_PLATE_CLICK_OFF, SoundEvents.BLOCK_STONE_PRESSURE_PLATE_CLICK_ON), ModItemGroup.CLUTTER);
-    public static final Block WAXED_EXPOSED_COPPER_PRESSURE_PLATE = registerBlock("waxed_exposed_copper_pressure_plate", new PressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, FabricBlockSettings.copy(ModBlocks.EXPOSED_COPPER_PRESSURE_PLATE), SoundEvents.BLOCK_STONE_PRESSURE_PLATE_CLICK_OFF, SoundEvents.BLOCK_STONE_PRESSURE_PLATE_CLICK_ON), ModItemGroup.CLUTTER);
-    public static final Block WAXED_WEATHERED_COPPER_PRESSURE_PLATE = registerBlock("waxed_weathered_copper_pressure_plate", new PressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, FabricBlockSettings.copy(ModBlocks.WEATHERED_COPPER_PRESSURE_PLATE), SoundEvents.BLOCK_STONE_PRESSURE_PLATE_CLICK_OFF, SoundEvents.BLOCK_STONE_PRESSURE_PLATE_CLICK_ON), ModItemGroup.CLUTTER);
-    public static final Block WAXED_OXIDIZED_COPPER_PRESSURE_PLATE = registerBlock("waxed_oxidized_copper_pressure_plate", new PressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, FabricBlockSettings.copy(ModBlocks.OXIDIZED_COPPER_PRESSURE_PLATE), SoundEvents.BLOCK_STONE_PRESSURE_PLATE_CLICK_OFF, SoundEvents.BLOCK_STONE_PRESSURE_PLATE_CLICK_ON), ModItemGroup.CLUTTER);
-    public static final Block WAXED_COPPER_TRAPDOOR = registerBlock("waxed_copper_trapdoor", new ModTrapdoorBlock(FabricBlockSettings.copy(Blocks.IRON_TRAPDOOR), SoundEvents.BLOCK_IRON_TRAPDOOR_CLOSE, SoundEvents.BLOCK_IRON_TRAPDOOR_OPEN), ModItemGroup.CLUTTER);
-    public static final Block WAXED_EXPOSED_COPPER_TRAPDOOR = registerBlock("waxed_exposed_copper_trapdoor", new ModTrapdoorBlock(FabricBlockSettings.copy(Blocks.IRON_TRAPDOOR), SoundEvents.BLOCK_IRON_TRAPDOOR_CLOSE, SoundEvents.BLOCK_IRON_TRAPDOOR_OPEN), ModItemGroup.CLUTTER);
-    public static final Block WAXED_WEATHERED_COPPER_TRAPDOOR = registerBlock("waxed_weathered_copper_trapdoor", new ModTrapdoorBlock(FabricBlockSettings.copy(Blocks.IRON_TRAPDOOR), SoundEvents.BLOCK_IRON_TRAPDOOR_CLOSE, SoundEvents.BLOCK_IRON_TRAPDOOR_OPEN), ModItemGroup.CLUTTER);
-    public static final Block WAXED_OXIDIZED_COPPER_TRAPDOOR = registerBlock("waxed_oxidized_copper_trapdoor", new ModTrapdoorBlock(FabricBlockSettings.copy(Blocks.IRON_TRAPDOOR), SoundEvents.BLOCK_IRON_TRAPDOOR_CLOSE, SoundEvents.BLOCK_IRON_TRAPDOOR_OPEN), ModItemGroup.CLUTTER);
+    public static final Block WAXED_COPPER_PRESSURE_PLATE = registerBlock("waxed_copper_pressure_plate", new PressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, FabricBlockSettings.copy(ModBlocks.COPPER_PRESSURE_PLATE)), ModItemGroup.CLUTTER);
+    public static final Block WAXED_EXPOSED_COPPER_PRESSURE_PLATE = registerBlock("waxed_exposed_copper_pressure_plate", new PressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, FabricBlockSettings.copy(ModBlocks.EXPOSED_COPPER_PRESSURE_PLATE)), ModItemGroup.CLUTTER);
+    public static final Block WAXED_WEATHERED_COPPER_PRESSURE_PLATE = registerBlock("waxed_weathered_copper_pressure_plate", new PressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, FabricBlockSettings.copy(ModBlocks.WEATHERED_COPPER_PRESSURE_PLATE)), ModItemGroup.CLUTTER);
+    public static final Block WAXED_OXIDIZED_COPPER_PRESSURE_PLATE = registerBlock("waxed_oxidized_copper_pressure_plate", new PressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, FabricBlockSettings.copy(ModBlocks.OXIDIZED_COPPER_PRESSURE_PLATE)), ModItemGroup.CLUTTER);
+    public static final Block WAXED_COPPER_TRAPDOOR = registerBlock("waxed_copper_trapdoor", new ModTrapdoorBlock(FabricBlockSettings.copy(Blocks.IRON_TRAPDOOR)), ModItemGroup.CLUTTER);
+    public static final Block WAXED_EXPOSED_COPPER_TRAPDOOR = registerBlock("waxed_exposed_copper_trapdoor", new ModTrapdoorBlock(FabricBlockSettings.copy(Blocks.IRON_TRAPDOOR)), ModItemGroup.CLUTTER);
+    public static final Block WAXED_WEATHERED_COPPER_TRAPDOOR = registerBlock("waxed_weathered_copper_trapdoor", new ModTrapdoorBlock(FabricBlockSettings.copy(Blocks.IRON_TRAPDOOR)), ModItemGroup.CLUTTER);
+    public static final Block WAXED_OXIDIZED_COPPER_TRAPDOOR = registerBlock("waxed_oxidized_copper_trapdoor", new ModTrapdoorBlock(FabricBlockSettings.copy(Blocks.IRON_TRAPDOOR)), ModItemGroup.CLUTTER);
 
-    public static final Block GOLDEN_BUTTON = registerBlock("golden_button", new ButtonBlock(FabricBlockSettings.copy(Blocks.STONE_BUTTON), 20, false, SoundEvents.BLOCK_STONE_BUTTON_CLICK_OFF, SoundEvents.BLOCK_STONE_BUTTON_CLICK_ON), ModItemGroup.CLUTTER);
+    public static final Block GOLDEN_BUTTON = registerBlock("golden_button", new StoneButtonBlock(FabricBlockSettings.copy(Blocks.STONE_BUTTON)), ModItemGroup.CLUTTER);
     public static final Block GOLDEN_CANDELABRA = registerBlock("golden_candelabra", new CandelabraBlock(FabricBlockSettings.copy(Blocks.GOLD_BLOCK).luminance(CandelabraBlock.createLightLevelFromLitBlockState(12))), ModItemGroup.CLUTTER);
     public static final Block GOLDEN_CHAIN = registerBlock("golden_chain", new ChainBlock(FabricBlockSettings.copy(Blocks.CHAIN)), ModItemGroup.CLUTTER);
     public static final Block GOLDEN_CHANDELIER = registerBlock("golden_chandelier", new ChandelierBlock(FabricBlockSettings.copy(Blocks.GOLD_BLOCK).luminance(ChandelierBlock.createLightLevelFromLitBlockState(12))), ModItemGroup.CLUTTER);
-    public static final Block GOLDEN_DOOR = registerBlock("golden_door", new DoorBlock(FabricBlockSettings.copy(Blocks.IRON_DOOR), SoundEvents.BLOCK_IRON_DOOR_CLOSE, SoundEvents.BLOCK_IRON_DOOR_OPEN), ModItemGroup.CLUTTER);
+    public static final Block GOLDEN_DOOR = registerBlock("golden_door", new DoorBlock(FabricBlockSettings.copy(Blocks.IRON_DOOR)), ModItemGroup.CLUTTER);
     public static final Block GOLDEN_LANTERN = registerBlock("golden_lantern", new LanternBlock(FabricBlockSettings.copy(Blocks.LANTERN)), ModItemGroup.CLUTTER);
     public static final Block GOLDEN_SOUL_LANTERN = registerBlock("golden_soul_lantern", new LanternBlock(FabricBlockSettings.copy(Blocks.SOUL_LANTERN)), ModItemGroup.CLUTTER);
-    public static final Block GOLDEN_TRAPDOOR = registerBlock("golden_trapdoor", new ModTrapdoorBlock(FabricBlockSettings.copy(Blocks.IRON_TRAPDOOR), SoundEvents.BLOCK_IRON_TRAPDOOR_CLOSE, SoundEvents.BLOCK_IRON_TRAPDOOR_OPEN), ModItemGroup.CLUTTER);
+    public static final Block GOLDEN_TRAPDOOR = registerBlock("golden_trapdoor", new ModTrapdoorBlock(FabricBlockSettings.copy(Blocks.IRON_TRAPDOOR)), ModItemGroup.CLUTTER);
 
-    public static final Block IRON_BUTTON = registerBlock("iron_button", new ButtonBlock(FabricBlockSettings.copy(Blocks.STONE_BUTTON), 60, false, SoundEvents.BLOCK_STONE_BUTTON_CLICK_OFF, SoundEvents.BLOCK_STONE_BUTTON_CLICK_ON), ModItemGroup.CLUTTER);
+    public static final Block IRON_BUTTON = registerBlock("iron_button", new StoneButtonBlock(FabricBlockSettings.copy(Blocks.STONE_BUTTON)), ModItemGroup.CLUTTER);
     public static final Block IRON_CANDELABRA = registerBlock("iron_candelabra", new CandelabraBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK).luminance(CandelabraBlock.createLightLevelFromLitBlockState(12))), ModItemGroup.CLUTTER);
     public static final Block IRON_CHANDELIER = registerBlock("iron_chandelier", new ChandelierBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK).luminance(ChandelierBlock.createLightLevelFromLitBlockState(12))), ModItemGroup.CLUTTER);
 
@@ -276,18 +272,16 @@ public class ModBlocks {
 
     private static Block registerBlock(String name, Block block, ItemGroup group) {
         registerBlockItem(name, block, group);
-        return Registry.register(Registries.BLOCK, new Identifier(Clutter.MOD_ID, name), block);
+        return Registry.register(Registry.BLOCK, new Identifier(Clutter.MOD_ID, name), block);
     }
 
     private static Block registerBlockWithoutItem(String name, Block block) {
-        return Registry.register(Registries.BLOCK, new Identifier(Clutter.MOD_ID, name), block);
+        return Registry.register(Registry.BLOCK, new Identifier(Clutter.MOD_ID, name), block);
     }
 
-    private static Item registerBlockItem(String name, Block block, ItemGroup group) {
-        Item item = Registry.register(Registries.ITEM, new Identifier(Clutter.MOD_ID, name),
-                new BlockItem(block, new FabricItemSettings()));
-        ItemGroupEvents.modifyEntriesEvent(group).register(entries -> entries.add(item));
-        return item;
+    private static Item registerBlockItem(String name, Block block, ItemGroup tab) {
+        return Registry.register(Registry.ITEM, new Identifier(Clutter.MOD_ID, name),
+                new BlockItem(block, new FabricItemSettings().group(tab)));
     }
 
     public static void oxidizableBlockPairs() {

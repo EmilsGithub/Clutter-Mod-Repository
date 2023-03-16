@@ -3,13 +3,13 @@
 	"id": "clutter",
 	"version": "${version}",
 	"name": "Clutter",
-	"description": "Aims to add decoration blocks while still keeping to the 'vanilla' style.",
+	"description": "Adds decoration blocks and items while keeping to the 'vanilla' style.",
 	"authors": [
 		"EmilSG"
 	],
 	"contact": {
 		"homepage": "https://www.curseforge.com/minecraft/mc-mods/clutter",
-		"sources": "https://github.com/EmilsGithub/Clutter-1.19.3"
+		"sources": "https://github.com/EmilsGithub/Clutter-Mod"
 	},
 	"license": "MIT",
 	"icon": "assets/clutter/icon.png",
@@ -20,9 +20,6 @@
 		],
 		"client": [
 			"net.emilsg.clutter.ClutterClient"
-		],
-		"fabric-datagen": [
-			"net.emilsg.clutter.ClutterDataGenerator"
 		]
 	},
 	"mixins": [
@@ -30,7 +27,7 @@
 	],
 	"depends": {
 		"fabricloader": ">=0.14.14",
-		"minecraft": "~1.19.3",
+		"minecraft": "~1.19.2",
 		"java": ">=17",
 		"fabric-api": "*"
 	},

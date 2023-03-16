@@ -4,22 +4,20 @@ import net.emilsg.clutter.Clutter;
 import net.emilsg.clutter.block.entity.SeatEntity;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.registry.Registry;
 
 import static net.emilsg.clutter.block.entity.SeatEntity.OCCUPIED;
 
 public class Sit
 {
-    public static final EntityType<SeatEntity> SEAT = Registry.register(Registries.ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "seat"),
+    public static final EntityType<SeatEntity> SEAT = Registry.register(Registry.ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "seat"),
             FabricEntityTypeBuilder.<SeatEntity>create(SpawnGroup.MISC, SeatEntity::new).dimensions(EntityDimensions.fixed(0.001F, 0.001F))
                     .build());
 
