@@ -75,7 +75,7 @@ public class WindowSillBlock extends Block implements Waterloggable{
         @Nullable
         @Override
         public BlockState getPlacementState(ItemPlacementContext ctx) {
-                return this.getDefaultState().with(FACING, ctx.getPlayerFacing());
+                return this.getDefaultState().with(FACING, ctx.getPlayerLookDirection());
         }
 
         @Override

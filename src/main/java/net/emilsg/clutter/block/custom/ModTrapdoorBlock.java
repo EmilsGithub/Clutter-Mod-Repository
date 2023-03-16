@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
+import net.minecraft.block.BlockSetType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.TrapdoorBlock;
 import net.minecraft.block.enums.BlockHalf;
@@ -11,8 +12,8 @@ import net.minecraft.util.math.Direction;
 
 public class ModTrapdoorBlock extends TrapdoorBlock {
 
-    public ModTrapdoorBlock(Settings settings, SoundEvent closeSound, SoundEvent openSound) {
-        super(settings, closeSound, openSound);
+    public ModTrapdoorBlock(Settings settings, BlockSetType blockSetType) {
+        super(settings, blockSetType);
     }
 
     @Override
@@ -20,7 +21,7 @@ public class ModTrapdoorBlock extends TrapdoorBlock {
         BlockState blockState = this.getDefaultState();
         FluidState fluidState = ctx.getWorld().getFluidState(ctx.getBlockPos());
         Direction direction = ctx.getSide();
-        blockState = ctx.canReplaceExisting() || !direction.getAxis().isHorizontal() ? (BlockState)((BlockState)blockState.with(FACING, ctx.getPlayerFacing())).with(HALF, direction == Direction.UP ? BlockHalf.BOTTOM : BlockHalf.TOP) : (BlockState)((BlockState)blockState.with(FACING, direction)).with(HALF, ctx.getHitPos().y - (double)ctx.getBlockPos().getY() > 0.5 ? BlockHalf.TOP : BlockHalf.BOTTOM);
+        blockState = ctx.canReplaceExisting() || !direction.getAxis().isHorizontal() ? (BlockState)((BlockState)blockState.with(FACING, ctx.getPlayerLookDirection())).with(HALF, direction == Direction.UP ? BlockHalf.BOTTOM : BlockHalf.TOP) : (BlockState)((BlockState)blockState.with(FACING, direction)).with(HALF, ctx.getHitPos().y - (double)ctx.getBlockPos().getY() > 0.5 ? BlockHalf.TOP : BlockHalf.BOTTOM);
         if (ctx.getWorld().isReceivingRedstonePower(ctx.getBlockPos())) {
             blockState = (BlockState)((BlockState)blockState.with(OPEN, true)).with(POWERED, true);
         }

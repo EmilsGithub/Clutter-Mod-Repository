@@ -1,9 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ButtonBlock;
-import net.minecraft.block.Oxidizable;
-import net.minecraft.block.PaneBlock;
+import net.minecraft.block.*;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.BlockPos;
@@ -13,8 +10,8 @@ public class OxidizableButtonBlock extends ButtonBlock implements Oxidizable {
 
     private final OxidationLevel oxidationLevel;
 
-    public OxidizableButtonBlock(OxidationLevel oxidationLevel, Settings settings, int pressTicks, boolean wooden, SoundEvent clickOffSound, SoundEvent clickOnSound) {
-        super(settings, pressTicks, wooden, clickOffSound, clickOnSound);
+    public OxidizableButtonBlock(OxidationLevel oxidationLevel, Settings settings, BlockSetType blockSetType, int pressTicks, boolean wooden) {
+        super(settings,blockSetType, pressTicks, wooden);
         this.oxidationLevel = oxidationLevel;
     }
 

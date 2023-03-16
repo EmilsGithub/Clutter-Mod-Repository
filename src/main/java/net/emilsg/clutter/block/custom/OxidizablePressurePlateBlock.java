@@ -1,9 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ChainBlock;
-import net.minecraft.block.Oxidizable;
-import net.minecraft.block.PressurePlateBlock;
+import net.minecraft.block.*;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.BlockPos;
@@ -13,8 +10,8 @@ public class OxidizablePressurePlateBlock extends PressurePlateBlock implements 
 
     private final OxidationLevel oxidationLevel;
 
-    public OxidizablePressurePlateBlock(OxidationLevel oxidationLevel, ActivationRule type, Settings settings, SoundEvent depressSound, SoundEvent pressSound) {
-        super(type, settings, depressSound, pressSound);
+    public OxidizablePressurePlateBlock(OxidationLevel oxidationLevel, ActivationRule type, Settings settings, BlockSetType blockSetType) {
+        super(type, settings, blockSetType);
         this.oxidationLevel = oxidationLevel;
     }
 

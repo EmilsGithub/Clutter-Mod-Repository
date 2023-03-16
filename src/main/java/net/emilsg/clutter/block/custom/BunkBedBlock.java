@@ -32,7 +32,7 @@ public class BunkBedBlock extends BedBlock {
     @Override
     @Nullable
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        Direction direction = ctx.getPlayerFacing();
+        Direction direction = ctx.getPlayerLookDirection();
         BlockPos blockPos = ctx.getBlockPos();
         BlockPos blockPos2 = blockPos.offset(direction);
         World world = ctx.getWorld();

@@ -118,7 +118,7 @@ public class CandelabraBlock extends WaterloggableLitBlock {
         BlockPos blockPos;
         World worldAccess = ctx.getWorld();
         boolean bl = worldAccess.getFluidState(blockPos = ctx.getBlockPos()).getFluid() == Fluids.WATER;
-        return (BlockState)this.getDefaultState().with(WATERLOGGED, bl).with(FACING, ctx.getPlayerFacing());
+        return (BlockState)this.getDefaultState().with(WATERLOGGED, bl).with(FACING, ctx.getPlayerLookDirection());
     }
 
     @Override

@@ -1,10 +1,7 @@
 package net.emilsg.clutter.block.custom;
 
 import net.emilsg.clutter.util.ModBlockTags;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.DoorBlock;
-import net.minecraft.block.Oxidizable;
+import net.minecraft.block.*;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
@@ -17,8 +14,8 @@ public class OxidizableDoorBlock extends DoorBlock implements Oxidizable {
 
     private final OxidationLevel oxidationLevel;
 
-    public OxidizableDoorBlock(OxidationLevel oxidationLevel, Settings settings, SoundEvent closeSound, SoundEvent openSound) {
-        super(settings, closeSound, openSound);
+    public OxidizableDoorBlock(OxidationLevel oxidationLevel, Settings settings, BlockSetType blockSetType) {
+        super(settings, blockSetType);
         this.oxidationLevel = oxidationLevel;
     }
 
