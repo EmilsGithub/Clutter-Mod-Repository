@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "on_chain=false": {
+      "model": "clutter:block/chandeliers/iron_chandelier"
+    },
+    "on_chain=true": {
+      "model": "clutter:block/chandeliers/iron_chandelier_on_chain"
+    }
+  }
+}

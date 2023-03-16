@@ -61,14 +61,13 @@ public class WindowSillBlock extends Block implements Waterloggable{
         @Override
         public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
                 int i = state.get(CURRENT_MODEL);
-                if (player.isSneaking() && hand.equals(Hand.MAIN_HAND) && !world.isClient()) {
+                if (!world.isClient && player.isSneaking() && hand.equals(Hand.MAIN_HAND) && player.getStackInHand(hand).isEmpty()) {
                         if (i < MAX_MODEL) {
                                 world.setBlockState(pos, state.with(CURRENT_MODEL, i + 1), Block.NOTIFY_ALL);
-                                return ActionResult.success(world.isClient);
-                        } else if (i >= MAX_MODEL) {
+                        } else {
                                 world.setBlockState(pos, state.with(CURRENT_MODEL, 0), Block.NOTIFY_ALL);
-                                return ActionResult.success(world.isClient);
                         }
+                        return ActionResult.SUCCESS;
                 }
                 return ActionResult.PASS;
         }

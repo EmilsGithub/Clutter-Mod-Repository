@@ -1,0 +1,15 @@
+{
+  "values": [
+    "#clutter:soul_lanterns",
+    "clutter:silver_lantern",
+    "clutter:golden_lantern",
+    "clutter:copper_lantern",
+    "clutter:exposed_copper_lantern",
+    "clutter:weathered_copper_lantern",
+    "clutter:oxidized_copper_lantern",
+    "clutter:waxed_copper_lantern",
+    "clutter:waxed_exposed_copper_lantern",
+    "clutter:waxed_weathered_copper_lantern",
+    "clutter:waxed_oxidized_copper_lantern"
+  ]
+}

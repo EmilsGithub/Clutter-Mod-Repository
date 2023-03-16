@@ -1,0 +1,10 @@
+{
+  "variants":{
+    "lit=false":{
+      "model":"clutter:block/lamps/colors/pink"
+    },
+    "lit=true":{
+      "model":"clutter:block/lamps/colors/pink_lit"
+    }
+  }
+}

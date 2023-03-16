@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "clutter:raw_silver"
+    }
+  },
+  "result": {
+    "item": "clutter:raw_silver_block",
+    "count": 1
+  }
+}

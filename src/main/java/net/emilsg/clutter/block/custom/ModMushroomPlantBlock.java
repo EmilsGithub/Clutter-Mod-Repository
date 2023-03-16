@@ -1,6 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
-import net.emilsg.clutter.other.ModBlockTags;
+import net.emilsg.clutter.util.ModBlockTags;
 import net.minecraft.block.*;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.server.world.ServerWorld;

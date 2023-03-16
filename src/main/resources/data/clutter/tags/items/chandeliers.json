@@ -1,0 +1,16 @@
+{
+  "values": [
+    "clutter:golden_chandelier",
+    "clutter:silver_chandelier",
+    "clutter:iron_chandelier",
+
+    "clutter:copper_chandelier",
+    "clutter:exposed_copper_chandelier",
+    "clutter:weathered_copper_chandelier",
+    "clutter:oxidized_copper_chandelier",
+    "clutter:waxed_copper_chandelier",
+    "clutter:waxed_exposed_copper_chandelier",
+    "clutter:waxed_weathered_copper_chandelier",
+    "clutter:waxed_oxidized_copper_chandelier"
+  ]
+}

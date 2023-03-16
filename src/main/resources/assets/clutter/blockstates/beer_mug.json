@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "clutter:block/beer_mug"
+    },
+    "facing=south": {
+      "model": "clutter:block/beer_mug",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "clutter:block/beer_mug",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "clutter:block/beer_mug",
+      "y": 90
+    }
+  }
+}

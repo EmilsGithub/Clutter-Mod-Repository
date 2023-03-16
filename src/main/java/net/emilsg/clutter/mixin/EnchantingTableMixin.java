@@ -17,8 +17,7 @@ public class EnchantingTableMixin {
     @Inject(at = @At("HEAD"), method = "canAccessBookshelf", cancellable = true)
     private static void canAccessBookshelf(World world, BlockPos tablePos, BlockPos bookshelfOffset, CallbackInfoReturnable<Boolean> cir)
     {
-        if (world.getBlockState(tablePos.add(bookshelfOffset)).isIn(ModBlockTags.BOOKSHELVES)
-                && world.isAir(tablePos.add(bookshelfOffset.getX() / 2, bookshelfOffset.getY(), bookshelfOffset.getZ() / 2)))
+        if (world.getBlockState(tablePos.add(bookshelfOffset)).isIn(ModBlockTags.BOOKSHELVES) && world.isAir(tablePos.add(bookshelfOffset.getX() / 2, bookshelfOffset.getY(), bookshelfOffset.getZ() / 2)))
         {
             cir.setReturnValue(true);
         }

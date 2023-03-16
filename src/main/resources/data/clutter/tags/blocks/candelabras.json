@@ -1,0 +1,16 @@
+{
+  "values": [
+    "clutter:golden_candelabra",
+    "clutter:silver_candelabra",
+    "clutter:iron_candelabra",
+
+    "clutter:copper_candelabra",
+    "clutter:exposed_copper_candelabra",
+    "clutter:weathered_copper_candelabra",
+    "clutter:oxidized_copper_candelabra",
+    "clutter:waxed_copper_candelabra",
+    "clutter:waxed_exposed_copper_candelabra",
+    "clutter:waxed_weathered_copper_candelabra",
+    "clutter:waxed_oxidized_copper_candelabra"
+  ]
+}

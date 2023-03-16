@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": {
+      "item": "clutter:silver_ingot"
+    },
+    "N": {
+      "item": "clutter:silver_nugget"
+    }
+  },
+  "pattern": [
+    "N",
+    "C",
+    "N"
+  ],
+  "result": {
+    "item": "clutter:silver_chain"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "clutter:block/curtains/light_blue_kitchen_curtains",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "clutter:block/curtains/light_blue_kitchen_curtains"
+    },
+    "facing=west": {
+      "model": "clutter:block/curtains/light_blue_kitchen_curtains",
+      "y": 90
+    },
+    "facing=east": {
+      "model": "clutter:block/curtains/light_blue_kitchen_curtains",
+      "y": 270
+    }
+  }
+}

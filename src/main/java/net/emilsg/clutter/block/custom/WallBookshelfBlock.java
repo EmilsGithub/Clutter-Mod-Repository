@@ -38,7 +38,7 @@ public class WallBookshelfBlock extends Block implements Waterloggable{
         protected static final VoxelShape EAST_SHAPE = Block.createCuboidShape(8.0, 0.0, 0.0, 16.0, 12.0, 16.0);
         protected static final VoxelShape WEST_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 8.0, 12.0, 16.0);
         public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
-        private static final BooleanProperty LIT = Properties.LIT;
+        private static final BooleanProperty LIT = BooleanProperty.of("lit");
         public static final int MAX_MODEL = 6;
         public static IntProperty CURRENT_MODEL = IntProperty.of("current_model", 0, MAX_MODEL);
         public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
@@ -46,9 +46,7 @@ public class WallBookshelfBlock extends Block implements Waterloggable{
 
         public WallBookshelfBlock(Settings settings) {
                 super(settings.luminance(state -> state.get(LIT) ? 8 : 0));
-                this.setDefaultState(this.getDefaultState().with(CURRENT_MODEL, 0).with(LIT, false));
-                this.setDefaultState(this.stateManager.getDefaultState().with(WATERLOGGED, false));
-
+                this.setDefaultState(this.getDefaultState().with(CURRENT_MODEL, 0).with(LIT, false).with(WATERLOGGED, false));
         }
 
         @Override
@@ -124,26 +122,25 @@ public class WallBookshelfBlock extends Block implements Waterloggable{
         @Override
         public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
                 int i = state.get(CURRENT_MODEL);
-                if (player.isSneaking() && hand.equals(Hand.MAIN_HAND) && !world.isClient()) {
-                        if (i < MAX_MODEL) {
-                                world.setBlockState(pos, state.with(CURRENT_MODEL, i + 1), Block.NOTIFY_ALL);
-                                return ActionResult.success(world.isClient);
-                        } else if (i >= MAX_MODEL) {
-                                world.setBlockState(pos, state.with(CURRENT_MODEL, 0), Block.NOTIFY_ALL);
-                                return ActionResult.success(world.isClient);
+                        if (!world.isClient && player.isSneaking() && hand.equals(Hand.MAIN_HAND) && player.getStackInHand(hand).isEmpty()) {
+                                if (i < MAX_MODEL) {
+                                        world.setBlockState(pos, state.with(CURRENT_MODEL, i + 1), Block.NOTIFY_ALL);
+                                        updateLit(world, pos, state);
+                                } else {
+                                        world.setBlockState(pos, state.with(CURRENT_MODEL, 0), Block.NOTIFY_ALL);
+                                }
+                                return ActionResult.SUCCESS;
                         }
-                }
-                if (i != 0 && !world.isClient() && player.getStackInHand(hand).isEmpty()) {
-                        if (i == 2 || i == 4) {
-                                world.setBlockState(pos, state.with(LIT, true), Block.NOTIFY_ALL);
-                                return ActionResult.success(world.isClient);
-                        }
-                        else {
-                                world.setBlockState(pos, state.with(LIT, false), Block.NOTIFY_ALL);
-                                return ActionResult.success(world.isClient);
-                        }
-                }
                 return ActionResult.PASS;
+        }
+
+        public void updateLit(World world, BlockPos pos, BlockState state) {
+                int i = state.get(CURRENT_MODEL);
+                        if (i == 1 || i == 3) {
+                                world.setBlockState(pos, state.with(LIT, true).with(CURRENT_MODEL, i + 1), Block.NOTIFY_ALL);
+                        } else {
+                                world.setBlockState(pos, state.with(LIT, false).with(CURRENT_MODEL, i + 1), Block.NOTIFY_ALL);
+                        }
         }
 
 

@@ -1,0 +1,6 @@
+{
+  "parent": "block/crop",
+  "textures": {
+    "crop": "clutter:block/hops_stage0"
+  }
+}

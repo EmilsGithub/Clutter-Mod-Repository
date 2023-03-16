@@ -1,0 +1,7 @@
+{
+  "parent": "clutter:block/chains/copper_chain",
+  "textures": {
+    "particle": "clutter:block/weathered_copper_chain",
+    "all": "clutter:block/weathered_copper_chain"
+  }
+}
