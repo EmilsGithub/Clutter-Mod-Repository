@@ -11,8 +11,8 @@ import net.minecraft.util.math.Direction;
 
 public class ModTrapdoorBlock extends TrapdoorBlock {
 
-    public ModTrapdoorBlock(Settings settings, SoundEvent closeSound, SoundEvent openSound) {
-        super(settings, closeSound, openSound);
+    public ModTrapdoorBlock(Settings settings) {
+        super(settings);
     }
 
     @Override

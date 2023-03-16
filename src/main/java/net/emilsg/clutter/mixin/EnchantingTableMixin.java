@@ -2,9 +2,6 @@ package net.emilsg.clutter.mixin;
 
 import net.emilsg.clutter.util.ModBlockTags;
 import net.minecraft.block.EnchantingTableBlock;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;

@@ -18,8 +18,8 @@ public class OxidizableTrapdoorBlock extends TrapdoorBlock implements Oxidizable
 
     private final OxidationLevel oxidationLevel;
 
-    public OxidizableTrapdoorBlock(OxidationLevel oxidationLevel, Settings settings, SoundEvent closeSound, SoundEvent openSound) {
-        super(settings, closeSound, openSound);
+    public OxidizableTrapdoorBlock(OxidationLevel oxidationLevel, Settings settings) {
+        super(settings);
         this.oxidationLevel = oxidationLevel;
     }
 

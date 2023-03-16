@@ -2,10 +2,9 @@ package net.emilsg.clutter;
 
 import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.block.entity.ModBlockEntities;
-import net.emilsg.clutter.item.ModItemGroup;
 import net.emilsg.clutter.item.ModItems;
 import net.emilsg.clutter.util.Sit;
-import net.emilsg.clutter.world.gen.ModWorldGeneration;
+import net.emilsg.clutter.world.gen.ModOreGeneration;
 import net.fabricmc.api.ModInitializer;
 
 import org.slf4j.Logger;
@@ -18,12 +17,11 @@ public class Clutter implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		ModItemGroup.registerItemGroups();
 		ModBlocks.registerModBlocks();
 		ModItems.registerModItems();
 		ModBlockEntities.registerBlockEntities();
 		Sit.sitUtil();
-		ModWorldGeneration.generateModWorldGen();
+		ModOreGeneration.generateOres();
 		ModBlocks.oxidizableBlockPairs();
 	}
 }
