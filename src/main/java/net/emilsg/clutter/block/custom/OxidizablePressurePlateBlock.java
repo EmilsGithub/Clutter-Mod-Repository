@@ -13,8 +13,8 @@ public class OxidizablePressurePlateBlock extends PressurePlateBlock implements 
 
     private final OxidationLevel oxidationLevel;
 
-    public OxidizablePressurePlateBlock(OxidationLevel oxidationLevel, ActivationRule type, Settings settings, SoundEvent depressSound, SoundEvent pressSound) {
-        super(type, settings, depressSound, pressSound);
+    public OxidizablePressurePlateBlock(OxidationLevel oxidationLevel, ActivationRule type, Settings settings) {
+        super(type, settings);
         this.oxidationLevel = oxidationLevel;
     }
 
