@@ -1,6 +1,3 @@
 {
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "clutter:item/sculk_wall_mushrooms"
-  }
+  "parent": "clutter:block/wall_mushrooms/sculk_wall_mushrooms"
 }

@@ -1,0 +1,10 @@
+{
+  "variants":{
+    "lit=false":{
+      "model":"clutter:block/lamps/colors/green"
+    },
+    "lit=true":{
+      "model":"clutter:block/lamps/colors/green_lit"
+    }
+  }
+}

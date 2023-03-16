@@ -1,0 +1,42 @@
+{
+  "variants": {
+    "facing=north": [
+      {
+        "model": "clutter:block/wall_mushrooms/crimson_wall_fungi"
+      },
+      {
+        "model": "clutter:block/wall_mushrooms/crimson_wall_fungi2"
+      }
+    ],
+    "facing=south": [
+      {
+        "model": "clutter:block/wall_mushrooms/crimson_wall_fungi",
+        "y": 180
+      },
+      {
+        "model": "clutter:block/wall_mushrooms/crimson_wall_fungi2",
+        "y": 180
+      }
+    ],
+    "facing=west": [
+      {
+        "model": "clutter:block/wall_mushrooms/crimson_wall_fungi",
+        "y": 270
+      },
+      {
+        "model": "clutter:block/wall_mushrooms/crimson_wall_fungi2",
+        "y": 270
+      }
+    ],
+    "facing=east": [
+      {
+        "model": "clutter:block/wall_mushrooms/crimson_wall_fungi",
+        "y": 90
+      },
+      {
+        "model": "clutter:block/wall_mushrooms/crimson_wall_fungi2",
+        "y": 90
+      }
+    ]
+  }
+}

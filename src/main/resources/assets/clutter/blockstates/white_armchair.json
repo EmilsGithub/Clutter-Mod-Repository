@@ -1,0 +1,19 @@
+{
+  "variants":{
+    "facing=north":{
+      "model":"clutter:block/armchairs/white"
+    },
+    "facing=south":{
+      "model":"clutter:block/armchairs/white",
+      "y": 180
+    },
+    "facing=east":{
+      "model":"clutter:block/armchairs/white",
+      "y": 90
+    },
+    "facing=west":{
+      "model":"clutter:block/armchairs/white",
+      "y": 270
+    }
+  }
+}

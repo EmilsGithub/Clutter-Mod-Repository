@@ -7,6 +7,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 
+import static net.emilsg.clutter.block.custom.ChimneyBlock.OPEN;
+
 public class ChimneyBlockEntity extends BlockEntity {
 
     public ChimneyBlockEntity(BlockPos pos, BlockState state) {
@@ -14,11 +16,13 @@ public class ChimneyBlockEntity extends BlockEntity {
     }
 
     public static <T extends BlockEntity> void clientTick(World world, BlockPos blockPos, BlockState state, T t) {
-        int i;
-        Random random = world.random;
-        if (random.nextFloat() < 0.25f) {
-            for (i = 0; i < random.nextInt(2) + 2; ++i) {
-                ChimneyBlock.spawnSmokeParticles(world, blockPos, true, state);
+        if(state.get(OPEN)) {
+            int i;
+            Random random = world.random;
+            if (random.nextFloat() < 0.25f) {
+                for (i = 0; i < random.nextInt(2) + 2; ++i) {
+                    ChimneyBlock.spawnSmokeParticles(world, blockPos, true, state);
+                }
             }
         }
     }

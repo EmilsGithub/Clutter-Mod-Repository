@@ -1,0 +1,6 @@
+{
+  "parent": "block/template_lantern",
+  "textures": {
+    "lantern": "clutter:block/exposed_copper_soul_lantern"
+  }
+}

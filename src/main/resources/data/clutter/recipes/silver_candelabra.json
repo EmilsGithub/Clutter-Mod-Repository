@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "IiI",
+    " i "
+  ],
+  "key": {
+    "#": {
+      "tag": "minecraft:candles"
+    },
+    "I": {
+      "item": "clutter:silver_nugget"
+    },
+    "i": {
+      "item": "clutter:silver_ingot"
+    }
+  },
+  "result": {
+    "item": "clutter:silver_candelabra",
+    "count": 1
+  }
+}

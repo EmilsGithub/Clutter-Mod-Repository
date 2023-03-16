@@ -1,0 +1,6 @@
+{
+  "parent": "block/template_lantern",
+  "textures": {
+    "lantern": "clutter:block/weathered_copper_lantern"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "variants":{
+    "facing=north":{
+      "model":"clutter:block/armchairs/magenta"
+    },
+    "facing=south":{
+      "model":"clutter:block/armchairs/magenta",
+      "y": 180
+    },
+    "facing=east":{
+      "model":"clutter:block/armchairs/magenta",
+      "y": 90
+    },
+    "facing=west":{
+      "model":"clutter:block/armchairs/magenta",
+      "y": 270
+    }
+  }
+}

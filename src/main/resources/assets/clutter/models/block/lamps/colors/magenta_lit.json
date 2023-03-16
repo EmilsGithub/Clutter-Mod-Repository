@@ -1,0 +1,6 @@
+{
+  "parent": "clutter:block/lamps/lamp_lit_parent",
+    "textures": {
+      "3": "block/magenta_wool"
+    }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "clutter:item/oxidized_copper_soul_lantern"
+  }
+}

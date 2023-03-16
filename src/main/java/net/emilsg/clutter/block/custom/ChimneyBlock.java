@@ -6,15 +6,23 @@ import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.text.Text;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Formatting;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
@@ -25,8 +33,11 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
+
 public class ChimneyBlock extends BlockWithEntity implements FluidFillable, Waterloggable{
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
+    public static BooleanProperty OPEN = BooleanProperty.of("open");
     protected static final VoxelShape SHAPE = VoxelShapes.union(
             Block.createCuboidShape(2.0, 0.0, 2.0, 14.0, 13.0, 14.0),
             Block.createCuboidShape(1.0, 13.0, 1.0, 15.0, 16.0, 15.0)
@@ -34,7 +45,7 @@ public class ChimneyBlock extends BlockWithEntity implements FluidFillable, Wate
 
     public ChimneyBlock(Settings settings) {
         super(settings);
-        this.setDefaultState((BlockState)(this.stateManager.getDefaultState()).with(WATERLOGGED, false));
+        this.setDefaultState(this.stateManager.getDefaultState().with(OPEN, true).with(WATERLOGGED, false));
     }
 
     @Override
@@ -50,6 +61,20 @@ public class ChimneyBlock extends BlockWithEntity implements FluidFillable, Wate
         boolean bl = worldAccess.getFluidState(blockPos = ctx.getBlockPos()).getFluid() == Fluids.WATER;
         return (BlockState)this.getDefaultState().with(WATERLOGGED, bl);
 
+    }
+
+    @Override
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        boolean i = state.get(OPEN);
+        if (!world.isClient && hand.equals(Hand.MAIN_HAND) && !player.isSneaking() && player.getStackInHand(hand).isEmpty()) {
+            if (!i) {
+                world.setBlockState(pos, state.with(OPEN, true), Block.NOTIFY_ALL);
+            } else {
+                world.setBlockState(pos, state.with(OPEN, false), Block.NOTIFY_ALL);
+            }
+            return ActionResult.SUCCESS;
+        }
+        return ActionResult.PASS;
     }
 
     @Override
@@ -72,7 +97,7 @@ public class ChimneyBlock extends BlockWithEntity implements FluidFillable, Wate
 
     @Override
     public boolean hasRandomTicks(BlockState state) {
-        return true;
+        return state.get(OPEN);
     }
 
     @Override
@@ -82,7 +107,9 @@ public class ChimneyBlock extends BlockWithEntity implements FluidFillable, Wate
 
     @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-        ChimneyBlock.spawnSmokeParticles(world, pos, true, state);
+        if(state.get(OPEN)) {
+            ChimneyBlock.spawnSmokeParticles(world, pos, true, state);
+        }
     }
 
     public static void spawnSmokeParticles(World world, BlockPos pos, boolean lotsOfSmoke, BlockState state) {
@@ -113,7 +140,7 @@ public class ChimneyBlock extends BlockWithEntity implements FluidFillable, Wate
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(WATERLOGGED);
+        builder.add(WATERLOGGED, OPEN);
     }
 
     @Nullable
@@ -127,4 +154,10 @@ public class ChimneyBlock extends BlockWithEntity implements FluidFillable, Wate
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
         return world.isClient() && type == ModBlockEntities.CHIMNEY ? ChimneyBlockEntity::clientTick : null;
     }
+
+    public void appendTooltip(ItemStack stack, @Nullable BlockView world, List<Text> tooltip, TooltipContext context) {
+        tooltip.add(Text.translatable("block.clutter.toggle_smoke.tooltip").formatted(Formatting.BLUE));
+        super.appendTooltip(stack, world, tooltip, context);
+    }
+
 }

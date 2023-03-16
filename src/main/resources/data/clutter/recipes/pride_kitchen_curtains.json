@@ -1,0 +1,38 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NRN",
+    "OYG",
+    "BIV"
+  ],
+  "key": {
+    "N": {
+      "item": "minecraft:iron_ingot"
+    },
+    "R": {
+      "item": "minecraft:red_wool"
+    },
+    "O": {
+      "item": "minecraft:orange_wool"
+    },
+    "Y": {
+      "item": "minecraft:yellow_wool"
+    },
+    "G": {
+      "item": "minecraft:lime_wool"
+    },
+    "B": {
+      "item": "minecraft:light_blue_wool"
+    },
+    "I": {
+      "item": "minecraft:blue_wool"
+    },
+    "V": {
+      "item": "minecraft:purple_wool"
+    }
+  },
+  "result": {
+    "item": "clutter:pride_kitchen_curtains",
+    "count": 6
+  }
+}

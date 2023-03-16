@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "CiC",
+    "CiC"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:copper_nuggets"
+    },
+    "C": {
+      "tag": "minecraft:candles"
+    },
+    "i": {
+      "tag": "c:copper_ingots"
+    }
+  },
+  "result": {
+    "item": "clutter:copper_chandelier",
+    "count": 1
+  }
+}

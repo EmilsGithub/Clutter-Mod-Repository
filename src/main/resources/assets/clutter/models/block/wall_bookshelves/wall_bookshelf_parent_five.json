@@ -3,7 +3,7 @@
 	"ambientocclusion": false,
 	"textures": {
 		"0": "minecraft:block/oak_planks",
-		"3": "minecraft:block/white_candle_lit",
+		"3": "minecraft:block/candle_lit",
 		"4": "clutter:block/books_five",
 		"6": "clutter:block/book_pages",
 		"particle": "minecraft:block/oak_planks"

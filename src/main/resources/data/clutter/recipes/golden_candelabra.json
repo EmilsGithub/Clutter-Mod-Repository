@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "IiI",
+    " i "
+  ],
+  "key": {
+    "#": {
+      "tag": "minecraft:candles"
+    },
+    "I": {
+      "item": "minecraft:gold_nugget"
+    },
+    "i": {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "result": {
+    "item": "clutter:golden_candelabra",
+    "count": 1
+  }
+}
