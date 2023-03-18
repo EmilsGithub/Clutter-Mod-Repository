@@ -1,0 +1,8 @@
+{
+	"parent": "clutter:block/trellises/trellis_parent",
+	"textures": {
+		"0": "block/glow_lichen",
+		"1": "block/stripped_birch_log",
+		"particle": "block/stripped_birch_log"
+	}
+}

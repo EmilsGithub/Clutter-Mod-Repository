@@ -8,16 +8,17 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.registry.Registry;
 
 import static net.emilsg.clutter.block.entity.SeatEntity.OCCUPIED;
 
 public class Sit
 {
-    public static final EntityType<SeatEntity> SEAT = Registry.register(Registry.ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "seat"),
+    public static final EntityType<SeatEntity> SEAT = Registry.register(Registries.ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "seat"),
             FabricEntityTypeBuilder.<SeatEntity>create(SpawnGroup.MISC, SeatEntity::new).dimensions(EntityDimensions.fixed(0.001F, 0.001F))
                     .build());
 
@@ -44,6 +45,18 @@ public class Sit
                 {
                     SeatEntity sit = SEAT.create(world);
                     Vec3d pos = new Vec3d(hitResult.getBlockPos().getX() + 0.5D, hitResult.getBlockPos().getY() + 0.2, hitResult.getBlockPos().getZ() + 0.5D);
+                    OCCUPIED.put(comparePos, player.getBlockPos());
+                    sit.updatePosition(pos.getX(), pos.getY(), pos.getZ());
+                    world.spawnEntity(sit);
+                    player.startRiding(sit);
+
+                    return ActionResult.SUCCESS;
+                }
+                //WOODEN CHAIRS
+                if(notSneakingEmptyHand && state.isIn(ModBlockTags.WOODEN_CHAIRS))
+                {
+                    SeatEntity sit = SEAT.create(world);
+                    Vec3d pos = new Vec3d(hitResult.getBlockPos().getX() + 0.5D, hitResult.getBlockPos().getY() + 0.3, hitResult.getBlockPos().getZ() + 0.5D);
                     OCCUPIED.put(comparePos, player.getBlockPos());
                     sit.updatePosition(pos.getX(), pos.getY(), pos.getZ());
                     world.spawnEntity(sit);

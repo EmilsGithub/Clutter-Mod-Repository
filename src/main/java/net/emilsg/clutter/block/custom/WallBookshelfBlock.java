@@ -38,7 +38,7 @@ public class WallBookshelfBlock extends Block implements Waterloggable{
         protected static final VoxelShape EAST_SHAPE = Block.createCuboidShape(8.0, 0.0, 0.0, 16.0, 12.0, 16.0);
         protected static final VoxelShape WEST_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 8.0, 12.0, 16.0);
         public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
-        private static final BooleanProperty LIT = BooleanProperty.of("lit");
+        private static final BooleanProperty LIT = Properties.LIT;
         public static final int MAX_MODEL = 6;
         public static IntProperty CURRENT_MODEL = IntProperty.of("current_model", 0, MAX_MODEL);
         public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
@@ -178,7 +178,7 @@ public class WallBookshelfBlock extends Block implements Waterloggable{
         @Override
         public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
                 if (state.get(WATERLOGGED)) {
-                        world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+                        world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
                 }
                 return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
         }
@@ -187,7 +187,7 @@ public class WallBookshelfBlock extends Block implements Waterloggable{
                 if (!state.get(Properties.WATERLOGGED) && fluidState.getFluid() == Fluids.WATER) {
 
                         world.setBlockState(pos, (BlockState)((BlockState)state.with(WATERLOGGED, true)), Block.NOTIFY_ALL);
-                        world.createAndScheduleFluidTick(pos, fluidState.getFluid(), fluidState.getFluid().getTickRate(world));
+                        world.scheduleFluidTick(pos, fluidState.getFluid(), fluidState.getFluid().getTickRate(world));
                         return true;
                 }
                 return false;

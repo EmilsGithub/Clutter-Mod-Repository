@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "legs=true,leg_positions=north": {
+      "model": "clutter:block/tables/crimson/stripped_crimson_s"
+    },
+    "legs=true,leg_positions=east": {
+      "model": "clutter:block/tables/crimson/stripped_crimson_w"
+    },
+    "legs=true,leg_positions=south": {
+      "model": "clutter:block/tables/crimson/stripped_crimson_n"
+    },
+    "legs=true,leg_positions=west": {
+      "model": "clutter:block/tables/crimson/stripped_crimson_e"
+    },
+    "legs=true,leg_positions=north_west": {
+      "model": "clutter:block/tables/crimson/stripped_crimson_se"
+    },
+    "legs=true,leg_positions=north_east": {
+      "model": "clutter:block/tables/crimson/stripped_crimson_sw"
+    },
+    "legs=true,leg_positions=south_east": {
+      "model": "clutter:block/tables/crimson/stripped_crimson_nw"
+    },
+    "legs=true,leg_positions=south_west": {
+      "model": "clutter:block/tables/crimson/stripped_crimson_ne"
+    },
+    "legs=true,leg_positions=all": {
+      "model": "clutter:block/tables/crimson/stripped_crimson_all"
+    },
+    "legs=false": {
+      "model": "clutter:block/tables/crimson/stripped_crimson_none"
+    }
+  }
+}

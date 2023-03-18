@@ -10,6 +10,8 @@
     "clutter:beer_mug",
     "#clutter:armchairs",
     "#clutter:bookshelves",
-    "#clutter:window_sills"
+    "#clutter:window_sills",
+    "#clutter:tables",
+    "#clutter:wooden_chairs"
   ]
 }

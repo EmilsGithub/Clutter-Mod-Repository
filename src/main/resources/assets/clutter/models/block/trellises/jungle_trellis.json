@@ -1,0 +1,7 @@
+{
+	"parent": "clutter:block/trellises/trellis_empty_parent",
+	"textures": {
+		"0": "block/stripped_jungle_log",
+		"particle": "block/stripped_jungle_log"
+	}
+}

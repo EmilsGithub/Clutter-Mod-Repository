@@ -17,10 +17,11 @@ public class OxidizableDoorBlock extends DoorBlock implements Oxidizable {
 
     private final OxidationLevel oxidationLevel;
 
-    public OxidizableDoorBlock(OxidationLevel oxidationLevel, Settings settings) {
-        super(settings);
+    public OxidizableDoorBlock(OxidationLevel oxidationLevel, Settings settings, SoundEvent closeSound, SoundEvent openSound) {
+        super(settings, closeSound, openSound);
         this.oxidationLevel = oxidationLevel;
     }
+
 
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {

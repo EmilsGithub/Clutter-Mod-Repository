@@ -246,5 +246,5 @@
   "block.clutter.toggle_smoke.tooltip": "Right-Click to Toggle Smoke",
   "block.clutter.blast_proof.tooltip": "Blast Proof",
 
-  "itemgroup.clutter.clutter": "Clutter"
+  "itemgroup.clutter": "Clutter"
 }

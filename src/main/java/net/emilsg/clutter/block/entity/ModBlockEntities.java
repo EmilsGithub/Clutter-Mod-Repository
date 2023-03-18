@@ -4,14 +4,15 @@ import net.emilsg.clutter.Clutter;
 import net.emilsg.clutter.block.ModBlocks;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 public class ModBlockEntities {
     public static BlockEntityType<ChimneyBlockEntity> CHIMNEY;
 
     public static void registerBlockEntities() {
-        CHIMNEY = Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "chimney"),
+        CHIMNEY = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "chimney"),
                 FabricBlockEntityTypeBuilder.create(ChimneyBlockEntity::new,
                                 ModBlocks.COBBLESTONE_CHIMNEY,
                                 ModBlocks.BRICK_CHIMNEY,

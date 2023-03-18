@@ -176,7 +176,16 @@ public class ClutterClient implements ClientModInitializer {
                 ModBlocks.PRIDE_KITCHEN_CURTAINS,
                 ModBlocks.GOLDEN_DOOR,
                 ModBlocks.GOLDEN_TRAPDOOR,
-                ModBlocks.SILVER_TRAPDOOR
+                ModBlocks.SILVER_TRAPDOOR,
+                ModBlocks.OAK_TRELLIS,
+                ModBlocks.DARK_OAK_TRELLIS,
+                ModBlocks.BIRCH_TRELLIS,
+                ModBlocks.JUNGLE_TRELLIS,
+                ModBlocks.ACACIA_TRELLIS,
+                ModBlocks.SPRUCE_TRELLIS,
+                ModBlocks.CRIMSON_TRELLIS,
+                ModBlocks.WARPED_TRELLIS,
+                ModBlocks.MANGROVE_TRELLIS
 
         );
 
