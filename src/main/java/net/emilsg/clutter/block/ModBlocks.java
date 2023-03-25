@@ -338,8 +338,6 @@ public class ModBlocks {
     public static final Block CRIMSON_TRELLIS = registerBlock("crimson_trellis", new TrellisBlock(FabricBlockSettings.copy(Blocks.CRIMSON_PLANKS).luminance(TrellisBlock.createLightLevelFromLitBlockState())), ModItemGroup.CLUTTER);
     public static final Block WARPED_TRELLIS = registerBlock("warped_trellis", new TrellisBlock(FabricBlockSettings.copy(Blocks.WARPED_PLANKS).luminance(TrellisBlock.createLightLevelFromLitBlockState())), ModItemGroup.CLUTTER);
 
-    public static final Block LONG_CURTAINS = registerBlock("long_curtains", new LongCurtainBlock(FabricBlockSettings.copy(Blocks.RED_WOOL)), ModItemGroup.CLUTTER);
-
     private static Block registerBlock(String name, Block block, ItemGroup group) {
         registerBlockItem(name, block, group);
         return Registry.register(Registries.BLOCK, new Identifier(Clutter.MOD_ID, name), block);
