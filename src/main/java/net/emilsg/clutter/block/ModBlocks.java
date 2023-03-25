@@ -272,7 +272,7 @@ public class ModBlocks {
     public static final Block HOPS_CROP = registerBlockWithoutItem("hops_crop", new HopsCropBlock(FabricBlockSettings.copy(Blocks.CARROTS)));
     public static final Block COTTON_CROP = registerBlockWithoutItem("cotton_crop", new CottonCropBlock(FabricBlockSettings.copy(Blocks.WHEAT)));
 
-
+//comment
 
     private static Block registerBlock(String name, Block block, ItemGroup group) {
         registerBlockItem(name, block, group);
