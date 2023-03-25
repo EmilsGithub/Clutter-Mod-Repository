@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
+import net.emilsg.clutter.util.ModBlockTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalFacingBlock;
@@ -13,7 +14,6 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
 
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -28,45 +28,42 @@ public class LongCurtainBlock extends HorizontalFacingBlock {
     public LongCurtainBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.stateManager.getDefaultState().with(OPEN, true));
-
     }
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        boolean i = state.get(OPEN);
-        if (!world.isClient && hand.equals(Hand.MAIN_HAND) && !player.isSneaking() && player.getStackInHand(hand).isEmpty()) {
-            if (!i) {
-                world.setBlockState(pos, state.with(OPEN, true), Block.NOTIFY_ALL);
-            } else {
-                world.setBlockState(pos, state.with(OPEN, false), Block.NOTIFY_ALL);
-            }
-            applyOpenToNeighbors(pos, world, state);
-            return ActionResult.SUCCESS;
+        if (!world.isClient) {
+            toggleBlockOpen(state, world, pos);
         }
-        return ActionResult.PASS;
+        return ActionResult.SUCCESS;
     }
 
-    public void applyOpenToNeighbors(BlockPos pos, World world, BlockState state) {
+    public static void toggleBlockOpen(BlockState state, World world, BlockPos pos) {
+        boolean open = !state.get(OPEN);
+        world.setBlockState(pos, state.with(OPEN, open), 3);
+        updateConnectedBlocks(world, pos, open);
+    }
+
+    public static void updateConnectedBlocks(World world, BlockPos pos, boolean open) {
         Queue<BlockPos> queue = new LinkedList<>();
         Set<BlockPos> visited = new HashSet<>();
+
         queue.offer(pos);
         visited.add(pos);
 
-        boolean open = state.get(OPEN);
-
         while (!queue.isEmpty()) {
-            BlockPos currentPos = queue.poll();
-            BlockState currentState = world.getBlockState(currentPos);
+            BlockPos currPos = queue.poll();
+            BlockState currState = world.getBlockState(currPos);
 
-            if (currentState.isOf(state.getBlock())) {
-                if (currentState.get(OPEN) != open) {
-                    world.setBlockState(currentPos, currentState.with(OPEN, open), Block.NOTIFY_ALL);
-                    for (Direction direction : Direction.values()) {
-                        BlockPos neighborPos = currentPos.offset(direction);
-                        if (!visited.contains(neighborPos)) {
-                            visited.add(neighborPos);
-                            queue.offer(neighborPos);
-                        }
+            if (currState.isIn(ModBlockTags.LONG_CURTAINS) && !visited.contains(currPos)) {
+                visited.add(currPos);
+                world.setBlockState(currPos, currState.with(OPEN, open), 3);
+
+                for (Direction direction : Direction.values()) {
+                    BlockPos nextPos = currPos.offset(direction);
+                    BlockState nextState = world.getBlockState(nextPos);
+                    if (!visited.contains(nextPos) && nextState.isIn(ModBlockTags.LONG_CURTAINS)) {
+                        queue.offer(nextPos);
                     }
                 }
             }
@@ -74,8 +71,10 @@ public class LongCurtainBlock extends HorizontalFacingBlock {
     }
 
 
+
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(MODEL, FACING, OPEN);
     }
 }
+

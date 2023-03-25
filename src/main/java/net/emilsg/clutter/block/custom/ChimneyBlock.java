@@ -60,7 +60,6 @@ public class ChimneyBlock extends BlockWithEntity implements FluidFillable, Wate
         World worldAccess = ctx.getWorld();
         boolean bl = worldAccess.getFluidState(blockPos = ctx.getBlockPos()).getFluid() == Fluids.WATER;
         return (BlockState)this.getDefaultState().with(WATERLOGGED, bl);
-
     }
 
     @Override

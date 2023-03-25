@@ -17,5 +17,5 @@ public class ModBlockTags {
     public static final TagKey<Block> STRIPPABLE_CHAIRS = TagKey.of(Registries.BLOCK.getKey(), new Identifier("clutter", "strippable_chairs"));
     public static final TagKey<Block> STRIPPABLE_TABLES = TagKey.of(Registries.BLOCK.getKey(), new Identifier("clutter", "strippable_tables"));
     public static final TagKey<Block> TRELLISES = TagKey.of(Registries.BLOCK.getKey(), new Identifier("clutter", "trellises"));
-    public static final TagKey<Block> LONG_CURTAIN_BLOCKS = TagKey.of(Registries.BLOCK.getKey(), new Identifier("clutter", "long_curtain_blocks"));
+    public static final TagKey<Block> LONG_CURTAINS = TagKey.of(Registries.BLOCK.getKey(), new Identifier("clutter", "long_curtains"));
 }

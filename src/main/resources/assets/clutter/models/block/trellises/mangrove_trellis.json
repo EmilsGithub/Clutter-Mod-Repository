@@ -1,7 +1,0 @@
-{
-	"parent": "clutter:block/trellises/trellis_empty_parent",
-	"textures": {
-		"0": "block/stripped_mangrove_log",
-		"particle": "block/stripped_mangrove_log"
-	}
-}

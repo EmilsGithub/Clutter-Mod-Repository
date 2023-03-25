@@ -299,6 +299,7 @@
 		{
 			"from": [0, 0, 1.025],
 			"to": [16, 16, 1.025],
+			"shade": false,
 			"faces": {
 				"north": {"uv": [16, 0, 0, 16], "texture": "#1"},
 				"south": {"uv": [0, 0, 16, 16], "texture": "#1"}
@@ -307,6 +308,7 @@
 		{
 			"from": [0, 0, 1.525],
 			"to": [16, 16, 1.525],
+			"shade": false,
 			"faces": {
 				"north": {"uv": [16, 0, 0, 16], "texture": "#2"},
 				"south": {"uv": [0, 0, 16, 16], "texture": "#2"}
