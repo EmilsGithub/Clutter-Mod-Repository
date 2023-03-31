@@ -59,6 +59,9 @@
       },
       {
         "model": "clutter:block/trellises/oak/rose_bush2"
+      },
+      {
+        "model": "clutter:block/trellises/oak/rose_bush3"
       }
     ],
     "under_block=false,facing=south,plant=rose_bush":[
@@ -223,6 +226,9 @@
       },
       {
         "model": "clutter:block/trellises/oak/horizontal_rose_bush2"
+      },
+      {
+        "model": "clutter:block/trellises/oak/horizontal_rose_bush3"
       }
     ],
     "under_block=true,plant=peony":{

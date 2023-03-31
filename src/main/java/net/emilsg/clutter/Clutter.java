@@ -5,7 +5,7 @@ import net.emilsg.clutter.block.entity.ModBlockEntities;
 import net.emilsg.clutter.item.ModItemGroup;
 import net.emilsg.clutter.item.ModItems;
 import net.emilsg.clutter.util.ModFlammableAndOrStrippableBlocks;
-import net.emilsg.clutter.util.Sit;
+import net.emilsg.clutter.util.ModSit;
 import net.emilsg.clutter.world.gen.ModWorldGeneration;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
@@ -22,9 +22,8 @@ public class Clutter implements ModInitializer {
 		ModBlocks.registerModBlocks();
 		ModItems.registerModItems();
 		ModBlockEntities.registerBlockEntities();
-		Sit.sitUtil();
+		ModSit.registerSitUtil();
 		ModWorldGeneration.generateModWorldGen();
 		ModFlammableAndOrStrippableBlocks.registerFlammableAndStrippableBlocks();
-		ModBlocks.oxidizableBlockPairs();
 	}
 }

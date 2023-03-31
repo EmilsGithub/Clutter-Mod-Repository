@@ -21,28 +21,46 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 public class WoodenChairBlock extends SeatBlock{
-    protected static final VoxelShape LEGS_AND_SEAT = VoxelShapes.union(
-            Block.createCuboidShape(3.0, 6.0, 3.0, 13.0, 8.0, 13.0),
-            Block.createCuboidShape(3.0, 0.0, 3.0, 5.0, 6.0, 5.0),
-            Block.createCuboidShape(11.0, 0.0, 3.0, 13.0, 6.0, 5.0),
-            Block.createCuboidShape(3.0, 0.0, 11.0, 5.0, 6.0, 13.0),
-            Block.createCuboidShape(11.0, 0.0, 11.0, 13.0, 6.0, 13.0)
+
+    protected static final VoxelShape NORTH_SHAPE = VoxelShapes.union(
+            Block.createCuboidShape(3, 8, 11, 13, 16, 12),
+            Block.createCuboidShape(4, 6, 12, 6, 16, 13),
+            Block.createCuboidShape(10, 6, 12, 12, 16, 13),
+            Block.createCuboidShape(11, 0, 10, 13, 6, 12),
+            Block.createCuboidShape(3, 0, 10, 5, 6, 12),
+            Block.createCuboidShape(3, 6, 3, 13, 8, 12),
+            Block.createCuboidShape(3, 0, 3, 5, 6, 5),
+            Block.createCuboidShape(11, 0, 3, 13, 6, 5)
     );
-    protected static final VoxelShape NORTH = VoxelShapes.union(
-            Block.createCuboidShape(3.0, 8.0, 12.0, 13.0, 16.0, 13.0),
-            LEGS_AND_SEAT
+    protected static final VoxelShape EAST_SHAPE = VoxelShapes.union(
+            Block.createCuboidShape(4, 8, 3, 5, 16, 13),
+            Block.createCuboidShape(3, 6, 4, 4, 16, 6),
+            Block.createCuboidShape(3, 6, 10, 4, 16, 12),
+            Block.createCuboidShape(4, 0, 11, 6, 6, 13),
+            Block.createCuboidShape(4, 0, 3, 6, 6, 5),
+            Block.createCuboidShape(4, 6, 3, 13, 8, 13),
+            Block.createCuboidShape(11, 0, 3, 13, 6, 5),
+            Block.createCuboidShape(11, 0, 11, 13, 6, 13)
     );
-    protected static final VoxelShape EAST = VoxelShapes.union(
-            Block.createCuboidShape(3.0, 8.0, 3.0, 4.0, 16.0, 13.0),
-            LEGS_AND_SEAT
+    protected static final VoxelShape SOUTH_SHAPE = VoxelShapes.union(
+            Block.createCuboidShape(3, 8, 4, 13, 16, 5),
+            Block.createCuboidShape(10, 6, 3, 12, 16, 4),
+            Block.createCuboidShape(4, 6, 3, 6, 16, 4),
+            Block.createCuboidShape(3, 0, 4, 5, 6, 6),
+            Block.createCuboidShape(11, 0, 4, 13, 6, 6),
+            Block.createCuboidShape(3, 6, 4, 13, 8, 13),
+            Block.createCuboidShape(11, 0, 11, 13, 6, 13),
+            Block.createCuboidShape(3, 0, 11, 5, 6, 13)
     );
-    protected static final VoxelShape SOUTH = VoxelShapes.union(
-            Block.createCuboidShape(3.0, 6.0, 3.0, 13.0, 8.0, 4.0),
-            LEGS_AND_SEAT
-    );
-    protected static final VoxelShape WEST = VoxelShapes.union(
-            Block.createCuboidShape(12, 8.0, 3.0, 13.0, 16.0, 13.0),
-            LEGS_AND_SEAT
+    protected static final VoxelShape WEST_SHAPE = VoxelShapes.union(
+            Block.createCuboidShape(11, 8, 3, 12, 16, 13),
+            Block.createCuboidShape(12, 6, 10, 13, 16, 12),
+            Block.createCuboidShape(12, 6, 4, 13, 16, 6),
+            Block.createCuboidShape(10, 0, 3, 12, 6, 5),
+            Block.createCuboidShape(10, 0, 11, 12, 6, 13),
+            Block.createCuboidShape(3, 6, 3, 12, 8, 13),
+            Block.createCuboidShape(3, 0, 11, 5, 6, 13),
+            Block.createCuboidShape(3, 0, 3, 5, 6, 5)
     );
 
     public WoodenChairBlock(Settings settings) {
@@ -53,10 +71,10 @@ public class WoodenChairBlock extends SeatBlock{
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         Direction i = state.get(FACING);
         return switch (i) {
-            case NORTH -> NORTH;
-            case SOUTH -> SOUTH;
-            case EAST -> EAST;
-            case WEST -> WEST;
+            case NORTH -> NORTH_SHAPE;
+            case SOUTH -> SOUTH_SHAPE;
+            case EAST -> EAST_SHAPE;
+            case WEST -> WEST_SHAPE;
             default -> VoxelShapes.empty(); // return an empty shape if no matching direction is found
         };
     }

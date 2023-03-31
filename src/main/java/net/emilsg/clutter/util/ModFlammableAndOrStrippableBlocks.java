@@ -14,9 +14,7 @@ public class ModFlammableAndOrStrippableBlocks {
     public static void registerFlammableBlocks() {
         FlammableBlockRegistry registry = FlammableBlockRegistry.getDefaultInstance();
 
-        registry.add(ModBlockTags.WOODEN_CHAIRS, 5, 20);
-        registry.add(ModBlockTags.ARMCHAIRS, 5, 20);
-        registry.add(ModBlockTags.TABLES, 5, 20);
+        registry.add(ModBlockTags.FLAMMABLE_DEFAULT, 5, 20);
     }
 
     public static void registerStrippables() {

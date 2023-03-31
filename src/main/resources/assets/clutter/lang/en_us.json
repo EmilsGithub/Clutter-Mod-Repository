@@ -241,6 +241,9 @@
   "item.clutter.cotton_seeds": "Cotton Seeds",
   "item.clutter.beer_mug": "Beer Mug",
   "item.clutter.wooden_mug": "Wooden Mug",
+  "item.clutter.copper_coin": "Copper Coin",
+  "item.clutter.silver_coin": "Silver Coin",
+  "item.clutter.golden_coin": "Golden Coin",
 
   "block.clutter.cycle_blockstate_tooltip.tooltip": "Shift Right-Click to Cycle Variant",
   "block.clutter.toggle_smoke.tooltip": "Right-Click to Toggle Smoke",

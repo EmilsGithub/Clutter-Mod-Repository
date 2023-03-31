@@ -5,16 +5,20 @@ import net.emilsg.clutter.util.ModBlockTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
+import net.minecraft.block.Waterloggable;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.FluidState;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.AxeItem;
+import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.EnumProperty;
-import net.minecraft.state.property.IntProperty;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.StringIdentifiable;
@@ -26,51 +30,71 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
+import org.jetbrains.annotations.Nullable;
 
-public class TableBlock extends Block {
-    public static final EnumProperty<LegPosition> LEGPOSITIONS = EnumProperty.of("leg_positions", LegPosition.class);
+public class TableBlock extends Block implements Waterloggable {
+    public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
+    public static final EnumProperty<LegPosition> LEG_POSITIONS = EnumProperty.of("leg_positions", LegPosition.class);
     public static final BooleanProperty LEGS = BooleanProperty.of("legs");
 
     public TableBlock(Settings settings) {
         super(settings);
+        this.setDefaultState((BlockState)(this.stateManager.getDefaultState()).with(WATERLOGGED, false));
     }
 
     protected static final VoxelShape NORTH_SHAPE = VoxelShapes.union(
-            Block.createCuboidShape(0.0, 14.0, 0.0, 16.0, 16.0, 16.0)
+            Block.createCuboidShape(0.0, 14.0, 0.0, 16.0, 16.0, 16.0),
+            Block.createCuboidShape(0.0, 0.0, 14.0, 2.0, 14.0, 16.0),
+            Block.createCuboidShape(14.0, 0.0, 14.0, 16.0, 14.0, 16.0)
     );
     protected static final VoxelShape EAST_SHAPE = VoxelShapes.union(
-            Block.createCuboidShape(0.0, 14.0, 0.0, 16.0, 16.0, 16.0)
+            Block.createCuboidShape(0.0, 14.0, 0.0, 16.0, 16.0, 16.0),
+            Block.createCuboidShape(0.0, 0.0, 14.0, 2.0, 14.0, 16.0),
+            Block.createCuboidShape(0.0, 0.0, 0.0, 2.0, 14.0, 2.0)
+
     );
     protected static final VoxelShape WEST_SHAPE = VoxelShapes.union(
-            Block.createCuboidShape(0.0, 14.0, 0.0, 16.0, 16.0, 16.0)
+            Block.createCuboidShape(0.0, 14.0, 0.0, 16.0, 16.0, 16.0),
+            Block.createCuboidShape(14.0, 0.0, 14.0, 16.0, 14.0, 16.0),
+            Block.createCuboidShape(14.0, 0.0, 0.0, 16.0, 14.0, 2.0)
     );
     protected static final VoxelShape SOUTH_SHAPE = VoxelShapes.union(
-            Block.createCuboidShape(0.0, 14.0, 0.0, 16.0, 16.0, 16.0)
+            Block.createCuboidShape(0.0, 14.0, 0.0, 16.0, 16.0, 16.0),
+            Block.createCuboidShape(0.0, 0.0, 0.0, 2.0, 14.0, 2.0),
+            Block.createCuboidShape(14.0, 0.0, 0.0, 16.0, 14.0, 2.0)
     );
     protected static final VoxelShape NORTH_WEST_SHAPE = VoxelShapes.union(
-            Block.createCuboidShape(0.0, 14.0, 0.0, 16.0, 16.0, 16.0)
+            Block.createCuboidShape(0.0, 14.0, 0.0, 16.0, 16.0, 16.0),
+            Block.createCuboidShape(0.0, 0.0, 14.0, 2.0, 14.0, 16.0)
     );
     protected static final VoxelShape NORTH_EAST_SHAPE = VoxelShapes.union(
-            Block.createCuboidShape(0.0, 14.0, 0.0, 16.0, 16.0, 16.0)
+            Block.createCuboidShape(0.0, 14.0, 0.0, 16.0, 16.0, 16.0),
+            Block.createCuboidShape(14.0, 0.0, 14.0, 16.0, 14.0, 16.0)
     );
     protected static final VoxelShape SOUTH_WEST_SHAPE = VoxelShapes.union(
-            Block.createCuboidShape(0.0, 14.0, 0.0, 16.0, 16.0, 16.0)
+            Block.createCuboidShape(0.0, 14.0, 0.0, 16.0, 16.0, 16.0),
+            Block.createCuboidShape(14.0, 0.0, 0.0, 16.0, 14.0, 2.0)
     );
     protected static final VoxelShape SOUTH_EAST_SHAPE = VoxelShapes.union(
-            Block.createCuboidShape(0.0, 14.0, 0.0, 16.0, 16.0, 16.0)
+            Block.createCuboidShape(0.0, 14.0, 0.0, 16.0, 16.0, 16.0),
+            Block.createCuboidShape(0.0, 0.0, 0.0, 2.0, 14.0, 2.0)
     );
     protected static final VoxelShape NONE_SHAPE = VoxelShapes.union(
             Block.createCuboidShape(0.0, 14.0, 0.0, 16.0, 16.0, 16.0)
     );
     protected static final VoxelShape ALL_SHAPE = VoxelShapes.union(
-            Block.createCuboidShape(0.0, 14.0, 0.0, 16.0, 16.0, 16.0)
+            Block.createCuboidShape(0.0, 14.0, 0.0, 16.0, 16.0, 16.0),
+            Block.createCuboidShape(0.0, 0.0, 0.0, 2.0, 14.0, 2.0),
+            Block.createCuboidShape(14.0, 0.0, 0.0, 16.0, 14.0, 2.0),
+            Block.createCuboidShape(0.0, 0.0, 14.0, 2.0, 14.0, 16.0),
+            Block.createCuboidShape(14.0, 0.0, 14.0, 16.0, 14.0, 16.0)
     );
 
 
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        LegPosition i = state.get(LEGPOSITIONS);
+        LegPosition i = state.get(LEG_POSITIONS);
         return switch (i) {
             case NORTH -> NORTH_SHAPE;
             case SOUTH -> SOUTH_SHAPE;
@@ -139,7 +163,7 @@ public class TableBlock extends Block {
 
     @Override
     public void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(LEGPOSITIONS, LEGS);
+        builder.add(LEG_POSITIONS, LEGS, WATERLOGGED);
         super.appendProperties(builder);
     }
 
@@ -151,16 +175,16 @@ public class TableBlock extends Block {
         boolean southTable = world.getBlockState(pos.south()).isIn(ModBlockTags.TABLES);
 
         if (!eastTable && !westTable && !northTable && !southTable) { // no tables nearby
-            return state.with(LEGPOSITIONS, LegPosition.ALL).with(LEGS, true);
+            return state.with(LEG_POSITIONS, LegPosition.ALL).with(LEGS, true);
         }
         if (eastTable && westTable && northTable && southTable) {
-            return state.with(LEGPOSITIONS, LegPosition.NONE).with(LEGS, false);
+            return state.with(LEG_POSITIONS, LegPosition.NONE).with(LEGS, false);
         }
         if (eastTable && westTable) {
-            return state.with(LEGPOSITIONS, LegPosition.NONE).with(LEGS, false);
+            return state.with(LEG_POSITIONS, LegPosition.NONE).with(LEGS, false);
         }
         if (northTable && southTable) {
-            return state.with(LEGPOSITIONS, LegPosition.NONE).with(LEGS, false);
+            return state.with(LEG_POSITIONS, LegPosition.NONE).with(LEGS, false);
         }
 
         boolean northWestTable = world.getBlockState(pos.north().west()).isIn(ModBlockTags.TABLES);
@@ -169,22 +193,26 @@ public class TableBlock extends Block {
         boolean southEastTable = world.getBlockState(pos.south().east()).isIn(ModBlockTags.TABLES);
 
         if (westTable && southTable && !northWestTable) {
-            return state.with(LEGPOSITIONS, LegPosition.SOUTH_WEST).with(LEGS, true);
+            return state.with(LEG_POSITIONS, LegPosition.SOUTH_WEST).with(LEGS, true);
         }
         if (westTable && northTable && !southWestTable) {
-            return state.with(LEGPOSITIONS, LegPosition.NORTH_WEST).with(LEGS, true);
+            return state.with(LEG_POSITIONS, LegPosition.NORTH_WEST).with(LEGS, true);
         }
         if (eastTable && northTable && !southEastTable) {
-            return state.with(LEGPOSITIONS, LegPosition.NORTH_EAST).with(LEGS, true);
+            return state.with(LEG_POSITIONS, LegPosition.NORTH_EAST).with(LEGS, true);
         }
         if (eastTable && southTable && !northEastTable) {
-            return state.with(LEGPOSITIONS, LegPosition.SOUTH_EAST).with(LEGS, true);
+            return state.with(LEG_POSITIONS, LegPosition.SOUTH_EAST).with(LEGS, true);
+        }
+
+        if (state.get(WATERLOGGED)) {
+            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
 
         LegPosition legPositions = LegPosition.fromNeighborBlocks(westTable, northTable, eastTable, southTable);
         boolean legs = !legPositions.equals(LegPosition.NONE);
 
-        return state.with(LEGPOSITIONS, legPositions).with(LEGS, legs);
+        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos).with(LEG_POSITIONS, legPositions).with(LEGS, legs);
     }
 
 
@@ -202,20 +230,28 @@ public class TableBlock extends Block {
         boolean southTable = world.getBlockState(pos.south()).isIn(ModBlockTags.TABLES);
 
         if (eastTable && westTable && northTable && southTable) {
-            world.setBlockState(pos, state.with(LEGPOSITIONS, LegPosition.NONE).with(LEGS, false));
+            world.setBlockState(pos, state.with(LEG_POSITIONS, LegPosition.NONE).with(LEGS, false));
         } else if (!eastTable && !westTable && !northTable && !southTable) {
-            world.setBlockState(pos, state.with(LEGPOSITIONS, LegPosition.ALL).with(LEGS, true));
+            world.setBlockState(pos, state.with(LEG_POSITIONS, LegPosition.ALL).with(LEGS, true));
         } else if (eastTable && westTable) {
-            world.setBlockState(pos, state.with(LEGPOSITIONS, LegPosition.NONE).with(LEGS, false));
+            world.setBlockState(pos, state.with(LEG_POSITIONS, LegPosition.NONE).with(LEGS, false));
         } else if (northTable && southTable) {
-            world.setBlockState(pos, state.with(LEGPOSITIONS, LegPosition.NONE).with(LEGS, false));
+            world.setBlockState(pos, state.with(LEG_POSITIONS, LegPosition.NONE).with(LEGS, false));
         } else {
             LegPosition legPositions = LegPosition.fromNeighborBlocks(westTable, northTable, eastTable, southTable);
             boolean legs = !legPositions.equals(LegPosition.NONE);
-            world.setBlockState(pos, state.with(LEGPOSITIONS, legPositions).with(LEGS, legs));
+            world.setBlockState(pos, state.with(LEG_POSITIONS, legPositions).with(LEGS, legs));
         }
     }
 
+    @Override
+    @Nullable
+    public BlockState getPlacementState(ItemPlacementContext ctx) {
+        BlockPos blockPos;
+        World worldAccess = ctx.getWorld();
+        boolean bl = worldAccess.getFluidState(blockPos = ctx.getBlockPos()).getFluid() == Fluids.WATER;
+        return (BlockState)this.getDefaultState().with(WATERLOGGED, bl);
+    }
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
@@ -235,25 +271,44 @@ public class TableBlock extends Block {
 
     private BlockState getStrippedState(BlockState state) {
         if (state.getBlock() == ModBlocks.OAK_TABLE) {
-            return ModBlocks.STRIPPED_OAK_TABLE.getDefaultState().with(LEGS, state.get(LEGS)).with(LEGPOSITIONS, state.get(LEGPOSITIONS));
+            return ModBlocks.STRIPPED_OAK_TABLE.getDefaultState().with(LEGS, state.get(LEGS)).with(LEG_POSITIONS, state.get(LEG_POSITIONS));
         } else if (state.getBlock() == ModBlocks.SPRUCE_TABLE) {
-            return ModBlocks.STRIPPED_SPRUCE_TABLE.getDefaultState().with(LEGS, state.get(LEGS)).with(LEGPOSITIONS, state.get(LEGPOSITIONS));
+            return ModBlocks.STRIPPED_SPRUCE_TABLE.getDefaultState().with(LEGS, state.get(LEGS)).with(LEG_POSITIONS, state.get(LEG_POSITIONS));
         } else if (state.getBlock() == ModBlocks.BIRCH_TABLE) {
-            return ModBlocks.STRIPPED_BIRCH_TABLE.getDefaultState().with(LEGS, state.get(LEGS)).with(LEGPOSITIONS, state.get(LEGPOSITIONS));
+            return ModBlocks.STRIPPED_BIRCH_TABLE.getDefaultState().with(LEGS, state.get(LEGS)).with(LEG_POSITIONS, state.get(LEG_POSITIONS));
         } else if (state.getBlock() == ModBlocks.JUNGLE_TABLE) {
-            return ModBlocks.STRIPPED_JUNGLE_TABLE.getDefaultState().with(LEGS, state.get(LEGS)).with(LEGPOSITIONS, state.get(LEGPOSITIONS));
+            return ModBlocks.STRIPPED_JUNGLE_TABLE.getDefaultState().with(LEGS, state.get(LEGS)).with(LEG_POSITIONS, state.get(LEG_POSITIONS));
         } else if (state.getBlock() == ModBlocks.ACACIA_TABLE) {
-            return ModBlocks.STRIPPED_ACACIA_TABLE.getDefaultState().with(LEGS, state.get(LEGS)).with(LEGPOSITIONS, state.get(LEGPOSITIONS));
+            return ModBlocks.STRIPPED_ACACIA_TABLE.getDefaultState().with(LEGS, state.get(LEGS)).with(LEG_POSITIONS, state.get(LEG_POSITIONS));
         } else if (state.getBlock() == ModBlocks.DARK_OAK_TABLE) {
-            return ModBlocks.STRIPPED_DARK_OAK_TABLE.getDefaultState().with(LEGS, state.get(LEGS)).with(LEGPOSITIONS, state.get(LEGPOSITIONS));
+            return ModBlocks.STRIPPED_DARK_OAK_TABLE.getDefaultState().with(LEGS, state.get(LEGS)).with(LEG_POSITIONS, state.get(LEG_POSITIONS));
         } else if (state.getBlock() == ModBlocks.MANGROVE_TABLE) {
-            return ModBlocks.STRIPPED_MANGROVE_TABLE.getDefaultState().with(LEGS, state.get(LEGS)).with(LEGPOSITIONS, state.get(LEGPOSITIONS));
+            return ModBlocks.STRIPPED_MANGROVE_TABLE.getDefaultState().with(LEGS, state.get(LEGS)).with(LEG_POSITIONS, state.get(LEG_POSITIONS));
         } else if (state.getBlock() == ModBlocks.CRIMSON_TABLE) {
-            return ModBlocks.STRIPPED_CRIMSON_TABLE.getDefaultState().with(LEGS, state.get(LEGS)).with(LEGPOSITIONS, state.get(LEGPOSITIONS));
+            return ModBlocks.STRIPPED_CRIMSON_TABLE.getDefaultState().with(LEGS, state.get(LEGS)).with(LEG_POSITIONS, state.get(LEG_POSITIONS));
         } else if (state.getBlock() == ModBlocks.WARPED_TABLE) {
-            return ModBlocks.STRIPPED_WARPED_TABLE.getDefaultState().with(LEGS, state.get(LEGS)).with(LEGPOSITIONS, state.get(LEGPOSITIONS));
+            return ModBlocks.STRIPPED_WARPED_TABLE.getDefaultState().with(LEGS, state.get(LEGS)).with(LEG_POSITIONS, state.get(LEG_POSITIONS));
         } else {
             return state;
         }
+    }
+
+    @Override
+    public boolean tryFillWithFluid(WorldAccess world, BlockPos pos, BlockState state, FluidState fluidState) {
+        if (!state.get(Properties.WATERLOGGED) && fluidState.getFluid() == Fluids.WATER) {
+
+            world.setBlockState(pos, (BlockState)((BlockState)state.with(WATERLOGGED, true)), Block.NOTIFY_ALL);
+            world.scheduleFluidTick(pos, fluidState.getFluid(), fluidState.getFluid().getTickRate(world));
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public FluidState getFluidState(BlockState state) {
+        if (state.get(WATERLOGGED)) {
+            return Fluids.WATER.getStill(false);
+        }
+        return super.getFluidState(state);
     }
 }

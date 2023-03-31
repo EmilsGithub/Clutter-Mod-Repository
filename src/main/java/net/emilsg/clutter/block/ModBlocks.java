@@ -11,6 +11,7 @@ import net.minecraft.block.*;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.Wearable;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
@@ -326,8 +327,6 @@ public class ModBlocks {
     public static final Block STRIPPED_CRIMSON_CHAIR = registerBlock("stripped_crimson_chair", new WoodenChairBlock(FabricBlockSettings.copy(Blocks.CRIMSON_PLANKS)), ModItemGroup.CLUTTER);
     public static final Block STRIPPED_WARPED_CHAIR = registerBlock("stripped_warped_chair", new WoodenChairBlock(FabricBlockSettings.copy(Blocks.WARPED_PLANKS)), ModItemGroup.CLUTTER);
 
-    public static final Block BOWL = registerBlock("bowl", new BowlBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).breakInstantly()), ModItemGroup.CLUTTER);
-
     public static final Block OAK_TRELLIS = registerBlock("oak_trellis", new TrellisBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).luminance(TrellisBlock.createLightLevelFromLitBlockState())), ModItemGroup.CLUTTER);
     public static final Block SPRUCE_TRELLIS = registerBlock("spruce_trellis", new TrellisBlock(FabricBlockSettings.copy(Blocks.SPRUCE_PLANKS).luminance(TrellisBlock.createLightLevelFromLitBlockState())), ModItemGroup.CLUTTER);
     public static final Block BIRCH_TRELLIS = registerBlock("birch_trellis", new TrellisBlock(FabricBlockSettings.copy(Blocks.BIRCH_PLANKS).luminance(TrellisBlock.createLightLevelFromLitBlockState())), ModItemGroup.CLUTTER);
@@ -337,6 +336,35 @@ public class ModBlocks {
     public static final Block MANGROVE_TRELLIS = registerBlock("mangrove_trellis", new TrellisBlock(FabricBlockSettings.copy(Blocks.MANGROVE_PLANKS).luminance(TrellisBlock.createLightLevelFromLitBlockState())), ModItemGroup.CLUTTER);
     public static final Block CRIMSON_TRELLIS = registerBlock("crimson_trellis", new TrellisBlock(FabricBlockSettings.copy(Blocks.CRIMSON_PLANKS).luminance(TrellisBlock.createLightLevelFromLitBlockState())), ModItemGroup.CLUTTER);
     public static final Block WARPED_TRELLIS = registerBlock("warped_trellis", new TrellisBlock(FabricBlockSettings.copy(Blocks.WARPED_PLANKS).luminance(TrellisBlock.createLightLevelFromLitBlockState())), ModItemGroup.CLUTTER);
+
+    public static final Block OAK_BENCH = registerBlock("oak_bench", new WoodenBenchBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS)), ModItemGroup.CLUTTER);
+    public static final Block SPRUCE_BENCH = registerBlock("spruce_bench", new WoodenBenchBlock(FabricBlockSettings.copy(Blocks.SPRUCE_PLANKS)), ModItemGroup.CLUTTER);
+    public static final Block BIRCH_BENCH = registerBlock("birch_bench", new WoodenBenchBlock(FabricBlockSettings.copy(Blocks.BIRCH_PLANKS)), ModItemGroup.CLUTTER);
+    public static final Block JUNGLE_BENCH = registerBlock("jungle_bench", new WoodenBenchBlock(FabricBlockSettings.copy(Blocks.JUNGLE_PLANKS)), ModItemGroup.CLUTTER);
+    public static final Block ACACIA_BENCH = registerBlock("acacia_bench", new WoodenBenchBlock(FabricBlockSettings.copy(Blocks.ACACIA_PLANKS)), ModItemGroup.CLUTTER);
+    public static final Block DARK_OAK_BENCH = registerBlock("dark_oak_bench", new WoodenBenchBlock(FabricBlockSettings.copy(Blocks.DARK_OAK_PLANKS)), ModItemGroup.CLUTTER);
+    public static final Block MANGROVE_BENCH = registerBlock("mangrove_bench", new WoodenBenchBlock(FabricBlockSettings.copy(Blocks.MANGROVE_PLANKS)), ModItemGroup.CLUTTER);
+    public static final Block CRIMSON_BENCH = registerBlock("crimson_bench", new WoodenBenchBlock(FabricBlockSettings.copy(Blocks.CRIMSON_PLANKS)), ModItemGroup.CLUTTER);
+    public static final Block WARPED_BENCH = registerBlock("warped_bench", new WoodenBenchBlock(FabricBlockSettings.copy(Blocks.WARPED_PLANKS)), ModItemGroup.CLUTTER);
+    public static final Block STRIPPED_OAK_BENCH = registerBlock("stripped_oak_bench", new WoodenBenchBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS)), ModItemGroup.CLUTTER);
+    public static final Block STRIPPED_SPRUCE_BENCH = registerBlock("stripped_spruce_bench", new WoodenBenchBlock(FabricBlockSettings.copy(Blocks.SPRUCE_PLANKS)), ModItemGroup.CLUTTER);
+    public static final Block STRIPPED_BIRCH_BENCH = registerBlock("stripped_birch_bench", new WoodenBenchBlock(FabricBlockSettings.copy(Blocks.BIRCH_PLANKS)), ModItemGroup.CLUTTER);
+    public static final Block STRIPPED_JUNGLE_BENCH = registerBlock("stripped_jungle_bench", new WoodenBenchBlock(FabricBlockSettings.copy(Blocks.JUNGLE_PLANKS)), ModItemGroup.CLUTTER);
+    public static final Block STRIPPED_ACACIA_BENCH = registerBlock("stripped_acacia_bench", new WoodenBenchBlock(FabricBlockSettings.copy(Blocks.ACACIA_PLANKS)), ModItemGroup.CLUTTER);
+    public static final Block STRIPPED_DARK_OAK_BENCH = registerBlock("stripped_dark_oak_bench", new WoodenBenchBlock(FabricBlockSettings.copy(Blocks.DARK_OAK_PLANKS)), ModItemGroup.CLUTTER);
+    public static final Block STRIPPED_MANGROVE_BENCH = registerBlock("stripped_mangrove_bench", new WoodenBenchBlock(FabricBlockSettings.copy(Blocks.MANGROVE_PLANKS)), ModItemGroup.CLUTTER);
+    public static final Block STRIPPED_CRIMSON_BENCH = registerBlock("stripped_crimson_bench", new WoodenBenchBlock(FabricBlockSettings.copy(Blocks.CRIMSON_PLANKS)), ModItemGroup.CLUTTER);
+    public static final Block STRIPPED_WARPED_BENCH = registerBlock("stripped_warped_bench", new WoodenBenchBlock(FabricBlockSettings.copy(Blocks.WARPED_PLANKS)), ModItemGroup.CLUTTER);
+
+    public static final Block SHEEP_PLUSHIE = registerBlock("sheep_plushie", new SheepPlushieBlock(FabricBlockSettings.copy(Blocks.WHITE_WOOL).breakInstantly()), ModItemGroup.CLUTTER);
+    public static final Block COW_PLUSHIE = registerBlock("cow_plushie", new CowPlushieBlock(FabricBlockSettings.copy(Blocks.BROWN_WOOL).breakInstantly()), ModItemGroup.CLUTTER);
+    public static final Block SQUID_PLUSHIE = registerBlock("squid_plushie", new SquidPlushieBlock(FabricBlockSettings.copy(Blocks.CYAN_WOOL).breakInstantly()), ModItemGroup.CLUTTER);
+    public static final Block CHICKEN_PLUSHIE = registerBlock("chicken_plushie", new ChickenPlushieBlock(FabricBlockSettings.copy(Blocks.WHITE_WOOL).breakInstantly()), ModItemGroup.CLUTTER);
+    public static final Block FOX_PLUSHIE = registerBlock("fox_plushie", new FoxPlushieBlock(FabricBlockSettings.copy(Blocks.ORANGE_WOOL).breakInstantly()), ModItemGroup.CLUTTER);
+    public static final Block SNOW_FOX_PLUSHIE = registerBlock("snow_fox_plushie", new FoxPlushieBlock(FabricBlockSettings.copy(Blocks.WHITE_WOOL).breakInstantly()), ModItemGroup.CLUTTER);
+
+    public static final Block BOWL = registerBlock("bowl", new BowlBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).breakInstantly()), ModItemGroup.CLUTTER);
+    public static final Block PLATE = registerBlock("plate", new PlateBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).breakInstantly()), ModItemGroup.CLUTTER);
 
     private static Block registerBlock(String name, Block block, ItemGroup group) {
         registerBlockItem(name, block, group);
@@ -448,5 +476,6 @@ public class ModBlocks {
 
     public static void registerModBlocks() {
         Clutter.LOGGER.info("Registering ModBlocks for " + Clutter.MOD_ID);
+        oxidizableBlockPairs();
     }
 }

@@ -141,12 +141,13 @@ public class BowlBlock extends Block implements Waterloggable {
         player.addStatusEffect(effectInstance);
     }
 
-
-
-    @Nullable
     @Override
+    @Nullable
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return this.getDefaultState().with(CURRENT_MODEL, 0).with(FACING, ctx.getPlayerFacing());
+        BlockPos blockPos;
+        World worldAccess = ctx.getWorld();
+        boolean bl = worldAccess.getFluidState(blockPos = ctx.getBlockPos()).getFluid() == Fluids.WATER;
+        return (BlockState)this.getDefaultState().with(WATERLOGGED, bl).with(FACING, ctx.getPlayerFacing()).with(CURRENT_MODEL, 0);
     }
 
     @Override

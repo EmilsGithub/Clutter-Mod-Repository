@@ -143,11 +143,13 @@ public class WallBookshelfBlock extends Block implements Waterloggable{
                         }
         }
 
-
-        @Nullable
         @Override
+        @Nullable
         public BlockState getPlacementState(ItemPlacementContext ctx) {
-                return this.getDefaultState().with(CURRENT_MODEL, 0).with(LIT, false).with(FACING, ctx.getPlayerFacing());
+                BlockPos blockPos;
+                World worldAccess = ctx.getWorld();
+                boolean bl = worldAccess.getFluidState(blockPos = ctx.getBlockPos()).getFluid() == Fluids.WATER;
+                return (BlockState)this.getDefaultState().with(WATERLOGGED, bl).with(CURRENT_MODEL, 0).with(LIT, false).with(FACING, ctx.getPlayerFacing());
         }
 
         @Override

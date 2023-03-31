@@ -11,6 +11,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
 
 
 public class ModItems {
@@ -29,6 +30,10 @@ public class ModItems {
     public static final Item BEER_MUG = registerItem("beer_mug", new BeerItem(ModBlocks.BEER_MUG, new FabricItemSettings()));
     public static final Item WOODEN_MUG = registerItem("wooden_mug", new AliasedBlockItem(ModBlocks.WOODEN_MUG, new FabricItemSettings()));
 
+    public static final Item COPPER_COIN = registerItem("copper_coin", new Item(new FabricItemSettings().maxCount(16).rarity(Rarity.UNCOMMON)));
+    public static final Item SILVER_COIN = registerItem("silver_coin", new Item(new FabricItemSettings().maxCount(16).rarity(Rarity.RARE)));
+    public static final Item GOLDEN_COIN = registerItem("golden_coin", new Item(new FabricItemSettings().maxCount(16).rarity(Rarity.EPIC)));
+
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, new Identifier(Clutter.MOD_ID, name), item);
     }
@@ -44,7 +49,10 @@ public class ModItems {
                 COTTON,
                 COTTON_SEEDS,
                 BEER_MUG,
-                WOODEN_MUG
+                WOODEN_MUG,
+                COPPER_COIN,
+                SILVER_COIN,
+                GOLDEN_COIN
         };
 
         for (Item item : items) {

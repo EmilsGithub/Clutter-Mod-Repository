@@ -2,7 +2,7 @@ package net.emilsg.clutter;
 
 import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.block.entity.SeatEntity;
-import net.emilsg.clutter.util.Sit;
+import net.emilsg.clutter.util.ModSit;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
@@ -19,7 +19,7 @@ import java.util.List;
 public class ClutterClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        EntityRendererRegistry.register(Sit.SEAT, EmptyRenderer::new);
+        EntityRendererRegistry.register(ModSit.SEAT, EmptyRenderer::new);
 
         List<Block> blocksToRender = Arrays.asList(
                 ModBlocks.FOOD_BOX,
@@ -186,7 +186,6 @@ public class ClutterClient implements ClientModInitializer {
                 ModBlocks.CRIMSON_TRELLIS,
                 ModBlocks.WARPED_TRELLIS,
                 ModBlocks.MANGROVE_TRELLIS
-
         );
 
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), blocksToRender.toArray(new Block[blocksToRender.size()]));

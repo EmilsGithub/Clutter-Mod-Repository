@@ -1,6 +1,6 @@
 package net.emilsg.clutter.block.entity;
 
-import net.emilsg.clutter.util.Sit;
+import net.emilsg.clutter.util.ModSit;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -25,12 +25,12 @@ public class SeatEntity extends Entity {
     }
     public SeatEntity(EntityType<? extends Entity> type, World world)
     {
-        super(Sit.SEAT, world);
+        super(ModSit.SEAT, world);
     }
 
     public SeatEntity(World world)
     {
-        super(Sit.SEAT, world);
+        super(ModSit.SEAT, world);
         noClip = true;
     }
 

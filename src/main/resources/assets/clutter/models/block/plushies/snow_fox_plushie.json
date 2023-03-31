@@ -1,0 +1,7 @@
+{
+	"parent": "clutter:block/plushies/fox_plushie",
+	"textures": {
+		"0": "clutter:block/snow_fox_plushie",
+		"particle": "block/white_wool"
+	}
+}

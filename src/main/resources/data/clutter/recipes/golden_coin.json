@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "clutter:silver_coin"
+    },
+    {
+      "item": "clutter:silver_coin"
+    },
+    {
+      "item": "clutter:silver_coin"
+    },
+    {
+      "item": "clutter:silver_coin"
+    }
+  ],
+  "result": {
+    "item": "clutter:golden_coin",
+    "count": 1
+  }
+}
