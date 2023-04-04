@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "#": {
-      "item": "clutter:silver_ingot"
+      "tag": "c:silver_ingots"
     }
   },
   "pattern": [

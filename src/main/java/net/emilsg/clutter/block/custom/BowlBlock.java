@@ -85,7 +85,6 @@ public class BowlBlock extends Block implements Waterloggable {
             return ActionResult.SUCCESS;
         } else if (!world.isClient && !player.isSneaking() && hand.equals(Hand.MAIN_HAND) && player.getStackInHand(hand).isOf(Items.MUSHROOM_STEW) && !i) {
             world.setBlockState(pos, state.with(CURRENT_MODEL, 1).with(FILLED, true), Block.NOTIFY_ALL);
-            player.setStackInHand(hand, ItemUsage.exchangeStack(player.getStackInHand(hand), player, new ItemStack(Items.BOWL)));
             if (!player.getAbilities().creativeMode) {
                 player.setStackInHand(hand, ItemUsage.exchangeStack(player.getStackInHand(hand), player, new ItemStack(Items.BOWL)));
             }
@@ -98,7 +97,6 @@ public class BowlBlock extends Block implements Waterloggable {
             return ActionResult.SUCCESS;
         } else if (!world.isClient && !player.isSneaking() && hand.equals(Hand.MAIN_HAND) && player.getStackInHand(hand).isOf(Items.RABBIT_STEW) && !i) {
             world.setBlockState(pos, state.with(CURRENT_MODEL, 3).with(FILLED, true), Block.NOTIFY_ALL);
-            player.setStackInHand(hand, ItemUsage.exchangeStack(player.getStackInHand(hand), player, new ItemStack(Items.BOWL)));
             if (!player.getAbilities().creativeMode) {
                 player.setStackInHand(hand, ItemUsage.exchangeStack(player.getStackInHand(hand), player, new ItemStack(Items.BOWL)));
             }
@@ -111,7 +109,6 @@ public class BowlBlock extends Block implements Waterloggable {
             return ActionResult.SUCCESS;
         } else if (!world.isClient && !player.isSneaking() && hand.equals(Hand.MAIN_HAND) && player.getStackInHand(hand).isOf(Items.SUSPICIOUS_STEW) && !i) {
             world.setBlockState(pos, state.with(CURRENT_MODEL, 5).with(FILLED, true), Block.NOTIFY_ALL);
-            player.setStackInHand(hand, ItemUsage.exchangeStack(player.getStackInHand(hand), player, new ItemStack(Items.BOWL)));
             if (!player.getAbilities().creativeMode) {
                 player.setStackInHand(hand, ItemUsage.exchangeStack(player.getStackInHand(hand), player, new ItemStack(Items.BOWL)));
             }

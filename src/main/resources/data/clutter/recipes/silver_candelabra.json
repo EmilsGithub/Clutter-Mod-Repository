@@ -13,7 +13,7 @@
       "item": "clutter:silver_nugget"
     },
     "i": {
-      "item": "clutter:silver_ingot"
+      "tag": "c:silver_ingots"
     }
   },
   "result": {

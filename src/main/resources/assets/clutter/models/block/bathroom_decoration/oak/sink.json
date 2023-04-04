@@ -1,0 +1,10 @@
+{
+	"parent": "clutter:block/bathroom_decoration/sink",
+	"textures": {
+		"0": "clutter:block/empty",
+		"1": "block/cauldron_inner",
+		"2": "block/cauldron_side",
+		"3": "block/oak_planks",
+		"particle": "block/oak_planks"
+	}
+}

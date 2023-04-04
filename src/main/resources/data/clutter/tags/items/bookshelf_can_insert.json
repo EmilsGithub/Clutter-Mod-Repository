@@ -1,0 +1,10 @@
+{
+  "values": [
+    "minecraft:enchanted_book",
+    "minecraft:written_book",
+    "minecraft:writable_book",
+    "minecraft:book",
+    "minecraft:map",
+    "minecraft:filled_map"
+  ]
+}

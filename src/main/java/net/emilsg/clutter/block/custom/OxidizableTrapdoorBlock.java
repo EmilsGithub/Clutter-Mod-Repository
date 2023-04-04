@@ -2,7 +2,6 @@ package net.emilsg.clutter.block.custom;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Oxidizable;
-import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.block.TrapdoorBlock;
 import net.minecraft.block.enums.BlockHalf;
 import net.minecraft.fluid.FluidState;
@@ -41,7 +40,11 @@ public class OxidizableTrapdoorBlock extends TrapdoorBlock implements Oxidizable
     }
 
     public boolean hasRandomTicks(BlockState state) {
-        return Oxidizable.getIncreasedOxidationBlock(state.getBlock()).isPresent();
+        if (!state.get(POWERED)) {
+            return Oxidizable.getIncreasedOxidationBlock(state.getBlock()).isPresent();
+        } else {
+            return false;
+        }
     }
 
     public OxidationLevel getDegradationLevel() {

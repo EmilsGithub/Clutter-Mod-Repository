@@ -11,7 +11,6 @@ import net.minecraft.block.*;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.item.Wearable;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
@@ -362,9 +361,16 @@ public class ModBlocks {
     public static final Block CHICKEN_PLUSHIE = registerBlock("chicken_plushie", new ChickenPlushieBlock(FabricBlockSettings.copy(Blocks.WHITE_WOOL).breakInstantly()), ModItemGroup.CLUTTER);
     public static final Block FOX_PLUSHIE = registerBlock("fox_plushie", new FoxPlushieBlock(FabricBlockSettings.copy(Blocks.ORANGE_WOOL).breakInstantly()), ModItemGroup.CLUTTER);
     public static final Block SNOW_FOX_PLUSHIE = registerBlock("snow_fox_plushie", new FoxPlushieBlock(FabricBlockSettings.copy(Blocks.WHITE_WOOL).breakInstantly()), ModItemGroup.CLUTTER);
+    public static final Block OCELOT_PLUSHIE = registerBlock("ocelot_plushie", new OcelotPlushieBlock(FabricBlockSettings.copy(Blocks.YELLOW_WOOL).breakInstantly()), ModItemGroup.CLUTTER);
+
+    public static final Block TOWEL = registerBlock("towel", new TowelBlock(FabricBlockSettings.copy(Blocks.WHITE_WOOL).breakInstantly()), ModItemGroup.CLUTTER);
+    public static final Block SINK = registerBlock("sink", new SinkBlock(FabricBlockSettings.copy(Blocks.WATER_CAULDRON).nonOpaque()), ModItemGroup.CLUTTER);
 
     public static final Block BOWL = registerBlock("bowl", new BowlBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).breakInstantly()), ModItemGroup.CLUTTER);
-    public static final Block PLATE = registerBlock("plate", new PlateBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).breakInstantly()), ModItemGroup.CLUTTER);
+    public static final Block PLATE = registerBlock("plate", new TablePlateBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).breakInstantly()), ModItemGroup.CLUTTER);
+
+    public static final Block OAK_WALL_CUPBOARD = registerBlock("oak_wall_cupboard", new WallCupboardBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS)), ModItemGroup.CLUTTER);
+
 
     private static Block registerBlock(String name, Block block, ItemGroup group) {
         registerBlockItem(name, block, group);
@@ -382,7 +388,7 @@ public class ModBlocks {
         return item;
     }
 
-    public static void oxidizableBlockPairs() {
+    public static void copperBlockPairs() {
         OxidizableBlocksRegistry.registerOxidizableBlockPair(COPPER_BARS, EXPOSED_COPPER_BARS);
         OxidizableBlocksRegistry.registerOxidizableBlockPair(EXPOSED_COPPER_BARS, WEATHERED_COPPER_BARS);
         OxidizableBlocksRegistry.registerOxidizableBlockPair(WEATHERED_COPPER_BARS, OXIDIZED_COPPER_BARS);
@@ -476,6 +482,5 @@ public class ModBlocks {
 
     public static void registerModBlocks() {
         Clutter.LOGGER.info("Registering ModBlocks for " + Clutter.MOD_ID);
-        oxidizableBlockPairs();
     }
 }

@@ -17,7 +17,6 @@ public class OxidizablePressurePlateBlock extends PressurePlateBlock implements 
         this.oxidationLevel = oxidationLevel;
     }
 
-
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         this.tickDegradation(state, world, pos, random);
     }

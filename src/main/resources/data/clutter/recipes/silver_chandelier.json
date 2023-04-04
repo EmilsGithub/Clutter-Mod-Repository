@@ -13,7 +13,7 @@
       "tag": "minecraft:candles"
     },
     "i": {
-      "item": "clutter:silver_ingot"
+      "tag": "c:silver_ingots"
     }
   },
   "result": {

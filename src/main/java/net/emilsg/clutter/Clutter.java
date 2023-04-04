@@ -25,5 +25,6 @@ public class Clutter implements ModInitializer {
 		ModSit.registerSitUtil();
 		ModWorldGeneration.generateModWorldGen();
 		ModFlammableAndOrStrippableBlocks.registerFlammableAndStrippableBlocks();
+		ModBlocks.copperBlockPairs();
 	}
 }
