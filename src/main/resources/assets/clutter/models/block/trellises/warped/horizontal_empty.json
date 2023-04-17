@@ -1,0 +1,7 @@
+{
+	"parent": "clutter:block/trellises/horizontal_trellis_parent",
+	"textures": {
+		"0": "block/warped_stem",
+		"particle": "block/warped_stem"
+	}
+}

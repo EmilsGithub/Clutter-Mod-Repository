@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPP",
+    "L L"
+  ],
+  "key": {
+    "L": {
+      "item": "minecraft:stripped_spruce_log"
+    },
+    "P": {
+      "item": "minecraft:spruce_planks"
+    }
+  },
+  "result": {
+    "item": "clutter:stripped_spruce_bench",
+    "count": 2
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "clutter:block/lamps/tall_lamp_top_parent",
+  "textures": {
+    "1": "block/light_blue_wool"
+  }
+}

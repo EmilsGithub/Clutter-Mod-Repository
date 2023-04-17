@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "C ",
+    "NI"
+  ],
+  "key": {
+    "I": {
+      "tag": "c:copper_ingots"
+    },
+    "N": {
+      "tag": "c:copper_nuggets"
+    },
+    "C": {
+      "item": "minecraft:light_gray_candle"
+    }
+  },
+  "result": {
+    "item": "clutter:light_gray_copper_wall_candle",
+    "count": 1
+  }
+}

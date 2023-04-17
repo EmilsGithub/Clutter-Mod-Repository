@@ -1,0 +1,9 @@
+{
+	"parent": "clutter:block/trellises/trellis_parent",
+	"textures": {
+		"0": "block/dark_oak_log",
+		"1": "clutter:block/peony",
+		"2": "clutter:block/peony_flowers",
+		"particle": "block/dark_oak_log"
+	}
+}

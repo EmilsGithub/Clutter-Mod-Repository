@@ -1,0 +1,8 @@
+{
+  "parent": "clutter:block/candelabras/copper_candelabra",
+  "textures": {
+    "0": "block/gray_candle_lit",
+    "1": "block/exposed_copper",
+    "particle": "block/exposed_copper"
+  }
+}

@@ -22,6 +22,7 @@ public class OxidizableDoorBlock extends DoorBlock implements Oxidizable {
         this.oxidationLevel = oxidationLevel;
     }
 
+
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         DoubleBlockHalf doubleBlockHalf = state.get(HALF);

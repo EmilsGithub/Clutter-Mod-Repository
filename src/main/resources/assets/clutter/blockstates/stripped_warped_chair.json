@@ -1,0 +1,19 @@
+{
+  "variants":{
+    "facing=north":{
+      "model":"clutter:block/chairs/stripped_warped_chair"
+    },
+    "facing=south":{
+      "model":"clutter:block/chairs/stripped_warped_chair",
+      "y": 180
+    },
+    "facing=east":{
+      "model":"clutter:block/chairs/stripped_warped_chair",
+      "y": 90
+    },
+    "facing=west":{
+      "model":"clutter:block/chairs/stripped_warped_chair",
+      "y": 270
+    }
+  }
+}

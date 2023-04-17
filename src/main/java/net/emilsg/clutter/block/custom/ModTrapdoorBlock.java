@@ -11,6 +11,7 @@ import net.minecraft.util.math.Direction;
 
 public class ModTrapdoorBlock extends TrapdoorBlock {
 
+
     public ModTrapdoorBlock(Settings settings) {
         super(settings);
     }

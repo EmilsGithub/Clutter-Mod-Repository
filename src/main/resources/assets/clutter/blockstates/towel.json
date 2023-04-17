@@ -1,0 +1,19 @@
+{
+  "variants":{
+    "facing=north":{
+      "model":"clutter:block/bathroom_decoration/towel"
+    },
+    "facing=south":{
+      "model":"clutter:block/bathroom_decoration/towel",
+      "y": 180
+    },
+    "facing=east":{
+      "model":"clutter:block/bathroom_decoration/towel",
+      "y": 90
+    },
+    "facing=west":{
+      "model":"clutter:block/bathroom_decoration/towel",
+      "y": 270
+    }
+  }
+}

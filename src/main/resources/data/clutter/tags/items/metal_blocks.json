@@ -42,6 +42,8 @@
     "clutter:raw_silver_block",
     "clutter:silver_ore",
     "clutter:deepslate_silver_ore",
+
+    "#clutter:wall_candles",
     "#clutter:chandeliers",
     "#clutter:candelabras",
     "#clutter:chains",

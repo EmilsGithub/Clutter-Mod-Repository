@@ -21,7 +21,7 @@ public class ChimneyBlockEntity extends BlockEntity {
             Random random = world.random;
             if (random.nextFloat() < 0.25f) {
                 for (i = 0; i < random.nextInt(2) + 2; ++i) {
-                    ChimneyBlock.spawnSmokeParticles(world, blockPos, true, state);
+                    ChimneyBlock.spawnSmokeParticles(world, blockPos, state);
                 }
             }
         }

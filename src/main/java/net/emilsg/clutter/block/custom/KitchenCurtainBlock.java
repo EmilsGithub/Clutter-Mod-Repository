@@ -1,9 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.block.Waterloggable;
+import net.minecraft.block.*;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
@@ -15,10 +12,11 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
-public class KitchenCurtainBlock extends HorizontalRotationBlock implements Waterloggable {
+public class KitchenCurtainBlock extends HorizontalFacingBlock implements Waterloggable {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
     protected static final VoxelShape NORTH_SHAPE = Block.createCuboidShape(0.0, 1.0, 0.0, 16.0, 16.0, 1.0);
     protected static final VoxelShape SOUTH_SHAPE = Block.createCuboidShape(0.0, 1.0, 15.0, 16.0, 16.0, 16.0);
@@ -66,11 +64,15 @@ public class KitchenCurtainBlock extends HorizontalRotationBlock implements Wate
         return false;
     }
 
-    @Nullable
     @Override
+    @Nullable
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return this.getDefaultState().with(FACING, ctx.getPlayerFacing());
+        BlockPos blockPos;
+        World worldAccess = ctx.getWorld();
+        boolean bl = worldAccess.getFluidState(blockPos = ctx.getBlockPos()).getFluid() == Fluids.WATER;
+        return (BlockState)this.getDefaultState().with(WATERLOGGED, bl).with(FACING, ctx.getPlayerFacing());
     }
+
 
     @Override
     public FluidState getFluidState(BlockState state) {

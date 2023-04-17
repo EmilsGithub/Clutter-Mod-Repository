@@ -1,0 +1,6 @@
+{
+  "parent": "clutter:block/chandeliers/weathered_copper_chandelier",
+  "textures": {
+    "1": "block/light_blue_candle"
+  }
+}

@@ -1,19 +1,19 @@
 {
   "variants": {
     "facing=north": {
-      "model": "clutter:block/carrot_food_box",
-      "y": 180
+      "model": "clutter:block/food_boxes/carrot_food_box"
     },
     "facing=south": {
-      "model": "clutter:block/carrot_food_box"
+      "model": "clutter:block/food_boxes/carrot_food_box",
+      "y": 180
     },
     "facing=west": {
-      "model": "clutter:block/carrot_food_box",
-      "y": 90
+      "model": "clutter:block/food_boxes/carrot_food_box",
+      "y": 270
     },
     "facing=east": {
-      "model": "clutter:block/carrot_food_box",
-      "y": 270
+      "model": "clutter:block/food_boxes/carrot_food_box",
+      "y": 90
     }
   }
 }

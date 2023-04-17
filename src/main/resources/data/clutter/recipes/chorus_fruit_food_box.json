@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#F#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:chorus_fruit"
+    },
+    "F": {
+      "item": "clutter:food_box"
+    }
+  },
+  "result": {
+    "item": "clutter:chorus_fruit_food_box"
+  }
+}

@@ -1,0 +1,25 @@
+{
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"textures": {
+		"0": "block/oak_log",
+		"1": "block/oak_log_top",
+		"2": "clutter:block/scorched_oak_log",
+		"particle": "block/oak_log_top"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 6],
+			"to": [16, 8, 14],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 6.16815, 7.4115]},
+			"faces": {
+				"north": {"uv": [6, 0, 10, 8], "rotation": 90, "texture": "#2"},
+				"east": {"uv": [4, 4, 12, 12], "texture": "#1"},
+				"south": {"uv": [6, 0, 14, 16], "rotation": 90, "texture": "#0"},
+				"west": {"uv": [4, 4, 12, 12], "texture": "#1"},
+				"up": {"uv": [6, 0, 14, 16], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [6, 0, 14, 16], "rotation": 90, "texture": "#0"}
+			}
+		}
+	]
+}

@@ -4,6 +4,7 @@ import net.emilsg.clutter.util.ModBlockTags;
 import net.minecraft.block.*;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
@@ -29,6 +30,10 @@ public class ChandelierBlock extends WaterloggableLitBlock {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
     public static final BooleanProperty LIT = Properties.LIT;
     public static final BooleanProperty ON_CHAIN = BooleanProperty.of("on_chain");
+
+    private static final VoxelShape BOTTOM_SHAPE = Block.createCuboidShape(1.5, 1.0, 1.0, 14.5, 8.0, 15.0);
+    private static final VoxelShape CHAIN_SHAPE = Block.createCuboidShape(6.5, 1.0, 6.5, 9.5, 16.0, 9.5);
+    private static final VoxelShape CEILING_MOUNT_SHAPE = Block.createCuboidShape(5.5, 15.0, 5.5, 10.5, 16.0, 10.5);
 
     private static final Vec3d[] CANDLE_POSITIONS = {
             new Vec3d(0.1875, 0.59375, 0.5),
@@ -69,10 +74,6 @@ public class ChandelierBlock extends WaterloggableLitBlock {
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        final VoxelShape BOTTOM_SHAPE = Block.createCuboidShape(1.5, 1.0, 1.0, 14.5, 8.0, 15.0);
-        final VoxelShape CHAIN_SHAPE = Block.createCuboidShape(6.5, 1.0, 6.5, 9.5, 16.0, 9.5);
-        final VoxelShape CEILING_MOUNT_SHAPE = Block.createCuboidShape(5.5, 15.0, 5.5, 10.5, 16.0, 10.5);
-
         if (state.get(ON_CHAIN)) {
             return VoxelShapes.union(BOTTOM_SHAPE, CHAIN_SHAPE);
         } else {

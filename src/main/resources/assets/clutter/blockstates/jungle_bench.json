@@ -1,0 +1,64 @@
+{
+  "variants":{
+    "facing=north,leg_positions=all":{
+      "model":"clutter:block/benches/jungle/all"
+    },
+    "facing=south,leg_positions=all":{
+      "model":"clutter:block/benches/jungle/all",
+      "y": 180
+    },
+    "facing=east,leg_positions=all":{
+      "model":"clutter:block/benches/jungle/all",
+      "y": 90
+    },
+    "facing=west,leg_positions=all":{
+      "model":"clutter:block/benches/jungle/all",
+      "y": 270
+    },
+    "facing=north,leg_positions=east":{
+      "model":"clutter:block/benches/jungle/left"
+    },
+    "facing=south,leg_positions=east":{
+      "model":"clutter:block/benches/jungle/right",
+      "y": 180
+    },
+    "facing=north,leg_positions=west":{
+      "model":"clutter:block/benches/jungle/right"
+    },
+    "facing=south,leg_positions=west":{
+      "model":"clutter:block/benches/jungle/left",
+      "y": 180
+    },
+    "facing=north,leg_positions=none":{
+      "model":"clutter:block/benches/jungle/none"
+    },
+    "facing=south,leg_positions=none":{
+      "model":"clutter:block/benches/jungle/none",
+      "y": 180
+    },
+    "facing=east,leg_positions=none":{
+      "model":"clutter:block/benches/jungle/none",
+      "y": 90
+    },
+    "facing=west,leg_positions=none":{
+      "model":"clutter:block/benches/jungle/none",
+      "y": 270
+    },
+    "facing=east,leg_positions=north":{
+      "model":"clutter:block/benches/jungle/right",
+      "y": 90
+    },
+    "facing=west,leg_positions=north":{
+      "model":"clutter:block/benches/jungle/left",
+      "y": 270
+    },
+    "facing=east,leg_positions=south":{
+      "model":"clutter:block/benches/jungle/left",
+      "y": 90
+    },
+    "facing=west,leg_positions=south":{
+      "model":"clutter:block/benches/jungle/right",
+      "y": 270
+    }
+  }
+}

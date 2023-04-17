@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "clutter:white_bunk_bed",
+    "clutter:light_gray_bunk_bed",
+    "clutter:gray_bunk_bed",
+    "clutter:black_bunk_bed",
+    "clutter:brown_bunk_bed",
+    "clutter:red_bunk_bed",
+    "clutter:orange_bunk_bed",
+    "clutter:yellow_bunk_bed",
+    "clutter:lime_bunk_bed",
+    "clutter:green_bunk_bed",
+    "clutter:cyan_bunk_bed",
+    "clutter:blue_bunk_bed",
+    "clutter:light_blue_bunk_bed",
+    "clutter:magenta_bunk_bed",
+    "clutter:purple_bunk_bed",
+    "clutter:pink_bunk_bed"
+  ]
+}

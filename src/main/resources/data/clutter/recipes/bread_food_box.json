@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#F#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:bread"
+    },
+    "F": {
+      "item": "clutter:food_box"
+    }
+  },
+  "result": {
+    "item": "clutter:bread_food_box"
+  }
+}

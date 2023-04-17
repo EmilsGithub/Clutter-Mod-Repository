@@ -1,0 +1,9 @@
+{
+	"parent": "clutter:block/trellises/trellis_no_shade_parent",
+	"textures": {
+		"0": "block/warped_stem",
+		"1": "clutter:block/vines",
+		"2": "clutter:block/vine_leaves",
+		"particle": "block/warped_stem"
+	}
+}

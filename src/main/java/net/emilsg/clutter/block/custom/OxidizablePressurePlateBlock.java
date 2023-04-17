@@ -1,7 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.block.ChainBlock;
 import net.minecraft.block.Oxidizable;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.server.world.ServerWorld;

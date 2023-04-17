@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "half=upper,lit=false": {
+      "model": "clutter:block/lamps/tall_colors/cyan_top"
+    },
+    "half=upper,lit=true": {
+      "model": "clutter:block/lamps/tall_colors/cyan_top_lit"
+    },
+    "half=lower": {
+      "model": "clutter:block/lamps/tall_lamp_bottom_parent"
+    }
+  }
+}

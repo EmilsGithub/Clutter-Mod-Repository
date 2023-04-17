@@ -1,0 +1,8 @@
+{
+  "parent": "clutter:block/candelabras/golden_candelabra",
+  "textures": {
+    "0": "block/brown_candle_lit",
+    "1": "block/gold_block",
+    "particle": "block/gold_block"
+  }
+}

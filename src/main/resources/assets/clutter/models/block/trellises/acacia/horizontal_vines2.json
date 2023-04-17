@@ -1,0 +1,9 @@
+{
+	"parent": "clutter:block/trellises/horizontal_no_shade_trellis_parent",
+	"textures": {
+		"0": "block/acacia_log",
+		"1": "clutter:block/vines",
+		"3": "clutter:block/long_vines_hanging",
+		"particle": "block/acacia_log"
+	}
+}

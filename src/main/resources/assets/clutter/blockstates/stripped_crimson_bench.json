@@ -1,0 +1,64 @@
+{
+  "variants":{
+    "facing=north,leg_positions=all":{
+      "model":"clutter:block/benches/stripped_crimson/all"
+    },
+    "facing=south,leg_positions=all":{
+      "model":"clutter:block/benches/stripped_crimson/all",
+      "y": 180
+    },
+    "facing=east,leg_positions=all":{
+      "model":"clutter:block/benches/stripped_crimson/all",
+      "y": 90
+    },
+    "facing=west,leg_positions=all":{
+      "model":"clutter:block/benches/stripped_crimson/all",
+      "y": 270
+    },
+    "facing=north,leg_positions=east":{
+      "model":"clutter:block/benches/stripped_crimson/left"
+    },
+    "facing=south,leg_positions=east":{
+      "model":"clutter:block/benches/stripped_crimson/right",
+      "y": 180
+    },
+    "facing=north,leg_positions=west":{
+      "model":"clutter:block/benches/stripped_crimson/right"
+    },
+    "facing=south,leg_positions=west":{
+      "model":"clutter:block/benches/stripped_crimson/left",
+      "y": 180
+    },
+    "facing=north,leg_positions=none":{
+      "model":"clutter:block/benches/stripped_crimson/none"
+    },
+    "facing=south,leg_positions=none":{
+      "model":"clutter:block/benches/stripped_crimson/none",
+      "y": 180
+    },
+    "facing=east,leg_positions=none":{
+      "model":"clutter:block/benches/stripped_crimson/none",
+      "y": 90
+    },
+    "facing=west,leg_positions=none":{
+      "model":"clutter:block/benches/stripped_crimson/none",
+      "y": 270
+    },
+    "facing=east,leg_positions=north":{
+      "model":"clutter:block/benches/stripped_crimson/right",
+      "y": 90
+    },
+    "facing=west,leg_positions=north":{
+      "model":"clutter:block/benches/stripped_crimson/left",
+      "y": 270
+    },
+    "facing=east,leg_positions=south":{
+      "model":"clutter:block/benches/stripped_crimson/left",
+      "y": 90
+    },
+    "facing=west,leg_positions=south":{
+      "model":"clutter:block/benches/stripped_crimson/right",
+      "y": 270
+    }
+  }
+}

@@ -1,3 +1,3 @@
 {
-  "parent": "clutter:block/food_box"
+  "parent": "clutter:block/food_boxes/food_box"
 }

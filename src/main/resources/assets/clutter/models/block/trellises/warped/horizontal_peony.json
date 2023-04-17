@@ -1,0 +1,10 @@
+{
+	"parent": "clutter:block/trellises/horizontal_trellis_parent",
+	"textures": {
+		"0": "block/warped_stem",
+		"1": "clutter:block/peony",
+		"2": "clutter:block/peony_flowers",
+		"3": "clutter:block/hanging_peony",
+		"particle": "block/warped_stem"
+	}
+}

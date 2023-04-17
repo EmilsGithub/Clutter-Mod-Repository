@@ -1,0 +1,6 @@
+{
+  "parent": "clutter:block/chandeliers/silver_chandelier_on_chain",
+  "textures": {
+    "1": "block/lime_candle"
+  }
+}

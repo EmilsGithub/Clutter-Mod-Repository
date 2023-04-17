@@ -1,0 +1,19 @@
+{
+  "variants":{
+    "facing=north":{
+      "model":"clutter:block/chairs/dark_oak_chair"
+    },
+    "facing=south":{
+      "model":"clutter:block/chairs/dark_oak_chair",
+      "y": 180
+    },
+    "facing=east":{
+      "model":"clutter:block/chairs/dark_oak_chair",
+      "y": 90
+    },
+    "facing=west":{
+      "model":"clutter:block/chairs/dark_oak_chair",
+      "y": 270
+    }
+  }
+}
