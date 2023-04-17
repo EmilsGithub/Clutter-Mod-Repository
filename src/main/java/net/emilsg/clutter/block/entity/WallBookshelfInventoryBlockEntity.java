@@ -122,12 +122,12 @@ public class WallBookshelfInventoryBlockEntity extends LootableContainerBlockEnt
 
     @Override
     public boolean canInsert(int slot, ItemStack stack, @Nullable Direction dir) {
-        return stack.isIn(ModItemTags.BOOKSHELF_CAN_INSERT);
+        return true;
     }
 
     @Override
     public boolean canExtract(int slot, ItemStack stack, Direction dir) {
-        return stack.isIn(ModItemTags.BOOKSHELF_CAN_INSERT);
+        return true;
     }
 
     @Override

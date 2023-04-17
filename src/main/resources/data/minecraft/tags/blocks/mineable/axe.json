@@ -1,17 +1,16 @@
 {
   "replace": false,
   "values": [
-    "clutter:food_box",
-    "clutter:carrot_food_box",
-    "clutter:potato_food_box",
-    "clutter:beetroot_food_box",
-    "clutter:apple_food_box",
-    "clutter:wooden_mug",
-    "clutter:beer_mug",
+    "clutter:bonfire",
+    "#clutter:food_boxes",
+    "#clutter:benches",
     "#clutter:armchairs",
     "#clutter:bookshelves",
     "#clutter:window_sills",
     "#clutter:tables",
-    "#clutter:wooden_chairs"
+    "#clutter:wooden_chairs",
+    "#clutter:trellises",
+    "#clutter:lamps",
+    "#clutter:cupboards"
   ]
 }

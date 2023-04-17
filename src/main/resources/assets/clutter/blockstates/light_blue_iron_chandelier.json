@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "on_chain=false,lit=false": {
+      "model": "clutter:block/chandeliers/colors/light_blue_iron"
+    },
+    "on_chain=true,lit=false": {
+      "model": "clutter:block/chandeliers/colors/light_blue_iron_on_chain"
+    },
+    "on_chain=false,lit=true": {
+      "model": "clutter:block/chandeliers/colors/light_blue_iron_lit"
+    },
+    "on_chain=true,lit=true": {
+      "model": "clutter:block/chandeliers/colors/light_blue_iron_on_chain_lit"
+    }
+  }
+}

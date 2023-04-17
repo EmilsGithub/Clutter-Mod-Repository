@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " S ",
+    "SSS",
+    " S "
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:warped_slab"
+    }
+  },
+  "result": {
+    "item": "clutter:warped_trellis",
+    "count": 2
+  }
+}

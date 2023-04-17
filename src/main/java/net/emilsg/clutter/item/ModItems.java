@@ -3,11 +3,10 @@ package net.emilsg.clutter.item;
 import net.emilsg.clutter.Clutter;
 import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.item.custom.BeerItem;
+import net.emilsg.clutter.util.ModItemGroup;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.item.AliasedBlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
+import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
@@ -21,10 +20,10 @@ public class ModItems {
     public static final Item SILVER_INGOT = registerItem("silver_ingot", new Item(new FabricItemSettings()));
     public static final Item RAW_SILVER = registerItem("raw_silver", new Item(new FabricItemSettings()));
 
-    public static final Item HOPS = registerItem("hops", new Item(new FabricItemSettings()));
+    public static final Item HOPS = registerItem("hops", new Item(new FabricItemSettings().food(new FoodComponent.Builder().hunger(1).saturationModifier(0).build())));
     public static final Item HOPS_SEEDS = registerItem("hops_seeds", new AliasedBlockItem(ModBlocks.HOPS_CROP, new FabricItemSettings()));
 
-    public static final Item COTTON = registerItem("cotton", new Item(new FabricItemSettings()));
+    public static final Item COTTON = registerItem("cotton", new Item(new FabricItemSettings().food(new FoodComponent.Builder().hunger(1).saturationModifier(0).build())));
     public static final Item COTTON_SEEDS = registerItem("cotton_seeds", new AliasedBlockItem(ModBlocks.COTTON_CROP, new FabricItemSettings()));
 
     public static final Item BEER_MUG = registerItem("beer_mug", new BeerItem(ModBlocks.BEER_MUG, new FabricItemSettings()));

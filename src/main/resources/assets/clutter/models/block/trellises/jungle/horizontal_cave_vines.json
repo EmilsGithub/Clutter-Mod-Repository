@@ -1,0 +1,9 @@
+{
+	"parent": "clutter:block/trellises/horizontal_trellis_parent",
+	"textures": {
+		"0": "block/jungle_log",
+		"1": "clutter:block/cave_vines",
+		"3": "clutter:block/hanging_cave_vines",
+		"particle": "block/jungle_log"
+	}
+}

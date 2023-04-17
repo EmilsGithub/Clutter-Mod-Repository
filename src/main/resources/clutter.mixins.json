@@ -1,11 +1,13 @@
 {
-	"required": true,
-	"package": "net.emilsg.clutter.mixin",
-	"compatibilityLevel": "JAVA_17",
-	"mixins": [
-		"EnchantingTableMixin"
-	],
-	"injectors": {
-		"defaultRequire": 1
+  "required": true,
+  "package": "net.emilsg.clutter.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "BrewingRecipeRegistryMixin",
+    "EnchantingTableMixin",
+    "EntityMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
 	}
 }

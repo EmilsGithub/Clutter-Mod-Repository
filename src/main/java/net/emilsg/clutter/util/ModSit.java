@@ -1,6 +1,7 @@
 package net.emilsg.clutter.util;
 
 import net.emilsg.clutter.Clutter;
+import net.emilsg.clutter.block.custom.FloorSeatBlock;
 import net.emilsg.clutter.block.custom.SeatBlock;
 import net.emilsg.clutter.block.entity.SeatEntity;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
@@ -29,7 +30,7 @@ public class ModSit
                     .build());
 
     private static ActionResult spawnSeat(World world, PlayerEntity player, BlockState state, BlockPos blockPos, double yOffset, Vec3d comparePos) {
-        if (state.getBlock() instanceof SeatBlock) {
+        if (state.getBlock() instanceof SeatBlock || state.getBlock() instanceof FloorSeatBlock) {
             SeatEntity sit = SEAT.create(world);
             Vec3d pos = new Vec3d(blockPos.getX() + 0.5D, blockPos.getY() + yOffset, blockPos.getZ() + 0.5D);
             OCCUPIED.put(comparePos, player.getBlockPos());

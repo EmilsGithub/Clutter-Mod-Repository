@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#F#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:glow_berries"
+    },
+    "F": {
+      "item": "clutter:food_box"
+    }
+  },
+  "result": {
+    "item": "clutter:glow_berry_food_box"
+  }
+}

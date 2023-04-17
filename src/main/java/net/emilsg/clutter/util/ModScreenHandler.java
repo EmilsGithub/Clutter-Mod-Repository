@@ -18,24 +18,11 @@ public class ModScreenHandler extends GenericContainerScreenHandler {
         return new GenericContainerScreenHandler(ScreenHandlerType.GENERIC_9X1, syncId, playerInventory, inventory, 1);
     }
 
-    public static GenericContainerScreenHandler createGeneric9x2(int syncId, PlayerInventory playerInventory, Inventory inventory) {
-        return new GenericContainerScreenHandler(ScreenHandlerType.GENERIC_9X2, syncId, playerInventory, inventory, 2);
+    public static GenericContainerScreenHandler createGeneric9x3(int syncId, PlayerInventory playerInventory, Inventory inventory) {
+        return new GenericContainerScreenHandler(ScreenHandlerType.GENERIC_9X3, syncId, playerInventory, inventory, 3);
     }
 
     public static GenericContainerScreenHandler createGeneric3x3(int syncId, PlayerInventory playerInventory, Inventory inventory) {
         return new GenericContainerScreenHandler(ScreenHandlerType.GENERIC_3X3, syncId, playerInventory, inventory, 1);
     }
-
-    @Override
-    public boolean canInsertIntoSlot(ItemStack stack, Slot slot) {
-        if (slot.inventory == this.getInventory()) {
-            return stack.isIn(ModItemTags.BOOKSHELF_CAN_INSERT);
-        } else {
-            return false;
-        }
-    }
-
-
-
-
 }

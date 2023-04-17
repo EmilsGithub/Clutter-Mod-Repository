@@ -13,5 +13,4 @@ public class ModItemTags {
     public static final TagKey<Item> VEGGIES = TagKey.of(Registries.ITEM.getKey(), new Identifier("clutter", "veggies"));
     public static final TagKey<Item> CARBS = TagKey.of(Registries.ITEM.getKey(), new Identifier("clutter", "carbs"));
     public static final TagKey<Item> PLATE_PLACEABLE = TagKey.of(Registries.ITEM.getKey(), new Identifier("clutter", "plate_placeable"));
-    public static final TagKey<Item> BOOKSHELF_CAN_INSERT = TagKey.of(Registries.ITEM.getKey(), new Identifier("clutter", "bookshelf_can_insert"));
 }

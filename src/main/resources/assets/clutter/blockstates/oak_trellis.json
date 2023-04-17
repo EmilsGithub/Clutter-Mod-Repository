@@ -94,42 +94,112 @@
         "y": 270
       }
     ],
-    "under_block=false,facing=north,plant=peony":{
-      "model":"clutter:block/trellises/oak/peony"
-    },
-    "under_block=false,facing=south,plant=peony":{
-      "model":"clutter:block/trellises/oak/peony",
-      "y": 180
-    },
-    "under_block=false,facing=east,plant=peony":{
-      "model":"clutter:block/trellises/oak/peony",
-      "y": 90
-    },
-    "under_block=false,facing=west,plant=peony":{
-      "model":"clutter:block/trellises/oak/peony",
-      "y": 270
-    },
-    "under_block=false,facing=north,plant=lilac":{
-      "model":"clutter:block/trellises/oak/lilac"
-    },
-    "under_block=false,facing=south,plant=lilac":{
-      "model":"clutter:block/trellises/oak/lilac",
-      "y": 180
-    },
-    "under_block=false,facing=east,plant=lilac":{
-      "model":"clutter:block/trellises/oak/lilac",
-      "y": 90
-    },
-    "under_block=false,facing=west,plant=lilac":{
-      "model":"clutter:block/trellises/oak/lilac",
-      "y": 270
-    },
+    "under_block=false,facing=north,plant=peony":[
+      {
+        "model": "clutter:block/trellises/oak/peony"
+      },
+      {
+        "model": "clutter:block/trellises/oak/peony2"
+      },
+      {
+        "model": "clutter:block/trellises/oak/peony3"
+      }
+    ],
+    "under_block=false,facing=south,plant=peony":[
+      {
+        "model": "clutter:block/trellises/oak/peony",
+        "y": 180
+      },
+      {
+        "model": "clutter:block/trellises/oak/peony2",
+        "y": 180
+      },
+      {
+        "model": "clutter:block/trellises/oak/peony3",
+        "y": 180
+      }
+    ],
+    "under_block=false,facing=east,plant=peony":[
+      {
+        "model": "clutter:block/trellises/oak/peony",
+        "y": 90
+      },
+      {
+        "model": "clutter:block/trellises/oak/peony2",
+        "y": 90
+      },
+      {
+        "model": "clutter:block/trellises/oak/peony3",
+        "y": 90
+      }
+    ],
+    "under_block=false,facing=west,plant=peony":[
+      {
+        "model": "clutter:block/trellises/oak/peony",
+        "y": 270
+      },
+      {
+        "model": "clutter:block/trellises/oak/peony2",
+        "y": 270
+      },
+      {
+        "model": "clutter:block/trellises/oak/peony3",
+        "y": 270
+      }
+    ],
+    "under_block=false,facing=north,plant=lilac":[
+      {
+        "model": "clutter:block/trellises/oak/lilac"
+      },
+      {
+        "model": "clutter:block/trellises/oak/lilac2"
+      }
+    ],
+    "under_block=false,facing=south,plant=lilac":[
+      {
+        "model": "clutter:block/trellises/oak/lilac",
+        "y": 180
+      },
+      {
+        "model": "clutter:block/trellises/oak/lilac2",
+        "y": 180
+      }
+    ],
+    "under_block=false,facing=east,plant=lilac":[
+      {
+        "model": "clutter:block/trellises/oak/lilac",
+        "y": 90
+      },
+      {
+        "model": "clutter:block/trellises/oak/lilac2",
+        "y": 90
+      }
+    ],
+    "under_block=false,facing=west,plant=lilac":[
+      {
+        "model": "clutter:block/trellises/oak/lilac",
+        "y": 270
+      },
+      {
+        "model": "clutter:block/trellises/oak/lilac2",
+        "y": 270
+      }
+    ],
     "under_block=false,facing=north,plant=cave_vines":[
       {
         "model": "clutter:block/trellises/oak/cave_vines"
       },
       {
         "model": "clutter:block/trellises/oak/cave_vines2"
+      },
+      {
+        "model": "clutter:block/trellises/oak/cave_vines3"
+      },
+      {
+        "model": "clutter:block/trellises/oak/cave_vines4"
+      },
+      {
+        "model": "clutter:block/trellises/oak/cave_vines5"
       }
     ],
     "under_block=false,facing=south,plant=cave_vines":[
@@ -139,6 +209,18 @@
       },
       {
         "model": "clutter:block/trellises/oak/cave_vines2",
+        "y": 180
+      },
+      {
+        "model": "clutter:block/trellises/oak/cave_vines3",
+        "y": 180
+      },
+      {
+        "model": "clutter:block/trellises/oak/cave_vines4",
+        "y": 180
+      },
+      {
+        "model": "clutter:block/trellises/oak/cave_vines5",
         "y": 180
       }
     ],
@@ -150,6 +232,18 @@
       {
         "model": "clutter:block/trellises/oak/cave_vines2",
         "y": 90
+      },
+      {
+        "model": "clutter:block/trellises/oak/cave_vines3",
+        "y": 90
+      },
+      {
+        "model": "clutter:block/trellises/oak/cave_vines4",
+        "y": 90
+      },
+      {
+        "model": "clutter:block/trellises/oak/cave_vines5",
+        "y": 90
       }
     ],
     "under_block=false,facing=west,plant=cave_vines":[
@@ -159,6 +253,18 @@
       },
       {
         "model": "clutter:block/trellises/oak/cave_vines2",
+        "y": 270
+      },
+      {
+        "model": "clutter:block/trellises/oak/cave_vines3",
+        "y": 270
+      },
+      {
+        "model": "clutter:block/trellises/oak/cave_vines4",
+        "y": 270
+      },
+      {
+        "model": "clutter:block/trellises/oak/cave_vines5",
         "y": 270
       }
     ],
@@ -231,12 +337,25 @@
         "model": "clutter:block/trellises/oak/horizontal_rose_bush3"
       }
     ],
-    "under_block=true,plant=peony":{
-      "model":"clutter:block/trellises/oak/horizontal_peony"
-    },
-    "under_block=true,plant=lilac":{
-      "model":"clutter:block/trellises/oak/horizontal_lilac"
-    },
+    "under_block=true,plant=peony":[
+      {
+        "model": "clutter:block/trellises/oak/horizontal_peony"
+      },
+      {
+        "model": "clutter:block/trellises/oak/horizontal_peony2"
+      },
+      {
+        "model": "clutter:block/trellises/oak/horizontal_peony3"
+      }
+    ],
+    "under_block=true,plant=lilac":[
+      {
+        "model": "clutter:block/trellises/oak/horizontal_lilac"
+      },
+      {
+        "model": "clutter:block/trellises/oak/horizontal_lilac2"
+      }
+    ],
     "under_block=true,plant=cave_vines":[
       {
         "model": "clutter:block/trellises/oak/horizontal_cave_vines"

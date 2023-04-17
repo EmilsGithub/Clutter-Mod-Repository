@@ -1,9 +1,10 @@
 {
 	"parent": "clutter:block/trellises/horizontal_trellis_parent",
 	"textures": {
-		"0": "block/stripped_oak_log",
-		"1": "block/cave_vines_plant_lit",
-		"3": "block/cave_vines_plant_lit",
-		"particle": "block/stripped_oak_log"
+		"0": "block/oak_log",
+		"1": "clutter:block/cave_vines2",
+		"2": "clutter:block/cave_vines_glow_berries2",
+		"3": "clutter:block/hanging_cave_vines_lit",
+		"particle": "block/oak_log"
 	}
 }

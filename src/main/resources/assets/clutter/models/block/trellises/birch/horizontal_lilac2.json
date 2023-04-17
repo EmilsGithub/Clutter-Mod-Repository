@@ -1,0 +1,10 @@
+{
+	"parent": "clutter:block/trellises/horizontal_trellis_parent",
+	"textures": {
+		"0": "block/birch_log",
+		"1": "clutter:block/lilac2",
+		"2": "clutter:block/lilac_flowers2",
+		"3": "clutter:block/hanging_lilac2",
+		"particle": "block/birch_log"
+	}
+}

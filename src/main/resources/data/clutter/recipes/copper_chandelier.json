@@ -1,19 +1,19 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    " # ",
-    "CiC",
-    "CiC"
+    " N ",
+    "CIC",
+    "CIC"
   ],
   "key": {
-    "#": {
+    "I": {
+      "tag": "c:copper_ingots"
+    },
+    "N": {
       "tag": "c:copper_nuggets"
     },
     "C": {
-      "tag": "minecraft:candles"
-    },
-    "i": {
-      "tag": "c:copper_ingots"
+      "item": "minecraft:candle"
     }
   },
   "result": {

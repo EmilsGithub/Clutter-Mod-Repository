@@ -30,6 +30,10 @@ public class ChandelierBlock extends WaterloggableLitBlock {
     public static final BooleanProperty LIT = Properties.LIT;
     public static final BooleanProperty ON_CHAIN = BooleanProperty.of("on_chain");
 
+    private static final VoxelShape BOTTOM_SHAPE = Block.createCuboidShape(1.5, 1.0, 1.0, 14.5, 8.0, 15.0);
+    private static final VoxelShape CHAIN_SHAPE = Block.createCuboidShape(6.5, 1.0, 6.5, 9.5, 16.0, 9.5);
+    private static final VoxelShape CEILING_MOUNT_SHAPE = Block.createCuboidShape(5.5, 15.0, 5.5, 10.5, 16.0, 10.5);
+
     private static final Vec3d[] CANDLE_POSITIONS = {
             new Vec3d(0.1875, 0.59375, 0.5),
             new Vec3d(0.5, 0.59375, 0.8125),
@@ -69,10 +73,6 @@ public class ChandelierBlock extends WaterloggableLitBlock {
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        final VoxelShape BOTTOM_SHAPE = Block.createCuboidShape(1.5, 1.0, 1.0, 14.5, 8.0, 15.0);
-        final VoxelShape CHAIN_SHAPE = Block.createCuboidShape(6.5, 1.0, 6.5, 9.5, 16.0, 9.5);
-        final VoxelShape CEILING_MOUNT_SHAPE = Block.createCuboidShape(5.5, 15.0, 5.5, 10.5, 16.0, 10.5);
-
         if (state.get(ON_CHAIN)) {
             return VoxelShapes.union(BOTTOM_SHAPE, CHAIN_SHAPE);
         } else {

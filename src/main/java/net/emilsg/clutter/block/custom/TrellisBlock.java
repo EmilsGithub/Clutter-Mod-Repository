@@ -90,42 +90,42 @@ public class TrellisBlock extends Block implements Waterloggable {
         if (!world.isClient && hand.equals(Hand.MAIN_HAND)) {
             if (i != Plant.NONE) {
                 if (i == TrellisBlock.Plant.VINES) {
-                    world.setBlockState(pos, state.with(PLANT, TrellisBlock.Plant.NONE), Block.NOTIFY_ALL);
+                    world.setBlockState(pos, state.with(PLANT, TrellisBlock.Plant.NONE).with(LIT, false), Block.NOTIFY_ALL);
                     player.giveItemStack(new ItemStack(Blocks.VINE));
                     world.playSound(null, pos, SoundEvents.BLOCK_VINE_BREAK, SoundCategory.BLOCKS);
                     return ActionResult.SUCCESS;
                 } else if (i == TrellisBlock.Plant.ROSE_BUSH) {
-                    world.setBlockState(pos, state.with(PLANT, TrellisBlock.Plant.NONE), Block.NOTIFY_ALL);
+                    world.setBlockState(pos, state.with(PLANT, TrellisBlock.Plant.NONE).with(LIT, false), Block.NOTIFY_ALL);
                     player.giveItemStack(new ItemStack(Blocks.ROSE_BUSH));
                     world.playSound(null, pos, SoundEvents.BLOCK_VINE_BREAK, SoundCategory.BLOCKS);
                     return ActionResult.SUCCESS;
                 } else if (i == TrellisBlock.Plant.PEONY) {
-                    world.setBlockState(pos, state.with(PLANT, TrellisBlock.Plant.NONE), Block.NOTIFY_ALL);
+                    world.setBlockState(pos, state.with(PLANT, TrellisBlock.Plant.NONE).with(LIT, false), Block.NOTIFY_ALL);
                     player.giveItemStack(new ItemStack(Blocks.PEONY));
                     world.playSound(null, pos, SoundEvents.BLOCK_VINE_BREAK, SoundCategory.BLOCKS);
                     return ActionResult.SUCCESS;
                 } else if (i == TrellisBlock.Plant.LILAC) {
-                    world.setBlockState(pos, state.with(PLANT, TrellisBlock.Plant.NONE), Block.NOTIFY_ALL);
+                    world.setBlockState(pos, state.with(PLANT, TrellisBlock.Plant.NONE).with(LIT, false), Block.NOTIFY_ALL);
                     player.giveItemStack(new ItemStack(Blocks.LILAC));
                     world.playSound(null, pos, SoundEvents.BLOCK_VINE_BREAK, SoundCategory.BLOCKS);
                     return ActionResult.SUCCESS;
                 } else if (i == TrellisBlock.Plant.CAVE_VINES) {
-                    world.setBlockState(pos, state.with(PLANT, TrellisBlock.Plant.NONE), Block.NOTIFY_ALL);
+                    world.setBlockState(pos, state.with(PLANT, TrellisBlock.Plant.NONE).with(LIT, false), Block.NOTIFY_ALL);
                     player.giveItemStack(new ItemStack(Items.GLOW_BERRIES));
                     world.playSound(null, pos, SoundEvents.BLOCK_VINE_BREAK, SoundCategory.BLOCKS);
                     return ActionResult.SUCCESS;
                 } else if (i == TrellisBlock.Plant.WEEPING_VINES) {
-                    world.setBlockState(pos, state.with(PLANT, TrellisBlock.Plant.NONE), Block.NOTIFY_ALL);
+                    world.setBlockState(pos, state.with(PLANT, TrellisBlock.Plant.NONE).with(LIT, false), Block.NOTIFY_ALL);
                     player.giveItemStack(new ItemStack(Blocks.WEEPING_VINES));
                     world.playSound(null, pos, SoundEvents.BLOCK_VINE_BREAK, SoundCategory.BLOCKS);
                     return ActionResult.SUCCESS;
                 } else if (i == TrellisBlock.Plant.TWISTING_VINES) {
-                    world.setBlockState(pos, state.with(PLANT, TrellisBlock.Plant.NONE), Block.NOTIFY_ALL);
+                    world.setBlockState(pos, state.with(PLANT, TrellisBlock.Plant.NONE).with(LIT, false), Block.NOTIFY_ALL);
                     player.giveItemStack(new ItemStack(Blocks.TWISTING_VINES));
                     world.playSound(null, pos, SoundEvents.BLOCK_VINE_BREAK, SoundCategory.BLOCKS);
                     return ActionResult.SUCCESS;
                 } else if (i == TrellisBlock.Plant.GLOW_LICHEN) {
-                    world.setBlockState(pos, state.with(PLANT, TrellisBlock.Plant.NONE), Block.NOTIFY_ALL);
+                    world.setBlockState(pos, state.with(PLANT, TrellisBlock.Plant.NONE).with(LIT, false), Block.NOTIFY_ALL);
                     player.giveItemStack(new ItemStack(Blocks.GLOW_LICHEN));
                     world.playSound(null, pos, SoundEvents.BLOCK_VINE_BREAK, SoundCategory.BLOCKS);
                     return ActionResult.SUCCESS;
@@ -134,21 +134,21 @@ public class TrellisBlock extends Block implements Waterloggable {
             } else if (stack.isIn(ModItemTags.TRELLIS_ITEMS) && state.get(PLANT) == TrellisBlock.Plant.NONE) {
                 Item item = stack.getItem();
                 if (item == Items.VINE) {
-                    world.setBlockState(pos, state.with(PLANT, TrellisBlock.Plant.VINES), Block.NOTIFY_ALL);
+                    world.setBlockState(pos, state.with(PLANT, TrellisBlock.Plant.VINES).with(LIT, false), Block.NOTIFY_ALL);
                 } else if (item == Items.ROSE_BUSH) {
-                    world.setBlockState(pos, state.with(PLANT, TrellisBlock.Plant.ROSE_BUSH), Block.NOTIFY_ALL);
+                    world.setBlockState(pos, state.with(PLANT, TrellisBlock.Plant.ROSE_BUSH).with(LIT, false), Block.NOTIFY_ALL);
                 } else if (item == Items.PEONY) {
-                    world.setBlockState(pos, state.with(PLANT, TrellisBlock.Plant.PEONY), Block.NOTIFY_ALL);
+                    world.setBlockState(pos, state.with(PLANT, TrellisBlock.Plant.PEONY).with(LIT, false), Block.NOTIFY_ALL);
                 } else if (item == Items.LILAC) {
-                    world.setBlockState(pos, state.with(PLANT, TrellisBlock.Plant.LILAC), Block.NOTIFY_ALL);
+                    world.setBlockState(pos, state.with(PLANT, TrellisBlock.Plant.LILAC).with(LIT, false), Block.NOTIFY_ALL);
                 } else if (item == Items.GLOW_BERRIES) {
-                    world.setBlockState(pos, state.with(PLANT, TrellisBlock.Plant.CAVE_VINES), Block.NOTIFY_ALL);
+                    world.setBlockState(pos, state.with(PLANT, TrellisBlock.Plant.CAVE_VINES).with(LIT, true), Block.NOTIFY_ALL);
                 } else if (item == Items.WEEPING_VINES) {
-                    world.setBlockState(pos, state.with(PLANT, TrellisBlock.Plant.WEEPING_VINES), Block.NOTIFY_ALL);
+                    world.setBlockState(pos, state.with(PLANT, TrellisBlock.Plant.WEEPING_VINES).with(LIT, false), Block.NOTIFY_ALL);
                 } else if (item == Items.TWISTING_VINES) {
-                    world.setBlockState(pos, state.with(PLANT, TrellisBlock.Plant.TWISTING_VINES), Block.NOTIFY_ALL);
+                    world.setBlockState(pos, state.with(PLANT, TrellisBlock.Plant.TWISTING_VINES).with(LIT, false), Block.NOTIFY_ALL);
                 } else if (item == Items.GLOW_LICHEN) {
-                    world.setBlockState(pos, state.with(PLANT, TrellisBlock.Plant.GLOW_LICHEN), Block.NOTIFY_ALL);
+                    world.setBlockState(pos, state.with(PLANT, TrellisBlock.Plant.GLOW_LICHEN).with(LIT, true), Block.NOTIFY_ALL);
                 }
                 if (!player.getAbilities().creativeMode) {
                     stack.decrement(1);
@@ -181,7 +181,7 @@ public class TrellisBlock extends Block implements Waterloggable {
             if (neighborState.isIn(ModBlockTags.TRELLISES) && neighborState.get(PLANT) != TrellisBlock.Plant.NONE) {
                 // If there is a neighboring block with a plant, set the block's plant state randomly
                 if (world.random.nextFloat() < 0.1f) {
-                    world.setBlockState(pos, state.with(PLANT, neighborState.get(PLANT)), Block.NOTIFY_ALL);
+                    world.setBlockState(pos, state.with(PLANT, neighborState.get(PLANT)).with(LIT, neighborState.get(LIT)), Block.NOTIFY_ALL);
                 }
                 break; // Stop checking neighbors
             }
@@ -191,8 +191,7 @@ public class TrellisBlock extends Block implements Waterloggable {
 
     @Override
     public boolean hasRandomTicks(BlockState state) {
-        TrellisBlock.Plant plant = state.get(TrellisBlock.PLANT);
-        return plant == TrellisBlock.Plant.NONE || plant == TrellisBlock.Plant.GLOW_LICHEN || plant == TrellisBlock.Plant.CAVE_VINES;
+        return state.get(TrellisBlock.PLANT) == TrellisBlock.Plant.NONE;
     }
 
     @Override
@@ -204,15 +203,6 @@ public class TrellisBlock extends Block implements Waterloggable {
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (state.get(TrellisBlock.PLANT) == TrellisBlock.Plant.NONE) {
             updatePlantState(world, pos);
-        }
-    }
-
-    @Override
-    public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-        if (state.get(TrellisBlock.PLANT) == TrellisBlock.Plant.GLOW_LICHEN || state.get(TrellisBlock.PLANT) == TrellisBlock.Plant.CAVE_VINES) {
-            world.setBlockState(pos, state.with(TrellisBlock.LIT, true), Block.NOTIFY_ALL);
-        } else {
-            world.setBlockState(pos, state.with(TrellisBlock.LIT, false), Block.NOTIFY_ALL);
         }
     }
 

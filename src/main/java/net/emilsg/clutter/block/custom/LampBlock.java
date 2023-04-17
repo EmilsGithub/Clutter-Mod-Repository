@@ -38,7 +38,7 @@ public class LampBlock extends Block implements Waterloggable {
     );
 
     public LampBlock(Settings settings) {
-        super(settings.luminance(state -> state.get(LIT) ? 12 : 0));
+        super(settings);
         this.setDefaultState(this.getDefaultState().with(LIT, false).with(WATERLOGGED, false));
     }
 

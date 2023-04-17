@@ -1,0 +1,8 @@
+{
+  "parent": "clutter:block/wall_candles/wall_candle_parent",
+  "textures": {
+    "0": "block/candle",
+    "1": "block/gold_block",
+    "particle": "block/gold_block"
+  }
+}

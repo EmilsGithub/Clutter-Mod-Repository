@@ -1,6 +1,7 @@
 package net.emilsg.clutter.block.entity;
 
 import net.emilsg.clutter.Clutter;
+import net.emilsg.clutter.block.ModBlocks;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.registry.Registries;
@@ -11,8 +12,10 @@ import static net.emilsg.clutter.block.ModBlocks.*;
 
 public class ModBlockEntities {
     public static BlockEntityType<ChimneyBlockEntity> CHIMNEY;
+    public static BlockEntityType<BonfireBlockEntity> BONFIRE;
     public static BlockEntityType<WallBookshelfInventoryBlockEntity> WALL_BOOKSHELF;
     public static BlockEntityType<WallCupboardInventoryBlockEntity> WALL_CUPBOARD;
+    public static BlockEntityType<CupboardInventoryBlockEntity> CUPBOARD;
 
     public static void registerBlockEntities() {
         CHIMNEY = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "chimney"),
@@ -47,6 +50,30 @@ public class ModBlockEntities {
 
         WALL_CUPBOARD = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "wall_cupboard"),
                 FabricBlockEntityTypeBuilder.create(WallCupboardInventoryBlockEntity::new,
-                        OAK_WALL_CUPBOARD).build());
+                        OAK_WALL_CUPBOARD,
+                        DARK_OAK_WALL_CUPBOARD,
+                        BIRCH_WALL_CUPBOARD,
+                        JUNGLE_WALL_CUPBOARD,
+                        ACACIA_WALL_CUPBOARD,
+                        SPRUCE_WALL_CUPBOARD,
+                        CRIMSON_WALL_CUPBOARD,
+                        WARPED_WALL_CUPBOARD,
+                        MANGROVE_WALL_CUPBOARD).build());
+
+        CUPBOARD = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "cupboard"),
+                FabricBlockEntityTypeBuilder.create(CupboardInventoryBlockEntity::new,
+                        OAK_CUPBOARD,
+                        DARK_OAK_CUPBOARD,
+                        BIRCH_CUPBOARD,
+                        JUNGLE_CUPBOARD,
+                        ACACIA_CUPBOARD,
+                        SPRUCE_CUPBOARD,
+                        CRIMSON_CUPBOARD,
+                        WARPED_CUPBOARD,
+                        MANGROVE_CUPBOARD).build());
+
+        BONFIRE = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "bonfire"),
+                FabricBlockEntityTypeBuilder.create(BonfireBlockEntity::new,
+                        ModBlocks.BONFIRE).build());
     }
 }

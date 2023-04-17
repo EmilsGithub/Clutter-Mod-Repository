@@ -1,8 +1,9 @@
 {
 	"parent": "clutter:block/trellises/trellis_parent",
 	"textures": {
-		"0": "block/stripped_oak_log",
-		"1": "block/lilac_bottom",
-		"particle": "block/stripped_oak_log"
+		"0": "block/oak_log",
+		"1": "clutter:block/lilac",
+		"2": "clutter:block/lilac_flowers",
+		"particle": "block/oak_log"
 	}
 }

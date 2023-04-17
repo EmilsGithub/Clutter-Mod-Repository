@@ -1,7 +1,7 @@
 {	"parent": "clutter:block/chandeliers/copper_chandelier_on_chain",
 	"textures": {
 		"0": "clutter:block/oxidized_copper_chandelier_chain",
-		"1": "block/candle_lit",
+		"1": "block/candle",
 		"2": "block/oxidized_copper",
 		"particle": "block/oxidized_copper"
 	}

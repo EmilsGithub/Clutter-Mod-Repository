@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "W",
+    "G",
+    "S"
+  ],
+  "key": {
+    "W": {
+      "item": "clutter:magenta_lamp"
+    },
+    "G": {
+      "item": "minecraft:stick"
+    },
+    "S": {
+      "tag": "minecraft:wooden_slabs"
+    }
+  },
+  "result": {
+    "item": "clutter:tall_magenta_lamp",
+    "count": 1
+  }
+}

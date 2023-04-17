@@ -1,9 +1,11 @@
 package net.emilsg.clutter.item.custom;
 
+import net.emilsg.clutter.effect.ModEffects;
 import net.emilsg.clutter.item.ModItems;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.Block;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
@@ -30,12 +32,22 @@ public class BeerItem extends AliasedBlockItem {
         PlayerEntity playerEntity;
         PlayerEntity playerEntity2 = playerEntity = user instanceof PlayerEntity ? (PlayerEntity)user : null;
         if (playerEntity instanceof ServerPlayerEntity) {
-            Criteria.CONSUME_ITEM.trigger((ServerPlayerEntity)playerEntity, stack);
+            Criteria.CONSUME_ITEM.trigger((ServerPlayerEntity) playerEntity, stack);
         }
         if (!world.isClient) {
-            user.addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 300, 0));
-            user.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 300, 0));
-            user.addStatusEffect(new StatusEffectInstance(StatusEffects.SATURATION, 4, 0));
+            extendOrApplyEffect(user, ModEffects.VULNERABILITY, 300, 0);
+            extendOrApplyEffect(user, StatusEffects.STRENGTH, 300, 0);
+
+            boolean shouldApplyNausea = (user.hasStatusEffect(ModEffects.VULNERABILITY) && user.getStatusEffect(ModEffects.VULNERABILITY).getDuration() > 600)
+                    || (user.hasStatusEffect(StatusEffects.STRENGTH) && user.getStatusEffect(StatusEffects.STRENGTH).getDuration() > 600);
+
+            if (shouldApplyNausea) {
+                extendOrApplyEffect(user, StatusEffects.NAUSEA, 300, 0);
+            }
+
+            if (user instanceof PlayerEntity) {
+                ((PlayerEntity) user).getHungerManager().add(4, 0.5F);
+            }
         }
         if (playerEntity != null) {
             playerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
@@ -53,6 +65,17 @@ public class BeerItem extends AliasedBlockItem {
         }
         user.emitGameEvent(GameEvent.DRINK);
         return stack;
+    }
+
+    private void extendOrApplyEffect(LivingEntity user, StatusEffect effect, int duration, int amplifier) {
+        StatusEffectInstance currentEffect = user.getStatusEffect(effect);
+
+        if (currentEffect != null) {
+            int newDuration = currentEffect.getDuration() + duration;
+            user.addStatusEffect(new StatusEffectInstance(effect, newDuration, amplifier));
+        } else {
+            user.addStatusEffect(new StatusEffectInstance(effect, duration, amplifier));
+        }
     }
 
     @Override

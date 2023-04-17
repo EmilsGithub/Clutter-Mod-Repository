@@ -6,7 +6,7 @@ import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 
 public class ModBlockTags {
-    public static final TagKey<Block> FLAMMABLE_DEFAULT = TagKey.of(Registries.BLOCK.getKey(), new Identifier("clutter", "flammable_default"));
+    public static final TagKey<Block> FLAMMABLE= TagKey.of(Registries.BLOCK.getKey(), new Identifier("clutter", "flammable"));
 
     public static final TagKey<Block> ARMCHAIRS = TagKey.of(Registries.BLOCK.getKey(), new Identifier("clutter", "armchairs"));
     public static final TagKey<Block> FLOOR_SEATING = TagKey.of(Registries.BLOCK.getKey(), new Identifier("clutter", "floor_seating"));

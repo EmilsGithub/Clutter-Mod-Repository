@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "NIN",
+    " I "
+  ],
+  "key": {
+    "I": {
+      "tag": "c:silver_ingots"
+    },
+    "N": {
+      "tag": "c:silver_nuggets"
+    },
+    "C": {
+      "item": "minecraft:red_candle"
+    }
+  },
+  "result": {
+    "item": "clutter:red_silver_candelabra",
+    "count": 1
+  }
+}

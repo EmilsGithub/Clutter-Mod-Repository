@@ -86,11 +86,15 @@ public class WaterloggableLitBlock extends Block implements Waterloggable {
             return ActionResult.success(world.isClient);
         } else if (player.getAbilities().allowModifyWorld && player.getStackInHand(hand).isOf(Items.FLINT_AND_STEEL) && !state.get(LIT)){
             WaterloggableLitBlock.setLit(world, state, pos, true);
-            player.getStackInHand(hand).damage(1, player, playerEntity -> playerEntity.sendToolBreakStatus(hand));
+            if (!player.getAbilities().creativeMode) {
+                player.getStackInHand(hand).damage(1, player, playerEntity -> playerEntity.sendToolBreakStatus(hand));
+            }
             return ActionResult.success(world.isClient);
         } else if (player.getAbilities().allowModifyWorld && player.getStackInHand(hand).isOf(Items.FIRE_CHARGE) && !state.get(LIT) && !player.getAbilities().creativeMode) {
             WaterloggableLitBlock.setLit(world, state, pos, true);
-            player.getStackInHand(hand).decrement(1);
+            if (!player.getAbilities().creativeMode) {
+                player.getStackInHand(hand).decrement(1);
+            }
             return ActionResult.success(world.isClient);
         } else if (player.getAbilities().allowModifyWorld && player.getStackInHand(hand).isOf(Items.FIRE_CHARGE) && !state.get(LIT) && player.getAbilities().creativeMode) {
             WaterloggableLitBlock.setLit(world, state, pos, true);

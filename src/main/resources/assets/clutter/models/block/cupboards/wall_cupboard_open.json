@@ -1,12 +1,12 @@
 {
 	"credit": "Made with Blockbench",
-	"ambientocclusion": false,
+	"ambientocclusion": true,
 	"textures": {
-		"2": "block/stripped_oak_log",
+		"2": "block/oak_planks",
 		"3": "clutter:block/oak_cupboard_inside",
 		"4": "clutter:block/oak_cupboard_doors",
 		"5": "block/cauldron_side",
-		"particle": "block/stripped_oak_log"
+		"particle": "block/oak_planks"
 	},
 	"elements": [
 		{

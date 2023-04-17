@@ -3,7 +3,7 @@
 	"ambientocclusion": false,
 	"textures": {
 		"0": "clutter:block/iron_chandelier_chain",
-		"1": "block/candle_lit",
+		"1": "block/candle",
 		"2": "clutter:block/dark_iron_block",
 		"particle": "clutter:block/dark_iron_block"
 	},

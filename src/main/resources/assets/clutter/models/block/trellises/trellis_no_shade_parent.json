@@ -2,10 +2,10 @@
 	"credit": "Made with Blockbench",
 	"ambientocclusion": false,
 	"textures": {
-		"0": "block/stripped_oak_log",
+		"0": "block/oak_log",
 		"1": "clutter:block/empty",
 		"2": "clutter:block/empty",
-		"particle": "block/stripped_oak_log"
+		"particle": "block/oak_log"
 	},
 	"elements": [
 		{

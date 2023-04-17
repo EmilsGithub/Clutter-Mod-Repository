@@ -1,4 +1,5 @@
 {
+  "replace": false,
   "values": [
     "clutter:red_wall_mushrooms",
     "clutter:brown_wall_mushrooms",

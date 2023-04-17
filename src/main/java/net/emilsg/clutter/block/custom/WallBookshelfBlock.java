@@ -42,6 +42,10 @@ public class WallBookshelfBlock extends BlockWithEntity implements Waterloggable
         protected static final VoxelShape SOUTH_SHAPE = Block.createCuboidShape(0.0, 0.0, 8.0, 16.0, 12.0, 16.0);
         protected static final VoxelShape EAST_SHAPE = Block.createCuboidShape(8.0, 0.0, 0.0, 16.0, 12.0, 16.0);
         protected static final VoxelShape WEST_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 8.0, 12.0, 16.0);
+        protected static final VoxelShape NORTH_SHAPE_EMPTY = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 4.0, 8.0);
+        protected static final VoxelShape SOUTH_SHAPE_EMPTY = Block.createCuboidShape(0.0, 0.0, 8.0, 16.0, 4.0, 16.0);
+        protected static final VoxelShape EAST_SHAPE_EMPTY = Block.createCuboidShape(8.0, 0.0, 0.0, 16.0, 4.0, 16.0);
+        protected static final VoxelShape WEST_SHAPE_EMPTY = Block.createCuboidShape(0.0, 0.0, 0.0, 8.0, 4.0, 16.0);
         public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
         private static final BooleanProperty LIT = Properties.LIT;
         public static final int MAX_MODEL = 6;
@@ -115,6 +119,15 @@ public class WallBookshelfBlock extends BlockWithEntity implements Waterloggable
         @Override
         public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
                 Direction i = state.get(FACING);
+                if (state.get(CURRENT_MODEL) == 6) {
+                        return switch (i) {
+                                case NORTH -> NORTH_SHAPE_EMPTY;
+                                case SOUTH -> SOUTH_SHAPE_EMPTY;
+                                case EAST -> EAST_SHAPE_EMPTY;
+                                case WEST -> WEST_SHAPE_EMPTY;
+                                default -> VoxelShapes.empty();
+                        };
+                }
                 return switch (i) {
                         case NORTH -> NORTH_SHAPE;
                         case SOUTH -> SOUTH_SHAPE;
