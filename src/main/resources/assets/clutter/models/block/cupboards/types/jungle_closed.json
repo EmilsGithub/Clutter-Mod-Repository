@@ -1,0 +1,10 @@
+{
+	"parent": "clutter:block/cupboards/cupboard_closed",
+	"textures": {
+		"2": "block/jungle_planks",
+		"3": "clutter:block/jungle_cupboard_inside",
+		"4": "clutter:block/jungle_cupboard_doors",
+		"5": "block/cauldron_side",
+		"particle": "block/jungle_planks"
+	}
+}

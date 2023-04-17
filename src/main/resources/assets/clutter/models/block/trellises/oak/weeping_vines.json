@@ -1,0 +1,9 @@
+{
+	"parent": "clutter:block/trellises/trellis_parent",
+	"textures": {
+		"0": "block/oak_log",
+		"1": "clutter:block/weeping_vines",
+		"2": "clutter:block/weeping_vines_mushrooms",
+		"particle": "block/oak_log"
+	}
+}

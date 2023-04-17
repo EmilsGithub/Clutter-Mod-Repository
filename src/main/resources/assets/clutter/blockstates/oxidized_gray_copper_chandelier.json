@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "on_chain=false,lit=false": {
+      "model": "clutter:block/chandeliers/colors/gray_oxidized_copper"
+    },
+    "on_chain=true,lit=false": {
+      "model": "clutter:block/chandeliers/colors/gray_oxidized_copper_on_chain"
+    },
+    "on_chain=false,lit=true": {
+      "model": "clutter:block/chandeliers/colors/gray_oxidized_copper_lit"
+    },
+    "on_chain=true,lit=true": {
+      "model": "clutter:block/chandeliers/colors/gray_oxidized_copper_on_chain_lit"
+    }
+  }
+}

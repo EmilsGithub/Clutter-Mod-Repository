@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " N ",
+    "CIC",
+    "CIC"
+  ],
+  "key": {
+    "I": {
+      "tag": "c:silver_ingots"
+    },
+    "N": {
+      "tag": "c:silver_nuggets"
+    },
+    "C": {
+      "item": "minecraft:lime_candle"
+    }
+  },
+  "result": {
+    "item": "clutter:lime_silver_chandelier",
+    "count": 1
+  }
+}

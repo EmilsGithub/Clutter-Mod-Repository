@@ -1,0 +1,38 @@
+{
+  "replace": false,
+  "values": [
+    "clutter:white_lamp",
+    "clutter:light_gray_lamp",
+    "clutter:gray_lamp",
+    "clutter:black_lamp",
+    "clutter:brown_lamp",
+    "clutter:red_lamp",
+    "clutter:orange_lamp",
+    "clutter:yellow_lamp",
+    "clutter:lime_lamp",
+    "clutter:green_lamp",
+    "clutter:cyan_lamp",
+    "clutter:light_blue_lamp",
+    "clutter:blue_lamp",
+    "clutter:purple_lamp",
+    "clutter:magenta_lamp",
+    "clutter:pink_lamp",
+
+    "clutter:tall_white_lamp",
+    "clutter:tall_light_gray_lamp",
+    "clutter:tall_gray_lamp",
+    "clutter:tall_black_lamp",
+    "clutter:tall_brown_lamp",
+    "clutter:tall_red_lamp",
+    "clutter:tall_orange_lamp",
+    "clutter:tall_yellow_lamp",
+    "clutter:tall_lime_lamp",
+    "clutter:tall_green_lamp",
+    "clutter:tall_cyan_lamp",
+    "clutter:tall_light_blue_lamp",
+    "clutter:tall_blue_lamp",
+    "clutter:tall_purple_lamp",
+    "clutter:tall_magenta_lamp",
+    "clutter:tall_pink_lamp"
+  ]
+}

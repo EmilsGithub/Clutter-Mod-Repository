@@ -3,7 +3,9 @@
 	"package": "net.emilsg.clutter.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
-		"EnchantingTableMixin"
+		"EnchantingTableMixin",
+		"BrewingRecipeRegistryMixin",
+		"EntityMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

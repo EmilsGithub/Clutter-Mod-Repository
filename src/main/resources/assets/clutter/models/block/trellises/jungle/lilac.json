@@ -1,0 +1,9 @@
+{
+	"parent": "clutter:block/trellises/trellis_parent",
+	"textures": {
+		"0": "block/jungle_log",
+		"1": "clutter:block/lilac",
+		"2": "clutter:block/lilac_flowers",
+		"particle": "block/jungle_log"
+	}
+}

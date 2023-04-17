@@ -1,0 +1,34 @@
+{
+  "variants":{
+    "facing=north,on=true":{
+      "model":"clutter:block/bathroom_decoration/oak/sink_on"
+    },
+    "facing=south,on=true":{
+      "model":"clutter:block/bathroom_decoration/oak/sink_on",
+      "y": 180
+    },
+    "facing=east,on=true":{
+      "model":"clutter:block/bathroom_decoration/oak/sink_on",
+      "y": 90
+    },
+    "facing=west,on=true":{
+      "model":"clutter:block/bathroom_decoration/oak/sink_on",
+      "y": 270
+    },
+    "facing=north,on=false":{
+      "model":"clutter:block/bathroom_decoration/oak/sink"
+    },
+    "facing=south,on=false":{
+      "model":"clutter:block/bathroom_decoration/oak/sink",
+      "y": 180
+    },
+    "facing=east,on=false":{
+      "model":"clutter:block/bathroom_decoration/oak/sink",
+      "y": 90
+    },
+    "facing=west,on=false":{
+      "model":"clutter:block/bathroom_decoration/oak/sink",
+      "y": 270
+    }
+  }
+}

@@ -1,19 +1,19 @@
 {
   "variants": {
     "facing=north": {
-      "model": "clutter:block/food_box",
-      "y": 180
+      "model": "clutter:block/food_boxes/food_box"
     },
     "facing=south": {
-      "model": "clutter:block/food_box"
+      "model": "clutter:block/food_boxes/food_box",
+      "y": 180
     },
     "facing=west": {
-      "model": "clutter:block/food_box",
-      "y": 90
+      "model": "clutter:block/food_boxes/food_box",
+      "y": 270
     },
     "facing=east": {
-      "model": "clutter:block/food_box",
-      "y": 270
+      "model": "clutter:block/food_boxes/food_box",
+      "y": 90
     }
   }
 }

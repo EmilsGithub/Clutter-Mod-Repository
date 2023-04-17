@@ -1,0 +1,19 @@
+{
+  "variants":{
+    "facing=north":{
+      "model":"clutter:block/plushies/ocelot_plushie"
+    },
+    "facing=south":{
+      "model":"clutter:block/plushies/ocelot_plushie",
+      "y": 180
+    },
+    "facing=east":{
+      "model":"clutter:block/plushies/ocelot_plushie",
+      "y": 90
+    },
+    "facing=west":{
+      "model":"clutter:block/plushies/ocelot_plushie",
+      "y": 270
+    }
+  }
+}

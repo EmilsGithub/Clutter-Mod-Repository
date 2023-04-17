@@ -1,0 +1,6 @@
+{
+  "parent": "clutter:block/lamps/tall_lamp_item",
+  "textures": {
+    "1": "block/purple_wool"
+  }
+}

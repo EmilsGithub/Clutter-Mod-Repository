@@ -1,0 +1,8 @@
+{
+	"parent": "clutter:block/trellises/horizontal_trellis_parent",
+	"textures": {
+		"0": "block/crimson_stem",
+		"1": "block/glow_lichen",
+		"particle": "block/crimson_stem"
+	}
+}

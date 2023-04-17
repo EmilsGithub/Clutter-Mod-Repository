@@ -60,7 +60,6 @@ public class ChimneyBlock extends BlockWithEntity implements FluidFillable, Wate
         World worldAccess = ctx.getWorld();
         boolean bl = worldAccess.getFluidState(blockPos = ctx.getBlockPos()).getFluid() == Fluids.WATER;
         return (BlockState)this.getDefaultState().with(WATERLOGGED, bl);
-
     }
 
     @Override
@@ -108,19 +107,15 @@ public class ChimneyBlock extends BlockWithEntity implements FluidFillable, Wate
     @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
         if(state.get(OPEN)) {
-            ChimneyBlock.spawnSmokeParticles(world, pos, true, state);
+            ChimneyBlock.spawnSmokeParticles(world, pos, state);
         }
     }
 
-    public static void spawnSmokeParticles(World world, BlockPos pos, boolean lotsOfSmoke, BlockState state) {
+    public static void spawnSmokeParticles(World world, BlockPos pos, BlockState state) {
         Random random = world.getRandom();
-        DefaultParticleType defaultParticleType = ParticleTypes.CAMPFIRE_COSY_SMOKE;
             if (!state.get(WATERLOGGED)) {
-                world.addImportantParticle(defaultParticleType, true, (double) pos.getX() + 0.5 + random.nextDouble() / 3.0 * (double) (random.nextBoolean() ? 1 : -1), (double) pos.getY() + random.nextDouble() + random.nextDouble() + 0.5, (double) pos.getZ() + 0.5 + random.nextDouble() / 3.0 * (double) (random.nextBoolean() ? 1 : -1), 0.0, 0.07, 0.0);
-            if (lotsOfSmoke) {
-                world.addParticle(ParticleTypes.SMOKE, (double) pos.getX() + 0.5 + random.nextDouble() / 4.0 * (double) (random.nextBoolean() ? 1 : -1), (double) pos.getY() + 0.4, (double) pos.getZ() + 0.5 + random.nextDouble() / 4.0 * (double) (random.nextBoolean() ? 1 : -1), 0.0, 0.005, 0.0);
+                world.addImportantParticle(ParticleTypes.CAMPFIRE_SIGNAL_SMOKE, true, (double) pos.getX() + 0.5 + random.nextDouble() / 3.0 * (double) (random.nextBoolean() ? 1 : -1), (double) pos.getY() + random.nextDouble() + random.nextDouble() + 0.65, (double) pos.getZ() + 0.5 + random.nextDouble() / 3.0 * (double) (random.nextBoolean() ? 1 : -1), random.nextDouble() * 0.02 - 0.01, 0.07, random.nextDouble() * 0.02 - 0.01);
             }
-        }
     }
 
     @Override

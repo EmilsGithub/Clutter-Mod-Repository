@@ -1,0 +1,7 @@
+{
+	"parent": "clutter:block/trellises/trellis_parent",
+	"textures": {
+		"0": "block/crimson_stem",
+		"particle": "block/crimson_stem"
+	}
+}

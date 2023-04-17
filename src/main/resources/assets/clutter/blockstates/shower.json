@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=north,half=upper": {
+      "model": "clutter:block/bathroom_decoration/shower_head",
+      "y": 180
+    },
+    "facing=south,half=upper": {
+      "model": "clutter:block/bathroom_decoration/shower_head"
+    },
+    "facing=west,half=upper": {
+      "model": "clutter:block/bathroom_decoration/shower_head",
+      "y": 90
+    },
+    "facing=east,half=upper": {
+      "model": "clutter:block/bathroom_decoration/shower_head",
+      "y": 270
+    },
+    "facing=north,half=lower": {
+      "model": "clutter:block/bathroom_decoration/shower_tap",
+      "y": 180
+    },
+    "facing=south,half=lower": {
+      "model": "clutter:block/bathroom_decoration/shower_tap"
+    },
+    "facing=west,half=lower": {
+      "model": "clutter:block/bathroom_decoration/shower_tap",
+      "y": 90
+    },
+    "facing=east,half=lower": {
+      "model": "clutter:block/bathroom_decoration/shower_tap",
+      "y": 270
+    }
+  }
+}

@@ -1,6 +1,9 @@
 package net.emilsg.clutter.block.custom;
 
-import net.minecraft.block.*;
+import net.minecraft.block.BlockSetType;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Oxidizable;
+import net.minecraft.block.TrapdoorBlock;
 import net.minecraft.block.enums.BlockHalf;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
@@ -16,16 +19,17 @@ public class OxidizableTrapdoorBlock extends TrapdoorBlock implements Oxidizable
     private final OxidationLevel oxidationLevel;
 
     public OxidizableTrapdoorBlock(OxidationLevel oxidationLevel, Settings settings, BlockSetType blockSetType) {
-        super(settings, blockSetType );
+        super(settings, blockSetType);
         this.oxidationLevel = oxidationLevel;
     }
+
 
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         BlockState blockState = this.getDefaultState();
         FluidState fluidState = ctx.getWorld().getFluidState(ctx.getBlockPos());
         Direction direction = ctx.getSide();
-        blockState = ctx.canReplaceExisting() || !direction.getAxis().isHorizontal() ? (BlockState)((BlockState)blockState.with(FACING, ctx.getPlayerLookDirection())).with(HALF, direction == Direction.UP ? BlockHalf.BOTTOM : BlockHalf.TOP) : (BlockState)((BlockState)blockState.with(FACING, direction)).with(HALF, ctx.getHitPos().y - (double)ctx.getBlockPos().getY() > 0.5 ? BlockHalf.TOP : BlockHalf.BOTTOM);
+        blockState = ctx.canReplaceExisting() || !direction.getAxis().isHorizontal() ? (BlockState)((BlockState)blockState.with(FACING, ctx.getHorizontalPlayerFacing())).with(HALF, direction == Direction.UP ? BlockHalf.BOTTOM : BlockHalf.TOP) : (BlockState)((BlockState)blockState.with(FACING, direction)).with(HALF, ctx.getHitPos().y - (double)ctx.getBlockPos().getY() > 0.5 ? BlockHalf.TOP : BlockHalf.BOTTOM);
         if (ctx.getWorld().isReceivingRedstonePower(ctx.getBlockPos())) {
             blockState = (BlockState)((BlockState)blockState.with(OPEN, true)).with(POWERED, true);
         }
@@ -37,7 +41,11 @@ public class OxidizableTrapdoorBlock extends TrapdoorBlock implements Oxidizable
     }
 
     public boolean hasRandomTicks(BlockState state) {
-        return Oxidizable.getIncreasedOxidationBlock(state.getBlock()).isPresent();
+        if (!state.get(POWERED)) {
+            return Oxidizable.getIncreasedOxidationBlock(state.getBlock()).isPresent();
+        } else {
+            return false;
+        }
     }
 
     public OxidationLevel getDegradationLevel() {

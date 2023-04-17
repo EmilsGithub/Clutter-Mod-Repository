@@ -1,0 +1,8 @@
+{
+	"parent": "clutter:block/chairs/wooden_chair_parent",
+	"textures": {
+		"0": "block/spruce_log",
+		"1": "block/spruce_planks",
+		"particle": "block/spruce_log"
+	}
+}

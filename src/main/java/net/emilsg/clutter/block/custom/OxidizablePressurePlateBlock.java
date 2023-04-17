@@ -1,6 +1,9 @@
 package net.emilsg.clutter.block.custom;
 
-import net.minecraft.block.*;
+import net.minecraft.block.BlockSetType;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Oxidizable;
+import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.BlockPos;

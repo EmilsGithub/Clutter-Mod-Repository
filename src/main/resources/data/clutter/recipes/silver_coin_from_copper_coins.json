@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "clutter:copper_coin"
+    },
+    {
+      "item": "clutter:copper_coin"
+    },
+    {
+      "item": "clutter:copper_coin"
+    },
+    {
+      "item": "clutter:copper_coin"
+    }
+  ],
+  "result": {
+    "item": "clutter:silver_coin",
+    "count": 1
+  }
+}

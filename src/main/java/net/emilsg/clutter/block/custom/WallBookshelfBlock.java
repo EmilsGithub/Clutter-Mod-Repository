@@ -1,13 +1,18 @@
 package net.emilsg.clutter.block.custom;
 
+import net.emilsg.clutter.block.entity.WallBookshelfInventoryBlockEntity;
 import net.minecraft.block.*;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
@@ -32,13 +37,17 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.function.ToIntFunction;
 
-public class WallBookshelfBlock extends Block implements Waterloggable{
+public class WallBookshelfBlock extends BlockWithEntity implements Waterloggable{
         protected static final VoxelShape NORTH_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 12.0, 8.0);
         protected static final VoxelShape SOUTH_SHAPE = Block.createCuboidShape(0.0, 0.0, 8.0, 16.0, 12.0, 16.0);
         protected static final VoxelShape EAST_SHAPE = Block.createCuboidShape(8.0, 0.0, 0.0, 16.0, 12.0, 16.0);
         protected static final VoxelShape WEST_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 8.0, 12.0, 16.0);
+        protected static final VoxelShape NORTH_SHAPE_EMPTY = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 4.0, 8.0);
+        protected static final VoxelShape SOUTH_SHAPE_EMPTY = Block.createCuboidShape(0.0, 0.0, 8.0, 16.0, 4.0, 16.0);
+        protected static final VoxelShape EAST_SHAPE_EMPTY = Block.createCuboidShape(8.0, 0.0, 0.0, 16.0, 4.0, 16.0);
+        protected static final VoxelShape WEST_SHAPE_EMPTY = Block.createCuboidShape(0.0, 0.0, 0.0, 8.0, 4.0, 16.0);
         public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
-        private static final BooleanProperty LIT = BooleanProperty.of("lit");
+        private static final BooleanProperty LIT = Properties.LIT;
         public static final int MAX_MODEL = 6;
         public static IntProperty CURRENT_MODEL = IntProperty.of("current_model", 0, MAX_MODEL);
         public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
@@ -110,6 +119,15 @@ public class WallBookshelfBlock extends Block implements Waterloggable{
         @Override
         public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
                 Direction i = state.get(FACING);
+                if (state.get(CURRENT_MODEL) == 6) {
+                        return switch (i) {
+                                case NORTH -> NORTH_SHAPE_EMPTY;
+                                case SOUTH -> SOUTH_SHAPE_EMPTY;
+                                case EAST -> EAST_SHAPE_EMPTY;
+                                case WEST -> WEST_SHAPE_EMPTY;
+                                default -> VoxelShapes.empty();
+                        };
+                }
                 return switch (i) {
                         case NORTH -> NORTH_SHAPE;
                         case SOUTH -> SOUTH_SHAPE;
@@ -122,15 +140,24 @@ public class WallBookshelfBlock extends Block implements Waterloggable{
         @Override
         public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
                 int i = state.get(CURRENT_MODEL);
-                        if (!world.isClient && player.isSneaking() && hand.equals(Hand.MAIN_HAND) && player.getStackInHand(hand).isEmpty()) {
-                                if (i < MAX_MODEL) {
-                                        world.setBlockState(pos, state.with(CURRENT_MODEL, i + 1), Block.NOTIFY_ALL);
-                                        updateLit(world, pos, state);
-                                } else {
-                                        world.setBlockState(pos, state.with(CURRENT_MODEL, 0), Block.NOTIFY_ALL);
-                                }
-                                return ActionResult.SUCCESS;
+                BlockEntity blockEntity = world.getBlockEntity(pos);
+                if (world.isClient) {
+                        return ActionResult.SUCCESS;
+                }
+                if (!player.isSneaking()) {
+                        if (blockEntity instanceof WallBookshelfInventoryBlockEntity) {
+                                player.openHandledScreen((WallBookshelfInventoryBlockEntity) blockEntity);
                         }
+                        return ActionResult.CONSUME;
+                } else if (player.isSneaking() && hand.equals(Hand.MAIN_HAND) && player.getStackInHand(hand).isEmpty()) {
+                        if (i < MAX_MODEL) {
+                                world.setBlockState(pos, state.with(CURRENT_MODEL, i + 1), Block.NOTIFY_ALL);
+                                updateLit(world, pos, state);
+                        } else {
+                                world.setBlockState(pos, state.with(CURRENT_MODEL, 0), Block.NOTIFY_ALL);
+                        }
+                        return ActionResult.SUCCESS;
+                }
                 return ActionResult.PASS;
         }
 
@@ -143,11 +170,13 @@ public class WallBookshelfBlock extends Block implements Waterloggable{
                         }
         }
 
-
-        @Nullable
         @Override
+        @Nullable
         public BlockState getPlacementState(ItemPlacementContext ctx) {
-                return this.getDefaultState().with(CURRENT_MODEL, 0).with(LIT, false).with(FACING, ctx.getPlayerLookDirection());
+                BlockPos blockPos;
+                World worldAccess = ctx.getWorld();
+                boolean bl = worldAccess.getFluidState(blockPos = ctx.getBlockPos()).getFluid() == Fluids.WATER;
+                return (BlockState)this.getDefaultState().with(WATERLOGGED, bl).with(CURRENT_MODEL, 0).with(LIT, false).with(FACING, ctx.getHorizontalPlayerFacing());
         }
 
         @Override
@@ -194,10 +223,55 @@ public class WallBookshelfBlock extends Block implements Waterloggable{
         }
 
         @Override
+        public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+                BlockEntity blockEntity;
+                if (itemStack.hasCustomName() && (blockEntity = world.getBlockEntity(pos)) instanceof WallBookshelfInventoryBlockEntity) {
+                        ((WallBookshelfInventoryBlockEntity)blockEntity).setCustomName(itemStack.getName());
+                }
+        }
+
+        @Override
         public FluidState getFluidState(BlockState state) {
                 if (state.get(WATERLOGGED)) {
                         return Fluids.WATER.getStill(false);
                 }
                 return super.getFluidState(state);
+        }
+
+        @Nullable
+        @Override
+        public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+                return new WallBookshelfInventoryBlockEntity(pos, state);
+        }
+
+        @Override
+        public BlockRenderType getRenderType(BlockState state) {
+                return BlockRenderType.MODEL;
+        }
+
+        @Override
+        public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+                BlockEntity blockEntity = world.getBlockEntity(pos);
+                if (blockEntity instanceof WallBookshelfInventoryBlockEntity) {
+                        ((WallBookshelfInventoryBlockEntity)blockEntity).tick();
+                }
+        }
+
+        @Override
+        public boolean hasComparatorOutput(BlockState state) {
+                return false;
+        }
+
+        @Override
+        public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+                if (state.isOf(newState.getBlock())) {
+                        return;
+                }
+                BlockEntity blockEntity = world.getBlockEntity(pos);
+                if (blockEntity instanceof Inventory) {
+                        ItemScatterer.spawn(world, pos, (Inventory)((Object)blockEntity));
+                        world.updateComparators(pos, this);
+                }
+                super.onStateReplaced(state, world, pos, newState, moved);
         }
 }

@@ -1,0 +1,133 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:vine",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "clutter:dark_oak_trellis",
+              "properties": {
+                "plant": "vines"
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:rose_bush",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "clutter:dark_oak_trellis",
+              "properties": {
+                "plant": "rose_bush"
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:peony",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "clutter:dark_oak_trellis",
+              "properties": {
+                "plant": "peony"
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:lilac",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "clutter:dark_oak_trellis",
+              "properties": {
+                "plant": "lilac"
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:glow_berries",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "clutter:dark_oak_trellis",
+              "properties": {
+                "plant": "cave_vines"
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:weeping_vines",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "clutter:dark_oak_trellis",
+              "properties": {
+                "plant": "weeping_vines"
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:twisting_vines",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "clutter:dark_oak_trellis",
+              "properties": {
+                "plant": "twisting_vines"
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:glow_lichen",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "clutter:dark_oak_trellis",
+              "properties": {
+                "plant": "glow_lichen"
+              }
+            }
+          ]
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "clutter:dark_oak_trellis"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ]
+    }
+  ]
+}

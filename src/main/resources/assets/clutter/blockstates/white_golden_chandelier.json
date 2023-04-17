@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "on_chain=false": {
+      "model": "clutter:block/chandeliers/colors/white_golden"
+    },
+    "on_chain=true": {
+      "model": "clutter:block/chandeliers/colors/white_golden_on_chain"
+    }
+  }
+}

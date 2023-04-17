@@ -1,10 +1,16 @@
 {
   "variants": {
-    "on_chain=false": {
+    "on_chain=false,lit=false": {
       "model": "clutter:block/chandeliers/copper_chandelier"
     },
-    "on_chain=true": {
+    "on_chain=true,lit=false": {
       "model": "clutter:block/chandeliers/copper_chandelier_on_chain"
+    },
+    "on_chain=false,lit=true": {
+      "model": "clutter:block/chandeliers/copper_chandelier_lit"
+    },
+    "on_chain=true,lit=true": {
+      "model": "clutter:block/chandeliers/copper_chandelier_on_chain_lit"
     }
   }
 }

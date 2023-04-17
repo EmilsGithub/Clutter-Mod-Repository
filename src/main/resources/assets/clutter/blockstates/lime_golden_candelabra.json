@@ -1,0 +1,34 @@
+{
+  "variants":{
+    "facing=north,lit=false":{
+      "model":"clutter:block/candelabras/colors/lime_golden"
+    },
+    "facing=south,lit=false":{
+      "model":"clutter:block/candelabras/colors/lime_golden",
+      "y": 180
+    },
+    "facing=east,lit=false":{
+      "model":"clutter:block/candelabras/colors/lime_golden",
+      "y": 90
+    },
+    "facing=west,lit=false":{
+      "model":"clutter:block/candelabras/colors/lime_golden",
+      "y": 270
+    },
+    "facing=north,lit=true":{
+      "model":"clutter:block/candelabras/colors/lime_golden_lit"
+    },
+    "facing=south,lit=true":{
+      "model":"clutter:block/candelabras/colors/lime_golden_lit",
+      "y": 180
+    },
+    "facing=east,lit=true":{
+      "model":"clutter:block/candelabras/colors/lime_golden_lit",
+      "y": 90
+    },
+    "facing=west,lit=true":{
+      "model":"clutter:block/candelabras/colors/lime_golden_lit",
+      "y": 270
+    }
+  }
+}

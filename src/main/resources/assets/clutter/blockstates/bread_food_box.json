@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "clutter:block/food_boxes/bread_food_box"
+    },
+    "facing=south": {
+      "model": "clutter:block/food_boxes/bread_food_box",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "clutter:block/food_boxes/bread_food_box",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "clutter:block/food_boxes/bread_food_box",
+      "y": 90
+    }
+  }
+}

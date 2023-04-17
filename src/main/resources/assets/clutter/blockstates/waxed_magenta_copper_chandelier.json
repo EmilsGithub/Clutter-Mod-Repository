@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "on_chain=false": {
+      "model": "clutter:block/chandeliers/colors/magenta_copper"
+    },
+    "on_chain=true": {
+      "model": "clutter:block/chandeliers/colors/magenta_copper_on_chain"
+    }
+  }
+}

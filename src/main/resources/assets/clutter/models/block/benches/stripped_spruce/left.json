@@ -1,0 +1,8 @@
+{
+	"parent": "clutter:block/benches/wooden_bench_leg_left_parent",
+	"textures": {
+		"0": "block/stripped_spruce_log",
+		"1": "block/spruce_planks",
+		"particle": "block/spruce_planks"
+	}
+}
