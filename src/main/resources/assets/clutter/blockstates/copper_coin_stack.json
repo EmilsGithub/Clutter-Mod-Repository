@@ -1,0 +1,28 @@
+{
+  "variants":{
+    "coin_layers=1":{
+      "model":"clutter:block/coin_stacks/copper/copper_one"
+    },
+    "coin_layers=2":{
+      "model":"clutter:block/coin_stacks/copper/copper_two"
+    },
+    "coin_layers=3":{
+      "model":"clutter:block/coin_stacks/copper/copper_three"
+    },
+    "coin_layers=4":{
+      "model":"clutter:block/coin_stacks/copper/copper_four"
+    },
+    "coin_layers=5":{
+      "model":"clutter:block/coin_stacks/copper/copper_five"
+    },
+    "coin_layers=6":{
+      "model":"clutter:block/coin_stacks/copper/copper_six"
+    },
+    "coin_layers=7":{
+      "model":"clutter:block/coin_stacks/copper/copper_seven"
+    },
+    "coin_layers=8":{
+      "model":"clutter:block/coin_stacks/copper/copper_eight"
+    }
+  }
+}

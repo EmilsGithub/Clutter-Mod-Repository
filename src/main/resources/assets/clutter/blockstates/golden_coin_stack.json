@@ -1,0 +1,28 @@
+{
+  "variants":{
+    "coin_layers=1":{
+      "model":"clutter:block/coin_stacks/golden/golden_one"
+    },
+    "coin_layers=2":{
+      "model":"clutter:block/coin_stacks/golden/golden_two"
+    },
+    "coin_layers=3":{
+      "model":"clutter:block/coin_stacks/golden/golden_three"
+    },
+    "coin_layers=4":{
+      "model":"clutter:block/coin_stacks/golden/golden_four"
+    },
+    "coin_layers=5":{
+      "model":"clutter:block/coin_stacks/golden/golden_five"
+    },
+    "coin_layers=6":{
+      "model":"clutter:block/coin_stacks/golden/golden_six"
+    },
+    "coin_layers=7":{
+      "model":"clutter:block/coin_stacks/golden/golden_seven"
+    },
+    "coin_layers=8":{
+      "model":"clutter:block/coin_stacks/golden/golden_eight"
+    }
+  }
+}

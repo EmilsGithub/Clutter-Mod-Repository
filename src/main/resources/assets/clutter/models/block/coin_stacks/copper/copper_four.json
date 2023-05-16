@@ -1,0 +1,7 @@
+{
+  "parent": "clutter:block/coin_stacks/coin_stack_four_parent",
+  "textures": {
+    "0": "clutter:block/copper_coin",
+    "particle": "clutter:block/copper_coin"
+  }
+}

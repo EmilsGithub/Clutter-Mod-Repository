@@ -27,5 +27,9 @@ public class ModBlockTags {
 
     public static final TagKey<Block> TRELLISES = TagKey.of(Registries.BLOCK.getKey(), new Identifier("clutter", "trellises"));
 
+    public static final TagKey<Block> SEATS = TagKey.of(Registries.BLOCK.getKey(), new Identifier("clutter", "seats"));
+
+    public static final TagKey<Block> BUTTERFLY_VALID = TagKey.of(Registries.BLOCK.getKey(), new Identifier("clutter", "butterfly_valid"));
+
     public static final TagKey<Block> LONG_CURTAINS = TagKey.of(Registries.BLOCK.getKey(), new Identifier("clutter", "long_curtains"));
 }

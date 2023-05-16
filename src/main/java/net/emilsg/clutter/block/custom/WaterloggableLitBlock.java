@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Waterloggable;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
@@ -19,6 +20,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.event.GameEvent;
@@ -100,7 +102,7 @@ public class WaterloggableLitBlock extends Block implements Waterloggable {
             WaterloggableLitBlock.setLit(world, state, pos, true);
             return ActionResult.success(world.isClient);
         }
-        return ActionResult.PASS;
+        return super.onUse(state, world, pos, player, hand, hit);
     }
 
     public static void extinguish(@Nullable PlayerEntity player, BlockState state, World world, BlockPos pos) {
@@ -108,7 +110,6 @@ public class WaterloggableLitBlock extends Block implements Waterloggable {
         world.playSound(null, pos, SoundEvents.BLOCK_CANDLE_EXTINGUISH, SoundCategory.BLOCKS, 1.0f, 1.0f);
         world.emitGameEvent((Entity)player, GameEvent.BLOCK_CHANGE, pos);
     }
-
 
     private static void setLit(WorldAccess world, BlockState state, BlockPos pos, boolean lit) {
         world.setBlockState(pos, (BlockState)state.with(LIT, lit), Block.NOTIFY_ALL | Block.REDRAW_ON_MAIN_THREAD);

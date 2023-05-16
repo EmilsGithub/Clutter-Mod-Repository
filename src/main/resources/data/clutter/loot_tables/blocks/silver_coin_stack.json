@@ -1,0 +1,125 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "clutter:silver_coin",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": 64,
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "clutter:silver_coin_stack",
+                  "properties": {
+                    "coin_layers": "8"
+                  }
+                }
+              ]
+            },
+            {
+              "function": "minecraft:set_count",
+              "count": 56,
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "clutter:silver_coin_stack",
+                  "properties": {
+                    "coin_layers": "7"
+                  }
+                }
+              ]
+            },
+            {
+              "function": "minecraft:set_count",
+              "count": 48,
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "clutter:silver_coin_stack",
+                  "properties": {
+                    "coin_layers": "6"
+                  }
+                }
+              ]
+            },
+            {
+              "function": "minecraft:set_count",
+              "count": 40,
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "clutter:silver_coin_stack",
+                  "properties": {
+                    "coin_layers": "5"
+                  }
+                }
+              ]
+            },
+            {
+              "function": "minecraft:set_count",
+              "count": 32,
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "clutter:silver_coin_stack",
+                  "properties": {
+                    "coin_layers": "4"
+                  }
+                }
+              ]
+            },
+            {
+              "function": "minecraft:set_count",
+              "count": 24,
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "clutter:silver_coin_stack",
+                  "properties": {
+                    "coin_layers": "3"
+                  }
+                }
+              ]
+            },
+            {
+              "function": "minecraft:set_count",
+              "count": 16,
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "clutter:silver_coin_stack",
+                  "properties": {
+                    "coin_layers": "2"
+                  }
+                }
+              ]
+            },
+            {
+              "function": "minecraft:set_count",
+              "count": 8,
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "clutter:silver_coin_stack",
+                  "properties": {
+                    "coin_layers": "1"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ]
+    }
+  ]
+}

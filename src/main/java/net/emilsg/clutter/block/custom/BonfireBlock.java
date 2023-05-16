@@ -13,6 +13,7 @@ import net.minecraft.client.item.TooltipContext;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
@@ -136,15 +137,14 @@ public class BonfireBlock extends BlockWithEntity {
             for (Direction direction1 : cardinalDirections) {
                 BlockPos neighborPos1 = basePos.offset(direction1);
                 BlockState neighborState1 = world.getBlockState(neighborPos1);
-                if (neighborState1.getBlock() != Blocks.AIR) {
+                if (neighborState1.getBlock() != Blocks.AIR && !neighborState1.getMaterial().isReplaceable()) {
                     return false;
                 }
-
                 for (Direction direction2 : cardinalDirections) {
                     if (direction2.getAxis() != direction1.getAxis()) {
                         BlockPos diagonalPos = neighborPos1.offset(direction2);
                         BlockState diagonalState = world.getBlockState(diagonalPos);
-                        if (diagonalState.getBlock() != Blocks.AIR) {
+                        if (diagonalState.getBlock() != Blocks.AIR && !diagonalState.getMaterial().isReplaceable()) {
                             return false;
                         }
                     }
@@ -177,7 +177,7 @@ public class BonfireBlock extends BlockWithEntity {
     }
 
 
-    public static void placeBonfireBlocks(BlockPos pos, World world) {
+    public void placeBonfireBlocks(BlockPos pos, World world) {
         int index = 0;
         int[] offsets = {-1, 0, 1};
 
@@ -186,7 +186,7 @@ public class BonfireBlock extends BlockWithEntity {
             for (int xOffset : offsets) {
                 for (int zOffset : offsets) {
                     BlockPos targetPos = yOffsetPos.add(xOffset, 0, zOffset);
-                    world.setBlockState(targetPos, ModBlocks.BONFIRE.getDefaultState().with(BonfireBlock.BLOCK_SHAPE, BonfireBlock.BONFIRE_BLOCK_MODEL.values()[index]));
+                    world.setBlockState(targetPos, this.getDefaultState().with(BonfireBlock.BLOCK_SHAPE, BonfireBlock.BONFIRE_BLOCK_MODEL.values()[index]));
                     index++;
                 }
             }
@@ -296,6 +296,11 @@ public class BonfireBlock extends BlockWithEntity {
     }
 
     @Override
+    public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
+        return false;
+    }
+
+    @Override
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         return checkAirAround(pos, (World) world, true);
     }
@@ -330,7 +335,7 @@ public class BonfireBlock extends BlockWithEntity {
             if (random.nextInt(8) == 0 && state.get(BLOCK_SHAPE) == BONFIRE_BLOCK_MODEL.CENTER && state.get(LIT)) {
                 world.playSound((double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, SoundEvents.BLOCK_CAMPFIRE_CRACKLE, SoundCategory.BLOCKS, 0.5f + random.nextFloat(), random.nextFloat() * 0.7f + 0.2f, false);
             }
-            if (random.nextInt(5) == 0 && state.get(BLOCK_SHAPE).asString().startsWith("up_")) {
+            if (random.nextInt(5) == 0 && state.get(BLOCK_SHAPE).asString().startsWith("up_") && this == ModBlocks.BONFIRE) {
                 for (int i = 0; i < random.nextInt(1) + 1; ++i) {
                     world.addParticle(ParticleTypes.LAVA, (double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, random.nextFloat() / 2.0f, 5.0E-5, random.nextFloat() / 2.0f);
                 }

@@ -911,17 +911,26 @@
   "item.clutter.copper_coin": "Copper Coin",
   "item.clutter.silver_coin": "Silver Coin",
   "item.clutter.golden_coin": "Golden Coin",
+  "item.clutter.user_manual": "User Manual",
 
   "block.clutter.3x2x3_area_tooltip.tooltip": "Needs a 3x2x3 Area to Place",
   "block.clutter.not_next_to_tooltip.tooltip": "Can't be Placed Next to Other Bonfires",
   "block.clutter.cycle_blockstate_tooltip.tooltip": "Shift Right-Click to Cycle Variant",
   "block.clutter.toggle_smoke.tooltip": "Right-Click to Toggle Smoke",
+  "item.clutter.coin_placement.tooltip": "Needs 8 Coins to Place",
+  "item.clutter.user_manual.tooltip": "Unlocks Clutter Recipes",
 
   "container.clutter.wall_bookshelf": "Wall Bookshelf",
   "container.clutter.wall_cupboard": "Wall Cupboard",
   "container.clutter.cupboard": "Cupboard",
 
-  "itemgroup.clutter": "Clutter",
+  "entity.clutter.seat": "Seat Entity",
+  "entity.clutter.butterfly": "Butterfly",
+
+  "enchantment.clutter.greed": "Greed",
+
+  "itemgroup.clutter_blocks": "Clutter Blocks",
+  "itemgroup.clutter_items": "Clutter Items",
 
   "effect.clutter.vulnerability": "Vulnerability",
   "item.minecraft.potion.effect.vulnerability_potion": "Potion of Vulnerability",

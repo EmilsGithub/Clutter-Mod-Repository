@@ -74,6 +74,7 @@ public class ModBlockEntities {
 
         BONFIRE = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "bonfire"),
                 FabricBlockEntityTypeBuilder.create(BonfireBlockEntity::new,
-                        ModBlocks.BONFIRE).build());
+                        ModBlocks.BONFIRE, SOUL_BONFIRE).build());
+
     }
 }

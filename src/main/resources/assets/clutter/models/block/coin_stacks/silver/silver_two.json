@@ -1,0 +1,7 @@
+{
+  "parent": "clutter:block/coin_stacks/coin_stack_two_parent",
+  "textures": {
+    "0": "clutter:block/silver_coin",
+    "particle": "clutter:block/silver_coin"
+  }
+}

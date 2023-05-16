@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "#clutter:soul_lanterns"
+    "#clutter:soul_lanterns",
+    "clutter:soul_bonfire"
   ]
 }

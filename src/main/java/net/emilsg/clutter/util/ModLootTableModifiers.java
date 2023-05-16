@@ -1,88 +1,128 @@
 package net.emilsg.clutter.util;
 
+import com.google.common.collect.ImmutableList;
+import net.emilsg.clutter.config.ModConfigs;
+import net.emilsg.clutter.enchantment.ModEnchantments;
 import net.emilsg.clutter.item.ModItems;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
+import net.minecraft.advancement.criterion.InventoryChangedCriterion;
+import net.minecraft.enchantment.EnchantmentLevelEntry;
+import net.minecraft.enchantment.Enchantments;
+import net.minecraft.item.EnchantedBookItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.loot.LootPool;
-import net.minecraft.loot.condition.KilledByPlayerLootCondition;
-import net.minecraft.loot.condition.RandomChanceLootCondition;
+import net.minecraft.loot.condition.*;
+import net.minecraft.loot.entry.AlternativeEntry;
+import net.minecraft.loot.entry.GroupEntry;
 import net.minecraft.loot.entry.ItemEntry;
+import net.minecraft.loot.entry.TagEntry;
+import net.minecraft.loot.function.EnchantRandomlyLootFunction;
 import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
+import net.minecraft.predicate.NumberRange;
+import net.minecraft.predicate.entity.LocationPredicate;
+import net.minecraft.predicate.item.EnchantmentPredicate;
+import net.minecraft.predicate.item.ItemPredicate;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Pair;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeKeys;
+
+import java.util.*;
 
 public class ModLootTableModifiers {
-    private static final Identifier BLAZE_ID = new Identifier("minecraft", "entities/blaze");
-    private static final Identifier CAVE_SPIDER_ID = new Identifier("minecraft", "entities/cave_spider");
-    private static final Identifier CREEPER_ID = new Identifier("minecraft", "entities/creeper");
-    private static final Identifier DROWNED_ID = new Identifier("minecraft", "entities/drowned");
-    private static final Identifier ELDER_GUARDIAN_ID = new Identifier("minecraft", "entities/elder_guardian");
-    private static final Identifier ENDER_DRAGON_ID = new Identifier("minecraft", "entities/ender_dragon");
-    private static final Identifier ENDERMITE_ID = new Identifier("minecraft", "entities/endermite");
-    private static final Identifier ENDERMAN_ID = new Identifier("minecraft", "entities/enderman");
-    private static final Identifier EVOKER_ID = new Identifier("minecraft", "entities/evoker");
-    private static final Identifier GHAST_ID = new Identifier("minecraft", "entities/ghast");
-    private static final Identifier GUARDIAN_ID = new Identifier("minecraft", "entities/guardian");
-    private static final Identifier HOGLIN_ID = new Identifier("minecraft", "entities/hoglin");
-    private static final Identifier HUSK_ID = new Identifier("minecraft", "entities/husk");
-    private static final Identifier MAGMA_CUBE_ID = new Identifier("minecraft", "entities/magma_cube");
-    private static final Identifier PHANTOM_ID = new Identifier("minecraft", "entities/phantom");
-    private static final Identifier PIGLIN_BRUTE_ID = new Identifier("minecraft", "entities/piglin_brute");
-    private static final Identifier PIGLIN_ID = new Identifier("minecraft", "entities/piglin");
-    private static final Identifier RAVAGER_ID = new Identifier("minecraft", "entities/ravager");
-    private static final Identifier SHULKER_ID = new Identifier("minecraft", "entities/shulker");
-    private static final Identifier SILVERFISH_ID = new Identifier("minecraft", "entities/silverfish");
-    private static final Identifier SKELETON_ID = new Identifier("minecraft", "entities/skeleton");
-    private static final Identifier SLIME_ID = new Identifier("minecraft", "entities/slime");
-    private static final Identifier SPIDER_ID = new Identifier("minecraft", "entities/spider");
-    private static final Identifier STRAY_ID = new Identifier("minecraft", "entities/stray");
-    private static final Identifier VEX_ID = new Identifier("minecraft", "entities/vex");
-    private static final Identifier VINDICATOR_ID = new Identifier("minecraft", "entities/vindicator");
-    private static final Identifier WITCH_ID = new Identifier("minecraft", "entities/witch");
-    private static final Identifier WITHER_ID = new Identifier("minecraft", "entities/wither");
-    private static final Identifier WITHER_SKELETON_ID = new Identifier("minecraft", "entities/wither_skeleton");
-    private static final Identifier ZOGLIN_ID = new Identifier("minecraft", "entities/zoglin");
-    private static final Identifier ZOMBIE_ID = new Identifier("minecraft", "entities/zombie");
-    private static final Identifier ZOMBIE_VILLAGER_ID = new Identifier("minecraft", "entities/zombie_villager");
-    private static final Identifier ZOMBIFIED_PIGLIN_ID = new Identifier("minecraft", "entities/zombified_piglin");
+    private static final Identifier FERN_ID = new Identifier("minecraft", "blocks/fern");
 
+    private static final Identifier ABANDONED_MINESHAFT_ID = new Identifier("minecraft", "chests/abandoned_mineshaft");
+    private static final Identifier ANCIENT_CITY_ID = new Identifier("minecraft", "chests/ancient_city");
+    private static final Identifier BASTION_TREASURE_ID = new Identifier("minecraft", "chests/bastion_treasure");
+    private static final Identifier BURIED_TREASURE_ID = new Identifier("minecraft", "chests/buried_treasure");
+    private static final Identifier SHIPWRECK_TREASURE_ID = new Identifier("minecraft", "chests/shipwreck_treasure");
+    private static final Identifier DESERT_PYRAMID_ID = new Identifier("minecraft", "chests/desert_pyramid");
+    private static final Identifier END_CITY_TREASURE_ID = new Identifier("minecraft", "chests/end_city_treasure");
+    private static final Identifier JUNGLE_TEMPLE_ID = new Identifier("minecraft", "chests/jungle_temple");
+    private static final Identifier RUINED_PORTAL_ID = new Identifier("minecraft", "chests/ruined_portal");
+    private static final Identifier SIMPLE_DUNGEON_ID = new Identifier("minecraft", "chests/simple_dungeon");
+    private static final Identifier WOODLAND_MANSION_ID = new Identifier("minecraft", "chests/woodland_mansion");
+
+    private static final Identifier PIGLIN_BRUTE_ID = new Identifier("minecraft", "entities/piglin_brute");
+    private static final Identifier ELDER_GUARDIAN_ID = new Identifier("minecraft", "entities/elder_guardian");
+
+    private static final Identifier WITHER_ID = new Identifier("minecraft", "entities/wither");
+    private static final Identifier ENDER_DRAGON_ID = new Identifier("minecraft", "entities/ender_dragon");
+
+
+    static List<Identifier> structureIds = Arrays.asList(
+            ABANDONED_MINESHAFT_ID,
+            ANCIENT_CITY_ID,
+            BASTION_TREASURE_ID,
+            BURIED_TREASURE_ID,
+            DESERT_PYRAMID_ID,
+            SHIPWRECK_TREASURE_ID,
+            END_CITY_TREASURE_ID,
+            JUNGLE_TEMPLE_ID,
+            RUINED_PORTAL_ID,
+            SIMPLE_DUNGEON_ID,
+            WOODLAND_MANSION_ID
+    );
 
     public static void modifyLootTables() {
         LootTableEvents.MODIFY.register(((resourceManager, lootManager, id, tableBuilder, source) -> {
-            if (id.equals(BLAZE_ID) || id.equals(CREEPER_ID) || id.equals(DROWNED_ID) || id.equals(ENDERMITE_ID) || id.equals(GHAST_ID) || id.equals(GUARDIAN_ID) || id.equals(HOGLIN_ID) || id.equals(HUSK_ID) || id.equals(MAGMA_CUBE_ID) || id.equals(PHANTOM_ID) || id.equals(PIGLIN_ID) || id.equals(SHULKER_ID) || id.equals(SILVERFISH_ID) || id.equals(SKELETON_ID) || id.equals(SPIDER_ID) || id.equals(STRAY_ID) || id.equals(WITCH_ID) || id.equals(WITHER_SKELETON_ID) || id.equals(ZOMBIE_ID) || id.equals(ZOMBIE_VILLAGER_ID) || id.equals(ZOGLIN_ID) || id.equals(CAVE_SPIDER_ID)) {
+
+            if (id.equals(FERN_ID)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
-                        .conditionally(RandomChanceLootCondition.builder(0.025f)) // 2.5%
-                        .with(ItemEntry.builder(ModItems.COPPER_COIN))
-                        .conditionally(KilledByPlayerLootCondition.builder())
-                        .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 3.0f)).build());
+                        .conditionally(RandomChanceLootCondition.builder(0.05f))
+                        .conditionally(InvertedLootCondition.builder(MatchToolLootCondition.builder(ItemPredicate.Builder.create().items(Items.SHEARS))).build())
+                        .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.HOPS_SEEDS).weight(1)))
+                        .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.COTTON_SEEDS).weight(1)))
+                        .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1.0f)).build());
                 tableBuilder.pool(poolBuilder.build());
             }
-            if (id.equals(ENDERMAN_ID) || id.equals(EVOKER_ID) || id.equals(RAVAGER_ID) || id.equals(VEX_ID) || id.equals(VINDICATOR_ID) || id.equals(ZOMBIFIED_PIGLIN_ID) || id.equals(SLIME_ID)) {
+
+            for (Identifier structureId : structureIds) {
+                if (id.equals(structureId)) {
+                    LootPool.Builder poolBuilder = LootPool.builder()
+                            .rolls(ConstantLootNumberProvider.create(2))
+                            .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.COMMON_COIN_POUCH).conditionally(RandomChanceLootCondition.builder(0.35f)).weight(20)))
+                            .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.UNCOMMON_COIN_POUCH).conditionally(RandomChanceLootCondition.builder(0.35f)).weight(10)))
+                            .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.RARE_COIN_POUCH).conditionally(RandomChanceLootCondition.builder(0.35f)).weight(5)))
+                            .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.EPIC_COIN_POUCH).conditionally(RandomChanceLootCondition.builder(0.35f)).weight(1)))
+                            .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1.0f)).build());
+                    tableBuilder.pool(poolBuilder.build());
+                }
+            }
+
+            if (id.equals(END_CITY_TREASURE_ID)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
-                        .conditionally(RandomChanceLootCondition.builder(0.01f)) // 1%
-                        .with(ItemEntry.builder(ModItems.COPPER_COIN))
-                        .conditionally(KilledByPlayerLootCondition.builder())
-                        .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build());
+                        .conditionally(RandomChanceLootCondition.builder(0.02f))
+                        .with(ItemEntry.builder(Items.BOOK)).apply(EnchantRandomlyLootFunction.create().add(ModEnchantments.GREED))
+                        .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1.0f)).build());
                 tableBuilder.pool(poolBuilder.build());
             }
-            if (id.equals(ELDER_GUARDIAN_ID) || id.equals(PIGLIN_BRUTE_ID)) {
+
+            if (id.equals(PIGLIN_BRUTE_ID) || id.equals(ELDER_GUARDIAN_ID)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
-                        .conditionally(RandomChanceLootCondition.builder(1.0f)) // 100%
-                        .with(ItemEntry.builder(ModItems.SILVER_COIN))
-                        .conditionally(KilledByPlayerLootCondition.builder())
-                        .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 2.0f)).build());
+                        .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.COMMON_COIN_POUCH).weight(500)))
+                        .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.UNCOMMON_COIN_POUCH).weight(375)))
+                        .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.RARE_COIN_POUCH).weight(125)))
+                        .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1.0f)).build());
                 tableBuilder.pool(poolBuilder.build());
             }
-            if (id.equals(ENDER_DRAGON_ID) || id.equals(WITHER_ID)) {
+
+            if (id.equals(WITHER_ID) || id.equals(ENDER_DRAGON_ID)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
-                        .rolls(ConstantLootNumberProvider.create(1))
-                        .conditionally(RandomChanceLootCondition.builder(1.0f))
-                        .with(ItemEntry.builder(ModItems.GOLDEN_COIN))
-                        .conditionally(KilledByPlayerLootCondition.builder())
-                        .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(3.0f, 6.0f)).build());
+                        .rolls(ConstantLootNumberProvider.create(6))
+                        .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.RARE_COIN_POUCH).weight(2)))
+                        .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.EPIC_COIN_POUCH).weight(1)))
+                        .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1.0f)).build());
                 tableBuilder.pool(poolBuilder.build());
             }
         }));

@@ -1,0 +1,14 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "clutter:item/magenta_butterfly_elytra"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "broken": 1
+      },
+      "model": "clutter:item/broken_magenta_butterfly_elytra"
+    }
+  ]
+}

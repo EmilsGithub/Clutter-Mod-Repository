@@ -1,0 +1,13 @@
+{
+  "values": [
+    "minecraft:grass_block",
+    "minecraft:dirt",
+    "#minecraft:leaves",
+    "#minecraft:wart_blocks",
+    "minecraft:soul_sand",
+    "minecraft:soul_soil",
+    "minecraft:warped_nylium",
+    "minecraft:crimson_nylium",
+    "minecraft:netherrack"
+  ]
+}

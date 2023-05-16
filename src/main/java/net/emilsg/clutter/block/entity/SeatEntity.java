@@ -1,6 +1,10 @@
 package net.emilsg.clutter.block.entity;
 
+import net.emilsg.clutter.util.ModBlockTags;
 import net.emilsg.clutter.util.ModSit;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.data.server.tag.TagProvider;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -9,11 +13,14 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
+import java.util.Set;
 
 public class SeatEntity extends Entity {
 
@@ -52,8 +59,12 @@ public class SeatEntity extends Entity {
         return super.updatePassengerForDismount(passenger);
     }
 
-
-
+    @Override
+    public void tick() {
+        if (!world.isClient && !world.getBlockState(this.getBlockPos()).isIn(ModBlockTags.SEATS)){
+            remove(RemovalReason.DISCARDED);
+        }
+    }
 
     @Override
     public void remove(RemovalReason reason)

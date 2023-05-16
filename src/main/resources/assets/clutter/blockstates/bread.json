@@ -1,0 +1,109 @@
+{
+  "variants":{
+    "facing=north,slices=7": {
+      "model": "clutter:block/edible_blocks/bread/bread_full"
+    },
+    "facing=north,slices=6": {
+      "model": "clutter:block/edible_blocks/bread/bread_six"
+    },
+    "facing=north,slices=5": {
+      "model": "clutter:block/edible_blocks/bread/bread_five"
+    },
+    "facing=north,slices=4": {
+      "model": "clutter:block/edible_blocks/bread/bread_four"
+    },
+    "facing=north,slices=3": {
+      "model": "clutter:block/edible_blocks/bread/bread_three"
+    },
+    "facing=north,slices=2": {
+      "model": "clutter:block/edible_blocks/bread/bread_two"
+    },
+    "facing=north,slices=1": {
+      "model": "clutter:block/edible_blocks/bread/bread_one"
+    },
+    "facing=south,slices=7": {
+      "model": "clutter:block/edible_blocks/bread/bread_full",
+      "y": 180
+    },
+    "facing=south,slices=6": {
+      "model": "clutter:block/edible_blocks/bread/bread_six",
+      "y": 180
+    },
+    "facing=south,slices=5": {
+      "model": "clutter:block/edible_blocks/bread/bread_five",
+      "y": 180
+    },
+    "facing=south,slices=4": {
+      "model": "clutter:block/edible_blocks/bread/bread_four",
+      "y": 180
+    },
+    "facing=south,slices=3": {
+      "model": "clutter:block/edible_blocks/bread/bread_three",
+      "y": 180
+    },
+    "facing=south,slices=2": {
+      "model": "clutter:block/edible_blocks/bread/bread_two",
+      "y": 180
+    },
+    "facing=south,slices=1": {
+      "model": "clutter:block/edible_blocks/bread/bread_one",
+      "y": 180
+    },
+    "facing=east,slices=7": {
+      "model": "clutter:block/edible_blocks/bread/bread_full",
+      "y": 90
+    },
+    "facing=east,slices=6": {
+      "model": "clutter:block/edible_blocks/bread/bread_six",
+      "y": 90
+    },
+    "facing=east,slices=5": {
+      "model": "clutter:block/edible_blocks/bread/bread_five",
+      "y": 90
+    },
+    "facing=east,slices=4": {
+      "model": "clutter:block/edible_blocks/bread/bread_four",
+      "y": 90
+    },
+    "facing=east,slices=3": {
+      "model": "clutter:block/edible_blocks/bread/bread_three",
+      "y": 90
+    },
+    "facing=east,slices=2": {
+      "model": "clutter:block/edible_blocks/bread/bread_two",
+      "y": 90
+    },
+    "facing=east,slices=1": {
+      "model": "clutter:block/edible_blocks/bread/bread_one",
+      "y": 90
+    },
+    "facing=west,slices=7": {
+      "model": "clutter:block/edible_blocks/bread/bread_full",
+      "y": 270
+    },
+    "facing=west,slices=6": {
+      "model": "clutter:block/edible_blocks/bread/bread_six",
+      "y": 270
+    },
+    "facing=west,slices=5": {
+      "model": "clutter:block/edible_blocks/bread/bread_five",
+      "y": 270
+    },
+    "facing=west,slices=4": {
+      "model": "clutter:block/edible_blocks/bread/bread_four",
+      "y": 270
+    },
+    "facing=west,slices=3": {
+      "model": "clutter:block/edible_blocks/bread/bread_three",
+      "y": 270
+    },
+    "facing=west,slices=2": {
+      "model": "clutter:block/edible_blocks/bread/bread_two",
+      "y": 270
+    },
+    "facing=west,slices=1": {
+      "model": "clutter:block/edible_blocks/bread/bread_one",
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "coin_pile_break": {
+    "subtitle": "sounds.clutter.coin_pile_break",
+    "sounds": [
+      "clutter:coin_pile_break"
+    ]
+  },
+  "coin_pile_place": {
+    "subtitle": "sounds.clutter.coin_pile_place",
+    "sounds": [
+      "clutter:coin_pile_place"
+    ]
+  },
+  "coin_pile_fall": {
+    "subtitle": "sounds.clutter.coin_pile_fall",
+    "sounds": [
+      "clutter:coin_pile_fall"
+    ]
+  },
+  "coin_pile_hit": {
+    "subtitle": "sounds.clutter.coin_pile_hit",
+    "sounds": [
+      "clutter:coin_pile_hit"
+    ]
+  },
+  "coin_pouch_use": {
+    "subtitle": "sounds.clutter.coin_pouch_use",
+    "sounds": [
+      "clutter:coin_pouch_use"
+    ]
+  }
+}

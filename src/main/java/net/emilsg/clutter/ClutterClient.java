@@ -1,7 +1,10 @@
 package net.emilsg.clutter;
 
-import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.block.entity.SeatEntity;
+import net.emilsg.clutter.entity.ModEntities;
+import net.emilsg.clutter.entity.client.ButterflyRenderer;
+import net.emilsg.clutter.entity.client.ChameleonRenderer;
+import net.emilsg.clutter.entity.client.EndFishRenderer;
 import net.emilsg.clutter.util.ModSit;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
@@ -11,6 +14,7 @@ import net.minecraft.client.render.Frustum;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
+import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.util.Identifier;
 
 import java.util.Arrays;
@@ -19,9 +23,13 @@ import java.util.List;
 import static net.emilsg.clutter.block.ModBlocks.*;
 
 public class ClutterClient implements ClientModInitializer {
+
     @Override
     public void onInitializeClient() {
         EntityRendererRegistry.register(ModSit.SEAT, EmptyRenderer::new);
+        EntityRendererRegistry.register(ModEntities.BUTTERFLY, ButterflyRenderer::new);
+        EntityRendererRegistry.register(ModEntities.CHAMELEON, ChameleonRenderer::new);
+        EntityRendererRegistry.register(ModEntities.END_FISH, EndFishRenderer::new);
 
         List<Block> blocksToRender = Arrays.asList(
                 FOOD_BOX,
@@ -369,7 +377,8 @@ public class ClutterClient implements ClientModInitializer {
                 CRIMSON_TRELLIS,
                 WARPED_TRELLIS,
                 MANGROVE_TRELLIS,
-                BONFIRE
+                BONFIRE,
+                SOUL_BONFIRE
         );
 
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), blocksToRender.toArray(new Block[blocksToRender.size()]));

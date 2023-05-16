@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "clutter:block/statues/frog_statue"
+    },
+    "facing=south": {
+      "model": "clutter:block/statues/frog_statue",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "clutter:block/statues/frog_statue",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "clutter:block/statues/frog_statue",
+      "y": 90
+    }
+  }
+}
