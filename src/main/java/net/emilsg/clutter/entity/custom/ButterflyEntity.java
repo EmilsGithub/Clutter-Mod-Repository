@@ -292,8 +292,15 @@ public class ButterflyEntity extends AnimalEntity implements GeoEntity {
         controllerRegistrar.add(new AnimationController<>(this, "controller", 0, this::predicate));
     }
 
+    //private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
+    //    tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.butterfly.flying", Animation.LoopType.LOOP));
+    //    return PlayState.CONTINUE;
+    //}
+
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
-        tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.butterfly.flying", Animation.LoopType.LOOP));
+        if(tAnimationState.getController().getCurrentAnimation() == null) {
+            tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.butterfly.flying", Animation.LoopType.LOOP));
+        }
         return PlayState.CONTINUE;
     }
 

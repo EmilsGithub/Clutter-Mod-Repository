@@ -32,6 +32,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.*;
 import org.jetbrains.annotations.Nullable;
+import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
@@ -43,7 +44,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.EnumSet;
 
-public class EndFishEntity extends AnimalEntity implements GeoAnimatable {
+public class EndFishEntity extends AnimalEntity implements GeoEntity {
     private final AnimatableInstanceCache CACHE = GeckoLibUtil.createInstanceCache(this);
     private static final TrackedData<BlockPos> HOME_POS;
 
@@ -202,7 +203,9 @@ public class EndFishEntity extends AnimalEntity implements GeoAnimatable {
     }
 
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
-        tAnimationState.getController().setAnimation(RawAnimation.begin().thenLoop("fish.swimming"));
+        if(tAnimationState.getController().getCurrentAnimation() == null) {
+            tAnimationState.getController().setAnimation(RawAnimation.begin().thenLoop("fish.swimming"));
+        }
         return PlayState.CONTINUE;
     }
 
@@ -211,10 +214,7 @@ public class EndFishEntity extends AnimalEntity implements GeoAnimatable {
         return CACHE;
     }
 
-    @Override
-    public double getTick(Object o) {
-        return 0;
-    }
+
 
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);

@@ -32,13 +32,4 @@ public class EndFishRenderer extends GeoEntityRenderer<EndFishEntity> {
     public Identifier getTextureLocation(EndFishEntity animatable) {
         return LOCATION_BY_VARIANT.get(animatable.getVariant());
     }
-
-    @Override
-    public void render(EndFishEntity entity, float entityYaw, float partialTick, MatrixStack poseStack, VertexConsumerProvider bufferSource, int packedLight) {
-        if(entity.isBaby()) {
-            poseStack.scale(0.5f,0.5f,0.5f);
-        }
-        super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
-    }
-
 }
