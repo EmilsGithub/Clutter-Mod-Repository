@@ -8,7 +8,8 @@ import net.emilsg.clutter.enchantment.ModEnchantments;
 import net.emilsg.clutter.entity.custom.ButterflyEntity;
 import net.emilsg.clutter.entity.ModEntities;
 import net.emilsg.clutter.entity.custom.ChameleonEntity;
-import net.emilsg.clutter.entity.custom.EndFishEntity;
+import net.emilsg.clutter.entity.custom.EchofinEntity;
+import net.emilsg.clutter.entity.custom.MossbloomEntity;
 import net.emilsg.clutter.item.ModItems;
 import net.emilsg.clutter.potion.ModPotions;
 import net.emilsg.clutter.util.ModItemGroup;
@@ -48,6 +49,7 @@ public class Clutter implements ModInitializer {
 		ModBlocks.copperBlockPairs();
 		FabricDefaultAttributeRegistry.register(ModEntities.BUTTERFLY, ButterflyEntity.setAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.CHAMELEON, ChameleonEntity.setAttributes());
-		FabricDefaultAttributeRegistry.register(ModEntities.END_FISH, EndFishEntity.setAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.ECHOFIN, EchofinEntity.setAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.MOSSBLOOM, MossbloomEntity.setAttributes());
 	}
 }

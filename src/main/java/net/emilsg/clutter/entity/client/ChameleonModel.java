@@ -2,6 +2,7 @@ package net.emilsg.clutter.entity.client;
 
 import net.emilsg.clutter.Clutter;
 import net.emilsg.clutter.entity.custom.ChameleonEntity;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import software.bernie.geckolib.constant.DataTickets;
@@ -25,6 +26,13 @@ public class ChameleonModel extends GeoModel<ChameleonEntity> {
     public Identifier getAnimationResource(ChameleonEntity animatable) {
         return new Identifier(Clutter.MOD_ID, "animations/animation.chameleon.json");
     }
+
+    @Override
+    public RenderLayer getRenderType(ChameleonEntity animatable, Identifier texture) {
+        return super.getRenderType(animatable, texture);
+    }
+
+
 
     @Override
     public void setCustomAnimations(ChameleonEntity animatable, long instanceId, AnimationState<ChameleonEntity> animationState) {

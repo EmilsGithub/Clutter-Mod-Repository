@@ -4,7 +4,8 @@ import net.emilsg.clutter.block.entity.SeatEntity;
 import net.emilsg.clutter.entity.ModEntities;
 import net.emilsg.clutter.entity.client.ButterflyRenderer;
 import net.emilsg.clutter.entity.client.ChameleonRenderer;
-import net.emilsg.clutter.entity.client.EndFishRenderer;
+import net.emilsg.clutter.entity.client.EchofinRenderer;
+import net.emilsg.clutter.entity.client.MossbloomRenderer;
 import net.emilsg.clutter.util.ModSit;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
@@ -14,7 +15,6 @@ import net.minecraft.client.render.Frustum;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.util.Identifier;
 
 import java.util.Arrays;
@@ -29,7 +29,8 @@ public class ClutterClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModSit.SEAT, EmptyRenderer::new);
         EntityRendererRegistry.register(ModEntities.BUTTERFLY, ButterflyRenderer::new);
         EntityRendererRegistry.register(ModEntities.CHAMELEON, ChameleonRenderer::new);
-        EntityRendererRegistry.register(ModEntities.END_FISH, EndFishRenderer::new);
+        EntityRendererRegistry.register(ModEntities.ECHOFIN, EchofinRenderer::new);
+        EntityRendererRegistry.register(ModEntities.MOSSBLOOM, MossbloomRenderer::new);
 
         List<Block> blocksToRender = Arrays.asList(
                 FOOD_BOX,

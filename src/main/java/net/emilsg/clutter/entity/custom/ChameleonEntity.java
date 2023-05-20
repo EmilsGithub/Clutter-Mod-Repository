@@ -3,11 +3,9 @@ package net.emilsg.clutter.entity.custom;
 import net.emilsg.clutter.entity.ModEntities;
 import net.emilsg.clutter.item.ModItems;
 import net.emilsg.clutter.item.custom.ButterflyBottleItem;
-import net.emilsg.clutter.util.ModBlockTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -15,23 +13,20 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
-import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.EntityView;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.*;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
@@ -39,7 +34,7 @@ import java.util.EnumSet;
 import java.util.List;
 
 public class ChameleonEntity extends AnimalEntity implements GeoEntity {
-    private AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private static final Ingredient BREEDING_INGREDIENT;
 
     public ChameleonEntity(EntityType<? extends AnimalEntity> entityType, World world) {
@@ -169,36 +164,37 @@ public class ChameleonEntity extends AnimalEntity implements GeoEntity {
         super.breed(world, other);
     }
 
-    @Override
-    public boolean shouldSpawnSprintingParticles() {
-        return false;
-    }
-
     @Nullable
     @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
         return ModEntities.CHAMELEON.create(world);
     }
 
-    private PlayState predicate(AnimationState tAnimationState) {
+    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
         if(!tAnimationState.isMoving() && !this.getPassengerList().isEmpty()) {
-            tAnimationState.getController().setAnimation(RawAnimation.begin().then("chameleon.lay_down", Animation.LoopType.HOLD_ON_LAST_FRAME));
+            tAnimationState.getController().setAnimation(RawAnimation.begin().thenPlayAndHold("chameleon.lay_down"));
             return PlayState.CONTINUE;
         } else if(tAnimationState.isMoving()) {
-            tAnimationState.getController().setAnimation(RawAnimation.begin().then("chameleon.walk", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
-        } else if(this.isAttacking()) {
-            tAnimationState.getController().setAnimation(RawAnimation.begin().thenLoop("chameleon.lick"));
+            tAnimationState.getController().setAnimation(RawAnimation.begin().thenLoop("chameleon.walk"));
             return PlayState.CONTINUE;
         }
-
-        tAnimationState.getController().setAnimation(RawAnimation.begin().then("chameleon.idle", Animation.LoopType.LOOP));
+        tAnimationState.getController().setAnimation(RawAnimation.begin().thenLoop("chameleon.idle"));
         return PlayState.CONTINUE;
     }
 
+
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController<>(this, "controller", 0, this::predicate));
+        controllerRegistrar.add(new AnimationController<>(this, "controller", 1, this::predicate));
+        controllerRegistrar.add(new AnimationController<>(this, "attack_controller", 1, this::attackPredicate));
+    }
+
+    private <T extends GeoAnimatable> PlayState attackPredicate(AnimationState<T> tAnimationState) {
+        if(this.isAttacking()) {
+            tAnimationState.getController().setAnimation(RawAnimation.begin().thenLoop("chameleon.lick"));
+            return PlayState.CONTINUE;
+        }
+        return PlayState.STOP;
     }
 
     @Override
