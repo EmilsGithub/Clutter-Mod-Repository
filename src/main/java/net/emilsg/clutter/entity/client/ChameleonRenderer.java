@@ -25,13 +25,16 @@ import software.bernie.geckolib.core.object.Color;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 public class ChameleonRenderer extends GeoEntityRenderer<ChameleonEntity> {
+    private static final Identifier TEXTURE = new Identifier(Clutter.MOD_ID, "textures/entity/chameleon.png");
+
     public ChameleonRenderer(EntityRendererFactory.Context renderManager) {
         super(renderManager, new ChameleonModel());
+        this.shadowRadius = 0.25f;
     }
 
     @Override
     public Identifier getTextureLocation(ChameleonEntity animatable) {
-        return new Identifier(Clutter.MOD_ID, "textures/entity/chameleon.png");
+        return TEXTURE;
     }
 
     @Override
@@ -41,16 +44,16 @@ public class ChameleonRenderer extends GeoEntityRenderer<ChameleonEntity> {
 
     public Color getFoliageColor(Entity animatable) {
         BlockPos animatablePos = animatable.getBlockPos();
-        RegistryEntry<Biome> registryEntry = animatable.world.getBiome(animatablePos);
+        RegistryEntry<Biome> registryEntry = animatable.getWorld().getBiome(animatablePos);
 
         int color;
         if(animatable.isTouchingWater() || getBlockOrFluidBelowEntity(animatable).getFluidState().isIn(FluidTags.WATER)) {
-            color = BiomeColors.getWaterColor(animatable.world, animatablePos);
+            color = BiomeColors.getWaterColor(animatable.getWorld(), animatablePos);
         } else if(registryEntry.isIn(BiomeTags.IS_OVERWORLD)) {
             if (getBlockOrFluidBelowEntity(animatable).getBlock() instanceof LeavesBlock) {
-                color = BiomeColors.getFoliageColor(animatable.world, animatablePos);
+                color = BiomeColors.getFoliageColor(animatable.getWorld(), animatablePos);
             } else {
-                color = BiomeColors.getGrassColor(animatable.world, animatablePos);
+                color = BiomeColors.getGrassColor(animatable.getWorld(), animatablePos);
             }
         } else if (registryEntry.isIn(BiomeTags.IS_NETHER)) {
             if (registryEntry.matchesKey(BiomeKeys.WARPED_FOREST) || getBlockOrFluidBelowEntity(animatable).isOf(Blocks.WARPED_NYLIUM)) {

@@ -3,11 +3,8 @@ package net.emilsg.clutter.block.custom;
 import net.emilsg.clutter.entity.ModEntities;
 import net.emilsg.clutter.entity.custom.ButterflyEntity;
 import net.emilsg.clutter.entity.variants.ButterflyVariant;
-import net.emilsg.clutter.item.ModItems;
 import net.minecraft.block.*;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.registry.entry.RegistryEntry;
@@ -21,7 +18,6 @@ import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Util;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -34,7 +30,6 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
-import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.dimension.DimensionTypes;
 
 public class ButterflyCocoonBlock extends Block {
@@ -95,7 +90,7 @@ public class ButterflyCocoonBlock extends Block {
                         RegistryEntry<Biome> registryEntry = world.getBiome(pos);
                         ButterflyVariant variant = ButterflyVariant.byId(1);
                         if (registryEntry.isIn(BiomeTags.IS_OVERWORLD)) {
-                            variant = ButterflyVariant.byId(random.nextInt(15));
+                            variant = ButterflyVariant.byId(random.nextInt(16));
                         } else if (registryEntry.isIn(BiomeTags.IS_NETHER)) {
                             if (registryEntry.matchesKey(BiomeKeys.WARPED_FOREST)) {
                                 variant = ButterflyVariant.WARPED;
@@ -103,8 +98,12 @@ public class ButterflyCocoonBlock extends Block {
                                 variant = ButterflyVariant.CRIMSON;
                             } else if (registryEntry.matchesKey(BiomeKeys.SOUL_SAND_VALLEY)) {
                                 variant = ButterflyVariant.SOUL;
+                            } else if (random.nextBoolean()) {
+                                variant = ButterflyVariant.CRIMSON;
+                            } else if (random.nextBoolean()) {
+                                variant = ButterflyVariant.WARPED;
                             } else {
-                                variant = ButterflyVariant.byId(random.nextBetween(16, 18));
+                                variant = ButterflyVariant.SOUL;
                             }
                         }
                         butterflyEntity.setBreedingAge(6000);
@@ -150,7 +149,7 @@ public class ButterflyCocoonBlock extends Block {
 
     @Override
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-        return world.getBlockState(pos.up()).getBlock() instanceof LeavesBlock ||  world.getBlockState(pos.up()).isIn(BlockTags.LOGS) || world.getBlockState(pos.up()).isIn(BlockTags.WART_BLOCKS);
+        return world.getBlockState(pos.up()).getBlock() instanceof LeavesBlock ||  world.getBlockState(pos.up()).isIn(BlockTags.LOGS) || world.getBlockState(pos.up()).isIn(BlockTags.WART_BLOCKS) || world.getBlockState(pos.up()).isOf(Blocks.BONE_BLOCK);
     }
 
     @Override

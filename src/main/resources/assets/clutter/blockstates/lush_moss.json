@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "clutter:block/plants/lush_moss"
+      },
+      {
+        "model": "clutter:block/plants/lush_moss2"
+      }
+    ]
+  }
+}

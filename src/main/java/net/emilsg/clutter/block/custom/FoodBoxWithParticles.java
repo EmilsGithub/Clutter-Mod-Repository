@@ -1,7 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;

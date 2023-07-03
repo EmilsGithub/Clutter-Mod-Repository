@@ -288,6 +288,8 @@ public class TableBlock extends Block implements Waterloggable {
             return ModBlocks.STRIPPED_CRIMSON_TABLE.getDefaultState().with(LEGS, state.get(LEGS)).with(LEG_POSITIONS, state.get(LEG_POSITIONS));
         } else if (state.getBlock() == ModBlocks.WARPED_TABLE) {
             return ModBlocks.STRIPPED_WARPED_TABLE.getDefaultState().with(LEGS, state.get(LEGS)).with(LEG_POSITIONS, state.get(LEG_POSITIONS));
+        } else if (state.getBlock() == ModBlocks.CHERRY_TABLE) {
+            return ModBlocks.STRIPPED_CHERRY_TABLE.getDefaultState().with(LEGS, state.get(LEGS)).with(LEG_POSITIONS, state.get(LEG_POSITIONS));
         } else {
             return state;
         }

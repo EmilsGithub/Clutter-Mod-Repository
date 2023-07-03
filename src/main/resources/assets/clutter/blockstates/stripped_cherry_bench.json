@@ -1,0 +1,64 @@
+{
+  "variants":{
+    "facing=north,leg_positions=all":{
+      "model":"clutter:block/benches/stripped_cherry/all"
+    },
+    "facing=south,leg_positions=all":{
+      "model":"clutter:block/benches/stripped_cherry/all",
+      "y": 180
+    },
+    "facing=east,leg_positions=all":{
+      "model":"clutter:block/benches/stripped_cherry/all",
+      "y": 90
+    },
+    "facing=west,leg_positions=all":{
+      "model":"clutter:block/benches/stripped_cherry/all",
+      "y": 270
+    },
+    "facing=north,leg_positions=east":{
+      "model":"clutter:block/benches/stripped_cherry/left"
+    },
+    "facing=south,leg_positions=east":{
+      "model":"clutter:block/benches/stripped_cherry/right",
+      "y": 180
+    },
+    "facing=north,leg_positions=west":{
+      "model":"clutter:block/benches/stripped_cherry/right"
+    },
+    "facing=south,leg_positions=west":{
+      "model":"clutter:block/benches/stripped_cherry/left",
+      "y": 180
+    },
+    "facing=north,leg_positions=none":{
+      "model":"clutter:block/benches/stripped_cherry/none"
+    },
+    "facing=south,leg_positions=none":{
+      "model":"clutter:block/benches/stripped_cherry/none",
+      "y": 180
+    },
+    "facing=east,leg_positions=none":{
+      "model":"clutter:block/benches/stripped_cherry/none",
+      "y": 90
+    },
+    "facing=west,leg_positions=none":{
+      "model":"clutter:block/benches/stripped_cherry/none",
+      "y": 270
+    },
+    "facing=east,leg_positions=north":{
+      "model":"clutter:block/benches/stripped_cherry/right",
+      "y": 90
+    },
+    "facing=west,leg_positions=north":{
+      "model":"clutter:block/benches/stripped_cherry/left",
+      "y": 270
+    },
+    "facing=east,leg_positions=south":{
+      "model":"clutter:block/benches/stripped_cherry/left",
+      "y": 90
+    },
+    "facing=west,leg_positions=south":{
+      "model":"clutter:block/benches/stripped_cherry/right",
+      "y": 270
+    }
+  }
+}

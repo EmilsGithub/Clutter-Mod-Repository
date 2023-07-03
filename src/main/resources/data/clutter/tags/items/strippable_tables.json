@@ -8,6 +8,7 @@
     "clutter:mangrove_table",
     "clutter:oak_table",
     "clutter:spruce_table",
-    "clutter:warped_table"
+    "clutter:warped_table",
+    "clutter:cherry_table"
   ]
 }

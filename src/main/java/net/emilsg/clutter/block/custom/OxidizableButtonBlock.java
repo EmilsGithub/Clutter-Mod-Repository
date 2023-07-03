@@ -5,7 +5,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.ButtonBlock;
 import net.minecraft.block.Oxidizable;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 

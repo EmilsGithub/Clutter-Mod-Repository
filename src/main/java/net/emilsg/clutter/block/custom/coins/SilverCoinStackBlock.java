@@ -7,12 +7,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.loot.context.LootContext;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.ActionResult;
@@ -26,8 +22,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 public class SilverCoinStackBlock extends Block {
     public static final IntProperty COIN_LAYERS = IntProperty.of("coin_layers", 1, 8);
@@ -66,10 +60,10 @@ public class SilverCoinStackBlock extends Block {
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (world.isClient && player.getStackInHand(hand).isOf(ModItems.SILVER_COIN) && hand.equals(Hand.MAIN_HAND) && player.getStackInHand(hand).getCount() >= 1 && state.get(COIN_LAYERS) < 8 && !player.isSneaking()) {
+        if (world.isClient && player.getStackInHand(hand).isOf(ModItems.SILVER_COIN) && hand.equals(Hand.MAIN_HAND) && player.getStackInHand(hand).getCount() >= 8 && state.get(COIN_LAYERS) < 8 && !player.isSneaking()) {
             return ActionResult.SUCCESS;
         }
-        if (!world.isClient && player.getStackInHand(hand).isOf(ModItems.SILVER_COIN) && hand.equals(Hand.MAIN_HAND) && player.getStackInHand(hand).getCount() >= 1 && state.get(COIN_LAYERS) < 8 && !player.isSneaking()) {
+        if (!world.isClient && player.getStackInHand(hand).isOf(ModItems.SILVER_COIN) && hand.equals(Hand.MAIN_HAND) && player.getStackInHand(hand).getCount() >= 8 && state.get(COIN_LAYERS) < 8 && !player.isSneaking()) {
             world.setBlockState(pos, state.with(COIN_LAYERS, state.get(COIN_LAYERS) + 1), Block.NOTIFY_ALL);
             world.playSound(null, pos, ModSounds.COIN_PILE_PLACE, SoundCategory.BLOCKS, 1.0f, 1.0f);
             if (!player.getAbilities().creativeMode) {

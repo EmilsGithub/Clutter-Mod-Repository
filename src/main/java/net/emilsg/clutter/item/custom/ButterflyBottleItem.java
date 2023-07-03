@@ -43,18 +43,17 @@ public class ButterflyBottleItem extends Item {
                 blockPos2 = blockPos.offset(direction);
             }
 
-            ButterflyEntity butterflyEntity = ModEntities.BUTTERFLY.create(world);
+            ButterflyEntity butterflyEntity = ModEntities.BUTTERFLY.create(context.getWorld());
             butterflyEntity.setVariant(variant);
             butterflyEntity.setPersistent();
             butterflyEntity.updatePosition(blockPos2.getX() + 0.5, blockPos2.getY(), blockPos2.getZ() + 0.5);
             butterflyEntity.setHomePos(blockPos2);
+            butterflyEntity.setBreedingAge(6000);
             world.playSound(null, blockPos2, SoundEvents.BLOCK_WOOL_FALL, SoundCategory.NEUTRAL, 1 ,1);
             world.spawnEntity(butterflyEntity);
-            if(Objects.requireNonNull(context.getPlayer()).isPlayer()) {
+            if(Objects.requireNonNull(context.getPlayer()).isPlayer() && !context.getPlayer().getAbilities().creativeMode) {
                 context.getPlayer().giveItemStack(new ItemStack(Items.GLASS_BOTTLE));
-                if(!context.getPlayer().getAbilities().creativeMode) {
-                    itemStack.decrement(1);
-                }
+                itemStack.decrement(1);
             }
             world.emitGameEvent(context.getPlayer(), GameEvent.ENTITY_PLACE, blockPos);
 

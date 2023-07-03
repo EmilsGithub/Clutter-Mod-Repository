@@ -1,0 +1,22 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "clutter:soul_bonfire"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "clutter:soul_bonfire",
+          "properties": {
+            "block_shape": "center"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "butterfly_elytron",
+  "pattern": [
+    "BBB",
+    "BEB",
+    "BBB"
+  ],
+  "key": {
+    "B": {
+      "item": "clutter:yellow_butterfly_in_a_bottle"
+    },
+    "E": {
+      "tag": "clutter:elytron"
+    }
+  },
+  "result": {
+    "item": "clutter:yellow_butterfly_elytra",
+    "count": 1
+  }
+}

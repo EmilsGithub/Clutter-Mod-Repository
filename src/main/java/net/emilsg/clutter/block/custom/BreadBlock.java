@@ -37,11 +37,11 @@ public class BreadBlock extends HorizontalFacingBlock {
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         int remainingSlices = state.get(SLICES);
 
-        if (world.isClient && hand.equals(Hand.MAIN_HAND) && player.getStackInHand(hand).isEmpty()) {
+        if (world.isClient && hand.equals(Hand.MAIN_HAND) && player.getStackInHand(hand).isEmpty() && player.getHungerManager().isNotFull()) {
             return ActionResult.SUCCESS;
         }
 
-        if (remainingSlices >= 1 && hand.equals(Hand.MAIN_HAND) && player.getStackInHand(hand).isEmpty()) {
+        if (remainingSlices >= 1 && hand.equals(Hand.MAIN_HAND) && player.getStackInHand(hand).isEmpty() && player.getHungerManager().isNotFull()) {
             if (remainingSlices - 1 < 1) {
                 player.getHungerManager().add(food, saturation);
                 world.removeBlock(pos, false);
@@ -122,7 +122,7 @@ public class BreadBlock extends HorizontalFacingBlock {
     }
 
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-        return world.getBlockState(pos.down()).getMaterial().isSolid();
+        return world.getBlockState(pos.down()).isSolid();
     }
 
     @Override

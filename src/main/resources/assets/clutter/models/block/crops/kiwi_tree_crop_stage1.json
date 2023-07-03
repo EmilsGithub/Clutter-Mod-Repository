@@ -1,0 +1,6 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "cross": "clutter:block/kiwi_tree_crop_stage1"
+  }
+}

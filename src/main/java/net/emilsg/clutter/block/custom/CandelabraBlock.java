@@ -1,7 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
 import net.minecraft.block.*;
-import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.particle.ParticleTypes;
@@ -195,11 +194,6 @@ public class CandelabraBlock extends WaterloggableLitBlock {
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         Direction direction = Direction.DOWN;
         return Block.sideCoversSmallSquare(world, pos.offset(direction), direction.getOpposite());
-    }
-
-    @Override
-    public PistonBehavior getPistonBehavior(BlockState state) {
-        return PistonBehavior.DESTROY;
     }
 
     @Override

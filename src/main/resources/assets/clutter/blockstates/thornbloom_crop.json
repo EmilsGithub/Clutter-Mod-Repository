@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "clutter:block/crops/thornbloom_stage0"
+    },
+    "age=1": {
+      "model": "clutter:block/crops/thornbloom_stage0"
+    },
+    "age=2": {
+      "model": "clutter:block/crops/thornbloom_stage1"
+    },
+    "age=3": {
+      "model": "clutter:block/crops/thornbloom_stage1"
+    },
+    "age=4": {
+      "model": "clutter:block/crops/thornbloom_stage1_5"
+    },
+    "age=5": {
+      "model": "clutter:block/crops/thornbloom_stage1_5"
+    },
+    "age=6": {
+      "model": "clutter:block/crops/thornbloom_stage1_5"
+    },
+    "age=7": {
+      "model": "clutter:block/crops/thornbloom_stage2"
+    }
+  }
+}

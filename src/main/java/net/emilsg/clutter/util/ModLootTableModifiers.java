@@ -1,43 +1,36 @@
 package net.emilsg.clutter.util;
 
-import com.google.common.collect.ImmutableList;
+import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.config.ModConfigs;
 import net.emilsg.clutter.enchantment.ModEnchantments;
 import net.emilsg.clutter.item.ModItems;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
-import net.minecraft.advancement.criterion.InventoryChangedCriterion;
-import net.minecraft.enchantment.EnchantmentLevelEntry;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.item.EnchantedBookItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.loot.LootPool;
-import net.minecraft.loot.condition.*;
+import net.minecraft.loot.condition.InvertedLootCondition;
+import net.minecraft.loot.condition.MatchToolLootCondition;
+import net.minecraft.loot.condition.RandomChanceLootCondition;
 import net.minecraft.loot.entry.AlternativeEntry;
-import net.minecraft.loot.entry.GroupEntry;
 import net.minecraft.loot.entry.ItemEntry;
-import net.minecraft.loot.entry.TagEntry;
 import net.minecraft.loot.function.EnchantRandomlyLootFunction;
 import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
-import net.minecraft.loot.provider.number.UniformLootNumberProvider;
-import net.minecraft.predicate.NumberRange;
-import net.minecraft.predicate.entity.LocationPredicate;
-import net.minecraft.predicate.item.EnchantmentPredicate;
 import net.minecraft.predicate.item.ItemPredicate;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Pair;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeKeys;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 
 public class ModLootTableModifiers {
+    private static final Identifier SNIFFER_DIGGING_ID = new Identifier("minecraft", "gameplay/sniffer_digging");
+
     private static final Identifier FERN_ID = new Identifier("minecraft", "blocks/fern");
 
+    private static final Identifier VILLAGE_FLETCHER_ID = new Identifier("minecraft", "chests/village/village_fletcher");
+    private static final Identifier VILLAGE_BUTCHER_ID = new Identifier("minecraft", "chests/village/village_butcher");
+    private static final Identifier VILLAGE_TANNERY_ID = new Identifier("minecraft", "chests/village/village_tannery");
+    private static final Identifier VILLAGE_SHEPHERD_ID = new Identifier("minecraft", "chests/village/village_shepherd");
+    private static final Identifier IGLOO_CHEST_ID = new Identifier("minecraft", "chests/igloo_chest");
     private static final Identifier ABANDONED_MINESHAFT_ID = new Identifier("minecraft", "chests/abandoned_mineshaft");
     private static final Identifier ANCIENT_CITY_ID = new Identifier("minecraft", "chests/ancient_city");
     private static final Identifier BASTION_TREASURE_ID = new Identifier("minecraft", "chests/bastion_treasure");
@@ -52,10 +45,8 @@ public class ModLootTableModifiers {
 
     private static final Identifier PIGLIN_BRUTE_ID = new Identifier("minecraft", "entities/piglin_brute");
     private static final Identifier ELDER_GUARDIAN_ID = new Identifier("minecraft", "entities/elder_guardian");
-
     private static final Identifier WITHER_ID = new Identifier("minecraft", "entities/wither");
     private static final Identifier ENDER_DRAGON_ID = new Identifier("minecraft", "entities/ender_dragon");
-
 
     static List<Identifier> structureIds = Arrays.asList(
             ABANDONED_MINESHAFT_ID,
@@ -85,6 +76,14 @@ public class ModLootTableModifiers {
                 tableBuilder.pool(poolBuilder.build());
             }
 
+            if (id.equals(SNIFFER_DIGGING_ID)) {
+                tableBuilder.modifyPools(builder -> {
+                    builder.with(AlternativeEntry.builder(ItemEntry.builder(ModItems.THORNBLOOM_SEEDS))).with(AlternativeEntry.builder(ItemEntry.builder(ModItems.KIWI_SEEDS)));
+                });
+            }
+
+            //Coins
+        if (ModConfigs.COIN_DROPS_AND_LOOT_GEN) {
             for (Identifier structureId : structureIds) {
                 if (id.equals(structureId)) {
                     LootPool.Builder poolBuilder = LootPool.builder()
@@ -122,6 +121,65 @@ public class ModLootTableModifiers {
                         .rolls(ConstantLootNumberProvider.create(6))
                         .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.RARE_COIN_POUCH).weight(2)))
                         .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.EPIC_COIN_POUCH).weight(1)))
+                        .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1.0f)).build());
+                tableBuilder.pool(poolBuilder.build());
+            }
+        }
+
+            if(id.equals(JUNGLE_TEMPLE_ID)) {
+                LootPool.Builder poolBuilder = LootPool.builder()
+                        .rolls(ConstantLootNumberProvider.create(1))
+                        .with(AlternativeEntry.builder(ItemEntry.builder(ModBlocks.PANDA_PLUSHIE).weight(1).conditionally(RandomChanceLootCondition.builder(0.1f))))
+                        .with(AlternativeEntry.builder(ItemEntry.builder(ModBlocks.OCELOT_PLUSHIE).weight(1).conditionally(RandomChanceLootCondition.builder(0.1f))))
+                        .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1.0f)).build());
+                tableBuilder.pool(poolBuilder.build());
+            }
+
+            if(id.equals(BURIED_TREASURE_ID)) {
+                LootPool.Builder poolBuilder = LootPool.builder()
+                        .rolls(ConstantLootNumberProvider.create(1))
+                        .with(ItemEntry.builder(ModBlocks.SQUID_PLUSHIE)).conditionally(RandomChanceLootCondition.builder(0.2f))
+                        .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1.0f)).build());
+                tableBuilder.pool(poolBuilder.build());
+            }
+
+            if(id.equals(IGLOO_CHEST_ID)) {
+                LootPool.Builder poolBuilder = LootPool.builder()
+                        .rolls(ConstantLootNumberProvider.create(1))
+                        .with(AlternativeEntry.builder(ItemEntry.builder(ModBlocks.FOX_PLUSHIE).weight(1).conditionally(RandomChanceLootCondition.builder(0.1f))))
+                        .with(AlternativeEntry.builder(ItemEntry.builder(ModBlocks.SNOW_FOX_PLUSHIE).weight(1).conditionally(RandomChanceLootCondition.builder(0.1f))))
+                        .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1.0f)).conditionally(RandomChanceLootCondition.builder(0.1f)).build());
+                tableBuilder.pool(poolBuilder.build());
+            }
+
+            if(id.equals(VILLAGE_SHEPHERD_ID)) {
+                LootPool.Builder poolBuilder = LootPool.builder()
+                        .rolls(ConstantLootNumberProvider.create(1))
+                        .with(ItemEntry.builder(ModBlocks.SHEEP_PLUSHIE)).conditionally(RandomChanceLootCondition.builder(0.2f))
+                        .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1.0f)).build());
+                tableBuilder.pool(poolBuilder.build());
+            }
+
+            if(id.equals(VILLAGE_TANNERY_ID)) {
+                LootPool.Builder poolBuilder = LootPool.builder()
+                        .rolls(ConstantLootNumberProvider.create(1))
+                        .with(ItemEntry.builder(ModBlocks.COW_PLUSHIE)).conditionally(RandomChanceLootCondition.builder(0.2f))
+                        .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1.0f)).build());
+                tableBuilder.pool(poolBuilder.build());
+            }
+
+            if(id.equals(VILLAGE_BUTCHER_ID)) {
+                LootPool.Builder poolBuilder = LootPool.builder()
+                        .rolls(ConstantLootNumberProvider.create(1))
+                        .with(ItemEntry.builder(ModBlocks.PIG_PLUSHIE)).conditionally(RandomChanceLootCondition.builder(0.2f))
+                        .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1.0f)).build());
+                tableBuilder.pool(poolBuilder.build());
+            }
+
+            if(id.equals(VILLAGE_FLETCHER_ID)) {
+                LootPool.Builder poolBuilder = LootPool.builder()
+                        .rolls(ConstantLootNumberProvider.create(1))
+                        .with(ItemEntry.builder(ModBlocks.CHICKEN_PLUSHIE)).conditionally(RandomChanceLootCondition.builder(0.2f))
                         .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1.0f)).build());
                 tableBuilder.pool(poolBuilder.build());
             }

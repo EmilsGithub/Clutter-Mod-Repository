@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "SFS"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stone"
+    },
+    "F": {
+      "item": "minecraft:frogspawn"
+    }
+  },
+  "result": {
+    "item": "clutter:frog_statue",
+    "count": 1
+  }
+}

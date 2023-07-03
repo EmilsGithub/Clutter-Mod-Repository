@@ -1,0 +1,10 @@
+{
+	"parent": "clutter:block/trellises/horizontal_trellis_parent",
+	"textures": {
+		"0": "block/cherry_log",
+		"1": "clutter:block/weeping_vines",
+		"2": "clutter:block/weeping_vines_mushrooms",
+		"3": "clutter:block/long_weeping_vines_hanging",
+		"particle": "block/cherry_log"
+	}
+}

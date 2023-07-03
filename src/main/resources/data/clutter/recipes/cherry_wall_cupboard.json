@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wall_cupboards",
+  "pattern": [
+    "PS ",
+    "PS ",
+    "PS "
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:cherry_slab"
+    },
+    "P": {
+      "item": "minecraft:cherry_planks"
+    }
+  },
+  "result": {
+    "item": "clutter:cherry_wall_cupboard",
+    "count": 2
+  }
+}

@@ -2,15 +2,15 @@ package net.emilsg.clutter;
 
 import net.emilsg.clutter.block.entity.SeatEntity;
 import net.emilsg.clutter.entity.ModEntities;
-import net.emilsg.clutter.entity.client.ButterflyRenderer;
-import net.emilsg.clutter.entity.client.ChameleonRenderer;
-import net.emilsg.clutter.entity.client.EchofinRenderer;
-import net.emilsg.clutter.entity.client.MossbloomRenderer;
+import net.emilsg.clutter.entity.client.*;
 import net.emilsg.clutter.util.ModSit;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.block.Block;
+import net.minecraft.client.color.world.BiomeColors;
+import net.minecraft.client.color.world.FoliageColors;
 import net.minecraft.client.render.Frustum;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.entity.EntityRenderer;
@@ -26,11 +26,15 @@ public class ClutterClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        registerColorProviders();
+
         EntityRendererRegistry.register(ModSit.SEAT, EmptyRenderer::new);
         EntityRendererRegistry.register(ModEntities.BUTTERFLY, ButterflyRenderer::new);
         EntityRendererRegistry.register(ModEntities.CHAMELEON, ChameleonRenderer::new);
         EntityRendererRegistry.register(ModEntities.ECHOFIN, EchofinRenderer::new);
         EntityRendererRegistry.register(ModEntities.MOSSBLOOM, MossbloomRenderer::new);
+        EntityRendererRegistry.register(ModEntities.KIWI_BIRD, KiwiBirdRenderer::new);
+        EntityRendererRegistry.register(ModEntities.EMPEROR_PENGUIN, EmperorPenguinRenderer::new);
 
         List<Block> blocksToRender = Arrays.asList(
                 FOOD_BOX,
@@ -65,6 +69,8 @@ public class ClutterClient implements ClientModInitializer {
                 JUNGLE_WINDOW_SILL,
                 ACACIA_WINDOW_SILL,
                 SPRUCE_WINDOW_SILL,
+                CHERRY_WINDOW_SILL,
+                BAMBOO_WINDOW_SILL,
                 CRIMSON_WINDOW_SILL,
                 WARPED_WINDOW_SILL,
                 MANGROVE_WINDOW_SILL,
@@ -74,6 +80,8 @@ public class ClutterClient implements ClientModInitializer {
                 JUNGLE_WALL_BOOKSHELF,
                 ACACIA_WALL_BOOKSHELF,
                 SPRUCE_WALL_BOOKSHELF,
+                BAMBOO_WALL_BOOKSHELF,
+                CHERRY_WALL_BOOKSHELF,
                 CRIMSON_WALL_BOOKSHELF,
                 WARPED_WALL_BOOKSHELF,
                 MANGROVE_WALL_BOOKSHELF,
@@ -375,16 +383,26 @@ public class ClutterClient implements ClientModInitializer {
                 JUNGLE_TRELLIS,
                 ACACIA_TRELLIS,
                 SPRUCE_TRELLIS,
+                BAMBOO_TRELLIS,
+                CHERRY_TRELLIS,
                 CRIMSON_TRELLIS,
                 WARPED_TRELLIS,
                 MANGROVE_TRELLIS,
                 BONFIRE,
-                SOUL_BONFIRE
+                SOUL_BONFIRE,
+                CATTAILS,
+                THORNBLOOM,
+                THORNBLOOM_CROP,
+                LUSH_MOSS,
+                KIWI_LEAVES,
+                RIPE_KIWI_LEAVES,
+                KIWI_TREE_SAPLING,
+                KIWI_CROP
         );
 
-        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), blocksToRender.toArray(new Block[blocksToRender.size()]));
-    }
 
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), blocksToRender.toArray(new Block[0]));
+    }
 
     private static class EmptyRenderer extends EntityRenderer<SeatEntity> {
         protected EmptyRenderer(EntityRendererFactory.Context ctx) {
@@ -400,6 +418,27 @@ public class ClutterClient implements ClientModInitializer {
         public Identifier getTexture(SeatEntity entity) {
             return null;
         }
+    }
+
+    private void registerColorProviders(){
+        ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) ->
+                        (world != null && pos != null) ? BiomeColors.getFoliageColor(world, pos)
+                        : FoliageColors.getDefaultColor(),
+                RIPE_KIWI_LEAVES,
+                KIWI_LEAVES
+        );
+
+        ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) ->
+                        (world != null && pos != null) ? BiomeColors.getGrassColor(world, pos)
+                                : FoliageColors.getDefaultColor(),
+                CATTAILS
+        );
+
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) ->
+                        FoliageColors.getDefaultColor(),
+                RIPE_KIWI_LEAVES,
+                KIWI_LEAVES
+        );
     }
 
 }

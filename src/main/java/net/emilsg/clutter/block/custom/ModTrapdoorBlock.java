@@ -7,7 +7,6 @@ import net.minecraft.block.enums.BlockHalf;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.Direction;
 
 public class ModTrapdoorBlock extends TrapdoorBlock {

@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "clutter:bonfire",
+    "clutter:soul_bonfire",
     "#clutter:food_boxes",
     "#clutter:benches",
     "#clutter:armchairs",

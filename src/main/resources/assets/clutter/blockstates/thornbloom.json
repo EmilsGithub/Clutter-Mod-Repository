@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "clutter:block/crops/thornbloom_stage1_5"
+    },
+    "age=1": {
+      "model": "clutter:block/crops/thornbloom_stage2"
+    },
+    "age=2": {
+      "model": "clutter:block/crops/thornbloom_stage3"
+    },
+    "age=3": {
+      "model": "clutter:block/crops/thornbloom_stage4"
+    }
+  }
+}

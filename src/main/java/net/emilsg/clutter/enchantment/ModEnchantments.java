@@ -19,7 +19,7 @@ public class ModEnchantments {
     }
 
     public static void registerModEnchantments() {
-        System.out.println("Registering Enchantments for " + Clutter.MOD_ID);
+
     }
 
 }

@@ -12,27 +12,29 @@ import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.model.data.EntityModelData;
 
 public class ChameleonModel extends GeoModel<ChameleonEntity> {
+    private static final Identifier TEXTURE = new Identifier(Clutter.MOD_ID, "textures/entity/chameleon.png");
+    private static final Identifier ANIMATIONS = new Identifier(Clutter.MOD_ID, "animations/animation.chameleon.json");
+    private static final Identifier MODEL = new Identifier(Clutter.MOD_ID, "geo/chameleon.geo.json");
+
     @Override
     public Identifier getModelResource(ChameleonEntity animatable) {
-        return new Identifier(Clutter.MOD_ID, "geo/chameleon.geo.json");
+        return MODEL;
     }
 
     @Override
     public Identifier getTextureResource(ChameleonEntity animatable) {
-        return new Identifier(Clutter.MOD_ID, "textures/entity/chameleon.png");
+        return TEXTURE;
     }
 
     @Override
     public Identifier getAnimationResource(ChameleonEntity animatable) {
-        return new Identifier(Clutter.MOD_ID, "animations/animation.chameleon.json");
+        return ANIMATIONS;
     }
 
     @Override
     public RenderLayer getRenderType(ChameleonEntity animatable, Identifier texture) {
         return super.getRenderType(animatable, texture);
     }
-
-
 
     @Override
     public void setCustomAnimations(ChameleonEntity animatable, long instanceId, AnimationState<ChameleonEntity> animationState) {

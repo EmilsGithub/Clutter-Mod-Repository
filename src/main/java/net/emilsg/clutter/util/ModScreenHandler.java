@@ -2,11 +2,8 @@ package net.emilsg.clutter.util;
 
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
-import net.minecraft.inventory.SimpleInventory;
-import net.minecraft.item.ItemStack;
 import net.minecraft.screen.GenericContainerScreenHandler;
 import net.minecraft.screen.ScreenHandlerType;
-import net.minecraft.screen.slot.Slot;
 
 public class ModScreenHandler extends GenericContainerScreenHandler {
 

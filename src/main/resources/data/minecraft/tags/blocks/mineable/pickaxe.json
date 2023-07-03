@@ -2,6 +2,7 @@
 {
   "replace": false,
   "values": [
+    "clutter:frog_statue",
     "#clutter:metal_blocks",
     "#clutter:chimneys"
   ]

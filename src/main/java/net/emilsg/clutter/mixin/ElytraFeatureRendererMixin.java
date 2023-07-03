@@ -2,7 +2,6 @@ package net.emilsg.clutter.mixin;
 
 import net.emilsg.clutter.Clutter;
 import net.emilsg.clutter.item.ModItems;
-import net.emilsg.clutter.util.ModItemTags;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
@@ -67,6 +66,9 @@ public abstract class ElytraFeatureRendererMixin<T extends LivingEntity, M exten
         if (item == ModItems.PURPLE_BUTTERFLY_ELYTRA) return "purple";
         if (item == ModItems.MAGENTA_BUTTERFLY_ELYTRA) return "magenta";
         if (item == ModItems.PINK_BUTTERFLY_ELYTRA) return "pink";
+        if (item == ModItems.CRIMSON_BUTTERFLY_ELYTRA) return "crimson";
+        if (item == ModItems.WARPED_BUTTERFLY_ELYTRA) return "warped";
+        if (item == ModItems.SOUL_BUTTERFLY_ELYTRA) return "soul";
         return null;
     }
 

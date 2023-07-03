@@ -1,7 +1,7 @@
 {
   "parent": "clutter:block/tables/table_none_parent",
   "textures": {
-    "0": "block/stripped_acacia_planks",
+    "0": "block/acacia_planks",
     "particle": "block/acacia_planks"
   }
 }

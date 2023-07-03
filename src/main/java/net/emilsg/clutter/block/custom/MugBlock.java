@@ -2,7 +2,6 @@ package net.emilsg.clutter.block.custom;
 
 import net.emilsg.clutter.item.ModItems;
 import net.minecraft.block.*;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager;

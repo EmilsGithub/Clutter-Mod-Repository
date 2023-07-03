@@ -2,14 +2,12 @@ package net.emilsg.clutter.block.custom;
 
 import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.util.ModBlockTags;
-import net.emilsg.clutter.util.ModItemTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
@@ -116,6 +114,8 @@ public class WoodenChairBlock extends SeatBlock{
             return ModBlocks.STRIPPED_CRIMSON_CHAIR.getDefaultState().with(FACING, state.get(FACING));
         } else if (state.getBlock() == ModBlocks.WARPED_CHAIR) {
             return ModBlocks.STRIPPED_WARPED_CHAIR.getDefaultState().with(FACING, state.get(FACING));
+        } else if (state.getBlock() == ModBlocks.CHERRY_CHAIR) {
+            return ModBlocks.STRIPPED_CHERRY_CHAIR.getDefaultState().with(FACING, state.get(FACING));
         } else {
             return state;
         }

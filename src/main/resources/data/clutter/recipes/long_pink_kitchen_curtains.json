@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "group": "long_kitchen_curtains",
   "pattern": [
     "NNN",
     "###",

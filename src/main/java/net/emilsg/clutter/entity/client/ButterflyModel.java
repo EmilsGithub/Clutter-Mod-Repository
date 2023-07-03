@@ -6,9 +6,12 @@ import net.minecraft.util.Identifier;
 import software.bernie.geckolib.model.GeoModel;
 
 public class ButterflyModel extends GeoModel<ButterflyEntity> {
+    private static final Identifier ANIMATIONS = new Identifier(Clutter.MOD_ID, "animations/butterfly.animation.json");
+    private static final Identifier MODEL = new Identifier(Clutter.MOD_ID, "geo/butterfly.geo.json");
+
     @Override
     public Identifier getModelResource(ButterflyEntity animatable) {
-        return new Identifier(Clutter.MOD_ID, "geo/butterfly.geo.json");
+        return MODEL;
     }
 
     @Override
@@ -18,7 +21,7 @@ public class ButterflyModel extends GeoModel<ButterflyEntity> {
 
     @Override
     public Identifier getAnimationResource(ButterflyEntity animatable) {
-        return new Identifier(Clutter.MOD_ID, "animations/butterfly.animation.json");
+        return ANIMATIONS;
     }
 
 

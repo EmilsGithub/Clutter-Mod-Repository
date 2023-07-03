@@ -1,0 +1,10 @@
+{
+	"parent": "clutter:block/trellises/horizontal_trellis_parent",
+	"textures": {
+		"0": "block/cherry_log",
+		"1": "clutter:block/climbing_rose_bush",
+		"2": "clutter:block/climbing_rose",
+		"3": "clutter:block/hanging_rose",
+		"particle": "block/cherry_log"
+	}
+}

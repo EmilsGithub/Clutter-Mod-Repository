@@ -1,22 +1,25 @@
 {
   "values": [
-    "clutter:acacia_bench",
-    "clutter:birch_bench",
-    "clutter:crimson_bench",
-    "clutter:dark_oak_bench",
-    "clutter:jungle_bench",
-    "clutter:mangrove_bench",
     "clutter:oak_bench",
     "clutter:spruce_bench",
+    "clutter:birch_bench",
+    "clutter:jungle_bench",
+    "clutter:acacia_bench",
+    "clutter:dark_oak_bench",
+    "clutter:mangrove_bench",
+    "clutter:crimson_bench",
     "clutter:warped_bench",
-    "clutter:stripped_acacia_bench",
-    "clutter:stripped_birch_bench",
-    "clutter:stripped_crimson_bench",
-    "clutter:stripped_dark_oak_bench",
-    "clutter:stripped_jungle_bench",
-    "clutter:stripped_mangrove_bench",
+    "clutter:bamboo_bench",
+    "clutter:cherry_bench",
     "clutter:stripped_oak_bench",
     "clutter:stripped_spruce_bench",
-    "clutter:stripped_warped_bench"
+    "clutter:stripped_birch_bench",
+    "clutter:stripped_jungle_bench",
+    "clutter:stripped_acacia_bench",
+    "clutter:stripped_dark_oak_bench",
+    "clutter:stripped_mangrove_bench",
+    "clutter:stripped_crimson_bench",
+    "clutter:stripped_warped_bench",
+    "clutter:stripped_cherry_bench"
   ]
 }

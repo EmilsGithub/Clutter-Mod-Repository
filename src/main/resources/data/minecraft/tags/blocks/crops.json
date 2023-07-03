@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "clutter:hops_crop",
-    "clutter:cotton_crop"
+    "clutter:cotton_crop",
+    "clutter:thornbloom_crop"
   ]
 }

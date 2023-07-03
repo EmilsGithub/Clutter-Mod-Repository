@@ -5,11 +5,8 @@ import net.emilsg.clutter.block.entity.ModBlockEntities;
 import net.emilsg.clutter.config.ModConfigs;
 import net.emilsg.clutter.effect.ModEffects;
 import net.emilsg.clutter.enchantment.ModEnchantments;
-import net.emilsg.clutter.entity.custom.ButterflyEntity;
 import net.emilsg.clutter.entity.ModEntities;
-import net.emilsg.clutter.entity.custom.ChameleonEntity;
-import net.emilsg.clutter.entity.custom.EchofinEntity;
-import net.emilsg.clutter.entity.custom.MossbloomEntity;
+import net.emilsg.clutter.entity.custom.*;
 import net.emilsg.clutter.item.ModItems;
 import net.emilsg.clutter.potion.ModPotions;
 import net.emilsg.clutter.util.ModItemGroup;
@@ -51,5 +48,7 @@ public class Clutter implements ModInitializer {
 		FabricDefaultAttributeRegistry.register(ModEntities.CHAMELEON, ChameleonEntity.setAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.ECHOFIN, EchofinEntity.setAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.MOSSBLOOM, MossbloomEntity.setAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.KIWI_BIRD, KiwiBirdEntity.setAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.EMPEROR_PENGUIN, EmperorPenguinEntity.setAttributes());
 	}
 }

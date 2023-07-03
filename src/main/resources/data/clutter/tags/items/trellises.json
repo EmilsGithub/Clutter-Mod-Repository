@@ -8,6 +8,8 @@
     "clutter:mangrove_trellis",
     "clutter:oak_trellis",
     "clutter:spruce_trellis",
-    "clutter:warped_trellis"
+    "clutter:warped_trellis",
+    "clutter:bamboo_trellis",
+    "clutter:cherry_trellis"
   ]
 }

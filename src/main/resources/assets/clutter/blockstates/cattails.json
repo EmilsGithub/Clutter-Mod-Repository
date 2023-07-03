@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "half=upper": [
+      {
+      "model": "clutter:block/plants/cattails_top"
+      },
+      {
+        "model": "clutter:block/plants/cattails_top2"
+      }
+      ],
+    "half=lower": [
+      {
+        "model": "clutter:block/plants/cattails_bottom"
+      },
+      {
+        "model": "clutter:block/plants/cattails_bottom2"
+      }
+    ]
+  }
+}

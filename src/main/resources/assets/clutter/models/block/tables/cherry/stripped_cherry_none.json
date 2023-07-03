@@ -1,0 +1,7 @@
+{
+  "parent": "clutter:block/tables/table_none_parent",
+  "textures": {
+    "0": "block/cherry_planks",
+    "particle": "block/cherry_planks"
+  }
+}

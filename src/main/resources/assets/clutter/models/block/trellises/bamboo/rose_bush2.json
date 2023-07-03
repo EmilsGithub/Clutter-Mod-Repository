@@ -1,0 +1,9 @@
+{
+	"parent": "clutter:block/trellises/trellis_parent",
+	"textures": {
+		"0": "block/bamboo_block",
+		"1": "clutter:block/climbing_rose_bush2",
+		"2": "clutter:block/climbing_rose2",
+		"particle": "block/bamboo_block"
+	}
+}

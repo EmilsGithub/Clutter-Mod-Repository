@@ -8,6 +8,7 @@
     "clutter:mangrove_bench",
     "clutter:oak_bench",
     "clutter:spruce_bench",
-    "clutter:warped_bench"
+    "clutter:warped_bench",
+    "clutter:cherry_bench"
   ]
 }

@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
-public class PlushieBlock extends HorizontalFacingBlock implements Waterloggable, Equipment {
+public abstract class PlushieBlock extends HorizontalFacingBlock implements Waterloggable, Equipment {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
     protected static final VoxelShape SHAPE = Block.createCuboidShape(2.0, 0.0, 2.0, 14.0, 8.0, 14.0);
 

@@ -4,5 +4,8 @@ public class ModWorldGeneration {
     public static void generateModWorldGen() {
         ModOreGeneration.generateOres();
         ModEntitySpawning.addSpawns();
+        ModFlowerGeneration.generateFlowers();
     }
 }
+
+

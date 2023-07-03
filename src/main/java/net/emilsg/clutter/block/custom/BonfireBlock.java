@@ -2,22 +2,18 @@ package net.emilsg.clutter.block.custom;
 
 import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.block.entity.BonfireBlockEntity;
-import net.emilsg.clutter.block.entity.ChimneyBlockEntity;
 import net.emilsg.clutter.block.entity.ModBlockEntities;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.pathing.NavigationType;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
-import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -137,14 +133,14 @@ public class BonfireBlock extends BlockWithEntity {
             for (Direction direction1 : cardinalDirections) {
                 BlockPos neighborPos1 = basePos.offset(direction1);
                 BlockState neighborState1 = world.getBlockState(neighborPos1);
-                if (neighborState1.getBlock() != Blocks.AIR && !neighborState1.getMaterial().isReplaceable()) {
+                if (neighborState1.getBlock() != Blocks.AIR && !neighborState1.isReplaceable()) {
                     return false;
                 }
                 for (Direction direction2 : cardinalDirections) {
                     if (direction2.getAxis() != direction1.getAxis()) {
                         BlockPos diagonalPos = neighborPos1.offset(direction2);
                         BlockState diagonalState = world.getBlockState(diagonalPos);
-                        if (diagonalState.getBlock() != Blocks.AIR && !diagonalState.getMaterial().isReplaceable()) {
+                        if (diagonalState.getBlock() != Blocks.AIR && !diagonalState.isReplaceable()) {
                             return false;
                         }
                     }
@@ -170,10 +166,7 @@ public class BonfireBlock extends BlockWithEntity {
             }
         }
 
-        if (world.getBlockState(pos.up()).getBlock() != Blocks.AIR) {
-            return false;
-        }
-        return true;
+        return world.getBlockState(pos.up()).getBlock() == Blocks.AIR;
     }
 
 

@@ -2,7 +2,6 @@ package net.emilsg.clutter.block.custom;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Oxidizable;
-import net.minecraft.block.OxidizableBlock;
 import net.minecraft.block.PaneBlock;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;

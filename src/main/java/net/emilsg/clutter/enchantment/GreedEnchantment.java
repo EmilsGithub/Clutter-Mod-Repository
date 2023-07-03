@@ -1,17 +1,10 @@
 package net.emilsg.clutter.enchantment;
 
-import net.emilsg.clutter.item.ModItems;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 public class GreedEnchantment extends Enchantment {
 

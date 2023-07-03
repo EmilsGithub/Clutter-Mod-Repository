@@ -66,22 +66,17 @@ public class MossbloomEntity extends AnimalEntity implements GeoEntity {
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(1, new EscapeDangerGoal(this, 1.5));
         this.goalSelector.add(2, new AnimalMateGoal(this, 1));
-        this.goalSelector.add(3, new TemptGoal(this, 1.25, Ingredient.ofItems(Items.SMALL_DRIPLEAF), false));
+        this.goalSelector.add(3, new TemptGoal(this, 1.25, Ingredient.ofItems(Items.SMALL_DRIPLEAF, Items.BIG_DRIPLEAF), false));
         this.goalSelector.add(4, new FollowParentGoal(this, 1.0));
-        this.goalSelector.add(5, new WanderAroundFarGoal(this, 1.0, 2));
-        this.goalSelector.add(6, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
+        this.goalSelector.add(5, new WanderAroundFarGoal(this, 1.0, 1));
+        this.goalSelector.add(6, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
         this.goalSelector.add(7, new LookAroundGoal(this));
     }
 
     public boolean canSpawn(WorldAccess world, SpawnReason spawnReason) {
         BlockPos pos = this.getBlockPos();
         BlockState blockState = world.getBlockState(pos.down());
-        return (blockState.isOf(Blocks.GRASS_BLOCK) || blockState.isOf(Blocks.STONE) || blockState.isOf(Blocks.MOSS_BLOCK) || blockState.isOf(Blocks.CLAY)) && world.getBaseLightLevel(pos, 0) < 14;
-    }
-
-    @Override
-    public boolean canSpawn(WorldView world) {
-        return super.canSpawn(world);
+        return (blockState.isOf(Blocks.GRASS_BLOCK) || blockState.isOf(Blocks.STONE) || blockState.isOf(Blocks.MOSS_BLOCK) || blockState.isOf(Blocks.CLAY));
     }
 
     protected void initDataTracker() {
@@ -151,9 +146,7 @@ public class MossbloomEntity extends AnimalEntity implements GeoEntity {
     public static boolean isValidLushSpawn(EntityType<? extends AnimalEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
         return world.getBlockState(pos.down()).isOf(Blocks.MOSS_BLOCK) ||
                 world.getBlockState(pos.down()).isOf(Blocks.MOSS_CARPET) ||
-                world.getBlockState(pos.down()).isOf(Blocks.CLAY) ||
-                world.getBlockState(pos.down()).isOf(Blocks.DEEPSLATE) ||
-                world.getBlockState(pos.down()).isOf(Blocks.STONE);
+                world.getBlockState(pos.down()).isOf(Blocks.CLAY);
     }
 
     protected static boolean isLightLevelValidForNaturalSpawn(BlockRenderView world, BlockPos pos) {
@@ -163,7 +156,10 @@ public class MossbloomEntity extends AnimalEntity implements GeoEntity {
     @Nullable
     @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
-        return ModEntities.MOSSBLOOM.create(world);
+        MossbloomEntity child = ModEntities.MOSSBLOOM.create(world);
+        assert child != null;
+        child.setVariant(Util.getRandom(MossbloomVariant.values(), this.random));
+        return child;
     }
 
     @Override

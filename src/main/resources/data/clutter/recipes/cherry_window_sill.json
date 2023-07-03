@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "window_sills",
+  "pattern": [
+    "  P",
+    "###"
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:flower_pot"
+    },
+    "#": {
+      "item": "minecraft:cherry_slab"
+    }
+  },
+  "result": {
+    "item": "clutter:cherry_window_sill",
+    "count": 1
+  }
+}

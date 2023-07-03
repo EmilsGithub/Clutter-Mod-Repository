@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "numismatic-overhaul:bronze_coin"
+    }
+  ],
+  "result": {
+    "item": "clutter:copper_coin"
+  }
+}
+

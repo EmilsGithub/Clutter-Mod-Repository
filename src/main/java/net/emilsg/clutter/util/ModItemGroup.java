@@ -6,20 +6,25 @@ import net.emilsg.clutter.item.ModItems;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public class ModItemGroup {
-    public static ItemGroup CLUTTER_BLOCKS;
-    public static ItemGroup CLUTTER_ITEMS;
+    public static final RegistryKey<ItemGroup> CLUTTER_BLOCKS = RegistryKey.of(RegistryKeys.ITEM_GROUP, new Identifier(Clutter.MOD_ID, "clutter_blocks"));
+    public static final RegistryKey<ItemGroup> CLUTTER_ITEMS = RegistryKey.of(RegistryKeys.ITEM_GROUP, new Identifier(Clutter.MOD_ID, "clutter_items"));
 
     public static void registerItemGroups() {
-        CLUTTER_BLOCKS = FabricItemGroup.builder(new Identifier(Clutter.MOD_ID, "clutter_blocks"))
-                .displayName(Text.translatable("itemgroup.clutter_blocks"))
-                .icon(() -> new ItemStack(ModBlocks.COPPER_LANTERN)).build();
 
-        CLUTTER_ITEMS = FabricItemGroup.builder(new Identifier(Clutter.MOD_ID, "clutter_items"))
-                .displayName(Text.translatable("itemgroup.clutter_items"))
-                .icon(() -> new ItemStack(ModItems.COPPER_NUGGET)).build();
+        Registry.register(Registries.ITEM_GROUP, CLUTTER_BLOCKS, FabricItemGroup.builder()
+                .icon(() -> new ItemStack(ModBlocks.COPPER_LANTERN))
+                .displayName(Text.translatable("itemgroup.clutter_blocks")).build());
+
+        Registry.register(Registries.ITEM_GROUP, CLUTTER_ITEMS, FabricItemGroup.builder()
+                .icon(() -> new ItemStack(ModItems.COPPER_NUGGET))
+                .displayName(Text.translatable("itemgroup.clutter_items")).build());
     }
 }

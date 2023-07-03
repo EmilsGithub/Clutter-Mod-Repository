@@ -1,0 +1,13 @@
+{
+  "variants":{
+    "hatch=0":{
+      "model":"clutter:block/kiwi_bird_egg"
+    },
+    "hatch=1":{
+      "model":"clutter:block/kiwi_bird_egg1"
+    },
+    "hatch=2":{
+      "model":"clutter:block/kiwi_bird_egg2"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "clutter:block/plants/kiwi_leaves"
+    },
+    "age=1": {
+      "model": "clutter:block/plants/ripe_kiwi_leaves_stage1"
+    },
+    "age=2": [
+      {
+        "model": "clutter:block/plants/ripe_kiwi_leaves_stage2"
+      },
+      {
+        "model": "clutter:block/plants/ripe_kiwi_leaves_stage2_5"
+      }
+    ],
+    "age=3": [
+      {
+        "model": "clutter:block/plants/ripe_kiwi_leaves_stage3"
+      },
+      {
+        "model": "clutter:block/plants/ripe_kiwi_leaves_stage3_5"
+      }
+    ]
+  }
+}

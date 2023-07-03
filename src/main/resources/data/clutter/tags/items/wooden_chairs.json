@@ -9,6 +9,8 @@
     "clutter:oak_chair",
     "clutter:spruce_chair",
     "clutter:warped_chair",
+    "clutter:bamboo_chair",
+    "clutter:cherry_chair",
     "clutter:stripped_acacia_chair",
     "clutter:stripped_birch_chair",
     "clutter:stripped_crimson_chair",
@@ -17,6 +19,7 @@
     "clutter:stripped_mangrove_chair",
     "clutter:stripped_oak_chair",
     "clutter:stripped_spruce_chair",
-    "clutter:stripped_warped_chair"
+    "clutter:stripped_warped_chair",
+    "clutter:stripped_cherry_chair"
   ]
 }

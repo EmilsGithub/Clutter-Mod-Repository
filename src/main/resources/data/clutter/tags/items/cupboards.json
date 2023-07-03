@@ -9,6 +9,8 @@
     "clutter:oak_wall_cupboard",
     "clutter:spruce_wall_cupboard",
     "clutter:warped_wall_cupboard",
+    "clutter:bamboo_wall_cupboard",
+    "clutter:cherry_wall_cupboard",
 
     "clutter:acacia_cupboard",
     "clutter:birch_cupboard",
@@ -18,6 +20,8 @@
     "clutter:mangrove_cupboard",
     "clutter:oak_cupboard",
     "clutter:spruce_cupboard",
-    "clutter:warped_cupboard"
+    "clutter:warped_cupboard",
+    "clutter:bamboo_cupboard",
+    "clutter:cherry_cupboard"
   ]
 }

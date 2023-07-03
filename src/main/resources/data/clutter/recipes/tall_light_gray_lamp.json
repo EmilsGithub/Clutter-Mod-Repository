@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "group": "tall_lamps",
   "pattern": [
     "W",
     "G",

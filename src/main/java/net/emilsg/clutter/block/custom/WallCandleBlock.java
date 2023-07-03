@@ -1,8 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
-import net.fabricmc.loader.impl.lib.sat4j.core.Vec;
 import net.minecraft.block.*;
-import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
@@ -230,10 +228,5 @@ public class WallCandleBlock extends HorizontalFacingBlock implements Waterlogga
 
     private static void setLit(WorldAccess world, BlockState state, BlockPos pos, boolean lit) {
         world.setBlockState(pos, (BlockState)state.with(LIT, lit), Block.NOTIFY_ALL | Block.REDRAW_ON_MAIN_THREAD);
-    }
-
-    @Override
-    public PistonBehavior getPistonBehavior(BlockState state) {
-        return PistonBehavior.DESTROY;
     }
 }

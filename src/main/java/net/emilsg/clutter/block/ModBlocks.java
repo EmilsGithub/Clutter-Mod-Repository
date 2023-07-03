@@ -2,11 +2,15 @@ package net.emilsg.clutter.block;
 
 import net.emilsg.clutter.Clutter;
 import net.emilsg.clutter.block.custom.*;
-import net.emilsg.clutter.block.custom.coins.*;
+import net.emilsg.clutter.block.custom.coins.CopperCoinStackBlock;
+import net.emilsg.clutter.block.custom.coins.GoldenCoinStackBlock;
+import net.emilsg.clutter.block.custom.coins.SilverCoinStackBlock;
+import net.emilsg.clutter.block.custom.plants.*;
 import net.emilsg.clutter.block.custom.plushies.*;
 import net.emilsg.clutter.item.ModItems;
 import net.emilsg.clutter.sound.ModSounds;
 import net.emilsg.clutter.util.ModItemGroup;
+import net.emilsg.clutter.world.gen.tree.KiwiTreeSaplingGenerator;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -17,6 +21,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
@@ -75,9 +80,9 @@ public class ModBlocks {
     public static final Block PINK_BUNK_BED = registerBlock("pink_bunk_bed", new BunkBedBlock(DyeColor.PINK, FabricBlockSettings.copy(Blocks.PINK_BED)), ModItemGroup.CLUTTER_BLOCKS);
 
 
-    public static final Block DEEPSLATE_SILVER_ORE = registerBlock("deepslate_silver_ore", new ExperienceDroppingBlock(FabricBlockSettings.of(Material.STONE).strength(4.5f, 3.0f).requiresTool().mapColor(MapColor.DEEPSLATE_GRAY), UniformIntProvider.create(4, 8)), ModItemGroup.CLUTTER_BLOCKS);
-    public static final Block SILVER_DOOR = registerBlock("silver_door", new DoorBlock(FabricBlockSettings.of(Material.METAL, MapColor.LIGHT_GRAY).requiresTool().strength(3.0f).sounds(BlockSoundGroup.METAL).nonOpaque(), BlockSetType.IRON), ModItemGroup.CLUTTER_BLOCKS);
-    public static final Block SILVER_ORE = registerBlock("silver_ore", new ExperienceDroppingBlock(FabricBlockSettings.of(Material.STONE).strength(3.0f, 3.0f).requiresTool(), UniformIntProvider.create(4, 8)), ModItemGroup.CLUTTER_BLOCKS);
+    public static final Block DEEPSLATE_SILVER_ORE = registerBlock("deepslate_silver_ore", new ExperienceDroppingBlock(FabricBlockSettings.copy(Blocks.DEEPSLATE).strength(4.5f, 3.0f).requiresTool().mapColor(MapColor.DEEPSLATE_GRAY), UniformIntProvider.create(4, 8)), ModItemGroup.CLUTTER_BLOCKS);
+    public static final Block SILVER_DOOR = registerBlock("silver_door", new DoorBlock(FabricBlockSettings.copy(Blocks.IRON_DOOR).requiresTool().strength(3.0f).sounds(BlockSoundGroup.METAL).nonOpaque(), BlockSetType.IRON), ModItemGroup.CLUTTER_BLOCKS);
+    public static final Block SILVER_ORE = registerBlock("silver_ore", new ExperienceDroppingBlock(FabricBlockSettings.copy(Blocks.STONE).strength(3.0f, 3.0f).requiresTool(), UniformIntProvider.create(4, 8)), ModItemGroup.CLUTTER_BLOCKS);
     public static final Block RAW_SILVER_BLOCK = registerBlock("raw_silver_block", new Block(FabricBlockSettings.copy(Blocks.RAW_GOLD_BLOCK).mapColor(MapColor.LIGHT_GRAY)), ModItemGroup.CLUTTER_BLOCKS);
     public static final Block SILVER_BLOCK = registerBlock("silver_block", new Block(FabricBlockSettings.copy(Blocks.GOLD_BLOCK).mapColor(MapColor.LIGHT_GRAY)), ModItemGroup.CLUTTER_BLOCKS);
     public static final Block SILVER_BUTTON = registerBlock("silver_button", new ButtonBlock(FabricBlockSettings.copy(Blocks.STONE_BUTTON), BlockSetType.IRON, 80, false), ModItemGroup.CLUTTER_BLOCKS);
@@ -87,10 +92,10 @@ public class ModBlocks {
     public static final Block SILVER_SOUL_LANTERN = registerBlock("silver_soul_lantern", new LanternBlock(FabricBlockSettings.copy(Blocks.SOUL_LANTERN)), ModItemGroup.CLUTTER_BLOCKS);
     public static final Block SILVER_TRAPDOOR = registerBlock("silver_trapdoor", new ModTrapdoorBlock(FabricBlockSettings.copy(Blocks.IRON_TRAPDOOR), BlockSetType.IRON), ModItemGroup.CLUTTER_BLOCKS);
 
-    public static final Block COPPER_BARS = registerBlock("copper_bars", new OxidizablePaneBlock(Oxidizable.OxidationLevel.UNAFFECTED, FabricBlockSettings.of(Material.METAL, MapColor.ORANGE).requiresTool().strength(3.0f, 6.0f).sounds(BlockSoundGroup.COPPER)), ModItemGroup.CLUTTER_BLOCKS);
-    public static final Block EXPOSED_COPPER_BARS = registerBlock("exposed_copper_bars", new OxidizablePaneBlock(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.of(Material.METAL, MapColor.TERRACOTTA_LIGHT_GRAY).requiresTool().strength(3.0f, 6.0f).sounds(BlockSoundGroup.COPPER)), ModItemGroup.CLUTTER_BLOCKS);
-    public static final Block WEATHERED_COPPER_BARS = registerBlock("weathered_copper_bars", new OxidizablePaneBlock(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.of(Material.METAL, MapColor.DARK_AQUA).requiresTool().strength(3.0f, 6.0f).sounds(BlockSoundGroup.COPPER)), ModItemGroup.CLUTTER_BLOCKS);
-    public static final Block OXIDIZED_COPPER_BARS = registerBlock("oxidized_copper_bars", new OxidizablePaneBlock(Oxidizable.OxidationLevel.OXIDIZED, FabricBlockSettings.of(Material.METAL, MapColor.TEAL).requiresTool().strength(3.0f, 6.0f).sounds(BlockSoundGroup.COPPER)), ModItemGroup.CLUTTER_BLOCKS);
+    public static final Block COPPER_BARS = registerBlock("copper_bars", new OxidizablePaneBlock(Oxidizable.OxidationLevel.UNAFFECTED, FabricBlockSettings.copy(Blocks.COPPER_BLOCK).requiresTool().strength(3.0f, 6.0f).sounds(BlockSoundGroup.COPPER)), ModItemGroup.CLUTTER_BLOCKS);
+    public static final Block EXPOSED_COPPER_BARS = registerBlock("exposed_copper_bars", new OxidizablePaneBlock(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.copy(Blocks.EXPOSED_COPPER).requiresTool().strength(3.0f, 6.0f).sounds(BlockSoundGroup.COPPER)), ModItemGroup.CLUTTER_BLOCKS);
+    public static final Block WEATHERED_COPPER_BARS = registerBlock("weathered_copper_bars", new OxidizablePaneBlock(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.copy(Blocks.WEATHERED_COPPER).requiresTool().strength(3.0f, 6.0f).sounds(BlockSoundGroup.COPPER)), ModItemGroup.CLUTTER_BLOCKS);
+    public static final Block OXIDIZED_COPPER_BARS = registerBlock("oxidized_copper_bars", new OxidizablePaneBlock(Oxidizable.OxidationLevel.OXIDIZED, FabricBlockSettings.copy(Blocks.OXIDIZED_COPPER).requiresTool().strength(3.0f, 6.0f).sounds(BlockSoundGroup.COPPER)), ModItemGroup.CLUTTER_BLOCKS);
 
     public static final Block COPPER_BUTTON = registerBlock("copper_button", new OxidizableButtonBlock(Oxidizable.OxidationLevel.UNAFFECTED, FabricBlockSettings.copy(Blocks.STONE_BUTTON), BlockSetType.IRON, 10, false), ModItemGroup.CLUTTER_BLOCKS);
     public static final Block EXPOSED_COPPER_BUTTON = registerBlock("exposed_copper_button", new OxidizableButtonBlock(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.copy(Blocks.STONE_BUTTON), BlockSetType.IRON, 20, false), ModItemGroup.CLUTTER_BLOCKS);
@@ -102,10 +107,10 @@ public class ModBlocks {
     public static final Block WEATHERED_COPPER_CHAIN = registerBlock("weathered_copper_chain", new OxidizableChainBlock(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.copy(Blocks.CHAIN)), ModItemGroup.CLUTTER_BLOCKS);
     public static final Block OXIDIZED_COPPER_CHAIN = registerBlock("oxidized_copper_chain", new OxidizableChainBlock(Oxidizable.OxidationLevel.OXIDIZED, FabricBlockSettings.copy(Blocks.CHAIN)), ModItemGroup.CLUTTER_BLOCKS);
 
-    public static final Block COPPER_DOOR = registerBlock("copper_door", new OxidizableDoorBlock(Oxidizable.OxidationLevel.UNAFFECTED, FabricBlockSettings.of(Material.METAL, MapColor.ORANGE).requiresTool().strength(5.0f).sounds(BlockSoundGroup.METAL).nonOpaque(), BlockSetType.IRON), ModItemGroup.CLUTTER_BLOCKS);
-    public static final Block EXPOSED_COPPER_DOOR = registerBlock("exposed_copper_door", new OxidizableDoorBlock(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.of(Material.METAL, MapColor.TERRACOTTA_LIGHT_GRAY).requiresTool().strength(5.0f).sounds(BlockSoundGroup.METAL).nonOpaque(), BlockSetType.IRON), ModItemGroup.CLUTTER_BLOCKS);
-    public static final Block WEATHERED_COPPER_DOOR = registerBlock("weathered_copper_door", new OxidizableDoorBlock(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.of(Material.METAL, MapColor.DARK_AQUA).requiresTool().strength(5.0f).sounds(BlockSoundGroup.METAL).nonOpaque(), BlockSetType.IRON), ModItemGroup.CLUTTER_BLOCKS);
-    public static final Block OXIDIZED_COPPER_DOOR = registerBlock("oxidized_copper_door", new OxidizableDoorBlock(Oxidizable.OxidationLevel.OXIDIZED, FabricBlockSettings.of(Material.METAL, MapColor.TEAL).requiresTool().strength(5.0f).sounds(BlockSoundGroup.METAL).nonOpaque(), BlockSetType.IRON), ModItemGroup.CLUTTER_BLOCKS);
+    public static final Block COPPER_DOOR = registerBlock("copper_door", new OxidizableDoorBlock(Oxidizable.OxidationLevel.UNAFFECTED, FabricBlockSettings.copy(Blocks.COPPER_BLOCK).requiresTool().strength(5.0f).sounds(BlockSoundGroup.METAL).nonOpaque(), BlockSetType.IRON), ModItemGroup.CLUTTER_BLOCKS);
+    public static final Block EXPOSED_COPPER_DOOR = registerBlock("exposed_copper_door", new OxidizableDoorBlock(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.copy(Blocks.EXPOSED_COPPER).requiresTool().strength(5.0f).sounds(BlockSoundGroup.METAL).nonOpaque(), BlockSetType.IRON), ModItemGroup.CLUTTER_BLOCKS);
+    public static final Block WEATHERED_COPPER_DOOR = registerBlock("weathered_copper_door", new OxidizableDoorBlock(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.copy(Blocks.WEATHERED_COPPER).requiresTool().strength(5.0f).sounds(BlockSoundGroup.METAL).nonOpaque(), BlockSetType.IRON), ModItemGroup.CLUTTER_BLOCKS);
+    public static final Block OXIDIZED_COPPER_DOOR = registerBlock("oxidized_copper_door", new OxidizableDoorBlock(Oxidizable.OxidationLevel.OXIDIZED, FabricBlockSettings.copy(Blocks.OXIDIZED_COPPER).requiresTool().strength(5.0f).sounds(BlockSoundGroup.METAL).nonOpaque(), BlockSetType.IRON), ModItemGroup.CLUTTER_BLOCKS);
 
     public static final Block COPPER_LANTERN = registerBlock("copper_lantern", new OxidizableLanternBlock(Oxidizable.OxidationLevel.UNAFFECTED, FabricBlockSettings.copy(Blocks.LANTERN)), ModItemGroup.CLUTTER_BLOCKS);
     public static final Block EXPOSED_COPPER_LANTERN = registerBlock("exposed_copper_lantern", new OxidizableLanternBlock(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.copy(Blocks.LANTERN)), ModItemGroup.CLUTTER_BLOCKS);
@@ -206,6 +211,11 @@ public class ModBlocks {
     public static final Block CRIMSON_WINDOW_SILL = registerBlock("crimson_window_sill", new WindowSillBlock(FabricBlockSettings.copy(Blocks.CRIMSON_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
     public static final Block WARPED_WALL_BOOKSHELF = registerBlock("warped_wall_bookshelf", new WallBookshelfBlock(FabricBlockSettings.copy(Blocks.WARPED_PLANKS).luminance(WallBookshelfBlock.createLightLevelFromLitBlockState(8))), ModItemGroup.CLUTTER_BLOCKS);
     public static final Block WARPED_WINDOW_SILL = registerBlock("warped_window_sill", new WindowSillBlock(FabricBlockSettings.copy(Blocks.WARPED_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
+    public static final Block BAMBOO_WALL_BOOKSHELF = registerBlock("bamboo_wall_bookshelf", new WallBookshelfBlock(FabricBlockSettings.copy(Blocks.BAMBOO_PLANKS).luminance(WallBookshelfBlock.createLightLevelFromLitBlockState(8))), ModItemGroup.CLUTTER_BLOCKS);
+    public static final Block BAMBOO_WINDOW_SILL = registerBlock("bamboo_window_sill", new WindowSillBlock(FabricBlockSettings.copy(Blocks.BAMBOO_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
+    public static final Block CHERRY_WALL_BOOKSHELF = registerBlock("cherry_wall_bookshelf", new WallBookshelfBlock(FabricBlockSettings.copy(Blocks.CHERRY_PLANKS).luminance(WallBookshelfBlock.createLightLevelFromLitBlockState(8))), ModItemGroup.CLUTTER_BLOCKS);
+    public static final Block CHERRY_WINDOW_SILL = registerBlock("cherry_window_sill", new WindowSillBlock(FabricBlockSettings.copy(Blocks.CHERRY_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
+
 
     public static final Block APPLE_FOOD_BOX = registerBlock("apple_food_box", new FoodBoxBlock(FabricBlockSettings.copy(Blocks.OAK_SLAB)), ModItemGroup.CLUTTER_BLOCKS);
     public static final Block BEETROOT_FOOD_BOX = registerBlock("beetroot_food_box", new FoodBoxBlock(FabricBlockSettings.copy(Blocks.OAK_SLAB)), ModItemGroup.CLUTTER_BLOCKS);
@@ -272,6 +282,8 @@ public class ModBlocks {
     public static final Block MANGROVE_TABLE = registerBlock("mangrove_table", new TableBlock(FabricBlockSettings.copy(Blocks.MANGROVE_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
     public static final Block CRIMSON_TABLE = registerBlock("crimson_table", new TableBlock(FabricBlockSettings.copy(Blocks.CRIMSON_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
     public static final Block WARPED_TABLE = registerBlock("warped_table", new TableBlock(FabricBlockSettings.copy(Blocks.WARPED_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
+    public static final Block BAMBOO_TABLE = registerBlock("bamboo_table", new TableBlock(FabricBlockSettings.copy(Blocks.BAMBOO_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
+    public static final Block CHERRY_TABLE = registerBlock("cherry_table", new TableBlock(FabricBlockSettings.copy(Blocks.CHERRY_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
 
     public static final Block STRIPPED_OAK_TABLE = registerBlock("stripped_oak_table", new TableBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
     public static final Block STRIPPED_SPRUCE_TABLE = registerBlock("stripped_spruce_table", new TableBlock(FabricBlockSettings.copy(Blocks.SPRUCE_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
@@ -282,6 +294,7 @@ public class ModBlocks {
     public static final Block STRIPPED_MANGROVE_TABLE = registerBlock("stripped_mangrove_table", new TableBlock(FabricBlockSettings.copy(Blocks.MANGROVE_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
     public static final Block STRIPPED_CRIMSON_TABLE = registerBlock("stripped_crimson_table", new TableBlock(FabricBlockSettings.copy(Blocks.CRIMSON_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
     public static final Block STRIPPED_WARPED_TABLE = registerBlock("stripped_warped_table", new TableBlock(FabricBlockSettings.copy(Blocks.WARPED_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
+    public static final Block STRIPPED_CHERRY_TABLE = registerBlock("stripped_cherry_table", new TableBlock(FabricBlockSettings.copy(Blocks.CHERRY_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
 
     public static final Block OAK_CHAIR = registerBlock("oak_chair", new WoodenChairBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
     public static final Block SPRUCE_CHAIR = registerBlock("spruce_chair", new WoodenChairBlock(FabricBlockSettings.copy(Blocks.SPRUCE_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
@@ -292,6 +305,8 @@ public class ModBlocks {
     public static final Block MANGROVE_CHAIR = registerBlock("mangrove_chair", new WoodenChairBlock(FabricBlockSettings.copy(Blocks.MANGROVE_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
     public static final Block CRIMSON_CHAIR = registerBlock("crimson_chair", new WoodenChairBlock(FabricBlockSettings.copy(Blocks.CRIMSON_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
     public static final Block WARPED_CHAIR = registerBlock("warped_chair", new WoodenChairBlock(FabricBlockSettings.copy(Blocks.WARPED_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
+    public static final Block BAMBOO_CHAIR = registerBlock("bamboo_chair", new WoodenChairBlock(FabricBlockSettings.copy(Blocks.BAMBOO_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
+    public static final Block CHERRY_CHAIR = registerBlock("cherry_chair", new WoodenChairBlock(FabricBlockSettings.copy(Blocks.CHERRY_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
 
     public static final Block STRIPPED_OAK_CHAIR = registerBlock("stripped_oak_chair", new WoodenChairBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
     public static final Block STRIPPED_SPRUCE_CHAIR = registerBlock("stripped_spruce_chair", new WoodenChairBlock(FabricBlockSettings.copy(Blocks.SPRUCE_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
@@ -302,6 +317,7 @@ public class ModBlocks {
     public static final Block STRIPPED_MANGROVE_CHAIR = registerBlock("stripped_mangrove_chair", new WoodenChairBlock(FabricBlockSettings.copy(Blocks.MANGROVE_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
     public static final Block STRIPPED_CRIMSON_CHAIR = registerBlock("stripped_crimson_chair", new WoodenChairBlock(FabricBlockSettings.copy(Blocks.CRIMSON_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
     public static final Block STRIPPED_WARPED_CHAIR = registerBlock("stripped_warped_chair", new WoodenChairBlock(FabricBlockSettings.copy(Blocks.WARPED_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
+    public static final Block STRIPPED_CHERRY_CHAIR = registerBlock("stripped_cherry_chair", new WoodenChairBlock(FabricBlockSettings.copy(Blocks.CHERRY_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
 
     public static final Block OAK_WALL_CUPBOARD = registerBlock("oak_wall_cupboard", new WallCupboardBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).nonOpaque()), ModItemGroup.CLUTTER_BLOCKS);
     public static final Block SPRUCE_WALL_CUPBOARD = registerBlock("spruce_wall_cupboard", new WallCupboardBlock(FabricBlockSettings.copy(Blocks.SPRUCE_PLANKS).nonOpaque()), ModItemGroup.CLUTTER_BLOCKS);
@@ -312,6 +328,8 @@ public class ModBlocks {
     public static final Block MANGROVE_WALL_CUPBOARD = registerBlock("mangrove_wall_cupboard", new WallCupboardBlock(FabricBlockSettings.copy(Blocks.MANGROVE_PLANKS).nonOpaque()), ModItemGroup.CLUTTER_BLOCKS);
     public static final Block CRIMSON_WALL_CUPBOARD = registerBlock("crimson_wall_cupboard", new WallCupboardBlock(FabricBlockSettings.copy(Blocks.CRIMSON_PLANKS).nonOpaque()), ModItemGroup.CLUTTER_BLOCKS);
     public static final Block WARPED_WALL_CUPBOARD = registerBlock("warped_wall_cupboard", new WallCupboardBlock(FabricBlockSettings.copy(Blocks.WARPED_PLANKS).nonOpaque()), ModItemGroup.CLUTTER_BLOCKS);
+    public static final Block BAMBOO_WALL_CUPBOARD = registerBlock("bamboo_wall_cupboard", new WallCupboardBlock(FabricBlockSettings.copy(Blocks.BAMBOO_PLANKS).nonOpaque()), ModItemGroup.CLUTTER_BLOCKS);
+    public static final Block CHERRY_WALL_CUPBOARD = registerBlock("cherry_wall_cupboard", new WallCupboardBlock(FabricBlockSettings.copy(Blocks.CHERRY_PLANKS).nonOpaque()), ModItemGroup.CLUTTER_BLOCKS);
 
     public static final Block OAK_CUPBOARD = registerBlock("oak_cupboard", new CupboardBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).nonOpaque()), ModItemGroup.CLUTTER_BLOCKS);
     public static final Block SPRUCE_CUPBOARD = registerBlock("spruce_cupboard", new CupboardBlock(FabricBlockSettings.copy(Blocks.SPRUCE_PLANKS).nonOpaque()), ModItemGroup.CLUTTER_BLOCKS);
@@ -322,7 +340,8 @@ public class ModBlocks {
     public static final Block MANGROVE_CUPBOARD = registerBlock("mangrove_cupboard", new CupboardBlock(FabricBlockSettings.copy(Blocks.MANGROVE_PLANKS).nonOpaque()), ModItemGroup.CLUTTER_BLOCKS);
     public static final Block CRIMSON_CUPBOARD = registerBlock("crimson_cupboard", new CupboardBlock(FabricBlockSettings.copy(Blocks.CRIMSON_PLANKS).nonOpaque()), ModItemGroup.CLUTTER_BLOCKS);
     public static final Block WARPED_CUPBOARD = registerBlock("warped_cupboard", new CupboardBlock(FabricBlockSettings.copy(Blocks.WARPED_PLANKS).nonOpaque()), ModItemGroup.CLUTTER_BLOCKS);
-
+    public static final Block BAMBOO_CUPBOARD = registerBlock("bamboo_cupboard", new CupboardBlock(FabricBlockSettings.copy(Blocks.BAMBOO_PLANKS).nonOpaque()), ModItemGroup.CLUTTER_BLOCKS);
+    public static final Block CHERRY_CUPBOARD = registerBlock("cherry_cupboard", new CupboardBlock(FabricBlockSettings.copy(Blocks.CHERRY_PLANKS).nonOpaque()), ModItemGroup.CLUTTER_BLOCKS);
 
     public static final Block OAK_TRELLIS = registerBlock("oak_trellis", new TrellisBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).luminance(TrellisBlock.createLightLevelFromLitBlockState())), ModItemGroup.CLUTTER_BLOCKS);
     public static final Block SPRUCE_TRELLIS = registerBlock("spruce_trellis", new TrellisBlock(FabricBlockSettings.copy(Blocks.SPRUCE_PLANKS).luminance(TrellisBlock.createLightLevelFromLitBlockState())), ModItemGroup.CLUTTER_BLOCKS);
@@ -333,6 +352,8 @@ public class ModBlocks {
     public static final Block MANGROVE_TRELLIS = registerBlock("mangrove_trellis", new TrellisBlock(FabricBlockSettings.copy(Blocks.MANGROVE_PLANKS).luminance(TrellisBlock.createLightLevelFromLitBlockState())), ModItemGroup.CLUTTER_BLOCKS);
     public static final Block CRIMSON_TRELLIS = registerBlock("crimson_trellis", new TrellisBlock(FabricBlockSettings.copy(Blocks.CRIMSON_PLANKS).luminance(TrellisBlock.createLightLevelFromLitBlockState())), ModItemGroup.CLUTTER_BLOCKS);
     public static final Block WARPED_TRELLIS = registerBlock("warped_trellis", new TrellisBlock(FabricBlockSettings.copy(Blocks.WARPED_PLANKS).luminance(TrellisBlock.createLightLevelFromLitBlockState())), ModItemGroup.CLUTTER_BLOCKS);
+    public static final Block BAMBOO_TRELLIS = registerBlock("bamboo_trellis", new TrellisBlock(FabricBlockSettings.copy(Blocks.BAMBOO_PLANKS).luminance(TrellisBlock.createLightLevelFromLitBlockState())), ModItemGroup.CLUTTER_BLOCKS);
+    public static final Block CHERRY_TRELLIS = registerBlock("cherry_trellis", new TrellisBlock(FabricBlockSettings.copy(Blocks.CHERRY_PLANKS).luminance(TrellisBlock.createLightLevelFromLitBlockState())), ModItemGroup.CLUTTER_BLOCKS);
 
     public static final Block OAK_BENCH = registerBlock("oak_bench", new WoodenBenchBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
     public static final Block SPRUCE_BENCH = registerBlock("spruce_bench", new WoodenBenchBlock(FabricBlockSettings.copy(Blocks.SPRUCE_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
@@ -343,6 +364,10 @@ public class ModBlocks {
     public static final Block MANGROVE_BENCH = registerBlock("mangrove_bench", new WoodenBenchBlock(FabricBlockSettings.copy(Blocks.MANGROVE_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
     public static final Block CRIMSON_BENCH = registerBlock("crimson_bench", new WoodenBenchBlock(FabricBlockSettings.copy(Blocks.CRIMSON_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
     public static final Block WARPED_BENCH = registerBlock("warped_bench", new WoodenBenchBlock(FabricBlockSettings.copy(Blocks.WARPED_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
+    public static final Block BAMBOO_BENCH = registerBlock("bamboo_bench", new WoodenBenchBlock(FabricBlockSettings.copy(Blocks.BAMBOO_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
+    public static final Block CHERRY_BENCH = registerBlock("cherry_bench", new WoodenBenchBlock(FabricBlockSettings.copy(Blocks.CHERRY_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
+
+
     public static final Block STRIPPED_OAK_BENCH = registerBlock("stripped_oak_bench", new WoodenBenchBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
     public static final Block STRIPPED_SPRUCE_BENCH = registerBlock("stripped_spruce_bench", new WoodenBenchBlock(FabricBlockSettings.copy(Blocks.SPRUCE_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
     public static final Block STRIPPED_BIRCH_BENCH = registerBlock("stripped_birch_bench", new WoodenBenchBlock(FabricBlockSettings.copy(Blocks.BIRCH_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
@@ -352,6 +377,7 @@ public class ModBlocks {
     public static final Block STRIPPED_MANGROVE_BENCH = registerBlock("stripped_mangrove_bench", new WoodenBenchBlock(FabricBlockSettings.copy(Blocks.MANGROVE_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
     public static final Block STRIPPED_CRIMSON_BENCH = registerBlock("stripped_crimson_bench", new WoodenBenchBlock(FabricBlockSettings.copy(Blocks.CRIMSON_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
     public static final Block STRIPPED_WARPED_BENCH = registerBlock("stripped_warped_bench", new WoodenBenchBlock(FabricBlockSettings.copy(Blocks.WARPED_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
+    public static final Block STRIPPED_CHERRY_BENCH = registerBlock("stripped_cherry_bench", new WoodenBenchBlock(FabricBlockSettings.copy(Blocks.CHERRY_PLANKS)), ModItemGroup.CLUTTER_BLOCKS);
 
     public static final Block SHEEP_PLUSHIE = registerBlock("sheep_plushie", new SheepPlushieBlock(FabricBlockSettings.copy(Blocks.WHITE_WOOL).breakInstantly()), ModItemGroup.CLUTTER_BLOCKS);
     public static final Block COW_PLUSHIE = registerBlock("cow_plushie", new CowPlushieBlock(FabricBlockSettings.copy(Blocks.BROWN_WOOL).breakInstantly()), ModItemGroup.CLUTTER_BLOCKS);
@@ -982,26 +1008,40 @@ public class ModBlocks {
     public static final Block BONFIRE = registerBlock("bonfire", new BonfireBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).nonOpaque().luminance(BonfireBlock.createLightLevelFromLitBlockState(15))), ModItemGroup.CLUTTER_BLOCKS);
     public static final Block SOUL_BONFIRE = registerBlock("soul_bonfire", new BonfireBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).nonOpaque().luminance(BonfireBlock.createLightLevelFromLitBlockState(13))), ModItemGroup.CLUTTER_BLOCKS);
 
+    public static final Block CATTAILS = registerBlock("cattails", new CattailPlantBlock(FabricBlockSettings.copy(Blocks.ROSE_BUSH)), ModItemGroup.CLUTTER_BLOCKS);
+    public static final Block LUSH_MOSS = registerBlock("lush_moss", new MossSproutBlock(FabricBlockSettings.copy(Blocks.NETHER_SPROUTS).sounds(BlockSoundGroup.MOSS_BLOCK)), ModItemGroup.CLUTTER_BLOCKS);
+
     public static final Block BREAD = registerBlock("bread", new BreadBlock(FabricBlockSettings.copy(Blocks.CAKE).nonOpaque(), 2, 0.25f), ModItemGroup.CLUTTER_BLOCKS);
 
     public static final Block FROG_STATUE = registerBlock("frog_statue", new FrogStatueBlock(FabricBlockSettings.copy(Blocks.STONE)), ModItemGroup.CLUTTER_BLOCKS);
+
+    public static final Block THORNBLOOM = registerBlock("thornbloom", new ThornBloomPlantBlock(FabricBlockSettings.copy(Blocks.SWEET_BERRY_BUSH)), ModItemGroup.CLUTTER_BLOCKS);
+    public static final Block THORNBLOOM_CROP = registerBlockWithoutItem("thornbloom_crop", new ThornbloomCropBlock(FabricBlockSettings.copy(Blocks.WHEAT)));
 
     //public static final Block SINK = registerBlock("sink", new SinkBlock(FabricBlockSettings.copy(Blocks.WATER_CAULDRON).nonOpaque()), ModItemGroup.CLUTTER);
     //public static final Block PLATE = registerBlock("plate", new TablePlateBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).breakInstantly()), ModItemGroup.CLUTTER);
     //public static final Block SHOWER = registerBlock("shower", new ShowerBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK).ticksRandomly()), ModItemGroup.CLUTTER);
 
-    public static final Block BUTTERFLY_COCOON = registerBlockWithoutItem("butterfly_cocoon", new ButterflyCocoonBlock(FabricBlockSettings.copy(Blocks.MOSS_BLOCK).nonOpaque()));
+    public static final Block BUTTERFLY_COCOON = registerBlockWithoutItem("butterfly_cocoon", new ButterflyCocoonBlock(FabricBlockSettings.copy(Blocks.MOSS_BLOCK).breakInstantly().nonOpaque().sounds(BlockSoundGroup.MOSS_BLOCK)));
+    public static final Block KIWI_BIRD_EGG = registerBlockWithoutItem("kiwi_bird_egg", new KiwiBirdEggBlock(FabricBlockSettings.copy(Blocks.SNIFFER_EGG).nonOpaque()));
 
     public static final Block BEER_MUG = registerBlockWithoutItem("beer_mug", new BeerMugBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).breakInstantly()));
     public static final Block WOODEN_MUG = registerBlockWithoutItem("wooden_mug", new MugBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).breakInstantly()));
     public static final Block HOPS_CROP = registerBlockWithoutItem("hops_crop", new ModCropBlock(FabricBlockSettings.copy(Blocks.CARROTS), ModItems.HOPS_SEEDS));
     public static final Block COTTON_CROP = registerBlockWithoutItem("cotton_crop", new ModCropBlock(FabricBlockSettings.copy(Blocks.WHEAT), ModItems.COTTON_SEEDS));
 
-    public static final Block COPPER_COIN_STACK = registerBlockWithoutItem("copper_coin_stack", new CopperCoinStackBlock(FabricBlockSettings.of(Material.METAL).nonOpaque().strength(0.25f).sounds(ModSounds.COIN_PILE_SOUNDS).mapColor(MapColor.TERRACOTTA_ORANGE)));
-    public static final Block SILVER_COIN_STACK = registerBlockWithoutItem("silver_coin_stack", new SilverCoinStackBlock(FabricBlockSettings.of(Material.METAL).nonOpaque().strength(0.25f).sounds(ModSounds.COIN_PILE_SOUNDS).mapColor(MapColor.LIGHT_GRAY)));
-    public static final Block GOLDEN_COIN_STACK = registerBlockWithoutItem("golden_coin_stack", new GoldenCoinStackBlock(FabricBlockSettings.of(Material.METAL).nonOpaque().strength(0.25f).sounds(ModSounds.COIN_PILE_SOUNDS).mapColor(MapColor.GOLD)));
+    public static final Block COPPER_COIN_STACK = registerBlockWithoutItem("copper_coin_stack", new CopperCoinStackBlock(FabricBlockSettings.create().nonOpaque().strength(0.25f).sounds(ModSounds.COIN_PILE_SOUNDS).mapColor(MapColor.TERRACOTTA_ORANGE)));
+    public static final Block SILVER_COIN_STACK = registerBlockWithoutItem("silver_coin_stack", new SilverCoinStackBlock(FabricBlockSettings.create().nonOpaque().strength(0.25f).sounds(ModSounds.COIN_PILE_SOUNDS).mapColor(MapColor.LIGHT_GRAY)));
+    public static final Block GOLDEN_COIN_STACK = registerBlockWithoutItem("golden_coin_stack", new GoldenCoinStackBlock(FabricBlockSettings.create().nonOpaque().strength(0.25f).sounds(ModSounds.COIN_PILE_SOUNDS).mapColor(MapColor.GOLD)));
 
-    private static Block registerBlock(String name, Block block, ItemGroup group) {
+    public static final Block RIPE_KIWI_LEAVES = registerBlock("ripe_kiwi_leaves", new KiwiLeafBlock(FabricBlockSettings.copy(Blocks.JUNGLE_LEAVES)), ModItemGroup.CLUTTER_BLOCKS);
+    public static final Block KIWI_LEAVES = registerBlock("kiwi_leaves", new LeavesBlock(FabricBlockSettings.copy(Blocks.JUNGLE_LEAVES)), ModItemGroup.CLUTTER_BLOCKS);
+    public static final Block KIWI_TREE_SAPLING = registerBlock("kiwi_tree_sapling", new SaplingBlock(new KiwiTreeSaplingGenerator(), FabricBlockSettings.copy(Blocks.JUNGLE_SAPLING)), ModItemGroup.CLUTTER_BLOCKS);
+    public static final Block KIWI_CROP = registerBlockWithoutItem("kiwi_crop", new KiwiCropBlock(FabricBlockSettings.copy(Blocks.JUNGLE_SAPLING)));
+
+
+
+    private static Block registerBlock(String name, Block block, RegistryKey<ItemGroup> group) {
         registerBlockItem(name, block, group);
         return Registry.register(Registries.BLOCK, new Identifier(Clutter.MOD_ID, name), block);
     }
@@ -1010,7 +1050,7 @@ public class ModBlocks {
         return Registry.register(Registries.BLOCK, new Identifier(Clutter.MOD_ID, name), block);
     }
 
-    private static Item registerBlockItem(String name, Block block, ItemGroup group) {
+    private static Item registerBlockItem(String name, Block block, RegistryKey<ItemGroup> group) {
         Item item = Registry.register(Registries.ITEM, new Identifier(Clutter.MOD_ID, name),
                 new BlockItem(block, new FabricItemSettings()));
         ItemGroupEvents.modifyEntriesEvent(group).register(entries -> entries.add(item));
@@ -1550,6 +1590,5 @@ public class ModBlocks {
     }
 
     public static void registerModBlocks() {
-        Clutter.LOGGER.info("Registering ModBlocks for " + Clutter.MOD_ID);
     }
 }

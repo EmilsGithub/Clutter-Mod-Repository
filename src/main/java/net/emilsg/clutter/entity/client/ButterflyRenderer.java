@@ -16,6 +16,7 @@ import java.util.Map;
 public class ButterflyRenderer extends GeoEntityRenderer<ButterflyEntity> {
     public ButterflyRenderer(EntityRendererFactory.Context renderManager) {
         super(renderManager, new ButterflyModel());
+        this.shadowRadius = 0.125f;
     }
 
     public static final Map<ButterflyVariant, Identifier> LOCATION_BY_VARIANT =

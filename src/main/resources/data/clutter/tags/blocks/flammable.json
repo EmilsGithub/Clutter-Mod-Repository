@@ -5,14 +5,6 @@
     "#clutter:armchairs",
     "#clutter:floor_seating",
 
-    "clutter:acacia_wall_bookshelf",
-    "clutter:birch_wall_bookshelf",
-    "clutter:dark_oak_wall_bookshelf",
-    "clutter:jungle_wall_bookshelf",
-    "clutter:mangrove_wall_bookshelf",
-    "clutter:oak_wall_bookshelf",
-    "clutter:spruce_wall_bookshelf",
-
     "clutter:acacia_table",
     "clutter:birch_table",
     "clutter:dark_oak_table",
@@ -75,22 +67,6 @@
     "clutter:jungle_trellis",
     "clutter:mangrove_trellis",
     "clutter:oak_trellis",
-    "clutter:spruce_trellis",
-
-    "clutter:acacia_wall_cupboard",
-    "clutter:birch_wall_cupboard",
-    "clutter:dark_oak_wall_cupboard",
-    "clutter:jungle_wall_cupboard",
-    "clutter:mangrove_wall_cupboard",
-    "clutter:oak_wall_cupboard",
-    "clutter:spruce_wall_cupboard",
-
-    "clutter:acacia_cupboard",
-    "clutter:birch_cupboard",
-    "clutter:dark_oak_cupboard",
-    "clutter:jungle_cupboard",
-    "clutter:mangrove_cupboard",
-    "clutter:oak_cupboard",
-    "clutter:spruce_cupboard"
+    "clutter:spruce_trellis"
   ]
 }

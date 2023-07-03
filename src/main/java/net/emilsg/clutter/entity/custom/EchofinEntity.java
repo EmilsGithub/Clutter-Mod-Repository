@@ -90,10 +90,15 @@ public class EchofinEntity extends AnimalEntity implements GeoEntity {
     }
 
     @Override
+    public int getLimitPerChunk() {
+        return 5;
+    }
+
+    @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
         ItemStack heldItem = player.getStackInHand(hand);
 
-        if (!world.isClient && heldItem.isOf(Items.BUCKET)) {
+        if (!this.getWorld().isClient && heldItem.isOf(Items.BUCKET)) {
             EchofinVariant variant = this.getVariant();
             Item returnItem;
             if (Objects.requireNonNull(variant) == EchofinVariant.CHORUS) {
@@ -105,7 +110,11 @@ public class EchofinEntity extends AnimalEntity implements GeoEntity {
                 player.setStackInHand(hand, new ItemStack(returnItem));
             } else {
                 heldItem.decrement(1);
-                player.giveItemStack(new ItemStack(returnItem));
+                if(player.getInventory().getEmptySlot() > 0) {
+                    player.giveItemStack(new ItemStack(returnItem));
+                } else {
+                    this.dropItem(returnItem);
+                }
             }
             player.playSound(SoundEvents.ITEM_BUCKET_FILL_FISH, SoundCategory.PLAYERS, 1.0f, 1.5f);
             this.remove(RemovalReason.DISCARDED);
@@ -202,13 +211,13 @@ public class EchofinEntity extends AnimalEntity implements GeoEntity {
                 return vec3d3;
             }
 
-            if (EchofinEntity.this.world.isNight() && EchofinEntity.this.getBlockPos().getSquaredDistance(Vec3d.ofCenter(homePos)) > 8 * 8) {
+            if (EchofinEntity.this.getWorld().isNight() && EchofinEntity.this.getBlockPos().getSquaredDistance(Vec3d.ofCenter(homePos)) > 8 * 8) {
                 return Vec3d.ofCenter(homePos);
             }
 
             BlockPos blockpos = homePos.add(-2 + EchofinEntity.this.random.nextInt(5), -1 + EchofinEntity.this.random.nextInt(3), -2 + EchofinEntity.this.random.nextInt(5));
 
-            if (!EchofinEntity.this.world.getBlockState(blockpos).isOpaque()) {
+            if (!EchofinEntity.this.getWorld().getBlockState(blockpos).isOpaque()) {
                 return Vec3d.ofCenter(blockpos);
             }
 
@@ -279,7 +288,7 @@ public class EchofinEntity extends AnimalEntity implements GeoEntity {
     @Override
     public void tick() {
         if (this.getVariant() == EchofinVariant.CHORUS && random.nextBoolean()) {
-            world.addParticle(ParticleTypes.PORTAL, true, (double) this.getX() + random.nextDouble() / 4.0 * (double) (random.nextBoolean() ? 1 : -1), this.getY() + random.nextDouble() / 16.0 * (double) (random.nextBoolean() ? 1 : -1), (double) this.getZ() + random.nextDouble() / 4.0 * (double) (random.nextBoolean() ? 1 : -1), (random.nextBoolean() ? 0.1 : -0.1), (random.nextBoolean() ? 0.1 : -0.1), (random.nextBoolean() ? 0.1 : -0.1));
+            this.getWorld().addParticle(ParticleTypes.PORTAL, true, (double) this.getX() + random.nextDouble() / 4.0 * (double) (random.nextBoolean() ? 1 : -1), this.getY() + random.nextDouble() / 16.0 * (double) (random.nextBoolean() ? 1 : -1), (double) this.getZ() + random.nextDouble() / 4.0 * (double) (random.nextBoolean() ? 1 : -1), (random.nextBoolean() ? 0.1 : -0.1), (random.nextBoolean() ? 0.1 : -0.1), (random.nextBoolean() ? 0.1 : -0.1));
         }
         super.tick();
     }

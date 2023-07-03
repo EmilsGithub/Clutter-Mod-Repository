@@ -1,12 +1,9 @@
 package net.emilsg.clutter.block.entity;
 
 import net.emilsg.clutter.block.custom.WallCupboardBlock;
-import net.emilsg.clutter.util.ModItemTags;
 import net.emilsg.clutter.util.ModScreenHandler;
-import net.minecraft.block.BarrelBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BarrelBlockEntity;
 import net.minecraft.block.entity.LootableContainerBlockEntity;
 import net.minecraft.block.entity.ViewerCountManager;
 import net.minecraft.entity.player.PlayerEntity;

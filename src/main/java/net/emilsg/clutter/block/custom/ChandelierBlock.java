@@ -1,8 +1,10 @@
 package net.emilsg.clutter.block.custom;
 
 import net.emilsg.clutter.util.ModBlockTags;
-import net.minecraft.block.*;
-import net.minecraft.block.piston.PistonBehavior;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
@@ -111,11 +113,6 @@ public class ChandelierBlock extends WaterloggableLitBlock {
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         Direction direction = Direction.UP;
         return Block.sideCoversSmallSquare(world, pos.offset(direction), direction.getOpposite());
-    }
-
-    @Override
-    public PistonBehavior getPistonBehavior(BlockState state) {
-        return PistonBehavior.DESTROY;
     }
 
     @Override

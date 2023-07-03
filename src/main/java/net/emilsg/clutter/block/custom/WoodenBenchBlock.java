@@ -15,7 +15,6 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
-import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.StringIdentifiable;
@@ -334,7 +333,9 @@ public class WoodenBenchBlock extends SeatBlock {
             return ModBlocks.STRIPPED_CRIMSON_BENCH.getDefaultState().with(FACING, state.get(FACING)).with(LEGPOSITIONS, state.get(LEGPOSITIONS));
         } else if (state.getBlock() == ModBlocks.WARPED_BENCH) {
             return ModBlocks.STRIPPED_WARPED_BENCH.getDefaultState().with(FACING, state.get(FACING)).with(LEGPOSITIONS, state.get(LEGPOSITIONS));
-        } else {
+        } else if (state.getBlock() == ModBlocks.CHERRY_BENCH) {
+            return ModBlocks.STRIPPED_CHERRY_BENCH.getDefaultState().with(FACING, state.get(FACING));
+        }  else {
             return state;
         }
     }

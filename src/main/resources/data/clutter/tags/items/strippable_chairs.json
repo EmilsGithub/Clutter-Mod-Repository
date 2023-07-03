@@ -8,6 +8,7 @@
     "clutter:mangrove_chair",
     "clutter:oak_chair",
     "clutter:spruce_chair",
-    "clutter:warped_chair"
+    "clutter:warped_chair",
+    "clutter:cherry_chair"
   ]
 }

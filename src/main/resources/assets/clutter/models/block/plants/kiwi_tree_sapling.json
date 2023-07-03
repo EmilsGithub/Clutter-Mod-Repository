@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "clutter:block/kiwi_tree_sapling"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "chairs",
+  "pattern": [
+    "P ",
+    "PP",
+    "LL"
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:cherry_planks"
+    },
+    "L": {
+      "item": "minecraft:stripped_cherry_log"
+    }
+  },
+  "result": {
+    "item": "clutter:stripped_cherry_chair",
+    "count": 2
+  }
+}
