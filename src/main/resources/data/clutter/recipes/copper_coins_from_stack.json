@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "copper_coins",
+  "ingredients": [
+    {
+      "item": "clutter:copper_coin_stack"
+    }
+  ],
+  "result": {
+    "item": "clutter:copper_coin",
+    "count": 8
+  }
+}
+

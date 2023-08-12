@@ -1,0 +1,250 @@
+{
+  "variants":{
+    "open=true,half=upper,facing=north,direction_shape=left":{
+      "model":"clutter:block/tall_curtains/colors/cyan_top_left_open"
+    },
+    "open=true,half=upper,facing=north,direction_shape=middle":{
+      "model":"clutter:block/tall_curtains/colors/cyan_top_middle_open"
+    },
+    "open=true,half=upper,facing=north,direction_shape=right":{
+      "model":"clutter:block/tall_curtains/colors/cyan_top_right_open"
+    },
+    "open=true,half=upper,facing=north,direction_shape=alone":{
+      "model":"clutter:block/tall_curtains/colors/cyan_top_alone_open"
+    },
+    "open=true,half=lower,facing=north,direction_shape=left":{
+      "model":"clutter:block/tall_curtains/colors/cyan_bottom_left_open"
+    },
+    "open=true,half=lower,facing=north,direction_shape=middle":{
+      "model":"clutter:block/tall_curtains/colors/cyan_bottom_middle_open"
+    },
+    "open=true,half=lower,facing=north,direction_shape=right":{
+      "model":"clutter:block/tall_curtains/colors/cyan_bottom_right_open"
+    },
+    "open=true,half=lower,facing=north,direction_shape=alone":{
+      "model":"clutter:block/tall_curtains/colors/cyan_bottom_alone_open"
+    },
+    "open=false,half=upper,facing=north,direction_shape=left":{
+      "model":"clutter:block/tall_curtains/colors/cyan_top_closed"
+    },
+    "open=false,half=upper,facing=north,direction_shape=middle":{
+      "model":"clutter:block/tall_curtains/colors/cyan_top_closed"
+    },
+    "open=false,half=upper,facing=north,direction_shape=right":{
+      "model":"clutter:block/tall_curtains/colors/cyan_top_closed"
+    },
+    "open=false,half=upper,facing=north,direction_shape=alone":{
+      "model":"clutter:block/tall_curtains/colors/cyan_top_alone_closed"
+    },
+    "open=false,half=lower,facing=north,direction_shape=left":{
+      "model":"clutter:block/tall_curtains/colors/cyan_bottom_closed"
+    },
+    "open=false,half=lower,facing=north,direction_shape=middle":{
+      "model":"clutter:block/tall_curtains/colors/cyan_bottom_closed"
+    },
+    "open=false,half=lower,facing=north,direction_shape=right":{
+      "model":"clutter:block/tall_curtains/colors/cyan_bottom_closed"
+    },
+    "open=false,half=lower,facing=north,direction_shape=alone":{
+      "model":"clutter:block/tall_curtains/colors/cyan_bottom_alone_closed"
+    },
+
+
+    "open=true,half=upper,facing=east,direction_shape=left":{
+      "model":"clutter:block/tall_curtains/colors/cyan_top_left_open",
+      "y": 90
+    },
+    "open=true,half=upper,facing=east,direction_shape=middle":{
+      "model":"clutter:block/tall_curtains/colors/cyan_top_middle_open",
+      "y": 90
+    },
+    "open=true,half=upper,facing=east,direction_shape=right":{
+      "model":"clutter:block/tall_curtains/colors/cyan_top_right_open",
+      "y": 90
+    },
+    "open=true,half=upper,facing=east,direction_shape=alone":{
+      "model":"clutter:block/tall_curtains/colors/cyan_top_alone_open",
+      "y": 90
+    },
+    "open=true,half=lower,facing=east,direction_shape=left":{
+      "model":"clutter:block/tall_curtains/colors/cyan_bottom_left_open",
+      "y": 90
+    },
+    "open=true,half=lower,facing=east,direction_shape=middle":{
+      "model":"clutter:block/tall_curtains/colors/cyan_bottom_middle_open",
+      "y": 90
+    },
+    "open=true,half=lower,facing=east,direction_shape=right":{
+      "model":"clutter:block/tall_curtains/colors/cyan_bottom_right_open",
+      "y": 90
+    },
+    "open=true,half=lower,facing=east,direction_shape=alone":{
+      "model":"clutter:block/tall_curtains/colors/cyan_bottom_alone_open",
+      "y": 90
+    },
+    "open=false,half=upper,facing=east,direction_shape=left":{
+      "model":"clutter:block/tall_curtains/colors/cyan_top_closed",
+      "y": 90
+    },
+    "open=false,half=upper,facing=east,direction_shape=middle":{
+      "model":"clutter:block/tall_curtains/colors/cyan_top_closed",
+      "y": 90
+    },
+    "open=false,half=upper,facing=east,direction_shape=right":{
+      "model":"clutter:block/tall_curtains/colors/cyan_top_closed",
+      "y": 90
+    },
+    "open=false,half=upper,facing=east,direction_shape=alone":{
+      "model":"clutter:block/tall_curtains/colors/cyan_top_alone_closed",
+      "y": 90
+    },
+    "open=false,half=lower,facing=east,direction_shape=left":{
+      "model":"clutter:block/tall_curtains/colors/cyan_bottom_closed",
+      "y": 90
+    },
+    "open=false,half=lower,facing=east,direction_shape=middle":{
+      "model":"clutter:block/tall_curtains/colors/cyan_bottom_closed",
+      "y": 90
+    },
+    "open=false,half=lower,facing=east,direction_shape=right":{
+      "model":"clutter:block/tall_curtains/colors/cyan_bottom_closed",
+      "y": 90
+    },
+    "open=false,half=lower,facing=east,direction_shape=alone":{
+      "model":"clutter:block/tall_curtains/colors/cyan_bottom_alone_closed",
+      "y": 90
+    },
+
+
+    "open=true,half=upper,facing=south,direction_shape=left":{
+      "model":"clutter:block/tall_curtains/colors/cyan_top_left_open",
+      "y": 180
+    },
+    "open=true,half=upper,facing=south,direction_shape=middle":{
+      "model":"clutter:block/tall_curtains/colors/cyan_top_middle_open",
+      "y": 180
+    },
+    "open=true,half=upper,facing=south,direction_shape=right":{
+      "model":"clutter:block/tall_curtains/colors/cyan_top_right_open",
+      "y": 180
+    },
+    "open=true,half=upper,facing=south,direction_shape=alone":{
+      "model":"clutter:block/tall_curtains/colors/cyan_top_alone_open",
+      "y": 180
+    },
+    "open=true,half=lower,facing=south,direction_shape=left":{
+      "model":"clutter:block/tall_curtains/colors/cyan_bottom_left_open",
+      "y": 180
+    },
+    "open=true,half=lower,facing=south,direction_shape=middle":{
+      "model":"clutter:block/tall_curtains/colors/cyan_bottom_middle_open",
+      "y": 180
+    },
+    "open=true,half=lower,facing=south,direction_shape=right":{
+      "model":"clutter:block/tall_curtains/colors/cyan_bottom_right_open",
+      "y": 180
+    },
+    "open=true,half=lower,facing=south,direction_shape=alone":{
+      "model":"clutter:block/tall_curtains/colors/cyan_bottom_alone_open",
+      "y": 180
+    },
+    "open=false,half=upper,facing=south,direction_shape=left":{
+      "model":"clutter:block/tall_curtains/colors/cyan_top_closed",
+      "y": 180
+    },
+    "open=false,half=upper,facing=south,direction_shape=middle":{
+      "model":"clutter:block/tall_curtains/colors/cyan_top_closed",
+      "y": 180
+    },
+    "open=false,half=upper,facing=south,direction_shape=right":{
+      "model":"clutter:block/tall_curtains/colors/cyan_top_closed",
+      "y": 180
+    },
+    "open=false,half=upper,facing=south,direction_shape=alone":{
+      "model":"clutter:block/tall_curtains/colors/cyan_top_alone_closed",
+      "y": 180
+    },
+    "open=false,half=lower,facing=south,direction_shape=left":{
+      "model":"clutter:block/tall_curtains/colors/cyan_bottom_closed",
+      "y": 180
+    },
+    "open=false,half=lower,facing=south,direction_shape=middle":{
+      "model":"clutter:block/tall_curtains/colors/cyan_bottom_closed",
+      "y": 180
+    },
+    "open=false,half=lower,facing=south,direction_shape=right":{
+      "model":"clutter:block/tall_curtains/colors/cyan_bottom_closed",
+      "y": 180
+    },
+    "open=false,half=lower,facing=south,direction_shape=alone":{
+      "model":"clutter:block/tall_curtains/colors/cyan_bottom_alone_closed",
+      "y": 180
+    },
+
+
+    "open=true,half=upper,facing=west,direction_shape=left":{
+      "model":"clutter:block/tall_curtains/colors/cyan_top_left_open",
+      "y": 270
+    },
+    "open=true,half=upper,facing=west,direction_shape=middle":{
+      "model":"clutter:block/tall_curtains/colors/cyan_top_middle_open",
+      "y": 270
+    },
+    "open=true,half=upper,facing=west,direction_shape=right":{
+      "model":"clutter:block/tall_curtains/colors/cyan_top_right_open",
+      "y": 270
+    },
+    "open=true,half=upper,facing=west,direction_shape=alone":{
+      "model":"clutter:block/tall_curtains/colors/cyan_top_alone_open",
+      "y": 270
+    },
+    "open=true,half=lower,facing=west,direction_shape=left":{
+      "model":"clutter:block/tall_curtains/colors/cyan_bottom_left_open",
+      "y": 270
+    },
+    "open=true,half=lower,facing=west,direction_shape=middle":{
+      "model":"clutter:block/tall_curtains/colors/cyan_bottom_middle_open",
+      "y": 270
+    },
+    "open=true,half=lower,facing=west,direction_shape=right":{
+      "model":"clutter:block/tall_curtains/colors/cyan_bottom_right_open",
+      "y": 270
+    },
+    "open=true,half=lower,facing=west,direction_shape=alone":{
+      "model":"clutter:block/tall_curtains/colors/cyan_bottom_alone_open",
+      "y": 270
+    },
+    "open=false,half=upper,facing=west,direction_shape=left":{
+      "model":"clutter:block/tall_curtains/colors/cyan_top_closed",
+      "y": 270
+    },
+    "open=false,half=upper,facing=west,direction_shape=middle":{
+      "model":"clutter:block/tall_curtains/colors/cyan_top_closed",
+      "y": 270
+    },
+    "open=false,half=upper,facing=west,direction_shape=right":{
+      "model":"clutter:block/tall_curtains/colors/cyan_top_closed",
+      "y": 270
+    },
+    "open=false,half=upper,facing=west,direction_shape=alone":{
+      "model":"clutter:block/tall_curtains/colors/cyan_top_alone_closed",
+      "y": 270
+    },
+    "open=false,half=lower,facing=west,direction_shape=left":{
+      "model":"clutter:block/tall_curtains/colors/cyan_bottom_closed",
+      "y": 270
+    },
+    "open=false,half=lower,facing=west,direction_shape=middle":{
+      "model":"clutter:block/tall_curtains/colors/cyan_bottom_closed",
+      "y": 270
+    },
+    "open=false,half=lower,facing=west,direction_shape=right":{
+      "model":"clutter:block/tall_curtains/colors/cyan_bottom_closed",
+      "y": 270
+    },
+    "open=false,half=lower,facing=west,direction_shape=alone":{
+      "model":"clutter:block/tall_curtains/colors/cyan_bottom_alone_closed",
+      "y": 270
+    }
+  }
+}

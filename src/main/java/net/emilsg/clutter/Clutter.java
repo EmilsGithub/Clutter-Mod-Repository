@@ -5,30 +5,33 @@ import net.emilsg.clutter.block.entity.ModBlockEntities;
 import net.emilsg.clutter.config.ModConfigs;
 import net.emilsg.clutter.effect.ModEffects;
 import net.emilsg.clutter.enchantment.ModEnchantments;
-import net.emilsg.clutter.entity.ModEntities;
-import net.emilsg.clutter.entity.custom.*;
+import net.emilsg.clutter.entity.ClutterAttributes;
 import net.emilsg.clutter.item.ModItems;
+import net.emilsg.clutter.networking.ModMessages;
 import net.emilsg.clutter.potion.ModPotions;
-import net.emilsg.clutter.util.ModItemGroup;
+import net.emilsg.clutter.util.ModCallbackRegistry;
+import net.emilsg.clutter.util.ModItemGroups;
 import net.emilsg.clutter.util.ModLootTableModifiers;
-import net.emilsg.clutter.util.ModSit;
 import net.emilsg.clutter.util.ModUtil;
 import net.emilsg.clutter.world.gen.ModWorldGeneration;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.fabricmc.loader.api.FabricLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Clutter implements ModInitializer {
-
+	public static final String MOD_VERSION = "0.4.3";
 	public static final String MOD_ID = "clutter";
 	public static final Logger LOGGER = LoggerFactory.getLogger("clutter");
+	public static final boolean IS_TRINKETS_LOADED = FabricLoader.getInstance().getModContainer("trinkets").isPresent();
+	public static final boolean IS_SUPPLEMENTARIES_LOADED = FabricLoader.getInstance().getModContainer("supplementaries").isPresent();
+
 
 	@Override
 	public void onInitialize() {
 		ModConfigs.registerConfigs();
 
-		ModItemGroup.registerItemGroups();
+		ModItemGroups.registerItemGroups();
 		ModEffects.registerEffects();
 		ModItems.registerModItems();
 		ModBlocks.registerModBlocks();
@@ -38,17 +41,18 @@ public class Clutter implements ModInitializer {
 
 		ModWorldGeneration.generateModWorldGen();
 
-		ModSit.registerSitUtil();
 		ModUtil.registerModUtil();
+
+		ModCallbackRegistry.handleSitting();
+		ModCallbackRegistry.handlePetsPets();
+		if (!IS_SUPPLEMENTARIES_LOADED) ModCallbackRegistry.handlePlacingBooks();
 
 		ModPotions.registerPotionRecipes();
 
-		ModBlocks.copperBlockPairs();
-		FabricDefaultAttributeRegistry.register(ModEntities.BUTTERFLY, ButterflyEntity.setAttributes());
-		FabricDefaultAttributeRegistry.register(ModEntities.CHAMELEON, ChameleonEntity.setAttributes());
-		FabricDefaultAttributeRegistry.register(ModEntities.ECHOFIN, EchofinEntity.setAttributes());
-		FabricDefaultAttributeRegistry.register(ModEntities.MOSSBLOOM, MossbloomEntity.setAttributes());
-		FabricDefaultAttributeRegistry.register(ModEntities.KIWI_BIRD, KiwiBirdEntity.setAttributes());
-		FabricDefaultAttributeRegistry.register(ModEntities.EMPEROR_PENGUIN, EmperorPenguinEntity.setAttributes());
+		ModBlocks.registerCopperBlockPairs();
+
+		ClutterAttributes.registerAttributes();
+
+		ModMessages.registerHandshakePackets();
 	}
 }

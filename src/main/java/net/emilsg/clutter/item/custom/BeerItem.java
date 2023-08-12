@@ -20,6 +20,8 @@ import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 
+import java.util.Objects;
+
 public class BeerItem extends AliasedBlockItem {
 
     public BeerItem(Block block, Settings settings) {
@@ -37,8 +39,8 @@ public class BeerItem extends AliasedBlockItem {
             extendOrApplyEffect(user, ModEffects.VULNERABILITY, 300, 0);
             extendOrApplyEffect(user, StatusEffects.STRENGTH, 300, 0);
 
-            boolean shouldApplyNausea = (user.hasStatusEffect(ModEffects.VULNERABILITY) && user.getStatusEffect(ModEffects.VULNERABILITY).getDuration() > 600)
-                    || (user.hasStatusEffect(StatusEffects.STRENGTH) && user.getStatusEffect(StatusEffects.STRENGTH).getDuration() > 600);
+            boolean shouldApplyNausea = (user.hasStatusEffect(ModEffects.VULNERABILITY) && Objects.requireNonNull(user.getStatusEffect(ModEffects.VULNERABILITY)).getDuration() > 600)
+                    || (user.hasStatusEffect(StatusEffects.STRENGTH) && Objects.requireNonNull(user.getStatusEffect(StatusEffects.STRENGTH)).getDuration() > 600);
 
             if (shouldApplyNausea) {
                 extendOrApplyEffect(user, StatusEffects.NAUSEA, 300, 0);

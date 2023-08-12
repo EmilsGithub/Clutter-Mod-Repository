@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "butterfly_elytra_smithing_template",
+  "pattern": [
+    "BBB",
+    "BTB",
+    "BDB"
+  ],
+  "key": {
+    "T": {
+      "item": "clutter:butterfly_elytra_smithing_template"
+    },
+    "B": {
+      "tag": "clutter:butterflies_in_bottles"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "result": {
+    "item": "clutter:butterfly_elytra_smithing_template",
+    "count": 2
+  }
+}

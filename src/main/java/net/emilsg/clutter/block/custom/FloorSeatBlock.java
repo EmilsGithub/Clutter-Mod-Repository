@@ -27,7 +27,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-import static net.emilsg.clutter.block.entity.SeatEntity.OCCUPIED;
+import static net.emilsg.clutter.block.entity.SeatEntity.IS_OCCUPIED;
 
 public class FloorSeatBlock extends Block implements Waterloggable {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
@@ -101,6 +101,6 @@ public class FloorSeatBlock extends Block implements Waterloggable {
         this.spawnBreakParticles(world, player, pos, state);
         world.emitGameEvent(player, GameEvent.BLOCK_DESTROY, pos);
 
-        OCCUPIED.remove(new Vec3d(xPos, yPos, zPos));
+        IS_OCCUPIED.remove(new Vec3d(xPos, yPos, zPos));
     }
 }

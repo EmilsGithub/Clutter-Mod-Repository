@@ -37,11 +37,13 @@ import net.minecraft.world.WorldView;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.constant.DefaultAnimations;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.ArrayList;
@@ -139,11 +141,12 @@ public class KiwiBirdEntity extends AnimalEntity implements GeoEntity {
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(
-                new AnimationController<>(this, 10, state ->
-                        state.setAndContinue(isSongPlaying() ? DANCE : state.isMoving() ? WALK : IDLE)),
-                DefaultAnimations.genericLivingController(this)
-        );
+        controllerRegistrar.add(new AnimationController<>(this, "controller", 10, this::predicate));
+    }
+
+    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
+        tAnimationState.getController().setAnimation(isSongPlaying() ? DANCE : tAnimationState.isMoving() ? WALK : IDLE);
+        return PlayState.CONTINUE;
     }
 
     @Override
@@ -198,15 +201,15 @@ public class KiwiBirdEntity extends AnimalEntity implements GeoEntity {
     }
 
     private static class KiwiMateGoal extends AnimalMateGoal {
-        private final KiwiBirdEntity turtle;
+        private final KiwiBirdEntity kiwiBird;
 
         KiwiMateGoal(KiwiBirdEntity kiwiBird, double speed) {
             super(kiwiBird, speed);
-            this.turtle = kiwiBird;
+            this.kiwiBird = kiwiBird;
         }
 
         public boolean canStart() {
-            return super.canStart() && !this.turtle.hasEgg();
+            return super.canStart() && !this.kiwiBird.hasEgg();
         }
 
         protected void breed() {
@@ -220,7 +223,7 @@ public class KiwiBirdEntity extends AnimalEntity implements GeoEntity {
                 Criteria.BRED_ANIMALS.trigger(serverPlayerEntity, this.animal, this.mate, null);
             }
 
-            this.turtle.setHasEgg(true);
+            this.kiwiBird.setHasEgg(true);
             this.animal.setBreedingAge(6000);
             this.mate.setBreedingAge(6000);
             this.animal.resetLoveTicks();
@@ -275,6 +278,8 @@ public class KiwiBirdEntity extends AnimalEntity implements GeoEntity {
                 return validPositions.get(this.kiwiBird.getRandom().nextInt(validPositions.size()));
             }
         }
+
+
 
 
         @Override

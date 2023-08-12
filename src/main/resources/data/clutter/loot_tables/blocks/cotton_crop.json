@@ -17,7 +17,7 @@
           "condition": "minecraft:block_state_property",
           "block": "clutter:cotton_crop",
           "properties": {
-            "age": "6"
+            "age": "7"
           }
         }
       ]
@@ -49,7 +49,7 @@
                   "condition": "minecraft:block_state_property",
                   "block": "clutter:cotton_crop",
                   "properties": {
-                    "age": "6"
+                    "age": "7"
                   }
                 }
               ]
@@ -83,7 +83,7 @@
           "condition": "minecraft:block_state_property",
           "block": "clutter:cotton_crop",
           "properties": {
-            "age": "6"
+            "age": "7"
           }
         }
       ]

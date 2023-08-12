@@ -8,7 +8,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
@@ -18,6 +20,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
@@ -28,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.function.ToIntFunction;
 
 public class LampBlock extends Block implements Waterloggable {
-    private static final BooleanProperty LIT = Properties.LIT;
+    public static final BooleanProperty LIT = Properties.LIT;
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 
     protected static final VoxelShape SHAPE = VoxelShapes.union(
@@ -47,21 +50,15 @@ public class LampBlock extends Block implements Waterloggable {
         return SHAPE;
     }
 
-    @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        boolean i = state.get(LIT);
-        if (!world.isClient && hand.equals(Hand.MAIN_HAND) && !player.isSneaking() && player.getStackInHand(hand).isEmpty()) {
-            if (!i) {
-                world.setBlockState(pos, state.with(LIT, true), Block.NOTIFY_ALL);
-                world.playSound(null, pos, SoundEvents.BLOCK_METAL_PRESSURE_PLATE_CLICK_ON, SoundCategory.BLOCKS, 1.0f, 1.25f);
-            }
-            else {
-                world.setBlockState(pos, state.with(LIT, false), Block.NOTIFY_ALL);
-                world.playSound(null, pos, SoundEvents.BLOCK_METAL_PRESSURE_PLATE_CLICK_OFF, SoundCategory.BLOCKS, 1.0f, 1.25f);
-            }
-            return ActionResult.SUCCESS;
-        }
-        return ActionResult.PASS;
+        state = state.cycle(LIT);
+        world.setBlockState(pos, state, 10);
+        playSound(state.get(LIT) ? SoundEvents.BLOCK_METAL_PRESSURE_PLATE_CLICK_OFF : SoundEvents.BLOCK_METAL_PRESSURE_PLATE_CLICK_ON, pos, world);
+        return ActionResult.success(world.isClient);
+    }
+
+    private static void playSound(SoundEvent soundEvent, BlockPos pos, World world) {
+        world.playSound(null, pos, soundEvent, SoundCategory.BLOCKS, 1.0f, 1.25f);
     }
 
     @Override
@@ -87,7 +84,27 @@ public class LampBlock extends Block implements Waterloggable {
         BlockPos blockPos;
         World worldAccess = ctx.getWorld();
         boolean bl = worldAccess.getFluidState(blockPos = ctx.getBlockPos()).getFluid() == Fluids.WATER;
-        return (BlockState)this.getDefaultState().with(WATERLOGGED, bl);
+        return (BlockState)this.getDefaultState().with(WATERLOGGED, bl).with(LIT, ctx.getWorld().isReceivingRedstonePower(ctx.getBlockPos()));
+    }
+
+    public void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
+        if (!world.isClient) {
+            boolean bl = (Boolean)state.get(LIT);
+            if (bl != world.isReceivingRedstonePower(pos)) {
+                if (bl) {
+                    world.scheduleBlockTick(pos, this, 4);
+                } else {
+                    world.setBlockState(pos, (BlockState)state.cycle(LIT), 2);
+                }
+            }
+
+        }
+    }
+
+    public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        if ((Boolean)state.get(LIT) && !world.isReceivingRedstonePower(pos)) {
+            world.setBlockState(pos, (BlockState)state.cycle(LIT), 2);
+        }
     }
 
     @Override

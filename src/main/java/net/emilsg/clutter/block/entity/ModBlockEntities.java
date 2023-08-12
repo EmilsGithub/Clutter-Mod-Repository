@@ -15,6 +15,8 @@ public class ModBlockEntities {
     public static BlockEntityType<BonfireBlockEntity> BONFIRE;
     public static BlockEntityType<WallBookshelfInventoryBlockEntity> WALL_BOOKSHELF;
     public static BlockEntityType<WallCupboardInventoryBlockEntity> WALL_CUPBOARD;
+    public static BlockEntityType<ShelfInventoryBlockEntity> SHELF;
+    public static BlockEntityType<PlateInventoryBlockEntity> PLATE;
     public static BlockEntityType<CupboardInventoryBlockEntity> CUPBOARD;
 
     public static void registerBlockEntities() {
@@ -23,6 +25,7 @@ public class ModBlockEntities {
                                 COBBLESTONE_CHIMNEY,
                                 BRICK_CHIMNEY,
                                 STONE_BRICK_CHIMNEY,
+                                PURPUR_CHIMNEY,
                                 MOSSY_STONE_BRICK_CHIMNEY,
                                 DEEPSLATE_BRICK_CHIMNEY,
                                 MUD_BRICK_CHIMNEY,
@@ -78,9 +81,27 @@ public class ModBlockEntities {
                         BAMBOO_CUPBOARD,
                         CHERRY_CUPBOARD).build());
 
+        SHELF = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "shelf"),
+                FabricBlockEntityTypeBuilder.create(ShelfInventoryBlockEntity::new,
+                        OAK_SHELF,
+                        DARK_OAK_SHELF,
+                        BIRCH_SHELF,
+                        JUNGLE_SHELF,
+                        ACACIA_SHELF,
+                        SPRUCE_SHELF,
+                        CRIMSON_SHELF,
+                        WARPED_SHELF,
+                        MANGROVE_SHELF,
+                        BAMBOO_SHELF,
+                        CHERRY_SHELF).build());
+
         BONFIRE = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "bonfire"),
                 FabricBlockEntityTypeBuilder.create(BonfireBlockEntity::new,
                         ModBlocks.BONFIRE, SOUL_BONFIRE).build());
+
+        PLATE = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "plate"),
+                FabricBlockEntityTypeBuilder.create(PlateInventoryBlockEntity::new,
+                        ModBlocks.PLATE).build());
 
     }
 }

@@ -14,6 +14,8 @@ public class ModItemTags {
     public static final TagKey<Item> PLATE_PLACEABLE = create("plate_placeable");
     public static final TagKey<Item> ELYTRON = create("elytron");
     public static final TagKey<Item> SEEDS = create("seeds");
+    public static final TagKey<Item> DYES = create("dyes");
+    public static final TagKey<Item> STRIPPABLE_LOGS = create("strippable_logs");
 
     private static TagKey<Item> create(String path) {
         return create(path, "clutter");

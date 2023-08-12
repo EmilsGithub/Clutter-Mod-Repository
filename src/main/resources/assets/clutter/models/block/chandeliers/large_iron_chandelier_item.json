@@ -1,0 +1,9 @@
+{	"parent": "clutter:block/chandeliers/large_chandelier_item_parent",
+	"textures": {
+		"0": "clutter:block/dark_iron_block",
+		"1": "clutter:block/large_iron_chandelier_center",
+		"2": "clutter:block/large_iron_chandelier_side",
+		"3": "clutter:block/large_iron_chandelier_side_rod",
+		"4": "clutter:block/large_iron_chandelier_diagonal"
+	}
+}

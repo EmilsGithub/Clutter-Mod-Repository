@@ -3,13 +3,24 @@
 	"id": "clutter",
 	"version": "${version}",
 	"name": "Clutter",
-	"description": "Adds a bunch of stuff like decorations, mobs, items and more.",
+	"description": "Adds a bunch of things like decorations, mobs, items and more.",
 	"authors": [
 		"EmilSG"
 	],
 	"contact": {
 		"homepage": "https://modrinth.com/mod/clutter",
+		"issues": "https://github.com/EmilsGithub/Clutter-Mod-Repository/issues",
 		"sources": "https://github.com/EmilsGithub/Clutter-Mod-Repository"
+	},
+	"custom": {
+		"modmenu": {
+			"links": {
+				"Discord": "https://discord.com/invite/pDMkMxMREA",
+				"Modrinth": "https://modrinth.com/mod/clutter",
+				"CurseForge": "https://www.curseforge.com/minecraft/mc-mods/clutter"
+			},
+			"update_checker": true
+		}
 	},
 	"license": "MIT",
 	"icon": "assets/clutter/icon.png",
@@ -30,7 +41,10 @@
 	],
 	"depends": {
 		"fabricloader": ">=0.14.21",
-		"minecraft": "~1.20.1",
+		"minecraft": [
+			"1.20",
+			"1.20.1"
+		],
 		"java": ">=17",
 		"geckolib": ">=4.2",
 		"fabric-api": "*"

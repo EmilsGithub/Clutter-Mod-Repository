@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "clutter:giant_lily_pad",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "lily_pad_directions": "south_west"
+              }
+            }
+          ],
+          "name": "clutter:giant_lily_pad"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

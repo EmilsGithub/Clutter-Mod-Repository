@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shapeless",
+  "group": "golden_coins",
   "ingredients": [
     {
       "item": "clutter:silver_coin"

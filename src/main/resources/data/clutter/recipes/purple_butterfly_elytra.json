@@ -1,21 +1,15 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "group": "butterfly_elytron",
-  "pattern": [
-    "BBB",
-    "BEB",
-    "BBB"
-  ],
-  "key": {
-    "B": {
-      "item": "clutter:purple_butterfly_in_a_bottle"
-    },
-    "E": {
-      "tag": "clutter:elytron"
-    }
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:purple_dye"
+  },
+  "base": {
+    "tag": "clutter:elytron"
   },
   "result": {
-    "item": "clutter:purple_butterfly_elytra",
-    "count": 1
+    "item": "clutter:purple_butterfly_elytra"
+  },
+  "template": {
+    "item": "clutter:butterfly_elytra_smithing_template"
   }
 }

@@ -1,0 +1,7 @@
+{
+  "parent": "clutter:block/tall_curtains/tall_curtains_top_alone_closed_parent",
+  "textures": {
+    "2": "clutter:block/tall_curtains/closed_light_blue",
+    "particle": "clutter:block/tall_curtains/closed_light_blue"
+  }
+}

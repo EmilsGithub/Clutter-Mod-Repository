@@ -1,0 +1,10 @@
+{
+  "variants":{
+    "lit=true":{
+      "model":"clutter:block/large_candles/large_magenta_candle_lit"
+    },
+    "lit=false":{
+      "model":"clutter:block/large_candles/large_magenta_candle"
+    }
+  }
+}

@@ -28,6 +28,7 @@ public abstract class PlushieBlock extends HorizontalFacingBlock implements Wate
 
     public PlushieBlock(Settings settings) {
         super(settings);
+        this.setDefaultState(this.getDefaultState().with(WATERLOGGED, false));
     }
 
     @Override

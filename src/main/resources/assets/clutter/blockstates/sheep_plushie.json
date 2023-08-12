@@ -1,18 +1,485 @@
 {
-  "variants":{
-    "facing=north":{
-      "model":"clutter:block/plushies/sheep_plushie"
+  "variants": {
+    "waterlogged=false,facing=north,color=white": {
+      "model": "clutter:block/plushies/sheep/white_sheep_plushie"
     },
-    "facing=south":{
-      "model":"clutter:block/plushies/sheep_plushie",
+    "waterlogged=false,facing=south,color=white": {
+      "model": "clutter:block/plushies/sheep/white_sheep_plushie",
       "y": 180
     },
-    "facing=east":{
-      "model":"clutter:block/plushies/sheep_plushie",
+    "waterlogged=false,facing=east,color=white": {
+      "model": "clutter:block/plushies/sheep/white_sheep_plushie",
       "y": 90
     },
-    "facing=west":{
-      "model":"clutter:block/plushies/sheep_plushie",
+    "waterlogged=false,facing=west,color=white": {
+      "model": "clutter:block/plushies/sheep/white_sheep_plushie",
+      "y": 270
+    },
+    "waterlogged=false,facing=north,color=black": {
+      "model": "clutter:block/plushies/sheep/black_sheep_plushie"
+    },
+    "waterlogged=false,facing=south,color=black": {
+      "model": "clutter:block/plushies/sheep/black_sheep_plushie",
+      "y": 180
+    },
+    "waterlogged=false,facing=east,color=black": {
+      "model": "clutter:block/plushies/sheep/black_sheep_plushie",
+      "y": 90
+    },
+    "waterlogged=false,facing=west,color=black": {
+      "model": "clutter:block/plushies/sheep/black_sheep_plushie",
+      "y": 270
+    },
+    "waterlogged=false,facing=north,color=blue": {
+      "model": "clutter:block/plushies/sheep/blue_sheep_plushie"
+    },
+    "waterlogged=false,facing=south,color=blue": {
+      "model": "clutter:block/plushies/sheep/blue_sheep_plushie",
+      "y": 180
+    },
+    "waterlogged=false,facing=east,color=blue": {
+      "model": "clutter:block/plushies/sheep/blue_sheep_plushie",
+      "y": 90
+    },
+    "waterlogged=false,facing=west,color=blue": {
+      "model": "clutter:block/plushies/sheep/blue_sheep_plushie",
+      "y": 270
+    },
+    "waterlogged=false,facing=north,color=brown": {
+      "model": "clutter:block/plushies/sheep/brown_sheep_plushie"
+    },
+    "waterlogged=false,facing=south,color=brown": {
+      "model": "clutter:block/plushies/sheep/brown_sheep_plushie",
+      "y": 180
+    },
+    "waterlogged=false,facing=east,color=brown": {
+      "model": "clutter:block/plushies/sheep/brown_sheep_plushie",
+      "y": 90
+    },
+    "waterlogged=false,facing=west,color=brown": {
+      "model": "clutter:block/plushies/sheep/brown_sheep_plushie",
+      "y": 270
+    },
+    "waterlogged=false,facing=north,color=cyan": {
+      "model": "clutter:block/plushies/sheep/cyan_sheep_plushie"
+    },
+    "waterlogged=false,facing=south,color=cyan": {
+      "model": "clutter:block/plushies/sheep/cyan_sheep_plushie",
+      "y": 180
+    },
+    "waterlogged=false,facing=east,color=cyan": {
+      "model": "clutter:block/plushies/sheep/cyan_sheep_plushie",
+      "y": 90
+    },
+    "waterlogged=false,facing=west,color=cyan": {
+      "model": "clutter:block/plushies/sheep/cyan_sheep_plushie",
+      "y": 270
+    },
+    "waterlogged=false,facing=north,color=gray": {
+      "model": "clutter:block/plushies/sheep/gray_sheep_plushie"
+    },
+    "waterlogged=false,facing=south,color=gray": {
+      "model": "clutter:block/plushies/sheep/gray_sheep_plushie",
+      "y": 180
+    },
+    "waterlogged=false,facing=east,color=gray": {
+      "model": "clutter:block/plushies/sheep/gray_sheep_plushie",
+      "y": 90
+    },
+    "waterlogged=false,facing=west,color=gray": {
+      "model": "clutter:block/plushies/sheep/gray_sheep_plushie",
+      "y": 270
+    },
+    "waterlogged=false,facing=north,color=green": {
+      "model": "clutter:block/plushies/sheep/green_sheep_plushie"
+    },
+    "waterlogged=false,facing=south,color=green": {
+      "model": "clutter:block/plushies/sheep/green_sheep_plushie",
+      "y": 180
+    },
+    "waterlogged=false,facing=east,color=green": {
+      "model": "clutter:block/plushies/sheep/green_sheep_plushie",
+      "y": 90
+    },
+    "waterlogged=false,facing=west,color=green": {
+      "model": "clutter:block/plushies/sheep/green_sheep_plushie",
+      "y": 270
+    },
+    "waterlogged=false,facing=north,color=light_blue": {
+      "model": "clutter:block/plushies/sheep/light_blue_sheep_plushie"
+    },
+    "waterlogged=false,facing=south,color=light_blue": {
+      "model": "clutter:block/plushies/sheep/light_blue_sheep_plushie",
+      "y": 180
+    },
+    "waterlogged=false,facing=east,color=light_blue": {
+      "model": "clutter:block/plushies/sheep/light_blue_sheep_plushie",
+      "y": 90
+    },
+    "waterlogged=false,facing=west,color=light_blue": {
+      "model": "clutter:block/plushies/sheep/light_blue_sheep_plushie",
+      "y": 270
+    },
+    "waterlogged=false,facing=north,color=lime": {
+      "model": "clutter:block/plushies/sheep/lime_sheep_plushie"
+    },
+    "waterlogged=false,facing=south,color=lime": {
+      "model": "clutter:block/plushies/sheep/lime_sheep_plushie",
+      "y": 180
+    },
+    "waterlogged=false,facing=east,color=lime": {
+      "model": "clutter:block/plushies/sheep/lime_sheep_plushie",
+      "y": 90
+    },
+    "waterlogged=false,facing=west,color=lime": {
+      "model": "clutter:block/plushies/sheep/lime_sheep_plushie",
+      "y": 270
+    },
+    "waterlogged=false,facing=north,color=magenta": {
+      "model": "clutter:block/plushies/sheep/magenta_sheep_plushie"
+    },
+    "waterlogged=false,facing=south,color=magenta": {
+      "model": "clutter:block/plushies/sheep/magenta_sheep_plushie",
+      "y": 180
+    },
+    "waterlogged=false,facing=east,color=magenta": {
+      "model": "clutter:block/plushies/sheep/magenta_sheep_plushie",
+      "y": 90
+    },
+    "waterlogged=false,facing=west,color=magenta": {
+      "model": "clutter:block/plushies/sheep/magenta_sheep_plushie",
+      "y": 270
+    },
+    "waterlogged=false,facing=north,color=light_gray": {
+      "model": "clutter:block/plushies/sheep/light_gray_sheep_plushie"
+    },
+    "waterlogged=false,facing=south,color=light_gray": {
+      "model": "clutter:block/plushies/sheep/light_gray_sheep_plushie",
+      "y": 180
+    },
+    "waterlogged=false,facing=east,color=light_gray": {
+      "model": "clutter:block/plushies/sheep/light_gray_sheep_plushie",
+      "y": 90
+    },
+    "waterlogged=false,facing=west,color=light_gray": {
+      "model": "clutter:block/plushies/sheep/light_gray_sheep_plushie",
+      "y": 270
+    },
+    "waterlogged=false,facing=north,color=red": {
+      "model": "clutter:block/plushies/sheep/red_sheep_plushie"
+    },
+    "waterlogged=false,facing=south,color=red": {
+      "model": "clutter:block/plushies/sheep/red_sheep_plushie",
+      "y": 180
+    },
+    "waterlogged=false,facing=east,color=red": {
+      "model": "clutter:block/plushies/sheep/red_sheep_plushie",
+      "y": 90
+    },
+    "waterlogged=false,facing=west,color=red": {
+      "model": "clutter:block/plushies/sheep/red_sheep_plushie",
+      "y": 270
+    },
+    "waterlogged=false,facing=north,color=orange": {
+      "model": "clutter:block/plushies/sheep/orange_sheep_plushie"
+    },
+    "waterlogged=false,facing=south,color=orange": {
+      "model": "clutter:block/plushies/sheep/orange_sheep_plushie",
+      "y": 180
+    },
+    "waterlogged=false,facing=east,color=orange": {
+      "model": "clutter:block/plushies/sheep/orange_sheep_plushie",
+      "y": 90
+    },
+    "waterlogged=false,facing=west,color=orange": {
+      "model": "clutter:block/plushies/sheep/orange_sheep_plushie",
+      "y": 270
+    },
+    "waterlogged=false,facing=north,color=yellow": {
+      "model": "clutter:block/plushies/sheep/yellow_sheep_plushie"
+    },
+    "waterlogged=false,facing=south,color=yellow": {
+      "model": "clutter:block/plushies/sheep/yellow_sheep_plushie",
+      "y": 180
+    },
+    "waterlogged=false,facing=east,color=yellow": {
+      "model": "clutter:block/plushies/sheep/yellow_sheep_plushie",
+      "y": 90
+    },
+    "waterlogged=false,facing=west,color=yellow": {
+      "model": "clutter:block/plushies/sheep/yellow_sheep_plushie",
+      "y": 270
+    },
+    "waterlogged=false,facing=north,color=purple": {
+      "model": "clutter:block/plushies/sheep/purple_sheep_plushie"
+    },
+    "waterlogged=false,facing=south,color=purple": {
+      "model": "clutter:block/plushies/sheep/purple_sheep_plushie",
+      "y": 180
+    },
+    "waterlogged=false,facing=east,color=purple": {
+      "model": "clutter:block/plushies/sheep/purple_sheep_plushie",
+      "y": 90
+    },
+    "waterlogged=false,facing=west,color=purple": {
+      "model": "clutter:block/plushies/sheep/purple_sheep_plushie",
+      "y": 270
+    },
+    "waterlogged=false,facing=north,color=pink": {
+      "model": "clutter:block/plushies/sheep/pink_sheep_plushie"
+    },
+    "waterlogged=false,facing=south,color=pink": {
+      "model": "clutter:block/plushies/sheep/pink_sheep_plushie",
+      "y": 180
+    },
+    "waterlogged=false,facing=east,color=pink": {
+      "model": "clutter:block/plushies/sheep/pink_sheep_plushie",
+      "y": 90
+    },
+    "waterlogged=false,facing=west,color=pink": {
+      "model": "clutter:block/plushies/sheep/pink_sheep_plushie",
+      "y": 270
+    },
+
+
+    "waterlogged=true,facing=north,color=white": {
+      "model": "clutter:block/plushies/sheep/white_sheep_plushie"
+    },
+    "waterlogged=true,facing=south,color=white": {
+      "model": "clutter:block/plushies/sheep/white_sheep_plushie",
+      "y": 180
+    },
+    "waterlogged=true,facing=east,color=white": {
+      "model": "clutter:block/plushies/sheep/white_sheep_plushie",
+      "y": 90
+    },
+    "waterlogged=true,facing=west,color=white": {
+      "model": "clutter:block/plushies/sheep/white_sheep_plushie",
+      "y": 270
+    },
+    "waterlogged=true,facing=north,color=black": {
+      "model": "clutter:block/plushies/sheep/black_sheep_plushie"
+    },
+    "waterlogged=true,facing=south,color=black": {
+      "model": "clutter:block/plushies/sheep/black_sheep_plushie",
+      "y": 180
+    },
+    "waterlogged=true,facing=east,color=black": {
+      "model": "clutter:block/plushies/sheep/black_sheep_plushie",
+      "y": 90
+    },
+    "waterlogged=true,facing=west,color=black": {
+      "model": "clutter:block/plushies/sheep/black_sheep_plushie",
+      "y": 270
+    },
+    "waterlogged=true,facing=north,color=blue": {
+      "model": "clutter:block/plushies/sheep/blue_sheep_plushie"
+    },
+    "waterlogged=true,facing=south,color=blue": {
+      "model": "clutter:block/plushies/sheep/blue_sheep_plushie",
+      "y": 180
+    },
+    "waterlogged=true,facing=east,color=blue": {
+      "model": "clutter:block/plushies/sheep/blue_sheep_plushie",
+      "y": 90
+    },
+    "waterlogged=true,facing=west,color=blue": {
+      "model": "clutter:block/plushies/sheep/blue_sheep_plushie",
+      "y": 270
+    },
+    "waterlogged=true,facing=north,color=brown": {
+      "model": "clutter:block/plushies/sheep/brown_sheep_plushie"
+    },
+    "waterlogged=true,facing=south,color=brown": {
+      "model": "clutter:block/plushies/sheep/brown_sheep_plushie",
+      "y": 180
+    },
+    "waterlogged=true,facing=east,color=brown": {
+      "model": "clutter:block/plushies/sheep/brown_sheep_plushie",
+      "y": 90
+    },
+    "waterlogged=true,facing=west,color=brown": {
+      "model": "clutter:block/plushies/sheep/brown_sheep_plushie",
+      "y": 270
+    },
+    "waterlogged=true,facing=north,color=cyan": {
+      "model": "clutter:block/plushies/sheep/cyan_sheep_plushie"
+    },
+    "waterlogged=true,facing=south,color=cyan": {
+      "model": "clutter:block/plushies/sheep/cyan_sheep_plushie",
+      "y": 180
+    },
+    "waterlogged=true,facing=east,color=cyan": {
+      "model": "clutter:block/plushies/sheep/cyan_sheep_plushie",
+      "y": 90
+    },
+    "waterlogged=true,facing=west,color=cyan": {
+      "model": "clutter:block/plushies/sheep/cyan_sheep_plushie",
+      "y": 270
+    },
+    "waterlogged=true,facing=north,color=gray": {
+      "model": "clutter:block/plushies/sheep/gray_sheep_plushie"
+    },
+    "waterlogged=true,facing=south,color=gray": {
+      "model": "clutter:block/plushies/sheep/gray_sheep_plushie",
+      "y": 180
+    },
+    "waterlogged=true,facing=east,color=gray": {
+      "model": "clutter:block/plushies/sheep/gray_sheep_plushie",
+      "y": 90
+    },
+    "waterlogged=true,facing=west,color=gray": {
+      "model": "clutter:block/plushies/sheep/gray_sheep_plushie",
+      "y": 270
+    },
+    "waterlogged=true,facing=north,color=green": {
+      "model": "clutter:block/plushies/sheep/green_sheep_plushie"
+    },
+    "waterlogged=true,facing=south,color=green": {
+      "model": "clutter:block/plushies/sheep/green_sheep_plushie",
+      "y": 180
+    },
+    "waterlogged=true,facing=east,color=green": {
+      "model": "clutter:block/plushies/sheep/green_sheep_plushie",
+      "y": 90
+    },
+    "waterlogged=true,facing=west,color=green": {
+      "model": "clutter:block/plushies/sheep/green_sheep_plushie",
+      "y": 270
+    },
+    "waterlogged=true,facing=north,color=light_blue": {
+      "model": "clutter:block/plushies/sheep/light_blue_sheep_plushie"
+    },
+    "waterlogged=true,facing=south,color=light_blue": {
+      "model": "clutter:block/plushies/sheep/light_blue_sheep_plushie",
+      "y": 180
+    },
+    "waterlogged=true,facing=east,color=light_blue": {
+      "model": "clutter:block/plushies/sheep/light_blue_sheep_plushie",
+      "y": 90
+    },
+    "waterlogged=true,facing=west,color=light_blue": {
+      "model": "clutter:block/plushies/sheep/light_blue_sheep_plushie",
+      "y": 270
+    },
+    "waterlogged=true,facing=north,color=lime": {
+      "model": "clutter:block/plushies/sheep/lime_sheep_plushie"
+    },
+    "waterlogged=true,facing=south,color=lime": {
+      "model": "clutter:block/plushies/sheep/lime_sheep_plushie",
+      "y": 180
+    },
+    "waterlogged=true,facing=east,color=lime": {
+      "model": "clutter:block/plushies/sheep/lime_sheep_plushie",
+      "y": 90
+    },
+    "waterlogged=true,facing=west,color=lime": {
+      "model": "clutter:block/plushies/sheep/lime_sheep_plushie",
+      "y": 270
+    },
+    "waterlogged=true,facing=north,color=magenta": {
+      "model": "clutter:block/plushies/sheep/magenta_sheep_plushie"
+    },
+    "waterlogged=true,facing=south,color=magenta": {
+      "model": "clutter:block/plushies/sheep/magenta_sheep_plushie",
+      "y": 180
+    },
+    "waterlogged=true,facing=east,color=magenta": {
+      "model": "clutter:block/plushies/sheep/magenta_sheep_plushie",
+      "y": 90
+    },
+    "waterlogged=true,facing=west,color=magenta": {
+      "model": "clutter:block/plushies/sheep/magenta_sheep_plushie",
+      "y": 270
+    },
+    "waterlogged=true,facing=north,color=light_gray": {
+      "model": "clutter:block/plushies/sheep/light_gray_sheep_plushie"
+    },
+    "waterlogged=true,facing=south,color=light_gray": {
+      "model": "clutter:block/plushies/sheep/light_gray_sheep_plushie",
+      "y": 180
+    },
+    "waterlogged=true,facing=east,color=light_gray": {
+      "model": "clutter:block/plushies/sheep/light_gray_sheep_plushie",
+      "y": 90
+    },
+    "waterlogged=true,facing=west,color=light_gray": {
+      "model": "clutter:block/plushies/sheep/light_gray_sheep_plushie",
+      "y": 270
+    },
+    "waterlogged=true,facing=north,color=red": {
+      "model": "clutter:block/plushies/sheep/red_sheep_plushie"
+    },
+    "waterlogged=true,facing=south,color=red": {
+      "model": "clutter:block/plushies/sheep/red_sheep_plushie",
+      "y": 180
+    },
+    "waterlogged=true,facing=east,color=red": {
+      "model": "clutter:block/plushies/sheep/red_sheep_plushie",
+      "y": 90
+    },
+    "waterlogged=true,facing=west,color=red": {
+      "model": "clutter:block/plushies/sheep/red_sheep_plushie",
+      "y": 270
+    },
+    "waterlogged=true,facing=north,color=orange": {
+      "model": "clutter:block/plushies/sheep/orange_sheep_plushie"
+    },
+    "waterlogged=true,facing=south,color=orange": {
+      "model": "clutter:block/plushies/sheep/orange_sheep_plushie",
+      "y": 180
+    },
+    "waterlogged=true,facing=east,color=orange": {
+      "model": "clutter:block/plushies/sheep/orange_sheep_plushie",
+      "y": 90
+    },
+    "waterlogged=true,facing=west,color=orange": {
+      "model": "clutter:block/plushies/sheep/orange_sheep_plushie",
+      "y": 270
+    },
+    "waterlogged=true,facing=north,color=yellow": {
+      "model": "clutter:block/plushies/sheep/yellow_sheep_plushie"
+    },
+    "waterlogged=true,facing=south,color=yellow": {
+      "model": "clutter:block/plushies/sheep/yellow_sheep_plushie",
+      "y": 180
+    },
+    "waterlogged=true,facing=east,color=yellow": {
+      "model": "clutter:block/plushies/sheep/yellow_sheep_plushie",
+      "y": 90
+    },
+    "waterlogged=true,facing=west,color=yellow": {
+      "model": "clutter:block/plushies/sheep/yellow_sheep_plushie",
+      "y": 270
+    },
+    "waterlogged=true,facing=north,color=purple": {
+      "model": "clutter:block/plushies/sheep/purple_sheep_plushie"
+    },
+    "waterlogged=true,facing=south,color=purple": {
+      "model": "clutter:block/plushies/sheep/purple_sheep_plushie",
+      "y": 180
+    },
+    "waterlogged=true,facing=east,color=purple": {
+      "model": "clutter:block/plushies/sheep/purple_sheep_plushie",
+      "y": 90
+    },
+    "waterlogged=true,facing=west,color=purple": {
+      "model": "clutter:block/plushies/sheep/purple_sheep_plushie",
+      "y": 270
+    },
+    "waterlogged=true,facing=north,color=pink": {
+      "model": "clutter:block/plushies/sheep/pink_sheep_plushie"
+    },
+    "waterlogged=true,facing=south,color=pink": {
+      "model": "clutter:block/plushies/sheep/pink_sheep_plushie",
+      "y": 180
+    },
+    "waterlogged=true,facing=east,color=pink": {
+      "model": "clutter:block/plushies/sheep/pink_sheep_plushie",
+      "y": 90
+    },
+    "waterlogged=true,facing=west,color=pink": {
+      "model": "clutter:block/plushies/sheep/pink_sheep_plushie",
       "y": 270
     }
   }

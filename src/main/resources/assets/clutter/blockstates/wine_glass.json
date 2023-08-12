@@ -1,0 +1,37 @@
+{
+  "variants": {
+    "glasses=0": {
+      "model": "clutter:block/bottles/wine_glass"
+    },
+    "facing=north,glasses=1": {
+      "model": "clutter:block/bottles/two_wine_glasses"
+    },
+    "facing=south,glasses=1": {
+      "model": "clutter:block/bottles/two_wine_glasses",
+      "y": 180
+    },
+    "facing=east,glasses=1": {
+      "model": "clutter:block/bottles/two_wine_glasses",
+      "y": 90
+    },
+    "facing=west,glasses=1": {
+      "model": "clutter:block/bottles/two_wine_glasses",
+      "y": 270
+    },
+    "facing=north,glasses=2": {
+      "model": "clutter:block/bottles/three_wine_glasses"
+    },
+    "facing=south,glasses=2": {
+      "model": "clutter:block/bottles/three_wine_glasses",
+      "y": 180
+    },
+    "facing=east,glasses=2": {
+      "model": "clutter:block/bottles/three_wine_glasses",
+      "y": 90
+    },
+    "facing=west,glasses=2": {
+      "model": "clutter:block/bottles/three_wine_glasses",
+      "y": 270
+    }
+  }
+}

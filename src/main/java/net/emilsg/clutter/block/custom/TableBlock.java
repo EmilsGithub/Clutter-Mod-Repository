@@ -39,7 +39,7 @@ public class TableBlock extends Block implements Waterloggable {
 
     public TableBlock(Settings settings) {
         super(settings);
-        this.setDefaultState((BlockState)(this.stateManager.getDefaultState()).with(WATERLOGGED, false));
+        this.setDefaultState((this.stateManager.getDefaultState()).with(WATERLOGGED, false).with(LEGS,true).with(LEG_POSITIONS, LegPosition.ALL));
     }
 
     protected static final VoxelShape NORTH_SHAPE = VoxelShapes.union(
@@ -89,8 +89,6 @@ public class TableBlock extends Block implements Waterloggable {
             Block.createCuboidShape(0.0, 0.0, 14.0, 2.0, 14.0, 16.0),
             Block.createCuboidShape(14.0, 0.0, 14.0, 16.0, 14.0, 16.0)
     );
-
-
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
@@ -164,17 +162,20 @@ public class TableBlock extends Block implements Waterloggable {
     @Override
     public void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(LEG_POSITIONS, LEGS, WATERLOGGED);
-        super.appendProperties(builder);
     }
 
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-        boolean eastTable = world.getBlockState(pos.east()).isIn(ModBlockTags.TABLES);
-        boolean westTable = world.getBlockState(pos.west()).isIn(ModBlockTags.TABLES);
-        boolean northTable = world.getBlockState(pos.north()).isIn(ModBlockTags.TABLES);
-        boolean southTable = world.getBlockState(pos.south()).isIn(ModBlockTags.TABLES);
+        boolean eastTable = world.getBlockState(pos.east()).getBlock() instanceof TableBlock;
+        boolean westTable = world.getBlockState(pos.west()).getBlock() instanceof TableBlock;
+        boolean northTable = world.getBlockState(pos.north()).getBlock() instanceof TableBlock;
+        boolean southTable = world.getBlockState(pos.south()).getBlock() instanceof TableBlock;
+        boolean northWestTable = world.getBlockState(pos.north().west()).getBlock() instanceof TableBlock;
+        boolean southWestTable = world.getBlockState(pos.south().west()).getBlock() instanceof TableBlock;
+        boolean northEastTable = world.getBlockState(pos.north().east()).getBlock() instanceof TableBlock;
+        boolean southEastTable = world.getBlockState(pos.south().east()).getBlock() instanceof TableBlock;
 
-        if (!eastTable && !westTable && !northTable && !southTable) { // no tables nearby
+        if (!eastTable && !westTable && !northTable && !southTable) {
             return state.with(LEG_POSITIONS, LegPosition.ALL).with(LEGS, true);
         }
         if (eastTable && westTable && northTable && southTable) {
@@ -186,12 +187,6 @@ public class TableBlock extends Block implements Waterloggable {
         if (northTable && southTable) {
             return state.with(LEG_POSITIONS, LegPosition.NONE).with(LEGS, false);
         }
-
-        boolean northWestTable = world.getBlockState(pos.north().west()).isIn(ModBlockTags.TABLES);
-        boolean southWestTable = world.getBlockState(pos.south().west()).isIn(ModBlockTags.TABLES);
-        boolean northEastTable = world.getBlockState(pos.north().east()).isIn(ModBlockTags.TABLES);
-        boolean southEastTable = world.getBlockState(pos.south().east()).isIn(ModBlockTags.TABLES);
-
         if (westTable && southTable && !northWestTable) {
             return state.with(LEG_POSITIONS, LegPosition.SOUTH_WEST).with(LEGS, true);
         }
@@ -224,10 +219,10 @@ public class TableBlock extends Block implements Waterloggable {
     }
 
     private void updateTableLegs(World world, BlockPos pos, BlockState state) {
-        boolean eastTable = world.getBlockState(pos.east()).isIn(ModBlockTags.TABLES);
-        boolean westTable = world.getBlockState(pos.west()).isIn(ModBlockTags.TABLES);
-        boolean northTable = world.getBlockState(pos.north()).isIn(ModBlockTags.TABLES);
-        boolean southTable = world.getBlockState(pos.south()).isIn(ModBlockTags.TABLES);
+        boolean eastTable = world.getBlockState(pos.east()).getBlock() instanceof TableBlock;
+        boolean westTable = world.getBlockState(pos.west()).getBlock() instanceof TableBlock;
+        boolean northTable = world.getBlockState(pos.north()).getBlock() instanceof TableBlock;
+        boolean southTable = world.getBlockState(pos.south()).getBlock() instanceof TableBlock;
 
         if (eastTable && westTable && northTable && southTable) {
             world.setBlockState(pos, state.with(LEG_POSITIONS, LegPosition.NONE).with(LEGS, false));

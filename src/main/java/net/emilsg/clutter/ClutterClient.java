@@ -1,40 +1,43 @@
 package net.emilsg.clutter;
 
-import net.emilsg.clutter.block.entity.SeatEntity;
+import io.netty.buffer.Unpooled;
+import net.emilsg.clutter.block.entity.ModBlockEntities;
+import net.emilsg.clutter.block.entity.render.PlateBlockEntityRenderer;
+import net.emilsg.clutter.block.entity.render.ShelfBlockEntityRenderer;
+import net.emilsg.clutter.compat.trinkets.TrinketsIntegration;
 import net.emilsg.clutter.entity.ModEntities;
 import net.emilsg.clutter.entity.client.*;
-import net.emilsg.clutter.util.ModSit;
+import net.emilsg.clutter.networking.ModMessages;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.color.world.FoliageColors;
-import net.minecraft.client.render.Frustum;
 import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.entity.EntityRenderer;
-import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
+import net.minecraft.network.PacketByteBuf;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
+import static net.emilsg.clutter.Clutter.IS_TRINKETS_LOADED;
 import static net.emilsg.clutter.block.ModBlocks.*;
 
 public class ClutterClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        registerColorProviders();
+        if(IS_TRINKETS_LOADED) TrinketsIntegration.registerTrinkets();
 
-        EntityRendererRegistry.register(ModSit.SEAT, EmptyRenderer::new);
-        EntityRendererRegistry.register(ModEntities.BUTTERFLY, ButterflyRenderer::new);
-        EntityRendererRegistry.register(ModEntities.CHAMELEON, ChameleonRenderer::new);
-        EntityRendererRegistry.register(ModEntities.ECHOFIN, EchofinRenderer::new);
-        EntityRendererRegistry.register(ModEntities.MOSSBLOOM, MossbloomRenderer::new);
-        EntityRendererRegistry.register(ModEntities.KIWI_BIRD, KiwiBirdRenderer::new);
-        EntityRendererRegistry.register(ModEntities.EMPEROR_PENGUIN, EmperorPenguinRenderer::new);
+        registerColorProviders();
+        registerEntityRenderers();
+        registerBlockEntityRenderers();
 
         List<Block> blocksToRender = Arrays.asList(
                 FOOD_BOX,
@@ -55,6 +58,7 @@ public class ClutterClient implements ClientModInitializer {
                 COBBLESTONE_CHIMNEY,
                 BRICK_CHIMNEY,
                 STONE_BRICK_CHIMNEY,
+                PURPUR_CHIMNEY,
                 MOSSY_STONE_BRICK_CHIMNEY,
                 DEEPSLATE_BRICK_CHIMNEY,
                 MUD_BRICK_CHIMNEY,
@@ -397,27 +401,34 @@ public class ClutterClient implements ClientModInitializer {
                 KIWI_LEAVES,
                 RIPE_KIWI_LEAVES,
                 KIWI_TREE_SAPLING,
-                KIWI_CROP
+                KIWI_CROP,
+                SHEEP_PLUSHIE,
+                TALL_WHITE_CURTAINS,
+                TALL_LIGHT_GRAY_CURTAINS,
+                TALL_GRAY_CURTAINS,
+                TALL_BLACK_CURTAINS,
+                TALL_BROWN_CURTAINS,
+                TALL_RED_CURTAINS,
+                TALL_ORANGE_CURTAINS,
+                TALL_YELLOW_CURTAINS,
+                TALL_LIME_CURTAINS,
+                TALL_GREEN_CURTAINS,
+                TALL_CYAN_CURTAINS,
+                TALL_LIGHT_BLUE_CURTAINS,
+                TALL_BLUE_CURTAINS,
+                TALL_PURPLE_CURTAINS,
+                TALL_MAGENTA_CURTAINS,
+                TALL_PINK_CURTAINS,
+                GIANT_LILY_PAD,
+                GIANT_LILY_PAD_SEEDLING,
+                SMALL_LILY_PADS,
+                WINE_GLASS,
+                PLATE
         );
 
-
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), blocksToRender.toArray(new Block[0]));
-    }
 
-    private static class EmptyRenderer extends EntityRenderer<SeatEntity> {
-        protected EmptyRenderer(EntityRendererFactory.Context ctx) {
-            super(ctx);
-        }
-
-        @Override
-        public boolean shouldRender(SeatEntity entity, Frustum frustum, double d, double e, double f) {
-            return false;
-        }
-
-        @Override
-        public Identifier getTexture(SeatEntity entity) {
-            return null;
-        }
+        ModMessages.registerS2CPackets();
     }
 
     private void registerColorProviders(){
@@ -434,11 +445,46 @@ public class ClutterClient implements ClientModInitializer {
                 CATTAILS
         );
 
+
+        ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) ->
+                Objects.requireNonNull(ColorProviderRegistry.BLOCK.get(Blocks.LILY_PAD)).getColor(state, world, pos, tintIndex),
+                GIANT_LILY_PAD,
+                GIANT_LILY_PAD_SEEDLING,
+                SMALL_LILY_PADS
+        );
+
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) ->
+                Objects.requireNonNull(ColorProviderRegistry.ITEM.get(Blocks.LILY_PAD)).getColor(stack, tintIndex),
+                SMALL_LILY_PADS,
+                GIANT_LILY_PAD
+        );
+
+
         ColorProviderRegistry.ITEM.register((stack, tintIndex) ->
                         FoliageColors.getDefaultColor(),
                 RIPE_KIWI_LEAVES,
                 KIWI_LEAVES
         );
+
+        ClientPlayConnectionEvents.JOIN.register((handler, client, isConnected) -> {
+            handler.sendPacket(ClientPlayNetworking.createC2SPacket(ModMessages.VERSION_HANDSHAKE_PACKET_ID, new PacketByteBuf(Unpooled.buffer()).writeString(Clutter.MOD_VERSION)));
+        });
+
     }
 
+    private void registerEntityRenderers() {
+        EntityRendererRegistry.register(ModEntities.SEAT, EmptySeatRenderer::new);
+        EntityRendererRegistry.register(ModEntities.BUTTERFLY, ButterflyRenderer::new);
+        EntityRendererRegistry.register(ModEntities.CHAMELEON, ChameleonRenderer::new);
+        EntityRendererRegistry.register(ModEntities.ECHOFIN, EchofinRenderer::new);
+        EntityRendererRegistry.register(ModEntities.MOSSBLOOM, MossbloomRenderer::new);
+        EntityRendererRegistry.register(ModEntities.KIWI_BIRD, KiwiBirdRenderer::new);
+        EntityRendererRegistry.register(ModEntities.EMPEROR_PENGUIN, EmperorPenguinRenderer::new);
+        EntityRendererRegistry.register(ModEntities.BEAVER, BeaverRenderer::new);
+    }
+
+    private void registerBlockEntityRenderers() {
+        BlockEntityRendererFactories.register(ModBlockEntities.SHELF, ShelfBlockEntityRenderer::new);
+        BlockEntityRendererFactories.register(ModBlockEntities.PLATE, PlateBlockEntityRenderer::new);
+    }
 }

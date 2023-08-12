@@ -29,6 +29,9 @@
     },
     "legs=false": {
       "model": "clutter:block/tables/dark_oak/dark_oak_none"
+    },
+    "leg_positions=none,legs=true": {
+      "model": "clutter:block/tables/dark_oak/dark_oak_none"
     }
   }
 }

@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "age=0": {
+        "model": "clutter:block/giant_lily_pad/giant_lily_pad_seedling"
+    },
+    "age=1": {
+      "model": "clutter:block/giant_lily_pad/giant_lily_pad_seedling_stage1"
+    },
+    "age=2": {
+      "model": "clutter:block/giant_lily_pad/giant_lily_pad_seedling_stage2"
+    },
+    "age=3": {
+      "model": "clutter:block/giant_lily_pad/giant_lily_pad_seedling_stage3"
+    }
+  }
+}

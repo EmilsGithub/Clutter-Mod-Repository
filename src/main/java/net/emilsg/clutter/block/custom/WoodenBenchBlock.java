@@ -245,10 +245,10 @@ public class WoodenBenchBlock extends SeatBlock {
     }
 
     private void updateBenchLegs(World world, BlockPos pos, BlockState state) {
-        boolean eastBench = world.getBlockState(pos.east()).isIn(ModBlockTags.BENCHES);
-        boolean westBench = world.getBlockState(pos.west()).isIn(ModBlockTags.BENCHES);
-        boolean northBench = world.getBlockState(pos.north()).isIn(ModBlockTags.BENCHES);
-        boolean southBench = world.getBlockState(pos.south()).isIn(ModBlockTags.BENCHES);
+        boolean eastBench = world.getBlockState(pos.east()).getBlock() instanceof WoodenBenchBlock;
+        boolean westBench = world.getBlockState(pos.west()).getBlock() instanceof WoodenBenchBlock;
+        boolean northBench = world.getBlockState(pos.north()).getBlock() instanceof WoodenBenchBlock;
+        boolean southBench = world.getBlockState(pos.south()).getBlock() instanceof WoodenBenchBlock;
 
         boolean facingNS = state.get(FACING) == Direction.NORTH || state.get(FACING) == Direction.SOUTH;
         boolean facingEW = state.get(FACING) == Direction.EAST || state.get(FACING) == Direction.WEST;
@@ -279,10 +279,10 @@ public class WoodenBenchBlock extends SeatBlock {
 
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-        boolean eastBench = world.getBlockState(pos.east()).isIn(ModBlockTags.BENCHES);
-        boolean westBench = world.getBlockState(pos.west()).isIn(ModBlockTags.BENCHES);
-        boolean northBench = world.getBlockState(pos.north()).isIn(ModBlockTags.BENCHES);
-        boolean southBench = world.getBlockState(pos.south()).isIn(ModBlockTags.BENCHES);
+        boolean eastBench = world.getBlockState(pos.east()).getBlock() instanceof WoodenBenchBlock;
+        boolean westBench = world.getBlockState(pos.west()).getBlock() instanceof WoodenBenchBlock;
+        boolean northBench = world.getBlockState(pos.north()).getBlock() instanceof WoodenBenchBlock;
+        boolean southBench = world.getBlockState(pos.south()).getBlock() instanceof WoodenBenchBlock;
 
         boolean facingNS = state.get(FACING) == Direction.NORTH || state.get(FACING) == Direction.SOUTH;
         boolean facingEW = state.get(FACING) == Direction.EAST || state.get(FACING) == Direction.WEST;

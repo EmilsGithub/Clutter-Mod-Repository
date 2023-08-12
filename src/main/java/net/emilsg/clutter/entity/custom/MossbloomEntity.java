@@ -43,6 +43,13 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class MossbloomEntity extends AnimalEntity implements GeoEntity {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+    private static final RawAnimation IDLE = RawAnimation.begin().thenLoop("mossbloom.idle");
+    private static final RawAnimation WALK = RawAnimation.begin().thenLoop("mossbloom.walk");
+
+    private static final RawAnimation WAG_TAIL = RawAnimation.begin().thenPlay("mossbloom.wag_tail");
+    private static final RawAnimation LE_DROP = RawAnimation.begin().thenPlay("mossbloom.le_drop");
+    private static final RawAnimation RE_DROP = RawAnimation.begin().thenPlay("mossbloom.re_drop");
+    private static final RawAnimation EARS_DROP = RawAnimation.begin().thenPlay("mossbloom.ears_drop");
 
     public MossbloomEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
@@ -164,34 +171,23 @@ public class MossbloomEntity extends AnimalEntity implements GeoEntity {
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController<>(this, "controller", 0, this::predicate));
-        controllerRegistrar.add(new AnimationController<>(this, "idle_controller", 0, this::idlePredicate));
+        controllerRegistrar.add(new AnimationController<>(this, "controller", 10, this::predicate));
+        controllerRegistrar.add(new AnimationController<>(this, "idle_controller", 10, this::idlePredicate));
     }
 
     private <T extends GeoAnimatable> PlayState idlePredicate(AnimationState<T> tAnimationState) {
-        if (this.random.nextInt(200) == 0) {
-            if (this.random.nextBoolean()) {
-                tAnimationState.getController().setAnimation(RawAnimation.begin().thenPlay("mossbloom.wag_tail"));
-            } else {
-                if (this.random.nextBoolean()) {
-                    tAnimationState.getController().setAnimation(RawAnimation.begin().thenPlay("mossbloom.le_drop"));
-                } else if (this.random.nextBoolean()){
-                    tAnimationState.getController().setAnimation(RawAnimation.begin().thenPlay("mossbloom.re_drop"));
-                } else {
-                    tAnimationState.getController().setAnimation(RawAnimation.begin().thenPlay("mossbloom.ears_drop"));
-                }
-            }
-            return PlayState.CONTINUE;
+        if(this.random.nextInt(200) == 0) {
+            tAnimationState.getController().setAnimation(this.random.nextBoolean() ? WAG_TAIL : this.random.nextBoolean() ? LE_DROP : this.random.nextBoolean() ? RE_DROP : EARS_DROP);
         }
         return PlayState.CONTINUE;
     }
 
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
         if(tAnimationState.isMoving()) {
-            tAnimationState.getController().setAnimation(RawAnimation.begin().thenLoop("mossbloom.walk"));
+            tAnimationState.getController().setAnimation(WALK);
             return PlayState.CONTINUE;
         }
-        tAnimationState.getController().setAnimation(RawAnimation.begin().thenLoop("mossbloom.idle"));
+        tAnimationState.getController().setAnimation(IDLE);
         return PlayState.CONTINUE;
     }
 

@@ -1,6 +1,5 @@
 package net.emilsg.clutter.block.custom;
 
-import net.emilsg.clutter.util.ModBlockTags;
 import net.emilsg.clutter.util.ModItemTags;
 import net.minecraft.block.*;
 import net.minecraft.entity.ai.pathing.NavigationType;
@@ -178,7 +177,7 @@ public class TrellisBlock extends Block implements Waterloggable {
             BlockPos neighborPos = pos.offset(direction);
             BlockState neighborState = world.getBlockState(neighborPos);
 
-            if (neighborState.isIn(ModBlockTags.TRELLISES) && neighborState.get(PLANT) != TrellisBlock.Plant.NONE) {
+            if (neighborState.getBlock() instanceof TrellisBlock && neighborState.get(PLANT) != TrellisBlock.Plant.NONE) {
                 // If there is a neighboring block with a plant, set the block's plant state randomly
                 if (world.random.nextFloat() < 0.1f) {
                     world.setBlockState(pos, state.with(PLANT, neighborState.get(PLANT)).with(LIT, neighborState.get(LIT)), Block.NOTIFY_ALL);

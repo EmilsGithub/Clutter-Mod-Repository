@@ -3,6 +3,7 @@ package net.emilsg.clutter.util;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.screen.GenericContainerScreenHandler;
+import net.minecraft.screen.HopperScreenHandler;
 import net.minecraft.screen.ScreenHandlerType;
 
 public class ModScreenHandler extends GenericContainerScreenHandler {
@@ -21,5 +22,9 @@ public class ModScreenHandler extends GenericContainerScreenHandler {
 
     public static GenericContainerScreenHandler createGeneric3x3(int syncId, PlayerInventory playerInventory, Inventory inventory) {
         return new GenericContainerScreenHandler(ScreenHandlerType.GENERIC_3X3, syncId, playerInventory, inventory, 1);
+    }
+
+    public static HopperScreenHandler createGeneric5x1(int syncId, PlayerInventory playerInventory, Inventory inventory) {
+        return new HopperScreenHandler(syncId, playerInventory, inventory);
     }
 }

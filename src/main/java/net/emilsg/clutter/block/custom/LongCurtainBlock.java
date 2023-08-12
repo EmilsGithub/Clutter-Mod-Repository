@@ -1,6 +1,5 @@
 package net.emilsg.clutter.block.custom;
 
-import net.emilsg.clutter.util.ModBlockTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalFacingBlock;
@@ -55,14 +54,14 @@ public class LongCurtainBlock extends HorizontalFacingBlock {
             BlockPos currPos = queue.poll();
             BlockState currState = world.getBlockState(currPos);
 
-            if (currState.isIn(ModBlockTags.LONG_CURTAINS) && !visited.contains(currPos)) {
+            if (currState.getBlock() instanceof LongCurtainBlock && !visited.contains(currPos)) {
                 visited.add(currPos);
                 world.setBlockState(currPos, currState.with(OPEN, open), 3);
 
                 for (Direction direction : Direction.values()) {
                     BlockPos nextPos = currPos.offset(direction);
                     BlockState nextState = world.getBlockState(nextPos);
-                    if (!visited.contains(nextPos) && nextState.isIn(ModBlockTags.LONG_CURTAINS)) {
+                    if (!visited.contains(nextPos) && nextState.getBlock() instanceof LongCurtainBlock) {
                         queue.offer(nextPos);
                     }
                 }

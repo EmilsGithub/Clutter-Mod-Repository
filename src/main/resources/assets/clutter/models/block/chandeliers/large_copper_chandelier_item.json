@@ -1,0 +1,9 @@
+{	"parent": "clutter:block/chandeliers/large_chandelier_item_parent",
+	"textures": {
+		"0": "block/copper_block",
+		"1": "clutter:block/large_copper_chandelier_center",
+		"2": "clutter:block/large_copper_chandelier_side",
+		"3": "clutter:block/large_copper_chandelier_side_rod",
+		"4": "clutter:block/large_copper_chandelier_diagonal"
+	}
+}

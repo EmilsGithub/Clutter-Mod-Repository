@@ -1,0 +1,7 @@
+{
+	"parent": "clutter:block/large_chains/large_chain_parent",
+	"textures": {
+		"0": "clutter:block/large_copper_chain",
+		"particle": "clutter:block/large_copper_chain"
+	}
+}

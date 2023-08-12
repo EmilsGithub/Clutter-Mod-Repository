@@ -3,6 +3,7 @@ package net.emilsg.clutter.block.custom;
 import net.emilsg.clutter.entity.ModEntities;
 import net.emilsg.clutter.entity.custom.ButterflyEntity;
 import net.emilsg.clutter.entity.variants.ButterflyVariant;
+import net.emilsg.clutter.item.ModItems;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -82,6 +83,7 @@ public class ButterflyCocoonBlock extends Block {
             } else {
                 world.playSound((PlayerEntity)null, pos, SoundEvents.BLOCK_MOSS_BREAK, SoundCategory.BLOCKS, 0.7F, 0.9F + random.nextFloat() * 0.2F);
                 world.removeBlock(pos, false);
+                if(random.nextInt(10) == 0) dropStack(world, pos, new ItemStack(ModItems.BUTTERFLY_ELYTRA_SMITHING_TEMPLATE_SHARDS));
 
                 for(int j = 0; j < 1; ++j) {
                     world.syncWorldEvent(2001, pos, Block.getRawIdFromState(state));

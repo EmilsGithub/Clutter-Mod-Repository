@@ -19,6 +19,9 @@
       "model": "clutter:block/crops/cotton_stage2"
     },
     "age=6": {
+      "model": "clutter:block/crops/cotton_stage2"
+    },
+    "age=7": {
       "model": "clutter:block/crops/cotton_stage3"
     }
   }

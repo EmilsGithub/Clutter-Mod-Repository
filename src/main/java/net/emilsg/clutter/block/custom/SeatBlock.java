@@ -25,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-import static net.emilsg.clutter.block.entity.SeatEntity.OCCUPIED;
+import static net.emilsg.clutter.block.entity.SeatEntity.IS_OCCUPIED;
 
 public class SeatBlock extends HorizontalFacingBlock implements Waterloggable {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
@@ -36,9 +36,11 @@ public class SeatBlock extends HorizontalFacingBlock implements Waterloggable {
         this.setDefaultState((BlockState)(this.stateManager.getDefaultState()).with(WATERLOGGED, false));
     }
 
+
     @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
-        stateManager.add(HORIZONTAL_FACING, WATERLOGGED);
+    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+        builder.add(HORIZONTAL_FACING, WATERLOGGED);
+        super.appendProperties(builder);
     }
 
     @Override
@@ -91,6 +93,6 @@ public class SeatBlock extends HorizontalFacingBlock implements Waterloggable {
         this.spawnBreakParticles(world, player, pos, state);
         world.emitGameEvent(player, GameEvent.BLOCK_DESTROY, pos);
 
-        OCCUPIED.remove(new Vec3d(xPos, yPos, zPos));
+        IS_OCCUPIED.remove(new Vec3d(xPos, yPos, zPos));
     }
 }

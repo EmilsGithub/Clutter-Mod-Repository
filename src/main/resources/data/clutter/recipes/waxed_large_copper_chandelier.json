@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "waxed_large_chandeliers",
+  "ingredients": [
+    {
+      "item": "clutter:large_copper_chandelier"
+    },
+    {
+      "item": "minecraft:honeycomb"
+    }
+  ],
+  "result": {
+    "item": "clutter:waxed_large_copper_chandelier"
+  }
+}
+

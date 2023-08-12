@@ -1,0 +1,7 @@
+{
+  "parent": "clutter:block/tall_curtains/tall_curtains_top_right_open_parent",
+  "textures": {
+    "0": "clutter:block/tall_curtains/open_purple",
+    "particle": "clutter:block/tall_curtains/open_purple"
+  }
+}

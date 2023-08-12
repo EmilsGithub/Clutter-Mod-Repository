@@ -1,7 +1,7 @@
 package net.emilsg.clutter.block.entity;
 
+import net.emilsg.clutter.entity.ModEntities;
 import net.emilsg.clutter.util.ModBlockTags;
-import net.emilsg.clutter.util.ModSit;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -18,34 +18,31 @@ import java.util.HashMap;
 
 public class SeatEntity extends Entity {
 
-    public static final HashMap<Vec3d, BlockPos> OCCUPIED = new HashMap<>();
+    public static final HashMap<Vec3d, BlockPos> IS_OCCUPIED = new HashMap<>();
     @Override
     public Packet<ClientPlayPacketListener> createSpawnPacket()
     {
         return new EntitySpawnS2CPacket(this);
     }
-    public SeatEntity(EntityType<? extends Entity> type, World world)
-    {
-        super(ModSit.SEAT, world);
+    public SeatEntity(EntityType<? extends Entity> type, World world) {
+        super(ModEntities.SEAT, world);
     }
 
-    public SeatEntity(World world)
-    {
-        super(ModSit.SEAT, world);
+    public SeatEntity(World world) {
+        super(ModEntities.SEAT, world);
         noClip = true;
     }
-
 
     @Override
     public Vec3d updatePassengerForDismount(LivingEntity passenger) {
         if (passenger instanceof PlayerEntity) {
-            int X = this.getBlockPos().getX();
-            int Y = this.getBlockPos().getY();
-            int Z = this.getBlockPos().getZ();
-            BlockPos pos = OCCUPIED.remove(new Vec3d(X, Y , Z));
+            int posX = this.getBlockPos().getX();
+            int posY = this.getBlockPos().getY();
+            int posZ = this.getBlockPos().getZ();
+            BlockPos pos = IS_OCCUPIED.remove(new Vec3d(posX, posY , posZ));
             if (pos != null) {
                 remove(RemovalReason.DISCARDED);
-                return new Vec3d(X + 0.5D, Y + 1.0D, Z + 0.5D);
+                return new Vec3d(posX + 0.5D, posY + 1.0D, posZ + 0.5D);
             }
         }
 
@@ -55,15 +52,14 @@ public class SeatEntity extends Entity {
 
     @Override
     public void tick() {
-        if (!this.getWorld().isClient && !this.getWorld().getBlockState(this.getBlockPos()).isIn(ModBlockTags.SEATS)){
+        if (!this.getWorld().isClient && !(this.getWorld().getBlockState(this.getBlockPos()).isIn(ModBlockTags.SEATS) || !this.getPassengerList().isEmpty())){
             remove(RemovalReason.DISCARDED);
         }
     }
 
     @Override
-    public void remove(RemovalReason reason)
-    {
-        OCCUPIED.remove(getPos());
+    public void remove(RemovalReason reason) {
+        IS_OCCUPIED.remove(getPos());
         super.remove(reason);
     }
 

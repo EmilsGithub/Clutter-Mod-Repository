@@ -1,0 +1,125 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:book",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": 8,
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "clutter:book_pile",
+                  "properties": {
+                    "layers": "7"
+                  }
+                }
+              ]
+            },
+            {
+              "function": "minecraft:set_count",
+              "count": 7,
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "clutter:book_pile",
+                  "properties": {
+                    "layers": "6"
+                  }
+                }
+              ]
+            },
+            {
+              "function": "minecraft:set_count",
+              "count": 6,
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "clutter:book_pile",
+                  "properties": {
+                    "layers": "5"
+                  }
+                }
+              ]
+            },
+            {
+              "function": "minecraft:set_count",
+              "count": 5,
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "clutter:book_pile",
+                  "properties": {
+                    "layers": "4"
+                  }
+                }
+              ]
+            },
+            {
+              "function": "minecraft:set_count",
+              "count": 4,
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "clutter:book_pile",
+                  "properties": {
+                    "layers": "3"
+                  }
+                }
+              ]
+            },
+            {
+              "function": "minecraft:set_count",
+              "count": 3,
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "clutter:book_pile",
+                  "properties": {
+                    "layers": "2"
+                  }
+                }
+              ]
+            },
+            {
+              "function": "minecraft:set_count",
+              "count": 2,
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "clutter:book_pile",
+                  "properties": {
+                    "layers": "1"
+                  }
+                }
+              ]
+            },
+            {
+              "function": "minecraft:set_count",
+              "count": 1,
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "clutter:book_pile",
+                  "properties": {
+                    "layers": "0"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ]
+    }
+  ]
+}

@@ -1,21 +1,21 @@
 {
-  "variants":{
-    "under_block=false,facing=north,plant=none":{
-      "model":"clutter:block/trellises/birch/empty"
+  "variants": {
+    "waterlogged=false,under_block=false,facing=north,plant=none": {
+      "model": "clutter:block/trellises/birch/empty"
     },
-    "under_block=false,facing=south,plant=none":{
-      "model":"clutter:block/trellises/birch/empty",
+    "waterlogged=false,under_block=false,facing=south,plant=none": {
+      "model": "clutter:block/trellises/birch/empty",
       "y": 180
     },
-    "under_block=false,facing=east,plant=none":{
-      "model":"clutter:block/trellises/birch/empty",
+    "waterlogged=false,under_block=false,facing=east,plant=none": {
+      "model": "clutter:block/trellises/birch/empty",
       "y": 90
     },
-    "under_block=false,facing=west,plant=none":{
-      "model":"clutter:block/trellises/birch/empty",
+    "waterlogged=false,under_block=false,facing=west,plant=none": {
+      "model": "clutter:block/trellises/birch/empty",
       "y": 270
     },
-    "under_block=false,facing=north,plant=vines":[
+    "waterlogged=false,under_block=false,facing=north,plant=vines": [
       {
         "model": "clutter:block/trellises/birch/vines"
       },
@@ -23,7 +23,7 @@
         "model": "clutter:block/trellises/birch/vines2"
       }
     ],
-    "under_block=false,facing=south,plant=vines":[
+    "waterlogged=false,under_block=false,facing=south,plant=vines": [
       {
         "model": "clutter:block/trellises/birch/vines",
         "y": 180
@@ -33,7 +33,7 @@
         "y": 180
       }
     ],
-    "under_block=false,facing=east,plant=vines":[
+    "waterlogged=false,under_block=false,facing=east,plant=vines": [
       {
         "model": "clutter:block/trellises/birch/vines",
         "y": 90
@@ -43,7 +43,7 @@
         "y": 90
       }
     ],
-    "under_block=false,facing=west,plant=vines":[
+    "waterlogged=false,under_block=false,facing=west,plant=vines": [
       {
         "model": "clutter:block/trellises/birch/vines",
         "y": 270
@@ -53,7 +53,7 @@
         "y": 270
       }
     ],
-    "under_block=false,facing=north,plant=rose_bush":[
+    "waterlogged=false,under_block=false,facing=north,plant=rose_bush": [
       {
         "model": "clutter:block/trellises/birch/rose_bush"
       },
@@ -64,7 +64,7 @@
         "model": "clutter:block/trellises/birch/rose_bush3"
       }
     ],
-    "under_block=false,facing=south,plant=rose_bush":[
+    "waterlogged=false,under_block=false,facing=south,plant=rose_bush": [
       {
         "model": "clutter:block/trellises/birch/rose_bush",
         "y": 180
@@ -74,7 +74,7 @@
         "y": 180
       }
     ],
-    "under_block=false,facing=east,plant=rose_bush":[
+    "waterlogged=false,under_block=false,facing=east,plant=rose_bush": [
       {
         "model": "clutter:block/trellises/birch/rose_bush",
         "y": 90
@@ -84,7 +84,7 @@
         "y": 90
       }
     ],
-    "under_block=false,facing=west,plant=rose_bush":[
+    "waterlogged=false,under_block=false,facing=west,plant=rose_bush": [
       {
         "model": "clutter:block/trellises/birch/rose_bush",
         "y": 270
@@ -94,7 +94,7 @@
         "y": 270
       }
     ],
-    "under_block=false,facing=north,plant=peony":[
+    "waterlogged=false,under_block=false,facing=north,plant=peony": [
       {
         "model": "clutter:block/trellises/birch/peony"
       },
@@ -105,7 +105,7 @@
         "model": "clutter:block/trellises/birch/peony3"
       }
     ],
-    "under_block=false,facing=south,plant=peony":[
+    "waterlogged=false,under_block=false,facing=south,plant=peony": [
       {
         "model": "clutter:block/trellises/birch/peony",
         "y": 180
@@ -119,7 +119,7 @@
         "y": 180
       }
     ],
-    "under_block=false,facing=east,plant=peony":[
+    "waterlogged=false,under_block=false,facing=east,plant=peony": [
       {
         "model": "clutter:block/trellises/birch/peony",
         "y": 90
@@ -133,7 +133,7 @@
         "y": 90
       }
     ],
-    "under_block=false,facing=west,plant=peony":[
+    "waterlogged=false,under_block=false,facing=west,plant=peony": [
       {
         "model": "clutter:block/trellises/birch/peony",
         "y": 270
@@ -147,7 +147,7 @@
         "y": 270
       }
     ],
-    "under_block=false,facing=north,plant=lilac":[
+    "waterlogged=false,under_block=false,facing=north,plant=lilac": [
       {
         "model": "clutter:block/trellises/birch/lilac"
       },
@@ -155,7 +155,7 @@
         "model": "clutter:block/trellises/birch/lilac2"
       }
     ],
-    "under_block=false,facing=south,plant=lilac":[
+    "waterlogged=false,under_block=false,facing=south,plant=lilac": [
       {
         "model": "clutter:block/trellises/birch/lilac",
         "y": 180
@@ -165,7 +165,7 @@
         "y": 180
       }
     ],
-    "under_block=false,facing=east,plant=lilac":[
+    "waterlogged=false,under_block=false,facing=east,plant=lilac": [
       {
         "model": "clutter:block/trellises/birch/lilac",
         "y": 90
@@ -175,7 +175,7 @@
         "y": 90
       }
     ],
-    "under_block=false,facing=west,plant=lilac":[
+    "waterlogged=false,under_block=false,facing=west,plant=lilac": [
       {
         "model": "clutter:block/trellises/birch/lilac",
         "y": 270
@@ -185,7 +185,7 @@
         "y": 270
       }
     ],
-    "under_block=false,facing=north,plant=cave_vines":[
+    "waterlogged=false,under_block=false,facing=north,plant=cave_vines": [
       {
         "model": "clutter:block/trellises/birch/cave_vines"
       },
@@ -202,7 +202,7 @@
         "model": "clutter:block/trellises/birch/cave_vines5"
       }
     ],
-    "under_block=false,facing=south,plant=cave_vines":[
+    "waterlogged=false,under_block=false,facing=south,plant=cave_vines": [
       {
         "model": "clutter:block/trellises/birch/cave_vines",
         "y": 180
@@ -224,7 +224,7 @@
         "y": 180
       }
     ],
-    "under_block=false,facing=east,plant=cave_vines":[
+    "waterlogged=false,under_block=false,facing=east,plant=cave_vines": [
       {
         "model": "clutter:block/trellises/birch/cave_vines",
         "y": 90
@@ -246,7 +246,7 @@
         "y": 90
       }
     ],
-    "under_block=false,facing=west,plant=cave_vines":[
+    "waterlogged=false,under_block=false,facing=west,plant=cave_vines": [
       {
         "model": "clutter:block/trellises/birch/cave_vines",
         "y": 270
@@ -268,65 +268,63 @@
         "y": 270
       }
     ],
-    "under_block=false,facing=north,plant=weeping_vines":{
-      "model":"clutter:block/trellises/birch/weeping_vines"
+    "waterlogged=false,under_block=false,facing=north,plant=weeping_vines": {
+      "model": "clutter:block/trellises/birch/weeping_vines"
     },
-    "under_block=false,facing=south,plant=weeping_vines":{
-      "model":"clutter:block/trellises/birch/weeping_vines",
+    "waterlogged=false,under_block=false,facing=south,plant=weeping_vines": {
+      "model": "clutter:block/trellises/birch/weeping_vines",
       "y": 180
     },
-    "under_block=false,facing=east,plant=weeping_vines":{
-      "model":"clutter:block/trellises/birch/weeping_vines",
+    "waterlogged=false,under_block=false,facing=east,plant=weeping_vines": {
+      "model": "clutter:block/trellises/birch/weeping_vines",
       "y": 90
     },
-    "under_block=false,facing=west,plant=weeping_vines":{
-      "model":"clutter:block/trellises/birch/weeping_vines",
+    "waterlogged=false,under_block=false,facing=west,plant=weeping_vines": {
+      "model": "clutter:block/trellises/birch/weeping_vines",
       "y": 270
     },
-    "under_block=false,facing=north,plant=twisting_vines":{
-      "model":"clutter:block/trellises/birch/twisting_vines"
+    "waterlogged=false,under_block=false,facing=north,plant=twisting_vines": {
+      "model": "clutter:block/trellises/birch/twisting_vines"
     },
-    "under_block=false,facing=south,plant=twisting_vines":{
-      "model":"clutter:block/trellises/birch/twisting_vines",
+    "waterlogged=false,under_block=false,facing=south,plant=twisting_vines": {
+      "model": "clutter:block/trellises/birch/twisting_vines",
       "y": 180
     },
-    "under_block=false,facing=east,plant=twisting_vines":{
-      "model":"clutter:block/trellises/birch/twisting_vines",
+    "waterlogged=false,under_block=false,facing=east,plant=twisting_vines": {
+      "model": "clutter:block/trellises/birch/twisting_vines",
       "y": 90
     },
-    "under_block=false,facing=west,plant=twisting_vines":{
-      "model":"clutter:block/trellises/birch/twisting_vines",
+    "waterlogged=false,under_block=false,facing=west,plant=twisting_vines": {
+      "model": "clutter:block/trellises/birch/twisting_vines",
       "y": 270
     },
-    "under_block=false,facing=north,plant=glow_lichen":{
-      "model":"clutter:block/trellises/birch/glow_lichen"
+    "waterlogged=false,under_block=false,facing=north,plant=glow_lichen": {
+      "model": "clutter:block/trellises/birch/glow_lichen"
     },
-    "under_block=false,facing=south,plant=glow_lichen":{
-      "model":"clutter:block/trellises/birch/glow_lichen",
+    "waterlogged=false,under_block=false,facing=south,plant=glow_lichen": {
+      "model": "clutter:block/trellises/birch/glow_lichen",
       "y": 180
     },
-    "under_block=false,facing=east,plant=glow_lichen":{
-      "model":"clutter:block/trellises/birch/glow_lichen",
+    "waterlogged=false,under_block=false,facing=east,plant=glow_lichen": {
+      "model": "clutter:block/trellises/birch/glow_lichen",
       "y": 90
     },
-    "under_block=false,facing=west,plant=glow_lichen":{
-      "model":"clutter:block/trellises/birch/glow_lichen",
+    "waterlogged=false,under_block=false,facing=west,plant=glow_lichen": {
+      "model": "clutter:block/trellises/birch/glow_lichen",
       "y": 270
     },
-
-
-    "under_block=true,plant=none":{
-      "model":"clutter:block/trellises/birch/horizontal_empty"
+    "waterlogged=false,under_block=true,plant=none": {
+      "model": "clutter:block/trellises/birch/horizontal_empty"
     },
-    "under_block=true,plant=vines":[
+    "waterlogged=false,under_block=true,plant=vines": [
       {
-        "model":"clutter:block/trellises/birch/horizontal_vines"
+        "model": "clutter:block/trellises/birch/horizontal_vines"
       },
       {
-        "model":"clutter:block/trellises/birch/horizontal_vines2"
+        "model": "clutter:block/trellises/birch/horizontal_vines2"
       }
     ],
-    "under_block=true,plant=rose_bush":[
+    "waterlogged=false,under_block=true,plant=rose_bush": [
       {
         "model": "clutter:block/trellises/birch/horizontal_rose_bush"
       },
@@ -337,7 +335,7 @@
         "model": "clutter:block/trellises/birch/horizontal_rose_bush3"
       }
     ],
-    "under_block=true,plant=peony":[
+    "waterlogged=false,under_block=true,plant=peony": [
       {
         "model": "clutter:block/trellises/birch/horizontal_peony"
       },
@@ -348,7 +346,7 @@
         "model": "clutter:block/trellises/birch/horizontal_peony3"
       }
     ],
-    "under_block=true,plant=lilac":[
+    "waterlogged=false,under_block=true,plant=lilac": [
       {
         "model": "clutter:block/trellises/birch/horizontal_lilac"
       },
@@ -356,7 +354,7 @@
         "model": "clutter:block/trellises/birch/horizontal_lilac2"
       }
     ],
-    "under_block=true,plant=cave_vines":[
+    "waterlogged=false,under_block=true,plant=cave_vines": [
       {
         "model": "clutter:block/trellises/birch/horizontal_cave_vines"
       },
@@ -364,24 +362,621 @@
         "model": "clutter:block/trellises/birch/horizontal_cave_vines2"
       }
     ],
-    "under_block=true,plant=weeping_vines":[
+    "waterlogged=false,under_block=true,plant=weeping_vines": [
       {
-        "model":"clutter:block/trellises/birch/horizontal_weeping_vines"
+        "model": "clutter:block/trellises/birch/horizontal_weeping_vines"
       },
       {
-        "model":"clutter:block/trellises/birch/horizontal_weeping_vines2"
+        "model": "clutter:block/trellises/birch/horizontal_weeping_vines2"
       }
     ],
-    "under_block=true,plant=twisting_vines":[
+    "waterlogged=false,under_block=true,plant=twisting_vines": [
       {
-        "model":"clutter:block/trellises/birch/horizontal_twisting_vines"
+        "model": "clutter:block/trellises/birch/horizontal_twisting_vines"
       },
       {
-        "model":"clutter:block/trellises/birch/horizontal_twisting_vines2"
+        "model": "clutter:block/trellises/birch/horizontal_twisting_vines2"
       }
     ],
-    "under_block=true,plant=glow_lichen":{
-      "model":"clutter:block/trellises/birch/horizontal_glow_lichen"
+    "waterlogged=false,under_block=true,plant=glow_lichen": {
+      "model": "clutter:block/trellises/birch/horizontal_glow_lichen"
+    },
+    "waterlogged=true,under_block=false,facing=north,plant=none": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "waterlogged=true,under_block=false,facing=south,plant=none": {
+      "model": "clutter:block/trellises/birch/empty",
+      "y": 180
+    },
+    "waterlogged=true,under_block=false,facing=east,plant=none": {
+      "model": "clutter:block/trellises/birch/empty",
+      "y": 90
+    },
+    "waterlogged=true,under_block=false,facing=west,plant=none": {
+      "model": "clutter:block/trellises/birch/empty",
+      "y": 270
+    },
+    "waterlogged=true,under_block=false,facing=north,plant=vines": [
+      {
+        "model": "clutter:block/trellises/birch/vines"
+      },
+      {
+        "model": "clutter:block/trellises/birch/vines2"
+      }
+    ],
+    "waterlogged=true,under_block=false,facing=south,plant=vines": [
+      {
+        "model": "clutter:block/trellises/birch/vines",
+        "y": 180
+      },
+      {
+        "model": "clutter:block/trellises/birch/vines2",
+        "y": 180
+      }
+    ],
+    "waterlogged=true,under_block=false,facing=east,plant=vines": [
+      {
+        "model": "clutter:block/trellises/birch/vines",
+        "y": 90
+      },
+      {
+        "model": "clutter:block/trellises/birch/vines2",
+        "y": 90
+      }
+    ],
+    "waterlogged=true,under_block=false,facing=west,plant=vines": [
+      {
+        "model": "clutter:block/trellises/birch/vines",
+        "y": 270
+      },
+      {
+        "model": "clutter:block/trellises/birch/vines2",
+        "y": 270
+      }
+    ],
+    "waterlogged=true,under_block=false,facing=north,plant=rose_bush": [
+      {
+        "model": "clutter:block/trellises/birch/rose_bush"
+      },
+      {
+        "model": "clutter:block/trellises/birch/rose_bush2"
+      },
+      {
+        "model": "clutter:block/trellises/birch/rose_bush3"
+      }
+    ],
+    "waterlogged=true,under_block=false,facing=south,plant=rose_bush": [
+      {
+        "model": "clutter:block/trellises/birch/rose_bush",
+        "y": 180
+      },
+      {
+        "model": "clutter:block/trellises/birch/rose_bush2",
+        "y": 180
+      }
+    ],
+    "waterlogged=true,under_block=false,facing=east,plant=rose_bush": [
+      {
+        "model": "clutter:block/trellises/birch/rose_bush",
+        "y": 90
+      },
+      {
+        "model": "clutter:block/trellises/birch/rose_bush2",
+        "y": 90
+      }
+    ],
+    "waterlogged=true,under_block=false,facing=west,plant=rose_bush": [
+      {
+        "model": "clutter:block/trellises/birch/rose_bush",
+        "y": 270
+      },
+      {
+        "model": "clutter:block/trellises/birch/rose_bush2",
+        "y": 270
+      }
+    ],
+    "waterlogged=true,under_block=false,facing=north,plant=peony": [
+      {
+        "model": "clutter:block/trellises/birch/peony"
+      },
+      {
+        "model": "clutter:block/trellises/birch/peony2"
+      },
+      {
+        "model": "clutter:block/trellises/birch/peony3"
+      }
+    ],
+    "waterlogged=true,under_block=false,facing=south,plant=peony": [
+      {
+        "model": "clutter:block/trellises/birch/peony",
+        "y": 180
+      },
+      {
+        "model": "clutter:block/trellises/birch/peony2",
+        "y": 180
+      },
+      {
+        "model": "clutter:block/trellises/birch/peony3",
+        "y": 180
+      }
+    ],
+    "waterlogged=true,under_block=false,facing=east,plant=peony": [
+      {
+        "model": "clutter:block/trellises/birch/peony",
+        "y": 90
+      },
+      {
+        "model": "clutter:block/trellises/birch/peony2",
+        "y": 90
+      },
+      {
+        "model": "clutter:block/trellises/birch/peony3",
+        "y": 90
+      }
+    ],
+    "waterlogged=true,under_block=false,facing=west,plant=peony": [
+      {
+        "model": "clutter:block/trellises/birch/peony",
+        "y": 270
+      },
+      {
+        "model": "clutter:block/trellises/birch/peony2",
+        "y": 270
+      },
+      {
+        "model": "clutter:block/trellises/birch/peony3",
+        "y": 270
+      }
+    ],
+    "waterlogged=true,under_block=false,facing=north,plant=lilac": [
+      {
+        "model": "clutter:block/trellises/birch/lilac"
+      },
+      {
+        "model": "clutter:block/trellises/birch/lilac2"
+      }
+    ],
+    "waterlogged=true,under_block=false,facing=south,plant=lilac": [
+      {
+        "model": "clutter:block/trellises/birch/lilac",
+        "y": 180
+      },
+      {
+        "model": "clutter:block/trellises/birch/lilac2",
+        "y": 180
+      }
+    ],
+    "waterlogged=true,under_block=false,facing=east,plant=lilac": [
+      {
+        "model": "clutter:block/trellises/birch/lilac",
+        "y": 90
+      },
+      {
+        "model": "clutter:block/trellises/birch/lilac2",
+        "y": 90
+      }
+    ],
+    "waterlogged=true,under_block=false,facing=west,plant=lilac": [
+      {
+        "model": "clutter:block/trellises/birch/lilac",
+        "y": 270
+      },
+      {
+        "model": "clutter:block/trellises/birch/lilac2",
+        "y": 270
+      }
+    ],
+    "waterlogged=true,under_block=false,facing=north,plant=cave_vines": [
+      {
+        "model": "clutter:block/trellises/birch/cave_vines"
+      },
+      {
+        "model": "clutter:block/trellises/birch/cave_vines2"
+      },
+      {
+        "model": "clutter:block/trellises/birch/cave_vines3"
+      },
+      {
+        "model": "clutter:block/trellises/birch/cave_vines4"
+      },
+      {
+        "model": "clutter:block/trellises/birch/cave_vines5"
+      }
+    ],
+    "waterlogged=true,under_block=false,facing=south,plant=cave_vines": [
+      {
+        "model": "clutter:block/trellises/birch/cave_vines",
+        "y": 180
+      },
+      {
+        "model": "clutter:block/trellises/birch/cave_vines2",
+        "y": 180
+      },
+      {
+        "model": "clutter:block/trellises/birch/cave_vines3",
+        "y": 180
+      },
+      {
+        "model": "clutter:block/trellises/birch/cave_vines4",
+        "y": 180
+      },
+      {
+        "model": "clutter:block/trellises/birch/cave_vines5",
+        "y": 180
+      }
+    ],
+    "waterlogged=true,under_block=false,facing=east,plant=cave_vines": [
+      {
+        "model": "clutter:block/trellises/birch/cave_vines",
+        "y": 90
+      },
+      {
+        "model": "clutter:block/trellises/birch/cave_vines2",
+        "y": 90
+      },
+      {
+        "model": "clutter:block/trellises/birch/cave_vines3",
+        "y": 90
+      },
+      {
+        "model": "clutter:block/trellises/birch/cave_vines4",
+        "y": 90
+      },
+      {
+        "model": "clutter:block/trellises/birch/cave_vines5",
+        "y": 90
+      }
+    ],
+    "waterlogged=true,under_block=false,facing=west,plant=cave_vines": [
+      {
+        "model": "clutter:block/trellises/birch/cave_vines",
+        "y": 270
+      },
+      {
+        "model": "clutter:block/trellises/birch/cave_vines2",
+        "y": 270
+      },
+      {
+        "model": "clutter:block/trellises/birch/cave_vines3",
+        "y": 270
+      },
+      {
+        "model": "clutter:block/trellises/birch/cave_vines4",
+        "y": 270
+      },
+      {
+        "model": "clutter:block/trellises/birch/cave_vines5",
+        "y": 270
+      }
+    ],
+    "waterlogged=true,under_block=false,facing=north,plant=weeping_vines": {
+      "model": "clutter:block/trellises/birch/weeping_vines"
+    },
+    "waterlogged=true,under_block=false,facing=south,plant=weeping_vines": {
+      "model": "clutter:block/trellises/birch/weeping_vines",
+      "y": 180
+    },
+    "waterlogged=true,under_block=false,facing=east,plant=weeping_vines": {
+      "model": "clutter:block/trellises/birch/weeping_vines",
+      "y": 90
+    },
+    "waterlogged=true,under_block=false,facing=west,plant=weeping_vines": {
+      "model": "clutter:block/trellises/birch/weeping_vines",
+      "y": 270
+    },
+    "waterlogged=true,under_block=false,facing=north,plant=twisting_vines": {
+      "model": "clutter:block/trellises/birch/twisting_vines"
+    },
+    "waterlogged=true,under_block=false,facing=south,plant=twisting_vines": {
+      "model": "clutter:block/trellises/birch/twisting_vines",
+      "y": 180
+    },
+    "waterlogged=true,under_block=false,facing=east,plant=twisting_vines": {
+      "model": "clutter:block/trellises/birch/twisting_vines",
+      "y": 90
+    },
+    "waterlogged=true,under_block=false,facing=west,plant=twisting_vines": {
+      "model": "clutter:block/trellises/birch/twisting_vines",
+      "y": 270
+    },
+    "waterlogged=true,under_block=false,facing=north,plant=glow_lichen": {
+      "model": "clutter:block/trellises/birch/glow_lichen"
+    },
+    "waterlogged=true,under_block=false,facing=south,plant=glow_lichen": {
+      "model": "clutter:block/trellises/birch/glow_lichen",
+      "y": 180
+    },
+    "waterlogged=true,under_block=false,facing=east,plant=glow_lichen": {
+      "model": "clutter:block/trellises/birch/glow_lichen",
+      "y": 90
+    },
+    "waterlogged=true,under_block=false,facing=west,plant=glow_lichen": {
+      "model": "clutter:block/trellises/birch/glow_lichen",
+      "y": 270
+    },
+    "waterlogged=true,under_block=true,plant=none": {
+      "model": "clutter:block/trellises/birch/horizontal_empty"
+    },
+    "waterlogged=true,under_block=true,plant=vines": [
+      {
+        "model": "clutter:block/trellises/birch/horizontal_vines"
+      },
+      {
+        "model": "clutter:block/trellises/birch/horizontal_vines2"
+      }
+    ],
+    "waterlogged=true,under_block=true,plant=rose_bush": [
+      {
+        "model": "clutter:block/trellises/birch/horizontal_rose_bush"
+      },
+      {
+        "model": "clutter:block/trellises/birch/horizontal_rose_bush2"
+      },
+      {
+        "model": "clutter:block/trellises/birch/horizontal_rose_bush3"
+      }
+    ],
+    "waterlogged=true,under_block=true,plant=peony": [
+      {
+        "model": "clutter:block/trellises/birch/horizontal_peony"
+      },
+      {
+        "model": "clutter:block/trellises/birch/horizontal_peony2"
+      },
+      {
+        "model": "clutter:block/trellises/birch/horizontal_peony3"
+      }
+    ],
+    "waterlogged=true,under_block=true,plant=lilac": [
+      {
+        "model": "clutter:block/trellises/birch/horizontal_lilac"
+      },
+      {
+        "model": "clutter:block/trellises/birch/horizontal_lilac2"
+      }
+    ],
+    "waterlogged=true,under_block=true,plant=cave_vines": [
+      {
+        "model": "clutter:block/trellises/birch/horizontal_cave_vines"
+      },
+      {
+        "model": "clutter:block/trellises/birch/horizontal_cave_vines2"
+      }
+    ],
+    "waterlogged=true,under_block=true,plant=weeping_vines": [
+      {
+        "model": "clutter:block/trellises/birch/horizontal_weeping_vines"
+      },
+      {
+        "model": "clutter:block/trellises/birch/horizontal_weeping_vines2"
+      }
+    ],
+    "waterlogged=true,under_block=true,plant=twisting_vines": [
+      {
+        "model": "clutter:block/trellises/birch/horizontal_twisting_vines"
+      },
+      {
+        "model": "clutter:block/trellises/birch/horizontal_twisting_vines2"
+      }
+    ],
+    "waterlogged=true,under_block=true,plant=glow_lichen": {
+      "model": "clutter:block/trellises/birch/horizontal_glow_lichen"
+    },
+    "facing=down,lit=false,plant=peony,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=up,lit=false,plant=rose_bush,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=up,lit=true,plant=peony,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=up,lit=false,plant=lilac,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=down,lit=true,plant=peony,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=down,lit=true,plant=lilac,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=up,lit=false,plant=weeping_vines,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=up,lit=false,plant=cave_vines,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=down,lit=false,plant=twisting_vines,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=up,lit=false,plant=none,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=down,lit=true,plant=lilac,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=up,lit=true,plant=peony,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=down,lit=false,plant=twisting_vines,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=down,lit=false,plant=weeping_vines,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=down,lit=true,plant=weeping_vines,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=down,lit=false,plant=rose_bush,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=down,lit=false,plant=vines,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=up,lit=true,plant=rose_bush,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=down,lit=false,plant=weeping_vines,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=up,lit=false,plant=none,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=down,lit=true,plant=rose_bush,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=up,lit=false,plant=vines,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=down,lit=true,plant=glow_lichen,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=up,lit=true,plant=lilac,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=up,lit=true,plant=vines,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=down,lit=true,plant=weeping_vines,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=up,lit=false,plant=weeping_vines,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=down,lit=true,plant=cave_vines,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=down,lit=true,plant=vines,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=up,lit=true,plant=weeping_vines,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=up,lit=false,plant=rose_bush,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=up,lit=true,plant=rose_bush,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=down,lit=true,plant=none,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=up,lit=false,plant=vines,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=down,lit=false,plant=vines,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=up,lit=true,plant=none,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=up,lit=true,plant=none,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=down,lit=false,plant=peony,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=up,lit=false,plant=twisting_vines,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=up,lit=true,plant=lilac,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=down,lit=false,plant=glow_lichen,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=up,lit=true,plant=glow_lichen,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=down,lit=false,plant=cave_vines,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=down,lit=true,plant=cave_vines,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=down,lit=true,plant=peony,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=down,lit=false,plant=none,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=up,lit=true,plant=cave_vines,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=up,lit=false,plant=peony,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=down,lit=false,plant=none,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=up,lit=true,plant=glow_lichen,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=up,lit=false,plant=glow_lichen,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=down,lit=true,plant=vines,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=down,lit=true,plant=twisting_vines,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=down,lit=true,plant=twisting_vines,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=down,lit=false,plant=lilac,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=down,lit=true,plant=none,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=down,lit=true,plant=glow_lichen,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=up,lit=false,plant=peony,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=up,lit=true,plant=twisting_vines,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=down,lit=false,plant=glow_lichen,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=up,lit=false,plant=cave_vines,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=down,lit=true,plant=rose_bush,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=up,lit=true,plant=weeping_vines,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=down,lit=false,plant=cave_vines,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=up,lit=true,plant=twisting_vines,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=up,lit=false,plant=glow_lichen,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=up,lit=false,plant=twisting_vines,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=up,lit=false,plant=lilac,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=up,lit=true,plant=vines,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=down,lit=false,plant=rose_bush,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=up,lit=true,plant=cave_vines,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/birch/empty"
+    },
+    "facing=down,lit=false,plant=lilac,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/birch/empty"
     }
   }
 }

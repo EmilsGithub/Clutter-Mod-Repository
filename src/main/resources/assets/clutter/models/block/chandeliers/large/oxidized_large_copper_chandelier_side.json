@@ -1,0 +1,8 @@
+{
+  "parent": "clutter:block/chandeliers/large_chandelier_side_parent",
+  "textures": {
+    "0": "clutter:block/oxidized_large_copper_chandelier_side",
+    "1": "clutter:block/oxidized_large_copper_chandelier_side_rod",
+    "particle": "block/oxidized_copper"
+  }
+}

@@ -1,64 +1,183 @@
 {
   "variants":{
-    "facing=north,leg_positions=all":{
+    "waterlogged=false,facing=north,leg_positions=all":{
       "model":"clutter:block/benches/dark_oak/all"
     },
-    "facing=south,leg_positions=all":{
+    "waterlogged=false,facing=south,leg_positions=all":{
       "model":"clutter:block/benches/dark_oak/all",
       "y": 180
     },
-    "facing=east,leg_positions=all":{
+    "waterlogged=false,facing=east,leg_positions=all":{
       "model":"clutter:block/benches/dark_oak/all",
       "y": 90
     },
-    "facing=west,leg_positions=all":{
+    "waterlogged=false,facing=west,leg_positions=all":{
       "model":"clutter:block/benches/dark_oak/all",
       "y": 270
     },
-    "facing=north,leg_positions=east":{
+    "waterlogged=false,facing=north,leg_positions=east":{
       "model":"clutter:block/benches/dark_oak/left"
     },
-    "facing=south,leg_positions=east":{
+    "waterlogged=false,facing=south,leg_positions=east":{
       "model":"clutter:block/benches/dark_oak/right",
       "y": 180
     },
-    "facing=north,leg_positions=west":{
+    "waterlogged=false,facing=north,leg_positions=west":{
       "model":"clutter:block/benches/dark_oak/right"
     },
-    "facing=south,leg_positions=west":{
+    "waterlogged=false,facing=south,leg_positions=west":{
       "model":"clutter:block/benches/dark_oak/left",
       "y": 180
     },
-    "facing=north,leg_positions=none":{
+    "waterlogged=false,facing=north,leg_positions=none":{
       "model":"clutter:block/benches/dark_oak/none"
     },
-    "facing=south,leg_positions=none":{
+    "waterlogged=false,facing=south,leg_positions=none":{
       "model":"clutter:block/benches/dark_oak/none",
       "y": 180
     },
-    "facing=east,leg_positions=none":{
+    "waterlogged=false,facing=east,leg_positions=none":{
       "model":"clutter:block/benches/dark_oak/none",
       "y": 90
     },
-    "facing=west,leg_positions=none":{
+    "waterlogged=false,facing=west,leg_positions=none":{
       "model":"clutter:block/benches/dark_oak/none",
       "y": 270
     },
-    "facing=east,leg_positions=north":{
+    "waterlogged=false,facing=east,leg_positions=north":{
       "model":"clutter:block/benches/dark_oak/right",
       "y": 90
     },
-    "facing=west,leg_positions=north":{
+    "waterlogged=false,facing=west,leg_positions=north":{
       "model":"clutter:block/benches/dark_oak/left",
       "y": 270
     },
-    "facing=east,leg_positions=south":{
+    "waterlogged=false,facing=east,leg_positions=south":{
       "model":"clutter:block/benches/dark_oak/left",
       "y": 90
     },
-    "facing=west,leg_positions=south":{
+    "waterlogged=false,facing=west,leg_positions=south":{
       "model":"clutter:block/benches/dark_oak/right",
       "y": 270
+    },
+    "waterlogged=true,facing=north,leg_positions=all":{
+      "model":"clutter:block/benches/dark_oak/all"
+    },
+    "waterlogged=true,facing=south,leg_positions=all":{
+      "model":"clutter:block/benches/dark_oak/all",
+      "y": 180
+    },
+    "waterlogged=true,facing=east,leg_positions=all":{
+      "model":"clutter:block/benches/dark_oak/all",
+      "y": 90
+    },
+    "waterlogged=true,facing=west,leg_positions=all":{
+      "model":"clutter:block/benches/dark_oak/all",
+      "y": 270
+    },
+    "waterlogged=true,facing=north,leg_positions=east":{
+      "model":"clutter:block/benches/dark_oak/left"
+    },
+    "waterlogged=true,facing=south,leg_positions=east":{
+      "model":"clutter:block/benches/dark_oak/right",
+      "y": 180
+    },
+    "waterlogged=true,facing=north,leg_positions=west":{
+      "model":"clutter:block/benches/dark_oak/right"
+    },
+    "waterlogged=true,facing=south,leg_positions=west":{
+      "model":"clutter:block/benches/dark_oak/left",
+      "y": 180
+    },
+    "waterlogged=true,facing=north,leg_positions=none":{
+      "model":"clutter:block/benches/dark_oak/none"
+    },
+    "waterlogged=true,facing=south,leg_positions=none":{
+      "model":"clutter:block/benches/dark_oak/none",
+      "y": 180
+    },
+    "waterlogged=true,facing=east,leg_positions=none":{
+      "model":"clutter:block/benches/dark_oak/none",
+      "y": 90
+    },
+    "waterlogged=true,facing=west,leg_positions=none":{
+      "model":"clutter:block/benches/dark_oak/none",
+      "y": 270
+    },
+    "waterlogged=true,facing=east,leg_positions=north":{
+      "model":"clutter:block/benches/dark_oak/right",
+      "y": 90
+    },
+    "waterlogged=true,facing=west,leg_positions=north":{
+      "model":"clutter:block/benches/dark_oak/left",
+      "y": 270
+    },
+    "waterlogged=true,facing=east,leg_positions=south":{
+      "model":"clutter:block/benches/dark_oak/left",
+      "y": 90
+    },
+    "waterlogged=true,facing=west,leg_positions=south":{
+      "model":"clutter:block/benches/dark_oak/right",
+      "y": 270
+    },
+    "facing=north,leg_positions=north,waterlogged=false":{
+      "model":"clutter:block/benches/dark_oak/none"
+    },
+    "facing=east,leg_positions=east,waterlogged=false":{
+      "model":"clutter:block/benches/dark_oak/none",
+      "y": 90
+    },
+    "facing=east,leg_positions=east,waterlogged=true":{
+      "model":"clutter:block/benches/dark_oak/none",
+      "y": 90
+    },
+    "facing=north,leg_positions=north,waterlogged=true":{
+      "model":"clutter:block/benches/dark_oak/none"
+    },
+    "facing=north,leg_positions=south,waterlogged=false":{
+      "model":"clutter:block/benches/dark_oak/none"
+    },
+    "facing=east,leg_positions=west,waterlogged=true":{
+      "model":"clutter:block/benches/dark_oak/none",
+      "y": 90
+    },
+    "facing=west,leg_positions=west,waterlogged=true":{
+      "model":"clutter:block/benches/dark_oak/none",
+      "y": 270
+    },
+    "facing=north,leg_positions=south,waterlogged=true":{
+      "model":"clutter:block/benches/dark_oak/none",
+      "y": 180
+    },
+    "facing=west,leg_positions=east,waterlogged=false":{
+      "model":"clutter:block/benches/dark_oak/none",
+      "y": 90
+    },
+    "facing=west,leg_positions=west,waterlogged=false":{
+      "model":"clutter:block/benches/dark_oak/none",
+      "y": 270
+    },
+    "facing=south,leg_positions=north,waterlogged=true":{
+      "model":"clutter:block/benches/dark_oak/none"
+    },
+    "facing=south,leg_positions=north,waterlogged=false":{
+      "model":"clutter:block/benches/dark_oak/none"
+    },
+    "facing=south,leg_positions=south,waterlogged=false":{
+      "model":"clutter:block/benches/dark_oak/none",
+      "y": 180
+    },
+    "facing=south,leg_positions=south,waterlogged=true":{
+      "model":"clutter:block/benches/dark_oak/none",
+      "y": 180
+    },
+    "facing=east,leg_positions=west,waterlogged=false":{
+      "model":"clutter:block/benches/dark_oak/none",
+      "y": 270
+    },
+    "facing=west,leg_positions=east,waterlogged=true":{
+      "model":"clutter:block/benches/dark_oak/none",
+      "y": 90
     }
   }
 }

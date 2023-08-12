@@ -1,34 +1,37 @@
 {
   "variants": {
     "legs=true,leg_positions=north": {
-      "model": "clutter:block/tables/acacia/stripped_acacia_s"
+      "model": "clutter:block/tables/stripped_acacia/stripped_acacia_s"
     },
     "legs=true,leg_positions=east": {
-      "model": "clutter:block/tables/acacia/stripped_acacia_w"
+      "model": "clutter:block/tables/stripped_acacia/stripped_acacia_w"
     },
     "legs=true,leg_positions=south": {
-      "model": "clutter:block/tables/acacia/stripped_acacia_n"
+      "model": "clutter:block/tables/stripped_acacia/stripped_acacia_n"
     },
     "legs=true,leg_positions=west": {
-      "model": "clutter:block/tables/acacia/stripped_acacia_e"
+      "model": "clutter:block/tables/stripped_acacia/stripped_acacia_e"
     },
     "legs=true,leg_positions=north_west": {
-      "model": "clutter:block/tables/acacia/stripped_acacia_se"
+      "model": "clutter:block/tables/stripped_acacia/stripped_acacia_se"
     },
     "legs=true,leg_positions=north_east": {
-      "model": "clutter:block/tables/acacia/stripped_acacia_sw"
+      "model": "clutter:block/tables/stripped_acacia/stripped_acacia_sw"
     },
     "legs=true,leg_positions=south_east": {
-      "model": "clutter:block/tables/acacia/stripped_acacia_nw"
+      "model": "clutter:block/tables/stripped_acacia/stripped_acacia_nw"
     },
     "legs=true,leg_positions=south_west": {
-      "model": "clutter:block/tables/acacia/stripped_acacia_ne"
+      "model": "clutter:block/tables/stripped_acacia/stripped_acacia_ne"
     },
     "legs=true,leg_positions=all": {
-      "model": "clutter:block/tables/acacia/stripped_acacia_all"
+      "model": "clutter:block/tables/stripped_acacia/stripped_acacia_all"
     },
     "legs=false": {
-      "model": "clutter:block/tables/acacia/stripped_acacia_none"
+      "model": "clutter:block/tables/stripped_acacia/stripped_acacia_none"
+    },
+    "leg_positions=none,legs=true": {
+      "model": "clutter:block/tables/stripped_acacia/stripped_acacia_none"
     }
   }
 }

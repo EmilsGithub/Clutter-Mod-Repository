@@ -13,11 +13,11 @@ import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.ai.AboveGroundTargeting;
 import net.minecraft.entity.ai.control.FlightMoveControl;
 import net.minecraft.entity.ai.control.LookControl;
 import net.minecraft.entity.ai.goal.AnimalMateGoal;
 import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.ai.goal.MoveToTargetPosGoal;
 import net.minecraft.entity.ai.goal.TemptGoal;
 import net.minecraft.entity.ai.pathing.BirdNavigation;
 import net.minecraft.entity.ai.pathing.EntityNavigation;
@@ -50,13 +50,11 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.*;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.dimension.DimensionType;
-import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
@@ -67,7 +65,6 @@ import software.bernie.geckolib.core.object.PlayState;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoField;
-import java.util.EnumSet;
 
 public class ButterflyEntity extends AnimalEntity implements GeoEntity {
     private final AnimatableInstanceCache CACHE = new SingletonAnimatableInstanceCache(this);
@@ -91,6 +88,14 @@ public class ButterflyEntity extends AnimalEntity implements GeoEntity {
                 .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.5f)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.1f)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0f);
+    }
+
+    @Override
+    protected void initGoals() {
+        this.goalSelector.add(0, new AnimalMateGoal(this, 1.0));
+        this.goalSelector.add(1, new LayCocoonGoal(this, 1.0));
+        this.goalSelector.add(2, new TemptGoal(this, 1.25, Ingredient.ofItems(Items.SUGAR), false));
+        this.goalSelector.add(3, new WanderAroundGoal(this));
     }
 
     protected void initDataTracker() {
@@ -141,72 +146,39 @@ public class ButterflyEntity extends AnimalEntity implements GeoEntity {
     protected void fall(double heightDifference, boolean onGround, BlockState state, BlockPos landedPosition) {
     }
 
-    public static class LayCocoonGoal extends Goal {
+    public static class LayCocoonGoal extends MoveToTargetPosGoal {
         private final ButterflyEntity butterfly;
-        private final double speed;
-        private BlockPos targetPos;
 
         LayCocoonGoal(ButterflyEntity butterfly, double speed) {
+            super(butterfly, speed, 16);
             this.butterfly = butterfly;
-            this.speed = speed;
         }
 
-        @Override
         public boolean canStart() {
-            if (!this.butterfly.hasCocoon() || !this.butterfly.getNavigation().isIdle()) {
-                return false;
-            }
-            targetPos = findNearestValidPos();
-            return targetPos != null;
+            return this.butterfly.hasCocoon() && super.canStart();
         }
 
-        private BlockPos findNearestValidPos() {
-            BlockPos entityPos = this.butterfly.getBlockPos();
-            int range = 16;
-            BlockPos nearestPos = null;
-            double nearestDist = Double.MAX_VALUE;
-            for (int dx = -range; dx <= range; dx++) {
-                for (int dy = -range; dy <= range; dy++) {
-                    for (int dz = -range; dz <= range; dz++) {
-                        BlockPos pos = entityPos.add(dx, dy, dz);
-                        if (isTargetPos(this.butterfly.getWorld(), pos)) {
-                            double dist = pos.getSquaredDistance(entityPos);
-                            if (dist < nearestDist) {
-                                nearestPos = pos;
-                                nearestDist = dist;
-                            }
-                        }
-                    }
-                }
-            }
-            return nearestPos;
-        }
-
-        @Override
-        public void start() {
-            this.butterfly.getNavigation().startMovingTo(targetPos.getX(), targetPos.getY(), targetPos.getZ(), speed);
-        }
-
-        @Override
         public boolean shouldContinue() {
-            return this.butterfly.hasCocoon() && this.butterfly.getNavigation().isIdle();
+            return super.shouldContinue() && this.butterfly.hasCocoon();
         }
 
-        @Override
-        public void stop() {
-            if (targetPos.isWithinDistance(this.butterfly.getPos(), 2) && this.butterfly.getWorld().isAir(targetPos.down())) {
+        public void tick() {
+            super.tick();
+            if (this.hasReached()) {
                 World world = this.butterfly.getWorld();
-                world.setBlockState(targetPos.down(), ModBlocks.BUTTERFLY_COCOON.getDefaultState(), 3);
-                world.emitGameEvent(GameEvent.BLOCK_PLACE, targetPos, GameEvent.Emitter.of(this.butterfly, ModBlocks.BUTTERFLY_COCOON.getDefaultState()));
+                BlockPos cocoonPos = this.targetPos;
+                world.setBlockState(cocoonPos, ModBlocks.BUTTERFLY_COCOON.getDefaultState(), 3);
                 this.butterfly.setHasCocoon(false);
             }
         }
 
         protected boolean isTargetPos(WorldView world, BlockPos pos) {
-            Block block = world.getBlockState(pos).getBlock();
-            return world.getBlockState(pos.down()).isAir() && (block instanceof LeavesBlock || block.getDefaultState().isIn(BlockTags.LOGS) || block.getDefaultState().isIn(BlockTags.WART_BLOCKS) || block.getDefaultState().isOf(Blocks.BONE_BLOCK));
+            Block block = world.getBlockState(pos.up()).getBlock();
+            BlockState state = world.getBlockState(pos.up());
+            return (world.isAir(pos) || state.isReplaceable()) && (block instanceof LeavesBlock || state.isIn(BlockTags.LOGS) || state.isIn(BlockTags.WART_BLOCKS) || state.isOf(Blocks.BONE_BLOCK));
         }
     }
+
 
     public void breed(ServerWorld world, AnimalEntity other) {
             ServerPlayerEntity serverPlayerEntity = this.getLovingPlayer();
@@ -239,14 +211,6 @@ public class ButterflyEntity extends AnimalEntity implements GeoEntity {
         return true;
     }
 
-    @Override
-    protected void initGoals() {
-        this.goalSelector.add(0, new AnimalMateGoal(this, 1.0));
-        this.goalSelector.add(1, new LayCocoonGoal(this, 1.0));
-        this.goalSelector.add(2, new TemptGoal(this, 1.25, Ingredient.ofItems(Items.HONEY_BOTTLE), false));
-        this.goalSelector.add(3, new ButterflyWanderAroundGoal());
-    }
-
     public static boolean isValidSpawn(EntityType<? extends AnimalEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
         return world.getBlockState(pos.down()).isIn(ModBlockTags.BUTTERFLY_VALID);
     }
@@ -264,71 +228,36 @@ public class ButterflyEntity extends AnimalEntity implements GeoEntity {
         return birdNavigation;
     }
 
-    class ButterflyWanderAroundGoal extends Goal {
-        private BlockPos homePos;
 
-        ButterflyWanderAroundGoal() {
-            this.setControls(EnumSet.of(Control.MOVE));
+    public static class WanderAroundGoal extends Goal {
+        private final ButterflyEntity butterfly;
+        public WanderAroundGoal(ButterflyEntity butterfly) {
+            this.butterfly = butterfly;
         }
-
+        @Override
         public boolean canStart() {
-            return ButterflyEntity.this.navigation.isIdle() && ButterflyEntity.this.random.nextInt(10) == 0;
+            return !butterfly.isSubmergedInWater() && butterfly.navigation.isIdle() && butterfly.random.nextInt(10) == 0;
         }
 
         public boolean shouldContinue() {
-            return ButterflyEntity.this.navigation.isFollowingPath();
+            return this.butterfly.navigation.isFollowingPath();
         }
 
         public void start() {
-            Vec3d vec3d = this.getRandomLocation();
-            if (vec3d != null) {
-                ButterflyEntity.this.navigation.startMovingAlong(ButterflyEntity.this.navigation.findPathTo(BlockPos.ofFloored(vec3d), 1), 1.0);
+            BlockPos homePos = butterfly.getHomePos();
+            BlockPos newPos = getRandomPos(homePos);
+            if(butterfly.getWorld().getBlockState(newPos).isReplaceable()) {
+                butterfly.navigation.startMovingTo(newPos.getX(), newPos.getY(), newPos.getZ(), 1.0f);
             }
         }
 
-        private Vec3d getRandomLocation() {
-            if (this.homePos == null) {
-                this.homePos = ButterflyEntity.this.getHomePos();
-            }
-
-            // Check if the Butterfly is in the Nether
-            if (ButterflyEntity.this.getWorld().getRegistryKey().equals(World.NETHER)) {
-
-                for (int attempts = 0; attempts < 50; attempts++) {
-
-                    BlockPos targetPos = homePos.add(
-                            -24 + ButterflyEntity.this.random.nextInt(49),
-                            -7 + ButterflyEntity.this.random.nextInt(15),
-                            -24 + ButterflyEntity.this.random.nextInt(49)
-                    );
-
-
-                    if (!ButterflyEntity.this.getWorld().getBlockState(targetPos).isOpaque()) {
-                        return Vec3d.ofCenter(targetPos);
-                    }
-                }
-            }
-            Vec3d vec3d2 = ButterflyEntity.this.getRotationVec(0.0F);
-            Vec3d vec3d3 = AboveGroundTargeting.find(ButterflyEntity.this, 24, 7, vec3d2.x, vec3d2.z, 1.5707964F, 3, 2);
-
-            if (vec3d3 != null && ButterflyEntity.this.getBlockPos().getSquaredDistance(Vec3d.ofCenter(homePos)) > 2 * 2) {
-                return vec3d3;
-            }
-
-            if (ButterflyEntity.this.getWorld().isNight() && ButterflyEntity.this.getBlockPos().getSquaredDistance(Vec3d.ofCenter(homePos)) > 8 * 8) {
-                return Vec3d.ofCenter(homePos);
-            }
-
-            BlockPos blockpos = homePos.add(-2 + ButterflyEntity.this.random.nextInt(5), -1 + ButterflyEntity.this.random.nextInt(3), -2 + ButterflyEntity.this.random.nextInt(5));
-
-            if (!ButterflyEntity.this.getWorld().getBlockState(blockpos).isOpaque()) {
-                return Vec3d.ofCenter(blockpos);
-            }
-
-            return null;
+        private static BlockPos getRandomPos(BlockPos center) {
+            int x = center.getX() + (int) (Math.random() * 24 * 2) - 24;
+            int y = center.getY() + (int) (Math.random() * 8 * 2) - 8;
+            int z = center.getZ() + (int) (Math.random() * 24 * 2) - 24;
+            return new BlockPos(x, y, z);
         }
     }
-
 
     @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
@@ -358,14 +287,16 @@ public class ButterflyEntity extends AnimalEntity implements GeoEntity {
                 case SOUL -> returnItem = ModItems.SOUL_BUTTERFLY_IN_A_BOTTLE;
                 default -> returnItem = ModItems.YELLOW_BUTTERFLY_IN_A_BOTTLE;
             }
+            ItemStack returnStack = new ItemStack(returnItem);
+
             if(!player.getAbilities().creativeMode) {
                 heldItem.decrement(1);
             }
-            if(player.getInventory().getEmptySlot() > 0) {
-                player.giveItemStack(new ItemStack(returnItem));
-            } else {
-                this.dropItem(returnItem);
+
+            if (!player.getInventory().insertStack(returnStack)) {
+                player.dropItem(returnStack, false);
             }
+
             player.playSound(SoundEvents.BLOCK_WOOL_FALL, SoundCategory.PLAYERS, 1.0f, 1.5f);
             this.remove(RemovalReason.DISCARDED);
             return ActionResult.SUCCESS;

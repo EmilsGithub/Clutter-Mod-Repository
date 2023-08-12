@@ -1,0 +1,10 @@
+{
+	"parent": "clutter:block/shelves/shelf_parent",
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"textures": {
+		"1": "block/jungle_log",
+		"2": "block/jungle_planks",
+		"particle": "block/jungle_planks"
+	}
+}

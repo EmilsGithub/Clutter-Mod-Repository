@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "clutter:block/large_chains/oxidized_large_copper_chain",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "clutter:block/large_chains/oxidized_large_copper_chain"
+    },
+    "axis=z": {
+      "model": "clutter:block/large_chains/oxidized_large_copper_chain",
+      "x": 90
+    }
+  }
+}

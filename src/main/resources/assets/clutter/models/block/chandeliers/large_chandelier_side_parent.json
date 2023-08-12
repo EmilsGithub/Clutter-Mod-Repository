@@ -1,0 +1,37 @@
+{
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"textures": {
+		"0": "clutter:block/large_silver_chandelier_side",
+		"1": "clutter:block/large_silver_chandelier_side_rod",
+		"particle": "clutter:block/large_silver_chandelier_side"
+	},
+	"elements": [
+		{
+			"from": [3, 14, 3],
+			"to": [13, 16, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 8, 0]},
+			"faces": {
+				"north": {"uv": [12, 3, 14, 13], "rotation": 90, "texture": "#0"},
+				"east": {"uv": [12, 3, 14, 13], "rotation": 90, "texture": "#0"},
+				"south": {"uv": [12, 3, 14, 13], "rotation": 90, "texture": "#0"},
+				"west": {"uv": [12, 3, 14, 13], "rotation": 90, "texture": "#0"},
+				"up": {"uv": [0, 3, 10, 13], "texture": "#0"},
+				"down": {"uv": [0, 3, 10, 13], "texture": "#0"}
+			}
+		},
+		{
+			"from": [6, 10, 6],
+			"to": [10, 14, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"north": {"uv": [12, 8, 16, 12], "texture": "#1"},
+				"east": {"uv": [16, 2, 6, 6], "texture": "#1"},
+				"south": {"uv": [6, 8, 10, 12], "texture": "#1"},
+				"west": {"uv": [6, 2, 16, 6], "texture": "#1"},
+				"up": {"uv": [16, 2, 6, 6], "rotation": 270, "texture": "#1"},
+				"down": {"uv": [16, 2, 6, 6], "rotation": 90, "texture": "#1"}
+			}
+		}
+	]
+}

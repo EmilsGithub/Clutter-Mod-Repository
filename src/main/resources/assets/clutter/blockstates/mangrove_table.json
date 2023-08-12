@@ -29,6 +29,9 @@
     },
     "legs=false": {
       "model": "clutter:block/tables/mangrove/mangrove_none"
+    },
+    "leg_positions=none,legs=true": {
+      "model": "clutter:block/tables/mangrove/mangrove_none"
     }
   }
 }

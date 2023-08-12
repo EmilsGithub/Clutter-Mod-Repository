@@ -1,34 +1,37 @@
 {
   "variants": {
     "legs=true,leg_positions=north": {
-      "model": "clutter:block/tables/birch/stripped_birch_s"
+      "model": "clutter:block/tables/stripped_birch/stripped_birch_s"
     },
     "legs=true,leg_positions=east": {
-      "model": "clutter:block/tables/birch/stripped_birch_w"
+      "model": "clutter:block/tables/stripped_birch/stripped_birch_w"
     },
     "legs=true,leg_positions=south": {
-      "model": "clutter:block/tables/birch/stripped_birch_n"
+      "model": "clutter:block/tables/stripped_birch/stripped_birch_n"
     },
     "legs=true,leg_positions=west": {
-      "model": "clutter:block/tables/birch/stripped_birch_e"
+      "model": "clutter:block/tables/stripped_birch/stripped_birch_e"
     },
     "legs=true,leg_positions=north_west": {
-      "model": "clutter:block/tables/birch/stripped_birch_se"
+      "model": "clutter:block/tables/stripped_birch/stripped_birch_se"
     },
     "legs=true,leg_positions=north_east": {
-      "model": "clutter:block/tables/birch/stripped_birch_sw"
+      "model": "clutter:block/tables/stripped_birch/stripped_birch_sw"
     },
     "legs=true,leg_positions=south_east": {
-      "model": "clutter:block/tables/birch/stripped_birch_nw"
+      "model": "clutter:block/tables/stripped_birch/stripped_birch_nw"
     },
     "legs=true,leg_positions=south_west": {
-      "model": "clutter:block/tables/birch/stripped_birch_ne"
+      "model": "clutter:block/tables/stripped_birch/stripped_birch_ne"
     },
     "legs=true,leg_positions=all": {
-      "model": "clutter:block/tables/birch/stripped_birch_all"
+      "model": "clutter:block/tables/stripped_birch/stripped_birch_all"
     },
     "legs=false": {
-      "model": "clutter:block/tables/birch/stripped_birch_none"
+      "model": "clutter:block/tables/stripped_birch/stripped_birch_none"
+    },
+    "leg_positions=none,legs=true": {
+      "model": "clutter:block/tables/stripped_birch/stripped_birch_none"
     }
   }
 }

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "shelves",
+  "pattern": [
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:spruce_slab"
+    }
+  },
+  "result": {
+    "item": "clutter:spruce_shelf",
+    "count": 2
+  }
+}

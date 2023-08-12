@@ -1,0 +1,37 @@
+{
+  "variants":{
+    "block_shape=center":{
+      "model":"clutter:block/chandeliers/large/large_silver_chandelier_center"
+    },
+    "block_shape=north":{
+      "model":"clutter:block/chandeliers/large/large_silver_chandelier_side"
+    },
+    "block_shape=north_east":{
+      "model":"clutter:block/chandeliers/large/large_silver_chandelier_diagonal"
+    },
+    "block_shape=east":{
+      "model":"clutter:block/chandeliers/large/large_silver_chandelier_side",
+      "y": 90
+    },
+    "block_shape=south_east":{
+      "model":"clutter:block/chandeliers/large/large_silver_chandelier_diagonal",
+      "y": 90
+    },
+    "block_shape=south":{
+      "model":"clutter:block/chandeliers/large/large_silver_chandelier_side",
+      "y": 180
+    },
+    "block_shape=south_west":{
+      "model":"clutter:block/chandeliers/large/large_silver_chandelier_diagonal",
+      "y": 180
+    },
+    "block_shape=west":{
+      "model":"clutter:block/chandeliers/large/large_silver_chandelier_side",
+      "y": 270
+    },
+    "block_shape=north_west":{
+      "model":"clutter:block/chandeliers/large/large_silver_chandelier_diagonal",
+      "y": 270
+    }
+  }
+}

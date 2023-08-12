@@ -1,34 +1,31 @@
 {
-  "criteria": {
-    "killed_by_something": {
-      "conditions": {},
-      "trigger": "minecraft:entity_killed_player"
-    },
-    "killed_something": {
-      "conditions": {},
-      "trigger": "minecraft:player_killed_entity"
-    }
-  },
   "display": {
-    "announce_to_chat": false,
-    "background": "minecraft:textures/block/spruce_planks.png",
+    "icon": {
+      "item": "clutter:clutter_recipe_book"
+    },
+    "title": {
+      "translate": "advancements.clutter.root.title"
+    },
     "description": {
       "translate": "advancements.clutter.root.description"
     },
+    "background": "minecraft:textures/block/spruce_planks.png",
     "frame": "task",
-    "hidden": false,
-    "icon": {
-      "item": "clutter:copper_nugget"
-    },
     "show_toast": false,
-    "title": {
-      "translate": "advancements.clutter.root.title"
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:enter_block",
+      "conditions": {
+        "block": "minecraft:air"
+      }
     }
   },
-  "requirements": [
-    [
-      "killed_something",
-      "killed_by_something"
+  "rewards": {
+    "recipes": [
+      "clutter:clutter_recipe_book"
     ]
-  ]
+  }
 }

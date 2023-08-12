@@ -3,6 +3,7 @@ package net.emilsg.clutter.block.custom;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
@@ -228,5 +229,15 @@ public class WallCandleBlock extends HorizontalFacingBlock implements Waterlogga
 
     private static void setLit(WorldAccess world, BlockState state, BlockPos pos, boolean lit) {
         world.setBlockState(pos, (BlockState)state.with(LIT, lit), Block.NOTIFY_ALL | Block.REDRAW_ON_MAIN_THREAD);
+    }
+
+    public void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
+        if (!world.isClient && projectile.isOnFire() && this.isNotLit(state)) {
+            setLit(world, state, hit.getBlockPos(), true);
+        }
+    }
+
+    protected boolean isNotLit(BlockState state) {
+        return !(Boolean)state.get(LIT);
     }
 }

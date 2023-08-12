@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "clutter:golden_coin"
+    },
+    {
+      "item": "clutter:golden_coin"
+    },
+    {
+      "item": "clutter:golden_coin"
+    },
+    {
+      "item": "clutter:golden_coin"
+    },
+    {
+      "item": "clutter:golden_coin"
+    },
+    {
+      "item": "clutter:golden_coin"
+    },
+    {
+      "item": "clutter:golden_coin"
+    },
+    {
+      "item": "clutter:golden_coin"
+    }
+  ],
+  "result": {
+    "item": "clutter:golden_coin_stack"
+  }
+}
+

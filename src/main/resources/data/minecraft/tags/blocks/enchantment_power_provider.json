@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "#clutter:bookshelves"
+    "#clutter:bookshelves",
+    "clutter:book_pile"
   ]
 }

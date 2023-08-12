@@ -1,0 +1,66 @@
+{
+  "variants":{
+    "lily_pad_directions=north_east,flowering=false":[
+      {"model":"clutter:block/giant_lily_pad/giant_lily_pad_short"},
+      {"model":"clutter:block/giant_lily_pad/giant_lily_pad"},
+      {"model":"clutter:block/giant_lily_pad/giant_lily_pad_long"}
+    ],
+
+    "lily_pad_directions=north_west,flowering=false":[
+      {"model":"clutter:block/giant_lily_pad/giant_lily_pad_short",
+        "y": 270},
+      {"model":"clutter:block/giant_lily_pad/giant_lily_pad",
+        "y": 270},
+      {"model":"clutter:block/giant_lily_pad/giant_lily_pad_long",
+        "y": 270}
+    ],
+    "lily_pad_directions=south_east,flowering=false":[
+      {"model":"clutter:block/giant_lily_pad/giant_lily_pad_short",
+        "y": 90},
+      {"model":"clutter:block/giant_lily_pad/giant_lily_pad",
+        "y": 90},
+      {"model":"clutter:block/giant_lily_pad/giant_lily_pad_long",
+        "y": 90}
+    ],
+    "lily_pad_directions=south_west,flowering=false":[
+      {"model":"clutter:block/giant_lily_pad/giant_lily_pad_short",
+        "y": 180},
+      {"model":"clutter:block/giant_lily_pad/giant_lily_pad",
+        "y": 180},
+      {"model":"clutter:block/giant_lily_pad/giant_lily_pad_long",
+        "y": 180}
+    ],
+
+
+    "lily_pad_directions=north_east,flowering=true":[
+      {"model":"clutter:block/giant_lily_pad/flowering_giant_lily_pad_short"},
+      {"model":"clutter:block/giant_lily_pad/flowering_giant_lily_pad"},
+      {"model":"clutter:block/giant_lily_pad/flowering_giant_lily_pad_long"}
+    ],
+
+    "lily_pad_directions=north_west,flowering=true":[
+      {"model":"clutter:block/giant_lily_pad/flowering_giant_lily_pad_short",
+        "y": 270},
+      {"model":"clutter:block/giant_lily_pad/flowering_giant_lily_pad",
+        "y": 270},
+      {"model":"clutter:block/giant_lily_pad/flowering_giant_lily_pad_long",
+        "y": 270}
+    ],
+    "lily_pad_directions=south_east,flowering=true":[
+      {"model":"clutter:block/giant_lily_pad/flowering_giant_lily_pad_short",
+        "y": 90},
+      {"model":"clutter:block/giant_lily_pad/flowering_giant_lily_pad",
+        "y": 90},
+      {"model":"clutter:block/giant_lily_pad/flowering_giant_lily_pad_long",
+        "y": 90}
+    ],
+    "lily_pad_directions=south_west,flowering=true":[
+      {"model":"clutter:block/giant_lily_pad/flowering_giant_lily_pad_short",
+        "y": 180},
+      {"model":"clutter:block/giant_lily_pad/flowering_giant_lily_pad",
+        "y": 180},
+      {"model":"clutter:block/giant_lily_pad/flowering_giant_lily_pad_long",
+        "y": 180}
+    ]
+  }
+}

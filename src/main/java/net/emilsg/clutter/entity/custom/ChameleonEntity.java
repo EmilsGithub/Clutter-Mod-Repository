@@ -46,6 +46,11 @@ import java.util.List;
 import java.util.UUID;
 
 public class ChameleonEntity extends TameableEntity implements GeoEntity {
+    private static final RawAnimation IDLE = RawAnimation.begin().thenLoop("chameleon.idle");
+    private static final RawAnimation WALK = RawAnimation.begin().thenLoop("chameleon.walk");
+    private static final RawAnimation LICK = RawAnimation.begin().thenLoop("chameleon.lick");
+    private static final RawAnimation LAY_DOWN = RawAnimation.begin().thenPlayAndHold("chameleon.lay_down");
+
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private static final Ingredient BREEDING_INGREDIENT;
 
@@ -84,11 +89,11 @@ public class ChameleonEntity extends TameableEntity implements GeoEntity {
         this.goalSelector.add(0, new RideAdultChameleonGoal(this));
         this.goalSelector.add(1, new SwimGoal(this));
         this.goalSelector.add(2, new SitGoal(this));
-        this.goalSelector.add(3, new ChameleonEscapeDangerGoal(1.25));
-        this.goalSelector.add(4, new FollowOwnerGoal(this, 1.1, 10.0F, 2.0F, false));
+        this.goalSelector.add(3, new ChameleonEscapeDangerGoal(1.5));
+        this.goalSelector.add(4, new FollowOwnerGoal(this, 1.2, 10.0F, 2.0F, false));
         this.goalSelector.add(5, new AnimalMateGoal(this, 1));
-        this.goalSelector.add(6, new TemptGoal(this, 1.1, BREEDING_INGREDIENT, false));
-        this.goalSelector.add(7, new FollowParentGoal(this, 1.1));
+        this.goalSelector.add(6, new TemptGoal(this, 1.2, BREEDING_INGREDIENT, false));
+        this.goalSelector.add(7, new FollowParentGoal(this, 1.2));
         this.goalSelector.add(8, new AttackGoal(this, 1.25));
         this.goalSelector.add(9, new WanderAroundFarGoal(this, 1.0, 1));
         this.goalSelector.add(10, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
@@ -205,17 +210,7 @@ public class ChameleonEntity extends TameableEntity implements GeoEntity {
     }
 
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
-        if(this.isSitting()) {
-            tAnimationState.getController().setAnimation(RawAnimation.begin().thenPlayAndHold("chameleon.lay_down"));
-            return PlayState.CONTINUE;
-        } else if(!tAnimationState.isMoving() && !this.getPassengerList().isEmpty() && !this.isSitting()) {
-            tAnimationState.getController().setAnimation(RawAnimation.begin().thenPlayAndHold("chameleon.lay_down"));
-            return PlayState.CONTINUE;
-        } else if(tAnimationState.isMoving() && !this.isSitting()) {
-            tAnimationState.getController().setAnimation(RawAnimation.begin().thenLoop("chameleon.walk"));
-            return PlayState.CONTINUE;
-        }
-        tAnimationState.getController().setAnimation(RawAnimation.begin().thenLoop("chameleon.idle"));
+        tAnimationState.getController().setAnimation(this.isSitting() || (!tAnimationState.isMoving() && !this.getPassengerList().isEmpty() && !this.isSitting()) ? LAY_DOWN : (tAnimationState.isMoving() && !this.isSitting() ? WALK : IDLE));
         return PlayState.CONTINUE;
     }
 
@@ -228,7 +223,7 @@ public class ChameleonEntity extends TameableEntity implements GeoEntity {
 
     private <T extends GeoAnimatable> PlayState attackPredicate(AnimationState<T> tAnimationState) {
         if(this.isAttacking() && !this.isSitting()) {
-            tAnimationState.getController().setAnimation(RawAnimation.begin().thenLoop("chameleon.lick"));
+            tAnimationState.getController().setAnimation(LICK);
             return PlayState.CONTINUE;
         }
         return PlayState.STOP;

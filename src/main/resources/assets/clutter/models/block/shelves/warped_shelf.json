@@ -1,0 +1,10 @@
+{
+	"parent": "clutter:block/shelves/shelf_parent",
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"textures": {
+		"1": "block/warped_stem",
+		"2": "block/warped_planks",
+		"particle": "block/warped_planks"
+	}
+}

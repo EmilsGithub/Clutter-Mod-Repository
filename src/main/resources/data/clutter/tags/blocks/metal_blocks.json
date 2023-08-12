@@ -46,8 +46,10 @@
 
     "#clutter:wall_candles",
     "#clutter:chandeliers",
+    "#clutter:large_chandeliers",
     "#clutter:candelabras",
     "#clutter:chains",
+    "#clutter:large_chains",
     "#clutter:lanterns",
     "#clutter:copper_doors"
   ]

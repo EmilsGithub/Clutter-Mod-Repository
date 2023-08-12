@@ -1,0 +1,19 @@
+{
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"texture_size": [64, 32],
+	"textures": {
+		"0": "clutter:block/tall_curtains/open_red",
+		"particle": "clutter:block/tall_curtains/open_red"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0.5],
+			"to": [16, 16, 0.5],
+			"faces": {
+				"north": {"uv": [4, 8, 8, 16], "texture": "#0"},
+				"south": {"uv": [4, 8, 8, 16], "texture": "#0"}
+			}
+		}
+	]
+}

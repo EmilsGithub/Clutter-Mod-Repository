@@ -5,7 +5,7 @@
 	"textures": {
 		"0": "clutter:block/bunk_bed",
 		"1": "clutter:block/bed/red",
-		"particle": "minecraft:block/oak_planks"
+		"particle": "block/oak_planks"
 	},
 	"elements": [
 		{
@@ -199,43 +199,39 @@
 	],
 	"display": {
 		"thirdperson_righthand": {
-			"rotation": [-160.94, 16.11, -175.39],
-			"translation": [0, 1.75, 0.75],
+			"rotation": [75, 45, 0],
+			"translation": [-1.5, 2.5, 0],
 			"scale": [0.2, 0.2, 0.2]
 		},
 		"thirdperson_lefthand": {
-			"rotation": [-160.94, 16.11, -175.39],
-			"translation": [0, 1.75, 0.75],
+			"rotation": [75, 45, 0],
+			"translation": [-1.5, 2.5, 0],
 			"scale": [0.2, 0.2, 0.2]
 		},
 		"firstperson_righthand": {
-			"rotation": [8.01, -19, 0.06],
-			"translation": [-0.25, 0.75, 0.25],
-			"scale": [0.5, 0.5, 0.5]
+			"rotation": [0, -45, 0],
+			"translation": [0, 0.75, 1],
+			"scale": [0.4, 0.4, 0.4]
 		},
 		"firstperson_lefthand": {
-			"rotation": [8.01, -19, 0.06],
-			"translation": [-0.25, 0.75, 0.25],
-			"scale": [0.5, 0.5, 0.5]
+			"rotation": [0, -45, 0],
+			"translation": [0, 0.75, 1],
+			"scale": [0.4, 0.4, 0.4]
 		},
 		"ground": {
-			"translation": [0, -0.75, -1.75],
+			"translation": [0, 3, -2],
 			"scale": [0.25, 0.25, 0.25]
 		},
 		"gui": {
-			"rotation": [30, -20, 0],
-			"translation": [1.25, 1.75, 0],
-			"scale": [0.5, 0.5, 0.5]
+			"rotation": [30, -45, 0],
+			"translation": [2.25, 0.75, 0],
+			"scale": [0.4, 0.4, 0.4]
 		},
 		"head": {
-			"rotation": [0, 180, 0],
-			"translation": [0, 9, 4],
-			"scale": [0.88867, 0.5, 0.5]
+			"translation": [0, 7.5, -8.75]
 		},
 		"fixed": {
-			"rotation": [0, 90, 0],
-			"translation": [-3.25, -0.25, -2.25],
-			"scale": [0.4, 0.4, 0.4]
+			"scale": [0.5, 0.5, 0.5]
 		}
 	}
 }

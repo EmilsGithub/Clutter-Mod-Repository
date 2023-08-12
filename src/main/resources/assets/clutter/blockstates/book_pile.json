@@ -1,0 +1,124 @@
+{
+  "variants": {
+    "layers=0,facing=north": {
+      "model": "clutter:block/book_piles/book_pile"
+    },
+    "layers=1,facing=north": {
+      "model": "clutter:block/book_piles/book_pile1"
+    },
+    "layers=2,facing=north": {
+      "model": "clutter:block/book_piles/book_pile2"
+    },
+    "layers=3,facing=north": {
+      "model": "clutter:block/book_piles/book_pile3"
+    },
+    "layers=4,facing=north": {
+      "model": "clutter:block/book_piles/book_pile4"
+    },
+    "layers=5,facing=north": {
+      "model": "clutter:block/book_piles/book_pile5"
+    },
+    "layers=6,facing=north": {
+      "model": "clutter:block/book_piles/book_pile6"
+    },
+    "layers=7,facing=north": {
+      "model": "clutter:block/book_piles/book_pile7"
+    },
+    "layers=0,facing=east": {
+      "model": "clutter:block/book_piles/book_pile",
+      "y": 90
+    },
+    "layers=1,facing=east": {
+      "model": "clutter:block/book_piles/book_pile1",
+      "y": 90
+    },
+    "layers=2,facing=east": {
+      "model": "clutter:block/book_piles/book_pile2",
+      "y": 90
+    },
+    "layers=3,facing=east": {
+      "model": "clutter:block/book_piles/book_pile3",
+      "y": 90
+    },
+    "layers=4,facing=east": {
+      "model": "clutter:block/book_piles/book_pile4",
+      "y": 90
+    },
+    "layers=5,facing=east": {
+      "model": "clutter:block/book_piles/book_pile5",
+      "y": 90
+    },
+    "layers=6,facing=east": {
+      "model": "clutter:block/book_piles/book_pile6",
+      "y": 90
+    },
+    "layers=7,facing=east": {
+      "model": "clutter:block/book_piles/book_pile7",
+      "y": 90
+    },
+    "layers=0,facing=south": {
+      "model": "clutter:block/book_piles/book_pile",
+      "y": 180
+    },
+    "layers=1,facing=south": {
+      "model": "clutter:block/book_piles/book_pile1",
+      "y": 180
+    },
+    "layers=2,facing=south": {
+      "model": "clutter:block/book_piles/book_pile2",
+      "y": 180
+    },
+    "layers=3,facing=south": {
+      "model": "clutter:block/book_piles/book_pile3",
+      "y": 180
+    },
+    "layers=4,facing=south": {
+      "model": "clutter:block/book_piles/book_pile4",
+      "y": 180
+    },
+    "layers=5,facing=south": {
+      "model": "clutter:block/book_piles/book_pile5",
+      "y": 180
+    },
+    "layers=6,facing=south": {
+      "model": "clutter:block/book_piles/book_pile6",
+      "y": 180
+    },
+    "layers=7,facing=south": {
+      "model": "clutter:block/book_piles/book_pile7",
+      "y": 180
+    },
+    "layers=0,facing=west": {
+      "model": "clutter:block/book_piles/book_pile",
+      "y": 270
+    },
+    "layers=1,facing=west": {
+      "model": "clutter:block/book_piles/book_pile1",
+      "y": 270
+    },
+    "layers=2,facing=west": {
+      "model": "clutter:block/book_piles/book_pile2",
+      "y": 270
+    },
+    "layers=3,facing=west": {
+      "model": "clutter:block/book_piles/book_pile3",
+      "y": 270
+    },
+    "layers=4,facing=west": {
+      "model": "clutter:block/book_piles/book_pile4",
+      "y": 270
+    },
+    "layers=5,facing=west": {
+      "model": "clutter:block/book_piles/book_pile5",
+      "y": 270
+    },
+    "layers=6,facing=west": {
+      "model": "clutter:block/book_piles/book_pile6",
+      "y": 270
+    },
+    "layers=7,facing=west": {
+      "model": "clutter:block/book_piles/book_pile7",
+      "y": 270
+    }
+  }
+}

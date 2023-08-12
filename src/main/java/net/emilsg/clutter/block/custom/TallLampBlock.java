@@ -9,7 +9,9 @@ import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
@@ -21,6 +23,7 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.*;
@@ -29,7 +32,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.function.ToIntFunction;
 
 public class TallLampBlock extends Block implements Waterloggable {
-    private static final BooleanProperty LIT = Properties.LIT;
+    public static final BooleanProperty LIT = Properties.LIT;
     public static final EnumProperty<DoubleBlockHalf> HALF = Properties.DOUBLE_BLOCK_HALF;
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 
@@ -47,33 +50,20 @@ public class TallLampBlock extends Block implements Waterloggable {
         this.setDefaultState((BlockState)((BlockState)this.stateManager.getDefaultState()).with(HALF, DoubleBlockHalf.LOWER).with(WATERLOGGED, false).with(LIT, false));
     }
 
-    @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        boolean i = state.get(LIT);
-        if (world.isClient) {
-            return ActionResult.PASS;
-        }
+            BlockState litState = state.cycle(LIT);
+            world.setBlockState(pos, litState.with(HALF, state.get(HALF)), 10);
+            if (state.get(HALF) == DoubleBlockHalf.LOWER) {
+                world.setBlockState(pos.up(), litState.with(HALF, world.getBlockState(pos.up()).get(HALF)).with(WATERLOGGED, world.getBlockState(pos.up()).get(WATERLOGGED)), 10);
+            } else {
+                world.setBlockState(pos.down(), litState.with(HALF, world.getBlockState(pos.down()).get(HALF)).with(WATERLOGGED, world.getBlockState(pos.down()).get(WATERLOGGED)), 10);
+            }
+            playSound(state.get(LIT) ? SoundEvents.BLOCK_METAL_PRESSURE_PLATE_CLICK_OFF : SoundEvents.BLOCK_METAL_PRESSURE_PLATE_CLICK_ON, pos, world);
+            return ActionResult.success(world.isClient);
+    }
 
-        if (hand.equals(Hand.MAIN_HAND) && player.getStackInHand(hand).isEmpty() && state.get(HALF) == DoubleBlockHalf.UPPER) {
-            world.setBlockState(pos, state.with(LIT, !i).with(HALF, DoubleBlockHalf.UPPER), Block.NOTIFY_ALL);
-            world.setBlockState(pos.down(), state.with(LIT, !i).with(HALF, DoubleBlockHalf.LOWER), Block.NOTIFY_ALL);
-            if (state.get(LIT)) {
-                world.playSound(null, pos, SoundEvents.BLOCK_METAL_PRESSURE_PLATE_CLICK_OFF, SoundCategory.BLOCKS, 1.0f, 1.25f);
-            } else {
-                world.playSound(null, pos, SoundEvents.BLOCK_METAL_PRESSURE_PLATE_CLICK_ON, SoundCategory.BLOCKS, 1.0f, 1.25f);
-            }
-            return ActionResult.SUCCESS;
-        } else if (hand.equals(Hand.MAIN_HAND) && player.getStackInHand(hand).isEmpty() && state.get(HALF) == DoubleBlockHalf.LOWER) {
-            world.setBlockState(pos, state.with(LIT, !i).with(HALF, DoubleBlockHalf.LOWER), Block.NOTIFY_ALL);
-            world.setBlockState(pos.up(), state.with(LIT, !i).with(HALF, DoubleBlockHalf.UPPER), Block.NOTIFY_ALL);
-            if (state.get(LIT)) {
-                world.playSound(null, pos, SoundEvents.BLOCK_METAL_PRESSURE_PLATE_CLICK_OFF, SoundCategory.BLOCKS, 1.0f, 1.25f);
-            } else {
-                world.playSound(null, pos, SoundEvents.BLOCK_METAL_PRESSURE_PLATE_CLICK_ON, SoundCategory.BLOCKS, 1.0f, 1.25f);
-            }
-            return ActionResult.SUCCESS;
-        }
-        return ActionResult.PASS;
+    private static void playSound(SoundEvent soundEvent, BlockPos pos, World world) {
+        world.playSound(null, pos, soundEvent, SoundCategory.BLOCKS, 1.0f, 1.25f);
     }
 
     public static ToIntFunction<BlockState> createLightLevelFromLitBlockState(int litLevel) {
@@ -127,9 +117,42 @@ public class TallLampBlock extends Block implements Waterloggable {
         World world = ctx.getWorld();
         if (blockPos.getY() < world.getTopY() - 1 && world.getBlockState(blockPos2).canReplace(ctx)) {
             boolean bl = world.getFluidState(blockPos = ctx.getBlockPos()).getFluid() == Fluids.WATER;
-            return (BlockState)this.getDefaultState().with(WATERLOGGED, bl);
+            return (BlockState)this.getDefaultState().with(WATERLOGGED, bl).with(LIT, ctx.getWorld().isReceivingRedstonePower(ctx.getBlockPos()));
         }
         return null;
+    }
+
+    public void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
+        if (!world.isClient) {
+            boolean bl = (Boolean)state.get(LIT);
+            if (bl != world.isReceivingRedstonePower(pos)) {
+                if (bl) {
+                    world.scheduleBlockTick(pos, this, 4);
+                } else {
+                    BlockState litState = state.cycle(LIT);
+                    world.setBlockState(pos, litState.with(HALF, state.get(HALF)), 2);
+                    if (state.get(HALF) == DoubleBlockHalf.LOWER) {
+                        world.setBlockState(pos.up(), litState.with(HALF, world.getBlockState(pos.up()).get(HALF)).with(WATERLOGGED, world.getBlockState(pos.up()).get(WATERLOGGED)), 2);
+                    } else {
+                        world.setBlockState(pos.down(), litState.with(HALF, world.getBlockState(pos.down()).get(HALF)).with(WATERLOGGED, world.getBlockState(pos.down()).get(WATERLOGGED)), 2);
+                    }
+                }
+            }
+
+        }
+    }
+
+    public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        if ((Boolean)state.get(LIT) && !world.isReceivingRedstonePower(pos)) {
+            BlockState litState = state.cycle(LIT);
+            world.setBlockState(pos, litState.with(HALF, state.get(HALF)), 2);
+            if (state.get(HALF) == DoubleBlockHalf.LOWER) {
+                world.setBlockState(pos.up(), litState.with(HALF, world.getBlockState(pos.up()).get(HALF)).with(WATERLOGGED, world.getBlockState(pos.up()).get(WATERLOGGED)), 2);
+            } else {
+                world.setBlockState(pos.down(), litState.with(HALF, world.getBlockState(pos.down()).get(HALF)).with(WATERLOGGED, world.getBlockState(pos.down()).get(WATERLOGGED)), 2);
+            }
+        }
+
     }
 
     @Override

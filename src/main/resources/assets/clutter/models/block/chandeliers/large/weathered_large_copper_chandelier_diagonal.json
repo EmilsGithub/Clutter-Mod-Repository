@@ -1,0 +1,7 @@
+{
+  "parent": "clutter:block/chandeliers/large_chandelier_diagonal_parent",
+  "textures": {
+    "0": "clutter:block/weathered_large_copper_chandelier_diagonal",
+    "particle": "block/weathered_copper"
+  }
+}

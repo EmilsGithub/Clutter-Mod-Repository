@@ -1,0 +1,9 @@
+{
+  "asset_name": "silver",
+  "ingredient": "clutter:silver_ingot",
+  "item_model_index": 0.21596,
+  "description": {
+    "translate": "trim_materials.clutter.silver",
+    "color": "#8B9899"
+  }
+}

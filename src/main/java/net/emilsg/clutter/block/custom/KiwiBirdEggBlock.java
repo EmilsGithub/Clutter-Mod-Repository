@@ -59,7 +59,7 @@ public class KiwiBirdEggBlock extends Block {
                     world.syncWorldEvent(2001, pos, Block.getRawIdFromState(state));
                     KiwiBirdEntity kiwiBird = ModEntities.KIWI_BIRD.create(world);
                     if (kiwiBird != null) {
-                        kiwiBird.setBreedingAge(6000);
+                        kiwiBird.setBaby(true);
                         kiwiBird.refreshPositionAndAngles((double)pos.getX() + 0.3 + (double)j * 0.2, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.3, 0.0F, 0.0F);
                         world.spawnEntity(kiwiBird);
                     }

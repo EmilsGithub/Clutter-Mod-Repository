@@ -1,186 +1,131 @@
 package net.emilsg.clutter.block.custom;
 
-
-import net.emilsg.clutter.util.ModItemTags;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.block.Waterloggable;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
+import net.emilsg.clutter.block.ModBlocks;
+import net.emilsg.clutter.block.entity.PlateInventoryBlockEntity;
+import net.minecraft.block.*;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.IntProperty;
+import net.minecraft.state.property.DirectionProperty;
+import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
+import net.minecraft.util.*;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Objects;
-
-public class PlateBlock extends Block implements Waterloggable {
-    protected static final VoxelShape SHAPE = Block.createCuboidShape(3.0, 0.0, 3.0, 13.0, 1.0, 13.0);
-
+public class PlateBlock extends BlockWithEntity implements Waterloggable {
+    public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
+    public static final EnumProperty<PlateBlock.Glass> GLASS_TYPE = EnumProperty.of("glass_type", PlateBlock.Glass.class);
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
-    public static final BooleanProperty HAS_VEGGIES = BooleanProperty.of("has_veggies");
-    public static final BooleanProperty HAS_MEAT = BooleanProperty.of("has_meat");
-    public static final BooleanProperty HAS_CARBS = BooleanProperty.of("has_carbs");
 
-    public static final IntProperty POISON_VALUE = IntProperty.of("poison_value", 0, 10);
-    public static final IntProperty HUNGER_VALUE = IntProperty.of("hunger_value", 0, 10);
-    public static final IntProperty NAUSEA_VALUE = IntProperty.of("nausea_value", 0, 10);
-    public static final IntProperty FOOD_VALUE = IntProperty.of("food_value", 0, 32);
-    public static final IntProperty FILLED_STATE = IntProperty.of("filled_state", 0, 3);
+    protected static final VoxelShape PLATE_SHAPE = Block.createCuboidShape(3.0, 0.0, 3.0, 13.0, 1.5, 13.0);
+    protected static final VoxelShape GLASS_SHAPE_N = VoxelShapes.union(
+            Block.createCuboidShape(11, 4, 0, 14, 8, 3),
+            Block.createCuboidShape(12, 1, 1, 13, 4, 2),
+            Block.createCuboidShape(11, 0, 0, 14, 1, 3)
+    );
+    protected static final VoxelShape GLASS_SHAPE_E = VoxelShapes.union(
+            Block.createCuboidShape(13, 4, 11, 16, 8, 14),
+            Block.createCuboidShape(14, 1, 12, 15, 4, 13),
+            Block.createCuboidShape(13, 0, 11, 16, 1, 14)
+    );
+    protected static final VoxelShape GLASS_SHAPE_S = VoxelShapes.union(
+            Block.createCuboidShape(2, 4, 13, 5, 8, 16),
+            Block.createCuboidShape(3, 1, 14, 4, 4, 15),
+            Block.createCuboidShape(2, 0, 13, 5, 1, 16)
+    );
+    protected static final VoxelShape GLASS_SHAPE_W = VoxelShapes.union(
+            Block.createCuboidShape(0, 4, 2, 3, 8, 5),
+            Block.createCuboidShape(1, 1, 3, 2, 4, 4),
+            Block.createCuboidShape(0, 0, 2, 3, 1, 5)
+    );
 
     public PlateBlock(Settings settings) {
         super(settings);
-        this.setDefaultState(this.getDefaultState()
-                .with(WATERLOGGED, false)
-                .with(HAS_VEGGIES, false)
-                .with(HAS_MEAT, false)
-                .with(HAS_CARBS, false)
-                .with(FILLED_STATE, 0)
-                .with(FOOD_VALUE, 0)
-                .with(POISON_VALUE, 0)
-                .with(HUNGER_VALUE, 0)
-                .with(NAUSEA_VALUE, 0));
+        this.setDefaultState(this.stateManager.getDefaultState().with(WATERLOGGED, false).with(FACING, Direction.NORTH).with(GLASS_TYPE, Glass.NONE));
+
     }
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return SHAPE;
-    }
+        VoxelShape finalShape = PLATE_SHAPE;
 
-    public void consumeFood(PlayerEntity player, BlockState state, BlockPos pos, World world, int foodValue){
-        int poisonAmount = state.get(POISON_VALUE);
-        int nauseaAmount = state.get(NAUSEA_VALUE);
-        int hungerAmount = state.get(HUNGER_VALUE);
-        if (poisonAmount != 0) {
-            player.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 300, poisonAmount - 1));
+        if(state.get(GLASS_TYPE) == Glass.WINE) {
+            switch (state.get(FACING)) {
+                default -> finalShape = VoxelShapes.union(PLATE_SHAPE, GLASS_SHAPE_N);
+                case EAST -> finalShape = VoxelShapes.union(PLATE_SHAPE, GLASS_SHAPE_E);
+                case SOUTH -> finalShape = VoxelShapes.union(PLATE_SHAPE, GLASS_SHAPE_S);
+                case WEST -> finalShape = VoxelShapes.union(PLATE_SHAPE, GLASS_SHAPE_W);
+            }
         }
-        if (nauseaAmount != 0) {
-            player.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 300, nauseaAmount - 1));
-        }
-        if (hungerAmount != 0) {
-            player.addStatusEffect(new StatusEffectInstance(StatusEffects.HUNGER, 300, hungerAmount - 1));
-        }
-        player.getHungerManager().add(foodValue, 0.25f);
-        player.playSound(SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 1.0F, 1.0F );
-        world.setBlockState(pos, getDefaultState().with(WATERLOGGED, state.get(WATERLOGGED)), Block.NOTIFY_ALL);
-    }
 
-    public void addMeats(PlayerEntity player, BlockState state, BlockPos pos, World world, Hand hand, ItemStack stack,
-                         int foodValue, int foodRestored,
-                         int filledState){
-
-        int poisonAmount = state.get(POISON_VALUE);
-        int nauseaAmount = state.get(NAUSEA_VALUE);
-        int hungerAmount = state.get(HUNGER_VALUE);
-        boolean puffer = stack.isOf(Items.PUFFERFISH);
-        boolean rotten = stack.isOf(Items.ROTTEN_FLESH);
-        boolean chicken = stack.isOf(Items.CHICKEN);
-        boolean spider = stack.isOf(Items.SPIDER_EYE);
-
-        if (puffer) {
-            poisonAmount += 2;
-            nauseaAmount ++;
-            hungerAmount += 3;
-        } else if (rotten) {
-            hungerAmount ++;
-        } else if (chicken && Math.random() < 0.3) {
-            hungerAmount ++;
-        } else if (spider) {
-            poisonAmount ++;
-        }
-        world.setBlockState(pos, state
-                .with(HAS_MEAT, true)
-                .with(FOOD_VALUE, foodValue + foodRestored)
-                .with(FILLED_STATE, filledState + 1)
-                .with(POISON_VALUE, poisonAmount)
-                .with(HUNGER_VALUE, hungerAmount)
-                .with(NAUSEA_VALUE, nauseaAmount), Block.NOTIFY_ALL);
-        if (!player.getAbilities().creativeMode) {
-            player.getStackInHand(hand).decrement(1);
-        }
-    }
-    public void addCarbs(PlayerEntity player, BlockState state, BlockPos pos, World world, Hand hand, ItemStack stack,
-                         int foodValue, int foodRestored, int filledState){
-        int poisonAmount = state.get(POISON_VALUE);
-
-        if (stack.isOf(Items.POISONOUS_POTATO)) {
-            poisonAmount++;
-        }
-        world.setBlockState(pos, state
-                .with(HAS_CARBS, true)
-                .with(FOOD_VALUE, foodValue + foodRestored)
-                .with(FILLED_STATE, filledState + 1)
-                .with(POISON_VALUE, poisonAmount), Block.NOTIFY_ALL);
-        if (!player.getAbilities().creativeMode) {
-            player.getStackInHand(hand).decrement(1);
-        }
-    }
-    public void addVeggies(PlayerEntity player, BlockState state, BlockPos pos, World world, Hand hand, int foodValue,
-                           int foodRestored, int filledState){
-        world.setBlockState(pos, state
-                .with(HAS_VEGGIES, true)
-                .with(FOOD_VALUE, foodValue + foodRestored)
-                .with(FILLED_STATE, filledState + 1), Block.NOTIFY_ALL);
-        if (!player.getAbilities().creativeMode) {
-            player.getStackInHand(hand).decrement(1);
-        }
+        return finalShape;
     }
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        ItemStack stack = player.getStackInHand(hand);
-        int filledState = state.get(FILLED_STATE);
-        int foodRestored = Objects.requireNonNull(stack.getItem().getFoodComponent()).getHunger();
-        int foodValue = state.get(FOOD_VALUE);
-        boolean filled = filledState == 3;
-        boolean empty = filledState < 1;
-
         if (world.isClient) {
-            return ActionResult.PASS;
-        }
-
-        if (!empty && hand.equals(Hand.MAIN_HAND) && player.getStackInHand(hand).isEmpty()) {
-            consumeFood(player, state, pos, world, foodValue);
             return ActionResult.SUCCESS;
         }
+        ItemStack stackInHand = player.getStackInHand(hand);
+        BlockEntity blockEntity = world.getBlockEntity(pos);
 
-        if (!filled && hand.equals(Hand.MAIN_HAND) && stack.isIn(ModItemTags.PLATE_PLACEABLE)) {
+        if(PLATE_SHAPE.raycast(Vec3d.ZERO, hit.getPos(), pos) != null) {
+            if ((Block.getBlockFromItem(stackInHand.getItem()) instanceof WineGlassBlock) && state.get(GLASS_TYPE).equals(Glass.NONE)) {
+                if(!player.getAbilities().creativeMode) {
+                    stackInHand.decrement(1);
+                }
+                world.setBlockState(pos, state.with(GLASS_TYPE, Glass.WINE), 3);
+                return ActionResult.SUCCESS;
+            } else if (blockEntity instanceof PlateInventoryBlockEntity plateEntity) {
+                if (!stackInHand.isEmpty() && stackInHand.isFood()) {
+                    for (int i = 0; i < plateEntity.size(); i++) {
+                        if (plateEntity.getStack(i).isEmpty()) {
+                            plateEntity.setStack(i, stackInHand.copyWithCount(1));
+                            if(!player.getAbilities().creativeMode) {
+                                stackInHand.decrement(1);
+                            }
+                            return ActionResult.SUCCESS;
+                        }
+                    }
+                } else if (stackInHand.isEmpty()) {
+                    for (int i = plateEntity.size() - 1; i >= 0; i--) {
+                        ItemStack stackInPlate = plateEntity.getStack(i);
+                        if (!stackInPlate.isEmpty()) {
+                            if(stackInHand.isEmpty() || (stackInHand.isOf(stackInPlate.getItem()) && stackInHand.getCount() != stackInHand.getMaxCount())) {
+                                player.giveItemStack(new ItemStack(stackInPlate.copy().getItem()));
+                            } else {
+                                dropStack(world, pos, new ItemStack(stackInPlate.copy().getItem()));
+                            }
+                            plateEntity.setStack(i, ItemStack.EMPTY);
+                            return ActionResult.SUCCESS;
+                        }
+                    }
+                }
+            }
+        } else {
+            if(player.getStackInHand(hand).isEmpty() || ((Block.getBlockFromItem(stackInHand.getItem()) instanceof WineGlassBlock) && stackInHand.getCount() != stackInHand.getMaxCount())) {
+                player.giveItemStack(new ItemStack(ModBlocks.WINE_GLASS));
+            } else {
+                dropStack(world, pos, new ItemStack(ModBlocks.WINE_GLASS));
+            }
 
-            if (stack.isIn(ModItemTags.MEATS)) {
-                addMeats(player, state, pos, world, hand, stack,
-                        foodValue, foodRestored, filledState);
-                return ActionResult.SUCCESS;
-            }
-            else if (stack.isIn(ModItemTags.VEGGIES)) {
-                addVeggies(player, state, pos, world, hand, foodValue, foodRestored, filledState);
-                return ActionResult.SUCCESS;
-            }
-            else if (stack.isIn(ModItemTags.CARBS)) {
-                addCarbs(player, state, pos, world, hand, stack, foodValue, foodRestored, filledState);
-                return ActionResult.SUCCESS;
-            }
-            else {
-                return ActionResult.PASS;
-            }
+            world.setBlockState(pos, state.with(GLASS_TYPE, Glass.NONE), 3);
+            return ActionResult.SUCCESS;
 
         }
         return ActionResult.CONSUME;
@@ -188,7 +133,7 @@ public class PlateBlock extends Block implements Waterloggable {
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(WATERLOGGED, FOOD_VALUE, FILLED_STATE, HAS_VEGGIES, HAS_MEAT, HAS_CARBS, POISON_VALUE, HUNGER_VALUE, NAUSEA_VALUE);
+        builder.add(WATERLOGGED, FACING, GLASS_TYPE);
     }
 
     @Override
@@ -197,7 +142,7 @@ public class PlateBlock extends Block implements Waterloggable {
         BlockPos blockPos;
         World worldAccess = ctx.getWorld();
         boolean bl = worldAccess.getFluidState(blockPos = ctx.getBlockPos()).getFluid() == Fluids.WATER;
-        return (BlockState)this.getDefaultState().with(WATERLOGGED, bl);
+        return (BlockState)this.getDefaultState().with(WATERLOGGED, bl).with(FACING, ctx.getHorizontalPlayerFacing());
     }
 
     @Override
@@ -207,6 +152,16 @@ public class PlateBlock extends Block implements Waterloggable {
         }
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
+
+
+    public BlockState rotate(BlockState state, BlockRotation rotation) {
+        return (BlockState)state.with(FACING, rotation.rotate((Direction)state.get(FACING)));
+    }
+
+    public BlockState mirror(BlockState state, BlockMirror mirror) {
+        return state.rotate(mirror.getRotation((Direction)state.get(FACING)));
+    }
+
     @Override
     public boolean tryFillWithFluid(WorldAccess world, BlockPos pos, BlockState state, FluidState fluidState) {
         if (!state.get(Properties.WATERLOGGED) && fluidState.getFluid() == Fluids.WATER) {
@@ -224,5 +179,49 @@ public class PlateBlock extends Block implements Waterloggable {
             return Fluids.WATER.getStill(false);
         }
         return super.getFluidState(state);
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+        return new PlateInventoryBlockEntity(pos, state);
+    }
+
+    @Override
+    public BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.MODEL;
+    }
+
+    @Override
+    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+        if (state.isOf(newState.getBlock())) {
+            return;
+        }
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        if (blockEntity instanceof Inventory) {
+            ItemScatterer.spawn(world, pos, (Inventory)((Object)blockEntity));
+            world.updateComparators(pos, this);
+        }
+        super.onStateReplaced(state, world, pos, newState, moved);
+    }
+
+    public enum Glass implements StringIdentifiable {
+        NONE("none"),
+        WINE("wine");
+
+        private final String name;
+
+        Glass(String name) {
+            this.name = name;
+        }
+
+        public String asString() {
+            return this.name;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
     }
 }

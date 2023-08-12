@@ -1,21 +1,15 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "group": "butterfly_elytron",
-  "pattern": [
-    "BBB",
-    "BEB",
-    "BBB"
-  ],
-  "key": {
-    "B": {
-      "item": "clutter:white_butterfly_in_a_bottle"
-    },
-    "E": {
-      "tag": "clutter:elytron"
-    }
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:white_dye"
+  },
+  "base": {
+    "tag": "clutter:elytron"
   },
   "result": {
-    "item": "clutter:white_butterfly_elytra",
-    "count": 1
+    "item": "clutter:white_butterfly_elytra"
+  },
+  "template": {
+    "item": "clutter:butterfly_elytra_smithing_template"
   }
 }

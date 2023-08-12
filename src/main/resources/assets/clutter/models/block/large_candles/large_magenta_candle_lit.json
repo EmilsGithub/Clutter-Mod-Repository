@@ -1,0 +1,7 @@
+{
+  "parent": "clutter:block/large_candles/large_candle_parent",
+  "textures": {
+    "0": "clutter:block/large_candles/large_magenta_candle_lit",
+    "particle": "clutter:block/large_candles/large_magenta_candle_lit"
+  }
+}

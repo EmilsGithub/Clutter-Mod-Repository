@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "clutter:onyx_block"
+  },
+  "result": "clutter:onyx_wall",
+  "count": 1
+}

@@ -1,0 +1,9 @@
+{
+  "asset_name": "onyx",
+  "ingredient": "clutter:onyx",
+  "item_model_index": 0.30208,
+  "description": {
+    "translate": "trim_materials.clutter.onyx",
+    "color": "#1D181A"
+  }
+}

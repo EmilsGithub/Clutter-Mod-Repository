@@ -19,6 +19,9 @@
       "model": "clutter:block/crops/hops_stage2"
     },
     "age=6": {
+      "model": "clutter:block/crops/hops_stage2"
+    },
+    "age=7": {
       "model": "clutter:block/crops/hops_stage3"
     }
   }

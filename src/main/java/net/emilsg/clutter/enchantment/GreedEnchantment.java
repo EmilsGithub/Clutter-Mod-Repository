@@ -1,5 +1,6 @@
 package net.emilsg.clutter.enchantment;
 
+import net.emilsg.clutter.config.ModConfigs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.enchantment.Enchantments;
@@ -34,6 +35,6 @@ public class GreedEnchantment extends Enchantment {
     }
 
     public boolean canAccept(Enchantment other) {
-        return super.canAccept(other) && other != Enchantments.LOOTING && other != Enchantments.FORTUNE && other != Enchantments.MENDING;
+        return !ModConfigs.GREED_WITH_LOOTING_AND_MENDING ? (super.canAccept(other) && other != Enchantments.LOOTING && other != Enchantments.FORTUNE && other != Enchantments.MENDING) : super.canAccept(other);
     }
 }

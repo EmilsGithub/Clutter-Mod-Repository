@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "clutter:block/onyx_ore"
+      },
+      {
+        "model": "clutter:block/onyx_ore2"
+      }
+    ]
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "large_chandeliers",
+  "pattern": [
+    "N N",
+    "IBI"
+  ],
+  "key": {
+    "N": {
+      "item": "minecraft:gold_nugget"
+    },
+    "I": {
+      "item": "minecraft:gold_ingot"
+    },
+    "B": {
+      "item": "minecraft:gold_block"
+    }
+  },
+  "result": {
+    "item": "clutter:large_golden_chandelier",
+    "count": 1
+  }
+}

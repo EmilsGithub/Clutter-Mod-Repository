@@ -57,4 +57,6 @@ public class BeerMugBlock extends HorizontalFacingBlock {
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return SHAPE;
     }
+
+
 }

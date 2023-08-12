@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "clutter:onyx_block",
+    "clutter:onyx_slab",
+    "clutter:onyx_stairs",
+    "clutter:onyx_wall",
+    "clutter:polished_onyx",
+    "clutter:polished_onyx_slab",
+    "clutter:polished_onyx_stairs",
+    "clutter:polished_onyx_wall"
+  ]
+}
