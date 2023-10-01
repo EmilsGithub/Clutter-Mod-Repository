@@ -4,6 +4,7 @@ import net.emilsg.clutter.entity.ModEntities;
 import net.emilsg.clutter.entity.custom.ButterflyEntity;
 import net.emilsg.clutter.entity.variants.ButterflyVariant;
 import net.emilsg.clutter.item.ModItems;
+import net.emilsg.clutter.util.ModProperties;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -34,8 +35,8 @@ import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.dimension.DimensionTypes;
 
 public class ButterflyCocoonBlock extends Block {
-    public static final BooleanProperty CAN_HATCH = BooleanProperty.of("can_hatch");
-    public static final IntProperty HATCH = IntProperty.of("hatch", 0, 3);
+    public static final BooleanProperty CAN_HATCH = ModProperties.CAN_HATCH;
+    public static final IntProperty HATCH = ModProperties.HATCH;
     private static final VoxelShape SHAPE = VoxelShapes.union(
       Block.createCuboidShape(7,15, 7,9,16,9),
       Block.createCuboidShape(6,10, 6,10,15,10),

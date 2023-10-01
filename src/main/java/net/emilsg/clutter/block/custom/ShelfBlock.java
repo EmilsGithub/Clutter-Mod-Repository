@@ -10,6 +10,7 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
@@ -147,6 +148,10 @@ public class ShelfBlock extends BlockWithEntity implements Waterloggable{
         @Override
         public boolean hasComparatorOutput(BlockState state) {
                 return true;
+        }
+
+        public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
+                return ScreenHandler.calculateComparatorOutput(world.getBlockEntity(pos));
         }
 
         @Override

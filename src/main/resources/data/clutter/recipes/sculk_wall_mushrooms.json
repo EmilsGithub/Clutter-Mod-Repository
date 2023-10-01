@@ -3,6 +3,9 @@
   "ingredients": [
     {
       "item": "clutter:sculk_mushroom"
+    },
+    {
+      "item": "clutter:sculk_mushroom"
     }
   ],
   "result": {

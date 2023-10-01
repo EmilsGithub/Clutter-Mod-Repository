@@ -7,6 +7,7 @@ public class ModConfigs {
     public static SimpleConfig CONFIG;
     private static ModConfigProvider configs;
 
+    public static boolean DISABLE_GREED_LOOT_GENERATON;
     public static boolean GREED_WITH_LOOTING_AND_MENDING;
     public static float GREED_CHANCE_PER_LEVEL;
     public static boolean COIN_DROPS_AND_LOOT_GEN;
@@ -41,6 +42,7 @@ public class ModConfigs {
     }
 
     private static void createConfigs() {
+        configs.addKeyValuePair(new Pair<>("disable.greed_loot_generation", false), "Disables the generation of Greed Books");
         configs.addKeyValuePair(new Pair<>("greed.with_looting_and_mending", false), "Greed compatible with Looting and Mending.");
         configs.addKeyValuePair(new Pair<>("greed.chance.per.level", 0.01f), "Coin drop chance per level of Greed.");
 
@@ -68,6 +70,7 @@ public class ModConfigs {
     }
 
     private static void assignConfigs() {
+        DISABLE_GREED_LOOT_GENERATON = CONFIG.getOrDefault("disable.greed_loot_generation", false);
         GREED_WITH_LOOTING_AND_MENDING = CONFIG.getOrDefault("greed.with_looting_and_mending", false);
         GREED_CHANCE_PER_LEVEL = (float) CONFIG.getOrDefault("greed.chance.per.level", 0.01f);
         COIN_DROPS_AND_LOOT_GEN = CONFIG.getOrDefault("coin.drops.and.loot.gen", true);

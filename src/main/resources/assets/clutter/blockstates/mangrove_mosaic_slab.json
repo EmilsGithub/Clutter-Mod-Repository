@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "clutter:block/mosaics/mangrove_mosaic_slab"
+    },
+    "type=double": {
+      "model": "clutter:block/mosaics/mangrove_mosaic"
+    },
+    "type=top": {
+      "model": "clutter:block/mosaics/mangrove_mosaic_slab_top"
+    }
+  }
+}

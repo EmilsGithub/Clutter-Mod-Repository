@@ -1,6 +1,7 @@
 package net.emilsg.clutter.block.custom;
 
 import net.emilsg.clutter.util.ModBlockTags;
+import net.emilsg.clutter.util.ModProperties;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -30,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
 public class ChandelierBlock extends WaterloggableLitBlock {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
     public static final BooleanProperty LIT = Properties.LIT;
-    public static final BooleanProperty ON_CHAIN = BooleanProperty.of("on_chain");
+    public static final BooleanProperty ON_CHAIN = ModProperties.ON_CHAIN;
 
     private static final VoxelShape BOTTOM_SHAPE = Block.createCuboidShape(1.5, 1.0, 1.0, 14.5, 8.0, 15.0);
     private static final VoxelShape CHAIN_SHAPE = Block.createCuboidShape(6.5, 1.0, 6.5, 9.5, 16.0, 9.5);

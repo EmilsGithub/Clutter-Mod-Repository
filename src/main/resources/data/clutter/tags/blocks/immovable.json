@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "clutter:budding_onyx",
     "clutter:onyx_block",
     "clutter:onyx_slab",
     "clutter:onyx_stairs",

@@ -6,6 +6,7 @@
     }
   ],
   "result": {
-    "item": "minecraft:brown_mushroom"
+    "item": "minecraft:brown_mushroom",
+    "count": 2
   }
 }

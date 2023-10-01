@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "clutter:block/onyx_cluster",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "clutter:block/onyx_cluster",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "clutter:block/onyx_cluster",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "clutter:block/onyx_cluster",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "clutter:block/onyx_cluster"
+    },
+    "facing=west": {
+      "model": "clutter:block/onyx_cluster",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

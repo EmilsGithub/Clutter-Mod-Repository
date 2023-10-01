@@ -1,0 +1,35 @@
+{
+  "variants":{
+    "lit=false,facing=north":{
+      "model":"clutter:block/brick_kiln"
+    },
+    "lit=false,facing=east":{
+      "model":"clutter:block/brick_kiln",
+      "y": 90
+    },
+    "lit=false,facing=south":{
+      "model":"clutter:block/brick_kiln",
+      "y": 180
+    },
+    "lit=false,facing=west":{
+      "model":"clutter:block/brick_kiln",
+      "y": 270
+    },
+
+    "lit=true,facing=north":{
+      "model":"clutter:block/brick_kiln_on"
+    },
+    "lit=true,facing=east":{
+      "model":"clutter:block/brick_kiln_on",
+      "y": 90
+    },
+    "lit=true,facing=south":{
+      "model":"clutter:block/brick_kiln_on",
+      "y": 180
+    },
+    "lit=true,facing=west":{
+      "model":"clutter:block/brick_kiln_on",
+      "y": 270
+    }
+  }
+}

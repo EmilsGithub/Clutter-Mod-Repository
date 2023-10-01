@@ -17,6 +17,7 @@ public class ModBlockTags {
     public static final TagKey<Block> SEATS = create("seats");
     public static final TagKey<Block> BUTTERFLY_VALID = create("butterfly_valid");
     public static final TagKey<Block> BASALT = create("basalt");
+    public static final TagKey<Block> GREEN_FIRE_BASE_BLOCKS = create("green_fire_base_blocks");
 
     private static TagKey<Block> create(String path) {
         return create(path, "clutter");

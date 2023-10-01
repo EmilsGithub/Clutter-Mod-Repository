@@ -8,7 +8,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -20,7 +19,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
@@ -32,6 +30,7 @@ import java.util.function.ToIntFunction;
 
 public class LampBlock extends Block implements Waterloggable {
     public static final BooleanProperty LIT = Properties.LIT;
+    public static final BooleanProperty POWERED = Properties.POWERED;
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 
     protected static final VoxelShape SHAPE = VoxelShapes.union(
@@ -42,7 +41,7 @@ public class LampBlock extends Block implements Waterloggable {
 
     public LampBlock(Settings settings) {
         super(settings);
-        this.setDefaultState(this.getDefaultState().with(LIT, false).with(WATERLOGGED, false));
+        this.setDefaultState(this.getDefaultState().with(LIT, false).with(WATERLOGGED, false).with(POWERED, false));
     }
 
     @Override
@@ -52,7 +51,7 @@ public class LampBlock extends Block implements Waterloggable {
 
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         state = state.cycle(LIT);
-        world.setBlockState(pos, state, 10);
+        world.setBlockState(pos, state, 2);
         playSound(state.get(LIT) ? SoundEvents.BLOCK_METAL_PRESSURE_PLATE_CLICK_OFF : SoundEvents.BLOCK_METAL_PRESSURE_PLATE_CLICK_ON, pos, world);
         return ActionResult.success(world.isClient);
     }
@@ -61,9 +60,27 @@ public class LampBlock extends Block implements Waterloggable {
         world.playSound(null, pos, soundEvent, SoundCategory.BLOCKS, 1.0f, 1.25f);
     }
 
+    public void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
+        if (!world.isClient) {
+            boolean isReceivingPower = world.isReceivingRedstonePower(pos);
+            if (isReceivingPower != (Boolean)state.get(POWERED)) {
+                if ((Boolean)state.get(LIT) != isReceivingPower) {
+                    state = (BlockState)state.with(LIT, isReceivingPower);
+                    playSound(state.get(LIT) ? SoundEvents.BLOCK_METAL_PRESSURE_PLATE_CLICK_OFF : SoundEvents.BLOCK_METAL_PRESSURE_PLATE_CLICK_ON, pos, world);
+                }
+
+                world.setBlockState(pos, (BlockState)state.with(POWERED, isReceivingPower), 2);
+                if ((Boolean)state.get(WATERLOGGED)) {
+                    world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+                }
+            }
+
+        }
+    }
+
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(LIT, WATERLOGGED);
+        builder.add(LIT, WATERLOGGED, POWERED);
     }
 
     public static ToIntFunction<BlockState> createLightLevelFromLitBlockState(int litLevel) {
@@ -85,26 +102,6 @@ public class LampBlock extends Block implements Waterloggable {
         World worldAccess = ctx.getWorld();
         boolean bl = worldAccess.getFluidState(blockPos = ctx.getBlockPos()).getFluid() == Fluids.WATER;
         return (BlockState)this.getDefaultState().with(WATERLOGGED, bl).with(LIT, ctx.getWorld().isReceivingRedstonePower(ctx.getBlockPos()));
-    }
-
-    public void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
-        if (!world.isClient) {
-            boolean bl = (Boolean)state.get(LIT);
-            if (bl != world.isReceivingRedstonePower(pos)) {
-                if (bl) {
-                    world.scheduleBlockTick(pos, this, 4);
-                } else {
-                    world.setBlockState(pos, (BlockState)state.cycle(LIT), 2);
-                }
-            }
-
-        }
-    }
-
-    public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if ((Boolean)state.get(LIT) && !world.isReceivingRedstonePower(pos)) {
-            world.setBlockState(pos, (BlockState)state.cycle(LIT), 2);
-        }
     }
 
     @Override

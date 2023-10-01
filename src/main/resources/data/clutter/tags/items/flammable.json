@@ -5,14 +5,6 @@
     "#clutter:armchairs",
     "#clutter:floor_seating",
 
-    "clutter:acacia_wall_bookshelf",
-    "clutter:birch_wall_bookshelf",
-    "clutter:dark_oak_wall_bookshelf",
-    "clutter:jungle_wall_bookshelf",
-    "clutter:mangrove_wall_bookshelf",
-    "clutter:oak_wall_bookshelf",
-    "clutter:spruce_wall_bookshelf",
-
     "clutter:acacia_table",
     "clutter:birch_table",
     "clutter:dark_oak_table",
@@ -20,6 +12,8 @@
     "clutter:mangrove_table",
     "clutter:oak_table",
     "clutter:spruce_table",
+    "clutter:cherry_table",
+    "clutter:bamboo_table",
 
     "clutter:stripped_acacia_table",
     "clutter:stripped_birch_table",
@@ -28,6 +22,7 @@
     "clutter:stripped_mangrove_table",
     "clutter:stripped_oak_table",
     "clutter:stripped_spruce_table",
+    "clutter:stripped_cherry_table",
 
     "clutter:acacia_bench",
     "clutter:birch_bench",
@@ -36,6 +31,9 @@
     "clutter:mangrove_bench",
     "clutter:oak_bench",
     "clutter:spruce_bench",
+    "clutter:spruce_bench",
+    "clutter:cherry_bench",
+    "clutter:bamboo_bench",
 
     "clutter:stripped_acacia_bench",
     "clutter:stripped_birch_bench",
@@ -44,6 +42,7 @@
     "clutter:stripped_mangrove_bench",
     "clutter:stripped_oak_bench",
     "clutter:stripped_spruce_bench",
+    "clutter:stripped_cherry_bench",
 
     "clutter:acacia_chair",
     "clutter:birch_chair",
@@ -52,6 +51,8 @@
     "clutter:mangrove_chair",
     "clutter:oak_chair",
     "clutter:spruce_chair",
+    "clutter:cherry_chair",
+    "clutter:bamboo_chair",
 
     "clutter:stripped_acacia_chair",
     "clutter:stripped_birch_chair",
@@ -60,6 +61,7 @@
     "clutter:stripped_mangrove_chair",
     "clutter:stripped_oak_chair",
     "clutter:stripped_spruce_chair",
+    "clutter:stripped_cherry_chair",
 
     "clutter:oak_window_sill",
     "clutter:dark_oak_window_sill",
@@ -68,6 +70,8 @@
     "clutter:acacia_window_sill",
     "clutter:spruce_window_sill",
     "clutter:birch_window_sill",
+    "clutter:cherry_window_sill",
+    "clutter:bamboo_window_sill",
 
     "clutter:acacia_trellis",
     "clutter:birch_trellis",
@@ -76,21 +80,7 @@
     "clutter:mangrove_trellis",
     "clutter:oak_trellis",
     "clutter:spruce_trellis",
-
-    "clutter:acacia_wall_cupboard",
-    "clutter:birch_wall_cupboard",
-    "clutter:dark_oak_wall_cupboard",
-    "clutter:jungle_wall_cupboard",
-    "clutter:mangrove_wall_cupboard",
-    "clutter:oak_wall_cupboard",
-    "clutter:spruce_wall_cupboard",
-
-    "clutter:acacia_cupboard",
-    "clutter:birch_cupboard",
-    "clutter:dark_oak_cupboard",
-    "clutter:jungle_cupboard",
-    "clutter:mangrove_cupboard",
-    "clutter:oak_cupboard",
-    "clutter:spruce_cupboard"
+    "clutter:cherry_trellis",
+    "clutter:bamboo_trellis"
   ]
 }

@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.entity;
 
+import net.emilsg.clutter.block.ModBlockEntities;
 import net.emilsg.clutter.block.custom.WallBookshelfBlock;
 import net.emilsg.clutter.util.ModScreenHandler;
 import net.minecraft.block.BlockState;
@@ -28,8 +29,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.stream.IntStream;
 
 public class WallBookshelfInventoryBlockEntity extends LootableContainerBlockEntity implements SidedInventory, Inventory {
-    private DefaultedList<ItemStack> inventory = DefaultedList.ofSize(9, ItemStack.EMPTY);
-    private static final int[] AVAILABLE_SLOTS = IntStream.range(0, 9).toArray();
+    private DefaultedList<ItemStack> inventory = DefaultedList.ofSize(5, ItemStack.EMPTY);
+    private static final int[] AVAILABLE_SLOTS = IntStream.range(0, 5).toArray();
 
     public WallBookshelfInventoryBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.WALL_BOOKSHELF, blockPos, blockState);
@@ -73,12 +74,12 @@ public class WallBookshelfInventoryBlockEntity extends LootableContainerBlockEnt
 
     @Override
     protected ScreenHandler createScreenHandler(int syncId, PlayerInventory playerInventory) {
-        return ModScreenHandler.createGeneric9x1(syncId, playerInventory, this);
+        return ModScreenHandler.createWallBookshelfScreen(syncId, playerInventory, this);
     }
 
     @Override
     public int size() {
-        return 9;
+        return 5;
     }
 
     private final ViewerCountManager stateManager = new ViewerCountManager(){

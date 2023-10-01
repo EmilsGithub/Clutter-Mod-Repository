@@ -12,6 +12,7 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -35,7 +36,6 @@ import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.function.ToIntFunction;
 
 public class WallBookshelfBlock extends BlockWithEntity implements Waterloggable{
         protected static final VoxelShape NORTH_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 12.0, 8.0);
@@ -195,10 +195,6 @@ public class WallBookshelfBlock extends BlockWithEntity implements Waterloggable
 
         }
 
-        public static ToIntFunction<BlockState> createLightLevelFromLitBlockState(int litLevel) {
-                return state -> state.get(LIT) ? litLevel : 0;
-        }
-
         public void appendTooltip(ItemStack stack, @Nullable BlockView world, List<Text> tooltip, TooltipContext context) {
                 tooltip.add(Text.translatable("block.clutter.cycle_blockstate_tooltip.tooltip").formatted(Formatting.BLUE));
                 super.appendTooltip(stack, world, tooltip, context);
@@ -259,7 +255,11 @@ public class WallBookshelfBlock extends BlockWithEntity implements Waterloggable
 
         @Override
         public boolean hasComparatorOutput(BlockState state) {
-                return false;
+                return true;
+        }
+
+        public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
+                return ScreenHandler.calculateComparatorOutput(world.getBlockEntity(pos));
         }
 
         @Override

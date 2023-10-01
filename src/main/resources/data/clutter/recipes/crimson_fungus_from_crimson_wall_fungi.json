@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "clutter:crimson_wall_fungi"
+    }
+  ],
+  "result": {
+    "item": "minecraft:crimson_wall_fungus",
+    "count": 2
+  }
+}

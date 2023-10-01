@@ -1,7 +1,8 @@
 package net.emilsg.clutter.block.custom;
 
 import net.emilsg.clutter.block.entity.ChimneyBlockEntity;
-import net.emilsg.clutter.block.entity.ModBlockEntities;
+import net.emilsg.clutter.block.ModBlockEntities;
+import net.emilsg.clutter.util.ModProperties;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -36,7 +37,7 @@ import java.util.List;
 
 public class ChimneyBlock extends BlockWithEntity implements FluidFillable, Waterloggable{
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
-    public static BooleanProperty OPEN = BooleanProperty.of("open");
+    public static BooleanProperty OPEN = ModProperties.OPEN;
     protected static final VoxelShape SHAPE = VoxelShapes.union(
             Block.createCuboidShape(2.0, 0.0, 2.0, 14.0, 13.0, 14.0),
             Block.createCuboidShape(1.0, 13.0, 1.0, 15.0, 16.0, 15.0)

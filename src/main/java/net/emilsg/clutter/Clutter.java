@@ -1,7 +1,7 @@
 package net.emilsg.clutter;
 
 import net.emilsg.clutter.block.ModBlocks;
-import net.emilsg.clutter.block.entity.ModBlockEntities;
+import net.emilsg.clutter.block.ModBlockEntities;
 import net.emilsg.clutter.config.ModConfigs;
 import net.emilsg.clutter.effect.ModEffects;
 import net.emilsg.clutter.enchantment.ModEnchantments;
@@ -9,6 +9,8 @@ import net.emilsg.clutter.entity.ClutterAttributes;
 import net.emilsg.clutter.item.ModItems;
 import net.emilsg.clutter.networking.ModMessages;
 import net.emilsg.clutter.potion.ModPotions;
+import net.emilsg.clutter.recipe.ModRecipeSerializers;
+import net.emilsg.clutter.recipe.ModRecipeTypes;
 import net.emilsg.clutter.util.ModCallbackRegistry;
 import net.emilsg.clutter.util.ModItemGroups;
 import net.emilsg.clutter.util.ModLootTableModifiers;
@@ -26,7 +28,6 @@ public class Clutter implements ModInitializer {
 	public static final boolean IS_TRINKETS_LOADED = FabricLoader.getInstance().getModContainer("trinkets").isPresent();
 	public static final boolean IS_SUPPLEMENTARIES_LOADED = FabricLoader.getInstance().getModContainer("supplementaries").isPresent();
 
-
 	@Override
 	public void onInitialize() {
 		ModConfigs.registerConfigs();
@@ -35,6 +36,10 @@ public class Clutter implements ModInitializer {
 		ModEffects.registerEffects();
 		ModItems.registerModItems();
 		ModBlocks.registerModBlocks();
+
+		ModRecipeTypes.registerRecipeTypes();
+		ModRecipeSerializers.registerRecipeSerializers();
+
 		ModEnchantments.registerModEnchantments();
 		ModLootTableModifiers.modifyLootTables();
 		ModBlockEntities.registerBlockEntities();
@@ -44,7 +49,7 @@ public class Clutter implements ModInitializer {
 		ModUtil.registerModUtil();
 
 		ModCallbackRegistry.handleSitting();
-		ModCallbackRegistry.handlePetsPets();
+		if (ModConfigs.PET_MOBS) ModCallbackRegistry.handlePetsPets();
 		if (!IS_SUPPLEMENTARIES_LOADED) ModCallbackRegistry.handlePlacingBooks();
 
 		ModPotions.registerPotionRecipes();

@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
+import net.emilsg.clutter.util.ModProperties;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.enums.DoubleBlockHalf;
@@ -30,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
 public class ShowerBlock extends HorizontalFacingBlock implements Waterloggable {
     public static final EnumProperty<DoubleBlockHalf> HALF = Properties.DOUBLE_BLOCK_HALF;
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
-    private static final BooleanProperty ON = BooleanProperty.of("on");
+    private static final BooleanProperty ON = ModProperties.ON;
 
     protected static final VoxelShape NORTH_TOP_SHAPE = VoxelShapes.union(
             Block.createCuboidShape(3, 9, 3, 13, 11, 13),

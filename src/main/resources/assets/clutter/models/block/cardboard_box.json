@@ -1,0 +1,23 @@
+{
+	"parent": "block/block",
+	"credit": "Made with Blockbench",
+	"texture_size": [32, 48],
+	"textures": {
+		"0": "clutter:block/cardboard_box",
+		"particle": "clutter:block/cardboard_box"
+	},
+	"elements": [
+		{
+			"from": [2, 0, 2],
+			"to": [14, 11, 14],
+			"faces": {
+				"north": {"uv": [6, 0, 12, 3.66667], "texture": "#0"},
+				"east": {"uv": [6, 3.66667, 12, 7.33333], "texture": "#0"},
+				"south": {"uv": [6, 7.33333, 12, 11], "texture": "#0"},
+				"west": {"uv": [0, 8, 6, 11.66667], "texture": "#0"},
+				"up": {"uv": [6, 4, 0, 0], "texture": "#0"},
+				"down": {"uv": [6, 4, 0, 8], "texture": "#0"}
+			}
+		}
+	]
+}

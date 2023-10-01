@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "axis=x": [
+      {
+      "model": "clutter:block/basalt_sulphur_ore",
+      "x": 90,
+      "y": 90
+      },
+      {
+        "model": "clutter:block/basalt_sulphur_ore2",
+        "x": 90,
+        "y": 90
+      }
+    ],
+    "axis=y": [
+      {
+      "model": "clutter:block/basalt_sulphur_ore"
+      },
+      {
+        "model": "clutter:block/basalt_sulphur_ore2"
+      }
+    ],
+    "axis=z": [
+      {
+      "model": "clutter:block/basalt_sulphur_ore",
+      "x": 90
+      },
+      {
+        "model": "clutter:block/basalt_sulphur_ore2",
+        "x": 90
+      }
+    ]
+  }
+}

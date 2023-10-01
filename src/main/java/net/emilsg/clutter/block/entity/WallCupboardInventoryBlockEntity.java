@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.entity;
 
+import net.emilsg.clutter.block.ModBlockEntities;
 import net.emilsg.clutter.block.custom.WallCupboardBlock;
 import net.emilsg.clutter.util.ModScreenHandler;
 import net.minecraft.block.Block;

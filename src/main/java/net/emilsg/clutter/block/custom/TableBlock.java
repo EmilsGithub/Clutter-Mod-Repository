@@ -2,6 +2,7 @@ package net.emilsg.clutter.block.custom;
 
 import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.util.ModBlockTags;
+import net.emilsg.clutter.util.ModProperties;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
@@ -35,7 +36,7 @@ import org.jetbrains.annotations.Nullable;
 public class TableBlock extends Block implements Waterloggable {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
     public static final EnumProperty<LegPosition> LEG_POSITIONS = EnumProperty.of("leg_positions", LegPosition.class);
-    public static final BooleanProperty LEGS = BooleanProperty.of("legs");
+    public static final BooleanProperty LEGS = ModProperties.LEGS;
 
     public TableBlock(Settings settings) {
         super(settings);

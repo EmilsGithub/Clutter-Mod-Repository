@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
+import net.emilsg.clutter.util.ModProperties;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalFacingBlock;
@@ -24,7 +25,7 @@ public class BreadBlock extends HorizontalFacingBlock {
     private final int food;
     private final float saturation;
 
-    public static final IntProperty SLICES = IntProperty.of("slices", 1, 7);
+    public static final IntProperty SLICES = ModProperties.SLICES;
 
     public BreadBlock(Settings settings, int food, float saturation) {
         super(settings);

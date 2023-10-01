@@ -5,8 +5,11 @@ import net.emilsg.clutter.config.ModConfigs;
 import net.emilsg.clutter.enchantment.ModEnchantments;
 import net.emilsg.clutter.item.ModItems;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Items;
 import net.minecraft.loot.LootPool;
+import net.minecraft.loot.condition.DamageSourcePropertiesLootCondition;
 import net.minecraft.loot.condition.InvertedLootCondition;
 import net.minecraft.loot.condition.MatchToolLootCondition;
 import net.minecraft.loot.condition.RandomChanceLootCondition;
@@ -15,11 +18,19 @@ import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.function.EnchantRandomlyLootFunction;
 import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
+import net.minecraft.loot.provider.number.UniformLootNumberProvider;
+import net.minecraft.predicate.NumberRange;
+import net.minecraft.predicate.TagPredicate;
+import net.minecraft.predicate.entity.DamageSourcePredicate;
+import net.minecraft.predicate.item.EnchantmentPredicate;
 import net.minecraft.predicate.item.ItemPredicate;
+import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.util.Identifier;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ModLootTableModifiers {
 
@@ -45,6 +56,7 @@ public class ModLootTableModifiers {
     private static final Identifier SIMPLE_DUNGEON_ID = new Identifier("minecraft", "chests/simple_dungeon");
     private static final Identifier WOODLAND_MANSION_ID = new Identifier("minecraft", "chests/woodland_mansion");
 
+    private static final Identifier BLAZE_ID = new Identifier("minecraft", "entities/blaze");
     private static final Identifier PIGLIN_BRUTE_ID = new Identifier("minecraft", "entities/piglin_brute");
     private static final Identifier ELDER_GUARDIAN_ID = new Identifier("minecraft", "entities/elder_guardian");
     private static final Identifier WITHER_ID = new Identifier("minecraft", "entities/wither");
@@ -65,6 +77,9 @@ public class ModLootTableModifiers {
     );
 
     public static void modifyLootTables() {
+        Map<Enchantment, Integer> enchantmentMap = new HashMap<>();
+        enchantmentMap.put(Enchantments.SILK_TOUCH, 1);
+
         LootTableEvents.MODIFY.register(((resourceManager, lootManager, id, tableBuilder, source) -> {
 
             if (id.equals(FERN_ID)) {
@@ -82,14 +97,16 @@ public class ModLootTableModifiers {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(2))
                         .conditionally(InvertedLootCondition.builder(MatchToolLootCondition.builder(ItemPredicate.Builder.create().items(Items.SHEARS))).build())
-                        .with(ItemEntry.builder(ModItems.CHERRIES).conditionally(RandomChanceLootCondition.builder(0.2f)))
+                        .conditionally(InvertedLootCondition.builder(MatchToolLootCondition.builder(ItemPredicate.Builder.create().enchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, NumberRange.IntRange.atLeast(1))))).build())
+                        .with(ItemEntry.builder(ModItems.CHERRIES).conditionally(RandomChanceLootCondition.builder(0.075f)))
                         .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1.0f)).build());
                 tableBuilder.pool(poolBuilder.build());
             }
 
             if (id.equals(SNIFFER_DIGGING_ID)) {
                 tableBuilder.modifyPools(builder -> {
-                    builder.with(AlternativeEntry.builder(ItemEntry.builder(ModItems.THORNBLOOM_SEEDS))).with(AlternativeEntry.builder(ItemEntry.builder(ModItems.KIWI_SEEDS)));
+                    builder.with(AlternativeEntry.builder(ItemEntry.builder(ModItems.THORNBLOOM_SEEDS)))
+                            .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.KIWI_SEEDS)));
                 });
             }
 
@@ -114,7 +131,7 @@ public class ModLootTableModifiers {
                 }
             }
 
-            if (id.equals(END_CITY_TREASURE_ID)) {
+            if (id.equals(END_CITY_TREASURE_ID) && !ModConfigs.DISABLE_GREED_LOOT_GENERATON) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .with(ItemEntry.builder(Items.BOOK).conditionally(RandomChanceLootCondition.builder(0.25f))).apply(EnchantRandomlyLootFunction.create().add(ModEnchantments.GREED))
@@ -141,6 +158,15 @@ public class ModLootTableModifiers {
                 tableBuilder.pool(poolBuilder.build());
             }
         }
+
+            if(id.equals(BLAZE_ID)) {
+                LootPool.Builder poolBuilder = LootPool.builder()
+                        .rolls(ConstantLootNumberProvider.create(1))
+                        .with(ItemEntry.builder(ModItems.SULPHUR))
+                        .conditionally(DamageSourcePropertiesLootCondition.builder(new DamageSourcePredicate.Builder().tag(TagPredicate.expected(DamageTypeTags.IS_DROWNING))).build())
+                        .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 3.0f)).build());
+                tableBuilder.pool(poolBuilder.build());
+            }
 
             if(id.equals(ENDER_DRAGON_ID)) {
                 LootPool.Builder poolBuilder = LootPool.builder()

@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
+import net.emilsg.clutter.util.ModProperties;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalFacingBlock;
@@ -21,7 +22,7 @@ import net.minecraft.world.WorldView;
 
 public class TallBottleBlock extends HorizontalFacingBlock {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
-    public static final IntProperty BOTTLES = IntProperty.of("bottles", 0, 2);
+    public static final IntProperty BOTTLES = ModProperties.BOTTLES;
 
     protected static final VoxelShape SINGLE_SHAPE = VoxelShapes.union(
             Block.createCuboidShape(6, 0, 6, 10, 9, 10),

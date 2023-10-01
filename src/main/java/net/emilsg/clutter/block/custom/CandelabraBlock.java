@@ -26,7 +26,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class CandelabraBlock extends WaterloggableLitBlock {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
-    public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
+    public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
     private static final BooleanProperty LIT = Properties.LIT;
 
     protected static final VoxelShape NORTH_SHAPE = VoxelShapes.union(

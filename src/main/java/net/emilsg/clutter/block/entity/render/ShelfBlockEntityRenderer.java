@@ -58,9 +58,9 @@ public class ShelfBlockEntityRenderer implements BlockEntityRenderer<ShelfInvent
             }
 
             switch(direction) {
-                case EAST -> itemRot = 91;
+                case EAST -> itemRot = 271;
                 case SOUTH -> itemRot = 181;
-                case WEST -> itemRot= 271;
+                case WEST -> itemRot= 91;
             }
 
 

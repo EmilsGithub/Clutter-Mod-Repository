@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
+import net.emilsg.clutter.util.ModProperties;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalFacingBlock;
@@ -27,7 +28,7 @@ import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
 public class SmallTargetBlock extends HorizontalFacingBlock {
-    public static final BooleanProperty UP = BooleanProperty.of("up");
+    public static final BooleanProperty UP = ModProperties.UP;
 
     public static final VoxelShape WEST_SHAPE = VoxelShapes.union(
             Block.createCuboidShape(0, 14, 0, 2, 16, 16),

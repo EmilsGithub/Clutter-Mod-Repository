@@ -8,6 +8,7 @@ import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.structure.rule.BlockMatchRuleTest;
 import net.minecraft.structure.rule.RuleTest;
 import net.minecraft.structure.rule.TagMatchRuleTest;
 import net.minecraft.util.Identifier;
@@ -29,16 +30,21 @@ public class ModConfiguredFeatures {
 
     public static final RegistryKey<ConfiguredFeature<?, ?>> ONYX_GEODE_KEY = registerKey("onyx_geode");
 
+    public static final RegistryKey<ConfiguredFeature<?,?>> BLACKSTONE_SULPHUR_ORE_KEY = registerKey("blackstone_sulphur_ore");
+    public static final RegistryKey<ConfiguredFeature<?,?>> BASALT_SULPHUR_ORE_KEY = registerKey("basalt_sulphur_ore");
+
     public static final RegistryKey<ConfiguredFeature<?,?>> CATTAILS_KEY = registerKey("cattails");
     public static final RegistryKey<ConfiguredFeature<?,?>> LUSH_MOSS_KEY = registerKey("lush_moss");
+    public static final RegistryKey<ConfiguredFeature<?,?>> SCULK_MUSHROOM_KEY = registerKey("sculk_mushroom");
     public static final RegistryKey<ConfiguredFeature<?,?>> GIANT_LILY_PAD_SEEDLING_KEY = registerKey("giant_lily_pad_seedling");
     public static final RegistryKey<ConfiguredFeature<?,?>> SMALL_LILY_PADS_KEY = registerKey("small_lily_pads");
 
     public static final RegistryKey<ConfiguredFeature<?,?>> KIWI_TREE_KEY = registerKey("kiwi_tree");
 
 
-
     public static void bootstrap(Registerable<ConfiguredFeature<?, ?>> context) {
+        RuleTest blackstoneReplaceables = new BlockMatchRuleTest(Blocks.BLACKSTONE);
+        RuleTest basaltReplaceables = new BlockMatchRuleTest(Blocks.BASALT);
         RuleTest stoneReplaceables = new TagMatchRuleTest(BlockTags.STONE_ORE_REPLACEABLES);
         RuleTest deepslateReplaceables = new TagMatchRuleTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
 
@@ -54,24 +60,27 @@ public class ModConfiguredFeatures {
                 List.of(OreFeatureConfig.createTarget(stoneReplaceables, ModBlocks.SILVER_ORE.getDefaultState()),
                         OreFeatureConfig.createTarget(deepslateReplaceables, ModBlocks.DEEPSLATE_SILVER_ORE.getDefaultState()));
 
+        List<OreFeatureConfig.Target> netherBlackstoneSulphur = List.of(OreFeatureConfig.createTarget(blackstoneReplaceables, ModBlocks.BLACKSTONE_SULPHUR_ORE.getDefaultState()));
+        List<OreFeatureConfig.Target> netherBasaltSulphur = List.of(OreFeatureConfig.createTarget(basaltReplaceables, ModBlocks.BASALT_SULPHUR_ORE.getDefaultState()));
+
         register(context, SILVER_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldSilverOres, 8));
 
-        register(context, ONYX_GEODE_KEY, Feature.GEODE,
-                new GeodeFeatureConfig(new GeodeLayerConfig(
-                        BlockStateProvider.of(Blocks.AIR),
-                        new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(ModBlocks.ONYX_ORE.getDefaultState(), 1).add(ModBlocks.SULPHUR_BLOCK.getDefaultState(), 5).build()),
-                        new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(ModBlocks.ONYX_ORE.getDefaultState(), 2).add(ModBlocks.SULPHUR_BLOCK.getDefaultState(), 5).build()),
-                        BlockStateProvider.of(Blocks.BLACKSTONE),
-                        BlockStateProvider.of(Blocks.SMOOTH_BASALT),
-                        List.of(ModBlocks.ONYX_ORE.getDefaultState()),
-                        BlockTags.FEATURES_CANNOT_REPLACE,
-                        BlockTags.GEODE_INVALID_BLOCKS),
-                        new GeodeLayerThicknessConfig(0.75D, 1.1D, 1.5D, 2.75D),
-                        new GeodeCrackConfig(0.65D, 1.5D, 2),
-                        0.4D, 0.080D, true,
-                        UniformIntProvider.create(4, 6), UniformIntProvider.create(3, 4), UniformIntProvider.create(1, 2),
-                        -14, 14, 0.04D, 1));
+        register(context, BLACKSTONE_SULPHUR_ORE_KEY, Feature.ORE, new OreFeatureConfig(netherBlackstoneSulphur, 12));
+        register(context, BASALT_SULPHUR_ORE_KEY, Feature.ORE, new OreFeatureConfig(netherBasaltSulphur, 20, 0.5f));
 
+
+
+                register(context, ONYX_GEODE_KEY, Feature.GEODE,
+                        new GeodeFeatureConfig(new GeodeLayerConfig(BlockStateProvider.of(Blocks.AIR),
+                                BlockStateProvider.of(ModBlocks.ONYX_BLOCK), BlockStateProvider.of(ModBlocks.BUDDING_ONYX),
+                                new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(ModBlocks.ONYX_ORE.getDefaultState(), 2).add(ModBlocks.SULPHUR_BLOCK.getDefaultState(), 5).build()), BlockStateProvider.of(Blocks.SMOOTH_BASALT),
+                                List.of(ModBlocks.SMALL_ONYX_BUD.getDefaultState(), ModBlocks.MEDIUM_ONYX_BUD.getDefaultState(), ModBlocks.LARGE_ONYX_BUD.getDefaultState(), ModBlocks.ONYX_CLUSTER.getDefaultState()),
+                                BlockTags.FEATURES_CANNOT_REPLACE, BlockTags.GEODE_INVALID_BLOCKS),
+                                new GeodeLayerThicknessConfig(0.75D, 1.1D, 1.5D, 2.75D),
+                                new GeodeCrackConfig(0.65D, 1.5D, 2),
+                                0.4D, 0.080D, true,
+                                UniformIntProvider.create(4, 6), UniformIntProvider.create(3, 4), UniformIntProvider.create(1, 2),
+                                -14, 14, 0.04D, 1));
 
         register(context, CATTAILS_KEY, Feature.FLOWER,
                 ConfiguredFeatures.createRandomPatchFeatureConfig(24, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK,
@@ -81,6 +90,11 @@ public class ModConfiguredFeatures {
                 ConfiguredFeatures.createRandomPatchFeatureConfig(48, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK,
                         new SimpleBlockFeatureConfig(BlockStateProvider.of(ModBlocks.LUSH_MOSS)))));
 
+
+        register(context, SCULK_MUSHROOM_KEY, Feature.FLOWER,
+                ConfiguredFeatures.createRandomPatchFeatureConfig(24, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK,
+                        new SimpleBlockFeatureConfig(BlockStateProvider.of(ModBlocks.SCULK_MUSHROOM)))));
+
         register(context, GIANT_LILY_PAD_SEEDLING_KEY, Feature.FLOWER,
                 ConfiguredFeatures.createRandomPatchFeatureConfig(8, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK,
                         new SimpleBlockFeatureConfig(BlockStateProvider.of(ModBlocks.GIANT_LILY_PAD_SEEDLING)))));
@@ -88,6 +102,7 @@ public class ModConfiguredFeatures {
         register(context, SMALL_LILY_PADS_KEY, Feature.FLOWER,
                 ConfiguredFeatures.createRandomPatchFeatureConfig(8, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK,
                         new SimpleBlockFeatureConfig(BlockStateProvider.of(ModBlocks.SMALL_LILY_PADS)))));
+
     }
 
     public static RegistryKey<ConfiguredFeature<?, ?>> registerKey(String name) {

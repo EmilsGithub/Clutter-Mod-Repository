@@ -2,7 +2,7 @@ package net.emilsg.clutter.block.custom;
 
 import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.block.entity.BonfireBlockEntity;
-import net.emilsg.clutter.block.entity.ModBlockEntities;
+import net.emilsg.clutter.block.ModBlockEntities;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;

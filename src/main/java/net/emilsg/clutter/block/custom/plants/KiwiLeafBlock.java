@@ -14,6 +14,7 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -24,7 +25,7 @@ import net.minecraft.world.WorldView;
 import net.minecraft.world.event.GameEvent;
 
 public class KiwiLeafBlock extends LeavesBlock implements Fertilizable {
-    public static final IntProperty AGE = IntProperty.of("age", 0, 3);
+    public static final IntProperty AGE = Properties.AGE_3;
 
     public KiwiLeafBlock(Settings settings) {
         super(settings);

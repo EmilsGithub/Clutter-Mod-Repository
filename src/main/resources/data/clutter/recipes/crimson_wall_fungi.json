@@ -2,10 +2,13 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "minecraft:warped_fungus"
+      "item": "minecraft:crimson_fungus"
+    },
+    {
+      "item": "minecraft:crimson_fungus"
     }
   ],
   "result": {
-    "item": "clutter:warped_wall_fungi"
+    "item": "clutter:crimson_wall_fungi"
   }
 }

@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom.plants;
 
+import net.emilsg.clutter.util.ModProperties;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -26,7 +27,7 @@ import java.util.Map;
 
 public class GiantLilyPadBlock extends LilyPadBlock implements Fertilizable {
     public static final EnumProperty<GiantLilyPadBlock.LilyPadDirections> LILY_PAD_DIRECTIONS = EnumProperty.of("lily_pad_directions", GiantLilyPadBlock.LilyPadDirections.class);
-    public static final BooleanProperty FLOWERING = BooleanProperty.of("flowering");
+    public static final BooleanProperty FLOWERING = ModProperties.FLOWERING;
 
     protected static final VoxelShape NORTH_WEST_SHAPE = Block.createCuboidShape(1.0, 0.0, 1.0, 16.0, 1.5, 16.0);
     protected static final VoxelShape NORTH_EAST_SHAPE = Block.createCuboidShape(0.0, 0.0, 1.0, 15.0, 1.5, 16.0);

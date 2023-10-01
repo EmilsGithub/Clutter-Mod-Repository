@@ -32,8 +32,6 @@ public class GrassBlockMixin {
                     world.setBlockState(plantPos.up(), ModBlocks.CATTAILS.getDefaultState().withIfExists(HALF, DoubleBlockHalf.UPPER), 3);
                 }
             }
-
-
         }
     }
 }

@@ -65,7 +65,7 @@ public class ModCallbackRegistry {
 
     public static void handlePetsPets() {
         UseEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
-            if (ModConfigs.PET_MOBS && (entity instanceof PassiveEntity || (entity instanceof HostileEntity && ((HostileEntity) entity).isBaby())) && player.getStackInHand(hand).isEmpty() && player.isSneaking()) {
+            if (ModConfigs.PET_MOBS && (entity instanceof PassiveEntity || (entity instanceof HostileEntity && ((HostileEntity) entity).isBaby()) || entity instanceof PlayerEntity) && player.getStackInHand(hand).isEmpty() && player.isSneaking()) {
                 Random random = new Random();
 
                 if(entity instanceof PassiveEntity && ((PassiveEntity) entity).getHealth() <= ((PassiveEntity) entity).getMaxHealth() && random.nextInt(10) == 0) {
@@ -96,7 +96,7 @@ public class ModCallbackRegistry {
             Direction side = hitResult.getSide();
             BlockState stateSide = world.getBlockState(hitResult.getBlockPos().offset(side));
             BlockPos blockPosSide = hitResult.getBlockPos().offset(side);
-            if (world.isClient || !world.canPlayerModifyAt(player, blockPos) || !player.getStackInHand(hand).isOf(Items.BOOK)) {
+            if (world.isClient || !world.canPlayerModifyAt(player, blockPos) || !player.getStackInHand(hand).isOf(Items.BOOK) || !player.isSneaking()) {
                 return ActionResult.PASS;
             }
             if (player.getStackInHand(hand).isOf(Items.BOOK)) {
@@ -128,8 +128,6 @@ public class ModCallbackRegistry {
             return ActionResult.PASS;
         });
     }
-
-
 
     private static ActionResult spawnSeat(World world, PlayerEntity player, BlockState state, BlockPos blockPos, double yOffset, Vec3d comparePos) {
         SeatEntity seatEntity = ModEntities.SEAT.create(world);

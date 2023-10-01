@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.entity;
 
+import net.emilsg.clutter.block.ModBlockEntities;
 import net.emilsg.clutter.networking.ModMessages;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;

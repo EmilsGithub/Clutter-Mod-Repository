@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
+import net.emilsg.clutter.util.ModProperties;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalFacingBlock;
@@ -13,7 +14,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 
 public class BookPileBlock extends HorizontalFacingBlock {
-    public static final IntProperty LAYERS = IntProperty.of("layers", 0, 7);
+    public static final IntProperty LAYERS = ModProperties.LAYERS;
 
     public BookPileBlock(Settings settings) {
         super(settings);

@@ -3,6 +3,56 @@
   "config": {
     "blocks": {
       "alternate_inner_layer_provider": {
+        "type": "minecraft:simple_state_provider",
+        "state": {
+          "Name": "clutter:budding_onyx"
+        }
+      },
+      "cannot_replace": "#minecraft:features_cannot_replace",
+      "filling_provider": {
+        "type": "minecraft:simple_state_provider",
+        "state": {
+          "Name": "minecraft:air"
+        }
+      },
+      "inner_layer_provider": {
+        "type": "minecraft:simple_state_provider",
+        "state": {
+          "Name": "clutter:onyx_block"
+        }
+      },
+      "inner_placements": [
+        {
+          "Name": "clutter:small_onyx_bud",
+          "Properties": {
+            "facing": "up",
+            "waterlogged": "false"
+          }
+        },
+        {
+          "Name": "clutter:medium_onyx_bud",
+          "Properties": {
+            "facing": "up",
+            "waterlogged": "false"
+          }
+        },
+        {
+          "Name": "clutter:large_onyx_bud",
+          "Properties": {
+            "facing": "up",
+            "waterlogged": "false"
+          }
+        },
+        {
+          "Name": "clutter:onyx_cluster",
+          "Properties": {
+            "facing": "up",
+            "waterlogged": "false"
+          }
+        }
+      ],
+      "invalid_blocks": "#minecraft:geode_invalid_blocks",
+      "middle_layer_provider": {
         "type": "minecraft:weighted_state_provider",
         "entries": [
           {
@@ -18,42 +68,6 @@
             "weight": 5
           }
         ]
-      },
-      "cannot_replace": "#minecraft:features_cannot_replace",
-      "filling_provider": {
-        "type": "minecraft:simple_state_provider",
-        "state": {
-          "Name": "minecraft:air"
-        }
-      },
-      "inner_layer_provider": {
-        "type": "minecraft:weighted_state_provider",
-        "entries": [
-          {
-            "data": {
-              "Name": "clutter:onyx_ore"
-            },
-            "weight": 1
-          },
-          {
-            "data": {
-              "Name": "clutter:sulphur_block"
-            },
-            "weight": 5
-          }
-        ]
-      },
-      "inner_placements": [
-        {
-          "Name": "clutter:onyx_ore"
-        }
-      ],
-      "invalid_blocks": "#minecraft:geode_invalid_blocks",
-      "middle_layer_provider": {
-        "type": "minecraft:simple_state_provider",
-        "state": {
-          "Name": "minecraft:blackstone"
-        }
       },
       "outer_layer_provider": {
         "type": "minecraft:simple_state_provider",

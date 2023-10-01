@@ -1,0 +1,8 @@
+{
+  "parent": "block/inner_stairs",
+  "textures": {
+    "bottom": "clutter:block/birch_mosaic",
+    "side": "clutter:block/birch_mosaic",
+    "top": "clutter:block/birch_mosaic"
+  }
+}

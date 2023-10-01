@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "clutter:block/blackstone_sulphur_ore_top",
+    "side": "clutter:block/blackstone_sulphur_ore_side"
+  }
+}

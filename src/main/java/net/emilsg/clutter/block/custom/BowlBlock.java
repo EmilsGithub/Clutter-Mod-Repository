@@ -1,6 +1,7 @@
 package net.emilsg.clutter.block.custom;
 
 import net.emilsg.clutter.util.ModItemTags;
+import net.emilsg.clutter.util.ModProperties;
 import net.minecraft.block.*;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -39,7 +40,7 @@ public class BowlBlock extends Block implements Waterloggable {
     public static final int MAX_MODEL = 5;
     public static IntProperty CURRENT_MODEL = IntProperty.of("current_model", 0, MAX_MODEL);
     public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
-    public static final BooleanProperty FILLED = BooleanProperty.of("filled");
+    public static final BooleanProperty FILLED = ModProperties.FILLED;
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 
     public BowlBlock(Settings settings) {

@@ -7,6 +7,7 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
@@ -17,7 +18,7 @@ import static net.emilsg.clutter.block.custom.plants.GiantLilyPadBlock.FLOWERING
 import static net.emilsg.clutter.block.custom.plants.GiantLilyPadBlock.LILY_PAD_DIRECTIONS;
 
 public class GiantLilyPadSeedlingBlock extends LilyPadBlock implements Fertilizable {
-    public static final IntProperty AGE = IntProperty.of("age", 0, 3);
+    public static final IntProperty AGE = Properties.AGE_3;
 
     public GiantLilyPadSeedlingBlock(Settings settings) {
         super(settings);

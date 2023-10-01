@@ -1,13 +1,17 @@
 package net.emilsg.clutter;
 
 import io.netty.buffer.Unpooled;
-import net.emilsg.clutter.block.entity.ModBlockEntities;
+import net.emilsg.clutter.block.ModBlockEntities;
 import net.emilsg.clutter.block.entity.render.PlateBlockEntityRenderer;
 import net.emilsg.clutter.block.entity.render.ShelfBlockEntityRenderer;
 import net.emilsg.clutter.compat.trinkets.TrinketsIntegration;
 import net.emilsg.clutter.entity.ModEntities;
 import net.emilsg.clutter.entity.client.*;
 import net.emilsg.clutter.networking.ModMessages;
+import net.emilsg.clutter.screen.CardboardBoxScreen;
+import net.emilsg.clutter.screen.ModScreenHandlers;
+import net.emilsg.clutter.screen.BrickKilnScreen;
+import net.emilsg.clutter.screen.WallBookshelfScreen;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
@@ -18,6 +22,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.color.world.FoliageColors;
+import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.network.PacketByteBuf;
@@ -38,6 +43,7 @@ public class ClutterClient implements ClientModInitializer {
         registerColorProviders();
         registerEntityRenderers();
         registerBlockEntityRenderers();
+        registerScreenHandlers();
 
         List<Block> blocksToRender = Arrays.asList(
                 FOOD_BOX,
@@ -423,7 +429,14 @@ public class ClutterClient implements ClientModInitializer {
                 GIANT_LILY_PAD_SEEDLING,
                 SMALL_LILY_PADS,
                 WINE_GLASS,
-                PLATE
+                PLATE,
+                SMALL_ONYX_BUD,
+                MEDIUM_ONYX_BUD,
+                LARGE_ONYX_BUD,
+                ONYX_CLUSTER,
+                GREEN_FIRE,
+                GLOWLILY_CROP,
+                GLOWLILY
         );
 
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), blocksToRender.toArray(new Block[0]));
@@ -486,5 +499,11 @@ public class ClutterClient implements ClientModInitializer {
     private void registerBlockEntityRenderers() {
         BlockEntityRendererFactories.register(ModBlockEntities.SHELF, ShelfBlockEntityRenderer::new);
         BlockEntityRendererFactories.register(ModBlockEntities.PLATE, PlateBlockEntityRenderer::new);
+    }
+
+    private void registerScreenHandlers() {
+        HandledScreens.register(ModScreenHandlers.BRICK_KILN_SCREEN_HANDLER, BrickKilnScreen::new);
+        HandledScreens.register(ModScreenHandlers.CARDBOARD_BOX_SCREEN_HANDLER, CardboardBoxScreen::new);
+        HandledScreens.register(ModScreenHandlers.WALL_BOOKSHELF_SCREEN_HANDLER, WallBookshelfScreen::new);
     }
 }

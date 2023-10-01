@@ -2,6 +2,7 @@ package net.emilsg.clutter.block.custom.coins;
 
 import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.sound.ModSounds;
+import net.emilsg.clutter.util.ModProperties;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
@@ -25,7 +26,7 @@ import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
 
 public class CopperCoinStackBlock extends Block implements Waterloggable {
-    public static final IntProperty COIN_LAYERS = IntProperty.of("coin_layers", 1, 8);
+    public static final IntProperty COIN_LAYERS = ModProperties.COIN_LAYERS;
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 
     public CopperCoinStackBlock(Settings settings) {

@@ -27,7 +27,12 @@ public class ModItems {
     public static final Item RAW_SILVER = registerItem("raw_silver", new Item(new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
     public static final Item ONYX = registerItem("onyx", new Item(new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
     public static final Item RAW_ONYX = registerItem("raw_onyx", new Item(new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
-    public static final Item SULPHUR = registerItem("sulphur", new Item(new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item SULPHUR = registerItem("sulphur", new SulphurItem(new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
+
+    public static final Item SILVER_HELMET = registerItem("silver_helmet", new ArmorItem(ModArmorMaterials.SILVER, ArmorItem.Type.HELMET, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item SILVER_CHESTPLATE = registerItem("silver_chestplate", new ArmorItem(ModArmorMaterials.SILVER, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item SILVER_LEGGINGS = registerItem("silver_leggings", new ArmorItem(ModArmorMaterials.SILVER, ArmorItem.Type.LEGGINGS, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item SILVER_BOOTS = registerItem("silver_boots", new ArmorItem(ModArmorMaterials.SILVER, ArmorItem.Type.BOOTS, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
 
     public static final Item HOPS = registerItem("hops", new Item(new FabricItemSettings().food(new FoodComponent.Builder().hunger(1).saturationModifier(0).build())), ModItemGroups.CLUTTER_ITEMS);
     public static final Item HOPS_SEEDS = registerItem("hops_seeds", new AliasedBlockItem(ModBlocks.HOPS_CROP, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
@@ -35,6 +40,7 @@ public class ModItems {
     public static final Item COTTON_SEEDS = registerItem("cotton_seeds", new AliasedBlockItem(ModBlocks.COTTON_CROP, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
     public static final Item THORNBLOOM_SEEDS = registerItem("thornbloom_seeds", new AliasedBlockItem(ModBlocks.THORNBLOOM_CROP, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
     public static final Item KIWI_SEEDS = registerItem("kiwi_seeds", new AliasedBlockItem(ModBlocks.KIWI_CROP, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item GLOWLILY_SEEDLING = registerItem("glowlily_seedling", new AliasedBlockItem(ModBlocks.GLOWLILY_CROP, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
 
     public static final Item RAW_CHORUS_ECHOFIN = registerItem("raw_chorus_echofin", new RandomTeleportItem(new FabricItemSettings().food(new FoodComponent.Builder().hunger(3).saturationModifier(0.1f).meat().alwaysEdible().build()), 200, 10, 48), ModItemGroups.CLUTTER_ITEMS);
     public static final Item COOKED_CHORUS_ECHOFIN = registerItem("cooked_chorus_echofin", new RandomTeleportItem(new FabricItemSettings().food(new FoodComponent.Builder().hunger(6).saturationModifier(0.2f).meat().alwaysEdible().build()), 150, 20, 96), ModItemGroups.CLUTTER_ITEMS);
@@ -50,6 +56,7 @@ public class ModItems {
     public static final Item KIWI_PIE = registerItem("kiwi_pie", new Item(new FabricItemSettings().food(new FoodComponent.Builder().hunger(6).saturationModifier(0.5f).alwaysEdible().build())), ModItemGroups.CLUTTER_ITEMS);
     public static final Item CHERRY_PIE = registerItem("cherry_pie", new FoodWithEffectItem(new FabricItemSettings().food(new FoodComponent.Builder().hunger(6).saturationModifier(0.5f).alwaysEdible().build()), StatusEffects.SPEED, 100, 1, 20, 0), ModItemGroups.CLUTTER_ITEMS);
     public static final Item CHERRIES = registerItem("cherries", new FoodWithEffectItem(new FabricItemSettings().food(new FoodComponent.Builder().hunger(2).saturationModifier(0.5f).alwaysEdible().build()), StatusEffects.SPEED, 100, 0, 10, 0), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item GLOWLILY_BULB = registerItem("glowlily_bulb", new GlowlilyBulbItem(new FabricItemSettings().food(new FoodComponent.Builder().hunger(2).saturationModifier(0.5f).build())), ModItemGroups.CLUTTER_ITEMS);
 
     public static final Item MOSSBLOOM_ANTLER = registerItem("mossbloom_antler", new Item(new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
 
@@ -127,6 +134,17 @@ public class ModItems {
     public static final Item KIWI_BIRD_SPAWN_EGG = registerItem("kiwi_bird_spawn_egg", new SpawnEggItem(ModEntities.KIWI_BIRD, 6243108, 6275609, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
     public static final Item EMPEROR_PENGUIN_SPAWN_EGG = registerItem("emperor_penguin_spawn_egg", new SpawnEggItem(ModEntities.EMPEROR_PENGUIN, 1973800, 16777210, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
     public static final Item BEAVER_SPAWN_EGG = registerItem("beaver_spawn_egg", new SpawnEggItem(ModEntities.BEAVER, 5916211, 3356222, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
+
+    public static final Item BEACH_HAT = registerItem("beach_hat", new HatItem(new FabricItemSettings().maxCount(1)), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item TOP_HAT = registerItem("top_hat", new HatItem(new FabricItemSettings().maxCount(1)), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item BERET = registerItem("beret", new HatItem(new FabricItemSettings().maxCount(1)), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item COWBOY_HAT = registerItem("cowboy_hat", new HatItem(new FabricItemSettings().maxCount(1)), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item BUTTERFLY_WINGS = registerItem("butterfly_wings", new HatItem(new FabricItemSettings().maxCount(1)), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item CROWN = registerItem("crown", new HatItem(new FabricItemSettings().maxCount(1)), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item CAP = registerItem("cap", new HatItem(new FabricItemSettings().maxCount(1)), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item PROPELLER_CAP = registerItem("propeller_cap", new HatItem(new FabricItemSettings().maxCount(1)), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item TIARA = registerItem("tiara", new HatItem(new FabricItemSettings().maxCount(1)), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item VIKING_HELMET = registerItem("viking_helmet", new HatItem(new FabricItemSettings().maxCount(1)), ModItemGroups.CLUTTER_ITEMS);
 
     private static Item registerItem(String name, Item item, RegistryKey<ItemGroup> group) {
         addToItemGroup(group, item);

@@ -1,0 +1,8 @@
+{
+  "parent": "block/slab",
+  "textures": {
+    "bottom": "clutter:block/warped_mosaic",
+    "side": "clutter:block/warped_mosaic",
+    "top": "clutter:block/warped_mosaic"
+  }
+}

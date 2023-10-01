@@ -1,5 +1,7 @@
 package net.emilsg.clutter;
 
+import net.emilsg.clutter.data.ModItemTagProvider;
+import net.emilsg.clutter.data.ModModelProvider;
 import net.emilsg.clutter.data.ModWorldGenerator;
 import net.emilsg.clutter.world.ModConfiguredFeatures;
 import net.emilsg.clutter.world.ModPlacedFeatures;
@@ -14,6 +16,8 @@ public class ClutterDataGenerator implements DataGeneratorEntrypoint {
 		FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
 
 		pack.addProvider(ModWorldGenerator::new);
+		pack.addProvider(ModItemTagProvider::new);
+		pack.addProvider(ModModelProvider::new);
 	}
 
 	@Override

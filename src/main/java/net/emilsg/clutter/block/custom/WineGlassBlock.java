@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
+import net.emilsg.clutter.util.ModProperties;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
@@ -20,7 +21,7 @@ import net.minecraft.world.WorldView;
 
 public class WineGlassBlock extends DrinkingGlassBlock {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
-    public static final IntProperty GLASSES = IntProperty.of("glasses", 0, 2);
+    public static final IntProperty GLASSES = ModProperties.GLASSES;
 
     protected static final VoxelShape SINGLE_SHAPE = VoxelShapes.union(
             Block.createCuboidShape(6.5, 0, 6.5, 9.5, 1, 9.5),

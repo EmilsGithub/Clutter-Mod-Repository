@@ -19,7 +19,6 @@ public class ModUtil {
         FlammableBlockRegistry registry = FlammableBlockRegistry.getDefaultInstance();
 
         registry.add(ModBlockTags.FLAMMABLE, 60, 20);
-        registry.add(ModBlocks.SULPHUR_BLOCK, 1, 5);
     }
 
     public static void registerStrippableBlocks() {
@@ -66,10 +65,6 @@ public class ModUtil {
         registry.add(ModBlocks.DARK_OAK_WINDOW_SILL, 100);
         registry.add(ModBlocks.MANGROVE_WALL_BOOKSHELF, 100);
         registry.add(ModBlocks.MANGROVE_WINDOW_SILL, 100);
-        registry.add(ModBlocks.CRIMSON_WALL_BOOKSHELF, 100);
-        registry.add(ModBlocks.CRIMSON_WINDOW_SILL, 100);
-        registry.add(ModBlocks.WARPED_WALL_BOOKSHELF, 100);
-        registry.add(ModBlocks.WARPED_WINDOW_SILL, 100);
         registry.add(ModBlocks.BAMBOO_WALL_BOOKSHELF, 100);
         registry.add(ModBlocks.BAMBOO_WINDOW_SILL, 100);
         registry.add(ModBlocks.CHERRY_WALL_BOOKSHELF, 100);
@@ -84,8 +79,6 @@ public class ModUtil {
         registry.add(ModBlocks.ACACIA_TABLE, 100);
         registry.add(ModBlocks.DARK_OAK_TABLE, 100);
         registry.add(ModBlocks.MANGROVE_TABLE, 100);
-        registry.add(ModBlocks.CRIMSON_TABLE, 100);
-        registry.add(ModBlocks.WARPED_TABLE, 100);
         registry.add(ModBlocks.BAMBOO_TABLE, 100);
         registry.add(ModBlocks.CHERRY_TABLE, 100);
         registry.add(ModBlocks.STRIPPED_OAK_TABLE, 100);
@@ -95,8 +88,6 @@ public class ModUtil {
         registry.add(ModBlocks.STRIPPED_ACACIA_TABLE, 100);
         registry.add(ModBlocks.STRIPPED_DARK_OAK_TABLE, 100);
         registry.add(ModBlocks.STRIPPED_MANGROVE_TABLE, 100);
-        registry.add(ModBlocks.STRIPPED_CRIMSON_TABLE, 100);
-        registry.add(ModBlocks.STRIPPED_WARPED_TABLE, 100);
         registry.add(ModBlocks.STRIPPED_CHERRY_TABLE, 100);
 
         registry.add(ModBlocks.OAK_CHAIR, 100);
@@ -106,8 +97,6 @@ public class ModUtil {
         registry.add(ModBlocks.ACACIA_CHAIR, 100);
         registry.add(ModBlocks.DARK_OAK_CHAIR, 100);
         registry.add(ModBlocks.MANGROVE_CHAIR, 100);
-        registry.add(ModBlocks.CRIMSON_CHAIR, 100);
-        registry.add(ModBlocks.WARPED_CHAIR, 100);
         registry.add(ModBlocks.BAMBOO_CHAIR, 100);
         registry.add(ModBlocks.CHERRY_CHAIR, 100);
         registry.add(ModBlocks.STRIPPED_OAK_CHAIR, 100);
@@ -117,8 +106,6 @@ public class ModUtil {
         registry.add(ModBlocks.STRIPPED_ACACIA_CHAIR, 100);
         registry.add(ModBlocks.STRIPPED_DARK_OAK_CHAIR, 100);
         registry.add(ModBlocks.STRIPPED_MANGROVE_CHAIR, 100);
-        registry.add(ModBlocks.STRIPPED_CRIMSON_CHAIR, 100);
-        registry.add(ModBlocks.STRIPPED_WARPED_CHAIR, 100);
         registry.add(ModBlocks.STRIPPED_CHERRY_CHAIR, 100);
 
         registry.add(ModBlocks.OAK_CUPBOARD, 100);
@@ -128,8 +115,6 @@ public class ModUtil {
         registry.add(ModBlocks.ACACIA_CUPBOARD, 100);
         registry.add(ModBlocks.DARK_OAK_CUPBOARD, 100);
         registry.add(ModBlocks.MANGROVE_CUPBOARD, 100);
-        registry.add(ModBlocks.CRIMSON_CUPBOARD, 100);
-        registry.add(ModBlocks.WARPED_CUPBOARD, 100);
         registry.add(ModBlocks.BAMBOO_CUPBOARD, 100);
         registry.add(ModBlocks.CHERRY_CUPBOARD, 100);
 
@@ -140,8 +125,6 @@ public class ModUtil {
         registry.add(ModBlocks.ACACIA_WALL_CUPBOARD, 100);
         registry.add(ModBlocks.DARK_OAK_WALL_CUPBOARD, 100);
         registry.add(ModBlocks.MANGROVE_WALL_CUPBOARD, 100);
-        registry.add(ModBlocks.CRIMSON_WALL_CUPBOARD, 100);
-        registry.add(ModBlocks.WARPED_WALL_CUPBOARD, 100);
         registry.add(ModBlocks.BAMBOO_WALL_CUPBOARD, 100);
         registry.add(ModBlocks.CHERRY_WALL_CUPBOARD, 100);
 
@@ -152,8 +135,6 @@ public class ModUtil {
         registry.add(ModBlocks.ACACIA_TRELLIS, 100);
         registry.add(ModBlocks.DARK_OAK_TRELLIS, 100);
         registry.add(ModBlocks.MANGROVE_TRELLIS, 100);
-        registry.add(ModBlocks.CRIMSON_TRELLIS, 100);
-        registry.add(ModBlocks.WARPED_TRELLIS, 100);
         registry.add(ModBlocks.BAMBOO_TRELLIS, 100);
         registry.add(ModBlocks.CHERRY_TRELLIS, 100);
 
@@ -164,8 +145,6 @@ public class ModUtil {
         registry.add(ModBlocks.ACACIA_BENCH, 100);
         registry.add(ModBlocks.DARK_OAK_BENCH, 100);
         registry.add(ModBlocks.MANGROVE_BENCH, 100);
-        registry.add(ModBlocks.CRIMSON_BENCH, 100);
-        registry.add(ModBlocks.WARPED_BENCH, 100);
         registry.add(ModBlocks.BAMBOO_BENCH, 100);
         registry.add(ModBlocks.CHERRY_BENCH, 100);
         registry.add(ModBlocks.STRIPPED_OAK_BENCH, 100);
@@ -175,8 +154,33 @@ public class ModUtil {
         registry.add(ModBlocks.STRIPPED_ACACIA_BENCH, 100);
         registry.add(ModBlocks.STRIPPED_DARK_OAK_BENCH, 100);
         registry.add(ModBlocks.STRIPPED_MANGROVE_BENCH, 100);
-        registry.add(ModBlocks.STRIPPED_CRIMSON_BENCH, 100);
-        registry.add(ModBlocks.STRIPPED_WARPED_BENCH, 100);
         registry.add(ModBlocks.STRIPPED_CHERRY_BENCH, 100);
+
+        registry.add(ModBlocks.OAK_MOSAIC, 300);
+        registry.add(ModBlocks.SPRUCE_MOSAIC, 300);
+        registry.add(ModBlocks.BIRCH_MOSAIC, 300);
+        registry.add(ModBlocks.JUNGLE_MOSAIC, 300);
+        registry.add(ModBlocks.ACACIA_MOSAIC, 300);
+        registry.add(ModBlocks.DARK_OAK_MOSAIC, 300);
+        registry.add(ModBlocks.MANGROVE_MOSAIC, 300);
+        registry.add(ModBlocks.CHERRY_MOSAIC, 300);
+
+        registry.add(ModBlocks.OAK_MOSAIC_SLAB, 100);
+        registry.add(ModBlocks.SPRUCE_MOSAIC_SLAB, 100);
+        registry.add(ModBlocks.BIRCH_MOSAIC_SLAB, 100);
+        registry.add(ModBlocks.JUNGLE_MOSAIC_SLAB, 100);
+        registry.add(ModBlocks.ACACIA_MOSAIC_SLAB, 100);
+        registry.add(ModBlocks.DARK_OAK_MOSAIC_SLAB, 100);
+        registry.add(ModBlocks.MANGROVE_MOSAIC_SLAB, 100);
+        registry.add(ModBlocks.CHERRY_MOSAIC_SLAB, 100);
+
+        registry.add(ModBlocks.OAK_MOSAIC_STAIRS, 100);
+        registry.add(ModBlocks.SPRUCE_MOSAIC_STAIRS, 100);
+        registry.add(ModBlocks.BIRCH_MOSAIC_STAIRS, 100);
+        registry.add(ModBlocks.JUNGLE_MOSAIC_STAIRS, 100);
+        registry.add(ModBlocks.ACACIA_MOSAIC_STAIRS, 100);
+        registry.add(ModBlocks.DARK_OAK_MOSAIC_STAIRS, 100);
+        registry.add(ModBlocks.MANGROVE_MOSAIC_STAIRS, 100);
+        registry.add(ModBlocks.CHERRY_MOSAIC_STAIRS, 100);
     }
 }

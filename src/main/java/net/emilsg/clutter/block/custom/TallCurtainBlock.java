@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
+import net.emilsg.clutter.util.ModProperties;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.enums.DoubleBlockHalf;
@@ -34,7 +35,7 @@ import java.util.Set;
 public class TallCurtainBlock extends HorizontalFacingBlock implements Waterloggable {
     public static final EnumProperty<DoubleBlockHalf> HALF = Properties.DOUBLE_BLOCK_HALF;
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
-    public static final BooleanProperty OPEN = BooleanProperty.of("open");
+    public static final BooleanProperty OPEN = ModProperties.OPEN;
     public static final EnumProperty<DirectionShape> DIRECTION_SHAPE = EnumProperty.of("direction_shape", TallCurtainBlock.DirectionShape.class);
     protected static final VoxelShape NORTH_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 16.0, 2.0);
     protected static final VoxelShape SOUTH_SHAPE = Block.createCuboidShape(0.0, 0.0, 14.0, 16.0, 16.0, 16.0);

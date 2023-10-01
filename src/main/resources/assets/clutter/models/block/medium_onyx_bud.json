@@ -1,0 +1,6 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "cross": "clutter:block/medium_onyx_bud"
+  }
+}

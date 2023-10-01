@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
+import net.emilsg.clutter.util.ModProperties;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
@@ -47,7 +48,7 @@ public class ToiletBlock extends SeatBlock{
             Block.createCuboidShape(12, 14, 5, 14, 16, 11)
     );
 
-    public static final BooleanProperty OPEN = BooleanProperty.of("open");
+    public static final BooleanProperty OPEN = ModProperties.OPEN;
     public static final BooleanProperty POWERED = Properties.POWERED;
 
     public ToiletBlock(Settings settings) {

@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.entity;
 
+import net.emilsg.clutter.block.ModBlockEntities;
 import net.emilsg.clutter.block.custom.BonfireBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;

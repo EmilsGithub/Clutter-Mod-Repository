@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
+import net.emilsg.clutter.util.ModProperties;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalFacingBlock;
@@ -30,9 +31,9 @@ import net.minecraft.world.World;
 
 public class SinkBlock extends HorizontalFacingBlock {
 
-    private static final BooleanProperty HAS_WATER = BooleanProperty.of("has_water");
-    private static final BooleanProperty ON = BooleanProperty.of("on");
-    private static final BooleanProperty INFINITE = BooleanProperty.of("infinite");
+    private static final BooleanProperty HAS_WATER = ModProperties.HAS_WATER;
+    private static final BooleanProperty ON = ModProperties.ON;
+    private static final BooleanProperty INFINITE = ModProperties.INFINITE;
 
     protected static final VoxelShape SHAPE = VoxelShapes.union(
             Block.createCuboidShape(0, 0, 0, 2, 3, 2),

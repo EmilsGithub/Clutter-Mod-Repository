@@ -86,7 +86,7 @@ public class ArmchairBlock extends SeatBlock{
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(WATERLOGGED, HORIZONTAL_FACING);
+        builder.add(WATERLOGGED, FACING);
     }
 
     @Override
