@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "clutter:oak_mosaic_slab",
+    "clutter:spruce_mosaic_slab",
+    "clutter:birch_mosaic_slab",
+    "clutter:jungle_mosaic_slab",
+    "clutter:acacia_mosaic_slab",
+    "clutter:dark_oak_mosaic_slab",
+    "clutter:mangrove_mosaic_slab",
+    "clutter:crimson_mosaic_slab",
+    "clutter:warped_mosaic_slab",
+    "clutter:cherry_mosaic_slab"
+  ]
+}

@@ -39,6 +39,8 @@ public class ModLootTableModifiers {
     private static final Identifier FERN_ID = new Identifier("minecraft", "blocks/fern");
     private static final Identifier CHERRY_LEAVES_ID = new Identifier("minecraft", "blocks/cherry_leaves");
 
+    private static final Identifier FISHING_JUNK_ID = new Identifier("minecraft", "gameplay/fishing/junk");
+
     private static final Identifier VILLAGE_FLETCHER_ID = new Identifier("minecraft", "chests/village/village_fletcher");
     private static final Identifier VILLAGE_BUTCHER_ID = new Identifier("minecraft", "chests/village/village_butcher");
     private static final Identifier VILLAGE_TANNERY_ID = new Identifier("minecraft", "chests/village/village_tannery");
@@ -95,18 +97,17 @@ public class ModLootTableModifiers {
 
             if (id.equals(CHERRY_LEAVES_ID)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
-                        .rolls(ConstantLootNumberProvider.create(2))
+                        .rolls(ConstantLootNumberProvider.create(1))
                         .conditionally(InvertedLootCondition.builder(MatchToolLootCondition.builder(ItemPredicate.Builder.create().items(Items.SHEARS))).build())
                         .conditionally(InvertedLootCondition.builder(MatchToolLootCondition.builder(ItemPredicate.Builder.create().enchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, NumberRange.IntRange.atLeast(1))))).build())
-                        .with(ItemEntry.builder(ModItems.CHERRIES).conditionally(RandomChanceLootCondition.builder(0.075f)))
-                        .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1.0f)).build());
+                        .with(ItemEntry.builder(ModItems.CHERRIES).conditionally(RandomChanceLootCondition.builder(ModConfigs.CHERRY_DROP_RATE)))
+                        .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1, 2)).build());
                 tableBuilder.pool(poolBuilder.build());
             }
 
             if (id.equals(SNIFFER_DIGGING_ID)) {
                 tableBuilder.modifyPools(builder -> {
-                    builder.with(AlternativeEntry.builder(ItemEntry.builder(ModItems.THORNBLOOM_SEEDS)))
-                            .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.KIWI_SEEDS)));
+                    builder.with(AlternativeEntry.builder(ItemEntry.builder(ModItems.THORNBLOOM_SEEDS))).with(AlternativeEntry.builder(ItemEntry.builder(ModItems.KIWI_SEEDS)));
                 });
             }
 
@@ -232,6 +233,14 @@ public class ModLootTableModifiers {
                         .with(ItemEntry.builder(ModBlocks.CHICKEN_PLUSHIE)).conditionally(RandomChanceLootCondition.builder(0.4f))
                         .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1.0f)).build());
                 tableBuilder.pool(poolBuilder.build());
+            }
+
+            if(id.equals(FISHING_JUNK_ID)) {
+                tableBuilder.modifyPools(builder -> {
+                    builder.with(ItemEntry.builder(ModItems.SMALL_LILY_PADS).weight(10));
+                    builder.with(ItemEntry.builder(ModItems.GIANT_LILY_PAD).weight(5));
+                    builder.with(ItemEntry.builder(ModItems.GIANT_LILY_PAD_SEEDLING).weight(5));
+                });
             }
         }));
     }

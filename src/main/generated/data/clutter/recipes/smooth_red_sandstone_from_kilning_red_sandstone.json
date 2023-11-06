@@ -1,0 +1,11 @@
+{
+  "type": "clutter:kilning",
+  "ingredients": [
+    {
+      "item": "minecraft:red_sandstone"
+    }
+  ],
+  "output": {
+    "item": "minecraft:smooth_red_sandstone"
+  }
+}

@@ -2,7 +2,6 @@ package net.emilsg.clutter.block.custom;
 
 import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.block.entity.CardboardBoxInventoryBlockEntity;
-import net.emilsg.clutter.util.ModProperties;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.item.TooltipContext;
@@ -28,6 +27,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
@@ -36,42 +36,43 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class CardboardBoxBlock extends BlockWithEntity implements Waterloggable {
-    public static final BooleanProperty OPEN = ModProperties.OPEN;
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
+    public static final BooleanProperty OPEN = Properties.OPEN;
 
+    private final VoxelShape OPEN_SHAPE = VoxelShapes.union(Block.createCuboidShape(2, 0, 2.0999999999999996, 2.1, 11, 13.9), Block.createCuboidShape(13.9, 0, 2.0999999999999996, 14, 11, 13.9), Block.createCuboidShape(2, 0, 2, 14, 11, 2.1), Block.createCuboidShape(2, 0, 13.9, 14, 11, 14), Block.createCuboidShape(2, 0, 2, 14, 0.1, 14));
     protected static final VoxelShape SHAPE = Block.createCuboidShape(2, 0, 2, 14, 11, 14);
 
     public CardboardBoxBlock(Settings settings) {
         super(settings);
-        this.setDefaultState(this.stateManager.getDefaultState().with(OPEN, false).with(WATERLOGGED, false).with(FACING, Direction.NORTH));
+        this.setDefaultState(this.stateManager.getDefaultState().with(WATERLOGGED, false).with(FACING, Direction.NORTH).with(OPEN, false));
     }
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(OPEN, WATERLOGGED, FACING);
+        builder.add(WATERLOGGED, FACING, OPEN);
     }
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return SHAPE;
+        return state.get(OPEN) ? OPEN_SHAPE : SHAPE;
     }
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (world.isClient && (player.isSneaking() || state.get(OPEN))) {
+        if (world.isClient) {
             return ActionResult.SUCCESS;
         }
 
-        if (player.isSneaking()) {
-            world.setBlockState(pos, state.cycle(OPEN), CardboardBoxBlock.NOTIFY_ALL);
-        }
-        else if (state.get(OPEN)) {
+        if(player.isSneaking() && player.getStackInHand(hand).isEmpty()) {
+            world.setBlockState(pos, state.cycle(OPEN));
+        } else if(!player.isSneaking()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof CardboardBoxInventoryBlockEntity) {
                 player.openHandledScreen((CardboardBoxInventoryBlockEntity)blockEntity);
             }
         }
+
         return ActionResult.CONSUME;
     }
 

@@ -1,8 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "#clutter:copper_doors",
-    "clutter:silver_door",
-    "clutter:golden_door"
-  ]
-}

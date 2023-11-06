@@ -1,0 +1,9 @@
+{
+	"parent": "clutter:block/reworked_chandelier/iron_chandelier",
+	"textures": {
+		"chain": "clutter:block/iron_chandelier_chain",
+		"candle": "block/red_candle",
+		"particle": "clutter:block/dark_iron_block",
+		"material": "clutter:block/dark_iron_block"
+	}
+}

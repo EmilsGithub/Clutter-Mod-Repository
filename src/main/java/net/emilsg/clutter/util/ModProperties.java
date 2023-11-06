@@ -21,4 +21,6 @@ public class ModProperties {
     public static final BooleanProperty LEGS = BooleanProperty.of("legs");
     public static final IntProperty BOTTLES = IntProperty.of("bottles", 0, 2);
     public static final IntProperty GLASSES = IntProperty.of("glasses", 0, 2);
+    public static final BooleanProperty CANDLES = BooleanProperty.of("candles");
+    public static final IntProperty PAD_AMOUNT = IntProperty.of("pad_amount", 1, 4);
 }

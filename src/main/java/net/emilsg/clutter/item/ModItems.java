@@ -17,9 +17,40 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
+import net.minecraft.util.math.Direction;
 
 
 public class ModItems {
+
+    public static final Item BLUE_AQUATIC_TORCH = registerItem("blue_aquatic_torch", new VerticallyAttachableBlockItem(ModBlocks.BLUE_AQUATIC_TORCH, ModBlocks.BLUE_AQUATIC_WALL_TORCH, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Item RED_AQUATIC_TORCH = registerItem("red_aquatic_torch", new VerticallyAttachableBlockItem(ModBlocks.RED_AQUATIC_TORCH, ModBlocks.RED_AQUATIC_WALL_TORCH, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Item YELLOW_AQUATIC_TORCH  = registerItem("yellow_aquatic_torch", new VerticallyAttachableBlockItem(ModBlocks.YELLOW_AQUATIC_TORCH, ModBlocks.YELLOW_AQUATIC_WALL_TORCH, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Item PINK_AQUATIC_TORCH = registerItem("pink_aquatic_torch", new VerticallyAttachableBlockItem(ModBlocks.PINK_AQUATIC_TORCH, ModBlocks.PINK_AQUATIC_WALL_TORCH, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Item MAGENTA_AQUATIC_TORCH = registerItem("magenta_aquatic_torch", new VerticallyAttachableBlockItem(ModBlocks.MAGENTA_AQUATIC_TORCH, ModBlocks.MAGENTA_AQUATIC_WALL_TORCH, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Item PRISMARINE_TORCH = registerItem("prismarine_torch", new VerticallyAttachableBlockItem(ModBlocks.PRISMARINE_TORCH, ModBlocks.PRISMARINE_WALL_TORCH, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
+
+    public static final Item DEAD_CUP_CORAL_FAN = registerItem("dead_cup_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.DEAD_CUP_CORAL_FAN, ModBlocks.DEAD_CUP_CORAL_WALL_FAN, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Item CUP_CORAL_FAN = registerItem("cup_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.CUP_CORAL_FAN, ModBlocks.CUP_CORAL_WALL_FAN, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Item DEAD_GHOST_CORAL_FAN = registerItem("dead_ghost_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.DEAD_GHOST_CORAL_FAN, ModBlocks.DEAD_GHOST_CORAL_WALL_FAN, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Item GHOST_CORAL_FAN = registerItem("ghost_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.GHOST_CORAL_FAN, ModBlocks.GHOST_CORAL_WALL_FAN, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Item DEAD_DIAMOND_CORAL_FAN = registerItem("dead_diamond_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.DEAD_DIAMOND_CORAL_FAN, ModBlocks.DEAD_DIAMOND_CORAL_WALL_FAN, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Item DIAMOND_CORAL_FAN = registerItem("diamond_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.DIAMOND_CORAL_FAN, ModBlocks.DIAMOND_CORAL_WALL_FAN, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Item DEAD_PASSION_CORAL_FAN = registerItem("dead_passion_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.DEAD_PASSION_CORAL_FAN, ModBlocks.DEAD_PASSION_CORAL_WALL_FAN, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Item PASSION_CORAL_FAN = registerItem("passion_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.PASSION_CORAL_FAN, ModBlocks.PASSION_CORAL_WALL_FAN, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Item DEAD_ANCHOR_CORAL_FAN = registerItem("dead_anchor_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.DEAD_ANCHOR_CORAL_FAN, ModBlocks.DEAD_ANCHOR_CORAL_WALL_FAN, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Item ANCHOR_CORAL_FAN = registerItem("anchor_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.ANCHOR_CORAL_FAN, ModBlocks.ANCHOR_CORAL_WALL_FAN, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Item DEAD_GEM_CORAL_FAN = registerItem("dead_gem_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.DEAD_GEM_CORAL_FAN, ModBlocks.DEAD_GEM_CORAL_WALL_FAN, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Item GEM_CORAL_FAN = registerItem("gem_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.GEM_CORAL_FAN, ModBlocks.GEM_CORAL_WALL_FAN, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Item DEAD_STONE_CORAL_FAN = registerItem("dead_stone_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.DEAD_STONE_CORAL_FAN, ModBlocks.DEAD_STONE_CORAL_WALL_FAN, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Item STONE_CORAL_FAN = registerItem("stone_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.STONE_CORAL_FAN, ModBlocks.STONE_CORAL_WALL_FAN, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Item DEAD_SLATE_CORAL_FAN = registerItem("dead_slate_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.DEAD_SLATE_CORAL_FAN, ModBlocks.DEAD_SLATE_CORAL_WALL_FAN, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Item SLATE_CORAL_FAN = registerItem("slate_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.SLATE_CORAL_FAN, ModBlocks.SLATE_CORAL_WALL_FAN, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Item DEAD_THORN_CORAL_FAN = registerItem("dead_thorn_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.DEAD_THORN_CORAL_FAN, ModBlocks.DEAD_THORN_CORAL_WALL_FAN, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Item THORN_CORAL_FAN = registerItem("thorn_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.THORN_CORAL_FAN, ModBlocks.THORN_CORAL_WALL_FAN, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Item DEAD_COCOA_CORAL_FAN = registerItem("dead_cocoa_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.DEAD_COCOA_CORAL_FAN, ModBlocks.DEAD_COCOA_CORAL_WALL_FAN, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Item COCOA_CORAL_FAN = registerItem("cocoa_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.COCOA_CORAL_FAN, ModBlocks.COCOA_CORAL_WALL_FAN, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Item DEAD_TOXIC_CORAL_FAN = registerItem("dead_toxic_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.DEAD_TOXIC_CORAL_FAN, ModBlocks.DEAD_TOXIC_CORAL_WALL_FAN, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Item TOXIC_CORAL_FAN = registerItem("toxic_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.TOXIC_CORAL_FAN, ModBlocks.TOXIC_CORAL_WALL_FAN, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
 
     public static final Item COPPER_NUGGET = registerItem("copper_nugget", new Item(new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
     public static final Item SILVER_NUGGET = registerItem("silver_nugget", new Item(new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
@@ -134,6 +165,7 @@ public class ModItems {
     public static final Item KIWI_BIRD_SPAWN_EGG = registerItem("kiwi_bird_spawn_egg", new SpawnEggItem(ModEntities.KIWI_BIRD, 6243108, 6275609, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
     public static final Item EMPEROR_PENGUIN_SPAWN_EGG = registerItem("emperor_penguin_spawn_egg", new SpawnEggItem(ModEntities.EMPEROR_PENGUIN, 1973800, 16777210, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
     public static final Item BEAVER_SPAWN_EGG = registerItem("beaver_spawn_egg", new SpawnEggItem(ModEntities.BEAVER, 5916211, 3356222, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item CAPYBARA_SPAWN_EGG = registerItem("capybara_spawn_egg", new SpawnEggItem(ModEntities.CAPYBARA, 4523422, 3422342, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
 
     public static final Item BEACH_HAT = registerItem("beach_hat", new HatItem(new FabricItemSettings().maxCount(1)), ModItemGroups.CLUTTER_ITEMS);
     public static final Item TOP_HAT = registerItem("top_hat", new HatItem(new FabricItemSettings().maxCount(1)), ModItemGroups.CLUTTER_ITEMS);

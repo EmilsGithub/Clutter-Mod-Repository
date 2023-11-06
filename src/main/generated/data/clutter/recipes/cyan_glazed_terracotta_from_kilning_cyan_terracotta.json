@@ -1,0 +1,11 @@
+{
+  "type": "clutter:kilning",
+  "ingredients": [
+    {
+      "item": "minecraft:cyan_terracotta"
+    }
+  ],
+  "output": {
+    "item": "minecraft:cyan_glazed_terracotta"
+  }
+}

@@ -1,15 +1,12 @@
 package net.emilsg.clutter.block.custom;
 
-import net.emilsg.clutter.util.ModBlockTags;
 import net.emilsg.clutter.util.ModProperties;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ShapeContext;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -57,21 +54,6 @@ public class ChandelierBlock extends WaterloggableLitBlock {
         World worldAccess = ctx.getWorld();
         boolean bl = worldAccess.getFluidState(blockPos = ctx.getBlockPos()).getFluid() == Fluids.WATER;
         return (BlockState)this.getDefaultState().with(WATERLOGGED, bl);
-    }
-
-    @Override
-    public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
-        updateChainState(world, pos);
-    }
-
-    private void updateChainState(World world, BlockPos pos) {
-        BlockState state = world.getBlockState(pos);
-        if (world.getBlockState(pos.up()).isIn(ModBlockTags.CHAINS)) {
-            state = state.with(ON_CHAIN, true);
-        } else {
-            state = state.with(ON_CHAIN, false);
-        }
-        world.setBlockState(pos, state, Block.NOTIFY_ALL);
     }
 
     @Override

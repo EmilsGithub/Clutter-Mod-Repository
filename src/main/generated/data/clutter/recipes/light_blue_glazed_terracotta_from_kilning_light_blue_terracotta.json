@@ -1,0 +1,11 @@
+{
+  "type": "clutter:kilning",
+  "ingredients": [
+    {
+      "item": "minecraft:light_blue_terracotta"
+    }
+  ],
+  "output": {
+    "item": "minecraft:light_blue_glazed_terracotta"
+  }
+}

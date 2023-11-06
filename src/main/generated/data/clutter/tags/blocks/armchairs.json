@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "clutter:white_armchair",
+    "clutter:light_gray_armchair",
+    "clutter:gray_armchair",
+    "clutter:black_armchair",
+    "clutter:brown_armchair",
+    "clutter:red_armchair",
+    "clutter:orange_armchair",
+    "clutter:yellow_armchair",
+    "clutter:lime_armchair",
+    "clutter:green_armchair",
+    "clutter:cyan_armchair",
+    "clutter:light_blue_armchair",
+    "clutter:blue_armchair",
+    "clutter:purple_armchair",
+    "clutter:magenta_armchair",
+    "clutter:pink_armchair"
+  ]
+}

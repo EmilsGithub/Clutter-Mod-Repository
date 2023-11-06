@@ -1,7 +1,7 @@
 package net.emilsg.clutter;
 
-import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.block.ModBlockEntities;
+import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.config.ModConfigs;
 import net.emilsg.clutter.effect.ModEffects;
 import net.emilsg.clutter.enchantment.ModEnchantments;
@@ -10,11 +10,7 @@ import net.emilsg.clutter.item.ModItems;
 import net.emilsg.clutter.networking.ModMessages;
 import net.emilsg.clutter.potion.ModPotions;
 import net.emilsg.clutter.recipe.ModRecipeSerializers;
-import net.emilsg.clutter.recipe.ModRecipeTypes;
-import net.emilsg.clutter.util.ModCallbackRegistry;
-import net.emilsg.clutter.util.ModItemGroups;
-import net.emilsg.clutter.util.ModLootTableModifiers;
-import net.emilsg.clutter.util.ModUtil;
+import net.emilsg.clutter.util.*;
 import net.emilsg.clutter.world.gen.ModWorldGeneration;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
@@ -37,7 +33,6 @@ public class Clutter implements ModInitializer {
 		ModItems.registerModItems();
 		ModBlocks.registerModBlocks();
 
-		ModRecipeTypes.registerRecipeTypes();
 		ModRecipeSerializers.registerRecipeSerializers();
 
 		ModEnchantments.registerModEnchantments();
@@ -47,6 +42,7 @@ public class Clutter implements ModInitializer {
 		ModWorldGeneration.generateModWorldGen();
 
 		ModUtil.registerModUtil();
+		ModTradeOffers.addTrades();
 
 		ModCallbackRegistry.handleSitting();
 		if (ModConfigs.PET_MOBS) ModCallbackRegistry.handlePetsPets();

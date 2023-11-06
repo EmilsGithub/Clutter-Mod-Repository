@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "clutter:block/small_lily_pads"
+    "layer0": "clutter:block/small_lily_pads_3"
   }
 }

@@ -37,4 +37,7 @@ public class ModEntities {
 
     public static final EntityType<BeaverEntity> BEAVER = Registry.register(Registries.ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "beaver"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, BeaverEntity::new).dimensions(EntityDimensions.changing(0.9f, 0.65f)).build());
+
+    public static final EntityType<CapybaraEntity> CAPYBARA = Registry.register(Registries.ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "capybara"),
+            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, CapybaraEntity::new).dimensions(EntityDimensions.fixed(0.7f, 0.8f)).build());
 }

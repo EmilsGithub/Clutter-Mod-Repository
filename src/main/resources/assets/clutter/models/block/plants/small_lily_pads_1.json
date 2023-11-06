@@ -1,0 +1,7 @@
+{
+  "parent": "clutter:block/plants/small_lily_pads",
+  "textures": {
+    "particle": "clutter:block/small_lily_pads_1",
+    "texture": "clutter:block/small_lily_pads_1"
+  }
+}

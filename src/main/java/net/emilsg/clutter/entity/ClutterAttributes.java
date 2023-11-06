@@ -12,5 +12,6 @@ public class ClutterAttributes {
         FabricDefaultAttributeRegistry.register(ModEntities.KIWI_BIRD, KiwiBirdEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.EMPEROR_PENGUIN, EmperorPenguinEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.BEAVER, BeaverEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.CAPYBARA, CapybaraEntity.setAttributes());
     }
 }

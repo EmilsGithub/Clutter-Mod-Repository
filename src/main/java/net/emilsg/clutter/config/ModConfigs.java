@@ -12,6 +12,8 @@ public class ModConfigs {
     public static float GREED_CHANCE_PER_LEVEL;
     public static boolean COIN_DROPS_AND_LOOT_GEN;
 
+    public static float CHERRY_DROP_RATE;
+
     public static boolean MELTDOWN_DESTROY_BLOCKS;
 
     public static boolean SPAWN_CLUTTER_MOBS;
@@ -44,7 +46,9 @@ public class ModConfigs {
     private static void createConfigs() {
         configs.addKeyValuePair(new Pair<>("disable.greed_loot_generation", false), "Disables the generation of Greed Books");
         configs.addKeyValuePair(new Pair<>("greed.with_looting_and_mending", false), "Greed compatible with Looting and Mending.");
-        configs.addKeyValuePair(new Pair<>("greed.chance.per.level", 0.01f), "Coin drop chance per level of Greed.");
+        configs.addKeyValuePair(new Pair<>("greed.chance.per.level", 0.01f), "Coin drop chance per level of Greed. (Default 1% per level of Greed)");
+
+        configs.addKeyValuePair(new Pair<>("cherry.drop.rate", 0.075f), "Drop rate for cherries. (Default, 7.5% chance for 1 to 2 Cherries to Drop, not affected by Fortune)");
 
         configs.addKeyValuePair(new Pair<>("coin.drops.and.loot.gen", true), "Coin drops and generation.");
 
@@ -74,6 +78,8 @@ public class ModConfigs {
         GREED_WITH_LOOTING_AND_MENDING = CONFIG.getOrDefault("greed.with_looting_and_mending", false);
         GREED_CHANCE_PER_LEVEL = (float) CONFIG.getOrDefault("greed.chance.per.level", 0.01f);
         COIN_DROPS_AND_LOOT_GEN = CONFIG.getOrDefault("coin.drops.and.loot.gen", true);
+
+        CHERRY_DROP_RATE = (float) CONFIG.getOrDefault("cherry.drop.rate", 0.075f);
 
         MELTDOWN_DESTROY_BLOCKS = CONFIG.getOrDefault("meltdown.destroy_blocks", false);
 

@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "clutter:bonfire",
+    "clutter:soul_bonfire",
+    "#clutter:trellises",
+    "#clutter:strippable_benches",
+    "#clutter:armchairs",
+    "#clutter:wooden_mosaics",
+    "#clutter:cupboards",
+    "#clutter:lamps",
+    "#clutter:wooden_mosaics",
+    "#clutter:tables",
+    "#clutter:food_boxes",
+    "#clutter:window_sills",
+    "#clutter:wooden_chairs"
+  ]
+}

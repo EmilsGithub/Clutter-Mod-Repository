@@ -2,15 +2,16 @@ package net.emilsg.clutter;
 
 import io.netty.buffer.Unpooled;
 import net.emilsg.clutter.block.ModBlockEntities;
+import net.emilsg.clutter.block.entity.render.CardboardBoxBlockEntityRenderer;
 import net.emilsg.clutter.block.entity.render.PlateBlockEntityRenderer;
 import net.emilsg.clutter.block.entity.render.ShelfBlockEntityRenderer;
-import net.emilsg.clutter.compat.trinkets.TrinketsIntegration;
+import net.emilsg.clutter.compat.trinkets.TrinketsIntegrationClient;
 import net.emilsg.clutter.entity.ModEntities;
 import net.emilsg.clutter.entity.client.*;
 import net.emilsg.clutter.networking.ModMessages;
+import net.emilsg.clutter.screen.BrickKilnScreen;
 import net.emilsg.clutter.screen.CardboardBoxScreen;
 import net.emilsg.clutter.screen.ModScreenHandlers;
-import net.emilsg.clutter.screen.BrickKilnScreen;
 import net.emilsg.clutter.screen.WallBookshelfScreen;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
@@ -38,12 +39,13 @@ public class ClutterClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        if(IS_TRINKETS_LOADED) TrinketsIntegration.registerTrinkets();
+        if(IS_TRINKETS_LOADED) TrinketsIntegrationClient.registerTrinkets();
 
-        registerColorProviders();
-        registerEntityRenderers();
-        registerBlockEntityRenderers();
-        registerScreenHandlers();
+        this.registerColorProviders();
+        this.registerEntityRenderers();
+        this.registerBlockEntityRenderers();
+        this.registerScreenHandlers();
+        this.registerConnectionEvents();
 
         List<Block> blocksToRender = Arrays.asList(
                 FOOD_BOX,
@@ -436,7 +438,96 @@ public class ClutterClient implements ClientModInitializer {
                 ONYX_CLUSTER,
                 GREEN_FIRE,
                 GLOWLILY_CROP,
-                GLOWLILY
+                GLOWLILY,
+                IRON_CANDLE_HOLDER,
+                SILVER_CANDLE_HOLDER,
+                GOLDEN_CANDLE_HOLDER,
+                COPPER_CANDLE_HOLDER,
+                EXPOSED_COPPER_CANDLE_HOLDER,
+                WEATHERED_COPPER_CANDLE_HOLDER,
+                OXIDIZED_COPPER_CANDLE_HOLDER,
+                WAXED_COPPER_CANDLE_HOLDER,
+                WAXED_EXPOSED_COPPER_CANDLE_HOLDER,
+                WAXED_WEATHERED_COPPER_CANDLE_HOLDER,
+                WAXED_OXIDIZED_COPPER_CANDLE_HOLDER,
+                BLUE_AQUATIC_TORCH,
+                RED_AQUATIC_TORCH,
+                YELLOW_AQUATIC_TORCH,
+                PINK_AQUATIC_TORCH ,
+                MAGENTA_AQUATIC_TORCH,
+                PRISMARINE_TORCH,
+                BLUE_AQUATIC_WALL_TORCH,
+                RED_AQUATIC_WALL_TORCH,
+                YELLOW_AQUATIC_WALL_TORCH,
+                PINK_AQUATIC_WALL_TORCH ,
+                MAGENTA_AQUATIC_WALL_TORCH,
+                PRISMARINE_WALL_TORCH,
+                DEAD_CUP_CORAL,
+                CUP_CORAL,
+                DEAD_CUP_CORAL_FAN,
+                CUP_CORAL_FAN,
+                DEAD_CUP_CORAL_WALL_FAN,
+                CUP_CORAL_WALL_FAN,
+                DEAD_GHOST_CORAL,
+                GHOST_CORAL,
+                DEAD_GHOST_CORAL_FAN,
+                GHOST_CORAL_FAN,
+                DEAD_GHOST_CORAL_WALL_FAN,
+                GHOST_CORAL_WALL_FAN,
+                DEAD_SLATE_CORAL,
+                SLATE_CORAL,
+                DEAD_SLATE_CORAL_FAN,
+                SLATE_CORAL_FAN,
+                DEAD_SLATE_CORAL_WALL_FAN,
+                SLATE_CORAL_WALL_FAN,
+                DEAD_STONE_CORAL,
+                STONE_CORAL,
+                DEAD_STONE_CORAL_FAN,
+                STONE_CORAL_FAN,
+                DEAD_STONE_CORAL_WALL_FAN,
+                STONE_CORAL_WALL_FAN,
+                DEAD_THORN_CORAL,
+                THORN_CORAL,
+                DEAD_THORN_CORAL_FAN,
+                THORN_CORAL_FAN,
+                DEAD_THORN_CORAL_WALL_FAN,
+                THORN_CORAL_WALL_FAN,
+                DEAD_COCOA_CORAL,
+                COCOA_CORAL,
+                DEAD_COCOA_CORAL_FAN,
+                COCOA_CORAL_FAN,
+                DEAD_COCOA_CORAL_WALL_FAN,
+                COCOA_CORAL_WALL_FAN,
+                DEAD_PASSION_CORAL,
+                PASSION_CORAL,
+                DEAD_PASSION_CORAL_FAN,
+                PASSION_CORAL_FAN,
+                DEAD_PASSION_CORAL_WALL_FAN,
+                PASSION_CORAL_WALL_FAN,
+                DEAD_TOXIC_CORAL,
+                TOXIC_CORAL,
+                DEAD_TOXIC_CORAL_FAN,
+                TOXIC_CORAL_FAN,
+                DEAD_TOXIC_CORAL_WALL_FAN,
+                TOXIC_CORAL_WALL_FAN,
+                DEAD_GEM_CORAL,
+                GEM_CORAL,
+                DEAD_GEM_CORAL_FAN,
+                GEM_CORAL_FAN,
+                DEAD_GEM_CORAL_WALL_FAN,
+                GEM_CORAL_WALL_FAN,
+                DEAD_DIAMOND_CORAL,
+                DIAMOND_CORAL,
+                DEAD_DIAMOND_CORAL_FAN,
+                DIAMOND_CORAL_FAN,
+                DEAD_DIAMOND_CORAL_WALL_FAN,
+                DIAMOND_CORAL_WALL_FAN,
+                DEAD_ANCHOR_CORAL,
+                ANCHOR_CORAL,
+                DEAD_ANCHOR_CORAL_FAN,
+                ANCHOR_CORAL_FAN,
+                DEAD_ANCHOR_CORAL_WALL_FAN,
+                ANCHOR_CORAL_WALL_FAN
         );
 
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), blocksToRender.toArray(new Block[0]));
@@ -478,11 +569,12 @@ public class ClutterClient implements ClientModInitializer {
                 RIPE_KIWI_LEAVES,
                 KIWI_LEAVES
         );
+    }
 
+    private void registerConnectionEvents() {
         ClientPlayConnectionEvents.JOIN.register((handler, client, isConnected) -> {
             handler.sendPacket(ClientPlayNetworking.createC2SPacket(ModMessages.VERSION_HANDSHAKE_PACKET_ID, new PacketByteBuf(Unpooled.buffer()).writeString(Clutter.MOD_VERSION)));
         });
-
     }
 
     private void registerEntityRenderers() {
@@ -494,11 +586,13 @@ public class ClutterClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.KIWI_BIRD, KiwiBirdRenderer::new);
         EntityRendererRegistry.register(ModEntities.EMPEROR_PENGUIN, EmperorPenguinRenderer::new);
         EntityRendererRegistry.register(ModEntities.BEAVER, BeaverRenderer::new);
+        EntityRendererRegistry.register(ModEntities.CAPYBARA, CapybaraRenderer::new);
     }
 
     private void registerBlockEntityRenderers() {
         BlockEntityRendererFactories.register(ModBlockEntities.SHELF, ShelfBlockEntityRenderer::new);
         BlockEntityRendererFactories.register(ModBlockEntities.PLATE, PlateBlockEntityRenderer::new);
+        BlockEntityRendererFactories.register(ModBlockEntities.CARDBOARD_BOX, CardboardBoxBlockEntityRenderer::new);
     }
 
     private void registerScreenHandlers() {

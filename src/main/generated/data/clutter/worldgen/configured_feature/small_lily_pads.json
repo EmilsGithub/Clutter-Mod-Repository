@@ -6,10 +6,169 @@
         "type": "minecraft:simple_block",
         "config": {
           "to_place": {
-            "type": "minecraft:simple_state_provider",
-            "state": {
-              "Name": "clutter:small_lily_pads"
-            }
+            "type": "minecraft:weighted_state_provider",
+            "entries": [
+              {
+                "data": {
+                  "Name": "clutter:small_lily_pads",
+                  "Properties": {
+                    "facing": "north",
+                    "pad_amount": "1"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "clutter:small_lily_pads",
+                  "Properties": {
+                    "facing": "south",
+                    "pad_amount": "1"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "clutter:small_lily_pads",
+                  "Properties": {
+                    "facing": "east",
+                    "pad_amount": "1"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "clutter:small_lily_pads",
+                  "Properties": {
+                    "facing": "south",
+                    "pad_amount": "1"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "clutter:small_lily_pads",
+                  "Properties": {
+                    "facing": "north",
+                    "pad_amount": "2"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "clutter:small_lily_pads",
+                  "Properties": {
+                    "facing": "east",
+                    "pad_amount": "2"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "clutter:small_lily_pads",
+                  "Properties": {
+                    "facing": "south",
+                    "pad_amount": "2"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "clutter:small_lily_pads",
+                  "Properties": {
+                    "facing": "west",
+                    "pad_amount": "2"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "clutter:small_lily_pads",
+                  "Properties": {
+                    "facing": "north",
+                    "pad_amount": "3"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "clutter:small_lily_pads",
+                  "Properties": {
+                    "facing": "east",
+                    "pad_amount": "3"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "clutter:small_lily_pads",
+                  "Properties": {
+                    "facing": "south",
+                    "pad_amount": "3"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "clutter:small_lily_pads",
+                  "Properties": {
+                    "facing": "west",
+                    "pad_amount": "3"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "clutter:small_lily_pads",
+                  "Properties": {
+                    "facing": "north",
+                    "pad_amount": "4"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "clutter:small_lily_pads",
+                  "Properties": {
+                    "facing": "east",
+                    "pad_amount": "4"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "clutter:small_lily_pads",
+                  "Properties": {
+                    "facing": "south",
+                    "pad_amount": "4"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "clutter:small_lily_pads",
+                  "Properties": {
+                    "facing": "west",
+                    "pad_amount": "4"
+                  }
+                },
+                "weight": 1
+              }
+            ]
           }
         }
       },

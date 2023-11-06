@@ -28,5 +28,12 @@
     "sounds": [
       "clutter:coin_pouch_use"
     ]
+  },
+  "entity_kiwi_call": {
+    "subtitle": "sounds.clutter.entity_kiwi_call",
+    "sounds": [
+      "clutter:kiwi_call_one",
+      "clutter:kiwi_call_two"
+    ]
   }
 }

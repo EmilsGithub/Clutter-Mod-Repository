@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "clutter:apple_food_box",
+    "clutter:beetroot_food_box",
+    "clutter:carrot_food_box",
+    "clutter:potato_food_box",
+    "clutter:melon_food_box",
+    "clutter:chorus_fruit_food_box",
+    "clutter:sweet_berry_food_box",
+    "clutter:glow_berry_food_box",
+    "clutter:bread_food_box",
+    "clutter:food_box"
+  ]
+}

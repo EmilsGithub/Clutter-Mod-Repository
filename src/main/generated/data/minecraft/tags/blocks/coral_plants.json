@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "clutter:cup_coral",
+    "clutter:ghost_coral",
+    "clutter:stone_coral",
+    "clutter:slate_coral",
+    "clutter:thorn_coral",
+    "clutter:cocoa_coral",
+    "clutter:passion_coral",
+    "clutter:toxic_coral",
+    "clutter:gem_coral",
+    "clutter:diamond_coral",
+    "clutter:anchor_coral"
+  ]
+}

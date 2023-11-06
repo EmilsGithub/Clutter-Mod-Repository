@@ -68,7 +68,7 @@ public class ButterflyEntity extends AnimalEntity implements GeoEntity {
     private final AnimatableInstanceCache CACHE = new SingletonAnimatableInstanceCache(this);
     private static final TrackedData<BlockPos> HOME_POS = DataTracker.registerData(ButterflyEntity.class, TrackedDataHandlerRegistry.BLOCK_POS);
     private static final TrackedData<Boolean> HAS_COCOON = DataTracker.registerData(ButterflyEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
-    private static final TrackedData<Integer> BLOSSOM_COOLDOWN = DataTracker.registerData(ButterflyEntity.class, TrackedDataHandlerRegistry.INTEGER);
+
 
     public ButterflyEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
@@ -94,15 +94,13 @@ public class ButterflyEntity extends AnimalEntity implements GeoEntity {
         this.goalSelector.add(0, new AnimalMateGoal(this, 1.0));
         this.goalSelector.add(1, new LayCocoonGoal(this, 1.0));
         this.goalSelector.add(2, new TemptGoal(this, 1.25, Ingredient.ofItems(Items.SUGAR), false));
-        this.goalSelector.add(3, new ButterflyMoveToSporeBlossomGoal(this, 1, 0.1f));
-        this.goalSelector.add(4, new WanderAroundGoal(this));
+        this.goalSelector.add(3, new WanderAroundGoal(this));
     }
 
     protected void initDataTracker() {
         super.initDataTracker();
         this.dataTracker.startTracking(HOME_POS, BlockPos.ORIGIN);
         this.dataTracker.startTracking(HAS_COCOON, false);
-        this.dataTracker.startTracking(BLOSSOM_COOLDOWN, 2000);
         this.dataTracker.startTracking(DATA_ID_TYPE_VARIANT, 0);
     }
 
@@ -139,77 +137,12 @@ public class ButterflyEntity extends AnimalEntity implements GeoEntity {
         return (BlockPos)this.dataTracker.get(HOME_POS);
     }
 
-    public void setBlossomCooldown(int cooldown) {
-        this.dataTracker.set(BLOSSOM_COOLDOWN, cooldown);
-    }
-
-    int getBlossomCooldown() {
-        return (int)this.dataTracker.get(BLOSSOM_COOLDOWN);
-    }
-
-    @Override
-    protected void mobTick() {
-        super.mobTick();
-        if (this.getBlossomCooldown() != 0) {
-            this.setBlossomCooldown(this.getBlossomCooldown() - 1);
-        }
-    }
-
     @Override
     public boolean handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
         return false;
     }
 
     protected void fall(double heightDifference, boolean onGround, BlockState state, BlockPos landedPosition) {
-    }
-
-    public static class ButterflyMoveToSporeBlossomGoal extends MoveToTargetPosGoal {
-        private final ButterflyEntity butterfly;
-        private final World world;
-        private final float chance;
-
-        public ButterflyMoveToSporeBlossomGoal(ButterflyEntity butterfly, double speed, float chance) {
-            super(butterfly, speed, 16);
-            this.butterfly = butterfly;
-            this.world = butterfly.getWorld();
-            this.chance = chance;
-        }
-
-        @Override
-        public boolean canStart() {
-            if (this.butterfly.getRandom().nextFloat() < chance && world.isDay() && this.butterfly.getBlossomCooldown() <= 0) {
-                return super.canStart();
-            }
-            return false;
-        }
-
-        @Override
-        public void start() {
-            super.start();
-        }
-
-        @Override
-        public void tick() {
-            super.tick();
-            if (this.hasReached()) {
-                this.spawnItem();
-                this.butterfly.setBlossomCooldown(30000);
-            }
-        }
-
-        public boolean shouldContinue() {
-            return super.shouldContinue();
-        }
-
-        @Override
-        protected boolean isTargetPos(WorldView world, BlockPos pos) {
-            return world.getBlockState(pos.up()).isOf(Blocks.SPORE_BLOSSOM);
-        }
-
-        private void spawnItem() {
-            BlockPos spawnPos = this.targetPos;
-            world.spawnEntity(new ItemEntity(world, spawnPos.getX() + 0.5, spawnPos.getY() + 0.5, spawnPos.getZ() + 0.5, new ItemStack(Blocks.SPORE_BLOSSOM, 1)));
-        }
     }
 
     public static class LayCocoonGoal extends MoveToTargetPosGoal {
@@ -414,7 +347,6 @@ public class ButterflyEntity extends AnimalEntity implements GeoEntity {
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
         nbt.putBoolean("HasCocoon", this.hasCocoon());
-        nbt.putInt("BlossomCooldown", this.getBlossomCooldown());
         nbt.putInt("HomePosX", this.getHomePos().getX());
         nbt.putInt("HomePosY", this.getHomePos().getY());
         nbt.putInt("HomePosZ", this.getHomePos().getZ());
@@ -425,7 +357,6 @@ public class ButterflyEntity extends AnimalEntity implements GeoEntity {
     public void readCustomDataFromNbt(NbtCompound nbt) {
         super.readCustomDataFromNbt(nbt);
         this.setHasCocoon(nbt.getBoolean("HasCocoon"));
-        this.setBlossomCooldown(nbt.getInt("BlossomCooldown"));
         int i = nbt.getInt("HomePosX");
         int j = nbt.getInt("HomePosY");
         int k = nbt.getInt("HomePosZ");
@@ -487,7 +418,6 @@ public class ButterflyEntity extends AnimalEntity implements GeoEntity {
 
         setVariant(variant);
         this.setHomePos(this.getBlockPos());
-        this.setBlossomCooldown(30000);
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
     }
 

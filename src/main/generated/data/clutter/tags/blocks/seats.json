@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "clutter:toilet",
+    "#clutter:strippable_benches"
+  ]
+}

@@ -17,7 +17,7 @@ public class ModBlockEntities {
     public static BlockEntityType<WallCupboardInventoryBlockEntity> WALL_CUPBOARD;
     public static BlockEntityType<ShelfInventoryBlockEntity> SHELF;
     public static BlockEntityType<PlateInventoryBlockEntity> PLATE;
-    public static BlockEntityType<BrickKilnEntity> BRICK_KILN_ENTITY;
+    public static BlockEntityType<BrickKilnBlockEntity> BRICK_KILN_ENTITY;
     public static BlockEntityType<CupboardInventoryBlockEntity> CUPBOARD;
     public static BlockEntityType<MailBoxInventoryBlockEntity> MAILBOX;
     public static BlockEntityType<CardboardBoxInventoryBlockEntity> CARDBOARD_BOX;
@@ -106,9 +106,9 @@ public class ModBlockEntities {
                 FabricBlockEntityTypeBuilder.create(PlateInventoryBlockEntity::new,
                         ModBlocks.PLATE).build());
 
-        BRICK_KILN_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "brick_furnace"),
-                FabricBlockEntityTypeBuilder.create(BrickKilnEntity::new,
-                        ModBlocks.BRICK_KILN).build());
+        BRICK_KILN_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "brick_kiln"),
+                FabricBlockEntityTypeBuilder.create(BrickKilnBlockEntity::new,
+                        ModBlocks.BRICK_KILN).build(null));
 
         MAILBOX = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "mailbox"),
                 FabricBlockEntityTypeBuilder.create(MailBoxInventoryBlockEntity::new,

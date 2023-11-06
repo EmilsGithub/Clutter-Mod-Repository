@@ -2,6 +2,7 @@ package net.emilsg.clutter.entity.custom;
 
 import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.entity.ModEntities;
+import net.emilsg.clutter.sound.ModSounds;
 import net.emilsg.clutter.util.ModItemTags;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.BlockState;
@@ -169,7 +170,7 @@ public class KiwiBirdEntity extends AnimalEntity implements GeoEntity {
     @Nullable
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.ENTITY_PARROT_AMBIENT;
+        return ModSounds.ENTITY_KIWI_CALL;
     }
 
     @Override
@@ -193,10 +194,7 @@ public class KiwiBirdEntity extends AnimalEntity implements GeoEntity {
 
         @Override
         public boolean canStart() {
-            if (isSongPlaying()) {
-                return false;
-            }
-            return super.canStart();
+            return super.canStart() && !isSongPlaying();
         }
     }
 

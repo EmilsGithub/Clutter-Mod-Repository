@@ -34,6 +34,9 @@
 		],
 		"fabric-datagen": [
 			"net.emilsg.clutter.ClutterDataGenerator"
+		],
+		"rei_client": [
+			"net.emilsg.clutter.compat.rei.ClutterREIClientPlugin"
 		]
 	},
 	"mixins": [

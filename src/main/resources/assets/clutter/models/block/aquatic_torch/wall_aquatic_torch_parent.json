@@ -1,0 +1,59 @@
+{
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"texture_size": [32, 32],
+	"textures": {
+		"particle": "clutter:block/aquatic_torch",
+		"metal": "clutter:block/aquatic_torch",
+		"coral": "clutter:block/bright_coral/tube_coral_block"
+	},
+	"elements": [
+		{
+			"from": [7, 1, 11.5],
+			"to": [9, 10, 13.5],
+			"rotation": {"angle": -22.5, "axis": "x", "origin": [8, 9.75, 14]},
+			"faces": {
+				"north": {"uv": [5, 5, 6, 9.5], "texture": "#metal"},
+				"east": {"uv": [0, 6, 1, 10.5], "texture": "#metal"},
+				"south": {"uv": [1, 6, 2, 10.5], "texture": "#metal"},
+				"west": {"uv": [2, 6, 3, 10.5], "texture": "#metal"},
+				"up": {"uv": [4, 7, 3, 6], "texture": "#metal"},
+				"down": {"uv": [5, 6, 4, 7], "texture": "#metal"}
+			}
+		},
+		{
+			"from": [5.5, 9.5, 10],
+			"to": [10.5, 15.5, 15],
+			"rotation": {"angle": -22.5, "axis": "x", "origin": [8, 9.75, 14]},
+			"faces": {
+				"north": {"uv": [0, 0, 2.5, 3], "texture": "#metal"},
+				"east": {"uv": [2.5, 0, 5, 3], "texture": "#metal"},
+				"south": {"uv": [0, 3, 2.5, 6], "texture": "#metal"},
+				"west": {"uv": [2.5, 3, 5, 6], "texture": "#metal"},
+				"up": {"uv": [7.5, 2.5, 5, 0], "texture": "#metal"},
+				"down": {"uv": [7.5, 2.5, 5, 5], "texture": "#metal"}
+			}
+		},
+		{
+			"from": [6, 10, 10.5],
+			"to": [10, 15, 14.5],
+			"rotation": {"angle": -22.5, "axis": "x", "origin": [8, 9.75, 14]},
+			"faces": {
+				"north": {"uv": [6, 6, 10, 11], "texture": "#coral"},
+				"east": {"uv": [6, 6, 10, 11], "texture": "#coral"},
+				"south": {"uv": [6, 6, 10, 11], "texture": "#coral"},
+				"west": {"uv": [6, 6, 10, 11], "texture": "#coral"},
+				"up": {"uv": [6, 6, 10, 10], "texture": "#coral"},
+				"down": {"uv": [6, 7, 10, 11], "texture": "#coral"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "Torch",
+			"origin": [0, 0, 0],
+			"color": 0,
+			"children": [0, 1, 2]
+		}
+	]
+}

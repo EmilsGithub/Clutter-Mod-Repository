@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
@@ -45,7 +46,7 @@ public class PlaceOnWaterItem extends AliasedBlockItem {
             BlockState blockstate = world.getBlockState(blockpos);
             FluidState fluidState = world.getFluidState(blockpos);
             if ((fluidState.getFluid() == Fluids.WATER || blockstate.getBlock() instanceof IceBlock) && world.isAir(blockPosUp)) {
-                    world.setBlockState(blockPosUp, placingBlock.getDefaultState());
+                    world.setBlockState(blockPosUp, placingBlock.getDefaultState().withIfExists(Properties.HORIZONTAL_FACING, user.getHorizontalFacing()));
 
                     if (!user.getAbilities().creativeMode) {
                         stackInHand.decrement(1);

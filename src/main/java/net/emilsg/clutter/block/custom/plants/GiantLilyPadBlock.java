@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom.plants;
 
+import net.emilsg.clutter.item.ModItems;
 import net.emilsg.clutter.util.ModProperties;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
@@ -110,12 +111,12 @@ public class GiantLilyPadBlock extends LilyPadBlock implements Fertilizable {
 
     @Override
     public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
-        return !state.get(FLOWERING);
+        return true;
     }
 
     @Override
     public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
-        return !state.get(FLOWERING);
+        return true;
     }
 
     @Override
@@ -135,6 +136,8 @@ public class GiantLilyPadBlock extends LilyPadBlock implements Fertilizable {
                     setFlowering(state, world, position);
                 }
             }
+        } else {
+            dropStack(world, pos, new ItemStack(ModItems.GIANT_LILY_PAD_SEEDLING));
         }
     }
 

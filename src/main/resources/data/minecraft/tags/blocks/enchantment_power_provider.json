@@ -1,7 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "#clutter:bookshelves",
-    "clutter:book_pile"
-  ]
-}

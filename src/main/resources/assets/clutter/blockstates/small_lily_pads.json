@@ -1,51 +1,68 @@
 {
   "variants": {
-    "": [
-        {
-          "model": "clutter:block/plants/small_lily_pads"
-        },
-        {
-          "model": "clutter:block/plants/small_lily_pads1"
-        },
-        {
-          "model": "clutter:block/plants/small_lily_pads2"
-        },
-        {
-          "model": "clutter:block/plants/small_lily_pads",
-          "y": 90
-        },
-        {
-          "model": "clutter:block/plants/small_lily_pads1",
-          "y": 90
-        },
-        {
-          "model": "clutter:block/plants/small_lily_pads2",
-          "y": 90
-        },
-        {
-          "model": "clutter:block/plants/small_lily_pads",
-          "y": 180
-        },
-        {
-          "model": "clutter:block/plants/small_lily_pads1",
-          "y": 180
-        },
-        {
-          "model": "clutter:block/plants/small_lily_pads2",
-          "y": 180
-        },
-        {
-          "model": "clutter:block/plants/small_lily_pads",
-          "y": 270
-        },
-        {
-          "model": "clutter:block/plants/small_lily_pads1",
-          "y": 270
-        },
-        {
-          "model": "clutter:block/plants/small_lily_pads2",
-          "y": 270
-        }
-    ]
+    "facing=north,pad_amount=1": {
+      "model":"clutter:block/plants/small_lily_pads"
+    },
+    "facing=east,pad_amount=1": {
+      "model":"clutter:block/plants/small_lily_pads",
+      "y": 90
+    },
+    "facing=south,pad_amount=1": {
+      "model":"clutter:block/plants/small_lily_pads",
+      "y": 180
+    },
+    "facing=west,pad_amount=1": {
+      "model":"clutter:block/plants/small_lily_pads",
+      "y": 270
+    },
+
+    "facing=north,pad_amount=2": {
+      "model":"clutter:block/plants/small_lily_pads_1"
+    },
+    "facing=east,pad_amount=2": {
+      "model":"clutter:block/plants/small_lily_pads_1",
+      "y": 90
+    },
+    "facing=south,pad_amount=2": {
+      "model":"clutter:block/plants/small_lily_pads_1",
+      "y": 180
+    },
+    "facing=west,pad_amount=2": {
+      "model":"clutter:block/plants/small_lily_pads_1",
+      "y": 270
+    },
+
+    "facing=north,pad_amount=3": {
+      "model":"clutter:block/plants/small_lily_pads_2"
+    },
+    "facing=east,pad_amount=3": {
+      "model":"clutter:block/plants/small_lily_pads_2",
+      "y": 90
+    },
+    "facing=south,pad_amount=3": {
+      "model":"clutter:block/plants/small_lily_pads_2",
+      "y": 180
+    },
+    "facing=west,pad_amount=3": {
+      "model":"clutter:block/plants/small_lily_pads_2",
+      "y": 270
+    },
+
+    "facing=north,pad_amount=4": {
+      "model":"clutter:block/plants/small_lily_pads_3"
+    },
+    "facing=east,pad_amount=4": {
+      "model":"clutter:block/plants/small_lily_pads_3",
+      "y": 90
+    },
+    "facing=south,pad_amount=4": {
+      "model":"clutter:block/plants/small_lily_pads_3",
+      "y": 180
+    },
+    "facing=west,pad_amount=4": {
+      "model":"clutter:block/plants/small_lily_pads_3",
+      "y": 270
+    }
+
   }
 }

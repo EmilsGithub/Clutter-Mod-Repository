@@ -1,8 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "#clutter:copper_trapdoors",
-    "clutter:silver_trapdoor",
-    "clutter:golden_trapdoor"
-  ]
-}

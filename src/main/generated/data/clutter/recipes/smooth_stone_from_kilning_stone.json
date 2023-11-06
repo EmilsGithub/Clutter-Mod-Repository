@@ -1,0 +1,11 @@
+{
+  "type": "clutter:kilning",
+  "ingredients": [
+    {
+      "item": "minecraft:stone"
+    }
+  ],
+  "output": {
+    "item": "minecraft:smooth_stone"
+  }
+}

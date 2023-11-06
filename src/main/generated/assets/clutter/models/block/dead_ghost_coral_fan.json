@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/coral_fan",
+  "textures": {
+    "fan": "clutter:block/dead_ghost_coral_fan"
+  }
+}

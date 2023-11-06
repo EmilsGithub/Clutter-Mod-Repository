@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "clutter:block/dead_cup_coral"
+  }
+}

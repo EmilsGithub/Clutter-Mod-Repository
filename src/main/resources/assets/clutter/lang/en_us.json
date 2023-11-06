@@ -1186,6 +1186,7 @@
   "container.clutter.cupboard": "Cupboard",
   "container.clutter.shelf": "Shelf",
   "container.clutter.brick_kiln": "Brick Kiln",
+  "recipe_type.clutter.kilning": "Kilning",
   "container.clutter.cardboard_box": "Cardboard Box",
   "gui.clutter.recipebook.toggleRecipes.brick_kiln": "Showing Smeltable",
   "tooltip.container.clutter.not_empty": "There's Something Inside",

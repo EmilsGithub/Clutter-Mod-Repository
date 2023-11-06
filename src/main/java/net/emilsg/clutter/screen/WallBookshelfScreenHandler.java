@@ -1,5 +1,6 @@
 package net.emilsg.clutter.screen;
 
+import net.emilsg.clutter.screen.slot.WallBookshelfBoxSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;

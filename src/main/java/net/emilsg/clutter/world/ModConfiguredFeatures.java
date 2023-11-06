@@ -2,17 +2,20 @@ package net.emilsg.clutter.world;
 
 import net.emilsg.clutter.Clutter;
 import net.emilsg.clutter.block.ModBlocks;
+import net.emilsg.clutter.util.ModProperties;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.state.property.Properties;
 import net.minecraft.structure.rule.BlockMatchRuleTest;
 import net.minecraft.structure.rule.RuleTest;
 import net.minecraft.structure.rule.TagMatchRuleTest;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DataPool;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.gen.feature.*;
@@ -101,7 +104,24 @@ public class ModConfiguredFeatures {
 
         register(context, SMALL_LILY_PADS_KEY, Feature.FLOWER,
                 ConfiguredFeatures.createRandomPatchFeatureConfig(8, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK,
-                        new SimpleBlockFeatureConfig(BlockStateProvider.of(ModBlocks.SMALL_LILY_PADS)))));
+                        new SimpleBlockFeatureConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder()
+                                .add(ModBlocks.SMALL_LILY_PADS.getDefaultState(), 1)
+                                .add(ModBlocks.SMALL_LILY_PADS.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.SOUTH), 1)
+                                .add(ModBlocks.SMALL_LILY_PADS.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.EAST), 1)
+                                .add(ModBlocks.SMALL_LILY_PADS.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.SOUTH), 1)
+                                .add(ModBlocks.SMALL_LILY_PADS.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.NORTH).with(ModProperties.PAD_AMOUNT, 2), 1)
+                                .add(ModBlocks.SMALL_LILY_PADS.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.EAST).with(ModProperties.PAD_AMOUNT, 2), 1)
+                                .add(ModBlocks.SMALL_LILY_PADS.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.SOUTH).with(ModProperties.PAD_AMOUNT, 2), 1)
+                                .add(ModBlocks.SMALL_LILY_PADS.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.WEST).with(ModProperties.PAD_AMOUNT, 2), 1)
+                                .add(ModBlocks.SMALL_LILY_PADS.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.NORTH).with(ModProperties.PAD_AMOUNT, 3), 1)
+                                .add(ModBlocks.SMALL_LILY_PADS.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.EAST).with(ModProperties.PAD_AMOUNT, 3), 1)
+                                .add(ModBlocks.SMALL_LILY_PADS.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.SOUTH).with(ModProperties.PAD_AMOUNT, 3), 1)
+                                .add(ModBlocks.SMALL_LILY_PADS.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.WEST).with(ModProperties.PAD_AMOUNT, 3), 1)
+                                .add(ModBlocks.SMALL_LILY_PADS.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.NORTH).with(ModProperties.PAD_AMOUNT, 4), 1)
+                                .add(ModBlocks.SMALL_LILY_PADS.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.EAST).with(ModProperties.PAD_AMOUNT, 4), 1)
+                                .add(ModBlocks.SMALL_LILY_PADS.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.SOUTH).with(ModProperties.PAD_AMOUNT, 4), 1)
+                                .add(ModBlocks.SMALL_LILY_PADS.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.WEST).with(ModProperties.PAD_AMOUNT, 4), 1)
+                        .build())))));
 
     }
 

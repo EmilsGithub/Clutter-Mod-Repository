@@ -41,6 +41,7 @@ public class ModUtil {
         registry.add(ModItems.BAKED_THORNBLOOM_PEAR, 0.3f);
         registry.add(ModBlocks.THORNBLOOM, 0.3f);
         registry.add(ModBlocks.KIWI_LEAVES, 0.2f);
+        registry.add(ModItems.CHERRIES, 0.2f);
     }
 
     public static void registerFuel() {

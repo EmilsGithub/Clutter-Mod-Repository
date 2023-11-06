@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "clutter:giant_lily_pad",
+    "clutter:giant_lily_pad_seedling",
+    "clutter:small_lily_pads"
+  ]
+}
