@@ -118,7 +118,7 @@ public class AquaticWallTorchBlock extends Block implements Waterloggable {
 
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
         if (random.nextInt(2) == 0 && state.get(WATERLOGGED) && world.getFluidState(pos.up()).isOf(Fluids.WATER)) {
-            double x = pos.getX() + 0.5, y = pos.getY() + 0.95, z = pos.getZ() + 0.5;
+            double x = pos.getX() + 0.5, y = pos.getY() + 1.05, z = pos.getZ() + 0.5;
             y += 0.1;
             Direction facing = state.get(FACING);
             double offset = 0.25;

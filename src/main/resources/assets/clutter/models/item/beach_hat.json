@@ -1,3 +1,6 @@
 {
-  "parent": "clutter:hat/hats/beach_hat"
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "clutter:item/beach_hat"
+  }
 }

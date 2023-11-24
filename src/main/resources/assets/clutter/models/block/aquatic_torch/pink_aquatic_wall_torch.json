@@ -1,8 +1,0 @@
-{
-  "parent": "clutter:block/aquatic_torch/wall_aquatic_torch_parent",
-  "textures": {
-    "particle": "clutter:block/aquatic_torch",
-    "metal": "clutter:block/aquatic_torch",
-    "coral": "clutter:block/bright_coral/brain_coral_block"
-  }
-}

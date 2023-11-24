@@ -22,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
 public class AquaticTorchBlock extends Block implements Waterloggable {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 
-    private static final VoxelShape FLOOR_SHAPE = VoxelShapes.union(Block.createCuboidShape(6.5, 0, 6.5, 9.5, 9, 9.5), Block.createCuboidShape(5, 8, 5, 11, 15, 11));
+    private static final VoxelShape FLOOR_SHAPE = VoxelShapes.union(Block.createCuboidShape(6, 0, 6, 10, 10, 10), Block.createCuboidShape(4.5, 8.5, 4.5, 11.5, 15.5, 11.5));
 
 
     public AquaticTorchBlock(Settings settings) {
@@ -92,8 +92,8 @@ public class AquaticTorchBlock extends Block implements Waterloggable {
 
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
         if (random.nextInt(2) == 0 && state.get(WATERLOGGED) && world.getFluidState(pos.up()).isOf(Fluids.WATER)) {
-            double x = pos.getX() + 0.5, y = pos.getY() + 0.95, z = pos.getZ() + 0.5;
-            world.addParticle(random.nextBoolean() ? ParticleTypes.BUBBLE : ParticleTypes.BUBBLE_POP, x, y, z, 0.0, 0.0, 0.0);
+            double x = pos.getX() + 0.5, y = pos.getY() + 1.05, z = pos.getZ() + 0.5;
+            world.addParticle(random.nextInt(2) == 0 ? ParticleTypes.BUBBLE_POP : ParticleTypes.BUBBLE, x, y, z, 0.0, 0.0, 0.0);
         }
     }
 

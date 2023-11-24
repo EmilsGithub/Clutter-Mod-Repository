@@ -1,3 +1,6 @@
 {
-  "parent": "clutter:hat/hats/propeller_cap"
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "clutter:item/propeller_cap"
+  }
 }

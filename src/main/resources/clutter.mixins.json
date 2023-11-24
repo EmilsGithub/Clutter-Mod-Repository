@@ -17,6 +17,9 @@
   },
   "client": [
     "CapeFeatureRendererMixin",
-    "ElytraFeatureRendererMixin"
+    "ElytraFeatureRendererMixin",
+    "ItemRendererAccessor",
+    "ItemRendererMixin",
+    "ModelLoaderMixin"
   ]
 }

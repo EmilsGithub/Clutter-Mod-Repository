@@ -22,11 +22,16 @@ import net.minecraft.util.math.Direction;
 
 public class ModItems {
 
-    public static final Item BLUE_AQUATIC_TORCH = registerItem("blue_aquatic_torch", new VerticallyAttachableBlockItem(ModBlocks.BLUE_AQUATIC_TORCH, ModBlocks.BLUE_AQUATIC_WALL_TORCH, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Item RED_AQUATIC_TORCH = registerItem("red_aquatic_torch", new VerticallyAttachableBlockItem(ModBlocks.RED_AQUATIC_TORCH, ModBlocks.RED_AQUATIC_WALL_TORCH, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Item YELLOW_AQUATIC_TORCH  = registerItem("yellow_aquatic_torch", new VerticallyAttachableBlockItem(ModBlocks.YELLOW_AQUATIC_TORCH, ModBlocks.YELLOW_AQUATIC_WALL_TORCH, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Item PINK_AQUATIC_TORCH = registerItem("pink_aquatic_torch", new VerticallyAttachableBlockItem(ModBlocks.PINK_AQUATIC_TORCH, ModBlocks.PINK_AQUATIC_WALL_TORCH, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Item MAGENTA_AQUATIC_TORCH = registerItem("magenta_aquatic_torch", new VerticallyAttachableBlockItem(ModBlocks.MAGENTA_AQUATIC_TORCH, ModBlocks.MAGENTA_AQUATIC_WALL_TORCH, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Item AQUATIC_TORCH = registerItem("aquatic_torch", new VerticallyAttachableBlockItem(ModBlocks.AQUATIC_TORCH, ModBlocks.AQUATIC_WALL_TORCH, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Item EXPOSED_AQUATIC_TORCH = registerItem("exposed_aquatic_torch", new VerticallyAttachableBlockItem(ModBlocks.EXPOSED_AQUATIC_TORCH, ModBlocks.EXPOSED_AQUATIC_WALL_TORCH, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Item WEATHERED_AQUATIC_TORCH = registerItem("weathered_aquatic_torch", new VerticallyAttachableBlockItem(ModBlocks.WEATHERED_AQUATIC_TORCH, ModBlocks.WEATHERED_AQUATIC_WALL_TORCH, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Item OXIDIZED_AQUATIC_TORCH = registerItem("oxidized_aquatic_torch", new VerticallyAttachableBlockItem(ModBlocks.OXIDIZED_AQUATIC_TORCH, ModBlocks.OXIDIZED_AQUATIC_WALL_TORCH, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
+
+    public static final Item WAXED_AQUATIC_TORCH = registerItem("waxed_aquatic_torch", new VerticallyAttachableBlockItem(ModBlocks.WAXED_AQUATIC_TORCH, ModBlocks.WAXED_AQUATIC_WALL_TORCH, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Item WAXED_EXPOSED_AQUATIC_TORCH = registerItem("waxed_exposed_aquatic_torch", new VerticallyAttachableBlockItem(ModBlocks.WAXED_EXPOSED_AQUATIC_TORCH, ModBlocks.WAXED_EXPOSED_AQUATIC_WALL_TORCH, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Item WAXED_WEATHERED_AQUATIC_TORCH = registerItem("waxed_weathered_aquatic_torch", new VerticallyAttachableBlockItem(ModBlocks.WAXED_WEATHERED_AQUATIC_TORCH, ModBlocks.WAXED_WEATHERED_AQUATIC_WALL_TORCH, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Item WAXED_OXIDIZED_AQUATIC_TORCH = registerItem("waxed_oxidized_aquatic_torch", new VerticallyAttachableBlockItem(ModBlocks.WAXED_OXIDIZED_AQUATIC_TORCH, ModBlocks.WAXED_OXIDIZED_AQUATIC_WALL_TORCH, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
+
     public static final Item PRISMARINE_TORCH = registerItem("prismarine_torch", new VerticallyAttachableBlockItem(ModBlocks.PRISMARINE_TORCH, ModBlocks.PRISMARINE_WALL_TORCH, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);
 
     public static final Item DEAD_CUP_CORAL_FAN = registerItem("dead_cup_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.DEAD_CUP_CORAL_FAN, ModBlocks.DEAD_CUP_CORAL_WALL_FAN, new FabricItemSettings(), Direction.DOWN), ModItemGroups.CLUTTER_BLOCKS);

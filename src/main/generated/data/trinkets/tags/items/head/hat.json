@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "clutter:beach_hat",
+    "clutter:top_hat",
+    "clutter:beret",
+    "clutter:cowboy_hat",
+    "clutter:butterfly_wings",
+    "clutter:crown",
+    "clutter:cap",
+    "clutter:propeller_cap",
+    "clutter:tiara",
+    "clutter:viking_helmet",
+    "#clutter:plushies"
+  ]
+}

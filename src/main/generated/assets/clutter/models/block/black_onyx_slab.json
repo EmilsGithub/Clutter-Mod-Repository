@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "clutter:block/black_onyx_block",
+    "side": "clutter:block/black_onyx_block",
+    "top": "clutter:block/black_onyx_block"
+  }
+}

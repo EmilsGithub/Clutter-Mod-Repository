@@ -23,7 +23,7 @@ import net.minecraft.world.dimension.DimensionTypes;
 
 public class EmperorPenguinEggBlock extends Block {
     public static final IntProperty HATCH = Properties.HATCH;
-    private static final VoxelShape SHAPE = VoxelShapes.union(Block.createCuboidShape(6, 0, 6, 10, 7, 10));
+    private static final VoxelShape SHAPE = VoxelShapes.union(Block.createCuboidShape(6, 0, 6, 10, 6, 10));
 
     public EmperorPenguinEggBlock(Settings settings) {
         super(settings);

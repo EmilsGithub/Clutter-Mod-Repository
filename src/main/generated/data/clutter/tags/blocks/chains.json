@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:chain",
+    "clutter:silver_chain",
+    "clutter:golden_chain",
+    "clutter:copper_chain",
+    "clutter:exposed_copper_chain",
+    "clutter:weathered_copper_chain",
+    "clutter:oxidized_copper_chain",
+    "clutter:waxed_copper_chain",
+    "clutter:waxed_exposed_copper_chain",
+    "clutter:waxed_weathered_copper_chain",
+    "clutter:waxed_oxidized_copper_chain"
+  ]
+}

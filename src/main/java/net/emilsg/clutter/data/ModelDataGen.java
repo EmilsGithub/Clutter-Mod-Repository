@@ -4,22 +4,32 @@ import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.item.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
-import net.minecraft.data.client.BlockStateModelGenerator;
-import net.minecraft.data.client.ItemModelGenerator;
-import net.minecraft.data.client.Model;
+import net.minecraft.block.Block;
+import net.minecraft.data.client.*;
+import net.minecraft.data.family.BlockFamilies;
+import net.minecraft.data.family.BlockFamily;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.util.Identifier;
 
 import java.util.Optional;
 
 public class ModelDataGen extends FabricModelProvider {
-
     public ModelDataGen(FabricDataOutput output) {
         super(output);
     }
 
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
+        BlockStateModelGenerator.BlockTexturePool blackOnyxTexturePool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.BLACK_ONYX_BLOCK);
+        BlockStateModelGenerator.BlockTexturePool polishedBlackOnyxTexturePool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.POLISHED_BLACK_ONYX);
+
+        blackOnyxTexturePool.slab(ModBlocks.BLACK_ONYX_SLAB);
+        blackOnyxTexturePool.stairs(ModBlocks.BLACK_ONYX_STAIRS);
+        blackOnyxTexturePool.wall(ModBlocks.BLACK_ONYX_WALL);
+        polishedBlackOnyxTexturePool.slab(ModBlocks.POLISHED_BLACK_ONYX_SLAB);
+        polishedBlackOnyxTexturePool.stairs(ModBlocks.POLISHED_BLACK_ONYX_STAIRS);
+        polishedBlackOnyxTexturePool.wall(ModBlocks.POLISHED_BLACK_ONYX_WALL);
+
         blockStateModelGenerator.registerCoral(ModBlocks.CUP_CORAL, ModBlocks.DEAD_CUP_CORAL, ModBlocks.CUP_CORAL_BLOCK, ModBlocks.DEAD_CUP_CORAL_BLOCK, ModBlocks.CUP_CORAL_FAN, ModBlocks.DEAD_CUP_CORAL_FAN, ModBlocks.CUP_CORAL_WALL_FAN, ModBlocks.DEAD_CUP_CORAL_WALL_FAN);
         blockStateModelGenerator.registerCoral(ModBlocks.GHOST_CORAL, ModBlocks.DEAD_GHOST_CORAL, ModBlocks.GHOST_CORAL_BLOCK, ModBlocks.DEAD_GHOST_CORAL_BLOCK, ModBlocks.GHOST_CORAL_FAN, ModBlocks.DEAD_GHOST_CORAL_FAN, ModBlocks.GHOST_CORAL_WALL_FAN, ModBlocks.DEAD_GHOST_CORAL_WALL_FAN);
         blockStateModelGenerator.registerCoral(ModBlocks.STONE_CORAL, ModBlocks.DEAD_STONE_CORAL, ModBlocks.STONE_CORAL_BLOCK, ModBlocks.DEAD_STONE_CORAL_BLOCK, ModBlocks.STONE_CORAL_FAN, ModBlocks.DEAD_STONE_CORAL_FAN, ModBlocks.STONE_CORAL_WALL_FAN, ModBlocks.DEAD_STONE_CORAL_WALL_FAN);
@@ -41,5 +51,26 @@ public class ModelDataGen extends FabricModelProvider {
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.SILVER_BOOTS));
 
         itemModelGenerator.register(ModItems.CAPYBARA_SPAWN_EGG, new Model(Optional.of(new Identifier("item/template_spawn_egg")), Optional.empty()));
+    }
+
+    private void registerSlab(Block slab, Block fullBlock, TextureMap texture, BlockStateModelGenerator blockStateModelGenerator) { //Credit to Xanthian
+        var slabLower = Models.SLAB.upload(slab, texture, blockStateModelGenerator.modelCollector);
+        var slabUpper = Models.SLAB_TOP.upload(slab, texture, blockStateModelGenerator.modelCollector);
+        blockStateModelGenerator.blockStateCollector.accept(BlockStateModelGenerator.createSlabBlockState(slab, slabLower, slabUpper, ModelIds.getBlockModelId(fullBlock)));
+        blockStateModelGenerator.registerParentedItemModel(slab, slabLower);
+    }
+
+    BlockStateSupplier registerWalls(Block block, Block texture, BlockStateModelGenerator blockStateModelGenerator){
+        TextureMap textureMap = new TextureMap().put(TextureKey.WALL, TextureMap.getSubId(texture, ""))
+                .put(TextureKey.SIDE,  TextureMap.getSubId(texture, ""))
+                .put(TextureKey.TOP, TextureMap.getSubId(texture, ""))
+                .put(TextureKey.BOTTOM, TextureMap.getSubId(texture, ""));
+
+        Identifier wallPost = Models.TEMPLATE_WALL_POST.upload(block, textureMap, blockStateModelGenerator.modelCollector);
+        Identifier wallSide = Models.TEMPLATE_WALL_SIDE.upload(block, textureMap, blockStateModelGenerator.modelCollector);
+        Identifier wallTallSide = Models.TEMPLATE_WALL_SIDE_TALL.upload(block, textureMap, blockStateModelGenerator.modelCollector);
+        Identifier wallInventory = Models.WALL_INVENTORY.upload(block, textureMap, blockStateModelGenerator.modelCollector);
+        blockStateModelGenerator.registerParentedItemModel(block, wallInventory);
+        return BlockStateModelGenerator.createWallBlockState(block, wallPost, wallSide, wallTallSide);
     }
 }

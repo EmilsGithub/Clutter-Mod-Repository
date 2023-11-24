@@ -29,6 +29,34 @@ public class LootTableDataGen extends FabricBlockLootTableProvider {
         this.addCoralDrops(ModBlocks.GEM_CORAL, ModBlocks.DEAD_GEM_CORAL, ModBlocks.GEM_CORAL_BLOCK, ModBlocks.DEAD_GEM_CORAL_BLOCK, ModBlocks.GEM_CORAL_FAN, ModBlocks.DEAD_GEM_CORAL_FAN, ModBlocks.GEM_CORAL_WALL_FAN, ModBlocks.DEAD_GEM_CORAL_WALL_FAN);
         this.addCoralDrops(ModBlocks.DIAMOND_CORAL, ModBlocks.DEAD_DIAMOND_CORAL, ModBlocks.DIAMOND_CORAL_BLOCK, ModBlocks.DEAD_DIAMOND_CORAL_BLOCK, ModBlocks.DIAMOND_CORAL_FAN, ModBlocks.DEAD_DIAMOND_CORAL_FAN, ModBlocks.DIAMOND_CORAL_WALL_FAN, ModBlocks.DEAD_DIAMOND_CORAL_WALL_FAN);
         this.addCoralDrops(ModBlocks.ANCHOR_CORAL, ModBlocks.DEAD_ANCHOR_CORAL, ModBlocks.ANCHOR_CORAL_BLOCK, ModBlocks.DEAD_ANCHOR_CORAL_BLOCK, ModBlocks.ANCHOR_CORAL_FAN, ModBlocks.DEAD_ANCHOR_CORAL_FAN, ModBlocks.ANCHOR_CORAL_WALL_FAN, ModBlocks.DEAD_ANCHOR_CORAL_WALL_FAN);
+        addDrop(ModBlocks.BLACK_ONYX_BLOCK);
+        addDrop(ModBlocks.BLACK_ONYX_SLAB, slabDrops(ModBlocks.BLACK_ONYX_SLAB));
+        addDrop(ModBlocks.BLACK_ONYX_STAIRS);
+        addDrop(ModBlocks.BLACK_ONYX_WALL);
+        addDrop(ModBlocks.POLISHED_BLACK_ONYX);
+        addDrop(ModBlocks.POLISHED_BLACK_ONYX_SLAB, slabDrops(ModBlocks.POLISHED_BLACK_ONYX_SLAB));
+        addDrop(ModBlocks.POLISHED_BLACK_ONYX_STAIRS);
+        addDrop(ModBlocks.POLISHED_BLACK_ONYX_WALL);
+        addDrop(ModBlocks.MAILBOX);
+        addDrop(ModBlocks.GLOWLILY_BLOCK);
+        addDrop(ModBlocks.AQUATIC_TORCH);
+        addDrop(ModBlocks.AQUATIC_WALL_TORCH);
+        addDrop(ModBlocks.EXPOSED_AQUATIC_TORCH);
+        addDrop(ModBlocks.EXPOSED_AQUATIC_WALL_TORCH);
+        addDrop(ModBlocks.WEATHERED_AQUATIC_TORCH);
+        addDrop(ModBlocks.WEATHERED_AQUATIC_WALL_TORCH);
+        addDrop(ModBlocks.OXIDIZED_AQUATIC_TORCH);
+        addDrop(ModBlocks.OXIDIZED_AQUATIC_WALL_TORCH);
+        addDrop(ModBlocks.WAXED_AQUATIC_TORCH);
+        addDrop(ModBlocks.WAXED_AQUATIC_WALL_TORCH);
+        addDrop(ModBlocks.WAXED_EXPOSED_AQUATIC_TORCH);
+        addDrop(ModBlocks.WAXED_EXPOSED_AQUATIC_WALL_TORCH);
+        addDrop(ModBlocks.WAXED_WEATHERED_AQUATIC_TORCH);
+        addDrop(ModBlocks.WAXED_WEATHERED_AQUATIC_WALL_TORCH);
+        addDrop(ModBlocks.WAXED_OXIDIZED_AQUATIC_TORCH);
+        addDrop(ModBlocks.WAXED_OXIDIZED_AQUATIC_WALL_TORCH);
+        addDrop(ModBlocks.PRISMARINE_TORCH);
+        addDrop(ModBlocks.PRISMARINE_WALL_TORCH);
     }
 
     private void addCoralDrops(Block coral, Block deadCoral, Block coralBlock, Block deadCoralBlock, Block coralFan, Block deadCoralFan, Block coralWallFan, Block deadCoralWallFan) {

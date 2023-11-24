@@ -1,0 +1,6 @@
+{
+	"parent": "clutter:block/aquatic_torch/aquatic_torch_parent",
+	"textures": {
+		"base": "clutter:block/exposed_aquatic_torch_base"
+	}
+}

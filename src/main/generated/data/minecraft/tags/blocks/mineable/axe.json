@@ -3,8 +3,9 @@
   "values": [
     "clutter:bonfire",
     "clutter:soul_bonfire",
+    "#clutter:shelves",
     "#clutter:trellises",
-    "#clutter:strippable_benches",
+    "#clutter:benches",
     "#clutter:armchairs",
     "#clutter:wooden_mosaics",
     "#clutter:cupboards",
@@ -13,6 +14,7 @@
     "#clutter:tables",
     "#clutter:food_boxes",
     "#clutter:window_sills",
-    "#clutter:wooden_chairs"
+    "#clutter:wooden_chairs",
+    "#clutter:bookshelves"
   ]
 }

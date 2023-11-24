@@ -62,7 +62,7 @@ public class ChameleonRenderer extends GeoEntityRenderer<ChameleonEntity> {
                 color = 10495779;
             } else if (registryEntry.matchesKey(BiomeKeys.SOUL_SAND_VALLEY) || getBlockOrFluidBelowEntity(animatable).isIn(BlockTags.SOUL_FIRE_BASE_BLOCKS)) {
                 color = 5192235;
-            } else if (registryEntry.matchesKey(BiomeKeys.BASALT_DELTAS) || getBlockOrFluidBelowEntity(animatable).isIn(ModBlockTags.BASALT)) {
+            } else if (registryEntry.matchesKey(BiomeKeys.BASALT_DELTAS) || getBlockOrFluidBelowEntity(animatable).isOf(Blocks.BASALT) || getBlockOrFluidBelowEntity(animatable).isOf(Blocks.POLISHED_BASALT) || getBlockOrFluidBelowEntity(animatable).isOf(Blocks.SMOOTH_BASALT)) {
                 color = 3552564;
             } else {
                 color = 8536385;

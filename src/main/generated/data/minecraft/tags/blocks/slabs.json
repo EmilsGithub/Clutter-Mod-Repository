@@ -3,6 +3,8 @@
   "values": [
     "clutter:onyx_slab",
     "clutter:polished_onyx_slab",
+    "clutter:black_onyx_slab",
+    "clutter:polished_black_onyx_slab",
     "clutter:oak_mosaic_slab",
     "clutter:spruce_mosaic_slab",
     "clutter:birch_mosaic_slab",

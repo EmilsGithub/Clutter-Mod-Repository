@@ -1,5 +1,6 @@
 package net.emilsg.clutter.mixin;
 
+import net.emilsg.clutter.Clutter;
 import net.emilsg.clutter.config.ModConfigs;
 import net.emilsg.clutter.effect.ModEffects;
 import net.emilsg.clutter.item.ModItems;

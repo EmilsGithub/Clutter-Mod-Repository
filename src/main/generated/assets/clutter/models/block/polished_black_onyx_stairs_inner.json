@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "clutter:block/polished_black_onyx",
+    "side": "clutter:block/polished_black_onyx",
+    "top": "clutter:block/polished_black_onyx"
+  }
+}

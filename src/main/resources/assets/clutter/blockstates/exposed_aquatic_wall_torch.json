@@ -1,0 +1,19 @@
+{
+  "variants":{
+    "facing=north":{
+      "model":"clutter:block/aquatic_torch/exposed_aquatic_wall_torch"
+    },
+    "facing=east":{
+      "model":"clutter:block/aquatic_torch/exposed_aquatic_wall_torch",
+      "y": 90
+    },
+    "facing=south":{
+      "model":"clutter:block/aquatic_torch/exposed_aquatic_wall_torch",
+      "y": 180
+    },
+    "facing=west":{
+      "model":"clutter:block/aquatic_torch/exposed_aquatic_wall_torch",
+      "y": 270
+    }
+  }
+}

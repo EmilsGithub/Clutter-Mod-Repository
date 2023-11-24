@@ -19,6 +19,7 @@ import net.minecraft.item.Items;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
@@ -96,33 +97,24 @@ public class ModCallbackRegistry {
             Direction side = hitResult.getSide();
             BlockState stateSide = world.getBlockState(hitResult.getBlockPos().offset(side));
             BlockPos blockPosSide = hitResult.getBlockPos().offset(side);
-            if (world.isClient || !world.canPlayerModifyAt(player, blockPos) || !player.getStackInHand(hand).isOf(Items.BOOK) || !player.isSneaking()) {
+
+            if (world.isClient || !world.canPlayerModifyAt(player, blockPos) || !player.getStackInHand(hand).isOf(Items.BOOK)) {
                 return ActionResult.PASS;
             }
+
             if (player.getStackInHand(hand).isOf(Items.BOOK)) {
-                if (state.isOf(ModBlocks.BOOK_PILE) && state.get(BookPileBlock.LAYERS) != 7) {
+                if (state.isOf(ModBlocks.BOOK_PILE) && !state.get(ModProperties.LAYERS).equals(7) && !player.isSneaking()) {
                     world.setBlockState(blockPos, ModBlocks.BOOK_PILE.getDefaultState()
-                            .with(HorizontalFacingBlock.FACING, world.getBlockState(blockPos).get(HorizontalFacingBlock.FACING))
-                            .with(BookPileBlock.LAYERS, world.getBlockState(blockPos).get(BookPileBlock.LAYERS) + 1), Block.NOTIFY_ALL);
-                    if (!player.getAbilities().creativeMode) player.getStackInHand(hand).decrement(1);
-                    world.playSound(null, blockPos, SoundEvents.ITEM_BOOK_PUT, SoundCategory.BLOCKS, 1.0f, 0.9f);
-                    return ActionResult.SUCCESS;
-                } else if (state.isReplaceable() && !state.isOf(ModBlocks.BOOK_PILE)) {
-                    world.setBlockState(blockPos, ModBlocks.BOOK_PILE.getDefaultState()
-                            .with(HorizontalFacingBlock.FACING, player.getHorizontalFacing()), Block.NOTIFY_ALL);
-                    if (!player.getAbilities().creativeMode) player.getStackInHand(hand).decrement(1);
-                    world.playSound(null, blockPos, SoundEvents.ITEM_BOOK_PUT, SoundCategory.BLOCKS, 1.0f, 0.9f);
-                    return ActionResult.SUCCESS;
-                } else if (stateSide.isReplaceable() && !stateSide.isOf(ModBlocks.BOOK_PILE) && !state.isOf(ModBlocks.BOOK_PILE)) {
-                    world.setBlockState(blockPosSide, ModBlocks.BOOK_PILE.getDefaultState().with(HorizontalFacingBlock.FACING, player.getHorizontalFacing()), Block.NOTIFY_ALL);
-                    if (!player.getAbilities().creativeMode) player.getStackInHand(hand).decrement(1);
-                    world.playSound(null, blockPos, SoundEvents.ITEM_BOOK_PUT, SoundCategory.BLOCKS, 1.0f, 0.9f);
-                    return ActionResult.SUCCESS;
-                } else if (stateSide.isReplaceable() && !stateSide.isOf(ModBlocks.BOOK_PILE) && player.isSneaking()) {
-                    world.setBlockState(blockPosSide, ModBlocks.BOOK_PILE.getDefaultState().with(HorizontalFacingBlock.FACING, player.getHorizontalFacing()), Block.NOTIFY_ALL);
-                    if (!player.getAbilities().creativeMode) player.getStackInHand(hand).decrement(1);
-                    world.playSound(null, blockPos, SoundEvents.ITEM_BOOK_PUT, SoundCategory.BLOCKS, 1.0f, 0.9f);
-                    return ActionResult.SUCCESS;
+                            .with(ModProperties.LAYERS, state.get(ModProperties.LAYERS) + 1), Block.NOTIFY_ALL);
+                    return decrementAndPlaySound(player, world, blockPos, hand);
+                }
+
+                if (player.isSneaking()) {
+                    if (!state.isOf(ModBlocks.BOOK_PILE) && stateSide.isReplaceable()) {
+                        world.setBlockState(blockPosSide, ModBlocks.BOOK_PILE.getDefaultState()
+                                .with(Properties.HORIZONTAL_FACING, player.getHorizontalFacing()), Block.NOTIFY_ALL);
+                        return decrementAndPlaySound(player, world, blockPos, hand);
+                    }
                 }
             }
             return ActionResult.PASS;
@@ -137,6 +129,12 @@ public class ModCallbackRegistry {
         seatEntity.updatePosition(pos.getX(), pos.getY(), pos.getZ());
         world.spawnEntity(seatEntity);
         player.startRiding(seatEntity);
+        return ActionResult.SUCCESS;
+    }
+
+    private static ActionResult decrementAndPlaySound(PlayerEntity player, World world, BlockPos blockPos, Hand hand) {
+        if (!player.getAbilities().creativeMode) player.getStackInHand(hand).decrement(1);
+        world.playSound(null, blockPos, SoundEvents.ITEM_BOOK_PUT, SoundCategory.BLOCKS, 1.0f, 0.9f);
         return ActionResult.SUCCESS;
     }
 }

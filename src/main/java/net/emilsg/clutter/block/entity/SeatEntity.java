@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.entity;
 
+import net.emilsg.clutter.block.custom.SeatBlock;
 import net.emilsg.clutter.entity.ModEntities;
 import net.emilsg.clutter.util.ModBlockTags;
 import net.minecraft.entity.Entity;
@@ -52,7 +53,7 @@ public class SeatEntity extends Entity {
 
     @Override
     public void tick() {
-        if (!this.getWorld().isClient && !(this.getWorld().getBlockState(this.getBlockPos()).isIn(ModBlockTags.SEATS) || !this.getPassengerList().isEmpty())){
+        if (!this.getWorld().isClient && !(!this.getPassengerList().isEmpty() || !(this.getWorld().getBlockState(this.getBlockPos()).getBlock() instanceof SeatBlock))){
             remove(RemovalReason.DISCARDED);
         }
     }

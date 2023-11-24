@@ -1,3 +1,6 @@
 {
-  "parent": "clutter:hat/hats/butterfly_wings"
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "clutter:item/butterfly_wings"
+  }
 }

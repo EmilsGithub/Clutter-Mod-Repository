@@ -1148,6 +1148,15 @@ public class ModBlocks {
     public static final Block POLISHED_ONYX_SLAB = registerBlock("polished_onyx_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
     public static final Block POLISHED_ONYX_STAIRS = registerBlock("polished_onyx_stairs", new StairsBlock(Blocks.OBSIDIAN.getDefaultState(), FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
     public static final Block POLISHED_ONYX_WALL = registerBlock("polished_onyx_wall", new WallBlock(FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block BLACK_ONYX_BLOCK = registerBlock("black_onyx_block", new Block(FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block BLACK_ONYX_SLAB = registerBlock("black_onyx_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block BLACK_ONYX_STAIRS = registerBlock("black_onyx_stairs", new StairsBlock(Blocks.OBSIDIAN.getDefaultState(), FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block BLACK_ONYX_WALL = registerBlock("black_onyx_wall", new WallBlock(FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block POLISHED_BLACK_ONYX = registerBlock("polished_black_onyx", new Block(FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block POLISHED_BLACK_ONYX_SLAB = registerBlock("polished_black_onyx_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block POLISHED_BLACK_ONYX_STAIRS = registerBlock("polished_black_onyx_stairs", new StairsBlock(Blocks.OBSIDIAN.getDefaultState(), FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block POLISHED_BLACK_ONYX_WALL = registerBlock("polished_black_onyx_wall", new WallBlock(FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
+
 
     public static final Block SMALL_TARGET_BLOCK = registerBlock("small_target_block", new SmallTargetBlock(FabricBlockSettings.copy(Blocks.TARGET).nonOpaque()), ModItemGroups.CLUTTER_BLOCKS);
 
@@ -1181,12 +1190,27 @@ public class ModBlocks {
     public static final Block WAXED_WEATHERED_COPPER_CANDLE_HOLDER = registerBlock("waxed_weathered_copper_candle_holder_block", new ReworkedCandleHolderBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK).luminance(createLightLevelFromLitBlockState(13))), ModItemGroups.CLUTTER_BLOCKS);
     public static final Block WAXED_OXIDIZED_COPPER_CANDLE_HOLDER = registerBlock("waxed_oxidized_copper_candle_holder_block", new ReworkedCandleHolderBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK).luminance(createLightLevelFromLitBlockState(13))), ModItemGroups.CLUTTER_BLOCKS);
 
-    public static final Block BLUE_AQUATIC_TORCH = registerBlockWithoutItem("blue_aquatic_torch", new AquaticTorchBlock(FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
-    public static final Block RED_AQUATIC_TORCH = registerBlockWithoutItem("red_aquatic_torch", new AquaticTorchBlock(FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
-    public static final Block YELLOW_AQUATIC_TORCH = registerBlockWithoutItem("yellow_aquatic_torch", new AquaticTorchBlock(FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
-    public static final Block PINK_AQUATIC_TORCH = registerBlockWithoutItem("pink_aquatic_torch", new AquaticTorchBlock(FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
-    public static final Block MAGENTA_AQUATIC_TORCH = registerBlockWithoutItem("magenta_aquatic_torch", new AquaticTorchBlock(FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
+    public static final Block AQUATIC_TORCH = registerBlockWithoutItem("aquatic_torch", new OxidizableAquaticTorchBlock(Oxidizable.OxidationLevel.UNAFFECTED, FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
+    public static final Block AQUATIC_WALL_TORCH = registerBlockWithoutItem("aquatic_wall_torch", new OxidizableAquaticWallTorchBlock(Oxidizable.OxidationLevel.UNAFFECTED, FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
+    public static final Block EXPOSED_AQUATIC_TORCH = registerBlockWithoutItem("exposed_aquatic_torch", new OxidizableAquaticTorchBlock(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
+    public static final Block EXPOSED_AQUATIC_WALL_TORCH = registerBlockWithoutItem("exposed_aquatic_wall_torch", new OxidizableAquaticWallTorchBlock(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
+    public static final Block WEATHERED_AQUATIC_TORCH = registerBlockWithoutItem("weathered_aquatic_torch", new OxidizableAquaticTorchBlock(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
+    public static final Block WEATHERED_AQUATIC_WALL_TORCH = registerBlockWithoutItem("weathered_aquatic_wall_torch", new OxidizableAquaticWallTorchBlock(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
+    public static final Block OXIDIZED_AQUATIC_TORCH = registerBlockWithoutItem("oxidized_aquatic_torch", new OxidizableAquaticTorchBlock(Oxidizable.OxidationLevel.OXIDIZED, FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
+    public static final Block OXIDIZED_AQUATIC_WALL_TORCH = registerBlockWithoutItem("oxidized_aquatic_wall_torch", new OxidizableAquaticWallTorchBlock(Oxidizable.OxidationLevel.OXIDIZED, FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
+
+    public static final Block WAXED_AQUATIC_TORCH = registerBlockWithoutItem("waxed_aquatic_torch", new AquaticTorchBlock(FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
+    public static final Block WAXED_AQUATIC_WALL_TORCH = registerBlockWithoutItem("waxed_aquatic_wall_torch", new AquaticTorchBlock(FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
+    public static final Block WAXED_EXPOSED_AQUATIC_TORCH = registerBlockWithoutItem("waxed_exposed_aquatic_torch", new AquaticTorchBlock(FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
+    public static final Block WAXED_EXPOSED_AQUATIC_WALL_TORCH = registerBlockWithoutItem("waxed_exposed_aquatic_wall_torch", new AquaticTorchBlock(FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
+    public static final Block WAXED_WEATHERED_AQUATIC_TORCH = registerBlockWithoutItem("waxed_weathered_aquatic_torch", new AquaticTorchBlock(FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
+    public static final Block WAXED_WEATHERED_AQUATIC_WALL_TORCH = registerBlockWithoutItem("waxed_weathered_aquatic_wall_torch", new AquaticTorchBlock(FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
+    public static final Block WAXED_OXIDIZED_AQUATIC_TORCH = registerBlockWithoutItem("waxed_oxidized_aquatic_torch", new AquaticTorchBlock(FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
+    public static final Block WAXED_OXIDIZED_AQUATIC_WALL_TORCH = registerBlockWithoutItem("waxed_oxidized_aquatic_wall_torch", new AquaticTorchBlock(FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
+
     public static final Block PRISMARINE_TORCH = registerBlockWithoutItem("prismarine_torch", new AquaticTorchBlock(FabricBlockSettings.copy(Blocks.PRISMARINE_BRICKS).luminance((state) -> 10)));
+    public static final Block PRISMARINE_WALL_TORCH = registerBlockWithoutItem("prismarine_wall_torch", new AquaticWallTorchBlock(FabricBlockSettings.copy(Blocks.PRISMARINE_BRICKS).luminance((state) -> 10)));
+
 
     public static final Block DEAD_CUP_CORAL_BLOCK = registerBlock("dead_cup_coral_block", new Block(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
     public static final Block CUP_CORAL_BLOCK = registerBlock("cup_coral_block", new CoralBlockBlock(ModBlocks.DEAD_CUP_CORAL_BLOCK, FabricBlockSettings.copy(Blocks.HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
@@ -1287,14 +1311,6 @@ public class ModBlocks {
     public static final Block DEAD_ANCHOR_CORAL_WALL_FAN = registerBlockWithoutItem("dead_anchor_coral_wall_fan", new DeadCoralWallFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN)));
     public static final Block ANCHOR_CORAL_WALL_FAN = registerBlockWithoutItem("anchor_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_ANCHOR_CORAL_WALL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_WALL_FAN)));
 
-
-    public static final Block BLUE_AQUATIC_WALL_TORCH = registerBlockWithoutItem("blue_aquatic_wall_torch", new AquaticWallTorchBlock(FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
-    public static final Block RED_AQUATIC_WALL_TORCH = registerBlockWithoutItem("red_aquatic_wall_torch", new AquaticWallTorchBlock(FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
-    public static final Block YELLOW_AQUATIC_WALL_TORCH = registerBlockWithoutItem("yellow_aquatic_wall_torch", new AquaticWallTorchBlock(FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
-    public static final Block PINK_AQUATIC_WALL_TORCH = registerBlockWithoutItem("pink_aquatic_wall_torch", new AquaticWallTorchBlock(FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
-    public static final Block MAGENTA_AQUATIC_WALL_TORCH = registerBlockWithoutItem("magenta_aquatic_wall_torch", new AquaticWallTorchBlock(FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
-    public static final Block PRISMARINE_WALL_TORCH = registerBlockWithoutItem("prismarine_wall_torch", new AquaticWallTorchBlock(FabricBlockSettings.copy(Blocks.PRISMARINE_BRICKS).luminance((state) -> 10)));
-
     public static final Block GREEN_FIRE = registerBlockWithoutItem("green_fire", new GreenFireBlock(FabricBlockSettings.copy(Blocks.FIRE)));
 
     public static final Block TALL_BOTTLE = registerBlockWithoutItem("tall_bottle", new TallBottleBlock(FabricBlockSettings.copy(Blocks.GREEN_STAINED_GLASS).breakInstantly().nonOpaque().pistonBehavior(PistonBehavior.DESTROY)));
@@ -1353,6 +1369,15 @@ public class ModBlocks {
     }
 
     public static void registerCopperBlockPairs() {
+
+        OxidizableBlocksRegistry.registerOxidizableBlockPair(AQUATIC_TORCH, EXPOSED_AQUATIC_TORCH);
+        OxidizableBlocksRegistry.registerOxidizableBlockPair(EXPOSED_AQUATIC_TORCH, WEATHERED_AQUATIC_TORCH);
+        OxidizableBlocksRegistry.registerOxidizableBlockPair(WEATHERED_AQUATIC_TORCH, OXIDIZED_AQUATIC_TORCH);
+
+        OxidizableBlocksRegistry.registerWaxableBlockPair(AQUATIC_TORCH, WAXED_AQUATIC_TORCH);
+        OxidizableBlocksRegistry.registerWaxableBlockPair(EXPOSED_AQUATIC_TORCH, WAXED_EXPOSED_AQUATIC_TORCH);
+        OxidizableBlocksRegistry.registerWaxableBlockPair(WEATHERED_AQUATIC_TORCH, WAXED_WEATHERED_AQUATIC_TORCH);
+        OxidizableBlocksRegistry.registerWaxableBlockPair(OXIDIZED_AQUATIC_TORCH, WAXED_OXIDIZED_AQUATIC_TORCH);
 
         OxidizableBlocksRegistry.registerOxidizableBlockPair(COPPER_CANDLE_HOLDER, EXPOSED_COPPER_CANDLE_HOLDER);
         OxidizableBlocksRegistry.registerOxidizableBlockPair(EXPOSED_COPPER_CANDLE_HOLDER, WEATHERED_COPPER_CANDLE_HOLDER);

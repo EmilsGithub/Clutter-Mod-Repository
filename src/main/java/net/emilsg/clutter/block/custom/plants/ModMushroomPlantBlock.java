@@ -27,7 +27,7 @@ public class ModMushroomPlantBlock extends PlantBlock implements Fertilizable {
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         BlockPos blockPos = pos.down();
         BlockState blockState = world.getBlockState(blockPos);
-        if (blockState.isIn(BlockTags.MUSHROOM_GROW_BLOCK) || blockState.isIn(ModBlockTags.FULL_SCULK_BLOCKS)) {
+        if (blockState.isIn(BlockTags.MUSHROOM_GROW_BLOCK) || blockState.isOf(Blocks.SCULK_CATALYST) || blockState.isOf(Blocks.SCULK)) {
             return true;
         }
         return world.getBaseLightLevel(pos, 0) < 13 && this.canPlantOnTop(blockState, world, blockPos);

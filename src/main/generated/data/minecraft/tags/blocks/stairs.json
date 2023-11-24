@@ -3,6 +3,8 @@
   "values": [
     "clutter:onyx_stairs",
     "clutter:polished_onyx_stairs",
+    "clutter:black_onyx_stairs",
+    "clutter:polished_black_onyx_stairs",
     "clutter:oak_mosaic_stairs",
     "clutter:spruce_mosaic_stairs",
     "clutter:birch_mosaic_stairs",
