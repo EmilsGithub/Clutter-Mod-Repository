@@ -3,6 +3,7 @@ package net.emilsg.clutter.world;
 import net.emilsg.clutter.Clutter;
 import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.util.ModProperties;
+import net.emilsg.clutter.world.gen.features.ModFeatures;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.registry.Registerable;
@@ -18,6 +19,7 @@ import net.minecraft.util.collection.DataPool;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
+import net.minecraft.world.gen.CountConfig;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
 import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
@@ -41,6 +43,7 @@ public class ModConfiguredFeatures {
     public static final RegistryKey<ConfiguredFeature<?,?>> SCULK_MUSHROOM_KEY = registerKey("sculk_mushroom");
     public static final RegistryKey<ConfiguredFeature<?,?>> GIANT_LILY_PAD_SEEDLING_KEY = registerKey("giant_lily_pad_seedling");
     public static final RegistryKey<ConfiguredFeature<?,?>> SMALL_LILY_PADS_KEY = registerKey("small_lily_pads");
+    public static final RegistryKey<ConfiguredFeature<?,?>> SPONGE_IN_REEFS_KEY = registerKey("sponge_in_reefs");
 
     public static final RegistryKey<ConfiguredFeature<?,?>> KIWI_TREE_KEY = registerKey("kiwi_tree");
 
@@ -71,8 +74,6 @@ public class ModConfiguredFeatures {
         register(context, BLACKSTONE_SULPHUR_ORE_KEY, Feature.ORE, new OreFeatureConfig(netherBlackstoneSulphur, 12));
         register(context, BASALT_SULPHUR_ORE_KEY, Feature.ORE, new OreFeatureConfig(netherBasaltSulphur, 20, 0.5f));
 
-
-
                 register(context, ONYX_GEODE_KEY, Feature.GEODE,
                         new GeodeFeatureConfig(new GeodeLayerConfig(BlockStateProvider.of(Blocks.AIR),
                                 BlockStateProvider.of(ModBlocks.ONYX_BLOCK), BlockStateProvider.of(ModBlocks.BUDDING_ONYX),
@@ -93,6 +94,7 @@ public class ModConfiguredFeatures {
                 ConfiguredFeatures.createRandomPatchFeatureConfig(48, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK,
                         new SimpleBlockFeatureConfig(BlockStateProvider.of(ModBlocks.LUSH_MOSS)))));
 
+        register(context, SPONGE_IN_REEFS_KEY, ModFeatures.SMALL_SPONGE, new CountConfig(2));
 
         register(context, SCULK_MUSHROOM_KEY, Feature.FLOWER,
                 ConfiguredFeatures.createRandomPatchFeatureConfig(24, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK,

@@ -11,6 +11,9 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
@@ -56,11 +59,41 @@ public class MailBoxBlock extends BlockWithEntity implements Waterloggable {
             return ActionResult.SUCCESS;
         }
 
-        BlockEntity blockEntity = world.getBlockEntity(pos);
-        if (blockEntity instanceof MailBoxInventoryBlockEntity) {
-            player.openHandledScreen((MailBoxInventoryBlockEntity)blockEntity);
+        if(!player.isSneaking()) {
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            if (blockEntity instanceof MailBoxInventoryBlockEntity) {
+                player.openHandledScreen((MailBoxInventoryBlockEntity) blockEntity);
+            }
+        } else {
+            this.playSound(SoundEvents.BLOCK_IRON_TRAPDOOR_OPEN, pos, world);
+            world.setBlockState(pos, state.cycle(FLAG_UP), Block.NOTIFY_ALL);
         }
         return ActionResult.CONSUME;
+    }
+
+    @Override
+    public boolean hasComparatorOutput(BlockState state) {
+        return true;
+    }
+
+    @Override
+    public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
+        int power = 0;
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+
+        if (blockEntity instanceof MailBoxInventoryBlockEntity mailBoxEntity) {
+
+            int filledSlots = 0;
+            for (int i = 0; i < mailBoxEntity.size(); i++) {
+                if (!mailBoxEntity.getStack(i).isEmpty()) {
+                    filledSlots++;
+                }
+            }
+
+            power = filledSlots;
+        }
+
+        return power;
     }
 
     @Override
@@ -157,5 +190,12 @@ public class MailBoxBlock extends BlockWithEntity implements Waterloggable {
             world.updateComparators(pos, this);
         }
         super.onStateReplaced(state, world, pos, newState, moved);
+    }
+
+    void playSound(SoundEvent soundEvent, BlockPos pos, World world) {
+        double d = (double)pos.getX() + 0.5;
+        double e = (double)pos.getY() + 0.5;
+        double f = (double)pos.getZ() + 0.5;
+        world.playSound(null, d, e, f, soundEvent, SoundCategory.BLOCKS, 0.5f, world.random.nextFloat() * 0.1f + 0.7f);
     }
 }

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "clutter:polished_onyx_slab"
+    }
+  ],
+  "result": {
+    "item": "clutter:polished_black_onyx_slab"
+  }
+}

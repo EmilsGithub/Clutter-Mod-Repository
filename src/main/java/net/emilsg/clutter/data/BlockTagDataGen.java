@@ -22,6 +22,15 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
         /** Vanilla **/
 
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(
+                ModBlocks.AQUATIC_TORCH,
+                ModBlocks.EXPOSED_AQUATIC_TORCH,
+                ModBlocks.WEATHERED_AQUATIC_TORCH,
+                ModBlocks.OXIDIZED_AQUATIC_TORCH,
+                ModBlocks.WAXED_AQUATIC_TORCH,
+                ModBlocks.WAXED_EXPOSED_AQUATIC_TORCH,
+                ModBlocks.WAXED_WEATHERED_AQUATIC_TORCH,
+                ModBlocks.WAXED_OXIDIZED_AQUATIC_TORCH,
+                ModBlocks.PRISMARINE_TORCH,
                 ModBlocks.MAILBOX,
                 ModBlocks.BRICK_KILN,
                 ModBlocks.BASALT_SULPHUR_ORE,
@@ -204,7 +213,8 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
 
         getOrCreateTagBuilder(BlockTags.HOE_MINEABLE).add(
                 ModBlocks.RIPE_KIWI_LEAVES,
-                ModBlocks.KIWI_LEAVES);
+                ModBlocks.KIWI_LEAVES,
+                ModBlocks.SMALL_SPONGE);
 
         getOrCreateTagBuilder(BlockTags.CORAL_BLOCKS).add(
                 ModBlocks.CUP_CORAL_BLOCK, ModBlocks.GHOST_CORAL_BLOCK, ModBlocks.STONE_CORAL_BLOCK, ModBlocks.SLATE_CORAL_BLOCK,

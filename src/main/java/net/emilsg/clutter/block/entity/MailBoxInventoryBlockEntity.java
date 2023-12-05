@@ -84,9 +84,9 @@ public class MailBoxInventoryBlockEntity extends LootableContainerBlockEntity {
             MailBoxInventoryBlockEntity.this.playSound(SoundEvents.BLOCK_IRON_TRAPDOOR_OPEN);
 
             if (!isEmpty()) {
-                world.setBlockState(pos, state.with(MailBoxBlock.FLAG_UP, true).with(MailBoxBlock.HATCH_OPEN, true), Block.NOTIFY_ALL);
+                world.setBlockState(pos, state.with(MailBoxBlock.HATCH_OPEN, true), Block.NOTIFY_ALL);
             } else {
-                world.setBlockState(pos, state.with(MailBoxBlock.FLAG_UP, false).with(MailBoxBlock.HATCH_OPEN, true), Block.NOTIFY_ALL);
+                world.setBlockState(pos, state.with(MailBoxBlock.HATCH_OPEN, true), Block.NOTIFY_ALL);
             }
         }
 
@@ -95,9 +95,9 @@ public class MailBoxInventoryBlockEntity extends LootableContainerBlockEntity {
             MailBoxInventoryBlockEntity.this.playSound(SoundEvents.BLOCK_IRON_TRAPDOOR_CLOSE);
 
             if (!isEmpty()) {
-                world.setBlockState(pos, state.with(MailBoxBlock.FLAG_UP, true).with(MailBoxBlock.HATCH_OPEN, false), Block.NOTIFY_ALL);
+                world.setBlockState(pos, state.with(MailBoxBlock.HATCH_OPEN, false), Block.NOTIFY_ALL);
             } else {
-                world.setBlockState(pos, state.with(MailBoxBlock.FLAG_UP, false).with(MailBoxBlock.HATCH_OPEN, false), Block.NOTIFY_ALL);
+                world.setBlockState(pos, state.with(MailBoxBlock.HATCH_OPEN, false), Block.NOTIFY_ALL);
             }
         }
 

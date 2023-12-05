@@ -1,7 +1,10 @@
 package net.emilsg.clutter.block.custom;
 
 import net.emilsg.clutter.util.ModProperties;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Fertilizable;
+import net.minecraft.block.LilyPadBlock;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
@@ -75,6 +78,4 @@ public class SmallLilyPadBlock extends LilyPadBlock implements Fertilizable {
             dropStack(world, pos, new ItemStack(this));
         }
     }
-
-
 }

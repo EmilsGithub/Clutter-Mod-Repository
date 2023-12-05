@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:chest"
+    },
+    "P": {
+      "item": "minecraft:paper"
+    }
+  },
+  "pattern": [
+    " P ",
+    "PCP",
+    " P "
+  ],
+  "result": {
+    "item": "clutter:cardboard_box"
+  },
+  "show_notification": true
+}

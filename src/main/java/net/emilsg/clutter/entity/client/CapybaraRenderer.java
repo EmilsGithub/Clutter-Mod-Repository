@@ -29,6 +29,7 @@ public class CapybaraRenderer extends GeoEntityRenderer<CapybaraEntity> {
         if(entity.isBaby()) {
             poseStack.scale(babyScale, babyScale, babyScale);
         }
+
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
     }
 

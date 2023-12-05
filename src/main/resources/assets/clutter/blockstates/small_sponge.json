@@ -1,0 +1,16 @@
+{
+  "variants":{
+    "age=0":{
+      "model":"clutter:block/small_sponge_0"
+    },
+    "age=1":{
+      "model":"clutter:block/small_sponge_1"
+    },
+    "age=2":{
+      "model":"clutter:block/small_sponge_2"
+    },
+    "age=3":{
+      "model":"clutter:block/small_sponge_3"
+    }
+  }
+}

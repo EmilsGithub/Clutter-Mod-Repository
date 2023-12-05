@@ -77,6 +77,7 @@ public class ModItems {
     public static final Item THORNBLOOM_SEEDS = registerItem("thornbloom_seeds", new AliasedBlockItem(ModBlocks.THORNBLOOM_CROP, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
     public static final Item KIWI_SEEDS = registerItem("kiwi_seeds", new AliasedBlockItem(ModBlocks.KIWI_CROP, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
     public static final Item GLOWLILY_SEEDLING = registerItem("glowlily_seedling", new AliasedBlockItem(ModBlocks.GLOWLILY_CROP, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item SPONGE_SHARD = registerItem("sponge_shard", new AliasedBlockItem(ModBlocks.SMALL_SPONGE, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
 
     public static final Item RAW_CHORUS_ECHOFIN = registerItem("raw_chorus_echofin", new RandomTeleportItem(new FabricItemSettings().food(new FoodComponent.Builder().hunger(3).saturationModifier(0.1f).meat().alwaysEdible().build()), 200, 10, 48), ModItemGroups.CLUTTER_ITEMS);
     public static final Item COOKED_CHORUS_ECHOFIN = registerItem("cooked_chorus_echofin", new RandomTeleportItem(new FabricItemSettings().food(new FoodComponent.Builder().hunger(6).saturationModifier(0.2f).meat().alwaysEdible().build()), 150, 20, 96), ModItemGroups.CLUTTER_ITEMS);
@@ -111,9 +112,9 @@ public class ModItems {
     public static final Item KIWI_BIRD_EGG = registerItem("kiwi_bird_egg", new AliasedBlockItem(ModBlocks.KIWI_BIRD_EGG, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
     public static final Item EMPEROR_PENGUIN_EGG = registerItem("emperor_penguin_egg", new AliasedBlockItem(ModBlocks.EMPEROR_PENGUIN_EGG, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
 
-    public static final Item SMALL_LILY_PADS = registerItem("small_lily_pads", new PlaceOnWaterItem(ModBlocks.SMALL_LILY_PADS, new FabricItemSettings()), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Item SMALL_LILY_PADS = registerItem("small_lily_pads", new SmallLilyPadBlockItem(ModBlocks.SMALL_LILY_PADS, new FabricItemSettings()), ModItemGroups.CLUTTER_BLOCKS);
     public static final Item GIANT_LILY_PAD = registerItem("giant_lily_pad", new GiantLilyPadItem(ModBlocks.GIANT_LILY_PAD, new FabricItemSettings()), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Item GIANT_LILY_PAD_SEEDLING = registerItem("giant_lily_pad_seedling", new PlaceOnWaterItem(ModBlocks.GIANT_LILY_PAD_SEEDLING, new FabricItemSettings()), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Item GIANT_LILY_PAD_SEEDLING = registerItem("giant_lily_pad_seedling", new PlaceableOnWaterItem(ModBlocks.GIANT_LILY_PAD_SEEDLING, new FabricItemSettings()), ModItemGroups.CLUTTER_BLOCKS);
 
     public static final Item LEVITATING_ECHOFIN_BUCKET = registerItem("levitating_echofin_bucket", new EchofinBucketItem(new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1), EchofinVariant.LEVITATING), ModItemGroups.CLUTTER_ITEMS);
     public static final Item CHORUS_ECHOFIN_BUCKET = registerItem("chorus_echofin_bucket", new EchofinBucketItem(new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1), EchofinVariant.CHORUS), ModItemGroups.CLUTTER_ITEMS);

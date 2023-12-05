@@ -14,12 +14,12 @@ public class CapybaraModel extends GeoModel<CapybaraEntity> {
     private static final Identifier TEXTURE = new Identifier(Clutter.MOD_ID, "textures/entity/capybara.png");
     private static final Identifier ANIMATIONS = new Identifier(Clutter.MOD_ID, "animations/animation.capybara.json");
     private static final Identifier MODEL = new Identifier(Clutter.MOD_ID, "geo/capybara.geo.json");
+    private static final Identifier BABY_MODEL = new Identifier(Clutter.MOD_ID, "geo/baby_capybara.geo.json");
 
     @Override
     public Identifier getModelResource(CapybaraEntity animatable) {
-        return MODEL;
+        return animatable.isBaby() ? BABY_MODEL : MODEL;
     }
-
 
     @Override
     public Identifier getTextureResource(CapybaraEntity animatable) {
@@ -35,7 +35,7 @@ public class CapybaraModel extends GeoModel<CapybaraEntity> {
     public void setCustomAnimations(CapybaraEntity animatable, long instanceId, AnimationState<CapybaraEntity> animationState) {
         CoreGeoBone head = getAnimationProcessor().getBone("Head");
 
-        if (head != null) {
+        if(head != null && !animatable.isSleeping()) {
             EntityModelData entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA);
             head.setRotX(entityData.headPitch() * MathHelper.RADIANS_PER_DEGREE);
             head.setRotY(entityData.netHeadYaw() * MathHelper.RADIANS_PER_DEGREE);

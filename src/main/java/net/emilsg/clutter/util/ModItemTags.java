@@ -1,7 +1,6 @@
 package net.emilsg.clutter.util;
 
 import net.emilsg.clutter.Clutter;
-import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.tag.TagKey;
@@ -14,6 +13,7 @@ public class ModItemTags {
     public static final TagKey<Item> SEEDS = create("seeds");
     public static final TagKey<Item> DYES = create("dyes");
     public static final TagKey<Item> STRIPPABLE_LOGS = create("strippable_logs");
+    public static final TagKey<Item> BOTTLED_BUTTERFLIES = create("bottled_butterflies");
 
     public static final TagKey<Item> PLUSHIES = create("plushies");
 
@@ -27,7 +27,6 @@ public class ModItemTags {
     public static final TagKey<Item> C_SILVER_NUGGETS = create("silver_nuggets", "c");
 
     public static final TagKey<Item> TRINKETS_HAT = create("head/hat", "trinkets");
-
 
     private static TagKey<Item> create(String path) {
         return create(path, Clutter.MOD_ID);

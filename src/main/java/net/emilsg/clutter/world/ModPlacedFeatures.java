@@ -23,6 +23,7 @@ public class ModPlacedFeatures {
     public static final RegistryKey<PlacedFeature> GIANT_LILY_PAD_SEEDLING_PLACED_KEY = registerKey("giant_lily_pad_seedling_placed");
     public static final RegistryKey<PlacedFeature> SMALL_LILY_PADS_PLACED_KEY = registerKey("small_lily_pads_placed");
     public static final RegistryKey<PlacedFeature> SCULK_MUSHROOM_PLACED_KEY = registerKey("sculk_mushroom_placed");
+    public static final RegistryKey<PlacedFeature> SPONGE_IN_REEFS_PLACED_KEY = registerKey("sponge_in_reefs_placed");
 
     public static void bootstrap(Registerable<PlacedFeature> context) {
         var configuredFeatureRegistryEntryLookup = context.getRegistryLookup(RegistryKeys.CONFIGURED_FEATURE);
@@ -37,6 +38,12 @@ public class ModPlacedFeatures {
         register(context, LUSH_MOSS_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.LUSH_MOSS_KEY), RarityFilterPlacementModifier.of(32), SquarePlacementModifier.of(), PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of());
         register(context, GIANT_LILY_PAD_SEEDLING_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.GIANT_LILY_PAD_SEEDLING_KEY), RarityFilterPlacementModifier.of(4), SquarePlacementModifier.of(), PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of());
         register(context, SMALL_LILY_PADS_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.SMALL_LILY_PADS_KEY), RarityFilterPlacementModifier.of(4), SquarePlacementModifier.of(), PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of());
+
+        register(context, SPONGE_IN_REEFS_PLACED_KEY,
+                configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.SPONGE_IN_REEFS_KEY),
+                RarityFilterPlacementModifier.of(4), SquarePlacementModifier.of(),
+                PlacedFeatures.OCEAN_FLOOR_WG_HEIGHTMAP, BiomePlacementModifier.of());
+
     }
 
 

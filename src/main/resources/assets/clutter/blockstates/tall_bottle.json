@@ -19,14 +19,14 @@
       "y": 270
     },
     "facing=north,bottles=2": {
-      "model": "clutter:block/bottles/two_tall_bottles"
+      "model": "clutter:block/bottles/three_tall_bottles"
     },
     "facing=south,bottles=2": {
-      "model": "clutter:block/bottles/two_tall_bottles",
+      "model": "clutter:block/bottles/three_tall_bottles",
       "y": 180
     },
     "facing=east,bottles=2": {
-      "model": "clutter:block/bottles/two_tall_bottles",
+      "model": "clutter:block/bottles/three_tall_bottles",
       "y": 90
     },
     "facing=west,bottles=2": {

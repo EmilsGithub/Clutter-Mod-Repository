@@ -1,6 +1,15 @@
 {
   "replace": false,
   "values": [
+    "clutter:aquatic_torch",
+    "clutter:exposed_aquatic_torch",
+    "clutter:weathered_aquatic_torch",
+    "clutter:oxidized_aquatic_torch",
+    "clutter:waxed_aquatic_torch",
+    "clutter:waxed_exposed_aquatic_torch",
+    "clutter:waxed_weathered_aquatic_torch",
+    "clutter:waxed_oxidized_aquatic_torch",
+    "clutter:prismarine_torch",
     "clutter:mailbox",
     "clutter:brick_kiln",
     "clutter:basalt_sulphur_ore",

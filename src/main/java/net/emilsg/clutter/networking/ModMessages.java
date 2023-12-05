@@ -20,7 +20,7 @@ public class ModMessages {
             String clientVersion = buf.readString();
 
             if (!Clutter.MOD_VERSION.equals(clientVersion)) {
-                player.networkHandler.disconnect(Text.literal("Mismatched mod version! Please use Clutter version " + Clutter.MOD_VERSION + "."));
+                player.networkHandler.disconnect(Text.literal("Mismatched mod version! Please use Clutter version " + Clutter.MOD_VERSION + ". If you're using a Modpack please make sure it's the same version as the Server."));
             }
         });
 

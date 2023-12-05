@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "D": {
+      "item": "minecraft:green_dye"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    }
+  },
+  "pattern": [
+    " G ",
+    " G ",
+    "GDG"
+  ],
+  "result": {
+    "item": "clutter:tall_bottle"
+  },
+  "show_notification": true
+}

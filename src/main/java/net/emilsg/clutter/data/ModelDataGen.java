@@ -4,10 +4,10 @@ import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.item.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
-import net.minecraft.block.Block;
-import net.minecraft.data.client.*;
-import net.minecraft.data.family.BlockFamilies;
-import net.minecraft.data.family.BlockFamily;
+import net.minecraft.data.client.BlockStateModelGenerator;
+import net.minecraft.data.client.ItemModelGenerator;
+import net.minecraft.data.client.Model;
+import net.minecraft.data.client.Models;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.util.Identifier;
 
@@ -50,27 +50,8 @@ public class ModelDataGen extends FabricModelProvider {
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.SILVER_LEGGINGS));
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.SILVER_BOOTS));
 
+        itemModelGenerator.register(ModItems.SPONGE_SHARD, Models.GENERATED);
+
         itemModelGenerator.register(ModItems.CAPYBARA_SPAWN_EGG, new Model(Optional.of(new Identifier("item/template_spawn_egg")), Optional.empty()));
-    }
-
-    private void registerSlab(Block slab, Block fullBlock, TextureMap texture, BlockStateModelGenerator blockStateModelGenerator) { //Credit to Xanthian
-        var slabLower = Models.SLAB.upload(slab, texture, blockStateModelGenerator.modelCollector);
-        var slabUpper = Models.SLAB_TOP.upload(slab, texture, blockStateModelGenerator.modelCollector);
-        blockStateModelGenerator.blockStateCollector.accept(BlockStateModelGenerator.createSlabBlockState(slab, slabLower, slabUpper, ModelIds.getBlockModelId(fullBlock)));
-        blockStateModelGenerator.registerParentedItemModel(slab, slabLower);
-    }
-
-    BlockStateSupplier registerWalls(Block block, Block texture, BlockStateModelGenerator blockStateModelGenerator){
-        TextureMap textureMap = new TextureMap().put(TextureKey.WALL, TextureMap.getSubId(texture, ""))
-                .put(TextureKey.SIDE,  TextureMap.getSubId(texture, ""))
-                .put(TextureKey.TOP, TextureMap.getSubId(texture, ""))
-                .put(TextureKey.BOTTOM, TextureMap.getSubId(texture, ""));
-
-        Identifier wallPost = Models.TEMPLATE_WALL_POST.upload(block, textureMap, blockStateModelGenerator.modelCollector);
-        Identifier wallSide = Models.TEMPLATE_WALL_SIDE.upload(block, textureMap, blockStateModelGenerator.modelCollector);
-        Identifier wallTallSide = Models.TEMPLATE_WALL_SIDE_TALL.upload(block, textureMap, blockStateModelGenerator.modelCollector);
-        Identifier wallInventory = Models.WALL_INVENTORY.upload(block, textureMap, blockStateModelGenerator.modelCollector);
-        blockStateModelGenerator.registerParentedItemModel(block, wallInventory);
-        return BlockStateModelGenerator.createWallBlockState(block, wallPost, wallSide, wallTallSide);
     }
 }

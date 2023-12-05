@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "clutter:onyx_block"
+    }
+  ],
+  "result": {
+    "item": "clutter:black_onyx_block"
+  }
+}

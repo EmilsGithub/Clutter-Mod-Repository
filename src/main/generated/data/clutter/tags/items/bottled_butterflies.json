@@ -1,0 +1,24 @@
+{
+  "replace": false,
+  "values": [
+    "clutter:white_butterfly_in_a_bottle",
+    "clutter:light_gray_butterfly_in_a_bottle",
+    "clutter:gray_butterfly_in_a_bottle",
+    "clutter:black_butterfly_in_a_bottle",
+    "clutter:brown_butterfly_in_a_bottle",
+    "clutter:red_butterfly_in_a_bottle",
+    "clutter:orange_butterfly_in_a_bottle",
+    "clutter:yellow_butterfly_in_a_bottle",
+    "clutter:lime_butterfly_in_a_bottle",
+    "clutter:green_butterfly_in_a_bottle",
+    "clutter:cyan_butterfly_in_a_bottle",
+    "clutter:light_blue_butterfly_in_a_bottle",
+    "clutter:blue_butterfly_in_a_bottle",
+    "clutter:purple_butterfly_in_a_bottle",
+    "clutter:magenta_butterfly_in_a_bottle",
+    "clutter:pink_butterfly_in_a_bottle",
+    "clutter:crimson_butterfly_in_a_bottle",
+    "clutter:warped_butterfly_in_a_bottle",
+    "clutter:soul_butterfly_in_a_bottle"
+  ]
+}

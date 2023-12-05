@@ -24,6 +24,7 @@ public class ModConfigs {
     public static boolean SPAWN_KIWI_BIRDS;
     public static boolean SPAWN_EMPEROR_PENGUINS;
     public static boolean SPAWN_BEAVERS;
+    public static boolean SPAWN_CAPYBARAS;
 
     public static boolean GENERATE_ORES;
     public static boolean GENERATE_SILVER_ORE;
@@ -62,6 +63,7 @@ public class ModConfigs {
         configs.addKeyValuePair(new Pair<>("spawn.kiwi_birds", true), "Spawn Kiwi Birds.");
         configs.addKeyValuePair(new Pair<>("spawn.emperor_penguins", true), "Spawn Emperor Penguins.");
         configs.addKeyValuePair(new Pair<>("spawn.beavers", true), "Spawn Beavers.");
+        configs.addKeyValuePair(new Pair<>("spawn.capybaras", true), "Spawn Capybaras.");
 
         configs.addKeyValuePair(new Pair<>("generate.geodes", true), "Generate Geodes.");
 
@@ -91,6 +93,7 @@ public class ModConfigs {
         SPAWN_KIWI_BIRDS = CONFIG.getOrDefault("spawn.kiwi_birds", true);
         SPAWN_EMPEROR_PENGUINS = CONFIG.getOrDefault("spawn.emperor_penguins", true);
         SPAWN_BEAVERS = CONFIG.getOrDefault("spawn.beavers", true);
+        SPAWN_CAPYBARAS = CONFIG.getOrDefault("spawn.capybaras", true);
 
         GENERATE_GEODES = CONFIG.getOrDefault("generate.geodes", true);
 

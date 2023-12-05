@@ -479,6 +479,269 @@ public class ModBlocks {
 
     public static final Block TUBE_TV = registerBlock("tube_tv", new TubeTvBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK).luminance(TubeTvBlock.createLightLevelFromLitBlockState(8))), ModItemGroups.CLUTTER_BLOCKS);
 
+    public static final Block BONFIRE = registerBlock("bonfire", new BonfireBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).nonOpaque().luminance(BonfireBlock.createLightLevelFromLitBlockState(15))), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block SOUL_BONFIRE = registerBlock("soul_bonfire", new BonfireBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).nonOpaque().luminance(BonfireBlock.createLightLevelFromLitBlockState(13))), ModItemGroups.CLUTTER_BLOCKS);
+
+    public static final Block CATTAILS = registerBlock("cattails", new CattailPlantBlock(FabricBlockSettings.copy(Blocks.ROSE_BUSH)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block LUSH_MOSS = registerBlock("lush_moss", new MossSproutBlock(FabricBlockSettings.copy(Blocks.NETHER_SPROUTS).sounds(BlockSoundGroup.MOSS_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
+
+    public static final Block BREAD = registerBlock("bread", new BreadBlock(FabricBlockSettings.copy(Blocks.CAKE).nonOpaque(), 2, 0.25f), ModItemGroups.CLUTTER_BLOCKS);
+
+    public static final Block FROG_STATUE = registerBlock("frog_statue", new FrogStatueBlock(FabricBlockSettings.copy(Blocks.STONE)), ModItemGroups.CLUTTER_BLOCKS);
+
+    public static final Block THORNBLOOM = registerBlock("thornbloom", new ThornBloomPlantBlock(FabricBlockSettings.copy(Blocks.SWEET_BERRY_BUSH)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block GLOWLILY = registerBlock("glowlily", new GlowLilyPlantBlock(FabricBlockSettings.copy(Blocks.SWEET_BERRY_BUSH).luminance(GlowLilyPlantBlock.createLightLevelFromAge())), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block GLOWLILY_BLOCK = registerBlock("glowlily_block", new Block(FabricBlockSettings.copy(Blocks.VERDANT_FROGLIGHT).luminance((state) -> {return 15;})), ModItemGroups.CLUTTER_BLOCKS);
+
+    //public static final Block SINK = registerBlock("sink", new SinkBlock(FabricBlockSettings.copy(Blocks.WATER_CAULDRON).nonOpaque()), ModItemGroups.CLUTTER_BLOCKS);
+    //public static final Block SHOWER = registerBlock("shower", new ShowerBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK).ticksRandomly()), ModItemGroups.CLUTTER_BLOCKS);
+
+    public static final Block COPPER_COIN_STACK = registerBlock("copper_coin_stack", new CopperCoinStackBlock(FabricBlockSettings.create().nonOpaque().strength(0.25f).sounds(ModSounds.COIN_PILE_SOUNDS).mapColor(MapColor.TERRACOTTA_ORANGE)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block SILVER_COIN_STACK = registerBlock("silver_coin_stack", new SilverCoinStackBlock(FabricBlockSettings.create().nonOpaque().strength(0.25f).sounds(ModSounds.COIN_PILE_SOUNDS).mapColor(MapColor.LIGHT_GRAY)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block GOLDEN_COIN_STACK = registerBlock("golden_coin_stack", new GoldenCoinStackBlock(FabricBlockSettings.create().nonOpaque().strength(0.25f).sounds(ModSounds.COIN_PILE_SOUNDS).mapColor(MapColor.GOLD)), ModItemGroups.CLUTTER_BLOCKS);
+
+    public static final Block RIPE_KIWI_LEAVES = registerBlock("ripe_kiwi_leaves", new KiwiLeafBlock(FabricBlockSettings.copy(Blocks.JUNGLE_LEAVES)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block KIWI_LEAVES = registerBlock("kiwi_leaves", new LeavesBlock(FabricBlockSettings.copy(Blocks.JUNGLE_LEAVES)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block KIWI_TREE_SAPLING = registerBlock("kiwi_tree_sapling", new SaplingBlock(new KiwiTreeSaplingGenerator(), FabricBlockSettings.copy(Blocks.JUNGLE_SAPLING)), ModItemGroups.CLUTTER_BLOCKS);
+
+    public static final Block LARGE_CHAIN = registerBlock("large_chain", new LargeChainBlock(FabricBlockSettings.copy(Blocks.CHAIN)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block LARGE_SILVER_CHAIN = registerBlock("large_silver_chain", new LargeChainBlock(FabricBlockSettings.copy(ModBlocks.SILVER_CHAIN)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block LARGE_GOLDEN_CHAIN = registerBlock("large_golden_chain", new LargeChainBlock(FabricBlockSettings.copy(ModBlocks.GOLDEN_CHAIN)), ModItemGroups.CLUTTER_BLOCKS);
+
+    public static final Block LARGE_COPPER_CHAIN = registerBlock("large_copper_chain", new OxidizableLargeChainBlock(Oxidizable.OxidationLevel.UNAFFECTED, FabricBlockSettings.copy(ModBlocks.COPPER_CHAIN)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block EXPOSED_LARGE_COPPER_CHAIN = registerBlock("exposed_large_copper_chain", new OxidizableLargeChainBlock(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.copy(ModBlocks.EXPOSED_COPPER_CHAIN)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block WEATHERED_LARGE_COPPER_CHAIN = registerBlock("weathered_large_copper_chain", new OxidizableLargeChainBlock(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.copy(ModBlocks.WEATHERED_COPPER_CHAIN)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block OXIDIZED_LARGE_COPPER_CHAIN = registerBlock("oxidized_large_copper_chain", new OxidizableLargeChainBlock(Oxidizable.OxidationLevel.OXIDIZED, FabricBlockSettings.copy(ModBlocks.OXIDIZED_COPPER_CHAIN)), ModItemGroups.CLUTTER_BLOCKS);
+
+    public static final Block WAXED_LARGE_COPPER_CHAIN = registerBlock("waxed_large_copper_chain", new OxidizableLargeChainBlock(Oxidizable.OxidationLevel.UNAFFECTED, FabricBlockSettings.copy(ModBlocks.WAXED_COPPER_CHAIN)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block WAXED_EXPOSED_LARGE_COPPER_CHAIN = registerBlock("waxed_exposed_large_copper_chain", new OxidizableLargeChainBlock(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.copy(ModBlocks.WAXED_EXPOSED_COPPER_CHAIN)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block WAXED_WEATHERED_LARGE_COPPER_CHAIN = registerBlock("waxed_weathered_large_copper_chain", new OxidizableLargeChainBlock(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.copy(ModBlocks.WAXED_WEATHERED_COPPER_CHAIN)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block WAXED_OXIDIZED_LARGE_COPPER_CHAIN = registerBlock("waxed_oxidized_large_copper_chain", new OxidizableLargeChainBlock(Oxidizable.OxidationLevel.OXIDIZED, FabricBlockSettings.copy(ModBlocks.WAXED_OXIDIZED_COPPER_CHAIN)), ModItemGroups.CLUTTER_BLOCKS);
+
+    public static final Block LARGE_CANDLE = registerBlock("large_candle", new LargeCandleBlock(FabricBlockSettings.create().mapColor(MapColor.PALE_YELLOW).nonOpaque().strength(0.1F).sounds(BlockSoundGroup.CANDLE).luminance(createLightLevelFromLitBlockState(12)).pistonBehavior(PistonBehavior.DESTROY)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block LARGE_WHITE_CANDLE = registerBlock("large_white_candle", new LargeCandleBlock(FabricBlockSettings.copy(ModBlocks.LARGE_CANDLE).mapColor(MapColor.WHITE_GRAY)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block LARGE_LIGHT_GRAY_CANDLE = registerBlock("large_light_gray_candle", new LargeCandleBlock(FabricBlockSettings.copy(ModBlocks.LARGE_CANDLE).mapColor(MapColor.LIGHT_GRAY)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block LARGE_GRAY_CANDLE = registerBlock("large_gray_candle", new LargeCandleBlock(FabricBlockSettings.copy(ModBlocks.LARGE_CANDLE).mapColor(MapColor.GRAY)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block LARGE_BLACK_CANDLE = registerBlock("large_black_candle", new LargeCandleBlock(FabricBlockSettings.copy(ModBlocks.LARGE_CANDLE).mapColor(MapColor.BLACK)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block LARGE_BROWN_CANDLE = registerBlock("large_brown_candle", new LargeCandleBlock(FabricBlockSettings.copy(ModBlocks.LARGE_CANDLE).mapColor(MapColor.BROWN)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block LARGE_RED_CANDLE = registerBlock("large_red_candle", new LargeCandleBlock(FabricBlockSettings.copy(ModBlocks.LARGE_CANDLE).mapColor(MapColor.RED)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block LARGE_ORANGE_CANDLE = registerBlock("large_orange_candle", new LargeCandleBlock(FabricBlockSettings.copy(ModBlocks.LARGE_CANDLE).mapColor(MapColor.ORANGE)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block LARGE_YELLOW_CANDLE = registerBlock("large_yellow_candle", new LargeCandleBlock(FabricBlockSettings.copy(ModBlocks.LARGE_CANDLE).mapColor(MapColor.YELLOW)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block LARGE_LIME_CANDLE = registerBlock("large_lime_candle", new LargeCandleBlock(FabricBlockSettings.copy(ModBlocks.LARGE_CANDLE).mapColor(MapColor.LIME)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block LARGE_GREEN_CANDLE = registerBlock("large_green_candle", new LargeCandleBlock(FabricBlockSettings.copy(ModBlocks.LARGE_CANDLE).mapColor(MapColor.GREEN)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block LARGE_CYAN_CANDLE = registerBlock("large_cyan_candle", new LargeCandleBlock(FabricBlockSettings.copy(ModBlocks.LARGE_CANDLE).mapColor(MapColor.CYAN)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block LARGE_LIGHT_BLUE_CANDLE = registerBlock("large_light_blue_candle", new LargeCandleBlock(FabricBlockSettings.copy(ModBlocks.LARGE_CANDLE).mapColor(MapColor.LIGHT_BLUE)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block LARGE_BLUE_CANDLE = registerBlock("large_blue_candle", new LargeCandleBlock(FabricBlockSettings.copy(ModBlocks.LARGE_CANDLE).mapColor(MapColor.BLUE)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block LARGE_PURPLE_CANDLE = registerBlock("large_purple_candle", new LargeCandleBlock(FabricBlockSettings.copy(ModBlocks.LARGE_CANDLE).mapColor(MapColor.PURPLE)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block LARGE_MAGENTA_CANDLE = registerBlock("large_magenta_candle", new LargeCandleBlock(FabricBlockSettings.copy(ModBlocks.LARGE_CANDLE).mapColor(MapColor.MAGENTA)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block LARGE_PINK_CANDLE = registerBlock("large_pink_candle", new LargeCandleBlock(FabricBlockSettings.copy(ModBlocks.LARGE_CANDLE).mapColor(MapColor.PINK)), ModItemGroups.CLUTTER_BLOCKS);
+
+    public static final Block BLACKSTONE_SULPHUR_ORE = registerBlock("blackstone_sulphur_ore", new ExperienceDroppingBlock(FabricBlockSettings.copy(Blocks.BLACKSTONE).mapColor(MapColor.PALE_YELLOW), UniformIntProvider.create(1, 2)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block BASALT_SULPHUR_ORE = registerBlock("basalt_sulphur_ore", new ExperienceDroppingPillarBlock(FabricBlockSettings.copy(Blocks.BASALT).mapColor(MapColor.PALE_YELLOW), UniformIntProvider.create(1, 2)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block SULPHUR_BLOCK = registerBlock("sulphur_block", new Block(FabricBlockSettings.create().instrument(Instrument.BASEDRUM).strength(1f, 1.5f).mapColor(MapColor.TERRACOTTA_YELLOW).sounds(BlockSoundGroup.SAND)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block ONYX_ORE = registerBlock("onyx_ore", new ExperienceDroppingBlock(FabricBlockSettings.create().instrument(Instrument.BASEDRUM).strength(1f, 1.5f).mapColor(MapColor.TERRACOTTA_YELLOW).sounds(BlockSoundGroup.SAND), UniformIntProvider.create(3, 7)), ModItemGroups.CLUTTER_BLOCKS);
+
+    public static final Block SMALL_ONYX_BUD = registerBlock("small_onyx_bud", new OnyxClusterBlock(3, 4, FabricBlockSettings.create().mapColor(MapColor.BLACK).solid().nonOpaque().ticksRandomly().sounds(BlockSoundGroup.SMALL_AMETHYST_BUD).strength(1.5F).luminance((state) -> 1).pistonBehavior(PistonBehavior.DESTROY)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block MEDIUM_ONYX_BUD = registerBlock("medium_onyx_bud", new OnyxClusterBlock(4, 3, FabricBlockSettings.copy(SMALL_ONYX_BUD).sounds(BlockSoundGroup.LARGE_AMETHYST_BUD).solid().luminance((state) -> 2).pistonBehavior(PistonBehavior.DESTROY)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block LARGE_ONYX_BUD = registerBlock("large_onyx_bud", new OnyxClusterBlock(5, 3, FabricBlockSettings.copy(SMALL_ONYX_BUD).sounds(BlockSoundGroup.MEDIUM_AMETHYST_BUD).solid().luminance((state) -> 4).pistonBehavior(PistonBehavior.DESTROY)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block ONYX_CLUSTER = registerBlock("onyx_cluster", new OnyxClusterBlock(7, 3, FabricBlockSettings.copy(SMALL_ONYX_BUD).sounds(BlockSoundGroup.AMETHYST_CLUSTER).strength(1.5F).luminance((state) -> 5).pistonBehavior(PistonBehavior.DESTROY)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block BUDDING_ONYX = registerBlock("budding_onyx", new BuddingOnyxBlock(FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F).ticksRandomly()), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block ONYX_BLOCK = registerBlock("onyx_block", new Block(FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block ONYX_SLAB = registerBlock("onyx_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block ONYX_STAIRS = registerBlock("onyx_stairs", new StairsBlock(Blocks.OBSIDIAN.getDefaultState(), FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block ONYX_WALL = registerBlock("onyx_wall", new WallBlock(FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block POLISHED_ONYX = registerBlock("polished_onyx", new Block(FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block POLISHED_ONYX_SLAB = registerBlock("polished_onyx_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block POLISHED_ONYX_STAIRS = registerBlock("polished_onyx_stairs", new StairsBlock(Blocks.OBSIDIAN.getDefaultState(), FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block POLISHED_ONYX_WALL = registerBlock("polished_onyx_wall", new WallBlock(FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block BLACK_ONYX_BLOCK = registerBlock("black_onyx_block", new Block(FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block BLACK_ONYX_SLAB = registerBlock("black_onyx_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block BLACK_ONYX_STAIRS = registerBlock("black_onyx_stairs", new StairsBlock(Blocks.OBSIDIAN.getDefaultState(), FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block BLACK_ONYX_WALL = registerBlock("black_onyx_wall", new WallBlock(FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block POLISHED_BLACK_ONYX = registerBlock("polished_black_onyx", new Block(FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block POLISHED_BLACK_ONYX_SLAB = registerBlock("polished_black_onyx_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block POLISHED_BLACK_ONYX_STAIRS = registerBlock("polished_black_onyx_stairs", new StairsBlock(Blocks.OBSIDIAN.getDefaultState(), FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block POLISHED_BLACK_ONYX_WALL = registerBlock("polished_black_onyx_wall", new WallBlock(FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
+
+    public static final Block SMALL_TARGET_BLOCK = registerBlock("small_target_block", new SmallTargetBlock(FabricBlockSettings.copy(Blocks.TARGET).nonOpaque()), ModItemGroups.CLUTTER_BLOCKS);
+
+    public static final Block LARGE_IRON_CHANDELIER = registerBlock("large_iron_chandelier", new LargeChandelierBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK).nonOpaque().pistonBehavior(PistonBehavior.DESTROY)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block LARGE_SILVER_CHANDELIER = registerBlock("large_silver_chandelier", new LargeChandelierBlock(FabricBlockSettings.copy(ModBlocks.SILVER_BLOCK).nonOpaque().pistonBehavior(PistonBehavior.DESTROY)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block LARGE_GOLDEN_CHANDELIER = registerBlock("large_golden_chandelier", new LargeChandelierBlock(FabricBlockSettings.copy(Blocks.GOLD_BLOCK).nonOpaque().pistonBehavior(PistonBehavior.DESTROY)), ModItemGroups.CLUTTER_BLOCKS);
+
+    public static final Block LARGE_COPPER_CHANDELIER = registerBlock("large_copper_chandelier", new OxidizableLargeChandelier(Oxidizable.OxidationLevel.UNAFFECTED, FabricBlockSettings.copy(Blocks.COPPER_BLOCK).nonOpaque().pistonBehavior(PistonBehavior.DESTROY)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block EXPOSED_LARGE_COPPER_CHANDELIER = registerBlock("exposed_large_copper_chandelier", new OxidizableLargeChandelier(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.copy(Blocks.EXPOSED_COPPER).nonOpaque().pistonBehavior(PistonBehavior.DESTROY)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block WEATHERED_LARGE_COPPER_CHANDELIER = registerBlock("weathered_large_copper_chandelier", new OxidizableLargeChandelier(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.copy(Blocks.WEATHERED_COPPER).nonOpaque().pistonBehavior(PistonBehavior.DESTROY)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block OXIDIZED_LARGE_COPPER_CHANDELIER = registerBlock("oxidized_large_copper_chandelier", new OxidizableLargeChandelier(Oxidizable.OxidationLevel.OXIDIZED, FabricBlockSettings.copy(Blocks.OXIDIZED_COPPER).nonOpaque().pistonBehavior(PistonBehavior.DESTROY)), ModItemGroups.CLUTTER_BLOCKS);
+
+    public static final Block WAXED_LARGE_COPPER_CHANDELIER = registerBlock("waxed_large_copper_chandelier", new LargeChandelierBlock(FabricBlockSettings.copy(Blocks.WAXED_COPPER_BLOCK).nonOpaque().pistonBehavior(PistonBehavior.DESTROY)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block WAXED_EXPOSED_LARGE_COPPER_CHANDELIER = registerBlock("waxed_exposed_large_copper_chandelier", new LargeChandelierBlock(FabricBlockSettings.copy(Blocks.WAXED_EXPOSED_COPPER).nonOpaque().pistonBehavior(PistonBehavior.DESTROY)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block WAXED_WEATHERED_LARGE_COPPER_CHANDELIER = registerBlock("waxed_weathered_large_copper_chandelier", new LargeChandelierBlock(FabricBlockSettings.copy(Blocks.WAXED_WEATHERED_COPPER).nonOpaque().pistonBehavior(PistonBehavior.DESTROY)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block WAXED_OXIDIZED_LARGE_COPPER_CHANDELIER = registerBlock("waxed_oxidized_large_copper_chandelier", new LargeChandelierBlock(FabricBlockSettings.copy(Blocks.WAXED_OXIDIZED_COPPER).nonOpaque().pistonBehavior(PistonBehavior.DESTROY)), ModItemGroups.CLUTTER_BLOCKS);
+
+    public static final Block BRICK_KILN = registerBlock("brick_kiln", new BrickKilnBlock(FabricBlockSettings.copy(Blocks.BRICKS).luminance(createLightLevelFromLitBlockState(13))), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block MAILBOX = registerBlock("mailbox", new MailBoxBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK).nonOpaque()), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block CARDBOARD_BOX = registerBlock("cardboard_box", new CardboardBoxBlock(FabricBlockSettings.create().nonOpaque().mapColor(MapColor.BROWN).sounds(BlockSoundGroup.WOOL)), ModItemGroups.CLUTTER_BLOCKS, 1);
+
+    //public static final Block IRON_CANDLE_HOLDER = registerBlockWithoutItem("iron_candle_holder_block", new ReworkedCandleHolderBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK).luminance(createLightLevelFromLitBlockState(13))));
+    //public static final Block SILVER_CANDLE_HOLDER = registerBlockWithoutItem("silver_candle_holder_block", new ReworkedCandleHolderBlock(FabricBlockSettings.copy(ModBlocks.SILVER_BLOCK).luminance(createLightLevelFromLitBlockState(13))));
+    //public static final Block GOLDEN_CANDLE_HOLDER = registerBlockWithoutItem("golden_candle_holder_block", new ReworkedCandleHolderBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK).luminance(createLightLevelFromLitBlockState(13))));
+    //public static final Block COPPER_CANDLE_HOLDER = registerBlockWithoutItem("copper_candle_holder_block", new OxidizableReworkedCandleHolderBlock(Oxidizable.OxidationLevel.UNAFFECTED, FabricBlockSettings.copy(Blocks.IRON_BLOCK).luminance(createLightLevelFromLitBlockState(13))));
+    //public static final Block EXPOSED_COPPER_CANDLE_HOLDER = registerBlockWithoutItem("exposed_copper_candle_holder_block", new OxidizableReworkedCandleHolderBlock(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.copy(Blocks.IRON_BLOCK).luminance(createLightLevelFromLitBlockState(13))));
+    //public static final Block WEATHERED_COPPER_CANDLE_HOLDER = registerBlockWithoutItem("weathered_copper_candle_holder_block", new OxidizableReworkedCandleHolderBlock(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.copy(Blocks.IRON_BLOCK).luminance(createLightLevelFromLitBlockState(13))));
+    //public static final Block OXIDIZED_COPPER_CANDLE_HOLDER = registerBlockWithoutItem("oxidized_copper_candle_holder_block", new OxidizableReworkedCandleHolderBlock(Oxidizable.OxidationLevel.OXIDIZED, FabricBlockSettings.copy(Blocks.IRON_BLOCK).luminance(createLightLevelFromLitBlockState(13))));
+    //public static final Block WAXED_COPPER_CANDLE_HOLDER = registerBlockWithoutItem("waxed_copper_candle_holder_block", new ReworkedCandleHolderBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK).luminance(createLightLevelFromLitBlockState(13))));
+    //public static final Block WAXED_EXPOSED_COPPER_CANDLE_HOLDER = registerBlockWithoutItem("waxed_exposed_copper_candle_holder_block", new ReworkedCandleHolderBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK).luminance(createLightLevelFromLitBlockState(13))));
+    //public static final Block WAXED_WEATHERED_COPPER_CANDLE_HOLDER = registerBlockWithoutItem("waxed_weathered_copper_candle_holder_block", new ReworkedCandleHolderBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK).luminance(createLightLevelFromLitBlockState(13))));
+    //public static final Block WAXED_OXIDIZED_COPPER_CANDLE_HOLDER = registerBlockWithoutItem("waxed_oxidized_copper_candle_holder_block", new ReworkedCandleHolderBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK).luminance(createLightLevelFromLitBlockState(13))));
+
+    public static final Block AQUATIC_TORCH = registerBlockWithoutItem("aquatic_torch", new OxidizableAquaticTorchBlock(Oxidizable.OxidationLevel.UNAFFECTED, FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
+    public static final Block AQUATIC_WALL_TORCH = registerBlockWithoutItem("aquatic_wall_torch", new OxidizableAquaticWallTorchBlock(Oxidizable.OxidationLevel.UNAFFECTED, FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
+    public static final Block EXPOSED_AQUATIC_TORCH = registerBlockWithoutItem("exposed_aquatic_torch", new OxidizableAquaticTorchBlock(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
+    public static final Block EXPOSED_AQUATIC_WALL_TORCH = registerBlockWithoutItem("exposed_aquatic_wall_torch", new OxidizableAquaticWallTorchBlock(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
+    public static final Block WEATHERED_AQUATIC_TORCH = registerBlockWithoutItem("weathered_aquatic_torch", new OxidizableAquaticTorchBlock(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
+    public static final Block WEATHERED_AQUATIC_WALL_TORCH = registerBlockWithoutItem("weathered_aquatic_wall_torch", new OxidizableAquaticWallTorchBlock(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
+    public static final Block OXIDIZED_AQUATIC_TORCH = registerBlockWithoutItem("oxidized_aquatic_torch", new OxidizableAquaticTorchBlock(Oxidizable.OxidationLevel.OXIDIZED, FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
+    public static final Block OXIDIZED_AQUATIC_WALL_TORCH = registerBlockWithoutItem("oxidized_aquatic_wall_torch", new OxidizableAquaticWallTorchBlock(Oxidizable.OxidationLevel.OXIDIZED, FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
+
+    public static final Block WAXED_AQUATIC_TORCH = registerBlockWithoutItem("waxed_aquatic_torch", new AquaticTorchBlock(FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
+    public static final Block WAXED_AQUATIC_WALL_TORCH = registerBlockWithoutItem("waxed_aquatic_wall_torch", new AquaticWallTorchBlock(FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
+    public static final Block WAXED_EXPOSED_AQUATIC_TORCH = registerBlockWithoutItem("waxed_exposed_aquatic_torch", new AquaticTorchBlock(FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
+    public static final Block WAXED_EXPOSED_AQUATIC_WALL_TORCH = registerBlockWithoutItem("waxed_exposed_aquatic_wall_torch", new AquaticWallTorchBlock(FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
+    public static final Block WAXED_WEATHERED_AQUATIC_TORCH = registerBlockWithoutItem("waxed_weathered_aquatic_torch", new AquaticTorchBlock(FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
+    public static final Block WAXED_WEATHERED_AQUATIC_WALL_TORCH = registerBlockWithoutItem("waxed_weathered_aquatic_wall_torch", new AquaticWallTorchBlock(FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
+    public static final Block WAXED_OXIDIZED_AQUATIC_TORCH = registerBlockWithoutItem("waxed_oxidized_aquatic_torch", new AquaticTorchBlock(FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
+    public static final Block WAXED_OXIDIZED_AQUATIC_WALL_TORCH = registerBlockWithoutItem("waxed_oxidized_aquatic_wall_torch", new AquaticWallTorchBlock(FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
+
+    public static final Block PRISMARINE_TORCH = registerBlockWithoutItem("prismarine_torch", new AquaticTorchBlock(FabricBlockSettings.copy(Blocks.PRISMARINE_BRICKS).luminance((state) -> 10)));
+    public static final Block PRISMARINE_WALL_TORCH = registerBlockWithoutItem("prismarine_wall_torch", new AquaticWallTorchBlock(FabricBlockSettings.copy(Blocks.PRISMARINE_BRICKS).luminance((state) -> 10)));
+
+    public static final Block DEAD_CUP_CORAL_BLOCK = registerBlock("dead_cup_coral_block", new Block(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block CUP_CORAL_BLOCK = registerBlock("cup_coral_block", new CoralBlockBlock(ModBlocks.DEAD_CUP_CORAL_BLOCK, FabricBlockSettings.copy(Blocks.HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block DEAD_CUP_CORAL = registerBlock("dead_cup_coral", new DeadCoralBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block CUP_CORAL = registerBlock("cup_coral", new CoralBlock(ModBlocks.DEAD_CUP_CORAL, FabricBlockSettings.copy(Blocks.HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block DEAD_CUP_CORAL_FAN = registerBlockWithoutItem("dead_cup_coral_fan", new DeadCoralFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_FAN)));
+    public static final Block CUP_CORAL_FAN = registerBlockWithoutItem("cup_coral_fan", new CoralFanBlock(ModBlocks.DEAD_CUP_CORAL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_FAN)));
+    public static final Block DEAD_CUP_CORAL_WALL_FAN = registerBlockWithoutItem("dead_cup_coral_wall_fan", new DeadCoralWallFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN)));
+    public static final Block CUP_CORAL_WALL_FAN = registerBlockWithoutItem("cup_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_CUP_CORAL_WALL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_WALL_FAN)));
+
+    public static final Block DEAD_GHOST_CORAL_BLOCK = registerBlock("dead_ghost_coral_block", new Block(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block GHOST_CORAL_BLOCK = registerBlock("ghost_coral_block", new CoralBlockBlock(ModBlocks.DEAD_GHOST_CORAL_BLOCK, FabricBlockSettings.copy(Blocks.HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block DEAD_GHOST_CORAL = registerBlock("dead_ghost_coral", new DeadCoralBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block GHOST_CORAL = registerBlock("ghost_coral", new CoralBlock(ModBlocks.DEAD_GHOST_CORAL, FabricBlockSettings.copy(Blocks.HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block DEAD_GHOST_CORAL_FAN = registerBlockWithoutItem("dead_ghost_coral_fan", new DeadCoralFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_FAN)));
+    public static final Block GHOST_CORAL_FAN = registerBlockWithoutItem("ghost_coral_fan", new CoralFanBlock(ModBlocks.DEAD_GHOST_CORAL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_FAN)));
+    public static final Block DEAD_GHOST_CORAL_WALL_FAN = registerBlockWithoutItem("dead_ghost_coral_wall_fan", new DeadCoralWallFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN)));
+    public static final Block GHOST_CORAL_WALL_FAN = registerBlockWithoutItem("ghost_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_GHOST_CORAL_WALL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_WALL_FAN)));
+
+    public static final Block DEAD_SLATE_CORAL_BLOCK = registerBlock("dead_slate_coral_block", new Block(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block SLATE_CORAL_BLOCK = registerBlock("slate_coral_block", new CoralBlockBlock(ModBlocks.DEAD_SLATE_CORAL_BLOCK, FabricBlockSettings.copy(Blocks.HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block DEAD_SLATE_CORAL = registerBlock("dead_slate_coral", new DeadCoralBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block SLATE_CORAL = registerBlock("slate_coral", new CoralBlock(ModBlocks.DEAD_SLATE_CORAL, FabricBlockSettings.copy(Blocks.HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block DEAD_SLATE_CORAL_FAN = registerBlockWithoutItem("dead_slate_coral_fan", new DeadCoralFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_FAN)));
+    public static final Block SLATE_CORAL_FAN = registerBlockWithoutItem("slate_coral_fan", new CoralFanBlock(ModBlocks.DEAD_SLATE_CORAL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_FAN)));
+    public static final Block DEAD_SLATE_CORAL_WALL_FAN = registerBlockWithoutItem("dead_slate_coral_wall_fan", new DeadCoralWallFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN)));
+    public static final Block SLATE_CORAL_WALL_FAN = registerBlockWithoutItem("slate_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_SLATE_CORAL_WALL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_WALL_FAN)));
+
+    public static final Block DEAD_STONE_CORAL_BLOCK = registerBlock("dead_stone_coral_block", new Block(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block STONE_CORAL_BLOCK = registerBlock("stone_coral_block", new CoralBlockBlock(ModBlocks.DEAD_STONE_CORAL_BLOCK, FabricBlockSettings.copy(Blocks.HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block DEAD_STONE_CORAL = registerBlock("dead_stone_coral", new DeadCoralBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block STONE_CORAL = registerBlock("stone_coral", new CoralBlock(ModBlocks.DEAD_STONE_CORAL, FabricBlockSettings.copy(Blocks.HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block DEAD_STONE_CORAL_FAN = registerBlockWithoutItem("dead_stone_coral_fan", new DeadCoralFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_FAN)));
+    public static final Block STONE_CORAL_FAN = registerBlockWithoutItem("stone_coral_fan", new CoralFanBlock(ModBlocks.DEAD_STONE_CORAL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_FAN)));
+    public static final Block DEAD_STONE_CORAL_WALL_FAN = registerBlockWithoutItem("dead_stone_coral_wall_fan", new DeadCoralWallFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN)));
+    public static final Block STONE_CORAL_WALL_FAN = registerBlockWithoutItem("stone_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_STONE_CORAL_WALL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_WALL_FAN)));
+
+    public static final Block DEAD_THORN_CORAL_BLOCK = registerBlock("dead_thorn_coral_block", new Block(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block THORN_CORAL_BLOCK = registerBlock("thorn_coral_block", new CoralBlockBlock(ModBlocks.DEAD_THORN_CORAL_BLOCK, FabricBlockSettings.copy(Blocks.HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block DEAD_THORN_CORAL = registerBlock("dead_thorn_coral", new DeadCoralBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block THORN_CORAL = registerBlock("thorn_coral", new CoralBlock(ModBlocks.DEAD_THORN_CORAL, FabricBlockSettings.copy(Blocks.HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block DEAD_THORN_CORAL_FAN = registerBlockWithoutItem("dead_thorn_coral_fan", new DeadCoralFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_FAN)));
+    public static final Block THORN_CORAL_FAN = registerBlockWithoutItem("thorn_coral_fan", new CoralFanBlock(ModBlocks.DEAD_THORN_CORAL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_FAN)));
+    public static final Block DEAD_THORN_CORAL_WALL_FAN = registerBlockWithoutItem("dead_thorn_coral_wall_fan", new DeadCoralWallFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN)));
+    public static final Block THORN_CORAL_WALL_FAN = registerBlockWithoutItem("thorn_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_THORN_CORAL_WALL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_WALL_FAN)));
+
+    public static final Block DEAD_COCOA_CORAL_BLOCK = registerBlock("dead_cocoa_coral_block", new Block(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block COCOA_CORAL_BLOCK = registerBlock("cocoa_coral_block", new CoralBlockBlock(ModBlocks.DEAD_COCOA_CORAL_BLOCK, FabricBlockSettings.copy(Blocks.HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block DEAD_COCOA_CORAL = registerBlock("dead_cocoa_coral", new DeadCoralBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block COCOA_CORAL = registerBlock("cocoa_coral", new CoralBlock(ModBlocks.DEAD_COCOA_CORAL, FabricBlockSettings.copy(Blocks.HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block DEAD_COCOA_CORAL_FAN = registerBlockWithoutItem("dead_cocoa_coral_fan", new DeadCoralFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_FAN)));
+    public static final Block COCOA_CORAL_FAN = registerBlockWithoutItem("cocoa_coral_fan", new CoralFanBlock(ModBlocks.DEAD_COCOA_CORAL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_FAN)));
+    public static final Block DEAD_COCOA_CORAL_WALL_FAN = registerBlockWithoutItem("dead_cocoa_coral_wall_fan", new DeadCoralWallFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN)));
+    public static final Block COCOA_CORAL_WALL_FAN = registerBlockWithoutItem("cocoa_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_COCOA_CORAL_WALL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_WALL_FAN)));
+
+    public static final Block DEAD_PASSION_CORAL_BLOCK = registerBlock("dead_passion_coral_block", new Block(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block PASSION_CORAL_BLOCK = registerBlock("passion_coral_block", new CoralBlockBlock(ModBlocks.DEAD_PASSION_CORAL_BLOCK, FabricBlockSettings.copy(Blocks.HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block DEAD_PASSION_CORAL = registerBlock("dead_passion_coral", new DeadCoralBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block PASSION_CORAL = registerBlock("passion_coral", new CoralBlock(ModBlocks.DEAD_PASSION_CORAL, FabricBlockSettings.copy(Blocks.HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block DEAD_PASSION_CORAL_FAN = registerBlockWithoutItem("dead_passion_coral_fan", new DeadCoralFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_FAN)));
+    public static final Block PASSION_CORAL_FAN = registerBlockWithoutItem("passion_coral_fan", new CoralFanBlock(ModBlocks.DEAD_PASSION_CORAL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_FAN)));
+    public static final Block DEAD_PASSION_CORAL_WALL_FAN = registerBlockWithoutItem("dead_passion_coral_wall_fan", new DeadCoralWallFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN)));
+    public static final Block PASSION_CORAL_WALL_FAN = registerBlockWithoutItem("passion_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_PASSION_CORAL_WALL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_WALL_FAN)));
+
+    public static final Block DEAD_TOXIC_CORAL_BLOCK = registerBlock("dead_toxic_coral_block", new Block(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block TOXIC_CORAL_BLOCK = registerBlock("toxic_coral_block", new CoralBlockBlock(ModBlocks.DEAD_TOXIC_CORAL_BLOCK, FabricBlockSettings.copy(Blocks.HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block DEAD_TOXIC_CORAL = registerBlock("dead_toxic_coral", new DeadCoralBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block TOXIC_CORAL = registerBlock("toxic_coral", new CoralBlock(ModBlocks.DEAD_TOXIC_CORAL, FabricBlockSettings.copy(Blocks.HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block DEAD_TOXIC_CORAL_FAN = registerBlockWithoutItem("dead_toxic_coral_fan", new DeadCoralFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_FAN)));
+    public static final Block TOXIC_CORAL_FAN = registerBlockWithoutItem("toxic_coral_fan", new CoralFanBlock(ModBlocks.DEAD_TOXIC_CORAL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_FAN)));
+    public static final Block DEAD_TOXIC_CORAL_WALL_FAN = registerBlockWithoutItem("dead_toxic_coral_wall_fan", new DeadCoralWallFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN)));
+    public static final Block TOXIC_CORAL_WALL_FAN = registerBlockWithoutItem("toxic_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_TOXIC_CORAL_WALL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_WALL_FAN)));
+
+    public static final Block DEAD_GEM_CORAL_BLOCK = registerBlock("dead_gem_coral_block", new Block(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block GEM_CORAL_BLOCK = registerBlock("gem_coral_block", new CoralBlockBlock(ModBlocks.DEAD_GEM_CORAL_BLOCK, FabricBlockSettings.copy(Blocks.HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block DEAD_GEM_CORAL = registerBlock("dead_gem_coral", new DeadCoralBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block GEM_CORAL = registerBlock("gem_coral", new CoralBlock(ModBlocks.DEAD_GEM_CORAL, FabricBlockSettings.copy(Blocks.HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block DEAD_GEM_CORAL_FAN = registerBlockWithoutItem("dead_gem_coral_fan", new DeadCoralFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_FAN)));
+    public static final Block GEM_CORAL_FAN = registerBlockWithoutItem("gem_coral_fan", new CoralFanBlock(ModBlocks.DEAD_GEM_CORAL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_FAN)));
+    public static final Block DEAD_GEM_CORAL_WALL_FAN = registerBlockWithoutItem("dead_gem_coral_wall_fan", new DeadCoralWallFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN)));
+    public static final Block GEM_CORAL_WALL_FAN = registerBlockWithoutItem("gem_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_GEM_CORAL_WALL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_WALL_FAN)));
+
+    public static final Block DEAD_DIAMOND_CORAL_BLOCK = registerBlock("dead_diamond_coral_block", new Block(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block DIAMOND_CORAL_BLOCK = registerBlock("diamond_coral_block", new CoralBlockBlock(ModBlocks.DEAD_DIAMOND_CORAL_BLOCK, FabricBlockSettings.copy(Blocks.HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block DEAD_DIAMOND_CORAL = registerBlock("dead_diamond_coral", new DeadCoralBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block DIAMOND_CORAL = registerBlock("diamond_coral", new CoralBlock(ModBlocks.DEAD_DIAMOND_CORAL, FabricBlockSettings.copy(Blocks.HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block DEAD_DIAMOND_CORAL_FAN = registerBlockWithoutItem("dead_diamond_coral_fan", new DeadCoralFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_FAN)));
+    public static final Block DIAMOND_CORAL_FAN = registerBlockWithoutItem("diamond_coral_fan", new CoralFanBlock(ModBlocks.DEAD_DIAMOND_CORAL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_FAN)));
+    public static final Block DEAD_DIAMOND_CORAL_WALL_FAN = registerBlockWithoutItem("dead_diamond_coral_wall_fan", new DeadCoralWallFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN)));
+    public static final Block DIAMOND_CORAL_WALL_FAN = registerBlockWithoutItem("diamond_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_DIAMOND_CORAL_WALL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_WALL_FAN)));
+
+    public static final Block DEAD_ANCHOR_CORAL_BLOCK = registerBlock("dead_anchor_coral_block", new Block(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block ANCHOR_CORAL_BLOCK = registerBlock("anchor_coral_block", new CoralBlockBlock(ModBlocks.DEAD_ANCHOR_CORAL_BLOCK, FabricBlockSettings.copy(Blocks.HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block DEAD_ANCHOR_CORAL = registerBlock("dead_anchor_coral", new DeadCoralBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block ANCHOR_CORAL = registerBlock("anchor_coral", new CoralBlock(ModBlocks.DEAD_ANCHOR_CORAL, FabricBlockSettings.copy(Blocks.HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block DEAD_ANCHOR_CORAL_FAN = registerBlockWithoutItem("dead_anchor_coral_fan", new DeadCoralFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_FAN)));
+    public static final Block ANCHOR_CORAL_FAN = registerBlockWithoutItem("anchor_coral_fan", new CoralFanBlock(ModBlocks.DEAD_ANCHOR_CORAL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_FAN)));
+    public static final Block DEAD_ANCHOR_CORAL_WALL_FAN = registerBlockWithoutItem("dead_anchor_coral_wall_fan", new DeadCoralWallFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN)));
+    public static final Block ANCHOR_CORAL_WALL_FAN = registerBlockWithoutItem("anchor_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_ANCHOR_CORAL_WALL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_WALL_FAN)));
+
+    public static final Block GREEN_FIRE = registerBlockWithoutItem("green_fire", new GreenFireBlock(FabricBlockSettings.copy(Blocks.FIRE)));
+
+    public static final Block TALL_BOTTLE = registerBlock("tall_bottle", new TallBottleBlock(FabricBlockSettings.copy(Blocks.GREEN_STAINED_GLASS).breakInstantly().nonOpaque().pistonBehavior(PistonBehavior.DESTROY)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block WINE_GLASS = registerBlock("wine_glass", new WineGlassBlock(FabricBlockSettings.copy(Blocks.GLASS).breakInstantly().nonOpaque().pistonBehavior(PistonBehavior.DESTROY)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block PLATE = registerBlockWithoutItem("plate", new PlateBlock(FabricBlockSettings.copy(Blocks.WHITE_TERRACOTTA).breakInstantly()));
+
+    public static final Block BUTTERFLY_COCOON = registerBlockWithoutItem("butterfly_cocoon", new ButterflyCocoonBlock(FabricBlockSettings.copy(Blocks.MOSS_BLOCK).breakInstantly().nonOpaque().sounds(BlockSoundGroup.MOSS_BLOCK)));
+    public static final Block KIWI_BIRD_EGG = registerBlockWithoutItem("kiwi_bird_egg", new KiwiBirdEggBlock(FabricBlockSettings.copy(Blocks.SNIFFER_EGG).nonOpaque()));
+    public static final Block EMPEROR_PENGUIN_EGG = registerBlockWithoutItem("emperor_penguin_egg", new EmperorPenguinEggBlock(FabricBlockSettings.copy(Blocks.SNIFFER_EGG).nonOpaque()));
+
+    public static final Block BEER_MUG = registerBlockWithoutItem("beer_mug", new BeerMugBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).breakInstantly()));
+    public static final Block WOODEN_MUG = registerBlockWithoutItem("wooden_mug", new MugBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).breakInstantly()));
+
+    public static final Block SMALL_SPONGE = registerBlockWithoutItem("small_sponge", new SmallSpongeBlock(FabricBlockSettings.copy(Blocks.WET_SPONGE)));
+
+    public static final Block HOPS_CROP = registerBlockWithoutItem("hops_crop", new HopsCropBlock(FabricBlockSettings.copy(Blocks.CARROTS)));
+    public static final Block COTTON_CROP = registerBlockWithoutItem("cotton_crop", new CottonCropBlock(FabricBlockSettings.copy(Blocks.WHEAT)));
+    public static final Block KIWI_CROP = registerBlockWithoutItem("kiwi_crop", new KiwiCropBlock(FabricBlockSettings.copy(Blocks.JUNGLE_SAPLING)));
+    public static final Block THORNBLOOM_CROP = registerBlockWithoutItem("thornbloom_crop", new ThornbloomCropBlock(FabricBlockSettings.copy(Blocks.WHEAT)));
+    public static final Block GLOWLILY_CROP = registerBlockWithoutItem("glowlily_crop", new GlowLilyCropBlock(FabricBlockSettings.copy(Blocks.TORCHFLOWER_CROP)));
+
+    public static final Block SMALL_LILY_PADS = registerBlockWithoutItem("small_lily_pads", new SmallLilyPadBlock(FabricBlockSettings.copy(Blocks.LILY_PAD)));
+    public static final Block GIANT_LILY_PAD = registerBlockWithoutItem("giant_lily_pad", new GiantLilyPadBlock(FabricBlockSettings.copy(Blocks.LILY_PAD)));
+    public static final Block GIANT_LILY_PAD_SEEDLING = registerBlockWithoutItem("giant_lily_pad_seedling", new GiantLilyPadSeedlingBlock(FabricBlockSettings.copy(Blocks.LILY_PAD)));
+
+    public static final Block BOOK_PILE = registerBlockWithoutItem("book_pile", new BookPileBlock(FabricBlockSettings.copy(Blocks.BOOKSHELF).breakInstantly()));
+
     public static final Block GOLDEN_WALL_CANDLE = registerBlock("golden_wall_candle", new WallCandleBlock(FabricBlockSettings.copy(Blocks.GOLD_BLOCK).luminance(createLightLevelFromLitBlockState(8))), ModItemGroups.CLUTTER_BLOCKS);
     public static final Block WHITE_GOLDEN_WALL_CANDLE = registerBlock("white_golden_wall_candle", new WallCandleBlock(FabricBlockSettings.copy(Blocks.GOLD_BLOCK).luminance(createLightLevelFromLitBlockState(8))), ModItemGroups.CLUTTER_BLOCKS);
     public static final Block LIGHT_GRAY_GOLDEN_WALL_CANDLE = registerBlock("light_gray_golden_wall_candle", new WallCandleBlock(FabricBlockSettings.copy(Blocks.GOLD_BLOCK).luminance(createLightLevelFromLitBlockState(8))), ModItemGroups.CLUTTER_BLOCKS);
@@ -1073,269 +1336,6 @@ public class ModBlocks {
     public static final Block MAGENTA_IRON_CANDELABRA = registerBlock("magenta_iron_candelabra", new CandelabraBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK).luminance(createLightLevelFromLitBlockState(12))), ModItemGroups.CLUTTER_BLOCKS);
     public static final Block PINK_IRON_CANDELABRA = registerBlock("pink_iron_candelabra", new CandelabraBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK).luminance(createLightLevelFromLitBlockState(12))), ModItemGroups.CLUTTER_BLOCKS);
 
-    public static final Block BONFIRE = registerBlock("bonfire", new BonfireBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).nonOpaque().luminance(BonfireBlock.createLightLevelFromLitBlockState(15))), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block SOUL_BONFIRE = registerBlock("soul_bonfire", new BonfireBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).nonOpaque().luminance(BonfireBlock.createLightLevelFromLitBlockState(13))), ModItemGroups.CLUTTER_BLOCKS);
-
-    public static final Block CATTAILS = registerBlock("cattails", new CattailPlantBlock(FabricBlockSettings.copy(Blocks.ROSE_BUSH)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block LUSH_MOSS = registerBlock("lush_moss", new MossSproutBlock(FabricBlockSettings.copy(Blocks.NETHER_SPROUTS).sounds(BlockSoundGroup.MOSS_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
-
-    public static final Block BREAD = registerBlock("bread", new BreadBlock(FabricBlockSettings.copy(Blocks.CAKE).nonOpaque(), 2, 0.25f), ModItemGroups.CLUTTER_BLOCKS);
-
-    public static final Block FROG_STATUE = registerBlock("frog_statue", new FrogStatueBlock(FabricBlockSettings.copy(Blocks.STONE)), ModItemGroups.CLUTTER_BLOCKS);
-
-    public static final Block THORNBLOOM = registerBlock("thornbloom", new ThornBloomPlantBlock(FabricBlockSettings.copy(Blocks.SWEET_BERRY_BUSH)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block GLOWLILY = registerBlock("glowlily", new GlowLilyPlantBlock(FabricBlockSettings.copy(Blocks.SWEET_BERRY_BUSH).luminance(GlowLilyPlantBlock.createLightLevelFromAge())), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block GLOWLILY_BLOCK = registerBlock("glowlily_block", new Block(FabricBlockSettings.copy(Blocks.VERDANT_FROGLIGHT).luminance((state) -> {return 15;})), ModItemGroups.CLUTTER_BLOCKS);
-
-    //public static final Block SINK = registerBlock("sink", new SinkBlock(FabricBlockSettings.copy(Blocks.WATER_CAULDRON).nonOpaque()), ModItemGroups.CLUTTER_BLOCKS);
-    //public static final Block SHOWER = registerBlock("shower", new ShowerBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK).ticksRandomly()), ModItemGroups.CLUTTER_BLOCKS);
-
-    public static final Block COPPER_COIN_STACK = registerBlock("copper_coin_stack", new CopperCoinStackBlock(FabricBlockSettings.create().nonOpaque().strength(0.25f).sounds(ModSounds.COIN_PILE_SOUNDS).mapColor(MapColor.TERRACOTTA_ORANGE)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block SILVER_COIN_STACK = registerBlock("silver_coin_stack", new SilverCoinStackBlock(FabricBlockSettings.create().nonOpaque().strength(0.25f).sounds(ModSounds.COIN_PILE_SOUNDS).mapColor(MapColor.LIGHT_GRAY)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block GOLDEN_COIN_STACK = registerBlock("golden_coin_stack", new GoldenCoinStackBlock(FabricBlockSettings.create().nonOpaque().strength(0.25f).sounds(ModSounds.COIN_PILE_SOUNDS).mapColor(MapColor.GOLD)), ModItemGroups.CLUTTER_BLOCKS);
-
-    public static final Block RIPE_KIWI_LEAVES = registerBlock("ripe_kiwi_leaves", new KiwiLeafBlock(FabricBlockSettings.copy(Blocks.JUNGLE_LEAVES)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block KIWI_LEAVES = registerBlock("kiwi_leaves", new LeavesBlock(FabricBlockSettings.copy(Blocks.JUNGLE_LEAVES)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block KIWI_TREE_SAPLING = registerBlock("kiwi_tree_sapling", new SaplingBlock(new KiwiTreeSaplingGenerator(), FabricBlockSettings.copy(Blocks.JUNGLE_SAPLING)), ModItemGroups.CLUTTER_BLOCKS);
-
-    public static final Block LARGE_CHAIN = registerBlock("large_chain", new LargeChainBlock(FabricBlockSettings.copy(Blocks.CHAIN)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block LARGE_SILVER_CHAIN = registerBlock("large_silver_chain", new LargeChainBlock(FabricBlockSettings.copy(ModBlocks.SILVER_CHAIN)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block LARGE_GOLDEN_CHAIN = registerBlock("large_golden_chain", new LargeChainBlock(FabricBlockSettings.copy(ModBlocks.GOLDEN_CHAIN)), ModItemGroups.CLUTTER_BLOCKS);
-
-    public static final Block LARGE_COPPER_CHAIN = registerBlock("large_copper_chain", new OxidizableLargeChainBlock(Oxidizable.OxidationLevel.UNAFFECTED, FabricBlockSettings.copy(ModBlocks.COPPER_CHAIN)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block EXPOSED_LARGE_COPPER_CHAIN = registerBlock("exposed_large_copper_chain", new OxidizableLargeChainBlock(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.copy(ModBlocks.EXPOSED_COPPER_CHAIN)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block WEATHERED_LARGE_COPPER_CHAIN = registerBlock("weathered_large_copper_chain", new OxidizableLargeChainBlock(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.copy(ModBlocks.WEATHERED_COPPER_CHAIN)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block OXIDIZED_LARGE_COPPER_CHAIN = registerBlock("oxidized_large_copper_chain", new OxidizableLargeChainBlock(Oxidizable.OxidationLevel.OXIDIZED, FabricBlockSettings.copy(ModBlocks.OXIDIZED_COPPER_CHAIN)), ModItemGroups.CLUTTER_BLOCKS);
-
-    public static final Block WAXED_LARGE_COPPER_CHAIN = registerBlock("waxed_large_copper_chain", new OxidizableLargeChainBlock(Oxidizable.OxidationLevel.UNAFFECTED, FabricBlockSettings.copy(ModBlocks.WAXED_COPPER_CHAIN)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block WAXED_EXPOSED_LARGE_COPPER_CHAIN = registerBlock("waxed_exposed_large_copper_chain", new OxidizableLargeChainBlock(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.copy(ModBlocks.WAXED_EXPOSED_COPPER_CHAIN)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block WAXED_WEATHERED_LARGE_COPPER_CHAIN = registerBlock("waxed_weathered_large_copper_chain", new OxidizableLargeChainBlock(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.copy(ModBlocks.WAXED_WEATHERED_COPPER_CHAIN)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block WAXED_OXIDIZED_LARGE_COPPER_CHAIN = registerBlock("waxed_oxidized_large_copper_chain", new OxidizableLargeChainBlock(Oxidizable.OxidationLevel.OXIDIZED, FabricBlockSettings.copy(ModBlocks.WAXED_OXIDIZED_COPPER_CHAIN)), ModItemGroups.CLUTTER_BLOCKS);
-
-    public static final Block LARGE_CANDLE = registerBlock("large_candle", new LargeCandleBlock(FabricBlockSettings.create().mapColor(MapColor.PALE_YELLOW).nonOpaque().strength(0.1F).sounds(BlockSoundGroup.CANDLE).luminance(createLightLevelFromLitBlockState(12)).pistonBehavior(PistonBehavior.DESTROY)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block LARGE_WHITE_CANDLE = registerBlock("large_white_candle", new LargeCandleBlock(FabricBlockSettings.copy(ModBlocks.LARGE_CANDLE).mapColor(MapColor.WHITE_GRAY)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block LARGE_LIGHT_GRAY_CANDLE = registerBlock("large_light_gray_candle", new LargeCandleBlock(FabricBlockSettings.copy(ModBlocks.LARGE_CANDLE).mapColor(MapColor.LIGHT_GRAY)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block LARGE_GRAY_CANDLE = registerBlock("large_gray_candle", new LargeCandleBlock(FabricBlockSettings.copy(ModBlocks.LARGE_CANDLE).mapColor(MapColor.GRAY)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block LARGE_BLACK_CANDLE = registerBlock("large_black_candle", new LargeCandleBlock(FabricBlockSettings.copy(ModBlocks.LARGE_CANDLE).mapColor(MapColor.BLACK)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block LARGE_BROWN_CANDLE = registerBlock("large_brown_candle", new LargeCandleBlock(FabricBlockSettings.copy(ModBlocks.LARGE_CANDLE).mapColor(MapColor.BROWN)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block LARGE_RED_CANDLE = registerBlock("large_red_candle", new LargeCandleBlock(FabricBlockSettings.copy(ModBlocks.LARGE_CANDLE).mapColor(MapColor.RED)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block LARGE_ORANGE_CANDLE = registerBlock("large_orange_candle", new LargeCandleBlock(FabricBlockSettings.copy(ModBlocks.LARGE_CANDLE).mapColor(MapColor.ORANGE)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block LARGE_YELLOW_CANDLE = registerBlock("large_yellow_candle", new LargeCandleBlock(FabricBlockSettings.copy(ModBlocks.LARGE_CANDLE).mapColor(MapColor.YELLOW)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block LARGE_LIME_CANDLE = registerBlock("large_lime_candle", new LargeCandleBlock(FabricBlockSettings.copy(ModBlocks.LARGE_CANDLE).mapColor(MapColor.LIME)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block LARGE_GREEN_CANDLE = registerBlock("large_green_candle", new LargeCandleBlock(FabricBlockSettings.copy(ModBlocks.LARGE_CANDLE).mapColor(MapColor.GREEN)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block LARGE_CYAN_CANDLE = registerBlock("large_cyan_candle", new LargeCandleBlock(FabricBlockSettings.copy(ModBlocks.LARGE_CANDLE).mapColor(MapColor.CYAN)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block LARGE_LIGHT_BLUE_CANDLE = registerBlock("large_light_blue_candle", new LargeCandleBlock(FabricBlockSettings.copy(ModBlocks.LARGE_CANDLE).mapColor(MapColor.LIGHT_BLUE)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block LARGE_BLUE_CANDLE = registerBlock("large_blue_candle", new LargeCandleBlock(FabricBlockSettings.copy(ModBlocks.LARGE_CANDLE).mapColor(MapColor.BLUE)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block LARGE_PURPLE_CANDLE = registerBlock("large_purple_candle", new LargeCandleBlock(FabricBlockSettings.copy(ModBlocks.LARGE_CANDLE).mapColor(MapColor.PURPLE)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block LARGE_MAGENTA_CANDLE = registerBlock("large_magenta_candle", new LargeCandleBlock(FabricBlockSettings.copy(ModBlocks.LARGE_CANDLE).mapColor(MapColor.MAGENTA)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block LARGE_PINK_CANDLE = registerBlock("large_pink_candle", new LargeCandleBlock(FabricBlockSettings.copy(ModBlocks.LARGE_CANDLE).mapColor(MapColor.PINK)), ModItemGroups.CLUTTER_BLOCKS);
-
-    public static final Block BLACKSTONE_SULPHUR_ORE = registerBlock("blackstone_sulphur_ore", new ExperienceDroppingBlock(FabricBlockSettings.copy(Blocks.BLACKSTONE).mapColor(MapColor.PALE_YELLOW), UniformIntProvider.create(1, 2)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block BASALT_SULPHUR_ORE = registerBlock("basalt_sulphur_ore", new ExperienceDroppingPillarBlock(FabricBlockSettings.copy(Blocks.BASALT).mapColor(MapColor.PALE_YELLOW), UniformIntProvider.create(1, 2)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block SULPHUR_BLOCK = registerBlock("sulphur_block", new Block(FabricBlockSettings.create().instrument(Instrument.BASEDRUM).strength(1f, 1.5f).mapColor(MapColor.TERRACOTTA_YELLOW).sounds(BlockSoundGroup.SAND)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block ONYX_ORE = registerBlock("onyx_ore", new ExperienceDroppingBlock(FabricBlockSettings.create().instrument(Instrument.BASEDRUM).strength(1f, 1.5f).mapColor(MapColor.TERRACOTTA_YELLOW).sounds(BlockSoundGroup.SAND), UniformIntProvider.create(3, 7)), ModItemGroups.CLUTTER_BLOCKS);
-
-    public static final Block SMALL_ONYX_BUD = registerBlock("small_onyx_bud", new OnyxClusterBlock(3, 4, FabricBlockSettings.create().mapColor(MapColor.BLACK).solid().nonOpaque().ticksRandomly().sounds(BlockSoundGroup.SMALL_AMETHYST_BUD).strength(1.5F).luminance((state) -> 1).pistonBehavior(PistonBehavior.DESTROY)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block MEDIUM_ONYX_BUD = registerBlock("medium_onyx_bud", new OnyxClusterBlock(4, 3, FabricBlockSettings.copy(SMALL_ONYX_BUD).sounds(BlockSoundGroup.LARGE_AMETHYST_BUD).solid().luminance((state) -> 2).pistonBehavior(PistonBehavior.DESTROY)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block LARGE_ONYX_BUD = registerBlock("large_onyx_bud", new OnyxClusterBlock(5, 3, FabricBlockSettings.copy(SMALL_ONYX_BUD).sounds(BlockSoundGroup.MEDIUM_AMETHYST_BUD).solid().luminance((state) -> 4).pistonBehavior(PistonBehavior.DESTROY)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block ONYX_CLUSTER = registerBlock("onyx_cluster", new OnyxClusterBlock(7, 3, FabricBlockSettings.copy(SMALL_ONYX_BUD).sounds(BlockSoundGroup.AMETHYST_CLUSTER).strength(1.5F).luminance((state) -> 5).pistonBehavior(PistonBehavior.DESTROY)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block BUDDING_ONYX = registerBlock("budding_onyx", new BuddingOnyxBlock(FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F).ticksRandomly()), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block ONYX_BLOCK = registerBlock("onyx_block", new Block(FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block ONYX_SLAB = registerBlock("onyx_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block ONYX_STAIRS = registerBlock("onyx_stairs", new StairsBlock(Blocks.OBSIDIAN.getDefaultState(), FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block ONYX_WALL = registerBlock("onyx_wall", new WallBlock(FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block POLISHED_ONYX = registerBlock("polished_onyx", new Block(FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block POLISHED_ONYX_SLAB = registerBlock("polished_onyx_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block POLISHED_ONYX_STAIRS = registerBlock("polished_onyx_stairs", new StairsBlock(Blocks.OBSIDIAN.getDefaultState(), FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block POLISHED_ONYX_WALL = registerBlock("polished_onyx_wall", new WallBlock(FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block BLACK_ONYX_BLOCK = registerBlock("black_onyx_block", new Block(FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block BLACK_ONYX_SLAB = registerBlock("black_onyx_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block BLACK_ONYX_STAIRS = registerBlock("black_onyx_stairs", new StairsBlock(Blocks.OBSIDIAN.getDefaultState(), FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block BLACK_ONYX_WALL = registerBlock("black_onyx_wall", new WallBlock(FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block POLISHED_BLACK_ONYX = registerBlock("polished_black_onyx", new Block(FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block POLISHED_BLACK_ONYX_SLAB = registerBlock("polished_black_onyx_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block POLISHED_BLACK_ONYX_STAIRS = registerBlock("polished_black_onyx_stairs", new StairsBlock(Blocks.OBSIDIAN.getDefaultState(), FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block POLISHED_BLACK_ONYX_WALL = registerBlock("polished_black_onyx_wall", new WallBlock(FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)), ModItemGroups.CLUTTER_BLOCKS);
-
-
-    public static final Block SMALL_TARGET_BLOCK = registerBlock("small_target_block", new SmallTargetBlock(FabricBlockSettings.copy(Blocks.TARGET).nonOpaque()), ModItemGroups.CLUTTER_BLOCKS);
-
-    public static final Block LARGE_IRON_CHANDELIER = registerBlock("large_iron_chandelier", new LargeChandelierBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK).nonOpaque().pistonBehavior(PistonBehavior.DESTROY)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block LARGE_SILVER_CHANDELIER = registerBlock("large_silver_chandelier", new LargeChandelierBlock(FabricBlockSettings.copy(ModBlocks.SILVER_BLOCK).nonOpaque().pistonBehavior(PistonBehavior.DESTROY)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block LARGE_GOLDEN_CHANDELIER = registerBlock("large_golden_chandelier", new LargeChandelierBlock(FabricBlockSettings.copy(Blocks.GOLD_BLOCK).nonOpaque().pistonBehavior(PistonBehavior.DESTROY)), ModItemGroups.CLUTTER_BLOCKS);
-
-    public static final Block LARGE_COPPER_CHANDELIER = registerBlock("large_copper_chandelier", new OxidizableLargeChandelier(Oxidizable.OxidationLevel.UNAFFECTED, FabricBlockSettings.copy(Blocks.COPPER_BLOCK).nonOpaque().pistonBehavior(PistonBehavior.DESTROY)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block EXPOSED_LARGE_COPPER_CHANDELIER = registerBlock("exposed_large_copper_chandelier", new OxidizableLargeChandelier(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.copy(Blocks.EXPOSED_COPPER).nonOpaque().pistonBehavior(PistonBehavior.DESTROY)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block WEATHERED_LARGE_COPPER_CHANDELIER = registerBlock("weathered_large_copper_chandelier", new OxidizableLargeChandelier(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.copy(Blocks.WEATHERED_COPPER).nonOpaque().pistonBehavior(PistonBehavior.DESTROY)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block OXIDIZED_LARGE_COPPER_CHANDELIER = registerBlock("oxidized_large_copper_chandelier", new OxidizableLargeChandelier(Oxidizable.OxidationLevel.OXIDIZED, FabricBlockSettings.copy(Blocks.OXIDIZED_COPPER).nonOpaque().pistonBehavior(PistonBehavior.DESTROY)), ModItemGroups.CLUTTER_BLOCKS);
-
-    public static final Block WAXED_LARGE_COPPER_CHANDELIER = registerBlock("waxed_large_copper_chandelier", new LargeChandelierBlock(FabricBlockSettings.copy(Blocks.WAXED_COPPER_BLOCK).nonOpaque().pistonBehavior(PistonBehavior.DESTROY)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block WAXED_EXPOSED_LARGE_COPPER_CHANDELIER = registerBlock("waxed_exposed_large_copper_chandelier", new LargeChandelierBlock(FabricBlockSettings.copy(Blocks.WAXED_EXPOSED_COPPER).nonOpaque().pistonBehavior(PistonBehavior.DESTROY)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block WAXED_WEATHERED_LARGE_COPPER_CHANDELIER = registerBlock("waxed_weathered_large_copper_chandelier", new LargeChandelierBlock(FabricBlockSettings.copy(Blocks.WAXED_WEATHERED_COPPER).nonOpaque().pistonBehavior(PistonBehavior.DESTROY)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block WAXED_OXIDIZED_LARGE_COPPER_CHANDELIER = registerBlock("waxed_oxidized_large_copper_chandelier", new LargeChandelierBlock(FabricBlockSettings.copy(Blocks.WAXED_OXIDIZED_COPPER).nonOpaque().pistonBehavior(PistonBehavior.DESTROY)), ModItemGroups.CLUTTER_BLOCKS);
-
-    public static final Block BRICK_KILN = registerBlock("brick_kiln", new BrickKilnBlock(FabricBlockSettings.copy(Blocks.BRICKS).luminance(createLightLevelFromLitBlockState(13))), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block MAILBOX = registerBlock("mailbox", new MailBoxBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK).nonOpaque()), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block CARDBOARD_BOX = registerBlock("cardboard_box", new CardboardBoxBlock(FabricBlockSettings.create().nonOpaque().mapColor(MapColor.BROWN).sounds(BlockSoundGroup.WOOL)), ModItemGroups.CLUTTER_BLOCKS, 1);
-
-    public static final Block IRON_CANDLE_HOLDER = registerBlock("iron_candle_holder_block", new ReworkedCandleHolderBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK).luminance(createLightLevelFromLitBlockState(13))), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block SILVER_CANDLE_HOLDER = registerBlock("silver_candle_holder_block", new ReworkedCandleHolderBlock(FabricBlockSettings.copy(ModBlocks.SILVER_BLOCK).luminance(createLightLevelFromLitBlockState(13))), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block GOLDEN_CANDLE_HOLDER = registerBlock("golden_candle_holder_block", new ReworkedCandleHolderBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK).luminance(createLightLevelFromLitBlockState(13))), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block COPPER_CANDLE_HOLDER = registerBlock("copper_candle_holder_block", new OxidizableReworkedCandleHolderBlock(Oxidizable.OxidationLevel.UNAFFECTED, FabricBlockSettings.copy(Blocks.IRON_BLOCK).luminance(createLightLevelFromLitBlockState(13))), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block EXPOSED_COPPER_CANDLE_HOLDER = registerBlock("exposed_copper_candle_holder_block", new OxidizableReworkedCandleHolderBlock(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.copy(Blocks.IRON_BLOCK).luminance(createLightLevelFromLitBlockState(13))), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block WEATHERED_COPPER_CANDLE_HOLDER = registerBlock("weathered_copper_candle_holder_block", new OxidizableReworkedCandleHolderBlock(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.copy(Blocks.IRON_BLOCK).luminance(createLightLevelFromLitBlockState(13))), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block OXIDIZED_COPPER_CANDLE_HOLDER = registerBlock("oxidized_copper_candle_holder_block", new OxidizableReworkedCandleHolderBlock(Oxidizable.OxidationLevel.OXIDIZED, FabricBlockSettings.copy(Blocks.IRON_BLOCK).luminance(createLightLevelFromLitBlockState(13))), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block WAXED_COPPER_CANDLE_HOLDER = registerBlock("waxed_copper_candle_holder_block", new ReworkedCandleHolderBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK).luminance(createLightLevelFromLitBlockState(13))), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block WAXED_EXPOSED_COPPER_CANDLE_HOLDER = registerBlock("waxed_exposed_copper_candle_holder_block", new ReworkedCandleHolderBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK).luminance(createLightLevelFromLitBlockState(13))), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block WAXED_WEATHERED_COPPER_CANDLE_HOLDER = registerBlock("waxed_weathered_copper_candle_holder_block", new ReworkedCandleHolderBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK).luminance(createLightLevelFromLitBlockState(13))), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block WAXED_OXIDIZED_COPPER_CANDLE_HOLDER = registerBlock("waxed_oxidized_copper_candle_holder_block", new ReworkedCandleHolderBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK).luminance(createLightLevelFromLitBlockState(13))), ModItemGroups.CLUTTER_BLOCKS);
-
-    public static final Block AQUATIC_TORCH = registerBlockWithoutItem("aquatic_torch", new OxidizableAquaticTorchBlock(Oxidizable.OxidationLevel.UNAFFECTED, FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
-    public static final Block AQUATIC_WALL_TORCH = registerBlockWithoutItem("aquatic_wall_torch", new OxidizableAquaticWallTorchBlock(Oxidizable.OxidationLevel.UNAFFECTED, FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
-    public static final Block EXPOSED_AQUATIC_TORCH = registerBlockWithoutItem("exposed_aquatic_torch", new OxidizableAquaticTorchBlock(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
-    public static final Block EXPOSED_AQUATIC_WALL_TORCH = registerBlockWithoutItem("exposed_aquatic_wall_torch", new OxidizableAquaticWallTorchBlock(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
-    public static final Block WEATHERED_AQUATIC_TORCH = registerBlockWithoutItem("weathered_aquatic_torch", new OxidizableAquaticTorchBlock(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
-    public static final Block WEATHERED_AQUATIC_WALL_TORCH = registerBlockWithoutItem("weathered_aquatic_wall_torch", new OxidizableAquaticWallTorchBlock(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
-    public static final Block OXIDIZED_AQUATIC_TORCH = registerBlockWithoutItem("oxidized_aquatic_torch", new OxidizableAquaticTorchBlock(Oxidizable.OxidationLevel.OXIDIZED, FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
-    public static final Block OXIDIZED_AQUATIC_WALL_TORCH = registerBlockWithoutItem("oxidized_aquatic_wall_torch", new OxidizableAquaticWallTorchBlock(Oxidizable.OxidationLevel.OXIDIZED, FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
-
-    public static final Block WAXED_AQUATIC_TORCH = registerBlockWithoutItem("waxed_aquatic_torch", new AquaticTorchBlock(FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
-    public static final Block WAXED_AQUATIC_WALL_TORCH = registerBlockWithoutItem("waxed_aquatic_wall_torch", new AquaticTorchBlock(FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
-    public static final Block WAXED_EXPOSED_AQUATIC_TORCH = registerBlockWithoutItem("waxed_exposed_aquatic_torch", new AquaticTorchBlock(FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
-    public static final Block WAXED_EXPOSED_AQUATIC_WALL_TORCH = registerBlockWithoutItem("waxed_exposed_aquatic_wall_torch", new AquaticTorchBlock(FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
-    public static final Block WAXED_WEATHERED_AQUATIC_TORCH = registerBlockWithoutItem("waxed_weathered_aquatic_torch", new AquaticTorchBlock(FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
-    public static final Block WAXED_WEATHERED_AQUATIC_WALL_TORCH = registerBlockWithoutItem("waxed_weathered_aquatic_wall_torch", new AquaticTorchBlock(FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
-    public static final Block WAXED_OXIDIZED_AQUATIC_TORCH = registerBlockWithoutItem("waxed_oxidized_aquatic_torch", new AquaticTorchBlock(FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
-    public static final Block WAXED_OXIDIZED_AQUATIC_WALL_TORCH = registerBlockWithoutItem("waxed_oxidized_aquatic_wall_torch", new AquaticTorchBlock(FabricBlockSettings.copy(Blocks.LANTERN).luminance((state) -> 10)));
-
-    public static final Block PRISMARINE_TORCH = registerBlockWithoutItem("prismarine_torch", new AquaticTorchBlock(FabricBlockSettings.copy(Blocks.PRISMARINE_BRICKS).luminance((state) -> 10)));
-    public static final Block PRISMARINE_WALL_TORCH = registerBlockWithoutItem("prismarine_wall_torch", new AquaticWallTorchBlock(FabricBlockSettings.copy(Blocks.PRISMARINE_BRICKS).luminance((state) -> 10)));
-
-
-    public static final Block DEAD_CUP_CORAL_BLOCK = registerBlock("dead_cup_coral_block", new Block(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block CUP_CORAL_BLOCK = registerBlock("cup_coral_block", new CoralBlockBlock(ModBlocks.DEAD_CUP_CORAL_BLOCK, FabricBlockSettings.copy(Blocks.HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block DEAD_CUP_CORAL = registerBlock("dead_cup_coral", new DeadCoralBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block CUP_CORAL = registerBlock("cup_coral", new CoralBlock(ModBlocks.DEAD_CUP_CORAL, FabricBlockSettings.copy(Blocks.HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block DEAD_CUP_CORAL_FAN = registerBlockWithoutItem("dead_cup_coral_fan", new DeadCoralFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_FAN)));
-    public static final Block CUP_CORAL_FAN = registerBlockWithoutItem("cup_coral_fan", new CoralFanBlock(ModBlocks.DEAD_CUP_CORAL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_FAN)));
-    public static final Block DEAD_CUP_CORAL_WALL_FAN = registerBlockWithoutItem("dead_cup_coral_wall_fan", new DeadCoralWallFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN)));
-    public static final Block CUP_CORAL_WALL_FAN = registerBlockWithoutItem("cup_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_CUP_CORAL_WALL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_WALL_FAN)));
-
-    public static final Block DEAD_GHOST_CORAL_BLOCK = registerBlock("dead_ghost_coral_block", new Block(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block GHOST_CORAL_BLOCK = registerBlock("ghost_coral_block", new CoralBlockBlock(ModBlocks.DEAD_GHOST_CORAL_BLOCK, FabricBlockSettings.copy(Blocks.HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block DEAD_GHOST_CORAL = registerBlock("dead_ghost_coral", new DeadCoralBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block GHOST_CORAL = registerBlock("ghost_coral", new CoralBlock(ModBlocks.DEAD_GHOST_CORAL, FabricBlockSettings.copy(Blocks.HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block DEAD_GHOST_CORAL_FAN = registerBlockWithoutItem("dead_ghost_coral_fan", new DeadCoralFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_FAN)));
-    public static final Block GHOST_CORAL_FAN = registerBlockWithoutItem("ghost_coral_fan", new CoralFanBlock(ModBlocks.DEAD_GHOST_CORAL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_FAN)));
-    public static final Block DEAD_GHOST_CORAL_WALL_FAN = registerBlockWithoutItem("dead_ghost_coral_wall_fan", new DeadCoralWallFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN)));
-    public static final Block GHOST_CORAL_WALL_FAN = registerBlockWithoutItem("ghost_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_GHOST_CORAL_WALL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_WALL_FAN)));
-
-    public static final Block DEAD_SLATE_CORAL_BLOCK = registerBlock("dead_slate_coral_block", new Block(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block SLATE_CORAL_BLOCK = registerBlock("slate_coral_block", new CoralBlockBlock(ModBlocks.DEAD_SLATE_CORAL_BLOCK, FabricBlockSettings.copy(Blocks.HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block DEAD_SLATE_CORAL = registerBlock("dead_slate_coral", new DeadCoralBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block SLATE_CORAL = registerBlock("slate_coral", new CoralBlock(ModBlocks.DEAD_SLATE_CORAL, FabricBlockSettings.copy(Blocks.HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block DEAD_SLATE_CORAL_FAN = registerBlockWithoutItem("dead_slate_coral_fan", new DeadCoralFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_FAN)));
-    public static final Block SLATE_CORAL_FAN = registerBlockWithoutItem("slate_coral_fan", new CoralFanBlock(ModBlocks.DEAD_SLATE_CORAL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_FAN)));
-    public static final Block DEAD_SLATE_CORAL_WALL_FAN = registerBlockWithoutItem("dead_slate_coral_wall_fan", new DeadCoralWallFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN)));
-    public static final Block SLATE_CORAL_WALL_FAN = registerBlockWithoutItem("slate_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_SLATE_CORAL_WALL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_WALL_FAN)));
-
-    public static final Block DEAD_STONE_CORAL_BLOCK = registerBlock("dead_stone_coral_block", new Block(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block STONE_CORAL_BLOCK = registerBlock("stone_coral_block", new CoralBlockBlock(ModBlocks.DEAD_STONE_CORAL_BLOCK, FabricBlockSettings.copy(Blocks.HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block DEAD_STONE_CORAL = registerBlock("dead_stone_coral", new DeadCoralBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block STONE_CORAL = registerBlock("stone_coral", new CoralBlock(ModBlocks.DEAD_STONE_CORAL, FabricBlockSettings.copy(Blocks.HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block DEAD_STONE_CORAL_FAN = registerBlockWithoutItem("dead_stone_coral_fan", new DeadCoralFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_FAN)));
-    public static final Block STONE_CORAL_FAN = registerBlockWithoutItem("stone_coral_fan", new CoralFanBlock(ModBlocks.DEAD_STONE_CORAL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_FAN)));
-    public static final Block DEAD_STONE_CORAL_WALL_FAN = registerBlockWithoutItem("dead_stone_coral_wall_fan", new DeadCoralWallFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN)));
-    public static final Block STONE_CORAL_WALL_FAN = registerBlockWithoutItem("stone_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_STONE_CORAL_WALL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_WALL_FAN)));
-
-    public static final Block DEAD_THORN_CORAL_BLOCK = registerBlock("dead_thorn_coral_block", new Block(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block THORN_CORAL_BLOCK = registerBlock("thorn_coral_block", new CoralBlockBlock(ModBlocks.DEAD_THORN_CORAL_BLOCK, FabricBlockSettings.copy(Blocks.HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block DEAD_THORN_CORAL = registerBlock("dead_thorn_coral", new DeadCoralBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block THORN_CORAL = registerBlock("thorn_coral", new CoralBlock(ModBlocks.DEAD_THORN_CORAL, FabricBlockSettings.copy(Blocks.HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block DEAD_THORN_CORAL_FAN = registerBlockWithoutItem("dead_thorn_coral_fan", new DeadCoralFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_FAN)));
-    public static final Block THORN_CORAL_FAN = registerBlockWithoutItem("thorn_coral_fan", new CoralFanBlock(ModBlocks.DEAD_THORN_CORAL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_FAN)));
-    public static final Block DEAD_THORN_CORAL_WALL_FAN = registerBlockWithoutItem("dead_thorn_coral_wall_fan", new DeadCoralWallFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN)));
-    public static final Block THORN_CORAL_WALL_FAN = registerBlockWithoutItem("thorn_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_THORN_CORAL_WALL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_WALL_FAN)));
-
-    public static final Block DEAD_COCOA_CORAL_BLOCK = registerBlock("dead_cocoa_coral_block", new Block(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block COCOA_CORAL_BLOCK = registerBlock("cocoa_coral_block", new CoralBlockBlock(ModBlocks.DEAD_COCOA_CORAL_BLOCK, FabricBlockSettings.copy(Blocks.HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block DEAD_COCOA_CORAL = registerBlock("dead_cocoa_coral", new DeadCoralBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block COCOA_CORAL = registerBlock("cocoa_coral", new CoralBlock(ModBlocks.DEAD_COCOA_CORAL, FabricBlockSettings.copy(Blocks.HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block DEAD_COCOA_CORAL_FAN = registerBlockWithoutItem("dead_cocoa_coral_fan", new DeadCoralFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_FAN)));
-    public static final Block COCOA_CORAL_FAN = registerBlockWithoutItem("cocoa_coral_fan", new CoralFanBlock(ModBlocks.DEAD_COCOA_CORAL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_FAN)));
-    public static final Block DEAD_COCOA_CORAL_WALL_FAN = registerBlockWithoutItem("dead_cocoa_coral_wall_fan", new DeadCoralWallFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN)));
-    public static final Block COCOA_CORAL_WALL_FAN = registerBlockWithoutItem("cocoa_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_COCOA_CORAL_WALL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_WALL_FAN)));
-
-    public static final Block DEAD_PASSION_CORAL_BLOCK = registerBlock("dead_passion_coral_block", new Block(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block PASSION_CORAL_BLOCK = registerBlock("passion_coral_block", new CoralBlockBlock(ModBlocks.DEAD_PASSION_CORAL_BLOCK, FabricBlockSettings.copy(Blocks.HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block DEAD_PASSION_CORAL = registerBlock("dead_passion_coral", new DeadCoralBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block PASSION_CORAL = registerBlock("passion_coral", new CoralBlock(ModBlocks.DEAD_PASSION_CORAL, FabricBlockSettings.copy(Blocks.HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block DEAD_PASSION_CORAL_FAN = registerBlockWithoutItem("dead_passion_coral_fan", new DeadCoralFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_FAN)));
-    public static final Block PASSION_CORAL_FAN = registerBlockWithoutItem("passion_coral_fan", new CoralFanBlock(ModBlocks.DEAD_PASSION_CORAL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_FAN)));
-    public static final Block DEAD_PASSION_CORAL_WALL_FAN = registerBlockWithoutItem("dead_passion_coral_wall_fan", new DeadCoralWallFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN)));
-    public static final Block PASSION_CORAL_WALL_FAN = registerBlockWithoutItem("passion_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_PASSION_CORAL_WALL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_WALL_FAN)));
-
-    public static final Block DEAD_TOXIC_CORAL_BLOCK = registerBlock("dead_toxic_coral_block", new Block(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block TOXIC_CORAL_BLOCK = registerBlock("toxic_coral_block", new CoralBlockBlock(ModBlocks.DEAD_TOXIC_CORAL_BLOCK, FabricBlockSettings.copy(Blocks.HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block DEAD_TOXIC_CORAL = registerBlock("dead_toxic_coral", new DeadCoralBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block TOXIC_CORAL = registerBlock("toxic_coral", new CoralBlock(ModBlocks.DEAD_TOXIC_CORAL, FabricBlockSettings.copy(Blocks.HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block DEAD_TOXIC_CORAL_FAN = registerBlockWithoutItem("dead_toxic_coral_fan", new DeadCoralFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_FAN)));
-    public static final Block TOXIC_CORAL_FAN = registerBlockWithoutItem("toxic_coral_fan", new CoralFanBlock(ModBlocks.DEAD_TOXIC_CORAL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_FAN)));
-    public static final Block DEAD_TOXIC_CORAL_WALL_FAN = registerBlockWithoutItem("dead_toxic_coral_wall_fan", new DeadCoralWallFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN)));
-    public static final Block TOXIC_CORAL_WALL_FAN = registerBlockWithoutItem("toxic_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_TOXIC_CORAL_WALL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_WALL_FAN)));
-
-    public static final Block DEAD_GEM_CORAL_BLOCK = registerBlock("dead_gem_coral_block", new Block(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block GEM_CORAL_BLOCK = registerBlock("gem_coral_block", new CoralBlockBlock(ModBlocks.DEAD_GEM_CORAL_BLOCK, FabricBlockSettings.copy(Blocks.HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block DEAD_GEM_CORAL = registerBlock("dead_gem_coral", new DeadCoralBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block GEM_CORAL = registerBlock("gem_coral", new CoralBlock(ModBlocks.DEAD_GEM_CORAL, FabricBlockSettings.copy(Blocks.HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block DEAD_GEM_CORAL_FAN = registerBlockWithoutItem("dead_gem_coral_fan", new DeadCoralFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_FAN)));
-    public static final Block GEM_CORAL_FAN = registerBlockWithoutItem("gem_coral_fan", new CoralFanBlock(ModBlocks.DEAD_GEM_CORAL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_FAN)));
-    public static final Block DEAD_GEM_CORAL_WALL_FAN = registerBlockWithoutItem("dead_gem_coral_wall_fan", new DeadCoralWallFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN)));
-    public static final Block GEM_CORAL_WALL_FAN = registerBlockWithoutItem("gem_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_GEM_CORAL_WALL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_WALL_FAN)));
-
-    public static final Block DEAD_DIAMOND_CORAL_BLOCK = registerBlock("dead_diamond_coral_block", new Block(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block DIAMOND_CORAL_BLOCK = registerBlock("diamond_coral_block", new CoralBlockBlock(ModBlocks.DEAD_DIAMOND_CORAL_BLOCK, FabricBlockSettings.copy(Blocks.HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block DEAD_DIAMOND_CORAL = registerBlock("dead_diamond_coral", new DeadCoralBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block DIAMOND_CORAL = registerBlock("diamond_coral", new CoralBlock(ModBlocks.DEAD_DIAMOND_CORAL, FabricBlockSettings.copy(Blocks.HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block DEAD_DIAMOND_CORAL_FAN = registerBlockWithoutItem("dead_diamond_coral_fan", new DeadCoralFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_FAN)));
-    public static final Block DIAMOND_CORAL_FAN = registerBlockWithoutItem("diamond_coral_fan", new CoralFanBlock(ModBlocks.DEAD_DIAMOND_CORAL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_FAN)));
-    public static final Block DEAD_DIAMOND_CORAL_WALL_FAN = registerBlockWithoutItem("dead_diamond_coral_wall_fan", new DeadCoralWallFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN)));
-    public static final Block DIAMOND_CORAL_WALL_FAN = registerBlockWithoutItem("diamond_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_DIAMOND_CORAL_WALL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_WALL_FAN)));
-
-    public static final Block DEAD_ANCHOR_CORAL_BLOCK = registerBlock("dead_anchor_coral_block", new Block(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block ANCHOR_CORAL_BLOCK = registerBlock("anchor_coral_block", new CoralBlockBlock(ModBlocks.DEAD_ANCHOR_CORAL_BLOCK, FabricBlockSettings.copy(Blocks.HORN_CORAL_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block DEAD_ANCHOR_CORAL = registerBlock("dead_anchor_coral", new DeadCoralBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block ANCHOR_CORAL = registerBlock("anchor_coral", new CoralBlock(ModBlocks.DEAD_ANCHOR_CORAL, FabricBlockSettings.copy(Blocks.HORN_CORAL)), ModItemGroups.CLUTTER_BLOCKS);
-    public static final Block DEAD_ANCHOR_CORAL_FAN = registerBlockWithoutItem("dead_anchor_coral_fan", new DeadCoralFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_FAN)));
-    public static final Block ANCHOR_CORAL_FAN = registerBlockWithoutItem("anchor_coral_fan", new CoralFanBlock(ModBlocks.DEAD_ANCHOR_CORAL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_FAN)));
-    public static final Block DEAD_ANCHOR_CORAL_WALL_FAN = registerBlockWithoutItem("dead_anchor_coral_wall_fan", new DeadCoralWallFanBlock(FabricBlockSettings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN)));
-    public static final Block ANCHOR_CORAL_WALL_FAN = registerBlockWithoutItem("anchor_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_ANCHOR_CORAL_WALL_FAN, FabricBlockSettings.copy(Blocks.HORN_CORAL_WALL_FAN)));
-
-    public static final Block GREEN_FIRE = registerBlockWithoutItem("green_fire", new GreenFireBlock(FabricBlockSettings.copy(Blocks.FIRE)));
-
-    public static final Block TALL_BOTTLE = registerBlockWithoutItem("tall_bottle", new TallBottleBlock(FabricBlockSettings.copy(Blocks.GREEN_STAINED_GLASS).breakInstantly().nonOpaque().pistonBehavior(PistonBehavior.DESTROY)));
-    public static final Block WINE_GLASS = registerBlockWithoutItem("wine_glass", new WineGlassBlock(FabricBlockSettings.copy(Blocks.GLASS).breakInstantly().nonOpaque().pistonBehavior(PistonBehavior.DESTROY)));
-    public static final Block PLATE = registerBlockWithoutItem("plate", new PlateBlock(FabricBlockSettings.copy(Blocks.WHITE_TERRACOTTA).breakInstantly()));
-
-    public static final Block BUTTERFLY_COCOON = registerBlockWithoutItem("butterfly_cocoon", new ButterflyCocoonBlock(FabricBlockSettings.copy(Blocks.MOSS_BLOCK).breakInstantly().nonOpaque().sounds(BlockSoundGroup.MOSS_BLOCK)));
-    public static final Block KIWI_BIRD_EGG = registerBlockWithoutItem("kiwi_bird_egg", new KiwiBirdEggBlock(FabricBlockSettings.copy(Blocks.SNIFFER_EGG).nonOpaque()));
-    public static final Block EMPEROR_PENGUIN_EGG = registerBlockWithoutItem("emperor_penguin_egg", new EmperorPenguinEggBlock(FabricBlockSettings.copy(Blocks.SNIFFER_EGG).nonOpaque()));
-
-    public static final Block BEER_MUG = registerBlockWithoutItem("beer_mug", new BeerMugBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).breakInstantly()));
-    public static final Block WOODEN_MUG = registerBlockWithoutItem("wooden_mug", new MugBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).breakInstantly()));
-
-    public static final Block HOPS_CROP = registerBlockWithoutItem("hops_crop", new HopsCropBlock(FabricBlockSettings.copy(Blocks.CARROTS)));
-    public static final Block COTTON_CROP = registerBlockWithoutItem("cotton_crop", new CottonCropBlock(FabricBlockSettings.copy(Blocks.WHEAT)));
-    public static final Block KIWI_CROP = registerBlockWithoutItem("kiwi_crop", new KiwiCropBlock(FabricBlockSettings.copy(Blocks.JUNGLE_SAPLING)));
-    public static final Block THORNBLOOM_CROP = registerBlockWithoutItem("thornbloom_crop", new ThornbloomCropBlock(FabricBlockSettings.copy(Blocks.WHEAT)));
-    public static final Block GLOWLILY_CROP = registerBlockWithoutItem("glowlily_crop", new GlowLilyCropBlock(FabricBlockSettings.copy(Blocks.TORCHFLOWER_CROP)));
-
-    public static final Block SMALL_LILY_PADS = registerBlockWithoutItem("small_lily_pads", new SmallLilyPadBlock(FabricBlockSettings.copy(Blocks.LILY_PAD)));
-    public static final Block GIANT_LILY_PAD = registerBlockWithoutItem("giant_lily_pad", new GiantLilyPadBlock(FabricBlockSettings.copy(Blocks.LILY_PAD)));
-    public static final Block GIANT_LILY_PAD_SEEDLING = registerBlockWithoutItem("giant_lily_pad_seedling", new GiantLilyPadSeedlingBlock(FabricBlockSettings.copy(Blocks.LILY_PAD)));
-
-    public static final Block BOOK_PILE = registerBlockWithoutItem("book_pile", new BookPileBlock(FabricBlockSettings.copy(Blocks.BOOKSHELF).breakInstantly()));
-
     private static Block registerBlock(String name, Block block, RegistryKey<ItemGroup> group) {
         registerBlockItem(name, block, group);
         return Registry.register(Registries.BLOCK, new Identifier(Clutter.MOD_ID, name), block);
@@ -1379,14 +1379,14 @@ public class ModBlocks {
         OxidizableBlocksRegistry.registerWaxableBlockPair(WEATHERED_AQUATIC_TORCH, WAXED_WEATHERED_AQUATIC_TORCH);
         OxidizableBlocksRegistry.registerWaxableBlockPair(OXIDIZED_AQUATIC_TORCH, WAXED_OXIDIZED_AQUATIC_TORCH);
 
-        OxidizableBlocksRegistry.registerOxidizableBlockPair(COPPER_CANDLE_HOLDER, EXPOSED_COPPER_CANDLE_HOLDER);
-        OxidizableBlocksRegistry.registerOxidizableBlockPair(EXPOSED_COPPER_CANDLE_HOLDER, WEATHERED_COPPER_CANDLE_HOLDER);
-        OxidizableBlocksRegistry.registerOxidizableBlockPair(WEATHERED_COPPER_CANDLE_HOLDER, OXIDIZED_COPPER_CANDLE_HOLDER);
+        //OxidizableBlocksRegistry.registerOxidizableBlockPair(COPPER_CANDLE_HOLDER, EXPOSED_COPPER_CANDLE_HOLDER);
+        //OxidizableBlocksRegistry.registerOxidizableBlockPair(EXPOSED_COPPER_CANDLE_HOLDER, WEATHERED_COPPER_CANDLE_HOLDER);
+        //OxidizableBlocksRegistry.registerOxidizableBlockPair(WEATHERED_COPPER_CANDLE_HOLDER, OXIDIZED_COPPER_CANDLE_HOLDER);
 
-        OxidizableBlocksRegistry.registerWaxableBlockPair(COPPER_CANDLE_HOLDER, WAXED_COPPER_CANDLE_HOLDER);
-        OxidizableBlocksRegistry.registerWaxableBlockPair(EXPOSED_COPPER_CANDLE_HOLDER, WAXED_EXPOSED_COPPER_CANDLE_HOLDER);
-        OxidizableBlocksRegistry.registerWaxableBlockPair(WEATHERED_COPPER_CANDLE_HOLDER, WAXED_WEATHERED_COPPER_CANDLE_HOLDER);
-        OxidizableBlocksRegistry.registerWaxableBlockPair(OXIDIZED_COPPER_CANDLE_HOLDER, WAXED_OXIDIZED_COPPER_CANDLE_HOLDER);
+        //OxidizableBlocksRegistry.registerWaxableBlockPair(COPPER_CANDLE_HOLDER, WAXED_COPPER_CANDLE_HOLDER);
+        //OxidizableBlocksRegistry.registerWaxableBlockPair(EXPOSED_COPPER_CANDLE_HOLDER, WAXED_EXPOSED_COPPER_CANDLE_HOLDER);
+        //OxidizableBlocksRegistry.registerWaxableBlockPair(WEATHERED_COPPER_CANDLE_HOLDER, WAXED_WEATHERED_COPPER_CANDLE_HOLDER);
+        //OxidizableBlocksRegistry.registerWaxableBlockPair(OXIDIZED_COPPER_CANDLE_HOLDER, WAXED_OXIDIZED_COPPER_CANDLE_HOLDER);
 
         OxidizableBlocksRegistry.registerOxidizableBlockPair(LARGE_COPPER_CHANDELIER, EXPOSED_LARGE_COPPER_CHANDELIER);
         OxidizableBlocksRegistry.registerOxidizableBlockPair(EXPOSED_LARGE_COPPER_CHANDELIER, WEATHERED_LARGE_COPPER_CHANDELIER);
