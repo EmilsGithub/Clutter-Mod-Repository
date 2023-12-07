@@ -129,7 +129,7 @@ public class ChimneyBlock extends BlockWithEntity implements FluidFillable, Wate
     }
 
     @Override
-    public boolean canFillWithFluid(BlockView world, BlockPos pos, BlockState state, Fluid fluid) {
+    public boolean canFillWithFluid(@Nullable PlayerEntity player, BlockView world, BlockPos pos, BlockState state, Fluid fluid) {
         return true;
     }
 

@@ -17,6 +17,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -169,12 +170,12 @@ public class BrickKilnBlockEntity extends BlockEntity implements ExtendedScreenH
     }
 
     private void craftItem() {
-        Optional<KilningRecipe> recipe = getCurrentRecipe();
+        Optional<RecipeEntry<KilningRecipe>> recipe = getCurrentRecipe();
 
         this.removeStack(INPUT_SLOT, 1);
 
-        this.setStack(OUTPUT_SLOT, new ItemStack(recipe.get().getOutput(null).getItem(),
-                this.getStack(OUTPUT_SLOT).getCount() + recipe.get().getOutput(null).getCount()));
+        this.setStack(OUTPUT_SLOT, new ItemStack(recipe.get().value().getResult(null).getItem(),
+                this.getStack(OUTPUT_SLOT).getCount() + recipe.get().value().getResult(null).getCount()));
     }
 
     private void resetProgress() {
@@ -190,12 +191,12 @@ public class BrickKilnBlockEntity extends BlockEntity implements ExtendedScreenH
     }
 
     private boolean hasRecipe() {
-        Optional<KilningRecipe> recipe = getCurrentRecipe();
+        Optional<RecipeEntry<KilningRecipe>> recipe = getCurrentRecipe();
 
         if (recipe.isEmpty()) {
             return false;
         }
-        ItemStack output = recipe.get().getOutput(null);
+        ItemStack output = recipe.get().value().getResult(null);
 
         return canInsertAmountIntoOutputSlot(output.getCount())
                 && canInsertItemIntoOutputSlot(output);
@@ -209,7 +210,7 @@ public class BrickKilnBlockEntity extends BlockEntity implements ExtendedScreenH
         return this.getStack(OUTPUT_SLOT).getMaxCount() >= this.getStack(OUTPUT_SLOT).getCount() + count;
     }
 
-    private Optional<KilningRecipe> getCurrentRecipe() {
+    private Optional<RecipeEntry<KilningRecipe>> getCurrentRecipe() {
         SimpleInventory inventory = new SimpleInventory((this.size()));
         for(int i = 0; i < this.size(); i++) {
             inventory.setStack(i, this.getStack(i));

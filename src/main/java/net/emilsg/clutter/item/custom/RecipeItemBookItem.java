@@ -3,7 +3,7 @@ package net.emilsg.clutter.item.custom;
 import net.emilsg.clutter.Clutter;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.recipe.Recipe;
+import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -32,8 +32,8 @@ public class RecipeItemBookItem extends DescriptionItem {
     }
 
     public void unlockAllRecipesFromNamespace(ServerPlayerEntity player, String namespace) {
-        List<Recipe<?>> recipes = Objects.requireNonNull(player.getServer()).getRecipeManager().values().stream()
-        .filter(recipe -> recipe.getId().getNamespace().equals(namespace)).collect(Collectors.toList());
+        List<RecipeEntry<?>> recipes = Objects.requireNonNull(player.getServer()).getRecipeManager().values().stream()
+        .filter(recipe -> recipe.id().getNamespace().equals(namespace)).collect(Collectors.toList());
         if (!recipes.isEmpty()) {
             player.unlockRecipes(recipes);
         }

@@ -8,7 +8,7 @@ import net.emilsg.clutter.util.ModItemTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.block.Blocks;
-import net.minecraft.data.server.recipe.RecipeJsonProvider;
+import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.RecipeProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
@@ -22,15 +22,13 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.Identifier;
 
-import java.util.function.Consumer;
-
 public class RecipeDataGen extends FabricRecipeProvider {
     public RecipeDataGen(FabricDataOutput output) {
         super(output);
     }
 
     @Override
-    public void generate(Consumer<RecipeJsonProvider> exporter) {
+    public void generate(RecipeExporter exporter) {
         kilningRecipe(Items.SAND, Items.GLASS, 1, exporter);
         kilningRecipe(Items.RED_SAND, Items.GLASS, 1, exporter);
         kilningRecipe(Items.CLAY_BALL, Items.BRICK, 1, exporter);
@@ -158,21 +156,20 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .input(Ingredient.fromTag(ModItemTags.DYES)).input(Ingredient.fromTag(ModItemTags.DYES))
                 .input(Ingredient.fromTag(ModItemTags.DYES)).input(ModItems.CAP)
                 .criterion(hasItem(ModItems.CAP), conditionsFromItem(ModItems.CAP))
-                        .offerTo(exporter, new Identifier(getRecipeName(ModItems.PROPELLER_CAP)));
+                .offerTo(exporter, new Identifier(getRecipeName(ModItems.PROPELLER_CAP)));
 
         ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.BUTTERFLY_WINGS)
                 .input(Ingredient.fromTag(ModItemTags.BOTTLED_BUTTERFLIES)).input(Ingredient.fromTag(ModItemTags.BOTTLED_BUTTERFLIES))
                 .input(Ingredient.fromTag(ModItemTags.BOTTLED_BUTTERFLIES)).input(Items.STRING)
                 .criterion(hasItem(Items.STRING), conditionsFromItem(Items.STRING))
                 .offerTo(exporter, new Identifier(getRecipeName(ModItems.BUTTERFLY_WINGS)));
-
     }
 
-    private void kilningRecipe(ItemConvertible ingredient, ItemConvertible result, int count, Consumer<RecipeJsonProvider> exporter) {
+    private void kilningRecipe(ItemConvertible ingredient, ItemConvertible result, int count, RecipeExporter exporter) {
         new KilningRecipeBuilder(ingredient, result, count).criterion(hasItem(ingredient), conditionsFromItem(ingredient)).offerTo(exporter);
     }
 
-    private void offerArmorRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible component, Item helmet, Item chestplate, Item leggings, Item boots) {
+    private void offerArmorRecipe(RecipeExporter exporter, ItemConvertible component, Item helmet, Item chestplate, Item leggings, Item boots) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, helmet)
                 .pattern("###").pattern("# #").input('#', component)
                 .criterion(hasItem(component), conditionsFromItem(component)).offerTo(exporter, new Identifier(getRecipeName(helmet)));
@@ -187,13 +184,13 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .criterion(hasItem(component), conditionsFromItem(component)).offerTo(exporter, new Identifier(getRecipeName(boots)));
     }
 
-    private void offerSulphurRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible component, ItemConvertible result, RecipeCategory category) {
+    private void offerSulphurRecipe(RecipeExporter exporter, ItemConvertible component, ItemConvertible result, RecipeCategory category) {
         ShapelessRecipeJsonBuilder.create(category, result).input(component)
                 .criterion(hasItem(component), conditionsFromItem(component))
                 .offerTo(exporter, new Identifier(getRecipeName(result)));
     }
 
-    private void offerHatRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible component, ItemConvertible secondComponent, Item result) {
+    private void offerHatRecipe(RecipeExporter exporter, ItemConvertible component, ItemConvertible secondComponent, Item result) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, result)
                 .pattern(" C ").pattern("CSC")
                 .input('C', component).input('S', secondComponent)
@@ -201,7 +198,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .offerTo(exporter, new Identifier(getRecipeName(result)));
     }
 
-    public static void offerClutterWaxingRecipes(Consumer<RecipeJsonProvider> exporter) {
+    public static void offerClutterWaxingRecipes(RecipeExporter exporter) {
         HoneycombItem.UNWAXED_TO_WAXED_BLOCKS.get().forEach((input, output) -> {
             if (Registries.ITEM.getId(input.asItem()).getNamespace().equals(Clutter.MOD_ID)) {
                 ShapelessRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, output)

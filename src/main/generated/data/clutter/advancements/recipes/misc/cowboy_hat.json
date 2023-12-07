@@ -34,9 +34,9 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_leather",
-      "has_gold_nugget",
-      "has_the_recipe"
+      "has_gold_nugget"
     ]
   ],
   "rewards": {

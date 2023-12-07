@@ -22,8 +22,8 @@
   },
   "requirements": [
     [
-      "has_exposed_copper_button",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_exposed_copper_button"
     ]
   ],
   "rewards": {

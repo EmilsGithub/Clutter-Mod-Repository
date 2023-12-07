@@ -1,12 +1,5 @@
 {
-  "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_the_recipe": {
-      "conditions": {
-        "recipe": "minecraft:white_glazed_terracotta"
-      },
-      "trigger": "minecraft:recipe_unlocked"
-    },
     "has_white_terracotta": {
       "conditions": {
         "items": [
@@ -23,15 +16,7 @@
   "requirements": [
     [
       "has_white_terracotta"
-    ],
-    [
-      "has_the_recipe"
     ]
   ],
-  "rewards": {
-    "recipes": [
-      "minecraft:white_glazed_terracotta"
-    ]
-  },
   "sends_telemetry_event": true
 }

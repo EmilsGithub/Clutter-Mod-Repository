@@ -3,12 +3,10 @@ package net.emilsg.clutter.item;
 import net.emilsg.clutter.Clutter;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
-import net.minecraft.item.ArmorMaterials;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Lazy;
-import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.Util;
 
 import java.util.EnumMap;
@@ -23,7 +21,6 @@ public enum ModArmorMaterials implements ArmorMaterial {
         map.put(ArmorItem.Type.HELMET, 2);
     }), 14, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F, 0.10F, () -> Ingredient.ofItems(ModItems.SILVER_INGOT));
 
-    public static final StringIdentifiable.Codec<ArmorMaterials> CODEC;
     private static final EnumMap<ArmorItem.Type, Integer> BASE_DURABILITY;
     private final String name;
     private final int durabilityMultiplier;
@@ -87,7 +84,6 @@ public enum ModArmorMaterials implements ArmorMaterial {
     }
 
     static {
-        CODEC = StringIdentifiable.createCodec(ArmorMaterials::values);
         BASE_DURABILITY = Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
             map.put(ArmorItem.Type.BOOTS, 13);
             map.put(ArmorItem.Type.LEGGINGS, 15);

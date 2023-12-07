@@ -22,8 +22,8 @@
   },
   "requirements": [
     [
-      "has_weathered_aquatic_torch",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_weathered_aquatic_torch"
     ]
   ],
   "rewards": {

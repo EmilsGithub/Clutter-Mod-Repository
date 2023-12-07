@@ -34,9 +34,9 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_prismarine_shard",
-      "has_prismarine_crystals",
-      "has_the_recipe"
+      "has_prismarine_crystals"
     ]
   ],
   "rewards": {

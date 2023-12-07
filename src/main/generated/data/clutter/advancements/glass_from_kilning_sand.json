@@ -1,0 +1,22 @@
+{
+  "criteria": {
+    "has_sand": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:sand"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_sand"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

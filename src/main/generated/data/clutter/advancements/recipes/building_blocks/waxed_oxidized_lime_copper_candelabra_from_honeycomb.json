@@ -22,8 +22,8 @@
   },
   "requirements": [
     [
-      "has_oxidized_lime_copper_candelabra",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_oxidized_lime_copper_candelabra"
     ]
   ],
   "rewards": {

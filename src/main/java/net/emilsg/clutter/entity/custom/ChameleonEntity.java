@@ -4,6 +4,7 @@ import net.emilsg.clutter.entity.ModEntities;
 import net.emilsg.clutter.item.ModItems;
 import net.emilsg.clutter.item.custom.ButterflyBottleItem;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.*;
@@ -80,8 +81,13 @@ public class ChameleonEntity extends TameableEntity implements GeoEntity {
     }
 
     @Override
-    public double getMountedHeightOffset() {
-        return 0.05d;
+    protected float getUnscaledRidingOffset(Entity vehicle) {
+        return 0.05f;
+    }
+
+    @Override
+    public float getRidingOffset(Entity vehicle) {
+        return super.getRidingOffset(vehicle);
     }
 
     @Override

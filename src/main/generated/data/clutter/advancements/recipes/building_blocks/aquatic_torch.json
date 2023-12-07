@@ -34,9 +34,9 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_copper_ingot",
-      "has_copper_nugget",
-      "has_the_recipe"
+      "has_copper_nugget"
     ]
   ],
   "rewards": {

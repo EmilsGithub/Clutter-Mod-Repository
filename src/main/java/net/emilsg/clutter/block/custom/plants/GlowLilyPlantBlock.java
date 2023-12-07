@@ -88,7 +88,8 @@ public class GlowLilyPlantBlock extends PlantBlock implements Fertilizable {
         }
     }
 
-    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
+    @Override
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state) {
         return state.get(AGE) < 2;
     }
 

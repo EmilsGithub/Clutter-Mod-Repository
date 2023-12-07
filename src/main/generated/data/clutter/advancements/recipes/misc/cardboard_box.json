@@ -34,9 +34,9 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_paper",
-      "has_chest",
-      "has_the_recipe"
+      "has_chest"
     ]
   ],
   "rewards": {

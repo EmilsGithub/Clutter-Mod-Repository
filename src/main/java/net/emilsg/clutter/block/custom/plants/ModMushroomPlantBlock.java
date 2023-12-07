@@ -1,6 +1,5 @@
 package net.emilsg.clutter.block.custom.plants;
 
-import net.emilsg.clutter.util.ModBlockTags;
 import net.minecraft.block.*;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.server.world.ServerWorld;
@@ -39,7 +38,7 @@ public class ModMushroomPlantBlock extends PlantBlock implements Fertilizable {
     }
 
     @Override
-    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state) {
         return true;
     }
 

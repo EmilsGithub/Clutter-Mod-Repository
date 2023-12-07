@@ -22,8 +22,8 @@
   },
   "requirements": [
     [
-      "has_exposed_pink_copper_wall_candle",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_exposed_pink_copper_wall_candle"
     ]
   ],
   "rewards": {
