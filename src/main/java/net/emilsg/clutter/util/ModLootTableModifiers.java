@@ -106,8 +106,10 @@ public class ModLootTableModifiers {
             }
 
             if (id.equals(SNIFFER_DIGGING_ID)) {
-                tableBuilder.modifyPools(builder -> {
-                    builder.with(AlternativeEntry.builder(ItemEntry.builder(ModItems.THORNBLOOM_SEEDS))).with(AlternativeEntry.builder(ItemEntry.builder(ModItems.KIWI_SEEDS)));
+                tableBuilder.modifyPools(builder -> { builder
+                        .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.THORNBLOOM_SEEDS)))
+                        .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.KIWI_SEEDS)))
+                        .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.GLOWLILY_SEEDLING)));
                 });
             }
 
