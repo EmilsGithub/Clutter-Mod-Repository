@@ -734,7 +734,7 @@ public class ModBlocks {
     public static final Block COTTON_CROP = registerBlockWithoutItem("cotton_crop", new CottonCropBlock(FabricBlockSettings.copy(Blocks.WHEAT)));
     public static final Block KIWI_CROP = registerBlockWithoutItem("kiwi_crop", new KiwiCropBlock(FabricBlockSettings.copy(Blocks.JUNGLE_SAPLING)));
     public static final Block THORNBLOOM_CROP = registerBlockWithoutItem("thornbloom_crop", new ThornbloomCropBlock(FabricBlockSettings.copy(Blocks.WHEAT)));
-    public static final Block GLOWLILY_CROP = registerBlockWithoutItem("glowlily_crop", new GlowLilyCropBlock(FabricBlockSettings.copy(Blocks.TORCHFLOWER_CROP)));
+    public static final Block GLOWLILY_CROP = registerBlockWithoutItem("glowlily_crop", new GlowLilyCropBlock(FabricBlockSettings.copy(Blocks.SWEET_BERRY_BUSH)));
 
     public static final Block SMALL_LILY_PADS = registerBlockWithoutItem("small_lily_pads", new SmallLilyPadBlock(FabricBlockSettings.copy(Blocks.LILY_PAD)));
     public static final Block GIANT_LILY_PAD = registerBlockWithoutItem("giant_lily_pad", new GiantLilyPadBlock(FabricBlockSettings.copy(Blocks.LILY_PAD)));
