@@ -26,7 +26,6 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldView;
 
 public class GlowLilyCropBlock extends CropBlock {
     public static final IntProperty AGE = Properties.AGE_2;
@@ -88,10 +87,6 @@ public class GlowLilyCropBlock extends CropBlock {
 
     protected IntProperty getAgeProperty() {
         return AGE;
-    }
-
-    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
-        return true;
     }
 
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
