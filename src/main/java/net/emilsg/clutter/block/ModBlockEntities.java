@@ -21,6 +21,7 @@ public class ModBlockEntities {
     public static BlockEntityType<CupboardInventoryBlockEntity> CUPBOARD;
     public static BlockEntityType<MailBoxInventoryBlockEntity> MAILBOX;
     public static BlockEntityType<CardboardBoxInventoryBlockEntity> CARDBOARD_BOX;
+    public static BlockEntityType<PresentInventoryBlockEntity> PRESENT;
 
     public static void registerBlockEntities() {
         CHIMNEY = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "chimney"),
@@ -117,6 +118,10 @@ public class ModBlockEntities {
         CARDBOARD_BOX = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "cardboard_box"),
                 FabricBlockEntityTypeBuilder.create(CardboardBoxInventoryBlockEntity::new,
                         ModBlocks.CARDBOARD_BOX).build());
+
+        PRESENT = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "present"),
+                FabricBlockEntityTypeBuilder.create(PresentInventoryBlockEntity::new,
+                        ModBlocks.RED_PRESENT).build());
 
     }
 }

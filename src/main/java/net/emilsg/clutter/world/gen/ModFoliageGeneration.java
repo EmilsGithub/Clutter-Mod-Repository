@@ -23,8 +23,5 @@ public class ModFoliageGeneration {
 
         BiomeModifications.addFeature(BiomeSelectors.includeByKey(SWAMP, MANGROVE_SWAMP),
                 GenerationStep.Feature.VEGETAL_DECORATION, ModPlacedFeatures.SMALL_LILY_PADS_PLACED_KEY);
-
-        BiomeModifications.addFeature(BiomeSelectors.includeByKey(WARM_OCEAN),
-                GenerationStep.Feature.VEGETAL_DECORATION, ModPlacedFeatures.SPONGE_IN_REEFS_PLACED_KEY);
     }
 }

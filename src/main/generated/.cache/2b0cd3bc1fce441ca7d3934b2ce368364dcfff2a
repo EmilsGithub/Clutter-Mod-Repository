@@ -1,4 +1,4 @@
-// 1.20.1	2023-12-05T23:16:48.2803249	Clutter/Block Loot Tables
+// 1.20.1	2023-12-18T23:21:43.0702811	Clutter/Block Loot Tables
 1f772a1e66750da84de1d62d984cea2f8cc2a773 data\clutter\loot_tables\blocks\passion_coral.json
 9ab9e259a84f221bd8a9207fc9ebeb3415bbce11 data\clutter\loot_tables\blocks\anchor_coral_block.json
 08bf3f29ff1a9ad9c0de83963fa7e441b842f0b5 data\clutter\loot_tables\blocks\dead_ghost_coral_wall_fan.json
@@ -75,6 +75,7 @@ fe70eef16378f9008c9e7abc21f84f336c690243 data\clutter\loot_tables\blocks\dead_to
 824c4413fd6ca5bb45e8de8a46201a28c86058e1 data\clutter\loot_tables\blocks\dead_gem_coral_wall_fan.json
 479b739cc57abf47b5284955db9a0285ef1c3a4d data\clutter\loot_tables\blocks\ghost_coral_fan.json
 ca0ea8d44826ac4e92924b33abe6e9e45b466ea4 data\clutter\loot_tables\blocks\prismarine_wall_torch.json
+c7e69b2a178a367ec5ebfe71cee8bbc384989c72 data\clutter\loot_tables\blocks\nautilus_shell_block.json
 ca0ea8d44826ac4e92924b33abe6e9e45b466ea4 data\clutter\loot_tables\blocks\prismarine_torch.json
 abe600b40d6d8def3a18f321d8bfe28b3dfb9ed3 data\clutter\loot_tables\blocks\dead_cup_coral.json
 c3cfb0387ca3e00cfda47665ed4e62777a98f3e8 data\clutter\loot_tables\blocks\exposed_aquatic_wall_torch.json

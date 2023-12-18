@@ -14,6 +14,7 @@ import static net.minecraft.world.biome.BiomeKeys.*;
 
 public class ModEntitySpawning {
     public static void addSpawns() {
+
             if (ModConfigs.SPAWN_BUTTERFLIES) {
                 BiomeModifications.addSpawn(BiomeSelectors.includeByKey(FLOWER_FOREST, SUNFLOWER_PLAINS, MEADOW, CHERRY_GROVE), SpawnGroup.AMBIENT,
                         ModEntities.BUTTERFLY, 20, 2, 4);

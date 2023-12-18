@@ -9,10 +9,7 @@ import net.emilsg.clutter.compat.trinkets.TrinketsIntegrationClient;
 import net.emilsg.clutter.entity.ModEntities;
 import net.emilsg.clutter.entity.client.*;
 import net.emilsg.clutter.networking.ModMessages;
-import net.emilsg.clutter.screen.BrickKilnScreen;
-import net.emilsg.clutter.screen.CardboardBoxScreen;
-import net.emilsg.clutter.screen.ModScreenHandlers;
-import net.emilsg.clutter.screen.WallBookshelfScreen;
+import net.emilsg.clutter.screen.*;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
@@ -533,7 +530,8 @@ public class ClutterClient implements ClientModInitializer {
                 DEAD_ANCHOR_CORAL_FAN,
                 ANCHOR_CORAL_FAN,
                 DEAD_ANCHOR_CORAL_WALL_FAN,
-                ANCHOR_CORAL_WALL_FAN
+                ANCHOR_CORAL_WALL_FAN,
+                RED_PRESENT
         );
 
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), blocksToRender.toArray(new Block[0]));
@@ -605,5 +603,7 @@ public class ClutterClient implements ClientModInitializer {
         HandledScreens.register(ModScreenHandlers.BRICK_KILN_SCREEN_HANDLER, BrickKilnScreen::new);
         HandledScreens.register(ModScreenHandlers.CARDBOARD_BOX_SCREEN_HANDLER, CardboardBoxScreen::new);
         HandledScreens.register(ModScreenHandlers.WALL_BOOKSHELF_SCREEN_HANDLER, WallBookshelfScreen::new);
+        HandledScreens.register(ModScreenHandlers.PRESENT_SCREEN_HANDLER, PresentScreen::new);
+
     }
 }

@@ -5,9 +5,9 @@
   "mixins": [
     "AbstractFireBlockMixin",
     "BrewingRecipeRegistryMixin",
-    "EntityMixin",
     "FireBlockInvoker",
     "GrassBlockMixin",
+    "LivingEntityMixin",
     "MossBlockMixin",
     "PistonBlockMixin",
     "PlayerEntityMixin"

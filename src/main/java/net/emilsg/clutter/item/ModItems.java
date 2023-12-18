@@ -65,6 +65,11 @@ public class ModItems {
     public static final Item RAW_ONYX = registerItem("raw_onyx", new Item(new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
     public static final Item SULPHUR = registerItem("sulphur", new SulphurItem(new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
 
+    public static final Item SEA_CONCH = registerItem("sea_conch", new Item(new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item SEASHELL = registerItem("seashell", new Item(new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item CLAM = registerItem("clam", new AliasedBlockItem(ModBlocks.PEARL_CLAM_BLOCK, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item PEARL = registerItem("pearl", new Item(new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
+
     public static final Item SILVER_HELMET = registerItem("silver_helmet", new ArmorItem(ModArmorMaterials.SILVER, ArmorItem.Type.HELMET, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
     public static final Item SILVER_CHESTPLATE = registerItem("silver_chestplate", new ArmorItem(ModArmorMaterials.SILVER, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
     public static final Item SILVER_LEGGINGS = registerItem("silver_leggings", new ArmorItem(ModArmorMaterials.SILVER, ArmorItem.Type.LEGGINGS, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);

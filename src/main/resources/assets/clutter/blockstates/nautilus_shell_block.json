@@ -1,0 +1,19 @@
+{
+  "variants":{
+    "facing=north":{
+      "model":"clutter:block/nautilus_shell"
+    },
+    "facing=east":{
+      "model":"clutter:block/nautilus_shell",
+      "y": 90
+    },
+    "facing=south":{
+      "model":"clutter:block/nautilus_shell",
+      "y": 180
+    },
+    "facing=west":{
+      "model":"clutter:block/nautilus_shell",
+      "y": 270
+    }
+  }
+}

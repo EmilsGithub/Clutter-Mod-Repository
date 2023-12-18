@@ -496,6 +496,9 @@ public class ModBlocks {
     //public static final Block SINK = registerBlock("sink", new SinkBlock(FabricBlockSettings.copy(Blocks.WATER_CAULDRON).nonOpaque()), ModItemGroups.CLUTTER_BLOCKS);
     //public static final Block SHOWER = registerBlock("shower", new ShowerBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK).ticksRandomly()), ModItemGroups.CLUTTER_BLOCKS);
 
+    public static final Block NAUTILUS_SHELL_BLOCK = registerBlockWithoutItem("nautilus_shell_block", new NautilusShellBlock(FabricBlockSettings.create().mapColor(MapColor.TERRACOTTA_BROWN).instrument(Instrument.XYLOPHONE).sounds(BlockSoundGroup.BONE).breakInstantly()));
+    public static final Block PEARL_CLAM_BLOCK = registerBlockWithoutItem("pearl_clam_block", new PearlClamBlock(FabricBlockSettings.create().mapColor(MapColor.TERRACOTTA_BROWN).instrument(Instrument.XYLOPHONE).sounds(BlockSoundGroup.BONE).offset(AbstractBlock.OffsetType.XZ).dynamicBounds().breakInstantly()));
+
     public static final Block COPPER_COIN_STACK = registerBlock("copper_coin_stack", new CopperCoinStackBlock(FabricBlockSettings.create().nonOpaque().strength(0.25f).sounds(ModSounds.COIN_PILE_SOUNDS).mapColor(MapColor.TERRACOTTA_ORANGE)), ModItemGroups.CLUTTER_BLOCKS);
     public static final Block SILVER_COIN_STACK = registerBlock("silver_coin_stack", new SilverCoinStackBlock(FabricBlockSettings.create().nonOpaque().strength(0.25f).sounds(ModSounds.COIN_PILE_SOUNDS).mapColor(MapColor.LIGHT_GRAY)), ModItemGroups.CLUTTER_BLOCKS);
     public static final Block GOLDEN_COIN_STACK = registerBlock("golden_coin_stack", new GoldenCoinStackBlock(FabricBlockSettings.create().nonOpaque().strength(0.25f).sounds(ModSounds.COIN_PILE_SOUNDS).mapColor(MapColor.GOLD)), ModItemGroups.CLUTTER_BLOCKS);
@@ -582,6 +585,7 @@ public class ModBlocks {
     public static final Block BRICK_KILN = registerBlock("brick_kiln", new BrickKilnBlock(FabricBlockSettings.copy(Blocks.BRICKS).luminance(createLightLevelFromLitBlockState(13))), ModItemGroups.CLUTTER_BLOCKS);
     public static final Block MAILBOX = registerBlock("mailbox", new MailBoxBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK).nonOpaque()), ModItemGroups.CLUTTER_BLOCKS);
     public static final Block CARDBOARD_BOX = registerBlock("cardboard_box", new CardboardBoxBlock(FabricBlockSettings.create().nonOpaque().mapColor(MapColor.BROWN).sounds(BlockSoundGroup.WOOL)), ModItemGroups.CLUTTER_BLOCKS, 1);
+    public static final Block RED_PRESENT = registerBlock("red_present", new PresentBlock(FabricBlockSettings.create().nonOpaque().mapColor(MapColor.BROWN).sounds(BlockSoundGroup.WOOL)), ModItemGroups.CLUTTER_BLOCKS, 1);
 
     //public static final Block IRON_CANDLE_HOLDER = registerBlockWithoutItem("iron_candle_holder_block", new ReworkedCandleHolderBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK).luminance(createLightLevelFromLitBlockState(13))));
     //public static final Block SILVER_CANDLE_HOLDER = registerBlockWithoutItem("silver_candle_holder_block", new ReworkedCandleHolderBlock(FabricBlockSettings.copy(ModBlocks.SILVER_BLOCK).luminance(createLightLevelFromLitBlockState(13))));

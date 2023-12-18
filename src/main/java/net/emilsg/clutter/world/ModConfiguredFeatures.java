@@ -44,6 +44,8 @@ public class ModConfiguredFeatures {
     public static final RegistryKey<ConfiguredFeature<?,?>> GIANT_LILY_PAD_SEEDLING_KEY = registerKey("giant_lily_pad_seedling");
     public static final RegistryKey<ConfiguredFeature<?,?>> SMALL_LILY_PADS_KEY = registerKey("small_lily_pads");
     public static final RegistryKey<ConfiguredFeature<?,?>> SPONGE_IN_REEFS_KEY = registerKey("sponge_in_reefs");
+    public static final RegistryKey<ConfiguredFeature<?,?>> CLAM_KEY = registerKey("clam");
+
 
     public static final RegistryKey<ConfiguredFeature<?,?>> KIWI_TREE_KEY = registerKey("kiwi_tree");
 
@@ -95,6 +97,8 @@ public class ModConfiguredFeatures {
                         new SimpleBlockFeatureConfig(BlockStateProvider.of(ModBlocks.LUSH_MOSS)))));
 
         register(context, SPONGE_IN_REEFS_KEY, ModFeatures.SMALL_SPONGE, new CountConfig(2));
+
+        register(context, CLAM_KEY, ModFeatures.CLAM, new CountConfig(6));
 
         register(context, SCULK_MUSHROOM_KEY, Feature.FLOWER,
                 ConfiguredFeatures.createRandomPatchFeatureConfig(24, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK,

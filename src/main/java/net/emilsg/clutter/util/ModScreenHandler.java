@@ -1,6 +1,7 @@
 package net.emilsg.clutter.util;
 
 import net.emilsg.clutter.screen.CardboardBoxScreenHandler;
+import net.emilsg.clutter.screen.PresentScreenHandler;
 import net.emilsg.clutter.screen.WallBookshelfScreenHandler;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -16,6 +17,10 @@ public class ModScreenHandler extends GenericContainerScreenHandler {
 
     public static CardboardBoxScreenHandler createCardboardBoxScreen(int syncId, PlayerInventory playerInventory, Inventory inventory) {
         return new CardboardBoxScreenHandler(syncId, playerInventory, inventory);
+    }
+
+    public static PresentScreenHandler createPresentScreen(int syncId, PlayerInventory playerInventory, Inventory inventory) {
+        return new PresentScreenHandler(syncId, playerInventory, inventory);
     }
 
     public static WallBookshelfScreenHandler createWallBookshelfScreen(int syncId, PlayerInventory playerInventory, Inventory inventory) {

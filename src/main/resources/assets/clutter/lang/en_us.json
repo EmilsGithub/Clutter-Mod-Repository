@@ -1370,5 +1370,26 @@
   "item.minecraft.potion.effect.strong_vulnerability_potion": "Potion of Vulnerability",
   "item.minecraft.splash_potion.effect.strong_vulnerability_potion": "Splash Potion of Vulnerability",
   "item.minecraft.lingering_potion.effect.strong_vulnerability_potion": "Lingering Potion of Vulnerability",
-  "item.minecraft.tipped_arrow.effect.strong_vulnerability_potion": "Arrow of Vulnerability"
+  "item.minecraft.tipped_arrow.effect.strong_vulnerability_potion": "Arrow of Vulnerability",
+
+
+  "effect.clutter.shimmer": "Shimmer",
+  "item.minecraft.potion.effect.shimmer_potion": "Potion of Shimmer",
+  "item.minecraft.splash_potion.effect.shimmer_potion": "Splash Potion of Shimmer",
+  "item.minecraft.lingering_potion.effect.shimmer_potion": "Lingering Potion of Shimmer",
+  "item.minecraft.tipped_arrow.effect.shimmer_potion": "Arrow of Shimmer",
+
+  "item.minecraft.potion.effect.long_shimmer_potion": "Potion of Shimmer",
+  "item.minecraft.splash_potion.effect.long_shimmer_potion": "Splash Potion of Shimmer",
+  "item.minecraft.lingering_potion.effect.long_shimmer_potion": "Lingering Potion of Shimmer",
+  "item.minecraft.tipped_arrow.effect.long_shimmer_potion": "Arrow of Shimmer",
+
+  "item.clutter.seashell": "Seashell",
+  "item.clutter.sea_conch": "Sea Conch",
+  "item.clutter.pearl": "Pearl",
+  "item.clutter.clam": "Clam",
+  "block.clutter.nautilus_shell_block": "Nautilus Shell Block",
+  "block.clutter.pearl_clam_block": "Pearl Clam Block",
+  "block.clutter.red_present": "Red Present",
+  "container.clutter.present": "Present"
 }

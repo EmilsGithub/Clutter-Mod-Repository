@@ -20,6 +20,9 @@ public class ModPotions {
     public static Potion MELTDOWN_POTION = registerPotion("meltdown_potion", new StatusEffectInstance(ModEffects.MELTDOWN, 600, 0));
     public static Potion STRONG_MELTDOWN_POTION = registerPotion("strong_meltdown_potion", new StatusEffectInstance(ModEffects.MELTDOWN, 600, 1));
 
+    public static Potion SHIMMER_POTION = registerPotion("shimmer_potion", new StatusEffectInstance(ModEffects.SHIMMER, 450, 0));
+    public static Potion LONG_SHIMMER_POTION = registerPotion("long_shimmer_potion", new StatusEffectInstance(ModEffects.SHIMMER, 900, 0));
+
     public static Potion registerPotion(String name, StatusEffectInstance effectInstance) {
         return Registry.register(Registries.POTION, new Identifier(Clutter.MOD_ID, name), new Potion(effectInstance));
     }
@@ -31,6 +34,9 @@ public class ModPotions {
 
         BrewingRecipeRegistryMixin.invokeRegisterPotionRecipe(Potions.THICK, ModItems.SULPHUR, ModPotions.MELTDOWN_POTION);
         BrewingRecipeRegistryMixin.invokeRegisterPotionRecipe(ModPotions.MELTDOWN_POTION, Items.GLOWSTONE_DUST, ModPotions.STRONG_MELTDOWN_POTION);
+
+        BrewingRecipeRegistryMixin.invokeRegisterPotionRecipe(Potions.MUNDANE, ModItems.PEARL, ModPotions.SHIMMER_POTION);
+        BrewingRecipeRegistryMixin.invokeRegisterPotionRecipe(ModPotions.SHIMMER_POTION, Items.REDSTONE, ModPotions.LONG_SHIMMER_POTION);
     }
 }
 

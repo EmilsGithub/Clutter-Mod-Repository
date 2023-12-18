@@ -134,7 +134,7 @@ public class ModLootTableModifiers {
                 }
             }
 
-            if (id.equals(END_CITY_TREASURE_ID) && !ModConfigs.DISABLE_GREED_LOOT_GENERATON) {
+            if (id.equals(END_CITY_TREASURE_ID) && !ModConfigs.DISABLE_GREED_LOOT_GENERATION) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .with(ItemEntry.builder(Items.BOOK).conditionally(RandomChanceLootCondition.builder(0.25f))).apply(EnchantRandomlyLootFunction.create().add(ModEnchantments.GREED))

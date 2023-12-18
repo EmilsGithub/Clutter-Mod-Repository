@@ -14,6 +14,7 @@ import java.util.Objects;
 import java.util.Random;
 
 public class Meltdown extends StatusEffect {
+    private static final Random random = new Random();
 
     protected Meltdown(StatusEffectCategory category, int color) {
         super(category, color);
@@ -22,14 +23,17 @@ public class Meltdown extends StatusEffect {
     @Override
     public void applyUpdateEffect(LivingEntity entity, int amplifier) {
         World world = entity.getWorld();
-        Random random = new Random();
         int duration = Objects.requireNonNull(entity.getStatusEffect(ModEffects.MELTDOWN)).getDuration();
 
-        if(world.isClient && random.nextInt(Math.abs(duration) + 20) <= 10) {
-            world.addParticle(ParticleTypes.FLAME, true,entity.getX() + random.nextDouble() / 1.5 * (double) (random.nextBoolean() ? 1 : -1), entity.getY() + 1.0f + random.nextDouble() / 1.5 * (double) (random.nextBoolean() ? 1 : -1), entity.getZ() + random.nextDouble() / 1.5 * (double) (random.nextBoolean() ? 1 : -1), 0, 0, 0);
+        if(world.isClient && duration <= 20) {
+            double offsetX = random.nextDouble() / 1.5 * (random.nextBoolean() ? 1 : -1);
+            double offsetY = 1.0f + random.nextDouble() / 1.5 * (random.nextBoolean() ? 1 : -1);
+            double offsetZ = random.nextDouble() / 1.5 * (random.nextBoolean() ? 1 : -1);
+
+            world.addParticle(ParticleTypes.FLAME, true, entity.getX() + offsetX, entity.getY() + offsetY, entity.getZ() + offsetZ, 0, 0, 0);
 
             if (random.nextInt(2) == 0) {
-                world.addParticle(ParticleTypes.SMOKE, true, entity.getX() + random.nextDouble() / 1.5 * (double) (random.nextBoolean() ? 1 : -1), entity.getY() + 1.0f + random.nextDouble() / 1.5 * (double) (random.nextBoolean() ? 1 : -1), entity.getZ() + random.nextDouble() / 1.5 * (double) (random.nextBoolean() ? 1 : -1), 0, 0, 0);
+                world.addParticle(ParticleTypes.SMOKE, true, entity.getX() + offsetX, entity.getY() + offsetY, entity.getZ() + offsetZ, 0, 0, 0);
                 if (random.nextBoolean()) {
                     entity.playSound(SoundEvents.BLOCK_FIRE_AMBIENT, 1.0f, 1.0f);
                 }
@@ -37,10 +41,11 @@ public class Meltdown extends StatusEffect {
         }
 
         if(!world.isClient) {
-            if(entity.isTouchingWater()) {
+            if(entity.isTouchingWaterOrRain()) {
                 entity.removeStatusEffect(ModEffects.MELTDOWN);
-                entity.getWorld().playSound(null, entity.getBlockPos(), SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.AMBIENT);
-            } else if (!entity.isTouchingWater() && entity.isOnFire()) {
+                world.playSound(null, entity.getBlockPos(), SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.PLAYERS);
+            }
+            else if(duration <= 1 && !entity.isTouchingWater()) {
                 if (ModConfigs.MELTDOWN_DESTROY_BLOCKS) {
                     world.createExplosion(entity, entity.getX(), entity.getBodyY(0.0625f), entity.getZ(), amplifier + 1.0f, World.ExplosionSourceType.TNT);
                 } else {
@@ -51,7 +56,7 @@ public class Meltdown extends StatusEffect {
                 entity.setFireTicks(1);
             }
         }
-
+        
         super.applyUpdateEffect(entity, amplifier);
     }
 

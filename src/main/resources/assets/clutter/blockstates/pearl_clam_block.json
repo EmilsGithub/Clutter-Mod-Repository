@@ -1,0 +1,34 @@
+{
+  "variants":{
+    "facing=north,has_pearl=false":{
+      "model":"clutter:block/pearl_clam"
+    },
+    "facing=east,has_pearl=false":{
+      "model":"clutter:block/pearl_clam",
+      "y": 90
+    },
+    "facing=south,has_pearl=false":{
+      "model":"clutter:block/pearl_clam",
+      "y": 180
+    },
+    "facing=west,has_pearl=false":{
+      "model":"clutter:block/pearl_clam",
+      "y": 270
+    },
+    "facing=north,has_pearl=true":{
+      "model":"clutter:block/pearl_clam_with_pearl"
+    },
+    "facing=east,has_pearl=true":{
+      "model":"clutter:block/pearl_clam_with_pearl",
+      "y": 90
+    },
+    "facing=south,has_pearl=true":{
+      "model":"clutter:block/pearl_clam_with_pearl",
+      "y": 180
+    },
+    "facing=west,has_pearl=true":{
+      "model":"clutter:block/pearl_clam_with_pearl",
+      "y": 270
+    }
+  }
+}

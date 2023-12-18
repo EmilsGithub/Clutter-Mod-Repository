@@ -51,6 +51,11 @@ public class ModelDataGen extends FabricModelProvider {
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.SILVER_BOOTS));
 
         itemModelGenerator.register(ModItems.SPONGE_SHARD, Models.GENERATED);
+        itemModelGenerator.register(ModItems.SEA_CONCH, Models.GENERATED);
+        itemModelGenerator.register(ModItems.SEASHELL, Models.GENERATED);
+        itemModelGenerator.register(ModItems.CLAM, Models.GENERATED);
+        itemModelGenerator.register(ModItems.PEARL, Models.GENERATED);
+
 
         itemModelGenerator.register(ModItems.CAPYBARA_SPAWN_EGG, new Model(Optional.of(new Identifier("item/template_spawn_egg")), Optional.empty()));
     }

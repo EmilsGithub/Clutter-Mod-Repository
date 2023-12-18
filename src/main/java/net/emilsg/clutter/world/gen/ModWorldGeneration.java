@@ -16,6 +16,8 @@ public class ModWorldGeneration {
         if(ModConfigs.GENERATE_FOLIAGE) {
             ModFoliageGeneration.generateFoliage();
         }
+
+        ModUnderwaterFeatureGeneration.generateUnderwaterFeatures();
     }
 }
 

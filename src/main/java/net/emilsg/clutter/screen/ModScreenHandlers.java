@@ -22,6 +22,10 @@ public class ModScreenHandlers {
             Registry.register(Registries.SCREEN_HANDLER, new Identifier(Clutter.MOD_ID, "wall_bookshelf_screen_handler"),
                     new ScreenHandlerType<>(WallBookshelfScreenHandler::new, FeatureFlags.VANILLA_FEATURES));
 
+    public static final ScreenHandlerType<PresentScreenHandler> PRESENT_SCREEN_HANDLER =
+            Registry.register(Registries.SCREEN_HANDLER, new Identifier(Clutter.MOD_ID, "present_screen_handler"),
+                    new ScreenHandlerType<>(PresentScreenHandler::new, FeatureFlags.VANILLA_FEATURES));
+
     public static void registerScreenHandlers() {
 
     }

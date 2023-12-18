@@ -122,6 +122,18 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .criterion(hasItem(Items.CHEST), conditionsFromItem(Items.CHEST))
                 .offerTo(exporter, new Identifier(getRecipeName(ModBlocks.CARDBOARD_BOX)));
 
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.RED_PRESENT)
+                .pattern("RPR")
+                .pattern("PCP")
+                .pattern("RPR")
+                .input('P', Items.PAPER)
+                .input('R', Items.RED_DYE)
+                .input('C', ModBlocks.CARDBOARD_BOX)
+                .criterion(hasItem(Items.PAPER), conditionsFromItem(Items.PAPER))
+                .criterion(hasItem(ModBlocks.CARDBOARD_BOX), conditionsFromItem(ModBlocks.CARDBOARD_BOX))
+                .criterion(hasItem(Items.RED_DYE), conditionsFromItem(Items.RED_DYE))
+                .offerTo(exporter, new Identifier(getRecipeName(ModBlocks.RED_PRESENT)));
+
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.MAILBOX)
                 .pattern(" I ")
                 .pattern("ICI")

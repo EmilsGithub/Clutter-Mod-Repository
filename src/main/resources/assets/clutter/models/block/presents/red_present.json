@@ -1,0 +1,6 @@
+{
+  "parent": "clutter:block/presents/present_parent",
+  "textures": {
+    "0": "clutter:block/red_present"
+  }
+}

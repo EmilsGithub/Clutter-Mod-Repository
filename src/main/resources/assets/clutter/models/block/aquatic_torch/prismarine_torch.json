@@ -3,8 +3,7 @@
 	"ambientocclusion": false,
 	"textures": {
 		"particle": "clutter:block/prismarine_torch_base",
-		"base": "clutter:block/prismarine_torch_base",
-		"light": "clutter:block/prismarine_torch_fire"
+		"base": "clutter:block/prismarine_torch_base"
 	},
 	"elements": [
 		{
@@ -59,10 +58,10 @@
 			"shade": false,
 			"rotation": {"angle": 0, "axis": "y", "origin": [0, -1, 0]},
 			"faces": {
-				"north": {"uv": [0, 0, 16, 16], "texture": "#light"},
-				"east": {"uv": [0, 0, 16, 16], "texture": "#light"},
-				"south": {"uv": [0, 0, 16, 16], "texture": "#light"},
-				"west": {"uv": [0, 0, 16, 16], "texture": "#light"},
+				"north": {"uv": [3, 6, 8, 10], "rotation": 90, "texture": "#base"},
+				"east": {"uv": [3, 6, 8, 10], "rotation": 90, "texture": "#base"},
+				"south": {"uv": [3, 6, 8, 10], "rotation": 90, "texture": "#base"},
+				"west": {"uv": [3, 6, 8, 10], "rotation": 90, "texture": "#base"},
 				"up": {"uv": [8, 6, 12, 10], "texture": "#base"}
 			}
 		},

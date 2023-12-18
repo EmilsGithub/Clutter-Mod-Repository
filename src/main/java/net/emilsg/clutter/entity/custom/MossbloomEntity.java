@@ -73,7 +73,7 @@ public class MossbloomEntity extends AnimalEntity implements GeoEntity {
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(1, new EscapeDangerGoal(this, 1.5));
         this.goalSelector.add(2, new AnimalMateGoal(this, 1));
-        this.goalSelector.add(3, new TemptGoal(this, 1.25, Ingredient.ofItems(Items.SMALL_DRIPLEAF, Items.BIG_DRIPLEAF), false));
+        this.goalSelector.add(3, new TemptGoal(this, 1.25, Ingredient.ofItems(Items.BIG_DRIPLEAF), false));
         this.goalSelector.add(4, new FollowParentGoal(this, 1.0));
         this.goalSelector.add(5, new WanderAroundFarGoal(this, 1.0, 1));
         this.goalSelector.add(6, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
@@ -93,7 +93,7 @@ public class MossbloomEntity extends AnimalEntity implements GeoEntity {
 
     @Override
     public boolean isBreedingItem(ItemStack stack) {
-        return stack.isOf(Items.SMALL_DRIPLEAF);
+        return stack.isOf(Items.BIG_DRIPLEAF);
     }
 
     @Override

@@ -4,6 +4,7 @@ import net.emilsg.clutter.block.ModBlocks;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.block.Block;
+import net.minecraft.item.Items;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.entry.AlternativeEntry;
@@ -57,6 +58,7 @@ public class LootTableDataGen extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.WAXED_OXIDIZED_AQUATIC_WALL_TORCH);
         addDrop(ModBlocks.PRISMARINE_TORCH);
         addDrop(ModBlocks.PRISMARINE_WALL_TORCH);
+        addDrop(ModBlocks.NAUTILUS_SHELL_BLOCK, Items.NAUTILUS_SHELL);
     }
 
     private void addCoralDrops(Block coral, Block deadCoral, Block coralBlock, Block deadCoralBlock, Block coralFan, Block deadCoralFan, Block coralWallFan, Block deadCoralWallFan) {

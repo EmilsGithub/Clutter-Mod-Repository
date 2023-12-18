@@ -31,7 +31,6 @@ public class AquaticTorchBlock extends Block implements Waterloggable {
 
     }
 
-
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(WATERLOGGED);
@@ -93,7 +92,7 @@ public class AquaticTorchBlock extends Block implements Waterloggable {
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
         if (random.nextInt(2) == 0 && state.get(WATERLOGGED) && world.getFluidState(pos.up()).isOf(Fluids.WATER)) {
             double x = pos.getX() + 0.5, y = pos.getY() + 1.05, z = pos.getZ() + 0.5;
-            world.addParticle(random.nextInt(2) == 0 ? ParticleTypes.BUBBLE_POP : ParticleTypes.BUBBLE, x, y, z, 0.0, 0.0, 0.0);
+            world.addParticle(random.nextInt(3) == 0 ? ParticleTypes.BUBBLE_POP : ParticleTypes.BUBBLE, x, y, z, 0.0, 0.0, 0.0);
         }
     }
 
