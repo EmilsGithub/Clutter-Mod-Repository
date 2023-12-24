@@ -66,7 +66,7 @@ public class ModItems {
     public static final Item SULPHUR = registerItem("sulphur", new SulphurItem(new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
 
     public static final Item SEA_CONCH = registerItem("sea_conch", new Item(new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
-    public static final Item SEASHELL = registerItem("seashell", new Item(new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item SEASHELL = registerItem("seashell", new AliasedBlockItem(ModBlocks.SEASHELL_BLOCK, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
     public static final Item CLAM = registerItem("clam", new AliasedBlockItem(ModBlocks.PEARL_CLAM_BLOCK, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
     public static final Item PEARL = registerItem("pearl", new Item(new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
 
@@ -176,7 +176,8 @@ public class ModItems {
     public static final Item KIWI_BIRD_SPAWN_EGG = registerItem("kiwi_bird_spawn_egg", new SpawnEggItem(ModEntities.KIWI_BIRD, 6243108, 6275609, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
     public static final Item EMPEROR_PENGUIN_SPAWN_EGG = registerItem("emperor_penguin_spawn_egg", new SpawnEggItem(ModEntities.EMPEROR_PENGUIN, 1973800, 16777210, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
     public static final Item BEAVER_SPAWN_EGG = registerItem("beaver_spawn_egg", new SpawnEggItem(ModEntities.BEAVER, 5916211, 3356222, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
-    public static final Item CAPYBARA_SPAWN_EGG = registerItem("capybara_spawn_egg", new SpawnEggItem(ModEntities.CAPYBARA, 4523422, 3422342, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item CAPYBARA_SPAWN_EGG = registerItem("capybara_spawn_egg", new SpawnEggItem(ModEntities.CAPYBARA, 2169626, 16651589, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item CRIMSON_NEWT_SPAWN_EGG = registerItem("crimson_newt_spawn_egg", new SpawnEggItem(ModEntities.CRIMSON_NEWT, 15783361, 11280416, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
 
     public static final Item BEACH_HAT = registerItem("beach_hat", new HatItem(new FabricItemSettings().maxCount(1)), ModItemGroups.CLUTTER_ITEMS);
     public static final Item TOP_HAT = registerItem("top_hat", new HatItem(new FabricItemSettings().maxCount(1)), ModItemGroups.CLUTTER_ITEMS);

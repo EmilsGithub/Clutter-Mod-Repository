@@ -1,5 +1,6 @@
 package net.emilsg.clutter.entity.custom;
 
+import net.emilsg.clutter.entity.custom.parent.ClutterAnimalEntity;
 import net.emilsg.clutter.entity.ModEntities;
 import net.emilsg.clutter.util.ModItemTags;
 import net.minecraft.block.Block;
@@ -55,9 +56,12 @@ import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-public class BeaverEntity extends AnimalEntity implements GeoEntity {
+public class BeaverEntity extends ClutterAnimalEntity implements GeoEntity {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private static final TrackedData<BlockPos> HOME_POS;
 
@@ -108,7 +112,7 @@ public class BeaverEntity extends AnimalEntity implements GeoEntity {
         STRIPPABLE_LOGS_MAP.put(Blocks.WARPED_HYPHAE, Blocks.STRIPPED_WARPED_HYPHAE);
     }
 
-    public BeaverEntity(EntityType<? extends AnimalEntity> entityType, World world) {
+    public BeaverEntity(EntityType<? extends ClutterAnimalEntity> entityType, World world) {
         super(entityType, world);
         this.setPathfindingPenalty(PathNodeType.WATER, 0.0F);
         this.setPathfindingPenalty(PathNodeType.DANGER_FIRE, -1.0F);
@@ -132,7 +136,7 @@ public class BeaverEntity extends AnimalEntity implements GeoEntity {
     }
 
     public static DefaultAttributeContainer.Builder setAttributes() {
-        return AnimalEntity.createMobAttributes()
+        return ClutterAnimalEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 10.0D)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25f)
                 .add(EntityAttributes.GENERIC_ATTACK_SPEED, 0.5f)

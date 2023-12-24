@@ -1,6 +1,7 @@
 package net.emilsg.clutter.entity.custom;
 
 import net.emilsg.clutter.block.ModBlocks;
+import net.emilsg.clutter.entity.custom.parent.ClutterAnimalEntity;
 import net.emilsg.clutter.entity.ModEntities;
 import net.emilsg.clutter.sound.ModSounds;
 import net.emilsg.clutter.util.ModItemTags;
@@ -18,7 +19,6 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.PathAwareEntity;
-import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -50,7 +50,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class KiwiBirdEntity extends AnimalEntity implements GeoEntity {
+public class KiwiBirdEntity extends ClutterAnimalEntity implements GeoEntity {
     private boolean songPlaying;
     @Nullable
     private BlockPos songSource;
@@ -63,7 +63,7 @@ public class KiwiBirdEntity extends AnimalEntity implements GeoEntity {
     private static final RawAnimation WALK = RawAnimation.begin().thenLoop("kiwi_bird.walk");
     private static final RawAnimation DANCE = RawAnimation.begin().thenLoop("kiwi_bird.dance");
 
-    public KiwiBirdEntity(EntityType<? extends AnimalEntity> entityType, World world) {
+    public KiwiBirdEntity(EntityType<? extends ClutterAnimalEntity> entityType, World world) {
         super(entityType, world);
         this.setPathfindingPenalty(PathNodeType.DANGER_FIRE, -1.0F);
         this.setPathfindingPenalty(PathNodeType.DAMAGE_FIRE, -1.0F);
@@ -71,7 +71,7 @@ public class KiwiBirdEntity extends AnimalEntity implements GeoEntity {
     }
 
     public static DefaultAttributeContainer.Builder setAttributes() {
-        return AnimalEntity.createMobAttributes()
+        return ClutterAnimalEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 6.0D)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.225f)
                 .add(EntityAttributes.GENERIC_ATTACK_SPEED, 0.5f)

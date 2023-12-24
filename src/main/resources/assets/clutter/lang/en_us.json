@@ -1391,5 +1391,7 @@
   "block.clutter.nautilus_shell_block": "Nautilus Shell Block",
   "block.clutter.pearl_clam_block": "Pearl Clam Block",
   "block.clutter.red_present": "Red Present",
-  "container.clutter.present": "Present"
+  "container.clutter.present": "Present",
+  "entity.clutter.crimson_newt": "Crimson Newt",
+  "item.clutter.crimson_newt_spawn_egg": "Crimson Newt Spawn Egg"
 }

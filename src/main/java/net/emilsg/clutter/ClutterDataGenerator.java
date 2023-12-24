@@ -20,6 +20,7 @@ public class ClutterDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(BlockTagDataGen::new);
 		pack.addProvider(LootTableDataGen::new);
 		pack.addProvider(RecipeDataGen::new);
+		pack.addProvider(BiomeTagDataGen::new);
 	}
 
 	@Override

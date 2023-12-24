@@ -8,6 +8,9 @@ import net.emilsg.clutter.block.entity.render.ShelfBlockEntityRenderer;
 import net.emilsg.clutter.compat.trinkets.TrinketsIntegrationClient;
 import net.emilsg.clutter.entity.ModEntities;
 import net.emilsg.clutter.entity.client.*;
+import net.emilsg.clutter.entity.client.layer.ModModelLayers;
+import net.emilsg.clutter.entity.client.model.CrimsonNewtModel;
+import net.emilsg.clutter.entity.client.render.CrimsonNewtRenderer;
 import net.emilsg.clutter.networking.ModMessages;
 import net.emilsg.clutter.screen.*;
 import net.fabricmc.api.ClientModInitializer;
@@ -15,6 +18,7 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -39,6 +43,7 @@ public class ClutterClient implements ClientModInitializer {
         if(IS_TRINKETS_LOADED) TrinketsIntegrationClient.registerTrinkets();
 
         this.registerColorProviders();
+        this.registerEntityModelLayers();
         this.registerEntityRenderers();
         this.registerBlockEntityRenderers();
         this.registerScreenHandlers();
@@ -581,6 +586,10 @@ public class ClutterClient implements ClientModInitializer {
         });
     }
 
+    private void registerEntityModelLayers() {
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.CRIMSON_NEWT, CrimsonNewtModel::getTexturedModelData);
+    }
+
     private void registerEntityRenderers() {
         EntityRendererRegistry.register(ModEntities.SEAT, EmptySeatRenderer::new);
         EntityRendererRegistry.register(ModEntities.BUTTERFLY, ButterflyRenderer::new);
@@ -591,6 +600,8 @@ public class ClutterClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.EMPEROR_PENGUIN, EmperorPenguinRenderer::new);
         EntityRendererRegistry.register(ModEntities.BEAVER, BeaverRenderer::new);
         EntityRendererRegistry.register(ModEntities.CAPYBARA, CapybaraRenderer::new);
+
+        EntityRendererRegistry.register(ModEntities.CRIMSON_NEWT, CrimsonNewtRenderer::new);
     }
 
     private void registerBlockEntityRenderers() {

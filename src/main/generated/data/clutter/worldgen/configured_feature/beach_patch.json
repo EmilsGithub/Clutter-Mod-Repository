@@ -1,0 +1,12 @@
+{
+  "type": "clutter:beach_patch",
+  "config": {
+    "count": {
+      "type": "minecraft:uniform",
+      "value": {
+        "max_inclusive": 14,
+        "min_inclusive": 6
+      }
+    }
+  }
+}

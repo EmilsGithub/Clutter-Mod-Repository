@@ -498,6 +498,7 @@ public class ModBlocks {
 
     public static final Block NAUTILUS_SHELL_BLOCK = registerBlockWithoutItem("nautilus_shell_block", new NautilusShellBlock(FabricBlockSettings.create().mapColor(MapColor.TERRACOTTA_BROWN).instrument(Instrument.XYLOPHONE).sounds(BlockSoundGroup.BONE).breakInstantly()));
     public static final Block PEARL_CLAM_BLOCK = registerBlockWithoutItem("pearl_clam_block", new PearlClamBlock(FabricBlockSettings.create().mapColor(MapColor.TERRACOTTA_BROWN).instrument(Instrument.XYLOPHONE).sounds(BlockSoundGroup.BONE).offset(AbstractBlock.OffsetType.XZ).dynamicBounds().breakInstantly()));
+    public static final Block SEASHELL_BLOCK = registerBlockWithoutItem("seashell_block", new SeashellBlock(FabricBlockSettings.create().mapColor(MapColor.TERRACOTTA_BROWN).instrument(Instrument.XYLOPHONE).sounds(BlockSoundGroup.BONE).offset(AbstractBlock.OffsetType.XZ).dynamicBounds().breakInstantly()));
 
     public static final Block COPPER_COIN_STACK = registerBlock("copper_coin_stack", new CopperCoinStackBlock(FabricBlockSettings.create().nonOpaque().strength(0.25f).sounds(ModSounds.COIN_PILE_SOUNDS).mapColor(MapColor.TERRACOTTA_ORANGE)), ModItemGroups.CLUTTER_BLOCKS);
     public static final Block SILVER_COIN_STACK = registerBlock("silver_coin_stack", new SilverCoinStackBlock(FabricBlockSettings.create().nonOpaque().strength(0.25f).sounds(ModSounds.COIN_PILE_SOUNDS).mapColor(MapColor.LIGHT_GRAY)), ModItemGroups.CLUTTER_BLOCKS);

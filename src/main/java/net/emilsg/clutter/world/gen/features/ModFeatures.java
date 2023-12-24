@@ -25,6 +25,11 @@ public class ModFeatures {
             new UnderwaterPatchFeature(CountConfig.CODEC, ModBlocks.PEARL_CLAM_BLOCK.getDefaultState(),
                     (state, random) -> state.with(PearlClamBlock.HAS_PEARL, random.nextInt(4) == 0).with(Properties.WATERLOGGED, true).with(Properties.HORIZONTAL_FACING, Direction.Type.HORIZONTAL.random(random))));
 
+    public static final Feature<CountConfig> BEACH_PATCH = register("beach_patch", new BeachPatchFeature(CountConfig.CODEC));
+
+    public static final Feature<CountConfig> CATTAILS = register("cattails", new CattailsFeature(CountConfig.CODEC, 8));
+    public static final Feature<CountConfig> CATTAILS_RIVER = register("cattails_river", new CattailsFeature(CountConfig.CODEC, 12));
+
     public static void registerModFeatures() {
 
     }

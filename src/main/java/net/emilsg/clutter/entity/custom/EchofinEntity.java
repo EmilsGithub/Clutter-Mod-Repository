@@ -1,5 +1,6 @@
 package net.emilsg.clutter.entity.custom;
 
+import net.emilsg.clutter.entity.custom.parent.ClutterAnimalEntity;
 import net.emilsg.clutter.entity.variants.EchofinVariant;
 import net.emilsg.clutter.item.ModItems;
 import net.minecraft.block.BlockState;
@@ -23,7 +24,6 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -56,11 +56,13 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import java.util.EnumSet;
 import java.util.Objects;
 
-public class EchofinEntity extends AnimalEntity implements GeoEntity {
+public class EchofinEntity extends ClutterAnimalEntity implements GeoEntity {
+
+    private static final RawAnimation SWIM = RawAnimation.begin().thenLoop("echofin.swimming");
     private final AnimatableInstanceCache CACHE = GeckoLibUtil.createInstanceCache(this);
     private static final TrackedData<BlockPos> HOME_POS;
 
-    public EchofinEntity(EntityType<? extends AnimalEntity> entityType, World world) {
+    public EchofinEntity(EntityType<? extends ClutterAnimalEntity> entityType, World world) {
         super(entityType, world);
         this.moveControl = new FlightMoveControl(this, 20, true);
         this.lookControl = new EchofinLookControl(this);
@@ -72,7 +74,7 @@ public class EchofinEntity extends AnimalEntity implements GeoEntity {
     }
 
     public static DefaultAttributeContainer.Builder setAttributes() {
-        return AnimalEntity.createMobAttributes()
+        return ClutterAnimalEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 10D)
                 .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.5f)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.1f)
@@ -251,7 +253,7 @@ public class EchofinEntity extends AnimalEntity implements GeoEntity {
 
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
         if(tAnimationState.getController().getCurrentAnimation() == null) {
-            tAnimationState.getController().setAnimation(RawAnimation.begin().thenLoop("fish.swimming"));
+            tAnimationState.getController().setAnimation(SWIM);
         }
         return PlayState.CONTINUE;
     }
@@ -281,7 +283,7 @@ public class EchofinEntity extends AnimalEntity implements GeoEntity {
         this.dataTracker.set(DATA_ID_TYPE_VARIANT, nbt.getInt("Variant"));
     }
 
-    public static boolean isValidSpawn(EntityType<? extends AnimalEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+    public static boolean isValidSpawn(EntityType<? extends ClutterAnimalEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
         return world.getBlockState(pos.down()).isOf(Blocks.END_STONE);
     }
 
@@ -322,6 +324,12 @@ public class EchofinEntity extends AnimalEntity implements GeoEntity {
         setVariant(variant);
         this.setHomePos(this.getBlockPos());
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
+    }
+
+    @Override
+    public void refreshPositionAndAngles(BlockPos pos, float yaw, float pitch) {
+        this.setHomePos(pos);
+        super.refreshPositionAndAngles(pos, yaw, pitch);
     }
 
     @Nullable

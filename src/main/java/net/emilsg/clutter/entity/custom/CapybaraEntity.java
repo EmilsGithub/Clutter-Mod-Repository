@@ -1,5 +1,6 @@
 package net.emilsg.clutter.entity.custom;
 
+import net.emilsg.clutter.entity.custom.parent.ClutterTameableEntity;
 import net.emilsg.clutter.entity.ModEntities;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
@@ -16,7 +17,6 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
-import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.Item;
@@ -47,7 +47,7 @@ import software.bernie.geckolib.core.object.PlayState;
 import java.util.EnumSet;
 import java.util.List;
 
-public class CapybaraEntity extends TameableEntity implements GeoEntity {
+public class CapybaraEntity extends ClutterTameableEntity implements GeoEntity {
 
     private final AnimatableInstanceCache CACHE = new SingletonAnimatableInstanceCache(this);
     private static final RawAnimation IDLE = RawAnimation.begin().thenPlayAndHold("capybara.idle");
@@ -64,7 +64,7 @@ public class CapybaraEntity extends TameableEntity implements GeoEntity {
 
     private static final Ingredient BREEDING_INGREDIENT = Ingredient.ofItems(Items.MELON);
 
-    public CapybaraEntity(EntityType<? extends TameableEntity> entityType, World world) {
+    public CapybaraEntity(EntityType<? extends ClutterTameableEntity> entityType, World world) {
         super(entityType, world);
         this.setPathfindingPenalty(PathNodeType.DANGER_FIRE, -1.0F);
         this.setPathfindingPenalty(PathNodeType.WATER, -1.0F);
@@ -95,8 +95,8 @@ public class CapybaraEntity extends TameableEntity implements GeoEntity {
     protected void initGoals() {
         this.goalSelector.add(1, new SwimGoal(this));
         this.goalSelector.add(2, new CapybaraSitGoal(this));
-        this.goalSelector.add(3, new EscapeDangerGoal(this, 1.25));
-        this.goalSelector.add(4, new AnimalMateGoal(this, 1));
+        this.goalSelector.add(3, new CapybaraEscapeDangerGoal(this, 1.25));
+        this.goalSelector.add(4, new CapybaraMateGoal(this, 1));
         this.goalSelector.add(5, new CapybaraFollowOwnerGoal(this, 1.2, 10.0F, 2.0F, false));
         this.goalSelector.add(6, new CapybaraTemptGoal(this, 1.2, BREEDING_INGREDIENT, false));
         this.goalSelector.add(7, new FollowParentGoal(this, 1.2));
@@ -305,7 +305,7 @@ public class CapybaraEntity extends TameableEntity implements GeoEntity {
 
     private class CapybaraFollowOwnerGoal extends FollowOwnerGoal {
 
-        public CapybaraFollowOwnerGoal(TameableEntity tameable, double speed, float minDistance, float maxDistance, boolean leavesAllowed) {
+        public CapybaraFollowOwnerGoal(ClutterTameableEntity tameable, double speed, float minDistance, float maxDistance, boolean leavesAllowed) {
             super(tameable, speed, minDistance, maxDistance, leavesAllowed);
         }
 
@@ -387,6 +387,30 @@ public class CapybaraEntity extends TameableEntity implements GeoEntity {
 
         for (LivingEntity entity : nearbyEntities) {
             entity.addStatusEffect(effect);
+        }
+    }
+
+    private class CapybaraEscapeDangerGoal extends EscapeDangerGoal {
+
+        public CapybaraEscapeDangerGoal(PathAwareEntity mob, double speed) {
+            super(mob, speed);
+        }
+
+        @Override
+        public boolean canStart() {
+            return super.canStart() && !isSleeping();
+        }
+    }
+
+    private class CapybaraMateGoal extends AnimalMateGoal {
+
+        public CapybaraMateGoal(AnimalEntity animal, double speed) {
+            super(animal, speed);
+        }
+
+        @Override
+        public boolean canStart() {
+            return super.canStart() && !isSleeping();
         }
     }
 }

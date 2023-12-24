@@ -1,6 +1,7 @@
 package net.emilsg.clutter.entity.custom;
 
 import net.emilsg.clutter.block.ModBlocks;
+import net.emilsg.clutter.entity.custom.parent.ClutterAnimalEntity;
 import net.emilsg.clutter.entity.variants.ButterflyVariant;
 import net.emilsg.clutter.item.ModItems;
 import net.emilsg.clutter.util.ModBlockTags;
@@ -9,7 +10,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.LeavesBlock;
-import net.minecraft.entity.*;
+import net.minecraft.entity.EntityData;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.control.FlightMoveControl;
 import net.minecraft.entity.ai.control.LookControl;
 import net.minecraft.entity.ai.goal.AnimalMateGoal;
@@ -26,7 +30,6 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -57,20 +60,19 @@ import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoField;
 
-public class ButterflyEntity extends AnimalEntity implements GeoEntity {
+public class ButterflyEntity extends ClutterAnimalEntity implements GeoEntity {
     private final AnimatableInstanceCache CACHE = new SingletonAnimatableInstanceCache(this);
     private static final TrackedData<BlockPos> HOME_POS = DataTracker.registerData(ButterflyEntity.class, TrackedDataHandlerRegistry.BLOCK_POS);
     private static final TrackedData<Boolean> HAS_COCOON = DataTracker.registerData(ButterflyEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
 
-    public ButterflyEntity(EntityType<? extends AnimalEntity> entityType, World world) {
+    public ButterflyEntity(EntityType<? extends ClutterAnimalEntity> entityType, World world) {
         super(entityType, world);
         this.moveControl = new FlightMoveControl(this, 20, true);
         this.lookControl = new ButterflyLookControl(this);
@@ -82,7 +84,7 @@ public class ButterflyEntity extends AnimalEntity implements GeoEntity {
     }
 
     public static DefaultAttributeContainer.Builder setAttributes() {
-        return AnimalEntity.createMobAttributes()
+        return ClutterAnimalEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 1D)
                 .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.5f)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.1f)
@@ -179,7 +181,7 @@ public class ButterflyEntity extends AnimalEntity implements GeoEntity {
     }
 
 
-    public void breed(ServerWorld world, AnimalEntity other) {
+    public void breed(ServerWorld world, ClutterAnimalEntity other) {
             ServerPlayerEntity serverPlayerEntity = this.getLovingPlayer();
             if (serverPlayerEntity == null && other.getLovingPlayer() != null) {
                 serverPlayerEntity = other.getLovingPlayer();
@@ -210,7 +212,7 @@ public class ButterflyEntity extends AnimalEntity implements GeoEntity {
         return true;
     }
 
-    public static boolean isValidSpawn(EntityType<? extends AnimalEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+    public static boolean isValidSpawn(EntityType<? extends ClutterAnimalEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
         return world.getBlockState(pos.down()).isIn(ModBlockTags.BUTTERFLY_VALID);
     }
 

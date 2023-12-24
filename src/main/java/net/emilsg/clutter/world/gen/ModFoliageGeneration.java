@@ -9,7 +9,7 @@ import static net.minecraft.world.biome.BiomeKeys.*;
 
 public class ModFoliageGeneration {
     public static void generateFoliage() {
-        BiomeModifications.addFeature(BiomeSelectors.includeByKey(SWAMP, MANGROVE_SWAMP),
+        BiomeModifications.addFeature(BiomeSelectors.includeByKey(SWAMP, MANGROVE_SWAMP, RIVER),
                 GenerationStep.Feature.VEGETAL_DECORATION, ModPlacedFeatures.CATTAILS_PLACED_KEY);
 
         BiomeModifications.addFeature(BiomeSelectors.includeByKey(LUSH_CAVES),

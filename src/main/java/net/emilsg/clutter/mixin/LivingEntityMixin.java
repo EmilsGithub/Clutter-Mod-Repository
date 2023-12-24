@@ -38,8 +38,6 @@ public abstract class LivingEntityMixin {
 
     @Shadow public abstract @Nullable StatusEffectInstance getStatusEffect(StatusEffect effect);
 
-    @Shadow public abstract boolean isInsideWall();
-
     @Inject(method = "damage", at = @At("HEAD"), cancellable = true)
     private void onDamage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         LivingEntity self = (LivingEntity) (Object) this;
@@ -60,7 +58,7 @@ public abstract class LivingEntityMixin {
     @Inject(method = "updatePotionVisibility", at = @At("HEAD"), cancellable = true)
     protected void onUpdatePotionVisibility(CallbackInfo ci) {
         LivingEntity livingEntity = (LivingEntity) (Object) this;
-        if (!this.getActiveStatusEffects().isEmpty() && this.hasStatusEffect(ModEffects.SHIMMER)) {
+        if (!this.getActiveStatusEffects().isEmpty() && this.hasStatusEffect(ModEffects.SHIMMER) && livingEntity instanceof PlayerEntity) {
             livingEntity.getDataTracker().set(POTION_SWIRLS_AMBIENT, false);
             livingEntity.getDataTracker().set(POTION_SWIRLS_COLOR, 0);
             ci.cancel();
@@ -68,7 +66,7 @@ public abstract class LivingEntityMixin {
     }
 
     @Inject(at = @At("HEAD"), method = "tick")
-    public void tick(CallbackInfo info) {
+    private void tick(CallbackInfo info) {
         LivingEntity livingEntity = (LivingEntity) (Object) this;
         World world = livingEntity.getWorld();
         Random random = world.getRandom();

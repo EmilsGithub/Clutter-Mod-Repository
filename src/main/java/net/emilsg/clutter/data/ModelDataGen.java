@@ -58,5 +58,7 @@ public class ModelDataGen extends FabricModelProvider {
 
 
         itemModelGenerator.register(ModItems.CAPYBARA_SPAWN_EGG, new Model(Optional.of(new Identifier("item/template_spawn_egg")), Optional.empty()));
+        itemModelGenerator.register(ModItems.CRIMSON_NEWT_SPAWN_EGG, new Model(Optional.of(new Identifier("item/template_spawn_egg")), Optional.empty()));
+
     }
 }

@@ -16,6 +16,7 @@ public class ModSounds {
     public static SoundEvent COIN_POUCH_USE = registerSoundEvent("coin_pouch_use");
 
     public static SoundEvent ENTITY_KIWI_CALL = registerSoundEvent("entity_kiwi_call");
+    public static SoundEvent ENTITY_CRIMSON_NEWT_HURT = registerSoundEvent("entity_crimson_newt_hurt");
 
     public static final BlockSoundGroup COIN_PILE_SOUNDS = new BlockSoundGroup(1f, 1f, COIN_PILE_BREAK, COIN_PILE_PLACE, COIN_PILE_PLACE, COIN_PILE_HIT, COIN_PILE_FALL);
 

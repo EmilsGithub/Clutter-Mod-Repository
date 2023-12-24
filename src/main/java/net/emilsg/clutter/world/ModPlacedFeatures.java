@@ -19,12 +19,14 @@ public class ModPlacedFeatures {
     public static final RegistryKey<PlacedFeature> BASALT_SULPHUR_ORE_PLACED_KEY = registerKey("basalt_sulphur_ore_placed");
     public static final RegistryKey<PlacedFeature> ONYX_GEODE_PLACED_KEY = registerKey("onyx_geode_placed");
     public static final RegistryKey<PlacedFeature> CATTAILS_PLACED_KEY = registerKey("cattails_placed");
+    public static final RegistryKey<PlacedFeature> CATTAILS_PLACED_RIVER_KEY = registerKey("cattails_placed_river");
     public static final RegistryKey<PlacedFeature> LUSH_MOSS_PLACED_KEY = registerKey("lush_moss_placed");
     public static final RegistryKey<PlacedFeature> GIANT_LILY_PAD_SEEDLING_PLACED_KEY = registerKey("giant_lily_pad_seedling_placed");
     public static final RegistryKey<PlacedFeature> SMALL_LILY_PADS_PLACED_KEY = registerKey("small_lily_pads_placed");
     public static final RegistryKey<PlacedFeature> SCULK_MUSHROOM_PLACED_KEY = registerKey("sculk_mushroom_placed");
     public static final RegistryKey<PlacedFeature> SPONGE_IN_REEFS_PLACED_KEY = registerKey("sponge_in_reefs_placed");
     public static final RegistryKey<PlacedFeature> CLAM_PLACED_KEY = registerKey("clam_placed");
+    public static final RegistryKey<PlacedFeature> BEACH_PATCH_PLACED_KEY = registerKey("beach_patch_placed");
 
 
     public static void bootstrap(Registerable<PlacedFeature> context) {
@@ -36,13 +38,15 @@ public class ModPlacedFeatures {
         register(context, ONYX_GEODE_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.ONYX_GEODE_KEY), RarityFilterPlacementModifier.of(32), SquarePlacementModifier.of(), HeightRangePlacementModifier.uniform(YOffset.aboveBottom(10), YOffset.belowTop(20)), BiomePlacementModifier.of());
 
         register(context, SCULK_MUSHROOM_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.SCULK_MUSHROOM_KEY), RarityFilterPlacementModifier.of(3), SquarePlacementModifier.of(), PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of());
-        register(context, CATTAILS_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.CATTAILS_KEY), RarityFilterPlacementModifier.of(2), SquarePlacementModifier.of(), HeightRangePlacementModifier.trapezoid(YOffset.fixed(60), YOffset.fixed(62)), PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of());
         register(context, LUSH_MOSS_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.LUSH_MOSS_KEY), RarityFilterPlacementModifier.of(32), SquarePlacementModifier.of(), PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of());
         register(context, GIANT_LILY_PAD_SEEDLING_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.GIANT_LILY_PAD_SEEDLING_KEY), RarityFilterPlacementModifier.of(4), SquarePlacementModifier.of(), PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of());
         register(context, SMALL_LILY_PADS_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.SMALL_LILY_PADS_KEY), RarityFilterPlacementModifier.of(4), SquarePlacementModifier.of(), PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of());
+        register(context, CATTAILS_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.CATTAILS_KEY), RarityFilterPlacementModifier.of(5), SquarePlacementModifier.of(), HeightRangePlacementModifier.trapezoid(YOffset.fixed(60), YOffset.fixed(62)), PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of());
+        register(context, CATTAILS_PLACED_RIVER_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.CATTAILS_RIVER_KEY), RarityFilterPlacementModifier.of(8), SquarePlacementModifier.of(), HeightRangePlacementModifier.trapezoid(YOffset.fixed(60), YOffset.fixed(62)), PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of());
 
         register(context, SPONGE_IN_REEFS_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.SPONGE_IN_REEFS_KEY), RarityFilterPlacementModifier.of(4), SquarePlacementModifier.of(), PlacedFeatures.OCEAN_FLOOR_WG_HEIGHTMAP, BiomePlacementModifier.of());
         register(context, CLAM_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.CLAM_KEY), RarityFilterPlacementModifier.of(16), SquarePlacementModifier.of(), PlacedFeatures.OCEAN_FLOOR_WG_HEIGHTMAP, BiomePlacementModifier.of());
+        register(context, BEACH_PATCH_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.BEACH_PATCH_KEY), RarityFilterPlacementModifier.of(24), SquarePlacementModifier.of(), PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of());
 
     }
 

@@ -1,6 +1,7 @@
 package net.emilsg.clutter.entity.custom;
 
 import net.emilsg.clutter.block.ModBlocks;
+import net.emilsg.clutter.entity.custom.parent.ClutterAnimalEntity;
 import net.emilsg.clutter.entity.ModEntities;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.Blocks;
@@ -17,7 +18,6 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.CodEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.passive.SalmonEntity;
@@ -52,7 +52,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmperorPenguinEntity extends AnimalEntity implements GeoEntity {
+public class EmperorPenguinEntity extends ClutterAnimalEntity implements GeoEntity {
     private static final Ingredient BREEDING_INGREDIENT = Ingredient.fromTag(ItemTags.FISHES);
     private static final TrackedData<Boolean> HAS_EGG = DataTracker.registerData(EmperorPenguinEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private static final RawAnimation IDLE = RawAnimation.begin().thenLoop("emperor_penguin.idle");
@@ -63,7 +63,7 @@ public class EmperorPenguinEntity extends AnimalEntity implements GeoEntity {
     private static final RawAnimation PADDLE = RawAnimation.begin().thenLoop("emperor_penguin.paddle");
     private final AnimatableInstanceCache CACHE = GeckoLibUtil.createInstanceCache(this);
 
-    public EmperorPenguinEntity(EntityType<? extends AnimalEntity> entityType, World world) {
+    public EmperorPenguinEntity(EntityType<? extends ClutterAnimalEntity> entityType, World world) {
         super(entityType, world);
         this.setPathfindingPenalty(PathNodeType.WATER, 0.0F);
         this.setPathfindingPenalty(PathNodeType.DANGER_FIRE, -1.0F);
@@ -74,7 +74,7 @@ public class EmperorPenguinEntity extends AnimalEntity implements GeoEntity {
     }
 
     public static DefaultAttributeContainer.Builder setAttributes() {
-        return AnimalEntity.createMobAttributes()
+        return ClutterAnimalEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 16.0D)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.18f)
                 .add(EntityAttributes.GENERIC_ATTACK_SPEED, 0.5f)

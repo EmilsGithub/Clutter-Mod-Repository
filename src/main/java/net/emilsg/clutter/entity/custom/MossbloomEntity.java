@@ -1,5 +1,6 @@
 package net.emilsg.clutter.entity.custom;
 
+import net.emilsg.clutter.entity.custom.parent.ClutterAnimalEntity;
 import net.emilsg.clutter.entity.ModEntities;
 import net.emilsg.clutter.entity.variants.MossbloomVariant;
 import net.minecraft.advancement.criterion.Criteria;
@@ -41,7 +42,7 @@ import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class MossbloomEntity extends AnimalEntity implements GeoEntity {
+public class MossbloomEntity extends ClutterAnimalEntity implements GeoEntity {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private static final RawAnimation IDLE = RawAnimation.begin().thenLoop("mossbloom.idle");
     private static final RawAnimation WALK = RawAnimation.begin().thenLoop("mossbloom.walk");
@@ -51,7 +52,7 @@ public class MossbloomEntity extends AnimalEntity implements GeoEntity {
     private static final RawAnimation RE_DROP = RawAnimation.begin().thenPlay("mossbloom.re_drop");
     private static final RawAnimation EARS_DROP = RawAnimation.begin().thenPlay("mossbloom.ears_drop");
 
-    public MossbloomEntity(EntityType<? extends AnimalEntity> entityType, World world) {
+    public MossbloomEntity(EntityType<? extends ClutterAnimalEntity> entityType, World world) {
         super(entityType, world);
         this.setPathfindingPenalty(PathNodeType.DANGER_FIRE, -1.0F);
         this.setPathfindingPenalty(PathNodeType.WATER, -1.0F);
@@ -59,7 +60,7 @@ public class MossbloomEntity extends AnimalEntity implements GeoEntity {
     }
 
     public static DefaultAttributeContainer.Builder setAttributes() {
-        return AnimalEntity.createMobAttributes()
+        return ClutterAnimalEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 20D)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2f)
                 .add(EntityAttributes.GENERIC_ATTACK_SPEED, 1.0f)
@@ -143,8 +144,6 @@ public class MossbloomEntity extends AnimalEntity implements GeoEntity {
 
         }
     }
-
-
 
     public static boolean isValidNaturalSpawn(EntityType<? extends AnimalEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
         return isValidLushSpawn(type, world, spawnReason, pos, random) && isLightLevelValidForNaturalSpawn(world, pos);

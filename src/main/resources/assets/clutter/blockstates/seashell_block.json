@@ -1,0 +1,68 @@
+{
+  "variants": {
+    "facing=north,amount=1": {
+      "model":"clutter:block/seashell_0"
+    },
+    "facing=east,amount=1": {
+      "model":"clutter:block/seashell_0",
+      "y": 90
+    },
+    "facing=south,amount=1": {
+      "model":"clutter:block/seashell_0",
+      "y": 180
+    },
+    "facing=west,amount=1": {
+      "model":"clutter:block/seashell_0",
+      "y": 270
+    },
+
+    "facing=north,amount=2": {
+      "model":"clutter:block/seashell_1"
+    },
+    "facing=east,amount=2": {
+      "model":"clutter:block/seashell_1",
+      "y": 90
+    },
+    "facing=south,amount=2": {
+      "model":"clutter:block/seashell_1",
+      "y": 180
+    },
+    "facing=west,amount=2": {
+      "model":"clutter:block/seashell_1",
+      "y": 270
+    },
+
+    "facing=north,amount=3": {
+      "model":"clutter:block/seashell_2"
+    },
+    "facing=east,amount=3": {
+      "model":"clutter:block/seashell_2",
+      "y": 90
+    },
+    "facing=south,amount=3": {
+      "model":"clutter:block/seashell_2",
+      "y": 180
+    },
+    "facing=west,amount=3": {
+      "model":"clutter:block/seashell_2",
+      "y": 270
+    },
+
+    "facing=north,amount=4": {
+      "model":"clutter:block/seashell_3"
+    },
+    "facing=east,amount=4": {
+      "model":"clutter:block/seashell_3",
+      "y": 90
+    },
+    "facing=south,amount=4": {
+      "model":"clutter:block/seashell_3",
+      "y": 180
+    },
+    "facing=west,amount=4": {
+      "model":"clutter:block/seashell_3",
+      "y": 270
+    }
+
+  }
+}

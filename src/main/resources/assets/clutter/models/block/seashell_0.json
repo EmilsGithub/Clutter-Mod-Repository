@@ -1,0 +1,33 @@
+{
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"textures": {
+		"0": "clutter:block/seashell",
+		"particle": "clutter:block/seashell"
+	},
+	"elements": [
+		{
+			"from": [7, 0, 9.5],
+			"to": [9, 1, 10.5],
+			"faces": {
+				"east": {"uv": [6, 4, 7, 5], "texture": "#0"},
+				"south": {"uv": [4, 4, 6, 5], "texture": "#0"},
+				"west": {"uv": [6, 5, 7, 6], "texture": "#0"},
+				"up": {"uv": [6, 6, 4, 5], "texture": "#0"},
+				"down": {"uv": [6, 6, 4, 7], "texture": "#0"}
+			}
+		},
+		{
+			"from": [6, 0, 5.5],
+			"to": [10, 1, 9.5],
+			"faces": {
+				"north": {"uv": [4, 0, 8, 1], "texture": "#0"},
+				"east": {"uv": [4, 1, 8, 2], "texture": "#0"},
+				"south": {"uv": [4, 2, 8, 3], "texture": "#0"},
+				"west": {"uv": [4, 3, 8, 4], "texture": "#0"},
+				"up": {"uv": [4, 4, 0, 0], "texture": "#0"},
+				"down": {"uv": [4, 4, 0, 8], "texture": "#0"}
+			}
+		}
+	]
+}

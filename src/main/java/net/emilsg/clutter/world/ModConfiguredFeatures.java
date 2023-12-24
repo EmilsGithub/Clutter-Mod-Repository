@@ -38,13 +38,17 @@ public class ModConfiguredFeatures {
     public static final RegistryKey<ConfiguredFeature<?,?>> BLACKSTONE_SULPHUR_ORE_KEY = registerKey("blackstone_sulphur_ore");
     public static final RegistryKey<ConfiguredFeature<?,?>> BASALT_SULPHUR_ORE_KEY = registerKey("basalt_sulphur_ore");
 
-    public static final RegistryKey<ConfiguredFeature<?,?>> CATTAILS_KEY = registerKey("cattails");
+
     public static final RegistryKey<ConfiguredFeature<?,?>> LUSH_MOSS_KEY = registerKey("lush_moss");
     public static final RegistryKey<ConfiguredFeature<?,?>> SCULK_MUSHROOM_KEY = registerKey("sculk_mushroom");
     public static final RegistryKey<ConfiguredFeature<?,?>> GIANT_LILY_PAD_SEEDLING_KEY = registerKey("giant_lily_pad_seedling");
     public static final RegistryKey<ConfiguredFeature<?,?>> SMALL_LILY_PADS_KEY = registerKey("small_lily_pads");
+    public static final RegistryKey<ConfiguredFeature<?,?>> CATTAILS_KEY = registerKey("cattails");
+    public static final RegistryKey<ConfiguredFeature<?,?>> CATTAILS_RIVER_KEY = registerKey("cattails_river");
+
     public static final RegistryKey<ConfiguredFeature<?,?>> SPONGE_IN_REEFS_KEY = registerKey("sponge_in_reefs");
     public static final RegistryKey<ConfiguredFeature<?,?>> CLAM_KEY = registerKey("clam");
+    public static final RegistryKey<ConfiguredFeature<?,?>> BEACH_PATCH_KEY = registerKey("beach_patch");
 
 
     public static final RegistryKey<ConfiguredFeature<?,?>> KIWI_TREE_KEY = registerKey("kiwi_tree");
@@ -88,17 +92,18 @@ public class ModConfiguredFeatures {
                                 UniformIntProvider.create(4, 6), UniformIntProvider.create(3, 4), UniformIntProvider.create(1, 2),
                                 -14, 14, 0.04D, 1));
 
-        register(context, CATTAILS_KEY, Feature.FLOWER,
-                ConfiguredFeatures.createRandomPatchFeatureConfig(24, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK,
-                        new SimpleBlockFeatureConfig(BlockStateProvider.of(ModBlocks.CATTAILS)))));
-
         register(context, LUSH_MOSS_KEY, Feature.FLOWER,
                 ConfiguredFeatures.createRandomPatchFeatureConfig(48, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK,
                         new SimpleBlockFeatureConfig(BlockStateProvider.of(ModBlocks.LUSH_MOSS)))));
 
+        register(context, CATTAILS_KEY, ModFeatures.CATTAILS, new CountConfig(18));
+        register(context, CATTAILS_RIVER_KEY, ModFeatures.CATTAILS_RIVER, new CountConfig(24));
+
         register(context, SPONGE_IN_REEFS_KEY, ModFeatures.SMALL_SPONGE, new CountConfig(2));
 
         register(context, CLAM_KEY, ModFeatures.CLAM, new CountConfig(6));
+
+        register(context, BEACH_PATCH_KEY, ModFeatures.BEACH_PATCH, new CountConfig(UniformIntProvider.create(6, 14)));
 
         register(context, SCULK_MUSHROOM_KEY, Feature.FLOWER,
                 ConfiguredFeatures.createRandomPatchFeatureConfig(24, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK,

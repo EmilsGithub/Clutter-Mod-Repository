@@ -1,5 +1,6 @@
 package net.emilsg.clutter.entity.custom;
 
+import net.emilsg.clutter.entity.custom.parent.ClutterTameableEntity;
 import net.emilsg.clutter.entity.ModEntities;
 import net.emilsg.clutter.item.ModItems;
 import net.emilsg.clutter.item.custom.ButterflyBottleItem;
@@ -16,7 +17,6 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
-import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -45,7 +45,7 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.UUID;
 
-public class ChameleonEntity extends TameableEntity implements GeoEntity {
+public class ChameleonEntity extends ClutterTameableEntity implements GeoEntity {
     private static final RawAnimation IDLE = RawAnimation.begin().thenLoop("chameleon.idle");
     private static final RawAnimation WALK = RawAnimation.begin().thenLoop("chameleon.walk");
     private static final RawAnimation LICK = RawAnimation.begin().thenLoop("chameleon.lick");
@@ -54,7 +54,7 @@ public class ChameleonEntity extends TameableEntity implements GeoEntity {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private static final Ingredient BREEDING_INGREDIENT;
 
-    public ChameleonEntity(EntityType<? extends TameableEntity> entityType, World world) {
+    public ChameleonEntity(EntityType<? extends ClutterTameableEntity> entityType, World world) {
         super(entityType, world);
         this.setPathfindingPenalty(PathNodeType.DANGER_FIRE, -1.0F);
         this.setPathfindingPenalty(PathNodeType.WATER, -1.0F);
