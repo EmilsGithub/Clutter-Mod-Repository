@@ -5,10 +5,7 @@ import net.emilsg.clutter.entity.ModEntities;
 import net.emilsg.clutter.util.ModItemTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.EntityData;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MovementType;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.FuzzyTargeting;
 import net.minecraft.entity.ai.control.MoveControl;
 import net.minecraft.entity.ai.goal.*;
@@ -46,31 +43,18 @@ import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.GeoAnimatable;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.object.PlayState;
-import software.bernie.geckolib.util.GeckoLibUtil;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class BeaverEntity extends ClutterAnimalEntity implements GeoEntity {
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+public class BeaverEntity extends ClutterAnimalEntity {
     private static final TrackedData<BlockPos> HOME_POS;
 
-    private static final RawAnimation IDLE = RawAnimation.begin().thenLoop("beaver.idle");
-    private static final RawAnimation IDLE_TAIL = RawAnimation.begin().thenLoop("beaver.idle_tail");
-    private static final RawAnimation WALK = RawAnimation.begin().thenLoop("beaver.walk");
-    private static final RawAnimation SWIM = RawAnimation.begin().thenLoop("beaver.swim");
-
     private static final Ingredient BREEDING_INGREDIENT = getIngredientWithName("sapling");
+
+    public final AnimationState idleTailAnimationState = new AnimationState();
+    private int idleAnimationTimeout = 0;
 
     private static Ingredient getIngredientWithName(String name) {
         List<Item> items = new ArrayList<>();
@@ -120,6 +104,36 @@ public class BeaverEntity extends ClutterAnimalEntity implements GeoEntity {
         this.setPathfindingPenalty(PathNodeType.COCOA, -1.0F);
         this.setStepHeight(1.0f);
         this.moveControl = new BeaverMoveControl(this);
+    }
+
+    private void setupAnimationStates() {
+        if (this.idleAnimationTimeout <= 0 && !this.isMoving()) {
+            this.idleAnimationTimeout = 40;
+            this.idleTailAnimationState.start(this.age);
+        } else {
+            --this.idleAnimationTimeout;
+        }
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        World world = this.getWorld();
+
+        if(world.isClient) {
+            this.setupAnimationStates();
+        }
+    }
+
+    protected void updateLimbs(float v) {
+        float f;
+        if (this.getPose() == EntityPose.STANDING) {
+            f = Math.min(v * 6.0F, 1.0F);
+        } else {
+            f = 0.0F;
+        }
+
+        this.limbAnimator.updateLimbs(f, 0.2F);
     }
 
     protected void initDataTracker() {
@@ -279,25 +293,6 @@ public class BeaverEntity extends ClutterAnimalEntity implements GeoEntity {
         return ModEntities.BEAVER.create(world);
     }
 
-    @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController<>(this, "controller", 10, this::predicate));
-        controllerRegistrar.add(new AnimationController<>(this, "idle_controller", 10, this::idlePredicate));
-    }
-
-    private <T extends GeoAnimatable> PlayState idlePredicate(AnimationState<T> tAnimationState) {
-        if(!this.isTouchingWater()) {
-            tAnimationState.getController().setAnimation(IDLE_TAIL);
-            return PlayState.CONTINUE;
-        }
-        return PlayState.STOP;
-    }
-
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
-        tAnimationState.getController().setAnimation(this.isTouchingWater() ? SWIM : tAnimationState.isMoving() ? WALK : IDLE);
-        return PlayState.CONTINUE;
-    }
-
     public void travel(Vec3d movementInput) {
         if (this.isLogicalSideForUpdatingMovement() && this.isTouchingWater()) {
             this.updateVelocity(0.1F, movementInput);
@@ -310,11 +305,6 @@ public class BeaverEntity extends ClutterAnimalEntity implements GeoEntity {
             super.travel(movementInput);
         }
 
-    }
-
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return cache;
     }
 
     static class BeaverMoveControl extends MoveControl {

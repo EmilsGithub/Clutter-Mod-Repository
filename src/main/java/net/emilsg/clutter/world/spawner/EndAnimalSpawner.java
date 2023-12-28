@@ -35,24 +35,20 @@ public class EndAnimalSpawner implements Spawner {
     public int spawn(ServerWorld world, boolean spawnMonsters, boolean spawnAnimals) {
         if (!world.getPlayers().isEmpty()) {
             if (!world.getDimensionKey().equals(DimensionTypes.THE_END)) {
-                System.out.println("1");
                 System.out.println(world.getDimensionKey());
                 return 0;
             }
 
             if (!spawnMonsters) {
-                System.out.println("2");
                 return 0;
             }
 
             ServerPlayerEntity playerEntity = world.getRandomAlivePlayer();
             if (playerEntity == null) {
-                System.out.println("3");
                 return 0;
             }
 
             if (playerEntity.isSpectator() || world.isNearOccupiedPointOfInterest(playerEntity.getBlockPos(), 2)) {
-                System.out.println("4");
                 return 0;
             }
 
@@ -68,25 +64,20 @@ public class EndAnimalSpawner implements Spawner {
             BlockPos spawnPos = new BlockPos(x, y, z);
 
             if (this.cooldown > 0) {
-                System.out.println("5");
                 return 0;
             }
 
             int passiveMobCount = world.getEntitiesByClass(ClutterAnimalEntity.class, new Box(playerEntity.getBlockPos()).expand(128), e -> true).size();
-            System.out.println(passiveMobCount);
             if (passiveMobCount >= 17) {
-                System.out.println("6");
                 return 0;
             }
 
 
             if (!world.isRegionLoaded(spawnPos.getX() - 10, spawnPos.getZ() - 10, spawnPos.getX() + 10, spawnPos.getZ() + 10)) {
-                System.out.println("7");
                 return 0;
             }
 
             if (!world.getBiome(spawnPos).isIn(biomeTagKey)) {
-                System.out.println("8");
                 return 0;
             }
 
@@ -94,20 +85,17 @@ public class EndAnimalSpawner implements Spawner {
             FluidState fluidState = world.getFluidState(spawnPos);
 
             if (!SpawnHelper.isClearForSpawn(world, spawnPos, blockState, fluidState, animalEntityType)) {
-                System.out.println("9");
                 return 0;
             }
 
             AnimalEntity animalEntity = (AnimalEntity) animalEntityType.create(world);
 
             if (animalEntity == null) {
-                System.out.println("10");
                 return 0;
             }
 
             if (SpawnHelper.canSpawn(SpawnRestriction.Location.ON_GROUND, world, spawnPos, animalEntityType)) {
                 this.cooldown = maxCooldown;
-                System.out.println("11");
                 return this.spawn(spawnPos, world, animalEntity);
             }
         }

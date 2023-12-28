@@ -73,8 +73,6 @@ public class NetherAnimalSpawner implements Spawner {
                 return 0;
             }
 
-            System.out.println(passiveMobCount);
-
             if (!world.isRegionLoaded(spawnPos.getX() - 10, spawnPos.getZ() - 10, spawnPos.getX() + 10, spawnPos.getZ() + 10)) {
                 return 0;
             }

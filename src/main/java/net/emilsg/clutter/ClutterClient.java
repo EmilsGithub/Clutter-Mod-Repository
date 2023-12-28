@@ -9,8 +9,14 @@ import net.emilsg.clutter.compat.trinkets.TrinketsIntegrationClient;
 import net.emilsg.clutter.entity.ModEntities;
 import net.emilsg.clutter.entity.client.*;
 import net.emilsg.clutter.entity.client.layer.ModModelLayers;
+import net.emilsg.clutter.entity.client.model.BeaverModel;
+import net.emilsg.clutter.entity.client.model.ButterflyModel;
 import net.emilsg.clutter.entity.client.model.CrimsonNewtModel;
+import net.emilsg.clutter.entity.client.model.EmberTortoiseModel;
+import net.emilsg.clutter.entity.client.render.BeaverRenderer;
+import net.emilsg.clutter.entity.client.render.ButterflyRenderer;
 import net.emilsg.clutter.entity.client.render.CrimsonNewtRenderer;
+import net.emilsg.clutter.entity.client.render.EmberTortoiseRenderer;
 import net.emilsg.clutter.networking.ModMessages;
 import net.emilsg.clutter.screen.*;
 import net.fabricmc.api.ClientModInitializer;
@@ -588,20 +594,24 @@ public class ClutterClient implements ClientModInitializer {
 
     private void registerEntityModelLayers() {
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.CRIMSON_NEWT, CrimsonNewtModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.BEAVER, BeaverModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.BUTTERFLY, ButterflyModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.EMBER_TORTOISE, EmberTortoiseModel::getTexturedModelData);
     }
 
     private void registerEntityRenderers() {
         EntityRendererRegistry.register(ModEntities.SEAT, EmptySeatRenderer::new);
-        EntityRendererRegistry.register(ModEntities.BUTTERFLY, ButterflyRenderer::new);
         EntityRendererRegistry.register(ModEntities.CHAMELEON, ChameleonRenderer::new);
         EntityRendererRegistry.register(ModEntities.ECHOFIN, EchofinRenderer::new);
         EntityRendererRegistry.register(ModEntities.MOSSBLOOM, MossbloomRenderer::new);
         EntityRendererRegistry.register(ModEntities.KIWI_BIRD, KiwiBirdRenderer::new);
         EntityRendererRegistry.register(ModEntities.EMPEROR_PENGUIN, EmperorPenguinRenderer::new);
-        EntityRendererRegistry.register(ModEntities.BEAVER, BeaverRenderer::new);
         EntityRendererRegistry.register(ModEntities.CAPYBARA, CapybaraRenderer::new);
 
+        EntityRendererRegistry.register(ModEntities.BUTTERFLY, ButterflyRenderer::new);
         EntityRendererRegistry.register(ModEntities.CRIMSON_NEWT, CrimsonNewtRenderer::new);
+        EntityRendererRegistry.register(ModEntities.BEAVER, BeaverRenderer::new);
+        EntityRendererRegistry.register(ModEntities.EMBER_TORTOISE, EmberTortoiseRenderer::new);
     }
 
     private void registerBlockEntityRenderers() {

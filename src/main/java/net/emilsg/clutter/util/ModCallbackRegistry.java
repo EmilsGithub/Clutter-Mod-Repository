@@ -1,5 +1,6 @@
 package net.emilsg.clutter.util;
 
+import net.emilsg.clutter.Clutter;
 import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.block.custom.*;
 import net.emilsg.clutter.block.entity.SeatEntity;
@@ -33,6 +34,13 @@ import java.util.Random;
 import static net.emilsg.clutter.block.entity.SeatEntity.IS_OCCUPIED;
 
 public class ModCallbackRegistry {
+
+    public static void handleCallbacks() {
+        handleSitting();
+        if (ModConfigs.PET_MOBS) handlePetsPets();
+        if (!Clutter.IS_SUPPLEMENTARIES_LOADED) handlePlacingBooks();
+        handlePlacingNautilusShells();
+    }
 
     public static void handleSitting() {
         UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> {

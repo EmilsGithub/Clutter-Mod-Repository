@@ -4,14 +4,12 @@ import net.emilsg.clutter.entity.client.animation.CrimsonNewtAnimations;
 import net.emilsg.clutter.entity.custom.CrimsonNewtEntity;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.MathHelper;
-import org.joml.Vector3f;
 
 
-public class CrimsonNewtModel<T extends CrimsonNewtEntity> extends SinglePartEntityModel<T> {
-	private final ModelPart torso;
+public class CrimsonNewtModel<T extends CrimsonNewtEntity> extends ClutterModel<T> {
+	private final ModelPart all;
 	private final ModelPart head;
 
 	private final ModelPart fungi1;
@@ -21,14 +19,14 @@ public class CrimsonNewtModel<T extends CrimsonNewtEntity> extends SinglePartEnt
 	private final ModelPart fungi5;
 
 	public CrimsonNewtModel(ModelPart root) {
-		this.torso = root.getChild("Torso");
-		this.head = torso.getChild("Skull");
+		this.all = root.getChild("Torso");
+		this.head = all.getChild("Skull");
 
-		this.fungi1 = torso.getChild("Mushroom");
-		this.fungi2 = torso.getChild("Mushroom2");
-		this.fungi3 = torso.getChild("Mushroom3");
-		this.fungi4 = torso.getChild("Mushroom4");
-		this.fungi5 = torso.getChild("Mushroom5");
+		this.fungi1 = all.getChild("Mushroom");
+		this.fungi2 = all.getChild("Mushroom2");
+		this.fungi3 = all.getChild("Mushroom3");
+		this.fungi4 = all.getChild("Mushroom4");
+		this.fungi5 = all.getChild("Mushroom5");
 	}
 
 	public static TexturedModelData getTexturedModelData() {
@@ -146,12 +144,8 @@ public class CrimsonNewtModel<T extends CrimsonNewtEntity> extends SinglePartEnt
 		fungi5.visible = fungiCount >= 3;
 	}
 
-	private Vector3f createVec3f(float scale) {
-		return new Vector3f(scale, scale, scale);
-	}
-
 	@Override
 	public ModelPart getPart() {
-		return torso;
+		return all;
 	}
 }

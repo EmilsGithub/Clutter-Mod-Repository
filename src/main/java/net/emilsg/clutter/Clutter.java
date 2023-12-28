@@ -20,7 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Clutter implements ModInitializer {
-	public static final String MOD_VERSION = "0.5.3";
+	public static final String MOD_VERSION = "0.5.6";
 	public static final String MOD_ID = "clutter";
 	public static final Logger LOGGER = LoggerFactory.getLogger("Clutter");
 	public static final boolean IS_TRINKETS_LOADED = FabricLoader.getInstance().getModContainer("trinkets").isPresent();
@@ -49,10 +49,7 @@ public class Clutter implements ModInitializer {
 		ModUtil.registerModUtil();
 		ModTradeOffers.addTrades();
 
-		ModCallbackRegistry.handleSitting();
-		if (ModConfigs.PET_MOBS) ModCallbackRegistry.handlePetsPets();
-		if (!IS_SUPPLEMENTARIES_LOADED) ModCallbackRegistry.handlePlacingBooks();
-		ModCallbackRegistry.handlePlacingNautilusShells();
+		ModCallbackRegistry.handleCallbacks();
 
 		ModPotions.registerPotionRecipes();
 
@@ -63,8 +60,5 @@ public class Clutter implements ModInitializer {
 		ModMessages.registerHandshakePackets();
 		LOGGER.info("[Clutter] Finished initializing.");
 	}
-
-
-
 
 }

@@ -295,6 +295,7 @@ public class ModBlocks {
 
     public static final Block FLOOR_SEATING = registerBlock("floor_seating", new FloorSeatBlock(FabricBlockSettings.copy(Blocks.LIGHT_GRAY_WOOL)), ModItemGroups.CLUTTER_BLOCKS);
     public static final Block TOILET = registerBlock("toilet", new ToiletBlock(FabricBlockSettings.copy(Blocks.WHITE_CONCRETE)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block PET_BED = registerBlock("pet_bed", new PetBedBlock(FabricBlockSettings.copy(Blocks.LIGHT_BLUE_WOOL)), ModItemGroups.CLUTTER_BLOCKS);
 
     public static final Block OAK_TABLE = registerBlock("oak_table", new TableBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS)), ModItemGroups.CLUTTER_BLOCKS);
     public static final Block SPRUCE_TABLE = registerBlock("spruce_table", new TableBlock(FabricBlockSettings.copy(Blocks.SPRUCE_PLANKS)), ModItemGroups.CLUTTER_BLOCKS);

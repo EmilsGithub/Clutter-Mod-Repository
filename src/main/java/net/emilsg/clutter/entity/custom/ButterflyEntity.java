@@ -10,10 +10,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.LeavesBlock;
-import net.minecraft.entity.EntityData;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.control.FlightMoveControl;
 import net.minecraft.entity.ai.control.LookControl;
 import net.minecraft.entity.ai.goal.AnimalMateGoal;
@@ -30,6 +27,7 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -56,20 +54,16 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.dimension.DimensionType;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.GeoAnimatable;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.*;
-import software.bernie.geckolib.core.object.PlayState;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoField;
 
-public class ButterflyEntity extends ClutterAnimalEntity implements GeoEntity {
-    private final AnimatableInstanceCache CACHE = new SingletonAnimatableInstanceCache(this);
+public class ButterflyEntity extends ClutterAnimalEntity {
     private static final TrackedData<BlockPos> HOME_POS = DataTracker.registerData(ButterflyEntity.class, TrackedDataHandlerRegistry.BLOCK_POS);
     private static final TrackedData<Boolean> HAS_COCOON = DataTracker.registerData(ButterflyEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+
+    public final AnimationState flyingAnimState = new AnimationState();
+    private int animationTimeout = 0;
 
 
     public ButterflyEntity(EntityType<? extends ClutterAnimalEntity> entityType, World world) {
@@ -89,6 +83,25 @@ public class ButterflyEntity extends ClutterAnimalEntity implements GeoEntity {
                 .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.5f)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.1f)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0f);
+    }
+
+    private void setupAnimationStates() {
+        if (this.animationTimeout <= 0) {
+            this.animationTimeout = 10;
+            this.flyingAnimState.start(this.age);
+        } else {
+            --this.animationTimeout;
+        }
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        World world = this.getWorld();
+
+        if(world.isClient) {
+            this.setupAnimationStates();
+        }
     }
 
     @Override
@@ -180,24 +193,25 @@ public class ButterflyEntity extends ClutterAnimalEntity implements GeoEntity {
         }
     }
 
+    @Override
+    public void breed(ServerWorld world, AnimalEntity other) {
+        super.breed(world, other);
+        ServerPlayerEntity serverPlayerEntity = this.getLovingPlayer();
+        if (serverPlayerEntity == null && other.getLovingPlayer() != null) {
+            serverPlayerEntity = other.getLovingPlayer();
+        }
 
-    public void breed(ServerWorld world, ClutterAnimalEntity other) {
-            ServerPlayerEntity serverPlayerEntity = this.getLovingPlayer();
-            if (serverPlayerEntity == null && other.getLovingPlayer() != null) {
-                serverPlayerEntity = other.getLovingPlayer();
-            }
+        if (serverPlayerEntity != null) {
+            serverPlayerEntity.incrementStat(Stats.ANIMALS_BRED);
+            Criteria.BRED_ANIMALS.trigger(serverPlayerEntity, this, other, null);
+        }
 
-            if (serverPlayerEntity != null) {
-                serverPlayerEntity.incrementStat(Stats.ANIMALS_BRED);
-                Criteria.BRED_ANIMALS.trigger(serverPlayerEntity, this, other, null);
-            }
-
-            this.setHasCocoon(true);
-            this.setBreedingAge(6000);
-            other.setBreedingAge(6000);
-            this.resetLoveTicks();
-            other.resetLoveTicks();
-            world.sendEntityStatus(this, (byte)18);
+        this.setHasCocoon(true);
+        this.setBreedingAge(6000);
+        other.setBreedingAge(6000);
+        this.resetLoveTicks();
+        other.resetLoveTicks();
+        world.sendEntityStatus(this, (byte)18);
     }
 
     private static boolean isTodayAroundHalloween() {
@@ -327,23 +341,6 @@ public class ButterflyEntity extends ClutterAnimalEntity implements GeoEntity {
         protected boolean shouldStayHorizontal() {
             return true;
         }
-    }
-
-    @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController<>(this, "controller", 0, this::predicate));
-    }
-
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
-        if(tAnimationState.getController().getCurrentAnimation() == null) {
-            tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.butterfly.flying", Animation.LoopType.LOOP));
-        }
-        return PlayState.CONTINUE;
-    }
-
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return CACHE;
     }
 
     public void writeCustomDataToNbt(NbtCompound nbt) {
