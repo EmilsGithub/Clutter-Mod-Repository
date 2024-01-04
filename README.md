@@ -24,6 +24,56 @@ The source code for the different versions of the mod can be found under the Bra
 - Fixed a bug that prevented Butterflies from mating properly.
 - Other small fixes and optimizations.
 
+# Update Log - Clutter-0.5.5
+
+**Changes / Bugfixes**
+- Fixed log spam from spawners.
+
+# Update Log - Clutter-0.5.4
+
+**Item**
+- [WIP] Sea-Conch item.
+
+**Entities**
+- [WIP] New way of spawning entities, currently affects Crimson Newts, Echofins and Butterflies.
+- Added a new entity, The Crimson Newt. Spawns in Crimson Forests. You can lure / breed them with Crimson Roots.
+
+**Changes / Bugfixes**
+- Seashells are now placeable and generate in the world.
+- Cattails are now Waterloggable on the bottom half and spawns in Swamps and Rivers.
+- Fixed a bug that made Capybara's move while sleeping.
+- Other Small Bugfixes.
+
+# Update Log - Clutter-0.5.3
+
+**Item**
+- Added Pearl-Clam with Clam / Pearl items.
+- [WIP] Added Sea-Conch item.
+- [WIP] Added Seashell item.
+
+**Blocks**
+- Made Nautilus Shells placeable.
+- Added Red Present.
+
+**Effect**
+- [WIP] Added a new potion effect: Shimmer, that blocks projectiles.
+
+**Changes / Bugfixes**
+- Fixed a bug that crashed the client when shift-right-clicking players.
+- Fixed a bug that set Mip-Map levels to 0.
+- Updated all dependencies.
+- Other Fixes.
+
+# Update Log - Clutter-0.5.2
+
+**Changes / Bugfixes**
+- Fixed an incompatibility with the Glowing Torchflower mod.
+
+# Update Log - Clutter-0.5.1
+
+**Changes / Bugfixes**
+- Fixed a bug that was crashing the game when interacting with inventories.
+
 # Update Log - Clutter-0.5.0
 
 **Entities**
