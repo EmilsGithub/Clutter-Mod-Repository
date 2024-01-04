@@ -27,7 +27,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:tall_bottle"
+        "recipe": "clutter:tall_bottle"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -41,7 +41,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:tall_bottle"
+      "clutter:tall_bottle"
     ]
   },
   "sends_telemetry_event": false

@@ -26,6 +26,7 @@ public class ModConfigs {
     public static boolean SPAWN_BEAVERS;
     public static boolean SPAWN_CAPYBARAS;
     public static boolean SPAWN_CRIMSON_NEWTS;
+    public static boolean SPAWN_EMBER_TORTOISES;
 
     public static boolean GENERATE_ORES;
     public static boolean GENERATE_SILVER_ORE;
@@ -34,13 +35,11 @@ public class ModConfigs {
 
     public static boolean GENERATE_FOLIAGE;
 
-    public static boolean PET_MOBS;
-
     public static void registerConfigs() {
         configs = new ModConfigProvider();
         createConfigs();
 
-        CONFIG = SimpleConfig.of(Clutter.MOD_ID + "config").provider(configs).request();
+        CONFIG = SimpleConfig.of(Clutter.MOD_ID).provider(configs).request();
 
         assignConfigs();
     }
@@ -66,6 +65,7 @@ public class ModConfigs {
         configs.addKeyValuePair(new Pair<>("spawn.beavers", true), "Spawn Beavers.");
         configs.addKeyValuePair(new Pair<>("spawn.capybaras", true), "Spawn Capybaras.");
         configs.addKeyValuePair(new Pair<>("spawn.crimson_newts", true), "Spawn Crimson Newts.");
+        configs.addKeyValuePair(new Pair<>("spawn.ember_tortoises", true), "Spawn Ember Tortoises.");
 
         configs.addKeyValuePair(new Pair<>("generate.geodes", true), "Generate Geodes.");
 
@@ -73,8 +73,6 @@ public class ModConfigs {
         configs.addKeyValuePair(new Pair<>("generate.silver_ore", true), "Generate Silver Ore.");
 
         configs.addKeyValuePair(new Pair<>("generate.foliage", true), "Generate Foliage.");
-
-        configs.addKeyValuePair(new Pair<>("pet.mobs", true), "Allows players to pet Peaceful and/or Baby mobs by right-clicking them while sneaking, this has a small chance of healing that mob.");
     }
 
     private static void assignConfigs() {
@@ -97,6 +95,7 @@ public class ModConfigs {
         SPAWN_BEAVERS = CONFIG.getOrDefault("spawn.beavers", true);
         SPAWN_CAPYBARAS = CONFIG.getOrDefault("spawn.capybaras", true);
         SPAWN_CRIMSON_NEWTS = CONFIG.getOrDefault("spawn.crimson_newts", true);
+        SPAWN_EMBER_TORTOISES = CONFIG.getOrDefault("spawn.ember_tortoises", true);
 
         GENERATE_GEODES = CONFIG.getOrDefault("generate.geodes", true);
 
@@ -104,7 +103,5 @@ public class ModConfigs {
         GENERATE_SILVER_ORE = CONFIG.getOrDefault("generate.silver_ore", true);
 
         GENERATE_FOLIAGE = CONFIG.getOrDefault("generate.foliage", true);
-
-        PET_MOBS = CONFIG.getOrDefault("pet.mobs", true);
     }
 }

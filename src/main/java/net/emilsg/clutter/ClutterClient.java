@@ -5,7 +5,7 @@ import net.emilsg.clutter.block.ModBlockEntities;
 import net.emilsg.clutter.block.entity.render.CardboardBoxBlockEntityRenderer;
 import net.emilsg.clutter.block.entity.render.PlateBlockEntityRenderer;
 import net.emilsg.clutter.block.entity.render.ShelfBlockEntityRenderer;
-import net.emilsg.clutter.compat.trinkets.TrinketsIntegrationClient;
+import net.emilsg.clutter.compat.trinkets.client.TrinketsIntegrationClient;
 import net.emilsg.clutter.entity.ModEntities;
 import net.emilsg.clutter.entity.client.*;
 import net.emilsg.clutter.entity.client.layer.ModModelLayers;
@@ -13,12 +13,14 @@ import net.emilsg.clutter.entity.client.model.BeaverModel;
 import net.emilsg.clutter.entity.client.model.ButterflyModel;
 import net.emilsg.clutter.entity.client.model.CrimsonNewtModel;
 import net.emilsg.clutter.entity.client.model.EmberTortoiseModel;
+import net.emilsg.clutter.entity.client.player.ElytraRenderer;
 import net.emilsg.clutter.entity.client.render.BeaverRenderer;
 import net.emilsg.clutter.entity.client.render.ButterflyRenderer;
 import net.emilsg.clutter.entity.client.render.CrimsonNewtRenderer;
 import net.emilsg.clutter.entity.client.render.EmberTortoiseRenderer;
 import net.emilsg.clutter.networking.ModMessages;
 import net.emilsg.clutter.screen.*;
+import net.emilsg.clutter.util.ModKeyInputHandler;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
@@ -48,6 +50,9 @@ public class ClutterClient implements ClientModInitializer {
     public void onInitializeClient() {
         if(IS_TRINKETS_LOADED) TrinketsIntegrationClient.registerTrinkets();
 
+        ElytraRenderer.register();
+
+        ModKeyInputHandler.register();
         this.registerColorProviders();
         this.registerEntityModelLayers();
         this.registerEntityRenderers();

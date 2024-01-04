@@ -28,6 +28,10 @@ public class BiomeTagDataGen extends FabricTagProvider<Biome> {
                 BiomeKeys.SOUL_SAND_VALLEY
         );
 
+        getOrCreateTagBuilder(ModBiomeTags.SPAWNS_EMBER_TORTOISES).add(
+                BiomeKeys.BASALT_DELTAS
+        );
+
     }
 
     @Override

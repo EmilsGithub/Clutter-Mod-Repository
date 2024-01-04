@@ -2,6 +2,7 @@ package net.emilsg.clutter.networking;
 
 import net.emilsg.clutter.Clutter;
 import net.emilsg.clutter.networking.packet.ItemStackSyncS2CPacket;
+import net.emilsg.clutter.networking.packet.SyncPetsC2SPacket;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.text.Text;
@@ -9,10 +10,16 @@ import net.minecraft.util.Identifier;
 
 public class ModMessages {
     public static final Identifier SYNC_ITEMS = new Identifier(Clutter.MOD_ID, "sync_items");
+    public static final Identifier SYNC_PETS = new Identifier(Clutter.MOD_ID, "sync_pets");
     public static final Identifier VERSION_HANDSHAKE_PACKET_ID = new Identifier(Clutter.MOD_ID, "version_handshake");
+
 
     public static void registerS2CPackets() {
         ClientPlayNetworking.registerGlobalReceiver(SYNC_ITEMS, ItemStackSyncS2CPacket::receive);
+    }
+
+    public static void registerC2SPackets() {
+        ServerPlayNetworking.registerGlobalReceiver(SYNC_PETS, SyncPetsC2SPacket::receive);
     }
 
     public static void registerHandshakePackets() {

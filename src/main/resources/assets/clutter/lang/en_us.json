@@ -1393,5 +1393,13 @@
   "block.clutter.red_present": "Red Present",
   "container.clutter.present": "Present",
   "entity.clutter.crimson_newt": "Crimson Newt",
-  "item.clutter.crimson_newt_spawn_egg": "Crimson Newt Spawn Egg"
+  "item.clutter.crimson_newt_spawn_egg": "Crimson Newt Spawn Egg",
+
+  "entity.clutter.ember_tortoise": "Ember Tortoise",
+  "item.clutter.ember_tortoise_spawn_egg": "Ember Tortoise Spawn Egg",
+  "key.category.clutter": "Clutter",
+  "key.clutter.pet": "Pet Entity",
+  "enchantment.clutter.necrosis.description": "Has a chance to Zombify some mobs when slain, depending on enchantment level.",
+  "enchantment.clutter.necrosis": "Necrosis",
+  "block.clutter.pet_bed": "Pet Bed"
 }

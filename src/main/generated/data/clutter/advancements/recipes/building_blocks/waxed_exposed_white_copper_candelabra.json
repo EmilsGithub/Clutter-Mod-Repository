@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_exposed_white_copper_candelabra": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "clutter:exposed_white_copper_candelabra"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "clutter:waxed_exposed_white_copper_candelabra"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_exposed_white_copper_candelabra",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "clutter:waxed_exposed_white_copper_candelabra"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -17,7 +17,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class SquidPlushieBlock extends PlushieBlock {
+public class SquidPlushieBlock extends AbstractPlushieBlock {
 
     protected static final VoxelShape SHAPE = Block.createCuboidShape(1, 0, 1, 15, 10, 15);
 

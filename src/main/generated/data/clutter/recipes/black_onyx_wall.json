@@ -4,6 +4,9 @@
   "ingredients": [
     {
       "item": "clutter:onyx_wall"
+    },
+    {
+      "item": "clutter:sulphur"
     }
   ],
   "result": {

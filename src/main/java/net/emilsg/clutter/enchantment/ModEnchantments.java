@@ -14,6 +14,9 @@ public class ModEnchantments {
     public static Enchantment GREED = register("greed",
             new GreedEnchantment(Enchantment.Rarity.VERY_RARE, EquipmentSlot.MAINHAND));
 
+    public static Enchantment NECROSIS = register("necrosis",
+            new NecrosisEnchantment(Enchantment.Rarity.VERY_RARE, EquipmentSlot.MAINHAND));
+
     private static Enchantment register(String name, Enchantment enchantment) {
         return Registry.register(Registries.ENCHANTMENT, new Identifier(Clutter.MOD_ID, name), enchantment);
     }

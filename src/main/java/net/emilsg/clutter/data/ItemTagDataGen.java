@@ -205,5 +205,7 @@ public class ItemTagDataGen extends FabricTagProvider.ItemTagProvider {
                 ModItems.TIARA,
                 ModItems.VIKING_HELMET
                 ).addTag(ModItemTags.PLUSHIES);
+
+        getOrCreateTagBuilder(ModItemTags.TRINKETS_CAPE).addTag(ModItemTags.ELYTRON);
     }
 }

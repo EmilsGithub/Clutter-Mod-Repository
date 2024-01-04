@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "clutter:waxed_weathered_magenta_copper_chandelier"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_weathered_magenta_copper_chandelier": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "clutter:weathered_magenta_copper_chandelier"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_weathered_magenta_copper_chandelier",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "clutter:waxed_weathered_magenta_copper_chandelier"
+    ]
+  },
+  "sends_telemetry_event": false
+}

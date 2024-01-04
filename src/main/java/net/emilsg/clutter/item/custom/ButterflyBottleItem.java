@@ -47,7 +47,6 @@ public class ButterflyBottleItem extends Item {
             butterflyEntity.setVariant(variant);
             butterflyEntity.setPersistent();
             butterflyEntity.updatePosition(blockPos2.getX() + 0.5, blockPos2.getY(), blockPos2.getZ() + 0.5);
-            butterflyEntity.setHomePos(blockPos2);
             butterflyEntity.setBreedingAge(6000);
             world.playSound(null, blockPos2, SoundEvents.BLOCK_WOOL_FALL, SoundCategory.NEUTRAL, 1 ,1);
             world.spawnEntity(butterflyEntity);

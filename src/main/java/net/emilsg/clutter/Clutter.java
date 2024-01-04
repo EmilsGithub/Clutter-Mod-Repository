@@ -2,6 +2,7 @@ package net.emilsg.clutter;
 
 import net.emilsg.clutter.block.ModBlockEntities;
 import net.emilsg.clutter.block.ModBlocks;
+import net.emilsg.clutter.compat.trinkets.TrinketsElytraUse;
 import net.emilsg.clutter.config.ModConfigs;
 import net.emilsg.clutter.effect.ModEffects;
 import net.emilsg.clutter.enchantment.ModEnchantments;
@@ -50,6 +51,7 @@ public class Clutter implements ModInitializer {
 		ModTradeOffers.addTrades();
 
 		ModCallbackRegistry.handleCallbacks();
+		ModMessages.registerC2SPackets();
 
 		ModPotions.registerPotionRecipes();
 
@@ -57,8 +59,12 @@ public class Clutter implements ModInitializer {
 
 		ClutterAttributes.registerAttributes();
 
+		if(IS_TRINKETS_LOADED) TrinketsElytraUse.doFlight();
+
+
 		ModMessages.registerHandshakePackets();
 		LOGGER.info("[Clutter] Finished initializing.");
+
 	}
 
 }

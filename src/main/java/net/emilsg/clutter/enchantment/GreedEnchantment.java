@@ -14,7 +14,7 @@ public class GreedEnchantment extends Enchantment {
     }
     @Override
     public boolean isAcceptableItem(ItemStack stack) {
-        return ModEnchantmentTarget.isAcceptableItem(stack);
+        return EnchantmentTarget.WEAPON.isAcceptableItem(stack.getItem()) || EnchantmentTarget.DIGGER.isAcceptableItem(stack.getItem());
     }
 
     public boolean isTreasure() {

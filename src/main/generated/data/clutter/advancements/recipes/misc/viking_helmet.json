@@ -27,7 +27,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:viking_helmet"
+        "recipe": "clutter:viking_helmet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -41,7 +41,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:viking_helmet"
+      "clutter:viking_helmet"
     ]
   },
   "sends_telemetry_event": false

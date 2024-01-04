@@ -27,7 +27,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:top_hat"
+        "recipe": "clutter:top_hat"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -41,7 +41,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:top_hat"
+      "clutter:top_hat"
     ]
   },
   "sends_telemetry_event": false

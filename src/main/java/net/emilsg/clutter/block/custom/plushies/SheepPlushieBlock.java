@@ -22,7 +22,7 @@ import net.minecraft.world.World;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SheepPlushieBlock extends PlushieBlock{
+public class SheepPlushieBlock extends AbstractPlushieBlock {
     public static final EnumProperty<SheepColors> COLOR = EnumProperty.of("color", SheepColors.class);
 
     public SheepPlushieBlock(Settings settings) {

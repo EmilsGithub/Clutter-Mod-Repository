@@ -27,7 +27,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:cardboard_box"
+        "recipe": "clutter:cardboard_box"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -41,7 +41,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:cardboard_box"
+      "clutter:cardboard_box"
     ]
   },
   "sends_telemetry_event": false

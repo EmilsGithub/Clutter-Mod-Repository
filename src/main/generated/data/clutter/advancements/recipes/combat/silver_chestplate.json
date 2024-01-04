@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:silver_chestplate"
+        "recipe": "clutter:silver_chestplate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:silver_chestplate"
+      "clutter:silver_chestplate"
     ]
   },
   "sends_telemetry_event": false

@@ -16,8 +16,6 @@
     "defaultRequire": 1
   },
   "client": [
-    "CapeFeatureRendererMixin",
-    "ElytraFeatureRendererMixin",
     "ItemRendererAccessor",
     "ItemRendererMixin",
     "ModelLoaderMixin"

@@ -4,20 +4,14 @@ import net.emilsg.clutter.Clutter;
 import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.block.custom.*;
 import net.emilsg.clutter.block.entity.SeatEntity;
-import net.emilsg.clutter.config.ModConfigs;
 import net.emilsg.clutter.entity.ModEntities;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
-import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.Items;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -29,15 +23,12 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-import java.util.Random;
-
 import static net.emilsg.clutter.block.entity.SeatEntity.IS_OCCUPIED;
 
 public class ModCallbackRegistry {
 
     public static void handleCallbacks() {
         handleSitting();
-        if (ModConfigs.PET_MOBS) handlePetsPets();
         if (!Clutter.IS_SUPPLEMENTARIES_LOADED) handlePlacingBooks();
         handlePlacingNautilusShells();
     }
@@ -65,33 +56,6 @@ public class ModCallbackRegistry {
                 return spawnSeat(world, player, blockPos, 0.3, comparePos);
             } else if (noAxe && state.getBlock() instanceof ToiletBlock) {
                 return spawnSeat(world, player, blockPos, 0.3, comparePos);
-            }
-
-            return ActionResult.PASS;
-        });
-    }
-
-    public static void handlePetsPets() {
-        UseEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
-            if (ModConfigs.PET_MOBS && (entity instanceof PassiveEntity || (entity instanceof HostileEntity && ((HostileEntity) entity).isBaby())) && player.getStackInHand(hand).isEmpty() && player.isSneaking()) {
-                Random random = new Random();
-
-                if(entity instanceof PassiveEntity && ((PassiveEntity) entity).getHealth() <= ((PassiveEntity) entity).getMaxHealth() && random.nextInt(10) == 0) {
-                    ((PassiveEntity) entity).heal(1.0f);
-                }
-
-                double x = entity.getX();
-                double y = entity.getY() + entity.getHeight() + 0.4;
-                double z = entity.getZ();
-
-                MobEntity mobEntity = (MobEntity) entity;
-                mobEntity.playAmbientSound();
-
-                for (int i = 0; i < 7; i++) {
-                    world.addParticle(ParticleTypes.HEART, x + random.nextDouble() / 2.0 * (double)(random.nextBoolean() ? 1 : -1), y + random.nextDouble() / 2.0 * (double)(random.nextBoolean() ? 1 : -1), z + random.nextDouble() / 2.0 * (double)(random.nextBoolean() ? 1 : -1), 0, 0, 0);
-                }
-
-                return ActionResult.success(world.isClient);
             }
 
             return ActionResult.PASS;

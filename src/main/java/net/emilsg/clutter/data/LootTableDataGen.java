@@ -59,6 +59,7 @@ public class LootTableDataGen extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.PRISMARINE_TORCH);
         addDrop(ModBlocks.PRISMARINE_WALL_TORCH);
         addDrop(ModBlocks.NAUTILUS_SHELL_BLOCK, Items.NAUTILUS_SHELL);
+        addDrop(ModBlocks.PET_BED);
     }
 
     private void addCoralDrops(Block coral, Block deadCoral, Block coralBlock, Block deadCoralBlock, Block coralFan, Block deadCoralFan, Block coralWallFan, Block deadCoralWallFan) {

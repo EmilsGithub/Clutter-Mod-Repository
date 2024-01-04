@@ -1,4 +1,4 @@
-// 1.20.1	2023-12-22T09:56:24.7527279	Clutter/Block Loot Tables
+// 1.20.1	2024-01-03T23:56:09.7989716	Clutter/Block Loot Tables
 1f772a1e66750da84de1d62d984cea2f8cc2a773 data\clutter\loot_tables\blocks\passion_coral.json
 9ab9e259a84f221bd8a9207fc9ebeb3415bbce11 data\clutter\loot_tables\blocks\anchor_coral_block.json
 08bf3f29ff1a9ad9c0de83963fa7e441b842f0b5 data\clutter\loot_tables\blocks\dead_ghost_coral_wall_fan.json
@@ -27,8 +27,8 @@ b3138d37e50370fe8d722f2bf98be299c1029bfa data\clutter\loot_tables\blocks\stone_c
 4d17a49b72678e8fccb53f5c2e002431f375bedb data\clutter\loot_tables\blocks\cup_coral_fan.json
 5879cfe9bb3371455a4cbdbd1796560859cecafa data\clutter\loot_tables\blocks\mailbox.json
 e549dc7597f00cedd0df7f15973c4c0a80bdced5 data\clutter\loot_tables\blocks\waxed_weathered_aquatic_wall_torch.json
-ec8ee244424a9d0ca593f36231a8b666d62b712f data\clutter\loot_tables\blocks\waxed_oxidized_aquatic_wall_torch.json
 67802176a2e21df0077a1c47929a0b642da758ab data\clutter\loot_tables\blocks\cocoa_coral.json
+ec8ee244424a9d0ca593f36231a8b666d62b712f data\clutter\loot_tables\blocks\waxed_oxidized_aquatic_wall_torch.json
 575e73fca9e57be42ca23311b5f0840743172b10 data\clutter\loot_tables\blocks\dead_thorn_coral_wall_fan.json
 412fb9a2ca3b881493a6a73436ff38f2c26ffc63 data\clutter\loot_tables\blocks\dead_stone_coral_block.json
 8405ecdf07802e623a5107157813862c1957e1c3 data\clutter\loot_tables\blocks\waxed_exposed_aquatic_wall_torch.json
@@ -53,6 +53,7 @@ cc3cc5628a9e3443f3997637d8ed780521822309 data\clutter\loot_tables\blocks\dead_pa
 575e73fca9e57be42ca23311b5f0840743172b10 data\clutter\loot_tables\blocks\dead_thorn_coral_fan.json
 5d61327242c9569a0131f03af4b8190fa137a92d data\clutter\loot_tables\blocks\cocoa_coral_wall_fan.json
 e47a4e0a30dfbf29062146b223e2659498b780b9 data\clutter\loot_tables\blocks\black_onyx_wall.json
+a565322f53321387ef1b8c1563b8a3c75c1549c9 data\clutter\loot_tables\blocks\pet_bed.json
 0b091b2da982659f2266085d88170de9cce9ca70 data\clutter\loot_tables\blocks\dead_thorn_coral_block.json
 281c85515f11f9a3bf15c2df19168f56d5307ee7 data\clutter\loot_tables\blocks\waxed_aquatic_torch.json
 d5af3ad1ad613c89a7301ea638a6e8ef49ec6d5f data\clutter\loot_tables\blocks\gem_coral_wall_fan.json

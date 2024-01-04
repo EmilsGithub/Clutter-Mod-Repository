@@ -13,9 +13,21 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
+    "has_sulphur": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "clutter:sulphur"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:black_onyx_stairs"
+        "recipe": "clutter:black_onyx_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -23,12 +35,13 @@
   "requirements": [
     [
       "has_onyx_stairs",
+      "has_sulphur",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:black_onyx_stairs"
+      "clutter:black_onyx_stairs"
     ]
   },
   "sends_telemetry_event": false

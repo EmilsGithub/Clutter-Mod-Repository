@@ -27,7 +27,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:cowboy_hat"
+        "recipe": "clutter:cowboy_hat"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -41,7 +41,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:cowboy_hat"
+      "clutter:cowboy_hat"
     ]
   },
   "sends_telemetry_event": false

@@ -27,6 +27,7 @@ public class ModItemTags {
     public static final TagKey<Item> C_SILVER_NUGGETS = create("silver_nuggets", "c");
 
     public static final TagKey<Item> TRINKETS_HAT = create("head/hat", "trinkets");
+    public static final TagKey<Item> TRINKETS_CAPE = create("chest/cape", "trinkets");
 
     private static TagKey<Item> create(String path) {
         return create(path, Clutter.MOD_ID);

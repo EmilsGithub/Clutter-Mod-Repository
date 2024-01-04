@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:wine_glass"
+        "recipe": "clutter:wine_glass"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:wine_glass"
+      "clutter:wine_glass"
     ]
   },
   "sends_telemetry_event": false

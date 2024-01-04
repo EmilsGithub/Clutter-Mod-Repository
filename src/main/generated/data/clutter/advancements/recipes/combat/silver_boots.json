@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:silver_boots"
+        "recipe": "clutter:silver_boots"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:silver_boots"
+      "clutter:silver_boots"
     ]
   },
   "sends_telemetry_event": false

@@ -27,7 +27,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:aquatic_torch"
+        "recipe": "clutter:aquatic_torch"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -41,7 +41,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:aquatic_torch"
+      "clutter:aquatic_torch"
     ]
   },
   "sends_telemetry_event": false

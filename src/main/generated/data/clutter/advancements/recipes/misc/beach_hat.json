@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:beach_hat"
+        "recipe": "clutter:beach_hat"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -41,7 +41,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:beach_hat"
+      "clutter:beach_hat"
     ]
   },
   "sends_telemetry_event": false

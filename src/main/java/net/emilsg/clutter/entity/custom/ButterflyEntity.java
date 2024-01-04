@@ -52,14 +52,12 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.*;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
-import net.minecraft.world.dimension.DimensionType;
 import org.jetbrains.annotations.Nullable;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoField;
 
 public class ButterflyEntity extends ClutterAnimalEntity {
-    private static final TrackedData<BlockPos> HOME_POS = DataTracker.registerData(ButterflyEntity.class, TrackedDataHandlerRegistry.BLOCK_POS);
     private static final TrackedData<Boolean> HAS_COCOON = DataTracker.registerData(ButterflyEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
     public final AnimationState flyingAnimState = new AnimationState();
@@ -109,12 +107,11 @@ public class ButterflyEntity extends ClutterAnimalEntity {
         this.goalSelector.add(0, new AnimalMateGoal(this, 1.0));
         this.goalSelector.add(1, new LayCocoonGoal(this, 1.0));
         this.goalSelector.add(2, new TemptGoal(this, 1.25, Ingredient.ofItems(Items.SUGAR), false));
-        this.goalSelector.add(3, new WanderAroundGoal(this));
+        this.goalSelector.add(3, new ButterflyWanderGoal(this));
     }
 
     protected void initDataTracker() {
         super.initDataTracker();
-        this.dataTracker.startTracking(HOME_POS, BlockPos.ORIGIN);
         this.dataTracker.startTracking(HAS_COCOON, false);
         this.dataTracker.startTracking(DATA_ID_TYPE_VARIANT, 0);
     }
@@ -142,14 +139,6 @@ public class ButterflyEntity extends ClutterAnimalEntity {
     @Override
     public boolean canBeLeashedBy(PlayerEntity player) {
         return false;
-    }
-
-    public void setHomePos(BlockPos pos) {
-        this.dataTracker.set(HOME_POS, pos);
-    }
-
-    BlockPos getHomePos() {
-        return (BlockPos)this.dataTracker.get(HOME_POS);
     }
 
     @Override
@@ -244,9 +233,9 @@ public class ButterflyEntity extends ClutterAnimalEntity {
     }
 
 
-    public static class WanderAroundGoal extends Goal {
+    public static class ButterflyWanderGoal extends Goal {
         private final ButterflyEntity butterfly;
-        public WanderAroundGoal(ButterflyEntity butterfly) {
+        public ButterflyWanderGoal(ButterflyEntity butterfly) {
             this.butterfly = butterfly;
         }
         @Override
@@ -259,10 +248,10 @@ public class ButterflyEntity extends ClutterAnimalEntity {
         }
 
         public void start() {
-            BlockPos homePos = butterfly.getHomePos();
-            BlockPos newPos = getRandomPos(homePos);
-            if(butterfly.getWorld().getBlockState(newPos).isReplaceable()) {
-                butterfly.navigation.startMovingTo(newPos.getX(), newPos.getY(), newPos.getZ(), 1.0f);
+            BlockPos butterflyBlockPos = this.butterfly.getBlockPos();
+            BlockPos randomPos = getRandomPos(butterflyBlockPos);
+            if(butterfly.getWorld().getBlockState(randomPos).isReplaceable()) {
+                butterfly.navigation.startMovingTo(randomPos.getX(), randomPos.getY(), randomPos.getZ(), 1.0f);
             }
         }
 
@@ -346,9 +335,6 @@ public class ButterflyEntity extends ClutterAnimalEntity {
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
         nbt.putBoolean("HasCocoon", this.hasCocoon());
-        nbt.putInt("HomePosX", this.getHomePos().getX());
-        nbt.putInt("HomePosY", this.getHomePos().getY());
-        nbt.putInt("HomePosZ", this.getHomePos().getZ());
         nbt.putInt("Variant", this.getTypeVariant());
     }
 
@@ -356,10 +342,6 @@ public class ButterflyEntity extends ClutterAnimalEntity {
     public void readCustomDataFromNbt(NbtCompound nbt) {
         super.readCustomDataFromNbt(nbt);
         this.setHasCocoon(nbt.getBoolean("HasCocoon"));
-        int i = nbt.getInt("HomePosX");
-        int j = nbt.getInt("HomePosY");
-        int k = nbt.getInt("HomePosZ");
-        this.setHomePos(new BlockPos(i, j, k));
         this.dataTracker.set(DATA_ID_TYPE_VARIANT, nbt.getInt("Variant"));
     }
 
@@ -384,11 +366,8 @@ public class ButterflyEntity extends ClutterAnimalEntity {
             DataTracker.registerData(ButterflyEntity.class, TrackedDataHandlerRegistry.INTEGER);
 
     @Override
-    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason,
-                                 @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
+    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
         RegistryEntry<Biome> registryEntry = world.getBiome(this.getBlockPos());
-        DimensionType dimension = this.getWorld().getDimension();
-
         ButterflyVariant variant = ButterflyVariant.byId(1);
 
         if(spawnReason.equals(SpawnReason.SPAWN_EGG)) {
@@ -396,8 +375,9 @@ public class ButterflyEntity extends ClutterAnimalEntity {
         }
 
         if (registryEntry.isIn(BiomeTags.IS_OVERWORLD)) {
-            variant = ButterflyVariant.byId(this.random.nextInt(16));
-        } else if (dimension.ultrawarm()) {
+            variant = ButterflyVariant.byId(this.random.nextInt(15) + 1);
+        }
+        else if (registryEntry.isIn(BiomeTags.IS_NETHER)) {
             if (registryEntry.matchesKey(BiomeKeys.WARPED_FOREST)) {
                 variant = ButterflyVariant.WARPED;
             } else if (registryEntry.matchesKey(BiomeKeys.CRIMSON_FOREST)) {
@@ -415,8 +395,7 @@ public class ButterflyEntity extends ClutterAnimalEntity {
             }
         }
 
-        setVariant(variant);
-        this.setHomePos(this.getBlockPos());
+        this.setVariant(variant);
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
     }
 

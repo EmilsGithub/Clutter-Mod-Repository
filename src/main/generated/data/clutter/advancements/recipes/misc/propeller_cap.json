@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:propeller_cap"
+        "recipe": "clutter:propeller_cap"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:propeller_cap"
+      "clutter:propeller_cap"
     ]
   },
   "sends_telemetry_event": false

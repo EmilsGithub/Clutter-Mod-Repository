@@ -39,7 +39,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:red_present"
+        "recipe": "clutter:red_present"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -54,7 +54,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:red_present"
+      "clutter:red_present"
     ]
   },
   "sends_telemetry_event": false

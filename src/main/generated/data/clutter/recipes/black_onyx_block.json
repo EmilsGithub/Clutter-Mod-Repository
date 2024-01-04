@@ -4,6 +4,9 @@
   "ingredients": [
     {
       "item": "clutter:onyx_block"
+    },
+    {
+      "item": "clutter:sulphur"
     }
   ],
   "result": {

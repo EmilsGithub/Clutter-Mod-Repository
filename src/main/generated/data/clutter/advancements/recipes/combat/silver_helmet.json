@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:silver_helmet"
+        "recipe": "clutter:silver_helmet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:silver_helmet"
+      "clutter:silver_helmet"
     ]
   },
   "sends_telemetry_event": false

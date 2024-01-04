@@ -178,7 +178,7 @@ public class ModItems {
     public static final Item BEAVER_SPAWN_EGG = registerItem("beaver_spawn_egg", new SpawnEggItem(ModEntities.BEAVER, 5916211, 3356222, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
     public static final Item CAPYBARA_SPAWN_EGG = registerItem("capybara_spawn_egg", new SpawnEggItem(ModEntities.CAPYBARA, 2169626, 16651589, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
     public static final Item CRIMSON_NEWT_SPAWN_EGG = registerItem("crimson_newt_spawn_egg", new SpawnEggItem(ModEntities.CRIMSON_NEWT, 15783361, 11280416, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
-    public static final Item EMBER_TORTOISE_SPAWN_EGG = registerItem("ember_tortoise_spawn_egg", new SpawnEggItem(ModEntities.EMBER_TORTOISE, 15783361, 11280416, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item EMBER_TORTOISE_SPAWN_EGG = registerItem("ember_tortoise_spawn_egg", new SpawnEggItem(ModEntities.EMBER_TORTOISE, 6052956, 8924463, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
 
     public static final Item BEACH_HAT = registerItem("beach_hat", new HatItem(new FabricItemSettings().maxCount(1)), ModItemGroups.CLUTTER_ITEMS);
     public static final Item TOP_HAT = registerItem("top_hat", new HatItem(new FabricItemSettings().maxCount(1)), ModItemGroups.CLUTTER_ITEMS);

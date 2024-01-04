@@ -10,6 +10,7 @@ import net.minecraft.util.Identifier;
 
 public class EmberTortoiseRenderer extends MobEntityRenderer<EmberTortoiseEntity, EmberTortoiseModel<EmberTortoiseEntity>> {
     private static final Identifier TEXTURE = new Identifier(Clutter.MOD_ID, "textures/entity/ember_tortoise_box.png");
+    private static final Identifier FIRE_TEXTURE = new Identifier(Clutter.MOD_ID, "textures/entity/ember_tortoise_fire_box.png");
 
     public EmberTortoiseRenderer(EntityRendererFactory.Context ctx) {
         super(ctx, new EmberTortoiseModel<>(ctx.getPart(ModModelLayers.EMBER_TORTOISE)), 0.9f);
@@ -17,6 +18,6 @@ public class EmberTortoiseRenderer extends MobEntityRenderer<EmberTortoiseEntity
 
     @Override
     public Identifier getTexture(EmberTortoiseEntity entity) {
-        return TEXTURE;
+        return entity.isShielding() ? FIRE_TEXTURE : TEXTURE;
     }
 }

@@ -111,7 +111,6 @@ public class ButterflyCocoonBlock extends Block {
                         }
                         butterflyEntity.setBreedingAge(6000);
                         butterflyEntity.refreshPositionAndAngles((double)pos.getX() + 0.3 + (double)j * 0.2, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.3, 0.0F, 0.0F);
-                        butterflyEntity.setHomePos(pos);
                         butterflyEntity.setVariant(variant);
                         world.spawnEntity(butterflyEntity);
                     }

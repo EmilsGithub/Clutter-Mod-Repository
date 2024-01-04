@@ -27,7 +27,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:prismarine_torch"
+        "recipe": "clutter:prismarine_torch"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -41,7 +41,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:prismarine_torch"
+      "clutter:prismarine_torch"
     ]
   },
   "sends_telemetry_event": false

@@ -1,10 +1,12 @@
 package net.emilsg.clutter.entity.custom;
 
 import net.emilsg.clutter.entity.ModEntities;
+import net.emilsg.clutter.entity.custom.goal.*;
 import net.emilsg.clutter.entity.custom.parent.ClutterAnimalEntity;
-import net.emilsg.clutter.item.ModItems;
 import net.minecraft.entity.*;
-import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.ai.goal.ActiveTargetGoal;
+import net.minecraft.entity.ai.goal.RevengeGoal;
+import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -12,31 +14,44 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.mob.HoglinEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.item.PickaxeItem;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionTypes;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
+import java.util.Random;
+
 public class EmberTortoiseEntity extends ClutterAnimalEntity {
     private static final TrackedData<Boolean> MOVING = DataTracker.registerData(EmberTortoiseEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    private static final TrackedData<Boolean> ATTACKING = DataTracker.registerData(EmberTortoiseEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private static final TrackedData<Boolean> SHIELDING = DataTracker.registerData(EmberTortoiseEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private static final TrackedData<Integer> SHIELDING_DURATION = DataTracker.registerData(EmberTortoiseEntity.class, TrackedDataHandlerRegistry.INTEGER);
     private static final TrackedData<Integer> SHIELDING_COOLDOWN = DataTracker.registerData(EmberTortoiseEntity.class, TrackedDataHandlerRegistry.INTEGER);
 
     public final AnimationState idleAnimationState = new AnimationState();
-    private int idleAnimationTimeout = 0;
+    public int idleAnimationTimeout = 0;
 
     public final AnimationState shieldingAnimationState = new AnimationState();
-    private int shieldingAnimationTimeout = 0;
+    public int shieldingAnimationTimeout = 0;
 
-    private static final Ingredient BREEDING_INGREDIENT = Ingredient.ofItems(ModItems.SULPHUR);
+    public final AnimationState attackAnimationState = new AnimationState();
+    public int attackAnimationTimeout = 0;
+
+    private static final Ingredient BREEDING_INGREDIENT = Ingredient.ofItems(Items.FIRE_CHARGE);
 
     public EmberTortoiseEntity(EntityType<? extends ClutterAnimalEntity> entityType, World world) {
         super(entityType, world);
@@ -54,33 +69,42 @@ public class EmberTortoiseEntity extends ClutterAnimalEntity {
     @Override
     public boolean damage(DamageSource source, float amount) {
         if(this.isShielding()) {
-            return super.damage(source, amount / 8);
+            LivingEntity livingEntity = (LivingEntity) source.getAttacker();
+
+            if (source.getSource() instanceof ProjectileEntity projectile) {
+                projectile.setVelocity(projectile.getVelocity().multiply(-1));
+                return false;
+            }
+
+            if(livingEntity != null && livingEntity.getMainHandStack().getItem() instanceof PickaxeItem) {
+                return super.damage(source, amount * 2);
+            }
+
+            return super.damage(source, amount / 16);
         }
         return super.damage(source, amount);
     }
 
     @Override
-    public boolean canBeHitByProjectile() {
-        if(!this.isShielding()) return super.canBeHitByProjectile();
-        else return !this.isShielding();
-    }
-
-    @Override
     protected void initGoals() {
         this.goalSelector.add(1, new SwimGoal(this));
-        this.goalSelector.add(2, new EmberMeleeGoal(this, 1.0f, true));
-        this.goalSelector.add(3, new EmberMateGoal(this, 1.2f));
-        this.goalSelector.add(4, new EmberTemptGoal(this, 1.2f, BREEDING_INGREDIENT, false));
-        this.goalSelector.add(5, new EmberFollowParentGoal(this, 1.2f));
-        this.goalSelector.add(6, new EmberWanderAroundFarGoal(this, 1.0f, 0.3f));
-        this.goalSelector.add(7, new EmberLookAtEntityGoal(this, PlayerEntity.class, 6.0f));
-        this.goalSelector.add(8, new EmberLookAroundGoal(this));
+        this.goalSelector.add(2, new EmberTortoiseMeleeGoal(this, 1.0f, true));
+        this.goalSelector.add(3, new EmberTortoiseMateGoal(this, 1.2f));
+        this.goalSelector.add(4, new EmberTortoiseTemptGoal(this, 1.2f, BREEDING_INGREDIENT, false));
+        this.goalSelector.add(5, new EmberTortoiseFollowParentGoal(this, 1.2f));
+        this.goalSelector.add(6, new EmberTortoiseWanderAroundFarGoal(this, 1.0f, 0.3f));
+        this.goalSelector.add(7, new EmberTortoiseLookAtEntityGoal(this, PlayerEntity.class, 6.0f));
+        this.goalSelector.add(8, new EmberTortoiseLookAroundGoal(this));
         this.targetSelector.add(1, new RevengeGoal(this));
+        this.targetSelector.add(2, new ActiveTargetGoal<>(this, HoglinEntity.class, true));
     }
+
+
 
     protected void initDataTracker() {
         super.initDataTracker();
         this.dataTracker.startTracking(MOVING, false);
+        this.dataTracker.startTracking(ATTACKING, false);
         this.dataTracker.startTracking(SHIELDING, false);
         this.dataTracker.startTracking(SHIELDING_COOLDOWN, 0);
         this.dataTracker.startTracking(SHIELDING_DURATION, 400);
@@ -94,7 +118,18 @@ public class EmberTortoiseEntity extends ClutterAnimalEntity {
             --this.idleAnimationTimeout;
         }
 
-        if(this.isShielding() && shieldingAnimationTimeout == 0) {
+        if(this.isAttacking() && attackAnimationTimeout <= 0) {
+            attackAnimationTimeout = 20;
+            attackAnimationState.start(this.age);
+        } else {
+            --this.attackAnimationTimeout;
+        }
+
+        if(!this.isAttacking()) {
+            attackAnimationState.stop();
+        }
+
+        if(this.isShielding() && shieldingAnimationTimeout <= 0) {
             this.shieldingAnimationState.start(this.age);
             this.shieldingAnimationTimeout = 1;
         } else if (!this.isShielding()){
@@ -104,7 +139,12 @@ public class EmberTortoiseEntity extends ClutterAnimalEntity {
 
     @Override
     public void takeKnockback(double strength, double x, double z) {
-        super.takeKnockback(this.isShielding() ? strength / 4 : strength / 2, x, z);
+        super.takeKnockback(0, x, z);
+    }
+
+    @Override
+    public boolean isPushable() {
+        return !this.isShielding();
     }
 
     protected void updateLimbs(float v) {
@@ -116,6 +156,14 @@ public class EmberTortoiseEntity extends ClutterAnimalEntity {
         }
 
         this.limbAnimator.updateLimbs(f, 0.2F);
+    }
+
+    public void setAttacking(boolean attacking) {
+        this.dataTracker.set(ATTACKING, attacking);
+    }
+
+    public boolean isAttacking() {
+        return this.dataTracker.get(ATTACKING);
     }
 
     public void setMoving(boolean moving) {
@@ -185,26 +233,55 @@ public class EmberTortoiseEntity extends ClutterAnimalEntity {
         }
     }
 
+    @Override
+    public boolean isFireImmune() {
+        return true;
+    }
 
     @Override
     public void tick() {
         super.tick();
         World world = this.getWorld();
 
-        if (!this.isDead() && this.getHealth() <= (this.getMaxHealth() / 4) && getShieldingCooldown() <= 0 && !world.isClient()) {
+        if (this.isAlive() && this.getHealth() <= (this.getMaxHealth() / 4) && getShieldingCooldown() <= 0 && !world.isClient()) {
             this.setShielding(true);
             this.setShieldingDuration((random.nextBetween(4, 8) + 1) * 100);
             this.setShieldingCooldown(2400);
-        } else if (!this.isDead() && getShieldingDuration() <= 0 && !world.isClient()) {
+        } else if (this.isAlive() && getShieldingDuration() <= 0 && !world.isClient()) {
             setShielding(false);
+        }
+
+        if (this.isShielding() && world.isClient) {
+            Vec3d entityPos = this.getPos();
+            Random random = new Random();
+            int numberOfParticles = 10;
+
+            for (int i = 0; i < numberOfParticles; i++) {
+                double velocityX = (random.nextDouble() - 0.5) * 0.4;
+                double velocityY = (random.nextDouble() - 0.5) * 0.4;
+                double velocityZ = (random.nextDouble() - 0.5) * 0.4;
+
+                world.addParticle(random.nextBoolean() ? ParticleTypes.FLAME : ParticleTypes.SMALL_FLAME,
+                        entityPos.x, entityPos.y + 1, entityPos.z,
+                        velocityX, velocityY, velocityZ);
+            }
         }
 
         if (this.isShielding() && !world.isClient()) {
             setShieldingDuration(this.getShieldingDuration() - 1);
+
+            List<LivingEntity> nearbyEntities = world.getEntitiesByClass(LivingEntity.class, new Box(this.getBlockPos()).expand(3), e -> true);
+
+            if(nearbyEntities != null) {
+                for (LivingEntity entity : nearbyEntities) {
+                    entity.setOnFire(true);
+                    entity.setFireTicks(100);
+                }
+            }
         }
 
-        if(!world.isClient() && this.getHealth() < this.getMaxHealth() && random.nextInt(20) == 0 && this.getWorld().getDimensionKey() == DimensionTypes.THE_NETHER) {
-            this.setHealth(this.getHealth() + 1);
+        if(!world.isClient() && this.getHealth() < this.getMaxHealth() && random.nextInt(200) == 0 && this.getWorld().getDimensionKey() == DimensionTypes.THE_NETHER && this.isAlive()) {
+            this.setHealth((float)(int)(this.getHealth() + 1));
         }
 
         if(world.isClient) {
@@ -219,106 +296,6 @@ public class EmberTortoiseEntity extends ClutterAnimalEntity {
 
     @Override
     public boolean isBreedingItem(ItemStack stack) {
-        return stack.isOf(ModItems.SULPHUR);
-    }
-
-    private static class EmberMeleeGoal extends MeleeAttackGoal {
-        EmberTortoiseEntity emberTortoise;
-
-        public EmberMeleeGoal(EmberTortoiseEntity emberTortoise, double speed, boolean pauseWhenMobIdle) {
-            super(emberTortoise, speed, pauseWhenMobIdle);
-            this.emberTortoise = emberTortoise;
-        }
-
-        @Override
-        public boolean canStart() {
-
-            return !emberTortoise.isShielding() && super.canStart();
-        }
-    }
-
-    private static class EmberMateGoal extends AnimalMateGoal {
-        EmberTortoiseEntity emberTortoise;
-
-        public EmberMateGoal(EmberTortoiseEntity emberTortoise, double speed) {
-            super(emberTortoise, speed);
-            this.emberTortoise = emberTortoise;
-        }
-
-        @Override
-        public boolean canStart() {
-            return !this.emberTortoise.isShielding() && super.canStart();
-        }
-    }
-
-    private static class EmberTemptGoal extends TemptGoal {
-        EmberTortoiseEntity emberTortoise;
-
-        public EmberTemptGoal(EmberTortoiseEntity emberTortoise, double speed, Ingredient food, boolean canBeScared) {
-            super(emberTortoise, speed, food, canBeScared);
-            this.emberTortoise = emberTortoise;
-        }
-
-        @Override
-        public boolean canStart() {
-            return !this.emberTortoise.isShielding() && super.canStart();
-        }
-    }
-
-    private static class EmberFollowParentGoal extends FollowParentGoal {
-        AnimalEntity animalEntity;
-
-        public EmberFollowParentGoal(AnimalEntity animal, double speed) {
-            super(animal, speed);
-            this.animalEntity = animal;
-        }
-
-        @Override
-        public boolean canStart() {
-            if(animalEntity instanceof EmberTortoiseEntity emberTortoise) return !emberTortoise.isShielding() && super.canStart();
-            else return super.canStart();
-        }
-    }
-
-    private static class EmberWanderAroundFarGoal extends WanderAroundFarGoal {
-        EmberTortoiseEntity emberTortoise;
-
-        public EmberWanderAroundFarGoal(EmberTortoiseEntity emberTortoise, double speed, float probability) {
-            super(emberTortoise, speed, probability);
-            this.emberTortoise = emberTortoise;
-        }
-
-        @Override
-        public boolean canStart() {
-            return !this.emberTortoise.isShielding() && super.canStart();
-        }
-    }
-
-    private static class EmberLookAtEntityGoal extends LookAtEntityGoal {
-        EmberTortoiseEntity emberTortoise;
-
-        public EmberLookAtEntityGoal(EmberTortoiseEntity emberTortoise, Class<? extends LivingEntity> targetType, float range) {
-            super(emberTortoise, targetType, range);
-            this.emberTortoise = emberTortoise;
-        }
-
-        @Override
-        public boolean canStart() {
-            return !this.emberTortoise.isShielding() && super.canStart();
-        }
-    }
-
-    private static class EmberLookAroundGoal extends LookAroundGoal {
-        EmberTortoiseEntity emberTortoise;
-
-        public EmberLookAroundGoal(EmberTortoiseEntity emberTortoise) {
-            super(emberTortoise);
-            this.emberTortoise = emberTortoise;
-        }
-
-        @Override
-        public boolean canStart() {
-            return !this.emberTortoise.isShielding() && super.canStart();
-        }
+        return stack.isOf(Items.FIRE_CHARGE);
     }
 }

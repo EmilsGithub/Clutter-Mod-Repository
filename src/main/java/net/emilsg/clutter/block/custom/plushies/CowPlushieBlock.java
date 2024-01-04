@@ -13,7 +13,7 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class CowPlushieBlock extends PlushieBlock {
+public class CowPlushieBlock extends AbstractPlushieBlock {
 
     public CowPlushieBlock(Settings settings) {
         super(settings);
