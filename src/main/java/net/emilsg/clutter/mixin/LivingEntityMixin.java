@@ -1,22 +1,14 @@
 package net.emilsg.clutter.mixin;
 
-import net.emilsg.clutter.Clutter;
 import net.emilsg.clutter.effect.ModEffects;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.mob.HoglinEntity;
-import net.minecraft.entity.mob.PiglinEntity;
-import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.registry.Registries;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
@@ -72,28 +64,6 @@ public abstract class LivingEntityMixin {
             livingEntity.getDataTracker().set(POTION_SWIRLS_AMBIENT, false);
             livingEntity.getDataTracker().set(POTION_SWIRLS_COLOR, 0);
             ci.cancel();
-        }
-    }
-
-    @Inject(at = @At("HEAD"), method = "shouldDropLoot", cancellable = true)
-    private void necrosisDrops(CallbackInfoReturnable<Boolean> cir) {
-        LivingEntity livingEntity = (LivingEntity) (Object) this;
-        if(livingEntity instanceof HoglinEntity || livingEntity instanceof PiglinEntity || livingEntity instanceof VillagerEntity) {
-            int necrosisLevel = EnchantmentHelper.getLevel(Registries.ENCHANTMENT.get(new Identifier(Clutter.MOD_ID, "necrosis")), Objects.requireNonNull(this.getPrimeAdversary()).getEquippedStack(EquipmentSlot.MAINHAND));
-            if (necrosisLevel > 0) {
-                cir.setReturnValue(false);
-            }
-        }
-    }
-
-    @Inject(at = @At("HEAD"), method = "dropXp", cancellable = true)
-    private void necrosisXPDrops(CallbackInfo ci) {
-        LivingEntity livingEntity = (LivingEntity) (Object) this;
-        if(livingEntity instanceof HoglinEntity || livingEntity instanceof PiglinEntity || livingEntity instanceof VillagerEntity) {
-            int necrosisLevel = EnchantmentHelper.getLevel(Registries.ENCHANTMENT.get(new Identifier(Clutter.MOD_ID, "necrosis")), Objects.requireNonNull(this.getPrimeAdversary()).getEquippedStack(EquipmentSlot.MAINHAND));
-            if (necrosisLevel > 0) {
-                ci.cancel();
-            }
         }
     }
 
