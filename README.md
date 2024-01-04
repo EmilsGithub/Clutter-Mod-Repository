@@ -6,12 +6,16 @@ The source code for the different versions of the mod can be found under the Bra
 
 **Block**
 - Pet Bed (Decorative)
+
 **Trinkets Compat**
 - Butterfly Elytras and Elytras now work in the Trinkets "cape" slot when equipped there. No dependencies needed.
+
 **Keybind**
 - The "Pet" action now has its own keybind. Defaulted to V.
+
 **Entity**
 - New Mob: Ember Tortoise, neutral mob that spawns in Basalt Deltas.
+
 **Enchantment**
 - New Enchantment: Necrosis, depending on level, killing some mobs has a chance of spawning a zombie version of that mob.
 
