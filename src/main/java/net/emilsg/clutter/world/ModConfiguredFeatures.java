@@ -1,5 +1,6 @@
 package net.emilsg.clutter.world;
 
+import com.google.common.collect.ImmutableList;
 import net.emilsg.clutter.Clutter;
 import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.util.ModProperties;
@@ -23,8 +24,11 @@ import net.minecraft.world.gen.CountConfig;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
 import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
+import net.minecraft.world.gen.foliage.MegaPineFoliagePlacer;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
+import net.minecraft.world.gen.treedecorator.AlterGroundTreeDecorator;
+import net.minecraft.world.gen.trunk.GiantTrunkPlacer;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 
 import java.util.List;
@@ -52,6 +56,9 @@ public class ModConfiguredFeatures {
 
 
     public static final RegistryKey<ConfiguredFeature<?,?>> KIWI_TREE_KEY = registerKey("kiwi_tree");
+
+
+    public static final RegistryKey<ConfiguredFeature<?,?>> MEGA_SPRUCE_KEY = registerKey("mega_spruce");
 
 
     public static void bootstrap(Registerable<ConfiguredFeature<?, ?>> context) {
@@ -134,6 +141,11 @@ public class ModConfiguredFeatures {
                                 .add(ModBlocks.SMALL_LILY_PADS.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.WEST).with(ModProperties.PAD_AMOUNT, 4), 1)
                         .build())))));
 
+        register(context, MEGA_SPRUCE_KEY, Feature.TREE,
+                new TreeFeatureConfig.Builder(BlockStateProvider.of(Blocks.SPRUCE_LOG),
+                        new GiantTrunkPlacer(20, 6, 25), BlockStateProvider.of(Blocks.SPRUCE_LEAVES),
+                        new MegaPineFoliagePlacer(ConstantIntProvider.create(0), ConstantIntProvider.create(0), UniformIntProvider.create(17, 21)),
+                        new TwoLayersFeatureSize(1, 1, 2)).decorators(ImmutableList.of(new AlterGroundTreeDecorator(BlockStateProvider.of(Blocks.PODZOL)))).build());
     }
 
     public static RegistryKey<ConfiguredFeature<?, ?>> registerKey(String name) {

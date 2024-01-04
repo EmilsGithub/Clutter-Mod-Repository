@@ -92,7 +92,7 @@ public class ReworkedCandleHolderBlock extends Block implements Waterloggable {
 
     public ReworkedCandleHolderBlock(Settings settings) {
         super(settings);
-        this.setDefaultState((this.stateManager.getDefaultState()).with(WATERLOGGED, false).with(LIT, false).with(FACING, Direction.NORTH).with(TYPE, Type.FLOOR).with(CANDLES, false).with(CANDLE_COLOR, CandleColor.NONE));
+        this.setDefaultState((this.stateManager.getDefaultState()).with(WATERLOGGED, false).with(LIT, false).with(FACING, Direction.NORTH).with(TYPE, Type.FLOOR).with(CANDLES, false).with(CANDLE_COLOR, CandleColor.NULL));
     }
 
     public enum Type implements StringIdentifiable {
@@ -133,7 +133,8 @@ public class ReworkedCandleHolderBlock extends Block implements Waterloggable {
         PURPLE("purple"),
         MAGENTA("magenta"),
         PINK("pink"),
-        NONE("none");
+        NONE("none"),
+        NULL("null");
 
         private final String name;
 
@@ -235,29 +236,30 @@ public class ReworkedCandleHolderBlock extends Block implements Waterloggable {
             return super.onUse(state, world, pos, player, hand, hit);
         }
 
+
         ItemStack stackInHand = player.getStackInHand(hand);
         boolean isLit = state.get(LIT);
         CandleColor currentColor = state.get(CANDLE_COLOR);
         boolean candles = state.get(CANDLES);
         Type type = state.get(TYPE);
+        int requiredCount = type == Type.CEILING ? 4 : type == Type.FLOOR ? 3 : 1;
 
         if (Block.getBlockFromItem(stackInHand.getItem()) instanceof CandleBlock) {
             CandleColor color = CANDLE_TO_COLOR.get(stackInHand.getItem());
-            int requiredCount = type == Type.CEILING ? 4 : type == Type.FLOOR ? 3 : 1;
             if (stackInHand.getCount() >= requiredCount && state.get(CANDLE_COLOR) != color) {
                 handleCandlePlacement(state, world, pos, player, hand, requiredCount, currentColor, candles);
                 return ActionResult.SUCCESS;
             }
         }
 
-        if (stackInHand.isOf(Items.FLINT_AND_STEEL) && !isLit) {
+        if (stackInHand.isOf(Items.FLINT_AND_STEEL) && !isLit && candles) {
             playSound(world, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE);
             setLit(world, state, pos, true, player);
             damageItemIfNotCreative(player, hand);
             return ActionResult.success(world.isClient);
         }
 
-        if (stackInHand.isOf(Items.FIRE_CHARGE) && !isLit) {
+        if (stackInHand.isOf(Items.FIRE_CHARGE) && !isLit && candles) {
             playSound(world, pos, SoundEvents.ITEM_FIRECHARGE_USE);
             setLit(world, state, pos, true, player);
             decrementItemIfNotCreative(player, hand, 1);
@@ -266,6 +268,16 @@ public class ReworkedCandleHolderBlock extends Block implements Waterloggable {
 
         if (stackInHand.isEmpty() && isLit) {
             extinguish(player, state, world, pos);
+            return ActionResult.success(world.isClient);
+        }
+
+        if(stackInHand.isEmpty() && candles && !isLit) {
+            setCandleAndColor(world, state, pos, CandleColor.NULL, false, player);
+            CANDLE_TO_COLOR.entrySet().stream().filter(entry -> entry.getValue() == currentColor)
+                    .map(Map.Entry::getKey).findFirst().ifPresent(oldCandles -> {
+                        ItemStack oldCandlesStack = new ItemStack(oldCandles, requiredCount);
+                        dropStack(world, pos, oldCandlesStack);
+                    });
             return ActionResult.success(world.isClient);
         }
 

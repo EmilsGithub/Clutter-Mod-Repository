@@ -14,6 +14,7 @@ import net.minecraft.util.Identifier;
 import java.util.Optional;
 
 public class ModelDataGen extends FabricModelProvider {
+
     public ModelDataGen(FabricDataOutput output) {
         super(output);
     }
@@ -23,12 +24,8 @@ public class ModelDataGen extends FabricModelProvider {
         BlockStateModelGenerator.BlockTexturePool blackOnyxTexturePool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.BLACK_ONYX_BLOCK);
         BlockStateModelGenerator.BlockTexturePool polishedBlackOnyxTexturePool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.POLISHED_BLACK_ONYX);
 
-        blackOnyxTexturePool.slab(ModBlocks.BLACK_ONYX_SLAB);
-        blackOnyxTexturePool.stairs(ModBlocks.BLACK_ONYX_STAIRS);
-        blackOnyxTexturePool.wall(ModBlocks.BLACK_ONYX_WALL);
-        polishedBlackOnyxTexturePool.slab(ModBlocks.POLISHED_BLACK_ONYX_SLAB);
-        polishedBlackOnyxTexturePool.stairs(ModBlocks.POLISHED_BLACK_ONYX_STAIRS);
-        polishedBlackOnyxTexturePool.wall(ModBlocks.POLISHED_BLACK_ONYX_WALL);
+        blackOnyxTexturePool.slab(ModBlocks.BLACK_ONYX_SLAB).stairs(ModBlocks.BLACK_ONYX_STAIRS).wall(ModBlocks.BLACK_ONYX_WALL);
+        polishedBlackOnyxTexturePool.slab(ModBlocks.POLISHED_BLACK_ONYX_SLAB).stairs(ModBlocks.POLISHED_BLACK_ONYX_STAIRS).wall(ModBlocks.POLISHED_BLACK_ONYX_WALL);
 
         blockStateModelGenerator.registerCoral(ModBlocks.CUP_CORAL, ModBlocks.DEAD_CUP_CORAL, ModBlocks.CUP_CORAL_BLOCK, ModBlocks.DEAD_CUP_CORAL_BLOCK, ModBlocks.CUP_CORAL_FAN, ModBlocks.DEAD_CUP_CORAL_FAN, ModBlocks.CUP_CORAL_WALL_FAN, ModBlocks.DEAD_CUP_CORAL_WALL_FAN);
         blockStateModelGenerator.registerCoral(ModBlocks.GHOST_CORAL, ModBlocks.DEAD_GHOST_CORAL, ModBlocks.GHOST_CORAL_BLOCK, ModBlocks.DEAD_GHOST_CORAL_BLOCK, ModBlocks.GHOST_CORAL_FAN, ModBlocks.DEAD_GHOST_CORAL_FAN, ModBlocks.GHOST_CORAL_WALL_FAN, ModBlocks.DEAD_GHOST_CORAL_WALL_FAN);
@@ -60,8 +57,5 @@ public class ModelDataGen extends FabricModelProvider {
         itemModelGenerator.register(ModItems.CAPYBARA_SPAWN_EGG, new Model(Optional.of(new Identifier("item/template_spawn_egg")), Optional.empty()));
         itemModelGenerator.register(ModItems.CRIMSON_NEWT_SPAWN_EGG, new Model(Optional.of(new Identifier("item/template_spawn_egg")), Optional.empty()));
         itemModelGenerator.register(ModItems.EMBER_TORTOISE_SPAWN_EGG, new Model(Optional.of(new Identifier("item/template_spawn_egg")), Optional.empty()));
-
-
-
     }
 }

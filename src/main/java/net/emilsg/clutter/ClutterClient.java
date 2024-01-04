@@ -452,7 +452,7 @@ public class ClutterClient implements ClientModInitializer {
                 GREEN_FIRE,
                 GLOWLILY_CROP,
                 GLOWLILY,
-                //IRON_CANDLE_HOLDER,
+                IRON_CANDLE_HOLDER,
                 //SILVER_CANDLE_HOLDER,
                 //GOLDEN_CANDLE_HOLDER,
                 //COPPER_CANDLE_HOLDER,
@@ -555,7 +555,7 @@ public class ClutterClient implements ClientModInitializer {
         ModMessages.registerS2CPackets();
     }
 
-    private void registerColorProviders(){
+    private void registerColorProviders() {
         ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) ->
                         (world != null && pos != null) ? BiomeColors.getFoliageColor(world, pos)
                         : FoliageColors.getDefaultColor(),

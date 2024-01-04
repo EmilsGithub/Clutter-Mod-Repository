@@ -1,6 +1,6 @@
-// 1.20.1	2024-01-03T23:56:09.7923927	Clutter/clutter
-21991038b944b6d51af34fa4a59fe1540d31fa60 data\clutter\worldgen\configured_feature\clam.json
+// 1.20.1	2024-01-04T21:44:17.2081771	Clutter/clutter
 ae578cb78a0099a2e263609aed18cf4b4ab9be95 data\clutter\worldgen\configured_feature\sponge_in_reefs.json
+21991038b944b6d51af34fa4a59fe1540d31fa60 data\clutter\worldgen\configured_feature\clam.json
 9f3df7a6a48ecb913ab4fe86ed6994a51000cda7 data\clutter\worldgen\configured_feature\beach_patch.json
 69624839410a7accf7093d44f17c546e452ed379 data\clutter\worldgen\placed_feature\beach_patch_placed.json
 9be53cc60d5b132c0bc3d147928955e55a250328 data\clutter\worldgen\placed_feature\giant_lily_pad_seedling_placed.json
@@ -14,6 +14,7 @@ c469000ef3ee1d1123a81d34735899f0b6cbec6c data\clutter\worldgen\configured_featur
 b8c8d0773d805425207b3e88725f87948069ee07 data\clutter\worldgen\configured_feature\cattails.json
 b052e5423c685b557a030bb2e59209694e670d95 data\clutter\worldgen\configured_feature\small_lily_pads.json
 3ca8ac3e3fb6de08f58e25f2c7d8c476db56285a data\clutter\worldgen\placed_feature\lush_moss_placed.json
+20468cd3a3ebbec26d9fc60a61d93c1d5f855782 data\clutter\worldgen\configured_feature\mega_spruce.json
 9b5a3690913c6a17c86fc80d33759c9c4f7ebaf3 data\clutter\worldgen\placed_feature\blackstone_sulphur_ore_placed.json
 85ae16b97824c1c85251233b328f1382bdddf348 data\clutter\worldgen\placed_feature\small_lily_pads_placed.json
 60ac7d92533d7b33c5bf2c63158f2264341860db data\clutter\worldgen\placed_feature\cattails_placed.json
