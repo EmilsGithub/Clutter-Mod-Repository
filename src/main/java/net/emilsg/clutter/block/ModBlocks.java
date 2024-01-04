@@ -10,7 +10,6 @@ import net.emilsg.clutter.block.custom.plants.*;
 import net.emilsg.clutter.block.custom.plushies.*;
 import net.emilsg.clutter.sound.ModSounds;
 import net.emilsg.clutter.util.ModItemGroups;
-import net.emilsg.clutter.world.ModSapling;
 import net.emilsg.clutter.world.gen.tree.KiwiTreeSaplingGenerator;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
@@ -34,8 +33,6 @@ import net.minecraft.util.math.intprovider.UniformIntProvider;
 import java.util.function.ToIntFunction;
 
 public class ModBlocks {
-
-    public static final Block TEMP_SAPLING = registerBlock("temp_sapling", new ModSaplingBlock(new ModSapling(), FabricBlockSettings.copyOf(Blocks.OAK_SAPLING).strength(1f)), ModItemGroups.CLUTTER_BLOCKS);
 
     public static final Block WHITE_LAMP = registerBlock("white_lamp", new LampBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).luminance(createLightLevelFromLitBlockState(12))), ModItemGroups.CLUTTER_BLOCKS);
     public static final Block LIGHT_GRAY_LAMP = registerBlock("light_gray_lamp", new LampBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).luminance(createLightLevelFromLitBlockState(12))), ModItemGroups.CLUTTER_BLOCKS);
