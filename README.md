@@ -2,9 +2,25 @@
 ## The Github repository for the Minecraft mod Clutter
 The source code for the different versions of the mod can be found under the Branches named accordingly.
 
-# Update Log - Clutter-0.5.0
+# Update Log - Clutter-0.5.6
 
-## New:
+**Block**
+- Pet Bed (Decorative)
+**Trinkets Compat**
+- Butterfly Elytras and Elytras now work in the Trinkets "cape" slot when equipped there. No dependencies needed.
+**Keybind**
+- The "Pet" action now has its own keybind. Defaulted to V.
+**Entity**
+- New Mob: Ember Tortoise, neutral mob that spawns in Basalt Deltas.
+**Enchantment**
+- New Enchantment: Necrosis, depending on level, killing some mobs has a chance of spawning a zombie version of that mob.
+
+**Changes / Bugfixes**
+- Minor changes to custom spawners.
+- Fixed a bug that prevented Butterflies from mating properly.
+- Other small fixes and optimizations.
+
+# Update Log - Clutter-0.5.0
 
 **Entities**
  - Capybaras (Spawns in Savannah Biomes)
