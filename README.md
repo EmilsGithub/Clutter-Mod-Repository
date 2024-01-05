@@ -2,6 +2,11 @@
 ## The Github repository for the Minecraft mod Clutter
 The source code for the different versions of the mod can be found under the Branches named accordingly.
 
+# Update Log - Clutter-0.5.7
+
+**Bugfix**
+- Fixed a bug that was crashing the game.
+
 # Update Log - Clutter-0.5.6
 
 **Block**
