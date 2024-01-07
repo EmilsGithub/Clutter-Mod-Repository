@@ -3,6 +3,7 @@
   "values": [
     "clutter:bonfire",
     "clutter:soul_bonfire",
+    "clutter:redwood_log",
     "#clutter:shelves",
     "#clutter:trellises",
     "#clutter:benches",
@@ -10,7 +11,6 @@
     "#clutter:wooden_mosaics",
     "#clutter:cupboards",
     "#clutter:lamps",
-    "#clutter:wooden_mosaics",
     "#clutter:tables",
     "#clutter:food_boxes",
     "#clutter:window_sills",

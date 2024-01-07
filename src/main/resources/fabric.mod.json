@@ -37,6 +37,9 @@
 		],
 		"rei_client": [
 			"net.emilsg.clutter.compat.rei.ClutterREIClientPlugin"
+		],
+		"terrablender": [
+			"net.emilsg.clutter.world.biome.ModTerraBlenderAPI"
 		]
 	},
 	"mixins": [

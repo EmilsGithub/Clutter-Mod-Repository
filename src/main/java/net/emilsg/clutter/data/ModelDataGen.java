@@ -4,10 +4,7 @@ import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.item.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
-import net.minecraft.data.client.BlockStateModelGenerator;
-import net.minecraft.data.client.ItemModelGenerator;
-import net.minecraft.data.client.Model;
-import net.minecraft.data.client.Models;
+import net.minecraft.data.client.*;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.util.Identifier;
 
@@ -38,6 +35,21 @@ public class ModelDataGen extends FabricModelProvider {
         blockStateModelGenerator.registerCoral(ModBlocks.GEM_CORAL, ModBlocks.DEAD_GEM_CORAL, ModBlocks.GEM_CORAL_BLOCK, ModBlocks.DEAD_GEM_CORAL_BLOCK, ModBlocks.GEM_CORAL_FAN, ModBlocks.DEAD_GEM_CORAL_FAN, ModBlocks.GEM_CORAL_WALL_FAN, ModBlocks.DEAD_GEM_CORAL_WALL_FAN);
         blockStateModelGenerator.registerCoral(ModBlocks.DIAMOND_CORAL, ModBlocks.DEAD_DIAMOND_CORAL, ModBlocks.DIAMOND_CORAL_BLOCK, ModBlocks.DEAD_DIAMOND_CORAL_BLOCK, ModBlocks.DIAMOND_CORAL_FAN, ModBlocks.DEAD_DIAMOND_CORAL_FAN, ModBlocks.DIAMOND_CORAL_WALL_FAN, ModBlocks.DEAD_DIAMOND_CORAL_WALL_FAN);
         blockStateModelGenerator.registerCoral(ModBlocks.ANCHOR_CORAL, ModBlocks.DEAD_ANCHOR_CORAL, ModBlocks.ANCHOR_CORAL_BLOCK, ModBlocks.DEAD_ANCHOR_CORAL_BLOCK, ModBlocks.ANCHOR_CORAL_FAN, ModBlocks.DEAD_ANCHOR_CORAL_FAN, ModBlocks.ANCHOR_CORAL_WALL_FAN, ModBlocks.DEAD_ANCHOR_CORAL_WALL_FAN);
+
+
+        //Redwood
+        BlockStateModelGenerator.BlockTexturePool redwoodPlanksTexturePool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.REDWOOD_PLANKS);
+        redwoodPlanksTexturePool.stairs(ModBlocks.REDWOOD_STAIRS).slab(ModBlocks.REDWOOD_SLAB)
+                .button(ModBlocks.REDWOOD_BUTTON).fence(ModBlocks.REDWOOD_FENCE).fenceGate(ModBlocks.REDWOOD_FENCE_GATE)
+                        .pressurePlate(ModBlocks.REDWOOD_PRESSURE_PLATE);
+
+        BlockStateModelGenerator.BlockTexturePool redwoodMosaicTexturePool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.REDWOOD_MOSAIC);
+        redwoodMosaicTexturePool.slab(ModBlocks.REDWOOD_MOSAIC_SLAB).stairs(ModBlocks.REDWOOD_MOSAIC_STAIRS);
+
+        blockStateModelGenerator.registerLog(ModBlocks.REDWOOD_LOG).log(ModBlocks.REDWOOD_LOG).wood(ModBlocks.REDWOOD_WOOD);
+        blockStateModelGenerator.registerLog(ModBlocks.STRIPPED_REDWOOD_LOG).log(ModBlocks.STRIPPED_REDWOOD_LOG).wood(ModBlocks.STRIPPED_REDWOOD_WOOD);
+        blockStateModelGenerator.registerSingleton(ModBlocks.REDWOOD_LEAVES, TexturedModel.LEAVES);
+        blockStateModelGenerator.registerTintableCross(ModBlocks.REDWOOD_SAPLING, BlockStateModelGenerator.TintType.NOT_TINTED);
     }
 
     @Override

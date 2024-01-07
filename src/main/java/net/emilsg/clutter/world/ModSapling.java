@@ -11,6 +11,6 @@ public class ModSapling extends SaplingGenerator {
     @Nullable
     @Override
     protected RegistryKey<ConfiguredFeature<?, ?>> getTreeFeature(Random random, boolean bees) {
-        return ModConfiguredFeatures.MEGA_SPRUCE_KEY;
+        return ModConfiguredFeatures.REDWOOD_KEY;
     }
 }

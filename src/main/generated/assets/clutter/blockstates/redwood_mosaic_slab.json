@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "clutter:block/redwood_mosaic_slab"
+    },
+    "type=double": {
+      "model": "clutter:block/redwood_mosaic"
+    },
+    "type=top": {
+      "model": "clutter:block/redwood_mosaic_slab_top"
+    }
+  }
+}

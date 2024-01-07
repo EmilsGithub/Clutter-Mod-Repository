@@ -1,20 +1,7 @@
 {
   "type": "minecraft:tree",
   "config": {
-    "decorators": [
-      {
-        "type": "minecraft:alter_ground",
-        "provider": {
-          "type": "minecraft:simple_state_provider",
-          "state": {
-            "Name": "minecraft:podzol",
-            "Properties": {
-              "snowy": "false"
-            }
-          }
-        }
-      }
-    ],
+    "decorators": [],
     "dirt_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
@@ -22,12 +9,12 @@
       }
     },
     "foliage_placer": {
-      "type": "minecraft:mega_pine_foliage_placer",
+      "type": "minecraft:small_redwood_foliage_placer",
       "crown_height": {
         "type": "minecraft:uniform",
         "value": {
-          "max_inclusive": 21,
-          "min_inclusive": 17
+          "max_inclusive": 17,
+          "min_inclusive": 13
         }
       },
       "offset": 0,
@@ -36,7 +23,7 @@
     "foliage_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "minecraft:spruce_leaves",
+        "Name": "clutter:redwood_leaves",
         "Properties": {
           "distance": "7",
           "persistent": "false",
@@ -45,23 +32,23 @@
       }
     },
     "force_dirt": false,
-    "ignore_vines": false,
+    "ignore_vines": true,
     "minimum_size": {
       "type": "minecraft:two_layers_feature_size",
-      "limit": 1,
-      "lower_size": 1,
+      "limit": 2,
+      "lower_size": 0,
       "upper_size": 2
     },
     "trunk_placer": {
-      "type": "minecraft:giant_trunk_placer",
-      "base_height": 13,
+      "type": "minecraft:straight_trunk_placer",
+      "base_height": 9,
       "height_rand_a": 4,
-      "height_rand_b": 14
+      "height_rand_b": 4
     },
     "trunk_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "minecraft:spruce_log",
+        "Name": "clutter:redwood_log",
         "Properties": {
           "axis": "y"
         }

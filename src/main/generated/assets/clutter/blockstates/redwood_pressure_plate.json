@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "clutter:block/redwood_pressure_plate"
+    },
+    "powered=true": {
+      "model": "clutter:block/redwood_pressure_plate_down"
+    }
+  }
+}

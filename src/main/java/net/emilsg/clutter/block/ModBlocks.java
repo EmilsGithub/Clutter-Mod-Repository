@@ -11,6 +11,7 @@ import net.emilsg.clutter.block.custom.plushies.*;
 import net.emilsg.clutter.sound.ModSounds;
 import net.emilsg.clutter.util.ModItemGroups;
 import net.emilsg.clutter.world.gen.tree.KiwiTreeSaplingGenerator;
+import net.emilsg.clutter.world.gen.tree.RedwoodTreeSaplingGenerator;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -508,6 +509,26 @@ public class ModBlocks {
     public static final Block RIPE_KIWI_LEAVES = registerBlock("ripe_kiwi_leaves", new KiwiLeafBlock(FabricBlockSettings.copy(Blocks.JUNGLE_LEAVES)), ModItemGroups.CLUTTER_BLOCKS);
     public static final Block KIWI_LEAVES = registerBlock("kiwi_leaves", new LeavesBlock(FabricBlockSettings.copy(Blocks.JUNGLE_LEAVES)), ModItemGroups.CLUTTER_BLOCKS);
     public static final Block KIWI_TREE_SAPLING = registerBlock("kiwi_tree_sapling", new SaplingBlock(new KiwiTreeSaplingGenerator(), FabricBlockSettings.copy(Blocks.JUNGLE_SAPLING)), ModItemGroups.CLUTTER_BLOCKS);
+
+
+    public static final Block REDWOOD_SAPLING = registerBlock("redwood_sapling", new SaplingBlock(new RedwoodTreeSaplingGenerator(), FabricBlockSettings.copy(Blocks.SPRUCE_SAPLING)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block REDWOOD_LEAVES = registerBlock("redwood_leaves", new LeavesBlock(FabricBlockSettings.copy(Blocks.SPRUCE_LEAVES)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block REDWOOD_LOG = registerBlock("redwood_log", new PillarBlock(FabricBlockSettings.copy(Blocks.SPRUCE_LOG)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block REDWOOD_WOOD = registerBlock("redwood_wood", new PillarBlock(FabricBlockSettings.copy(Blocks.SPRUCE_WOOD)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block STRIPPED_REDWOOD_LOG = registerBlock("stripped_redwood_log", new PillarBlock(FabricBlockSettings.copy(Blocks.STRIPPED_SPRUCE_LOG)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block STRIPPED_REDWOOD_WOOD = registerBlock("stripped_redwood_wood", new PillarBlock(FabricBlockSettings.copy(Blocks.STRIPPED_SPRUCE_WOOD)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block REDWOOD_PLANKS = registerBlock("redwood_planks", new Block(FabricBlockSettings.copy(Blocks.SPRUCE_PLANKS)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block REDWOOD_STAIRS = registerBlock("redwood_stairs", new StairsBlock(ModBlocks.REDWOOD_PLANKS.getDefaultState(), FabricBlockSettings.copy(Blocks.SPRUCE_STAIRS)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block REDWOOD_SLAB = registerBlock("redwood_slab", new SlabBlock(FabricBlockSettings.copy(ModBlocks.REDWOOD_PLANKS)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block REDWOOD_FENCE = registerBlock("redwood_fence", new FenceBlock(FabricBlockSettings.copy(Blocks.SPRUCE_FENCE)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block REDWOOD_FENCE_GATE = registerBlock("redwood_fence_gate", new FenceGateBlock(FabricBlockSettings.copy(Blocks.SPRUCE_FENCE), WoodType.SPRUCE), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block REDWOOD_BUTTON = registerBlock("redwood_button", new ButtonBlock(FabricBlockSettings.copy(Blocks.SPRUCE_BUTTON), BlockSetType.SPRUCE, 30, true), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block REDWOOD_PRESSURE_PLATE = registerBlock("redwood_pressure_plate", new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING, FabricBlockSettings.copy(Blocks.SPRUCE_FENCE), BlockSetType.SPRUCE), ModItemGroups.CLUTTER_BLOCKS);
+
+    public static final Block REDWOOD_MOSAIC = registerBlock("redwood_mosaic", new PillarBlock(FabricBlockSettings.copy(ModBlocks.SPRUCE_MOSAIC)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block REDWOOD_MOSAIC_STAIRS = registerBlock("redwood_mosaic_stairs", new StairsBlock(ModBlocks.REDWOOD_MOSAIC.getDefaultState(), FabricBlockSettings.copy(ModBlocks.SPRUCE_MOSAIC_STAIRS)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block REDWOOD_MOSAIC_SLAB = registerBlock("redwood_mosaic_slab", new SlabBlock(FabricBlockSettings.copy(ModBlocks.REDWOOD_MOSAIC)), ModItemGroups.CLUTTER_BLOCKS);
+
 
     public static final Block LARGE_CHAIN = registerBlock("large_chain", new LargeChainBlock(FabricBlockSettings.copy(Blocks.CHAIN)), ModItemGroups.CLUTTER_BLOCKS);
     public static final Block LARGE_SILVER_CHAIN = registerBlock("large_silver_chain", new LargeChainBlock(FabricBlockSettings.copy(ModBlocks.SILVER_CHAIN)), ModItemGroups.CLUTTER_BLOCKS);

@@ -1,7 +1,6 @@
 package net.emilsg.clutter.entity.client.player;
 
 import net.emilsg.clutter.Clutter;
-import net.emilsg.clutter.compat.trinkets.TrinketsElytraUse;
 import net.emilsg.clutter.item.ModItems;
 import net.emilsg.clutter.util.ModItemTags;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -25,9 +24,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 
-import java.util.List;
-
-public class TrinketsElytraFeatureRenderer<T extends LivingEntity, M extends EntityModel<T>> extends FeatureRenderer<T, M> {
+public class ElytraFeatureRenderer<T extends LivingEntity, M extends EntityModel<T>> extends FeatureRenderer<T, M> {
     private final ElytraEntityModel<T> elytra;
     private static final Identifier DEFAULT = new Identifier("textures/entity/elytra.png");
 
@@ -54,7 +51,7 @@ public class TrinketsElytraFeatureRenderer<T extends LivingEntity, M extends Ent
         return null;
     }
 
-    public TrinketsElytraFeatureRenderer(FeatureRendererContext<T, M> context, EntityModelLoader loader) {
+    public ElytraFeatureRenderer(FeatureRendererContext<T, M> context, EntityModelLoader loader) {
         super(context);
         this.elytra = new ElytraEntityModel<T>(loader.getModelPart(EntityModelLayers.ELYTRA));
     }
@@ -65,12 +62,6 @@ public class TrinketsElytraFeatureRenderer<T extends LivingEntity, M extends Ent
         Identifier customElytraTexture = DEFAULT;
         String color;
         ItemStack itemStack = livingEntity.getEquippedStack(EquipmentSlot.CHEST);
-
-        if (Clutter.IS_TRINKETS_LOADED && !livingEntity.getEquippedStack(EquipmentSlot.CHEST).isIn(ModItemTags.ELYTRON)) {
-            List<ItemStack> trinketStack = TrinketsElytraUse.getEquippedElytra(livingEntity);
-            if (trinketStack.isEmpty()) return;
-            itemStack = trinketStack.get(0);
-        }
 
         if (livingEntity.getEquippedStack(EquipmentSlot.CHEST).isOf(Items.ELYTRA)) return;
 

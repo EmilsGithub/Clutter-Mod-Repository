@@ -547,7 +547,9 @@ public class ClutterClient implements ClientModInitializer {
                 ANCHOR_CORAL_FAN,
                 DEAD_ANCHOR_CORAL_WALL_FAN,
                 ANCHOR_CORAL_WALL_FAN,
-                RED_PRESENT
+                RED_PRESENT,
+                REDWOOD_LEAVES,
+                REDWOOD_SAPLING
         );
 
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), blocksToRender.toArray(new Block[0]));
@@ -588,6 +590,16 @@ public class ClutterClient implements ClientModInitializer {
                         FoliageColors.getDefaultColor(),
                 RIPE_KIWI_LEAVES,
                 KIWI_LEAVES
+        );
+
+        ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) ->
+                        Objects.requireNonNull(ColorProviderRegistry.BLOCK.get(Blocks.SPRUCE_LEAVES)).getColor(state, world, pos, tintIndex),
+                REDWOOD_LEAVES
+        );
+
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) ->
+                        Objects.requireNonNull(ColorProviderRegistry.ITEM.get(Blocks.SPRUCE_LEAVES)).getColor(stack, tintIndex),
+                REDWOOD_LEAVES
         );
     }
 

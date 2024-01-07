@@ -19,6 +19,7 @@ repositories {
 	maven {	url 'https://maven.terraformersmc.com/' }
 	maven { url 'https://maven.ladysnake.org/releases' }
 	maven { url "https://maven.shedaniel.me" }
+	maven { url "https://maven.minecraftforge.net" }
 }
 
 loom {
@@ -53,8 +54,11 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	// Geckolib. Not optional.
+	// Geckolib. Not Optional.
 	modImplementation "software.bernie.geckolib:geckolib-fabric-1.20.1:${project.geckolib_version}"
+
+	// TerraBlender. Not Optional.
+	modImplementation "com.github.glitchfiend:TerraBlender-fabric:${project.terrablender_version}"
 
 	// Trinkets. Optional
 	modApi "dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cca_version}"

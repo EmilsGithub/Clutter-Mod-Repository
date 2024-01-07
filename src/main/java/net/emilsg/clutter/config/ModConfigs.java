@@ -35,6 +35,9 @@ public class ModConfigs {
 
     public static boolean GENERATE_FOLIAGE;
 
+    public static boolean GENERATE_BIOMES;
+    public static boolean GENERATE_REDWOOD_FOREST;
+
     public static void registerConfigs() {
         configs = new ModConfigProvider();
         createConfigs();
@@ -73,6 +76,9 @@ public class ModConfigs {
         configs.addKeyValuePair(new Pair<>("generate.silver_ore", true), "Generate Silver Ore.");
 
         configs.addKeyValuePair(new Pair<>("generate.foliage", true), "Generate Foliage.");
+
+        configs.addKeyValuePair(new Pair<>("generate.biomes", true), "Generate Clutter Biomes.");
+        configs.addKeyValuePair(new Pair<>("generate.redwood_forest", true), "Generate Redwood Forests.");
     }
 
     private static void assignConfigs() {
@@ -103,5 +109,8 @@ public class ModConfigs {
         GENERATE_SILVER_ORE = CONFIG.getOrDefault("generate.silver_ore", true);
 
         GENERATE_FOLIAGE = CONFIG.getOrDefault("generate.foliage", true);
+
+        GENERATE_BIOMES = CONFIG.getOrDefault("generate.biomes", true);
+        GENERATE_REDWOOD_FOREST = CONFIG.getOrDefault("generate.redwood_forest", true);
     }
 }

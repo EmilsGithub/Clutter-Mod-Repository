@@ -15,6 +15,8 @@ import net.emilsg.clutter.screen.ModScreenHandlers;
 import net.emilsg.clutter.util.*;
 import net.emilsg.clutter.world.gen.ModWorldGeneration;
 import net.emilsg.clutter.world.gen.features.ModFeatures;
+import net.emilsg.clutter.world.gen.type.ModFoliagePlacerTypes;
+import net.emilsg.clutter.world.gen.type.ModTrunkPlacerTypes;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import org.slf4j.Logger;
@@ -44,6 +46,8 @@ public class Clutter implements ModInitializer {
 		ModBlockEntities.registerBlockEntities();
 
 		ModFeatures.registerModFeatures();
+		ModTrunkPlacerTypes.register();
+		ModFoliagePlacerTypes.register();
 
 		ModWorldGeneration.generateModWorldGen();
 
