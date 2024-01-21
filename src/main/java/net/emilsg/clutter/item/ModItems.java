@@ -75,6 +75,11 @@ public class ModItems {
     public static final Item SILVER_LEGGINGS = registerItem("silver_leggings", new ArmorItem(ModArmorMaterials.SILVER, ArmorItem.Type.LEGGINGS, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
     public static final Item SILVER_BOOTS = registerItem("silver_boots", new ArmorItem(ModArmorMaterials.SILVER, ArmorItem.Type.BOOTS, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
 
+    public static final Item COPPER_DIVING_HELMET = registerItem("copper_diving_helmet", new CopperDivingArmorItem(ModArmorMaterials.COPPER, ArmorItem.Type.HELMET, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item COPPER_DIVING_CHESTPLATE = registerItem("copper_diving_chestplate", new CopperDivingArmorItem(ModArmorMaterials.COPPER, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item COPPER_DIVING_LEGGINGS = registerItem("copper_diving_leggings", new CopperDivingArmorItem(ModArmorMaterials.COPPER, ArmorItem.Type.LEGGINGS, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item COPPER_DIVING_BOOTS = registerItem("copper_diving_boots", new CopperDivingArmorItem(ModArmorMaterials.COPPER, ArmorItem.Type.BOOTS, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
+
     public static final Item HOPS = registerItem("hops", new Item(new FabricItemSettings().food(new FoodComponent.Builder().hunger(1).saturationModifier(0).build())), ModItemGroups.CLUTTER_ITEMS);
     public static final Item HOPS_SEEDS = registerItem("hops_seeds", new AliasedBlockItem(ModBlocks.HOPS_CROP, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
     public static final Item COTTON = registerItem("cotton", new Item(new FabricItemSettings().food(new FoodComponent.Builder().hunger(1).saturationModifier(0).build())), ModItemGroups.CLUTTER_ITEMS);
@@ -179,6 +184,7 @@ public class ModItems {
     public static final Item CAPYBARA_SPAWN_EGG = registerItem("capybara_spawn_egg", new SpawnEggItem(ModEntities.CAPYBARA, 2169626, 16651589, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
     public static final Item CRIMSON_NEWT_SPAWN_EGG = registerItem("crimson_newt_spawn_egg", new SpawnEggItem(ModEntities.CRIMSON_NEWT, 15783361, 11280416, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
     public static final Item EMBER_TORTOISE_SPAWN_EGG = registerItem("ember_tortoise_spawn_egg", new SpawnEggItem(ModEntities.EMBER_TORTOISE, 6052956, 8924463, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item JELLYFISH_SPAWN_EGG = registerItem("jellyfish_spawn_egg", new SpawnEggItem(ModEntities.JELLYFISH, 5487623, 8732643, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
 
     public static final Item BEACH_HAT = registerItem("beach_hat", new HatItem(new FabricItemSettings().maxCount(1)), ModItemGroups.CLUTTER_ITEMS);
     public static final Item TOP_HAT = registerItem("top_hat", new HatItem(new FabricItemSettings().maxCount(1)), ModItemGroups.CLUTTER_ITEMS);
@@ -189,6 +195,7 @@ public class ModItems {
     public static final Item CAP = registerItem("cap", new HatItem(new FabricItemSettings().maxCount(1)), ModItemGroups.CLUTTER_ITEMS);
     public static final Item PROPELLER_CAP = registerItem("propeller_cap", new HatItem(new FabricItemSettings().maxCount(1)), ModItemGroups.CLUTTER_ITEMS);
     public static final Item TIARA = registerItem("tiara", new HatItem(new FabricItemSettings().maxCount(1)), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item SILVER_TIARA = registerItem("silver_tiara", new HatItem(new FabricItemSettings().maxCount(1)), ModItemGroups.CLUTTER_ITEMS);
     public static final Item VIKING_HELMET = registerItem("viking_helmet", new HatItem(new FabricItemSettings().maxCount(1)), ModItemGroups.CLUTTER_ITEMS);
 
     private static Item registerItem(String name, Item item, RegistryKey<ItemGroup> group) {

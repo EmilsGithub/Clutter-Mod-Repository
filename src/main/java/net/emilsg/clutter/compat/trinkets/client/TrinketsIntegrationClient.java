@@ -28,6 +28,7 @@ public class TrinketsIntegrationClient {
         TrinketRendererRegistry.registerRenderer((ModItems.CAP), new TrinketsClientRenderer());
         TrinketRendererRegistry.registerRenderer((ModItems.PROPELLER_CAP), new TrinketsClientRenderer());
         TrinketRendererRegistry.registerRenderer((ModItems.TIARA), new TrinketsClientRenderer());
+        TrinketRendererRegistry.registerRenderer((ModItems.SILVER_TIARA), new TrinketsClientRenderer());
         TrinketRendererRegistry.registerRenderer((ModItems.VIKING_HELMET), new TrinketsClientRenderer());
     }
 }

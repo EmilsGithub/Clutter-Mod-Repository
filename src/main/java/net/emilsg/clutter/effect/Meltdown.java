@@ -1,6 +1,6 @@
 package net.emilsg.clutter.effect;
 
-import net.emilsg.clutter.config.ModConfigs;
+import net.emilsg.clutter.config.ClutterConfig;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
@@ -46,7 +46,7 @@ public class Meltdown extends StatusEffect {
                 world.playSound(null, entity.getBlockPos(), SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.PLAYERS);
             }
             else if(duration <= 1 && !entity.isTouchingWater()) {
-                if (ModConfigs.MELTDOWN_DESTROY_BLOCKS) {
+                if (ClutterConfig.getInstance().getBoolean(ClutterConfig.MELTDOWN_DESTROYS_BLOCKS)) {
                     world.createExplosion(entity, entity.getX(), entity.getBodyY(0.0625f), entity.getZ(), amplifier + 1.0f, World.ExplosionSourceType.TNT);
                 } else {
                     world.createExplosion(entity, world.getDamageSources().explosion(entity, entity), new ExplosionBehavior(), entity.getX(), entity.getBodyY(0.0625f), entity.getZ(), amplifier + 1.0f, false, World.ExplosionSourceType.NONE);

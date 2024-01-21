@@ -10,6 +10,8 @@
     "clutter:mangrove_mosaic_slab",
     "clutter:crimson_mosaic_slab",
     "clutter:warped_mosaic_slab",
-    "clutter:cherry_mosaic_slab"
+    "clutter:cherry_mosaic_slab",
+    "clutter:redwood_mosaic_slab",
+    "clutter:redwood_slab"
   ]
 }

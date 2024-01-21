@@ -1,0 +1,8 @@
+{
+  "parent": "clutter:block/parent/cupboard_open_parent",
+  "textures": {
+    "cupboard_door": "clutter:block/redwood_cupboard_door",
+    "cupboard_inside": "clutter:block/redwood_cupboard_inside",
+    "planks": "clutter:block/redwood_planks"
+  }
+}

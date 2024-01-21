@@ -6,11 +6,14 @@
     "AbstractFireBlockMixin",
     "BrewingRecipeRegistryMixin",
     "FireBlockInvoker",
+    "FoliagePlacerTypeInvoker",
     "LivingEntityMixin",
     "MossBlockMixin",
     "PistonBlockMixin",
     "PlayerEntityMixin",
-    "ServerWorldAccessor"
+    "ServerWorldAccessor",
+    "TreeDecoratorTypeInvoker",
+    "TrunkPlacerTypeInvoker"
   ],
   "injectors": {
     "defaultRequire": 1

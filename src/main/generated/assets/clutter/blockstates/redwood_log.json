@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "clutter:block/redwood_log_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "clutter:block/redwood_log"
+    },
+    "axis=z": {
+      "model": "clutter:block/redwood_log_horizontal",
+      "x": 90
+    }
+  }
+}

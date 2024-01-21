@@ -19,8 +19,7 @@ public class ClutterREIClientPlugin implements REIClientPlugin {
 
     @Override
     public void registerDisplays(DisplayRegistry registry) {
-        registry.registerRecipeFiller(KilningRecipe.class, KilningRecipe.Type.INSTANCE,
-                KilningDisplay::new);
+        registry.registerRecipeFiller(KilningRecipe.class, KilningRecipe.Type.INSTANCE, KilningDisplay::new);
     }
 
     @Override

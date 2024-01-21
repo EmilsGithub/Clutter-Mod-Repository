@@ -30,7 +30,7 @@ public class ShelfBlockEntityRenderer implements BlockEntityRenderer<ShelfInvent
     public void render(ShelfInventoryBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
         ItemRenderer itemRenderer = MinecraftClient.getInstance().getItemRenderer();
         Direction direction = entity.getCachedState().get(ShelfBlock.FACING);
-        int itemRot = 1;
+        int itemRot = 181;
 
         for (int i = 0; i < entity.size(); i++) {
             ItemStack itemStack = entity.getRenderStack(i);
@@ -58,9 +58,9 @@ public class ShelfBlockEntityRenderer implements BlockEntityRenderer<ShelfInvent
             }
 
             switch(direction) {
-                case EAST -> itemRot = 271;
-                case SOUTH -> itemRot = 181;
-                case WEST -> itemRot= 91;
+                case EAST -> itemRot = 91;
+                case SOUTH -> itemRot = 1;
+                case WEST -> itemRot= 271;
             }
 
 

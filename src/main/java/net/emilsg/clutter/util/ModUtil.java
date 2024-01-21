@@ -5,6 +5,7 @@ import net.emilsg.clutter.item.ModItems;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
+import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 
 
 public class ModUtil {
@@ -22,7 +23,8 @@ public class ModUtil {
     }
 
     public static void registerStrippableBlocks() {
-
+        StrippableBlockRegistry.register(ModBlocks.REDWOOD_LOG, ModBlocks.STRIPPED_REDWOOD_LOG);
+        StrippableBlockRegistry.register(ModBlocks.REDWOOD_WOOD, ModBlocks.STRIPPED_REDWOOD_WOOD);
     }
 
     public static void registerCompostableItems() {

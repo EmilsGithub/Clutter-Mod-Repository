@@ -14,8 +14,7 @@ import net.minecraft.util.Identifier;
 public class ModEntities {
 
     public static final EntityType<SeatEntity> SEAT = Registry.register(Registries.ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "seat"),
-            FabricEntityTypeBuilder.<SeatEntity>create(SpawnGroup.MISC, SeatEntity::new).dimensions(EntityDimensions.fixed(0.001F, 0.001F))
-                    .build());
+            FabricEntityTypeBuilder.<SeatEntity>create(SpawnGroup.MISC, SeatEntity::new).dimensions(EntityDimensions.fixed(0.001F, 0.001F)).build());
 
     public static final EntityType<ButterflyEntity> BUTTERFLY = Registry.register(Registries.ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "butterfly"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, ButterflyEntity::new).dimensions(EntityDimensions.changing(0.5f, 0.5f)).build());
@@ -46,4 +45,7 @@ public class ModEntities {
 
     public static final EntityType<EmberTortoiseEntity> EMBER_TORTOISE = Registry.register(Registries.ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "ember_tortoise"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, EmberTortoiseEntity::new).dimensions(EntityDimensions.changing(1.5f, 1.45f)).fireImmune().build());
+
+    public static final EntityType<JellyfishEntity> JELLYFISH = Registry.register(Registries.ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "jellyfish"),
+            FabricEntityTypeBuilder.create(SpawnGroup.WATER_CREATURE, JellyfishEntity::new).dimensions(EntityDimensions.changing(0.5f, 0.5f)).build());
 }

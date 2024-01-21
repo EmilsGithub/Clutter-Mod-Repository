@@ -38,8 +38,6 @@ public abstract class LivingEntityMixin {
 
     @Shadow public abstract @Nullable StatusEffectInstance getStatusEffect(StatusEffect effect);
 
-    @Shadow public abstract @Nullable LivingEntity getPrimeAdversary();
-
     @Inject(method = "damage", at = @At("HEAD"), cancellable = true)
     private void onDamage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         LivingEntity self = (LivingEntity) (Object) this;

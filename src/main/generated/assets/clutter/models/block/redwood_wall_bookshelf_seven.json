@@ -1,0 +1,6 @@
+{
+  "parent": "clutter:block/parent/wall_bookshelf_parent_seven",
+  "textures": {
+    "planks": "clutter:block/redwood_planks"
+  }
+}

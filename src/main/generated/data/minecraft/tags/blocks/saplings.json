@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "clutter:kiwi_tree_sapling"
+    "clutter:kiwi_tree_sapling",
+    "clutter:redwood_sapling"
   ]
 }

@@ -50,7 +50,7 @@ public class WindowSillBlock extends Block implements Waterloggable{
                         case SOUTH -> SOUTH;
                         case EAST -> EAST;
                         case WEST -> WEST;
-                        default -> VoxelShapes.empty(); // return an empty shape if no matching direction is found
+                        default -> VoxelShapes.empty();
                 };
         }
 

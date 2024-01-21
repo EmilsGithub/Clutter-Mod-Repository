@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=north": [
+      {
+        "model": "clutter:block/yellow_polypore"
+      }
+    ],
+    "facing=south": [
+      {
+        "model": "clutter:block/yellow_polypore",
+        "y": 180
+      }
+    ],
+    "facing=west": [
+      {
+        "model": "clutter:block/yellow_polypore",
+        "y": 270
+      }
+    ],
+    "facing=east": [
+      {
+        "model": "clutter:block/yellow_polypore",
+        "y": 90
+      }
+    ]
+  }
+}

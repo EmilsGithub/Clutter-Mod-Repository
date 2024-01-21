@@ -191,7 +191,8 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
 
         getOrCreateTagBuilder(BlockTags.AXE_MINEABLE).add(
                  ModBlocks.BONFIRE,
-                 ModBlocks.SOUL_BONFIRE
+                 ModBlocks.SOUL_BONFIRE,
+                 ModBlocks.REDWOOD_LOG
         )
                 .addTag(ModBlockTags.SHELVES)
                 .addTag(ModBlockTags.TRELLISES)
@@ -200,7 +201,6 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
                 .addTag(ModBlockTags.WOODEN_MOSAICS)
                 .addTag(ModBlockTags.CUPBOARDS)
                 .addTag(ModBlockTags.LAMPS)
-                .addTag(ModBlockTags.WOODEN_MOSAICS)
                 .addTag(ModBlockTags.TABLES)
                 .addTag(ModBlockTags.FOOD_BOXES)
                 .addTag(ModBlockTags.WINDOW_SILLS)
@@ -244,6 +244,18 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
                 ModBlocks.GIANT_LILY_PAD_SEEDLING,
                 ModBlocks.SMALL_LILY_PADS);
 
+        getOrCreateTagBuilder(BlockTags.DIRT).add(
+                ModBlocks.OVERGROWN_STONE);
+
+        getOrCreateTagBuilder(BlockTags.ANIMALS_SPAWNABLE_ON).add(
+                ModBlocks.OVERGROWN_STONE);
+
+        getOrCreateTagBuilder(BlockTags.SNIFFER_DIGGABLE_BLOCK).add(
+                ModBlocks.OVERGROWN_STONE);
+
+        getOrCreateTagBuilder(BlockTags.MUSHROOM_GROW_BLOCK).add(
+                ModBlocks.OVERGROWN_STONE);
+
         getOrCreateTagBuilder(BlockTags.FROGS_SPAWNABLE_ON).add(
                 ModBlocks.GIANT_LILY_PAD,
                 ModBlocks.GIANT_LILY_PAD_SEEDLING,
@@ -275,7 +287,35 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
 
         getOrCreateTagBuilder(BlockTags.LEAVES).add(
                 ModBlocks.KIWI_LEAVES,
-                ModBlocks.RIPE_KIWI_LEAVES);
+                ModBlocks.RIPE_KIWI_LEAVES,
+                ModBlocks.REDWOOD_LEAVES);
+
+        getOrCreateTagBuilder(BlockTags.WOODEN_FENCES).add(
+                ModBlocks.REDWOOD_FENCE);
+
+        getOrCreateTagBuilder(BlockTags.FENCE_GATES).add(
+                ModBlocks.REDWOOD_FENCE_GATE);
+
+        getOrCreateTagBuilder(BlockTags.WOODEN_BUTTONS).add(
+                ModBlocks.REDWOOD_BUTTON);
+
+        getOrCreateTagBuilder(BlockTags.WOODEN_PRESSURE_PLATES).add(
+                ModBlocks.REDWOOD_PRESSURE_PLATE);
+
+        getOrCreateTagBuilder(BlockTags.LOGS).add(
+                ModBlocks.REDWOOD_LOG,
+                ModBlocks.STRIPPED_REDWOOD_LOG,
+                ModBlocks.REDWOOD_WOOD,
+                ModBlocks.STRIPPED_REDWOOD_WOOD);
+
+        getOrCreateTagBuilder(BlockTags.LOGS_THAT_BURN).add(
+                ModBlocks.REDWOOD_LOG,
+                ModBlocks.STRIPPED_REDWOOD_LOG,
+                ModBlocks.REDWOOD_WOOD,
+                ModBlocks.STRIPPED_REDWOOD_WOOD);
+
+        getOrCreateTagBuilder(BlockTags.PLANKS).add(
+                ModBlocks.REDWOOD_PLANKS);
 
         getOrCreateTagBuilder(BlockTags.SOUL_FIRE_BASE_BLOCKS).add(
                 ModBlocks.SULPHUR_BLOCK);
@@ -285,7 +325,9 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
                 ModBlocks.GLOWLILY);
 
         getOrCreateTagBuilder(BlockTags.SAPLINGS).add(
-                ModBlocks.KIWI_TREE_SAPLING);
+                ModBlocks.KIWI_TREE_SAPLING,
+                ModBlocks.REDWOOD_SAPLING);
+
 
         getOrCreateTagBuilder(BlockTags.CROPS).add(
                 ModBlocks.HOPS_CROP,
@@ -391,7 +433,23 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
                 ModBlocks.MANGROVE_MOSAIC_SLAB,
                 ModBlocks.CRIMSON_MOSAIC_SLAB,
                 ModBlocks.WARPED_MOSAIC_SLAB,
-                ModBlocks.CHERRY_MOSAIC_SLAB);
+                ModBlocks.CHERRY_MOSAIC_SLAB,
+                ModBlocks.REDWOOD_MOSAIC_SLAB,
+                ModBlocks.REDWOOD_SLAB);
+
+        getOrCreateTagBuilder(BlockTags.WOODEN_STAIRS).add(
+                ModBlocks.OAK_MOSAIC_STAIRS,
+                ModBlocks.SPRUCE_MOSAIC_STAIRS,
+                ModBlocks.BIRCH_MOSAIC_STAIRS,
+                ModBlocks.JUNGLE_MOSAIC_STAIRS,
+                ModBlocks.ACACIA_MOSAIC_STAIRS,
+                ModBlocks.DARK_OAK_MOSAIC_STAIRS,
+                ModBlocks.MANGROVE_MOSAIC_STAIRS,
+                ModBlocks.CRIMSON_MOSAIC_STAIRS,
+                ModBlocks.WARPED_MOSAIC_STAIRS,
+                ModBlocks.CHERRY_MOSAIC_STAIRS,
+                ModBlocks.REDWOOD_MOSAIC_STAIRS,
+                ModBlocks.REDWOOD_STAIRS);
 
         getOrCreateTagBuilder(BlockTags.TRAPDOORS).add(
                 ModBlocks.SILVER_TRAPDOOR,
@@ -518,6 +576,7 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
                 ModBlocks.CRIMSON_MOSAIC,
                 ModBlocks.WARPED_MOSAIC,
                 ModBlocks.CHERRY_MOSAIC,
+                ModBlocks.REDWOOD_MOSAIC,
                 ModBlocks.OAK_MOSAIC_STAIRS,
                 ModBlocks.SPRUCE_MOSAIC_STAIRS,
                 ModBlocks.BIRCH_MOSAIC_STAIRS,
@@ -528,6 +587,7 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
                 ModBlocks.CRIMSON_MOSAIC_STAIRS,
                 ModBlocks.WARPED_MOSAIC_STAIRS,
                 ModBlocks.CHERRY_MOSAIC_STAIRS,
+                ModBlocks.REDWOOD_MOSAIC_STAIRS,
                 ModBlocks.OAK_MOSAIC_SLAB,
                 ModBlocks.SPRUCE_MOSAIC_SLAB,
                 ModBlocks.BIRCH_MOSAIC_SLAB,
@@ -537,7 +597,8 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
                 ModBlocks.MANGROVE_MOSAIC_SLAB,
                 ModBlocks.CRIMSON_MOSAIC_SLAB,
                 ModBlocks.WARPED_MOSAIC_SLAB,
-                ModBlocks.CHERRY_MOSAIC_SLAB
+                ModBlocks.CHERRY_MOSAIC_SLAB,
+                ModBlocks.REDWOOD_MOSAIC_SLAB
         );
 
         getOrCreateTagBuilder(ModBlockTags.LAMPS).add(
@@ -587,6 +648,7 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
                 ModBlocks.WARPED_CHAIR,
                 ModBlocks.CHERRY_CHAIR,
                 ModBlocks.BAMBOO_CHAIR,
+                ModBlocks.REDWOOD_CHAIR,
                 ModBlocks.STRIPPED_OAK_CHAIR,
                 ModBlocks.STRIPPED_SPRUCE_CHAIR,
                 ModBlocks.STRIPPED_BIRCH_CHAIR,
@@ -596,7 +658,8 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
                 ModBlocks.STRIPPED_MANGROVE_CHAIR,
                 ModBlocks.STRIPPED_CRIMSON_CHAIR,
                 ModBlocks.STRIPPED_WARPED_CHAIR,
-                ModBlocks.STRIPPED_CHERRY_CHAIR
+                ModBlocks.STRIPPED_CHERRY_CHAIR,
+                ModBlocks.STRIPPED_REDWOOD_CHAIR
         );
 
         getOrCreateTagBuilder(ModBlockTags.WALL_CANDLES).add(
@@ -1088,7 +1151,8 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
                 ModBlocks.OAK_CHAIR,
                 ModBlocks.SPRUCE_CHAIR,
                 ModBlocks.WARPED_CHAIR,
-                ModBlocks.CHERRY_CHAIR
+                ModBlocks.CHERRY_CHAIR,
+                ModBlocks.REDWOOD_CHAIR
         );
 
         getOrCreateTagBuilder(ModBlockTags.STRIPPABLE_LOGS).add(
@@ -1477,6 +1541,7 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
                 ModBlocks.STRIPPED_DARK_OAK_CHAIR,
                 ModBlocks.STRIPPED_MANGROVE_CHAIR,
                 ModBlocks.STRIPPED_CHERRY_CHAIR,
+                ModBlocks.STRIPPED_REDWOOD_CHAIR,
                 ModBlocks.OAK_CUPBOARD,
                 ModBlocks.SPRUCE_CUPBOARD,
                 ModBlocks.BIRCH_CUPBOARD,
@@ -1513,6 +1578,7 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
                 ModBlocks.OAK_CHAIR,
                 ModBlocks.BAMBOO_CHAIR,
                 ModBlocks.SPRUCE_CHAIR,
+                ModBlocks.REDWOOD_CHAIR,
                 ModBlocks.ACACIA_BENCH,
                 ModBlocks.BIRCH_BENCH,
                 ModBlocks.DARK_OAK_BENCH,
@@ -1565,8 +1631,24 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
                 ModBlocks.OAK_TRELLIS,
                 ModBlocks.SPRUCE_TRELLIS,
                 ModBlocks.BAMBOO_TRELLIS,
-                ModBlocks.CHERRY_TRELLIS
-        )
+                ModBlocks.CHERRY_TRELLIS,
+                        ModBlocks.REDWOOD_SAPLING,
+                        ModBlocks.REDWOOD_LEAVES,
+                        ModBlocks.REDWOOD_LOG,
+                        ModBlocks.REDWOOD_WOOD,
+                        ModBlocks.STRIPPED_REDWOOD_LOG,
+                        ModBlocks.STRIPPED_REDWOOD_WOOD,
+                        ModBlocks.REDWOOD_PLANKS,
+                        ModBlocks.REDWOOD_STAIRS,
+                        ModBlocks.REDWOOD_SLAB,
+                        ModBlocks.REDWOOD_FENCE,
+                        ModBlocks.REDWOOD_FENCE_GATE,
+                        ModBlocks.REDWOOD_BUTTON,
+                        ModBlocks.REDWOOD_PRESSURE_PLATE,
+                        ModBlocks.REDWOOD_MOSAIC,
+                        ModBlocks.REDWOOD_MOSAIC_STAIRS,
+                        ModBlocks.REDWOOD_MOSAIC_SLAB
+                )
                 .addTag(ModBlockTags.ARMCHAIRS)
                 .addTag(ModBlockTags.FOOD_BOXES)
                 .addTag(ModBlockTags.LAMPS);

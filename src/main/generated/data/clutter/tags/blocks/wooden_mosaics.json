@@ -11,6 +11,7 @@
     "clutter:crimson_mosaic",
     "clutter:warped_mosaic",
     "clutter:cherry_mosaic",
+    "clutter:redwood_mosaic",
     "clutter:oak_mosaic_stairs",
     "clutter:spruce_mosaic_stairs",
     "clutter:birch_mosaic_stairs",
@@ -21,6 +22,7 @@
     "clutter:crimson_mosaic_stairs",
     "clutter:warped_mosaic_stairs",
     "clutter:cherry_mosaic_stairs",
+    "clutter:redwood_mosaic_stairs",
     "clutter:oak_mosaic_slab",
     "clutter:spruce_mosaic_slab",
     "clutter:birch_mosaic_slab",
@@ -30,6 +32,7 @@
     "clutter:mangrove_mosaic_slab",
     "clutter:crimson_mosaic_slab",
     "clutter:warped_mosaic_slab",
-    "clutter:cherry_mosaic_slab"
+    "clutter:cherry_mosaic_slab",
+    "clutter:redwood_mosaic_slab"
   ]
 }

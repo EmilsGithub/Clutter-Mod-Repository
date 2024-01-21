@@ -9,54 +9,67 @@ import net.minecraft.client.render.model.BakedModel;
 import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Mixin(ItemRenderer.class)
 public abstract class ItemRendererMixin {
-    private final ModelIdentifier CROWN = new ModelIdentifier(Clutter.MOD_ID, "crown_hat", "inventory");
-    private final ModelIdentifier BEACH_HAT = new ModelIdentifier(Clutter.MOD_ID, "beach_hat_hat", "inventory");
-    private final ModelIdentifier TOP_HAT = new ModelIdentifier(Clutter.MOD_ID, "top_hat_hat", "inventory");
-    private final ModelIdentifier BERET = new ModelIdentifier(Clutter.MOD_ID, "beret_hat", "inventory");
-    private final ModelIdentifier COWBOY_HAT = new ModelIdentifier(Clutter.MOD_ID, "cowboy_hat_hat", "inventory");
-    private final ModelIdentifier CAP = new ModelIdentifier(Clutter.MOD_ID, "cap_hat", "inventory");
-    private final ModelIdentifier BUTTERFLY_WINGS = new ModelIdentifier(Clutter.MOD_ID, "butterfly_wings_hat", "inventory");
-    private final ModelIdentifier PROPELLER_CAP = new ModelIdentifier(Clutter.MOD_ID, "propeller_cap_hat", "inventory");
-    private final ModelIdentifier TIARA = new ModelIdentifier(Clutter.MOD_ID, "tiara_hat", "inventory");
-    private final ModelIdentifier VIKING_HELMET = new ModelIdentifier(Clutter.MOD_ID, "viking_helmet_hat", "inventory");
+
+    @Unique
+    private static final Map<Item, ModelIdentifier> itemModelMap = new HashMap<>();
+
+    @Unique
+    private static final ModelIdentifier CROWN = new ModelIdentifier(Clutter.MOD_ID, "crown_hat", "inventory");
+    @Unique
+    private static final ModelIdentifier BEACH_HAT = new ModelIdentifier(Clutter.MOD_ID, "beach_hat_hat", "inventory");
+    @Unique
+    private static final ModelIdentifier TOP_HAT = new ModelIdentifier(Clutter.MOD_ID, "top_hat_hat", "inventory");
+    @Unique
+    private static final ModelIdentifier BERET = new ModelIdentifier(Clutter.MOD_ID, "beret_hat", "inventory");
+    @Unique
+    private static final ModelIdentifier COWBOY_HAT = new ModelIdentifier(Clutter.MOD_ID, "cowboy_hat_hat", "inventory");
+    @Unique
+    private static final ModelIdentifier CAP = new ModelIdentifier(Clutter.MOD_ID, "cap_hat", "inventory");
+    @Unique
+    private static final ModelIdentifier BUTTERFLY_WINGS = new ModelIdentifier(Clutter.MOD_ID, "butterfly_wings_hat", "inventory");
+    @Unique
+    private static final ModelIdentifier PROPELLER_CAP = new ModelIdentifier(Clutter.MOD_ID, "propeller_cap_hat", "inventory");
+    @Unique
+    private static final ModelIdentifier TIARA = new ModelIdentifier(Clutter.MOD_ID, "tiara_hat", "inventory");
+    @Unique
+    private static final ModelIdentifier SILVER_TIARA = new ModelIdentifier(Clutter.MOD_ID, "silver_tiara_hat", "inventory");
+    @Unique
+    private static final ModelIdentifier VIKING_HELMET = new ModelIdentifier(Clutter.MOD_ID, "viking_helmet_hat", "inventory");
+
+    static {
+        itemModelMap.put(ModItems.CROWN, CROWN);
+        itemModelMap.put(ModItems.BEACH_HAT, BEACH_HAT);
+        itemModelMap.put(ModItems.TOP_HAT, TOP_HAT);
+        itemModelMap.put(ModItems.BERET, BERET);
+        itemModelMap.put(ModItems.COWBOY_HAT, COWBOY_HAT);
+        itemModelMap.put(ModItems.CAP, CAP);
+        itemModelMap.put(ModItems.BUTTERFLY_WINGS, BUTTERFLY_WINGS);
+        itemModelMap.put(ModItems.PROPELLER_CAP, PROPELLER_CAP);
+        itemModelMap.put(ModItems.TIARA, TIARA);
+        itemModelMap.put(ModItems.SILVER_TIARA, SILVER_TIARA);
+        itemModelMap.put(ModItems.VIKING_HELMET, VIKING_HELMET);
+    }
 
     @ModifyVariable(method = "renderItem", at = @At(value = "HEAD"), argsOnly = true)
     public BakedModel useHatModels(BakedModel value, ItemStack stack, ModelTransformationMode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
         if (stack.getItem() instanceof HatItem && renderMode == ModelTransformationMode.HEAD) {
-            ModelIdentifier modelIdentifier = null;
 
-            if (stack.getItem().equals(ModItems.CROWN)) {
-                modelIdentifier = CROWN;
-            } else if (stack.getItem().equals(ModItems.BEACH_HAT)) {
-                modelIdentifier = BEACH_HAT;
-            } else if (stack.getItem().equals(ModItems.TOP_HAT)) {
-                modelIdentifier = TOP_HAT;
-            } else if (stack.getItem().equals(ModItems.BERET)) {
-                modelIdentifier = BERET;
-            } else if (stack.getItem().equals(ModItems.COWBOY_HAT)) {
-                modelIdentifier = COWBOY_HAT;
-            } else if (stack.getItem().equals(ModItems.CAP)) {
-                modelIdentifier = CAP;
-            } else if (stack.getItem().equals(ModItems.BUTTERFLY_WINGS)) {
-                modelIdentifier = BUTTERFLY_WINGS;
-            } else if (stack.getItem().equals(ModItems.PROPELLER_CAP)) {
-                modelIdentifier = PROPELLER_CAP;
-            } else if (stack.getItem().equals(ModItems.TIARA)) {
-                modelIdentifier = TIARA;
-            } else if (stack.getItem().equals(ModItems.VIKING_HELMET)) {
-                modelIdentifier = VIKING_HELMET;
-            }
-
-
+            ModelIdentifier modelIdentifier = itemModelMap.getOrDefault(stack.getItem(), null);
 
             if (modelIdentifier != null) {
+                System.out.println(modelIdentifier.getPath());
                 return ((ItemRendererAccessor) this).getModels().getModelManager().getModel(modelIdentifier);
             }
         }

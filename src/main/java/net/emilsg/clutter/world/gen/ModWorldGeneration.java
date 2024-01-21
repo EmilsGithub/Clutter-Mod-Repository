@@ -1,23 +1,26 @@
 package net.emilsg.clutter.world.gen;
 
-import net.emilsg.clutter.config.ModConfigs;
+import net.emilsg.clutter.config.ClutterConfig;
 
 public class ModWorldGeneration {
     public static void generateModWorldGen() {
-        if(ModConfigs.GENERATE_ORES) {
+        if(ClutterConfig.getInstance().getBoolean(ClutterConfig.GENERATE_ORES)) {
             ModRockGeneration.generateOres();
         }
-        if(ModConfigs.GENERATE_GEODES) {
+        if(ClutterConfig.getInstance().getBoolean(ClutterConfig.GENERATE_GEODES)) {
             ModRockGeneration.generateGeodes();
         }
-        if(ModConfigs.SPAWN_CLUTTER_MOBS) {
+        if(ClutterConfig.getInstance().getBoolean(ClutterConfig.SPAWN_CLUTTER_MOBS)) {
             ModEntitySpawning.addSpawns();
         }
-        if(ModConfigs.GENERATE_FOLIAGE) {
+        if(ClutterConfig.getInstance().getBoolean(ClutterConfig.GENERATE_FOLIAGE)) {
             ModFoliageGeneration.generateFoliage();
         }
 
+        //ModFoliageGeneration.generateModBiomeFoliage();
+
         MiscFeatureGeneration.generateMiscFeatures();
+
         ModUnderwaterFeatureGeneration.generateUnderwaterFeatures();
     }
 }

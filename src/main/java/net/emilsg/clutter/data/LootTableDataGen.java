@@ -4,6 +4,8 @@ import net.emilsg.clutter.block.ModBlocks;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.data.server.loottable.BlockLootTableGenerator;
 import net.minecraft.item.Items;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTable;
@@ -30,36 +32,70 @@ public class LootTableDataGen extends FabricBlockLootTableProvider {
         this.addCoralDrops(ModBlocks.GEM_CORAL, ModBlocks.DEAD_GEM_CORAL, ModBlocks.GEM_CORAL_BLOCK, ModBlocks.DEAD_GEM_CORAL_BLOCK, ModBlocks.GEM_CORAL_FAN, ModBlocks.DEAD_GEM_CORAL_FAN, ModBlocks.GEM_CORAL_WALL_FAN, ModBlocks.DEAD_GEM_CORAL_WALL_FAN);
         this.addCoralDrops(ModBlocks.DIAMOND_CORAL, ModBlocks.DEAD_DIAMOND_CORAL, ModBlocks.DIAMOND_CORAL_BLOCK, ModBlocks.DEAD_DIAMOND_CORAL_BLOCK, ModBlocks.DIAMOND_CORAL_FAN, ModBlocks.DEAD_DIAMOND_CORAL_FAN, ModBlocks.DIAMOND_CORAL_WALL_FAN, ModBlocks.DEAD_DIAMOND_CORAL_WALL_FAN);
         this.addCoralDrops(ModBlocks.ANCHOR_CORAL, ModBlocks.DEAD_ANCHOR_CORAL, ModBlocks.ANCHOR_CORAL_BLOCK, ModBlocks.DEAD_ANCHOR_CORAL_BLOCK, ModBlocks.ANCHOR_CORAL_FAN, ModBlocks.DEAD_ANCHOR_CORAL_FAN, ModBlocks.ANCHOR_CORAL_WALL_FAN, ModBlocks.DEAD_ANCHOR_CORAL_WALL_FAN);
-        addDrop(ModBlocks.BLACK_ONYX_BLOCK);
-        addDrop(ModBlocks.BLACK_ONYX_SLAB, slabDrops(ModBlocks.BLACK_ONYX_SLAB));
-        addDrop(ModBlocks.BLACK_ONYX_STAIRS);
-        addDrop(ModBlocks.BLACK_ONYX_WALL);
-        addDrop(ModBlocks.POLISHED_BLACK_ONYX);
-        addDrop(ModBlocks.POLISHED_BLACK_ONYX_SLAB, slabDrops(ModBlocks.POLISHED_BLACK_ONYX_SLAB));
-        addDrop(ModBlocks.POLISHED_BLACK_ONYX_STAIRS);
-        addDrop(ModBlocks.POLISHED_BLACK_ONYX_WALL);
-        addDrop(ModBlocks.MAILBOX);
-        addDrop(ModBlocks.GLOWLILY_BLOCK);
-        addDrop(ModBlocks.AQUATIC_TORCH);
-        addDrop(ModBlocks.AQUATIC_WALL_TORCH);
-        addDrop(ModBlocks.EXPOSED_AQUATIC_TORCH);
-        addDrop(ModBlocks.EXPOSED_AQUATIC_WALL_TORCH);
-        addDrop(ModBlocks.WEATHERED_AQUATIC_TORCH);
-        addDrop(ModBlocks.WEATHERED_AQUATIC_WALL_TORCH);
-        addDrop(ModBlocks.OXIDIZED_AQUATIC_TORCH);
-        addDrop(ModBlocks.OXIDIZED_AQUATIC_WALL_TORCH);
-        addDrop(ModBlocks.WAXED_AQUATIC_TORCH);
-        addDrop(ModBlocks.WAXED_AQUATIC_WALL_TORCH);
-        addDrop(ModBlocks.WAXED_EXPOSED_AQUATIC_TORCH);
-        addDrop(ModBlocks.WAXED_EXPOSED_AQUATIC_WALL_TORCH);
-        addDrop(ModBlocks.WAXED_WEATHERED_AQUATIC_TORCH);
-        addDrop(ModBlocks.WAXED_WEATHERED_AQUATIC_WALL_TORCH);
-        addDrop(ModBlocks.WAXED_OXIDIZED_AQUATIC_TORCH);
-        addDrop(ModBlocks.WAXED_OXIDIZED_AQUATIC_WALL_TORCH);
-        addDrop(ModBlocks.PRISMARINE_TORCH);
-        addDrop(ModBlocks.PRISMARINE_WALL_TORCH);
-        addDrop(ModBlocks.NAUTILUS_SHELL_BLOCK, Items.NAUTILUS_SHELL);
-        addDrop(ModBlocks.PET_BED);
+        this.addDrop(ModBlocks.NAUTILUS_SHELL_BLOCK, Items.NAUTILUS_SHELL);
+
+        this.silkTouchDrops(ModBlocks.OVERGROWN_STONE, Blocks.COBBLESTONE);
+
+        this.addSlabGroupDrops(
+                ModBlocks.REDWOOD_MOSAIC_SLAB,
+                ModBlocks.REDWOOD_SLAB,
+                ModBlocks.POLISHED_BLACK_ONYX_SLAB,
+                ModBlocks.BLACK_ONYX_SLAB
+        );
+
+        this.addSingleGroupDrops(
+                ModBlocks.BLACK_ONYX_BLOCK,
+                ModBlocks.BLACK_ONYX_STAIRS,
+                ModBlocks.BLACK_ONYX_WALL,
+                ModBlocks.POLISHED_BLACK_ONYX,
+                ModBlocks.POLISHED_BLACK_ONYX_STAIRS,
+                ModBlocks.POLISHED_BLACK_ONYX_WALL,
+                ModBlocks.MAILBOX,
+                ModBlocks.GLOWLILY_BLOCK,
+                ModBlocks.AQUATIC_TORCH,
+                ModBlocks.AQUATIC_WALL_TORCH,
+                ModBlocks.EXPOSED_AQUATIC_TORCH,
+                ModBlocks.EXPOSED_AQUATIC_WALL_TORCH,
+                ModBlocks.WEATHERED_AQUATIC_TORCH,
+                ModBlocks.WEATHERED_AQUATIC_WALL_TORCH,
+                ModBlocks.OXIDIZED_AQUATIC_TORCH,
+                ModBlocks.OXIDIZED_AQUATIC_WALL_TORCH,
+                ModBlocks.WAXED_AQUATIC_TORCH,
+                ModBlocks.WAXED_AQUATIC_WALL_TORCH,
+                ModBlocks.WAXED_EXPOSED_AQUATIC_TORCH,
+                ModBlocks.WAXED_EXPOSED_AQUATIC_WALL_TORCH,
+                ModBlocks.WAXED_WEATHERED_AQUATIC_TORCH,
+                ModBlocks.WAXED_WEATHERED_AQUATIC_WALL_TORCH,
+                ModBlocks.WAXED_OXIDIZED_AQUATIC_TORCH,
+                ModBlocks.WAXED_OXIDIZED_AQUATIC_WALL_TORCH,
+                ModBlocks.PRISMARINE_TORCH,
+                ModBlocks.PRISMARINE_WALL_TORCH,
+                ModBlocks.PET_BED,
+                ModBlocks.REDWOOD_WOOD,
+                ModBlocks.STRIPPED_REDWOOD_WOOD,
+                ModBlocks.REDWOOD_LOG,
+                ModBlocks.STRIPPED_REDWOOD_LOG,
+                ModBlocks.REDWOOD_PLANKS,
+                ModBlocks.REDWOOD_STAIRS,
+                ModBlocks.REDWOOD_FENCE,
+                ModBlocks.REDWOOD_FENCE_GATE,
+                ModBlocks.REDWOOD_BUTTON,
+                ModBlocks.REDWOOD_PRESSURE_PLATE,
+                ModBlocks.REDWOOD_MOSAIC,
+                ModBlocks.REDWOOD_MOSAIC_STAIRS
+        );
+    }
+
+    private void addSingleGroupDrops(Block... blocks) {
+        for (Block block : blocks) {
+            this.addDrop(block);
+        }
+    }
+
+    private void addSlabGroupDrops(Block... blocks) {
+        for (Block block : blocks) {
+            this.addDrop(block, slabDrops(block));
+        }
     }
 
     private void addCoralDrops(Block coral, Block deadCoral, Block coralBlock, Block deadCoralBlock, Block coralFan, Block deadCoralFan, Block coralWallFan, Block deadCoralWallFan) {
@@ -76,5 +112,9 @@ public class LootTableDataGen extends FabricBlockLootTableProvider {
     private void coralBlockDrops(Block coralBlock, Block deadCoralBlock) {
         LootTable.Builder tableBuilder = LootTable.builder().pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1)).with(AlternativeEntry.builder(ItemEntry.builder(coralBlock).conditionally(WITH_SILK_TOUCH), ItemEntry.builder(deadCoralBlock).conditionally(WITHOUT_SILK_TOUCH))));
         this.addDrop(coralBlock, tableBuilder);
+    }
+
+    public LootTable.Builder silkTouchDrops(Block dropWithSilkTouch, Block drop) {
+        return BlockLootTableGenerator.dropsWithSilkTouch(dropWithSilkTouch, this.applyExplosionDecay(dropWithSilkTouch, ItemEntry.builder(drop)));
     }
 }

@@ -1,6 +1,0 @@
-{
-	"parent": "clutter:block/window_sills/mangrove/mangrove_window_sill_parent",
-	"textures": {
-		"3": "minecraft:block/pink_tulip"
-	}
-}

@@ -5,6 +5,10 @@ import net.emilsg.clutter.Clutter;
 import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.util.ModProperties;
 import net.emilsg.clutter.world.gen.features.ModFeatures;
+import net.emilsg.clutter.world.gen.tree.RedwoodFoliagePlacer;
+import net.emilsg.clutter.world.gen.tree.RedwoodTrunkPlacer;
+import net.emilsg.clutter.world.gen.tree.SmallRedwoodFoliagePlacer;
+import net.emilsg.clutter.world.gen.tree.WallMushroomTreeDecorator;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.registry.Registerable;
@@ -24,10 +28,10 @@ import net.minecraft.world.gen.CountConfig;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
 import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
+import net.minecraft.world.gen.foliage.BushFoliagePlacer;
 import net.minecraft.world.gen.foliage.MegaPineFoliagePlacer;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
-import net.minecraft.world.gen.treedecorator.AlterGroundTreeDecorator;
 import net.minecraft.world.gen.trunk.GiantTrunkPlacer;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 
@@ -57,8 +61,11 @@ public class ModConfiguredFeatures {
 
     public static final RegistryKey<ConfiguredFeature<?,?>> KIWI_TREE_KEY = registerKey("kiwi_tree");
 
-
-    public static final RegistryKey<ConfiguredFeature<?,?>> MEGA_SPRUCE_KEY = registerKey("mega_spruce");
+    public static final RegistryKey<ConfiguredFeature<?,?>> REDWOOD_BUSH_KEY = registerKey("redwood_bush");
+    public static final RegistryKey<ConfiguredFeature<?,?>> REDWOOD_KEY = registerKey("redwood");
+    public static final RegistryKey<ConfiguredFeature<?,?>> REDWOOD_KEY_2 = registerKey("redwood_2");
+    public static final RegistryKey<ConfiguredFeature<?,?>> MEDIUM_REDWOOD_KEY = registerKey("medium_redwood");
+    public static final RegistryKey<ConfiguredFeature<?,?>> SMALL_REDWOOD_KEY = registerKey("small_redwood");
 
 
     public static void bootstrap(Registerable<ConfiguredFeature<?, ?>> context) {
@@ -141,11 +148,37 @@ public class ModConfiguredFeatures {
                                 .add(ModBlocks.SMALL_LILY_PADS.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.WEST).with(ModProperties.PAD_AMOUNT, 4), 1)
                         .build())))));
 
-        register(context, MEGA_SPRUCE_KEY, Feature.TREE,
-                new TreeFeatureConfig.Builder(BlockStateProvider.of(Blocks.SPRUCE_LOG),
-                        new GiantTrunkPlacer(20, 6, 25), BlockStateProvider.of(Blocks.SPRUCE_LEAVES),
-                        new MegaPineFoliagePlacer(ConstantIntProvider.create(0), ConstantIntProvider.create(0), UniformIntProvider.create(17, 21)),
-                        new TwoLayersFeatureSize(1, 1, 2)).decorators(ImmutableList.of(new AlterGroundTreeDecorator(BlockStateProvider.of(Blocks.PODZOL)))).build());
+
+        register(context, REDWOOD_BUSH_KEY, Feature.TREE,
+                new TreeFeatureConfig.Builder(BlockStateProvider.of(ModBlocks.REDWOOD_LOG),
+                        new StraightTrunkPlacer(1, 0, 0), BlockStateProvider.of(ModBlocks.REDWOOD_LEAVES),
+                        new BushFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(1), 2),
+                        new TwoLayersFeatureSize(0, 0, 0)).build());
+
+        register(context, REDWOOD_KEY, Feature.TREE,
+                new TreeFeatureConfig.Builder(BlockStateProvider.of(ModBlocks.REDWOOD_LOG),
+                        new RedwoodTrunkPlacer(20, 5, 5), BlockStateProvider.of(ModBlocks.REDWOOD_LEAVES),
+                        new RedwoodFoliagePlacer(ConstantIntProvider.create(0), ConstantIntProvider.create(0), UniformIntProvider.create(13, 17)),
+                        new TwoLayersFeatureSize(1, 2, 2)).decorators(ImmutableList.of(new WallMushroomTreeDecorator())).build());
+
+        register(context, REDWOOD_KEY_2, Feature.TREE,
+                new TreeFeatureConfig.Builder(BlockStateProvider.of(ModBlocks.REDWOOD_LOG),
+                        new RedwoodTrunkPlacer(20, 5, 5), BlockStateProvider.of(ModBlocks.REDWOOD_LEAVES),
+                        new RedwoodFoliagePlacer(ConstantIntProvider.create(0), ConstantIntProvider.create(0), UniformIntProvider.create(13, 17)),
+                        new TwoLayersFeatureSize(0, 0, 1)).decorators(ImmutableList.of(new WallMushroomTreeDecorator())).build());
+
+        register(context, MEDIUM_REDWOOD_KEY, Feature.TREE,
+                new TreeFeatureConfig.Builder(BlockStateProvider.of(ModBlocks.REDWOOD_LOG),
+                        new GiantTrunkPlacer(10, 2, 7), BlockStateProvider.of(ModBlocks.REDWOOD_LEAVES),
+                        new MegaPineFoliagePlacer(ConstantIntProvider.create(0), ConstantIntProvider.create(0), UniformIntProvider.create(3, 7)),
+                        new TwoLayersFeatureSize(0, 0,1)).build());
+
+        register(context, SMALL_REDWOOD_KEY, Feature.TREE,
+                new TreeFeatureConfig.Builder(BlockStateProvider.of(ModBlocks.REDWOOD_LOG),
+                        new StraightTrunkPlacer(9, 4, 4), BlockStateProvider.of(ModBlocks.REDWOOD_LEAVES),
+                        new SmallRedwoodFoliagePlacer(ConstantIntProvider.create(0), ConstantIntProvider.create(0), UniformIntProvider.create(13, 17)),
+                        new TwoLayersFeatureSize(2, 0, 2)).build());
+
     }
 
     public static RegistryKey<ConfiguredFeature<?, ?>> registerKey(String name) {

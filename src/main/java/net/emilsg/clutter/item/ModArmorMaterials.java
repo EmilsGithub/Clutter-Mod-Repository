@@ -21,7 +21,13 @@ public enum ModArmorMaterials implements ArmorMaterial {
         map.put(ArmorItem.Type.LEGGINGS, 5);
         map.put(ArmorItem.Type.CHESTPLATE, 6);
         map.put(ArmorItem.Type.HELMET, 2);
-    }), 14, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F, 0.10F, () -> Ingredient.ofItems(ModItems.SILVER_INGOT));
+    }), 14, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F, 0.10F, () -> Ingredient.ofItems(ModItems.SILVER_INGOT)),
+    COPPER("copper", 8, Util.make(new EnumMap<ArmorItem.Type, Integer>(ArmorItem.Type.class), map -> {
+        map.put(ArmorItem.Type.BOOTS, 1);
+        map.put(ArmorItem.Type.LEGGINGS, 3);
+        map.put(ArmorItem.Type.CHESTPLATE, 4);
+        map.put(ArmorItem.Type.HELMET, 1);
+    }), 16, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F, 0.0F, () -> Ingredient.ofItems(ModItems.SILVER_INGOT));
 
     public static final StringIdentifiable.Codec<ArmorMaterials> CODEC;
     private static final EnumMap<ArmorItem.Type, Integer> BASE_DURABILITY;
