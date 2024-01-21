@@ -1,5 +1,6 @@
 package net.emilsg.clutter.entity.custom;
 
+import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.entity.custom.parent.ClutterAnimalEntity;
 import net.emilsg.clutter.entity.ModEntities;
 import net.emilsg.clutter.util.ModItemTags;
@@ -94,6 +95,8 @@ public class BeaverEntity extends ClutterAnimalEntity {
         STRIPPABLE_LOGS_MAP.put(Blocks.JUNGLE_WOOD, Blocks.STRIPPED_JUNGLE_WOOD);
         STRIPPABLE_LOGS_MAP.put(Blocks.CRIMSON_HYPHAE, Blocks.STRIPPED_CRIMSON_HYPHAE);
         STRIPPABLE_LOGS_MAP.put(Blocks.WARPED_HYPHAE, Blocks.STRIPPED_WARPED_HYPHAE);
+        STRIPPABLE_LOGS_MAP.put(ModBlocks.REDWOOD_LOG, ModBlocks.STRIPPED_REDWOOD_LOG);
+        STRIPPABLE_LOGS_MAP.put(ModBlocks.REDWOOD_WOOD, ModBlocks.STRIPPED_REDWOOD_WOOD);
     }
 
     public BeaverEntity(EntityType<? extends ClutterAnimalEntity> entityType, World world) {

@@ -4,6 +4,8 @@ import net.emilsg.clutter.block.ModBlocks;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.data.server.loottable.BlockLootTableGenerator;
 import net.minecraft.item.Items;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTable;
@@ -31,6 +33,8 @@ public class LootTableDataGen extends FabricBlockLootTableProvider {
         this.addCoralDrops(ModBlocks.DIAMOND_CORAL, ModBlocks.DEAD_DIAMOND_CORAL, ModBlocks.DIAMOND_CORAL_BLOCK, ModBlocks.DEAD_DIAMOND_CORAL_BLOCK, ModBlocks.DIAMOND_CORAL_FAN, ModBlocks.DEAD_DIAMOND_CORAL_FAN, ModBlocks.DIAMOND_CORAL_WALL_FAN, ModBlocks.DEAD_DIAMOND_CORAL_WALL_FAN);
         this.addCoralDrops(ModBlocks.ANCHOR_CORAL, ModBlocks.DEAD_ANCHOR_CORAL, ModBlocks.ANCHOR_CORAL_BLOCK, ModBlocks.DEAD_ANCHOR_CORAL_BLOCK, ModBlocks.ANCHOR_CORAL_FAN, ModBlocks.DEAD_ANCHOR_CORAL_FAN, ModBlocks.ANCHOR_CORAL_WALL_FAN, ModBlocks.DEAD_ANCHOR_CORAL_WALL_FAN);
         this.addDrop(ModBlocks.NAUTILUS_SHELL_BLOCK, Items.NAUTILUS_SHELL);
+
+        this.silkTouchDrops(ModBlocks.OVERGROWN_STONE, Blocks.COBBLESTONE);
 
         this.addSlabGroupDrops(
                 ModBlocks.REDWOOD_MOSAIC_SLAB,
@@ -108,5 +112,9 @@ public class LootTableDataGen extends FabricBlockLootTableProvider {
     private void coralBlockDrops(Block coralBlock, Block deadCoralBlock) {
         LootTable.Builder tableBuilder = LootTable.builder().pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1)).with(AlternativeEntry.builder(ItemEntry.builder(coralBlock).conditionally(WITH_SILK_TOUCH), ItemEntry.builder(deadCoralBlock).conditionally(WITHOUT_SILK_TOUCH))));
         this.addDrop(coralBlock, tableBuilder);
+    }
+
+    public LootTable.Builder silkTouchDrops(Block dropWithSilkTouch, Block drop) {
+        return BlockLootTableGenerator.dropsWithSilkTouch(dropWithSilkTouch, this.applyExplosionDecay(dropWithSilkTouch, ItemEntry.builder(drop)));
     }
 }

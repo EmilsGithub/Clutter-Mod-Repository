@@ -244,6 +244,18 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
                 ModBlocks.GIANT_LILY_PAD_SEEDLING,
                 ModBlocks.SMALL_LILY_PADS);
 
+        getOrCreateTagBuilder(BlockTags.DIRT).add(
+                ModBlocks.OVERGROWN_STONE);
+
+        getOrCreateTagBuilder(BlockTags.ANIMALS_SPAWNABLE_ON).add(
+                ModBlocks.OVERGROWN_STONE);
+
+        getOrCreateTagBuilder(BlockTags.SNIFFER_DIGGABLE_BLOCK).add(
+                ModBlocks.OVERGROWN_STONE);
+
+        getOrCreateTagBuilder(BlockTags.MUSHROOM_GROW_BLOCK).add(
+                ModBlocks.OVERGROWN_STONE);
+
         getOrCreateTagBuilder(BlockTags.FROGS_SPAWNABLE_ON).add(
                 ModBlocks.GIANT_LILY_PAD,
                 ModBlocks.GIANT_LILY_PAD_SEEDLING,
@@ -636,6 +648,7 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
                 ModBlocks.WARPED_CHAIR,
                 ModBlocks.CHERRY_CHAIR,
                 ModBlocks.BAMBOO_CHAIR,
+                ModBlocks.REDWOOD_CHAIR,
                 ModBlocks.STRIPPED_OAK_CHAIR,
                 ModBlocks.STRIPPED_SPRUCE_CHAIR,
                 ModBlocks.STRIPPED_BIRCH_CHAIR,
@@ -645,7 +658,8 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
                 ModBlocks.STRIPPED_MANGROVE_CHAIR,
                 ModBlocks.STRIPPED_CRIMSON_CHAIR,
                 ModBlocks.STRIPPED_WARPED_CHAIR,
-                ModBlocks.STRIPPED_CHERRY_CHAIR
+                ModBlocks.STRIPPED_CHERRY_CHAIR,
+                ModBlocks.STRIPPED_REDWOOD_CHAIR
         );
 
         getOrCreateTagBuilder(ModBlockTags.WALL_CANDLES).add(
@@ -1137,7 +1151,8 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
                 ModBlocks.OAK_CHAIR,
                 ModBlocks.SPRUCE_CHAIR,
                 ModBlocks.WARPED_CHAIR,
-                ModBlocks.CHERRY_CHAIR
+                ModBlocks.CHERRY_CHAIR,
+                ModBlocks.REDWOOD_CHAIR
         );
 
         getOrCreateTagBuilder(ModBlockTags.STRIPPABLE_LOGS).add(
@@ -1526,6 +1541,7 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
                 ModBlocks.STRIPPED_DARK_OAK_CHAIR,
                 ModBlocks.STRIPPED_MANGROVE_CHAIR,
                 ModBlocks.STRIPPED_CHERRY_CHAIR,
+                ModBlocks.STRIPPED_REDWOOD_CHAIR,
                 ModBlocks.OAK_CUPBOARD,
                 ModBlocks.SPRUCE_CUPBOARD,
                 ModBlocks.BIRCH_CUPBOARD,
@@ -1562,6 +1578,7 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
                 ModBlocks.OAK_CHAIR,
                 ModBlocks.BAMBOO_CHAIR,
                 ModBlocks.SPRUCE_CHAIR,
+                ModBlocks.REDWOOD_CHAIR,
                 ModBlocks.ACACIA_BENCH,
                 ModBlocks.BIRCH_BENCH,
                 ModBlocks.DARK_OAK_BENCH,

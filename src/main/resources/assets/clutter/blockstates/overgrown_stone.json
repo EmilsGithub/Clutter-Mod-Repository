@@ -1,0 +1,24 @@
+{
+  "variants": {
+    "snowy=false": [
+      {
+        "model": "clutter:block/overgrown_stone"
+      },
+      {
+        "model": "clutter:block/overgrown_stone",
+        "y": 90
+      },
+      {
+        "model": "clutter:block/overgrown_stone",
+        "y": 180
+      },
+      {
+        "model": "clutter:block/overgrown_stone",
+        "y": 270
+      }
+    ],
+    "snowy=true": {
+      "model": "clutter:block/overgrown_stone_snow"
+    }
+  }
+}

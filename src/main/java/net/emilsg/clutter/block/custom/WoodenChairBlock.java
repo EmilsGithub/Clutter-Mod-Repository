@@ -116,6 +116,8 @@ public class WoodenChairBlock extends SeatBlock{
             return ModBlocks.STRIPPED_WARPED_CHAIR.getDefaultState().with(FACING, state.get(FACING));
         } else if (state.getBlock() == ModBlocks.CHERRY_CHAIR) {
             return ModBlocks.STRIPPED_CHERRY_CHAIR.getDefaultState().with(FACING, state.get(FACING));
+        } else if (state.getBlock() == ModBlocks.REDWOOD_CHAIR) {
+            return ModBlocks.STRIPPED_REDWOOD_CHAIR.getDefaultState().with(FACING, state.get(FACING));
         } else {
             return state;
         }

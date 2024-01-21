@@ -63,7 +63,6 @@ public class NecrosisEnchantment extends Enchantment {
 
             serverWorld.spawnEntity(zombie);
         }
-
     }
 
     public boolean isTreasure() {

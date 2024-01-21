@@ -10,7 +10,7 @@
   "effects": {
     "fog_color": 12638463,
     "foliage_color": 5019969,
-    "grass_color": 8828304,
+    "grass_color": 7049587,
     "mood_sound": {
       "block_search_extent": 8,
       "offset": 2.0,
@@ -24,8 +24,8 @@
       "sound": "minecraft:music.overworld.old_growth_taiga"
     },
     "sky_color": 8168447,
-    "water_color": 4159204,
-    "water_fog_color": 329011
+    "water_color": 2068169,
+    "water_fog_color": 271411
   },
   "features": [
     [],
@@ -34,8 +34,7 @@
       "minecraft:lake_lava_surface"
     ],
     [
-      "minecraft:amethyst_geode",
-      "minecraft:forest_rock"
+      "minecraft:amethyst_geode"
     ],
     [
       "minecraft:monster_room",
@@ -80,6 +79,11 @@
     ],
     [
       "minecraft:glow_lichen",
+      "clutter:redwood_placed",
+      "clutter:redwood_placed_2",
+      "clutter:medium_redwood_placed",
+      "clutter:small_redwood_placed",
+      "clutter:redwood_bush_placed",
       "minecraft:patch_large_fern",
       "minecraft:flower_default",
       "minecraft:patch_grass_taiga",

@@ -3,7 +3,7 @@ package net.emilsg.clutter;
 import net.emilsg.clutter.block.ModBlockEntities;
 import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.compat.trinkets.TrinketsElytraUse;
-import net.emilsg.clutter.config.ModConfigs;
+import net.emilsg.clutter.config.ClutterConfig;
 import net.emilsg.clutter.effect.ModEffects;
 import net.emilsg.clutter.enchantment.ModEnchantments;
 import net.emilsg.clutter.entity.ClutterAttributes;
@@ -16,6 +16,7 @@ import net.emilsg.clutter.util.*;
 import net.emilsg.clutter.world.gen.ModWorldGeneration;
 import net.emilsg.clutter.world.gen.features.ModFeatures;
 import net.emilsg.clutter.world.gen.type.ModFoliagePlacerTypes;
+import net.emilsg.clutter.world.gen.type.ModTreeDecoratorTypes;
 import net.emilsg.clutter.world.gen.type.ModTrunkPlacerTypes;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
@@ -31,7 +32,7 @@ public class Clutter implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		ModConfigs.registerConfigs();
+		ClutterConfig.init();
 
 		ModItemGroups.registerItemGroups();
 		ModEffects.registerEffects();
@@ -48,6 +49,7 @@ public class Clutter implements ModInitializer {
 		ModFeatures.registerModFeatures();
 		ModTrunkPlacerTypes.register();
 		ModFoliagePlacerTypes.register();
+		ModTreeDecoratorTypes.register();
 
 		ModWorldGeneration.generateModWorldGen();
 

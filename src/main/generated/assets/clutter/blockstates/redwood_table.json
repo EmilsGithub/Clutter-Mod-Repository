@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "leg_positions=all,legs=false": {
+      "model": "clutter:block/redwood_table_none"
+    },
+    "leg_positions=all,legs=true": {
+      "model": "clutter:block/redwood_table_all"
+    },
+    "leg_positions=east,legs=false": {
+      "model": "clutter:block/redwood_table_none"
+    },
+    "leg_positions=east,legs=true": {
+      "model": "clutter:block/redwood_table_w"
+    },
+    "leg_positions=none,legs=false": {
+      "model": "clutter:block/redwood_table_none"
+    },
+    "leg_positions=none,legs=true": {
+      "model": "clutter:block/redwood_table_none"
+    },
+    "leg_positions=north,legs=false": {
+      "model": "clutter:block/redwood_table_none"
+    },
+    "leg_positions=north,legs=true": {
+      "model": "clutter:block/redwood_table_s"
+    },
+    "leg_positions=north_east,legs=false": {
+      "model": "clutter:block/redwood_table_none"
+    },
+    "leg_positions=north_east,legs=true": {
+      "model": "clutter:block/redwood_table_sw"
+    },
+    "leg_positions=north_west,legs=false": {
+      "model": "clutter:block/redwood_table_none"
+    },
+    "leg_positions=north_west,legs=true": {
+      "model": "clutter:block/redwood_table_se"
+    },
+    "leg_positions=south,legs=false": {
+      "model": "clutter:block/redwood_table_none"
+    },
+    "leg_positions=south,legs=true": {
+      "model": "clutter:block/redwood_table_n"
+    },
+    "leg_positions=south_east,legs=false": {
+      "model": "clutter:block/redwood_table_none"
+    },
+    "leg_positions=south_east,legs=true": {
+      "model": "clutter:block/redwood_table_nw"
+    },
+    "leg_positions=south_west,legs=false": {
+      "model": "clutter:block/redwood_table_none"
+    },
+    "leg_positions=south_west,legs=true": {
+      "model": "clutter:block/redwood_table_ne"
+    },
+    "leg_positions=west,legs=false": {
+      "model": "clutter:block/redwood_table_none"
+    },
+    "leg_positions=west,legs=true": {
+      "model": "clutter:block/redwood_table_e"
+    }
+  }
+}

@@ -55,7 +55,8 @@ public class ModBlockEntities {
                         WARPED_WALL_BOOKSHELF,
                         MANGROVE_WALL_BOOKSHELF,
                         BAMBOO_WALL_BOOKSHELF,
-                        CHERRY_WALL_BOOKSHELF).build());
+                        CHERRY_WALL_BOOKSHELF,
+                        REDWOOD_WALL_BOOKSHELF).build());
 
         WALL_CUPBOARD = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "wall_cupboard"),
                 FabricBlockEntityTypeBuilder.create(WallCupboardInventoryBlockEntity::new,
@@ -69,7 +70,8 @@ public class ModBlockEntities {
                         WARPED_WALL_CUPBOARD,
                         MANGROVE_WALL_CUPBOARD,
                         BAMBOO_WALL_CUPBOARD,
-                        CHERRY_WALL_CUPBOARD).build());
+                        CHERRY_WALL_CUPBOARD,
+                        REDWOOD_WALL_CUPBOARD).build());
 
         CUPBOARD = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "cupboard"),
                 FabricBlockEntityTypeBuilder.create(CupboardInventoryBlockEntity::new,
@@ -83,7 +85,8 @@ public class ModBlockEntities {
                         WARPED_CUPBOARD,
                         MANGROVE_CUPBOARD,
                         BAMBOO_CUPBOARD,
-                        CHERRY_CUPBOARD).build());
+                        CHERRY_CUPBOARD,
+                        REDWOOD_CUPBOARD).build());
 
         SHELF = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "shelf"),
                 FabricBlockEntityTypeBuilder.create(ShelfInventoryBlockEntity::new,
@@ -97,7 +100,8 @@ public class ModBlockEntities {
                         WARPED_SHELF,
                         MANGROVE_SHELF,
                         BAMBOO_SHELF,
-                        CHERRY_SHELF).build());
+                        CHERRY_SHELF,
+                        REDWOOD_SHELF).build());
 
         BONFIRE = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "bonfire"),
                 FabricBlockEntityTypeBuilder.create(BonfireBlockEntity::new,

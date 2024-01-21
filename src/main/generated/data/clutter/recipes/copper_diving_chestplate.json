@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "minecraft:copper_ingot"
+    },
+    "H": {
+      "item": "minecraft:heart_of_the_sea"
+    }
+  },
+  "pattern": [
+    "# #",
+    "#H#",
+    "###"
+  ],
+  "result": {
+    "item": "clutter:copper_diving_chestplate"
+  },
+  "show_notification": true
+}

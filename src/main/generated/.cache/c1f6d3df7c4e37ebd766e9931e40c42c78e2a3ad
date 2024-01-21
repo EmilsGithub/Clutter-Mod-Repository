@@ -1,4 +1,4 @@
-// 1.20.1	2024-01-07T17:58:04.7018815	Clutter/Tags for minecraft:block
+// 1.20.1	2024-01-21T02:03:43.3827667	Clutter/Tags for minecraft:block
 2a1e5827425a69082b28ac486128506cef939a9e data\minecraft\tags\blocks\trapdoors.json
 55a380cd9256f9671993e65b7436596fa240293f data\minecraft\tags\blocks\coral_blocks.json
 5f86340965aeaee98d937e6e0995f3de6809565e data\minecraft\tags\blocks\doors.json
@@ -23,13 +23,14 @@ eda1753cead64f3e2067a64a42edb493a351e3f9 data\minecraft\tags\blocks\wooden_press
 66b7d11510982363fdd483e26ae66b16c4c55ba7 data\minecraft\tags\blocks\wall_corals.json
 3631e0cbc65d1249132b38e2c1d9e7460c68fac0 data\minecraft\tags\blocks\crops.json
 13af4400c18da40c3d7e2054742f27735feaf566 data\minecraft\tags\blocks\mineable\shovel.json
-cca6231af72857ec2eaf1f694b83c993062ad3f1 data\clutter\tags\blocks\flammable.json
-4c4f44ff8ac6bb81256464b8657d108028782e8e data\clutter\tags\blocks\strippable_chairs.json
+7d07398042e7cc3ba379f5862b857d72a1234553 data\clutter\tags\blocks\flammable.json
+fd8697a50e79beccc032de64e1f4ef19942b77e4 data\clutter\tags\blocks\strippable_chairs.json
 3df8a685661e78da437a2479f009e6c26d70d596 data\clutter\tags\blocks\shelves.json
 d4ab1af1dd3f975f3b8f3aaea3d1e6908e551e26 data\clutter\tags\blocks\strippable_logs.json
 932be1264b983266e3e46b0e2a706071afa9dadc data\minecraft\tags\blocks\mineable\hoe.json
 d825d51f61b7397f96c2bc8aea4f90793cc1c686 data\minecraft\tags\blocks\coral_plants.json
 3ac6923c0d0e23977b1a1d5e8fab1793b5250d0b data\clutter\tags\blocks\copper_doors.json
+14b0b640b991754a83ccc9cd7b02dcef9745ea96 data\minecraft\tags\blocks\animals_spawnable_on.json
 1b5fa414ee0adb1344b7933d2288a795521972d3 data\minecraft\tags\blocks\corals.json
 6f79bd8a255dce20a9cf3d608c864a8d492cc1b6 data\clutter\tags\blocks\chimneys.json
 cc1e13c42f33081929c2a443bc4d13915d391686 data\c\tags\blocks\ores.json
@@ -39,6 +40,7 @@ b082460107c8e90898ff881496a5c535683a120b data\minecraft\tags\blocks\saplings.jso
 fbb399301d679c3ba4342ed05bc68266e9d9fb70 data\clutter\tags\blocks\food_boxes.json
 d7909c39e4c64af8d9bff426413f9b8c8941007e data\minecraft\tags\blocks\slabs.json
 8107d23ed53bcde42542b539e495cd89bce0d791 data\minecraft\tags\blocks\stairs.json
+14b0b640b991754a83ccc9cd7b02dcef9745ea96 data\minecraft\tags\blocks\mushroom_grow_block.json
 0c616f7cd29ac7f1e4c3a53ae280bc2ff928adf8 data\clutter\tags\blocks\chains.json
 e463cdb06c28cc79d27cbbc1546edf9eb4bc1ec8 data\clutter\tags\blocks\large_chains.json
 3631e0cbc65d1249132b38e2c1d9e7460c68fac0 data\minecraft\tags\blocks\bee_growables.json
@@ -47,12 +49,14 @@ e463cdb06c28cc79d27cbbc1546edf9eb4bc1ec8 data\clutter\tags\blocks\large_chains.j
 83b4f54ce48b4732e09d5d67d4f721eba9ec5568 data\minecraft\tags\blocks\mineable\pickaxe.json
 c31e8399791e653baa285413657278624820bbce data\clutter\tags\blocks\strippable_tables.json
 4e010c72845c0670173cd865598fcc7e3806d355 data\minecraft\tags\blocks\fence_gates.json
-c119da25d4b6ae3106b5d72ae69cf0024ffb9b86 data\clutter\tags\blocks\wooden_chairs.json
+4951dece5d7432b4da68d41b11b301a9b14be08f data\clutter\tags\blocks\wooden_chairs.json
 5abf6f87f89107462d0a88f3bd1b3aacd252cfd8 data\minecraft\tags\blocks\mineable\axe.json
+14b0b640b991754a83ccc9cd7b02dcef9745ea96 data\minecraft\tags\blocks\dirt.json
 dd2e34eb2baf4001dea86d51befc612802571deb data\minecraft\tags\blocks\wooden_buttons.json
 3bdc0b232dd3e5d2b2bd52b63a8ff221abc1febb data\minecraft\tags\blocks\maintains_farmland.json
 0e199b10598b6bf53d4a430152e838347121e5b7 data\minecraft\tags\blocks\frog_prefer_jump_to.json
 4e02038e6cf65a04103b41ffd399a0d099e25c89 data\minecraft\tags\blocks\enchantment_power_transmitter.json
+14b0b640b991754a83ccc9cd7b02dcef9745ea96 data\minecraft\tags\blocks\sniffer_diggable_block.json
 9bb485b37ff2ec736d971c7eabaea42466629953 data\minecraft\tags\blocks\needs_iron_tool.json
 823e88d6c4f2b77de20b46502ccd9cb7f7c2e2a7 data\minecraft\tags\blocks\wooden_slabs.json
 3d2bda64e2875e0058a3123a1a2ca2207eea9dbf data\minecraft\tags\blocks\wooden_stairs.json

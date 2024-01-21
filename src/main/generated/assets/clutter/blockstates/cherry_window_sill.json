@@ -1,0 +1,304 @@
+{
+  "variants": {
+    "current_model=0,facing=east": {
+      "model": "clutter:block/cherry_window_sill_empty",
+      "y": 90
+    },
+    "current_model=0,facing=north": {
+      "model": "clutter:block/cherry_window_sill_empty"
+    },
+    "current_model=0,facing=south": {
+      "model": "clutter:block/cherry_window_sill_empty",
+      "y": 180
+    },
+    "current_model=0,facing=west": {
+      "model": "clutter:block/cherry_window_sill_empty",
+      "y": 270
+    },
+    "current_model=1,facing=east": {
+      "model": "clutter:block/cherry_window_sill_allium",
+      "y": 90
+    },
+    "current_model=1,facing=north": {
+      "model": "clutter:block/cherry_window_sill_allium"
+    },
+    "current_model=1,facing=south": {
+      "model": "clutter:block/cherry_window_sill_allium",
+      "y": 180
+    },
+    "current_model=1,facing=west": {
+      "model": "clutter:block/cherry_window_sill_allium",
+      "y": 270
+    },
+    "current_model=10,facing=east": {
+      "model": "clutter:block/cherry_window_sill_lily_of_the_valley",
+      "y": 90
+    },
+    "current_model=10,facing=north": {
+      "model": "clutter:block/cherry_window_sill_lily_of_the_valley"
+    },
+    "current_model=10,facing=south": {
+      "model": "clutter:block/cherry_window_sill_lily_of_the_valley",
+      "y": 180
+    },
+    "current_model=10,facing=west": {
+      "model": "clutter:block/cherry_window_sill_lily_of_the_valley",
+      "y": 270
+    },
+    "current_model=11,facing=east": {
+      "model": "clutter:block/cherry_window_sill_orange_tulip",
+      "y": 90
+    },
+    "current_model=11,facing=north": {
+      "model": "clutter:block/cherry_window_sill_orange_tulip"
+    },
+    "current_model=11,facing=south": {
+      "model": "clutter:block/cherry_window_sill_orange_tulip",
+      "y": 180
+    },
+    "current_model=11,facing=west": {
+      "model": "clutter:block/cherry_window_sill_orange_tulip",
+      "y": 270
+    },
+    "current_model=12,facing=east": {
+      "model": "clutter:block/cherry_window_sill_oxeye_daisy",
+      "y": 90
+    },
+    "current_model=12,facing=north": {
+      "model": "clutter:block/cherry_window_sill_oxeye_daisy"
+    },
+    "current_model=12,facing=south": {
+      "model": "clutter:block/cherry_window_sill_oxeye_daisy",
+      "y": 180
+    },
+    "current_model=12,facing=west": {
+      "model": "clutter:block/cherry_window_sill_oxeye_daisy",
+      "y": 270
+    },
+    "current_model=13,facing=east": {
+      "model": "clutter:block/cherry_window_sill_pink_tulip",
+      "y": 90
+    },
+    "current_model=13,facing=north": {
+      "model": "clutter:block/cherry_window_sill_pink_tulip"
+    },
+    "current_model=13,facing=south": {
+      "model": "clutter:block/cherry_window_sill_pink_tulip",
+      "y": 180
+    },
+    "current_model=13,facing=west": {
+      "model": "clutter:block/cherry_window_sill_pink_tulip",
+      "y": 270
+    },
+    "current_model=14,facing=east": {
+      "model": "clutter:block/cherry_window_sill_poppy",
+      "y": 90
+    },
+    "current_model=14,facing=north": {
+      "model": "clutter:block/cherry_window_sill_poppy"
+    },
+    "current_model=14,facing=south": {
+      "model": "clutter:block/cherry_window_sill_poppy",
+      "y": 180
+    },
+    "current_model=14,facing=west": {
+      "model": "clutter:block/cherry_window_sill_poppy",
+      "y": 270
+    },
+    "current_model=15,facing=east": {
+      "model": "clutter:block/cherry_window_sill_red_mushroom",
+      "y": 90
+    },
+    "current_model=15,facing=north": {
+      "model": "clutter:block/cherry_window_sill_red_mushroom"
+    },
+    "current_model=15,facing=south": {
+      "model": "clutter:block/cherry_window_sill_red_mushroom",
+      "y": 180
+    },
+    "current_model=15,facing=west": {
+      "model": "clutter:block/cherry_window_sill_red_mushroom",
+      "y": 270
+    },
+    "current_model=16,facing=east": {
+      "model": "clutter:block/cherry_window_sill_red_tulip",
+      "y": 90
+    },
+    "current_model=16,facing=north": {
+      "model": "clutter:block/cherry_window_sill_red_tulip"
+    },
+    "current_model=16,facing=south": {
+      "model": "clutter:block/cherry_window_sill_red_tulip",
+      "y": 180
+    },
+    "current_model=16,facing=west": {
+      "model": "clutter:block/cherry_window_sill_red_tulip",
+      "y": 270
+    },
+    "current_model=17,facing=east": {
+      "model": "clutter:block/cherry_window_sill_warped_fungus",
+      "y": 90
+    },
+    "current_model=17,facing=north": {
+      "model": "clutter:block/cherry_window_sill_warped_fungus"
+    },
+    "current_model=17,facing=south": {
+      "model": "clutter:block/cherry_window_sill_warped_fungus",
+      "y": 180
+    },
+    "current_model=17,facing=west": {
+      "model": "clutter:block/cherry_window_sill_warped_fungus",
+      "y": 270
+    },
+    "current_model=18,facing=east": {
+      "model": "clutter:block/cherry_window_sill_white_tulip",
+      "y": 90
+    },
+    "current_model=18,facing=north": {
+      "model": "clutter:block/cherry_window_sill_white_tulip"
+    },
+    "current_model=18,facing=south": {
+      "model": "clutter:block/cherry_window_sill_white_tulip",
+      "y": 180
+    },
+    "current_model=18,facing=west": {
+      "model": "clutter:block/cherry_window_sill_white_tulip",
+      "y": 270
+    },
+    "current_model=19,facing=east": {
+      "model": "clutter:block/cherry_window_sill_wither_rose",
+      "y": 90
+    },
+    "current_model=19,facing=north": {
+      "model": "clutter:block/cherry_window_sill_wither_rose"
+    },
+    "current_model=19,facing=south": {
+      "model": "clutter:block/cherry_window_sill_wither_rose",
+      "y": 180
+    },
+    "current_model=19,facing=west": {
+      "model": "clutter:block/cherry_window_sill_wither_rose",
+      "y": 270
+    },
+    "current_model=2,facing=east": {
+      "model": "clutter:block/cherry_window_sill_azure_bluet",
+      "y": 90
+    },
+    "current_model=2,facing=north": {
+      "model": "clutter:block/cherry_window_sill_azure_bluet"
+    },
+    "current_model=2,facing=south": {
+      "model": "clutter:block/cherry_window_sill_azure_bluet",
+      "y": 180
+    },
+    "current_model=2,facing=west": {
+      "model": "clutter:block/cherry_window_sill_azure_bluet",
+      "y": 270
+    },
+    "current_model=3,facing=east": {
+      "model": "clutter:block/cherry_window_sill_blue_orchid",
+      "y": 90
+    },
+    "current_model=3,facing=north": {
+      "model": "clutter:block/cherry_window_sill_blue_orchid"
+    },
+    "current_model=3,facing=south": {
+      "model": "clutter:block/cherry_window_sill_blue_orchid",
+      "y": 180
+    },
+    "current_model=3,facing=west": {
+      "model": "clutter:block/cherry_window_sill_blue_orchid",
+      "y": 270
+    },
+    "current_model=4,facing=east": {
+      "model": "clutter:block/cherry_window_sill_brown_mushroom",
+      "y": 90
+    },
+    "current_model=4,facing=north": {
+      "model": "clutter:block/cherry_window_sill_brown_mushroom"
+    },
+    "current_model=4,facing=south": {
+      "model": "clutter:block/cherry_window_sill_brown_mushroom",
+      "y": 180
+    },
+    "current_model=4,facing=west": {
+      "model": "clutter:block/cherry_window_sill_brown_mushroom",
+      "y": 270
+    },
+    "current_model=5,facing=east": {
+      "model": "clutter:block/cherry_window_sill_cornflower",
+      "y": 90
+    },
+    "current_model=5,facing=north": {
+      "model": "clutter:block/cherry_window_sill_cornflower"
+    },
+    "current_model=5,facing=south": {
+      "model": "clutter:block/cherry_window_sill_cornflower",
+      "y": 180
+    },
+    "current_model=5,facing=west": {
+      "model": "clutter:block/cherry_window_sill_cornflower",
+      "y": 270
+    },
+    "current_model=6,facing=east": {
+      "model": "clutter:block/cherry_window_sill_crimson_fungus",
+      "y": 90
+    },
+    "current_model=6,facing=north": {
+      "model": "clutter:block/cherry_window_sill_crimson_fungus"
+    },
+    "current_model=6,facing=south": {
+      "model": "clutter:block/cherry_window_sill_crimson_fungus",
+      "y": 180
+    },
+    "current_model=6,facing=west": {
+      "model": "clutter:block/cherry_window_sill_crimson_fungus",
+      "y": 270
+    },
+    "current_model=7,facing=east": {
+      "model": "clutter:block/cherry_window_sill_dandelion",
+      "y": 90
+    },
+    "current_model=7,facing=north": {
+      "model": "clutter:block/cherry_window_sill_dandelion"
+    },
+    "current_model=7,facing=south": {
+      "model": "clutter:block/cherry_window_sill_dandelion",
+      "y": 180
+    },
+    "current_model=7,facing=west": {
+      "model": "clutter:block/cherry_window_sill_dandelion",
+      "y": 270
+    },
+    "current_model=8,facing=east": {
+      "model": "clutter:block/cherry_window_sill_dead_bush",
+      "y": 90
+    },
+    "current_model=8,facing=north": {
+      "model": "clutter:block/cherry_window_sill_dead_bush"
+    },
+    "current_model=8,facing=south": {
+      "model": "clutter:block/cherry_window_sill_dead_bush",
+      "y": 180
+    },
+    "current_model=8,facing=west": {
+      "model": "clutter:block/cherry_window_sill_dead_bush",
+      "y": 270
+    },
+    "current_model=9,facing=east": {
+      "model": "clutter:block/cherry_window_sill_fern",
+      "y": 90
+    },
+    "current_model=9,facing=north": {
+      "model": "clutter:block/cherry_window_sill_fern"
+    },
+    "current_model=9,facing=south": {
+      "model": "clutter:block/cherry_window_sill_fern",
+      "y": 180
+    },
+    "current_model=9,facing=west": {
+      "model": "clutter:block/cherry_window_sill_fern",
+      "y": 270
+    }
+  }
+}

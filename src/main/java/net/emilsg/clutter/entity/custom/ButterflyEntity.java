@@ -59,6 +59,7 @@ import java.time.temporal.ChronoField;
 
 public class ButterflyEntity extends ClutterAnimalEntity {
     private static final TrackedData<Boolean> HAS_COCOON = DataTracker.registerData(ButterflyEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    private static final TrackedData<Integer> DATA_ID_TYPE_VARIANT = DataTracker.registerData(ButterflyEntity.class, TrackedDataHandlerRegistry.INTEGER);
 
     public final AnimationState flyingAnimState = new AnimationState();
     private int animationTimeout = 0;
@@ -362,8 +363,7 @@ public class ButterflyEntity extends ClutterAnimalEntity {
         return SoundEvents.BLOCK_WOOL_BREAK;
     }
 
-    private static final TrackedData<Integer> DATA_ID_TYPE_VARIANT =
-            DataTracker.registerData(ButterflyEntity.class, TrackedDataHandlerRegistry.INTEGER);
+
 
     @Override
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {

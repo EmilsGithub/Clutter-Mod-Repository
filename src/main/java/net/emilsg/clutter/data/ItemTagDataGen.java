@@ -25,7 +25,11 @@ public class ItemTagDataGen extends FabricTagProvider.ItemTagProvider {
                 ModItems.SILVER_HELMET,
                 ModItems.SILVER_CHESTPLATE,
                 ModItems.SILVER_LEGGINGS,
-                ModItems.SILVER_BOOTS
+                ModItems.SILVER_BOOTS,
+                ModItems.COPPER_DIVING_HELMET,
+                ModItems.COPPER_DIVING_CHESTPLATE,
+                ModItems.COPPER_DIVING_LEGGINGS,
+                ModItems.COPPER_DIVING_BOOTS
         );
 
         getOrCreateTagBuilder(ItemTags.TRIM_MATERIALS).add(
@@ -203,6 +207,7 @@ public class ItemTagDataGen extends FabricTagProvider.ItemTagProvider {
                 ModItems.CAP,
                 ModItems.PROPELLER_CAP,
                 ModItems.TIARA,
+                ModItems.SILVER_TIARA,
                 ModItems.VIKING_HELMET
                 ).addTag(ModItemTags.PLUSHIES);
 

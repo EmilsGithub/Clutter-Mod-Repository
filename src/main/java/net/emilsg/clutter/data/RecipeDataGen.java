@@ -7,7 +7,6 @@ import net.emilsg.clutter.recipe.KilningRecipeBuilder;
 import net.emilsg.clutter.util.ModItemTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.minecraft.advancement.criterion.InventoryChangedCriterion;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
@@ -62,6 +61,11 @@ public class RecipeDataGen extends FabricRecipeProvider {
         kilningRecipe(Items.PINK_TERRACOTTA, Items.PINK_GLAZED_TERRACOTTA, 1, exporter);
 
         offerClutterWaxingRecipes(exporter);
+
+        offerCombinationRecipe(exporter, Items.SCULK_VEIN, Items.RED_MUSHROOM, ModBlocks.SCULK_MUSHROOM, 2, RecipeCategory.MISC);
+        offerCombinationRecipe(exporter, Items.SCULK_VEIN, Items.BROWN_MUSHROOM, ModBlocks.SCULK_MUSHROOM, 2, RecipeCategory.MISC);
+        offerCombinationRecipe(exporter, Items.SCULK_VEIN, ModBlocks.BROWN_WALL_MUSHROOMS, ModBlocks.SCULK_WALL_MUSHROOMS, 2, RecipeCategory.MISC);
+        offerCombinationRecipe(exporter, Items.SCULK_VEIN, ModBlocks.RED_WALL_MUSHROOMS, ModBlocks.SCULK_WALL_MUSHROOMS, 2, RecipeCategory.MISC);
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModItems.AQUATIC_TORCH)
                 .pattern(" N ")
@@ -153,7 +157,27 @@ public class RecipeDataGen extends FabricRecipeProvider {
 
         offerCompactingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, Blocks.WET_SPONGE, ModItems.SPONGE_SHARD);
         offer2x2CompactingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GLOWLILY_BLOCK, ModItems.GLOWLILY_BULB);
+
         offerArmorRecipe(exporter, ModItems.SILVER_INGOT, ModItems.SILVER_HELMET, ModItems.SILVER_CHESTPLATE, ModItems.SILVER_LEGGINGS, ModItems.SILVER_BOOTS);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.COPPER_DIVING_HELMET)
+                .pattern("###").pattern("#G#")
+                .input('#', Items.COPPER_INGOT)
+                .input('G', Items.GLASS)
+                .criterion(hasItem(Items.COPPER_INGOT), conditionsFromItem(Items.COPPER_INGOT))
+                .criterion(hasItem(Items.GLASS), conditionsFromItem(Items.GLASS))
+                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(ModItems.COPPER_DIVING_HELMET)));
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.COPPER_DIVING_CHESTPLATE)
+                .pattern("# #").pattern("#H#").pattern("###")
+                .input('#', Items.COPPER_INGOT)
+                .input('H', Items.HEART_OF_THE_SEA)
+                .criterion(hasItem(Items.COPPER_INGOT), conditionsFromItem(Items.COPPER_INGOT))
+                .criterion(hasItem(Items.HEART_OF_THE_SEA), conditionsFromItem(Items.HEART_OF_THE_SEA))
+                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(ModItems.COPPER_DIVING_CHESTPLATE)));
+
+        offerLeggingsRecipe(exporter, Items.COPPER_INGOT, ModItems.COPPER_DIVING_LEGGINGS);
+        offerBootsRecipe(exporter, Items.COPPER_INGOT, ModItems.COPPER_DIVING_BOOTS);
 
         offerSulphurRecipe(exporter, ModBlocks.ONYX_BLOCK, ModBlocks.BLACK_ONYX_BLOCK, RecipeCategory.BUILDING_BLOCKS);
         offerSulphurRecipe(exporter, ModBlocks.ONYX_SLAB, ModBlocks.BLACK_ONYX_SLAB, RecipeCategory.BUILDING_BLOCKS);
@@ -170,6 +194,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
         offerHatRecipe(exporter, Items.LIGHT_BLUE_WOOL, Items.WHITE_DYE, ModItems.CAP);
         offerHatRecipe(exporter, Items.PINK_WOOL, Items.BLACK_DYE, ModItems.BERET);
         offerHatRecipe(exporter, Items.GOLD_INGOT, Items.EMERALD, ModItems.TIARA);
+        offerHatRecipe(exporter, ModItems.SILVER_INGOT, Items.DIAMOND, ModItems.SILVER_TIARA);
         offerHatRecipe(exporter, Items.EMERALD, Items.GOLD_INGOT, ModItems.CROWN);
         offerHatRecipe(exporter, Items.BONE, Items.IRON_INGOT, ModItems.VIKING_HELMET);
 
@@ -191,21 +216,46 @@ public class RecipeDataGen extends FabricRecipeProvider {
 
     }
 
+    private void offerCombinationRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible input, ItemConvertible input2, ItemConvertible output, int count, RecipeCategory recipeCategory) {
+        ShapelessRecipeJsonBuilder.create(recipeCategory, output.asItem(), count)
+                .input(input.asItem())
+                .input(input2.asItem())
+                .criterion(hasItem(input.asItem()), conditionsFromItem(input.asItem()))
+                .criterion(hasItem(input2.asItem()), conditionsFromItem(input2.asItem()))
+                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output.asItem()) + "_from_" + input.asItem() + "_and_" + input2.asItem()));
+    }
+
 
     private void kilningRecipe(ItemConvertible ingredient, ItemConvertible result, int count, Consumer<RecipeJsonProvider> exporter) {
         new KilningRecipeBuilder(ingredient, result, count).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(result)));
     }
 
     private void offerArmorRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible component, Item helmet, Item chestplate, Item leggings, Item boots) {
+        offerHelmetRecipe(exporter, component, helmet);
+        offerChestplateRecipe(exporter, component, chestplate);
+        offerLeggingsRecipe(exporter, component, leggings);
+        offerBootsRecipe(exporter, component, boots);
+    }
+
+    private void offerHelmetRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible component, Item helmet) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, helmet)
                 .pattern("###").pattern("# #").input('#', component)
                 .criterion(hasItem(component), conditionsFromItem(component)).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(helmet)));
+    }
+
+    private void offerChestplateRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible component, Item chestplate) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, chestplate)
                 .pattern("# #").pattern("###").pattern("###").input('#', component)
                 .criterion(hasItem(component), conditionsFromItem(component)).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(chestplate)));
+    }
+
+    private void offerLeggingsRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible component, Item leggings) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, leggings)
                 .pattern("###").pattern("# #").pattern("# #").input('#', component)
                 .criterion(hasItem(component), conditionsFromItem(component)).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(leggings)));
+    }
+
+    private void offerBootsRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible component, Item boots) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, boots)
                 .pattern("# #").pattern("# #").input('#', component)
                 .criterion(hasItem(component), conditionsFromItem(component)).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(boots)));
@@ -239,12 +289,5 @@ public class RecipeDataGen extends FabricRecipeProvider {
 
             }
         });
-    }
-
-    private InventoryChangedCriterion.Conditions conditionsFromIngredient(Ingredient ingredient) {
-        if (ingredient.getMatchingStacks().length > 0) {
-            return InventoryChangedCriterion.Conditions.items(ingredient.getMatchingStacks()[0].getItem());
-        }
-        return InventoryChangedCriterion.Conditions.items(Items.AIR);
     }
 }

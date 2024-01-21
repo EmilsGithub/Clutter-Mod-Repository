@@ -48,7 +48,9 @@ public class ModBiomes {
                         context.getRegistryLookup(RegistryKeys.CONFIGURED_CARVER));
 
         globalOverworldGeneration(builder);
-        DefaultBiomeFeatures.addMossyRocks(builder);
+
+        ClutterDefaultBiomeFeatures.addRedwoodTreeFeatures(builder);
+
         DefaultBiomeFeatures.addLargeFerns(builder);
         DefaultBiomeFeatures.addDefaultOres(builder);
         DefaultBiomeFeatures.addDefaultDisks(builder);
@@ -66,10 +68,10 @@ public class ModBiomes {
                 .generationSettings(builder.build())
                 .spawnSettings(spawnBuilder.build())
                 .effects((new BiomeEffects.Builder())
-                        .waterColor(4159204)
-                        .waterFogColor(329011)
+                        .waterColor(2068169)
+                        .waterFogColor(271411)
                         .skyColor(OverworldBiomeCreator.getSkyColor(0.3f))
-                        .grassColor(8828304)
+                        .grassColor(7049587)
                         .foliageColor(5019969)
                         .fogColor(12638463)
                         .moodSound(BiomeMoodSound.CAVE)

@@ -30,7 +30,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class WoodenBenchBlock extends SeatBlock {
 
-    public static final EnumProperty<WoodenBenchBlock.LegPosition> LEGPOSITIONS = EnumProperty.of("leg_positions", LegPosition.class);
+    public static final EnumProperty<WoodenBenchBlock.LegPosition> LEG_POSITIONS = EnumProperty.of("leg_positions", LegPosition.class);
 
     protected static final VoxelShape NORTH_NONE_SHAPE = VoxelShapes.union(Block.createCuboidShape(0.0, 8.0, 3.0, 16.0, 11.0, 5.0),
             Block.createCuboidShape(0.0, 11.0, 2.0, 16.0, 14.0, 4.0), Block.createCuboidShape(0.0, 13.0, 1.0, 16.0, 16.0, 3.0),
@@ -129,7 +129,7 @@ public class WoodenBenchBlock extends SeatBlock {
         super(settings);
     }
 
-    private enum LegPosition implements StringIdentifiable {
+    public enum LegPosition implements StringIdentifiable {
         NONE("none"),
         NORTH("north"),
         SOUTH("south"),
@@ -154,13 +154,13 @@ public class WoodenBenchBlock extends SeatBlock {
 
         public static LegPosition fromNeighborBlocks(boolean west, boolean north, boolean east, boolean south) {
             if (west) {
-                return LegPosition.WEST;
-            } else if (east) {
                 return LegPosition.EAST;
+            } else if (east) {
+                return LegPosition.WEST;
             } else if (north) {
-                return LegPosition.NORTH;
-            } else if (south) {
                 return LegPosition.SOUTH;
+            } else if (south) {
+                return LegPosition.NORTH;
             } else {
                 return LegPosition.ALL;
             }
@@ -170,7 +170,7 @@ public class WoodenBenchBlock extends SeatBlock {
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         Direction i = state.get(FACING);
-        LegPosition j = state.get(LEGPOSITIONS);
+        LegPosition j = state.get(LEG_POSITIONS);
         if (i == Direction.NORTH) {
             return switch (j) {
                 case ALL -> NORTH_ALL_SHAPE;
@@ -218,14 +218,13 @@ public class WoodenBenchBlock extends SeatBlock {
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(FACING, WATERLOGGED, LEGPOSITIONS);
+        builder.add(FACING, WATERLOGGED, LEG_POSITIONS);
     }
 
     @Override
     public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
         super.onPlaced(world, pos, state, placer, itemStack);
         updateBenchLegs(world, pos, state);
-
     }
 
     @Override
@@ -245,97 +244,99 @@ public class WoodenBenchBlock extends SeatBlock {
     }
 
     private void updateBenchLegs(World world, BlockPos pos, BlockState state) {
-        boolean eastBench = world.getBlockState(pos.east()).getBlock() instanceof WoodenBenchBlock;
-        boolean westBench = world.getBlockState(pos.west()).getBlock() instanceof WoodenBenchBlock;
-        boolean northBench = world.getBlockState(pos.north()).getBlock() instanceof WoodenBenchBlock;
-        boolean southBench = world.getBlockState(pos.south()).getBlock() instanceof WoodenBenchBlock;
+        boolean eastBench = world.getBlockState(pos.east()).getBlock() instanceof WoodenBenchBlock && world.getBlockState(pos.east()).get(FACING) == state.get(FACING);
+        boolean westBench = world.getBlockState(pos.west()).getBlock() instanceof WoodenBenchBlock && world.getBlockState(pos.west()).get(FACING) == state.get(FACING);
+        boolean northBench = world.getBlockState(pos.north()).getBlock() instanceof WoodenBenchBlock && world.getBlockState(pos.north()).get(FACING) == state.get(FACING);
+        boolean southBench = world.getBlockState(pos.south()).getBlock() instanceof WoodenBenchBlock && world.getBlockState(pos.south()).get(FACING) == state.get(FACING);
 
         boolean facingNS = state.get(FACING) == Direction.NORTH || state.get(FACING) == Direction.SOUTH;
         boolean facingEW = state.get(FACING) == Direction.EAST || state.get(FACING) == Direction.WEST;
 
         if (facingNS) {
             if (eastBench && westBench) {
-                world.setBlockState(pos, state.with(LEGPOSITIONS, LegPosition.NONE));
+                world.setBlockState(pos, state.with(LEG_POSITIONS, LegPosition.NONE));
             } else if (!eastBench && !westBench) {
-                world.setBlockState(pos, state.with(LEGPOSITIONS, LegPosition.ALL));
+                world.setBlockState(pos, state.with(LEG_POSITIONS, LegPosition.ALL));
             } else if (westBench) {
-                world.setBlockState(pos, state.with(LEGPOSITIONS, LegPosition.EAST));
+                world.setBlockState(pos, state.with(LEG_POSITIONS, LegPosition.EAST));
             } else if (eastBench) {
-                world.setBlockState(pos, state.with(LEGPOSITIONS, LegPosition.WEST));
+                world.setBlockState(pos, state.with(LEG_POSITIONS, LegPosition.WEST));
             }
         }
         else if (facingEW) {
             if (northBench && southBench) {
-                world.setBlockState(pos, state.with(LEGPOSITIONS, LegPosition.NONE));
+                world.setBlockState(pos, state.with(LEG_POSITIONS, LegPosition.NONE));
             } else if (!northBench && !southBench) {
-                world.setBlockState(pos, state.with(LEGPOSITIONS, LegPosition.ALL));
+                world.setBlockState(pos, state.with(LEG_POSITIONS, LegPosition.ALL));
             } else if (northBench) {
-                world.setBlockState(pos, state.with(LEGPOSITIONS, LegPosition.SOUTH));
+                world.setBlockState(pos, state.with(LEG_POSITIONS, LegPosition.SOUTH));
             } else if (southBench) {
-                world.setBlockState(pos, state.with(LEGPOSITIONS, LegPosition.NORTH));
+                world.setBlockState(pos, state.with(LEG_POSITIONS, LegPosition.NORTH));
             }
         }
     }
 
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-        boolean eastBench = world.getBlockState(pos.east()).getBlock() instanceof WoodenBenchBlock;
-        boolean westBench = world.getBlockState(pos.west()).getBlock() instanceof WoodenBenchBlock;
-        boolean northBench = world.getBlockState(pos.north()).getBlock() instanceof WoodenBenchBlock;
-        boolean southBench = world.getBlockState(pos.south()).getBlock() instanceof WoodenBenchBlock;
+        boolean eastBench = world.getBlockState(pos.east()).getBlock() instanceof WoodenBenchBlock && world.getBlockState(pos.east()).get(FACING) == state.get(FACING);
+        boolean westBench = world.getBlockState(pos.west()).getBlock() instanceof WoodenBenchBlock && world.getBlockState(pos.west()).get(FACING) == state.get(FACING);
+        boolean northBench = world.getBlockState(pos.north()).getBlock() instanceof WoodenBenchBlock && world.getBlockState(pos.north()).get(FACING) == state.get(FACING);
+        boolean southBench = world.getBlockState(pos.south()).getBlock() instanceof WoodenBenchBlock && world.getBlockState(pos.south()).get(FACING) == state.get(FACING);
 
         boolean facingNS = state.get(FACING) == Direction.NORTH || state.get(FACING) == Direction.SOUTH;
         boolean facingEW = state.get(FACING) == Direction.EAST || state.get(FACING) == Direction.WEST;
 
         if (facingNS) {
             if (eastBench && westBench) {
-                return state.with(LEGPOSITIONS, LegPosition.NONE);
+                return state.with(LEG_POSITIONS, LegPosition.NONE);
             } else if (!eastBench && !westBench) {
-                return state.with(LEGPOSITIONS, LegPosition.ALL);
+                return state.with(LEG_POSITIONS, LegPosition.ALL);
             } else if (westBench) {
-                return state.with(LEGPOSITIONS, LegPosition.EAST);
+                return state.with(LEG_POSITIONS, LegPosition.EAST);
             } else if (eastBench) {
-                return state.with(LEGPOSITIONS, LegPosition.WEST);
+                return state.with(LEG_POSITIONS, LegPosition.WEST);
             }
         }
         else if (facingEW) {
             if (northBench && southBench) {
-                return state.with(LEGPOSITIONS, LegPosition.NONE);
+                return state.with(LEG_POSITIONS, LegPosition.NONE);
             } else if (!northBench && !southBench) {
-                return state.with(LEGPOSITIONS, LegPosition.ALL);
+                return state.with(LEG_POSITIONS, LegPosition.ALL);
             } else if (northBench) {
-                return state.with(LEGPOSITIONS, LegPosition.SOUTH);
+                return state.with(LEG_POSITIONS, LegPosition.SOUTH);
             } else if (southBench) {
-                return state.with(LEGPOSITIONS, LegPosition.NORTH);
+                return state.with(LEG_POSITIONS, LegPosition.NORTH);
             }
         }
 
-        LegPosition legPositions = LegPosition.fromNeighborBlocks(westBench, northBench, eastBench, southBench);
-        return state.with(LEGPOSITIONS, legPositions);
+        LegPosition leg_Positions = LegPosition.fromNeighborBlocks(westBench, northBench, eastBench, southBench);
+        return state.with(LEG_POSITIONS, leg_Positions);
     }
 
     private BlockState getStrippedState(BlockState state) {
         if (state.getBlock() == ModBlocks.OAK_BENCH) {
-            return ModBlocks.STRIPPED_OAK_BENCH.getDefaultState().with(FACING, state.get(FACING)).with(LEGPOSITIONS, state.get(LEGPOSITIONS));
+            return ModBlocks.STRIPPED_OAK_BENCH.getDefaultState().with(FACING, state.get(FACING)).with(LEG_POSITIONS, state.get(LEG_POSITIONS));
         } else if (state.getBlock() == ModBlocks.SPRUCE_BENCH) {
-            return ModBlocks.STRIPPED_SPRUCE_BENCH.getDefaultState().with(FACING, state.get(FACING)).with(LEGPOSITIONS, state.get(LEGPOSITIONS));
+            return ModBlocks.STRIPPED_SPRUCE_BENCH.getDefaultState().with(FACING, state.get(FACING)).with(LEG_POSITIONS, state.get(LEG_POSITIONS));
         } else if (state.getBlock() == ModBlocks.BIRCH_BENCH) {
-            return ModBlocks.STRIPPED_BIRCH_BENCH.getDefaultState().with(FACING, state.get(FACING)).with(LEGPOSITIONS, state.get(LEGPOSITIONS));
+            return ModBlocks.STRIPPED_BIRCH_BENCH.getDefaultState().with(FACING, state.get(FACING)).with(LEG_POSITIONS, state.get(LEG_POSITIONS));
         } else if (state.getBlock() == ModBlocks.JUNGLE_BENCH) {
-            return ModBlocks.STRIPPED_JUNGLE_BENCH.getDefaultState().with(FACING, state.get(FACING)).with(LEGPOSITIONS, state.get(LEGPOSITIONS));
+            return ModBlocks.STRIPPED_JUNGLE_BENCH.getDefaultState().with(FACING, state.get(FACING)).with(LEG_POSITIONS, state.get(LEG_POSITIONS));
         } else if (state.getBlock() == ModBlocks.ACACIA_BENCH) {
-            return ModBlocks.STRIPPED_ACACIA_BENCH.getDefaultState().with(FACING, state.get(FACING)).with(LEGPOSITIONS, state.get(LEGPOSITIONS));
+            return ModBlocks.STRIPPED_ACACIA_BENCH.getDefaultState().with(FACING, state.get(FACING)).with(LEG_POSITIONS, state.get(LEG_POSITIONS));
         } else if (state.getBlock() == ModBlocks.DARK_OAK_BENCH) {
-            return ModBlocks.STRIPPED_DARK_OAK_BENCH.getDefaultState().with(FACING, state.get(FACING)).with(LEGPOSITIONS, state.get(LEGPOSITIONS));
+            return ModBlocks.STRIPPED_DARK_OAK_BENCH.getDefaultState().with(FACING, state.get(FACING)).with(LEG_POSITIONS, state.get(LEG_POSITIONS));
         } else if (state.getBlock() == ModBlocks.MANGROVE_BENCH) {
-            return ModBlocks.STRIPPED_MANGROVE_BENCH.getDefaultState().with(FACING, state.get(FACING)).with(LEGPOSITIONS, state.get(LEGPOSITIONS));
+            return ModBlocks.STRIPPED_MANGROVE_BENCH.getDefaultState().with(FACING, state.get(FACING)).with(LEG_POSITIONS, state.get(LEG_POSITIONS));
         } else if (state.getBlock() == ModBlocks.CRIMSON_BENCH) {
-            return ModBlocks.STRIPPED_CRIMSON_BENCH.getDefaultState().with(FACING, state.get(FACING)).with(LEGPOSITIONS, state.get(LEGPOSITIONS));
+            return ModBlocks.STRIPPED_CRIMSON_BENCH.getDefaultState().with(FACING, state.get(FACING)).with(LEG_POSITIONS, state.get(LEG_POSITIONS));
         } else if (state.getBlock() == ModBlocks.WARPED_BENCH) {
-            return ModBlocks.STRIPPED_WARPED_BENCH.getDefaultState().with(FACING, state.get(FACING)).with(LEGPOSITIONS, state.get(LEGPOSITIONS));
+            return ModBlocks.STRIPPED_WARPED_BENCH.getDefaultState().with(FACING, state.get(FACING)).with(LEG_POSITIONS, state.get(LEG_POSITIONS));
         } else if (state.getBlock() == ModBlocks.CHERRY_BENCH) {
             return ModBlocks.STRIPPED_CHERRY_BENCH.getDefaultState().with(FACING, state.get(FACING));
-        }  else {
+        } else if (state.getBlock() == ModBlocks.REDWOOD_BENCH) {
+            return ModBlocks.STRIPPED_REDWOOD_BENCH.getDefaultState().with(FACING, state.get(FACING));
+        } else {
             return state;
         }
     }

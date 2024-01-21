@@ -31,6 +31,7 @@ public abstract class ModelLoaderMixin {
         this.addModel(new ModelIdentifier(Clutter.MOD_ID, "butterfly_wings_hat", "inventory"));
         this.addModel(new ModelIdentifier(Clutter.MOD_ID, "propeller_cap_hat", "inventory"));
         this.addModel(new ModelIdentifier(Clutter.MOD_ID, "tiara_hat", "inventory"));
+        this.addModel(new ModelIdentifier(Clutter.MOD_ID, "silver_tiara_hat", "inventory"));
         this.addModel(new ModelIdentifier(Clutter.MOD_ID, "viking_helmet_hat", "inventory"));
 
     }

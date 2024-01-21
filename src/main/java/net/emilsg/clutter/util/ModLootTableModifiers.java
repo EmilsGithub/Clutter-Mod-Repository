@@ -1,7 +1,7 @@
 package net.emilsg.clutter.util;
 
 import net.emilsg.clutter.block.ModBlocks;
-import net.emilsg.clutter.config.ModConfigs;
+import net.emilsg.clutter.config.ClutterConfig;
 import net.emilsg.clutter.enchantment.ModEnchantments;
 import net.emilsg.clutter.item.ModItems;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
@@ -100,7 +100,7 @@ public class ModLootTableModifiers {
                         .rolls(ConstantLootNumberProvider.create(1))
                         .conditionally(InvertedLootCondition.builder(MatchToolLootCondition.builder(ItemPredicate.Builder.create().items(Items.SHEARS))).build())
                         .conditionally(InvertedLootCondition.builder(MatchToolLootCondition.builder(ItemPredicate.Builder.create().enchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, NumberRange.IntRange.atLeast(1))))).build())
-                        .with(ItemEntry.builder(ModItems.CHERRIES).conditionally(RandomChanceLootCondition.builder(ModConfigs.CHERRY_DROP_RATE)))
+                        .with(ItemEntry.builder(ModItems.CHERRIES).conditionally(RandomChanceLootCondition.builder(ClutterConfig.getInstance().getFloat(ClutterConfig.CHERRY_DROP_RATE))))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1, 2)).build());
                 tableBuilder.pool(poolBuilder.build());
             }
@@ -120,7 +120,7 @@ public class ModLootTableModifiers {
             }
 
             //Coins
-        if (ModConfigs.COIN_DROPS_AND_LOOT_GEN) {
+        if (ClutterConfig.getInstance().getBoolean(ClutterConfig.COIN_DROPS_AND_LOOT_GEN)) {
             for (Identifier structureId : structureIds) {
                 if (id.equals(structureId)) {
                     LootPool.Builder poolBuilder = LootPool.builder()
@@ -134,7 +134,7 @@ public class ModLootTableModifiers {
                 }
             }
 
-            if (id.equals(END_CITY_TREASURE_ID) && !ModConfigs.DISABLE_GREED_LOOT_GENERATION) {
+            if (id.equals(END_CITY_TREASURE_ID) && !ClutterConfig.getInstance().getBoolean(ClutterConfig.DISABLE_GREED_GENERATION)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .with(ItemEntry.builder(Items.BOOK).conditionally(RandomChanceLootCondition.builder(0.25f))).apply(EnchantRandomlyLootFunction.create().add(ModEnchantments.GREED))

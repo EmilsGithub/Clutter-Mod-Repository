@@ -1,0 +1,7 @@
+{
+  "parent": "clutter:block/parent/window_sill_parent",
+  "textures": {
+    "flower": "minecraft:block/oak_window_sill_parent",
+    "planks": "minecraft:block/bamboo_planks"
+  }
+}

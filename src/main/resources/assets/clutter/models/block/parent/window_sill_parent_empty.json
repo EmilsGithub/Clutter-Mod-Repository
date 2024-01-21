@@ -1,0 +1,61 @@
+{
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"textures": {
+		"planks": "minecraft:block/oak_planks",
+		"particle": "#planks"
+	},
+	"elements": [
+		{
+			"from": [0, 12, 0],
+			"to": [16, 16, 8],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 4], "texture": "#planks"},
+				"east": {"uv": [0, 0, 8, 4], "texture": "#planks"},
+				"south": {"uv": [0, 0, 16, 4], "texture": "#planks"},
+				"west": {"uv": [0, 0, 8, 4], "texture": "#planks"},
+				"up": {"uv": [16, 8, 0, 0], "texture": "#planks"},
+				"down": {"uv": [16, 0, 0, 8], "texture": "#planks"}
+			}
+		}
+	],
+	"gui_light": "front",
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [0, 90, 0],
+			"translation": [1.5, -3, -2.75],
+			"scale": [0.33, 0.33, 0.33]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [0, 90, 0],
+			"translation": [1.5, -3, -2.75],
+			"scale": [0.33, 0.33, 0.33]
+		},
+		"firstperson_righthand": {
+			"translation": [0, -5.25, 0],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"firstperson_lefthand": {
+			"translation": [0, -5.25, 0],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"ground": {
+			"translation": [0, -4.25, 0],
+			"scale": [0.33, 0.33, 0.33]
+		},
+		"gui": {
+			"rotation": [-160, 135, 180],
+			"translation": [1.75, -6, 0],
+			"scale": [0.6, 0.6, 0.6]
+		},
+		"head": {
+			"rotation": [0, 180, 0],
+			"translation": [0, -1.75, -4]
+		},
+		"fixed": {
+			"rotation": [0, -180, 0],
+			"translation": [0, -6, -5],
+			"scale": [0.75, 0.75, 0.75]
+		}
+	}
+}

@@ -50,10 +50,20 @@ public class BrickKilnScreenHandler extends ScreenHandler {
     public ItemStack quickMove(PlayerEntity player, int invSlot) {
         ItemStack newStack = ItemStack.EMPTY;
         Slot slot = this.slots.get(invSlot);
+
         if (slot != null && slot.hasStack()) {
             ItemStack originalStack = slot.getStack();
             newStack = originalStack.copy();
-            if (invSlot < this.inventory.size()) {
+
+            if (invSlot == 2) {
+                if (!this.insertItem(originalStack, 3, this.slots.size(), true)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if (isFuel(originalStack)) {
+                if (!this.insertItem(originalStack, 2, 3, false)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if (invSlot < this.inventory.size()) {
                 if (!this.insertItem(originalStack, this.inventory.size(), this.slots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
@@ -71,13 +81,13 @@ public class BrickKilnScreenHandler extends ScreenHandler {
         return newStack;
     }
 
+    public boolean isFuel(ItemStack itemStack) {
+        return AbstractFurnaceBlockEntity.canUseAsFuel(itemStack);
+    }
+
     @Override
     public boolean canUse(PlayerEntity player) {
         return this.inventory.canPlayerUse(player);
-    }
-
-    public boolean isFuel(ItemStack itemStack) {
-        return AbstractFurnaceBlockEntity.canUseAsFuel(itemStack);
     }
 
     private void addPlayerInventory(PlayerInventory playerInventory) {

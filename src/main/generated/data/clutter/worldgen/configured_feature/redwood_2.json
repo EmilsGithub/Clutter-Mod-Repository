@@ -1,7 +1,11 @@
 {
   "type": "minecraft:tree",
   "config": {
-    "decorators": [],
+    "decorators": [
+      {
+        "type": "minecraft:trunk_wall_mushroom"
+      }
+    ],
     "dirt_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
@@ -35,9 +39,9 @@
     "ignore_vines": false,
     "minimum_size": {
       "type": "minecraft:two_layers_feature_size",
-      "limit": 1,
-      "lower_size": 3,
-      "upper_size": 3
+      "limit": 0,
+      "lower_size": 0,
+      "upper_size": 1
     },
     "trunk_placer": {
       "type": "minecraft:redwood_trunk_placer",

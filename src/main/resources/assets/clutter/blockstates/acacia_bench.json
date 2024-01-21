@@ -1,181 +1,102 @@
 {
   "variants":{
-    "waterlogged=false,facing=north,leg_positions=all":{
+    "facing=north,leg_positions=all":{
       "model":"clutter:block/benches/acacia/all"
     },
-    "waterlogged=false,facing=south,leg_positions=all":{
+    "facing=south,leg_positions=all":{
       "model":"clutter:block/benches/acacia/all",
       "y": 180
     },
-    "waterlogged=false,facing=east,leg_positions=all":{
+    "facing=east,leg_positions=all":{
       "model":"clutter:block/benches/acacia/all",
       "y": 90
     },
-    "waterlogged=false,facing=west,leg_positions=all":{
+    "facing=west,leg_positions=all":{
       "model":"clutter:block/benches/acacia/all",
       "y": 270
     },
-    "waterlogged=false,facing=north,leg_positions=east":{
+
+
+    "facing=north,leg_positions=east":{
       "model":"clutter:block/benches/acacia/left"
     },
-    "waterlogged=false,facing=south,leg_positions=east":{
+    "facing=south,leg_positions=east":{
       "model":"clutter:block/benches/acacia/right",
       "y": 180
     },
-    "waterlogged=false,facing=north,leg_positions=west":{
+    "facing=north,leg_positions=west":{
       "model":"clutter:block/benches/acacia/right"
     },
-    "waterlogged=false,facing=south,leg_positions=west":{
+    "facing=south,leg_positions=west":{
       "model":"clutter:block/benches/acacia/left",
       "y": 180
     },
-    "waterlogged=false,facing=north,leg_positions=none":{
+
+
+    "facing=north,leg_positions=none":{
       "model":"clutter:block/benches/acacia/none"
     },
-    "waterlogged=false,facing=south,leg_positions=none":{
+    "facing=south,leg_positions=none":{
       "model":"clutter:block/benches/acacia/none",
       "y": 180
     },
-    "waterlogged=false,facing=east,leg_positions=none":{
+    "facing=east,leg_positions=none":{
       "model":"clutter:block/benches/acacia/none",
       "y": 90
     },
-    "waterlogged=false,facing=west,leg_positions=none":{
+    "facing=west,leg_positions=none":{
       "model":"clutter:block/benches/acacia/none",
       "y": 270
     },
-    "waterlogged=false,facing=east,leg_positions=north":{
+
+
+    "facing=east,leg_positions=north":{
       "model":"clutter:block/benches/acacia/right",
       "y": 90
     },
-    "waterlogged=false,facing=west,leg_positions=north":{
+    "facing=west,leg_positions=north":{
       "model":"clutter:block/benches/acacia/left",
       "y": 270
     },
-    "waterlogged=false,facing=east,leg_positions=south":{
+    "facing=east,leg_positions=south":{
       "model":"clutter:block/benches/acacia/left",
       "y": 90
     },
-    "waterlogged=false,facing=west,leg_positions=south":{
+    "facing=west,leg_positions=south":{
       "model":"clutter:block/benches/acacia/right",
       "y": 270
     },
-    "waterlogged=true,facing=north,leg_positions=all":{
-      "model":"clutter:block/benches/acacia/all"
-    },
-    "waterlogged=true,facing=south,leg_positions=all":{
-      "model":"clutter:block/benches/acacia/all",
-      "y": 180
-    },
-    "waterlogged=true,facing=east,leg_positions=all":{
-      "model":"clutter:block/benches/acacia/all",
-      "y": 90
-    },
-    "waterlogged=true,facing=west,leg_positions=all":{
-      "model":"clutter:block/benches/acacia/all",
-      "y": 270
-    },
-    "waterlogged=true,facing=north,leg_positions=east":{
-      "model":"clutter:block/benches/acacia/left"
-    },
-    "waterlogged=true,facing=south,leg_positions=east":{
-      "model":"clutter:block/benches/acacia/right",
-      "y": 180
-    },
-    "waterlogged=true,facing=north,leg_positions=west":{
-      "model":"clutter:block/benches/acacia/right"
-    },
-    "waterlogged=true,facing=south,leg_positions=west":{
-      "model":"clutter:block/benches/acacia/left",
-      "y": 180
-    },
-    "waterlogged=true,facing=north,leg_positions=none":{
+
+
+    "facing=north,leg_positions=north":{
       "model":"clutter:block/benches/acacia/none"
     },
-    "waterlogged=true,facing=south,leg_positions=none":{
+    "facing=east,leg_positions=east":{
+      "model":"clutter:block/benches/acacia/none",
+      "y": 90
+    },
+    "facing=north,leg_positions=south":{
       "model":"clutter:block/benches/acacia/none",
       "y": 180
     },
-    "waterlogged=true,facing=east,leg_positions=none":{
-      "model":"clutter:block/benches/acacia/none",
-      "y": 90
-    },
-    "waterlogged=true,facing=west,leg_positions=none":{
+    "facing=west,leg_positions=west":{
       "model":"clutter:block/benches/acacia/none",
       "y": 270
     },
-    "waterlogged=true,facing=east,leg_positions=north":{
-      "model":"clutter:block/benches/acacia/right",
-      "y": 90
-    },
-    "waterlogged=true,facing=west,leg_positions=north":{
-      "model":"clutter:block/benches/acacia/left",
-      "y": 270
-    },
-    "waterlogged=true,facing=east,leg_positions=south":{
-      "model":"clutter:block/benches/acacia/left",
-      "y": 90
-    },
-    "waterlogged=true,facing=west,leg_positions=south":{
-      "model":"clutter:block/benches/acacia/right",
-      "y": 270
-    },
-    "facing=north,leg_positions=north,waterlogged=false":{
+
+
+    "facing=south,leg_positions=north":{
       "model":"clutter:block/benches/acacia/none"
     },
-    "facing=east,leg_positions=east,waterlogged=false":{
-      "model":"clutter:block/benches/acacia/none",
-      "y": 90
-    },
-    "facing=east,leg_positions=east,waterlogged=true":{
-      "model":"clutter:block/benches/acacia/none",
-      "y": 90
-    },
-    "facing=north,leg_positions=north,waterlogged=true":{
-      "model":"clutter:block/benches/acacia/none"
-    },
-    "facing=north,leg_positions=south,waterlogged=false":{
-      "model":"clutter:block/benches/acacia/none"
-    },
-    "facing=east,leg_positions=west,waterlogged=true":{
-      "model":"clutter:block/benches/acacia/none",
-      "y": 90
-    },
-    "facing=west,leg_positions=west,waterlogged=true":{
-      "model":"clutter:block/benches/acacia/none",
-      "y": 270
-    },
-    "facing=north,leg_positions=south,waterlogged=true":{
+    "facing=south,leg_positions=south":{
       "model":"clutter:block/benches/acacia/none",
       "y": 180
     },
-    "facing=west,leg_positions=east,waterlogged=false":{
-      "model":"clutter:block/benches/acacia/none",
-      "y": 90
-    },
-    "facing=west,leg_positions=west,waterlogged=false":{
+    "facing=east,leg_positions=west":{
       "model":"clutter:block/benches/acacia/none",
       "y": 270
     },
-    "facing=south,leg_positions=north,waterlogged=true":{
-      "model":"clutter:block/benches/acacia/none"
-    },
-    "facing=south,leg_positions=north,waterlogged=false":{
-      "model":"clutter:block/benches/acacia/none"
-    },
-    "facing=south,leg_positions=south,waterlogged=false":{
-      "model":"clutter:block/benches/acacia/none",
-      "y": 180
-    },
-    "facing=south,leg_positions=south,waterlogged=true":{
-      "model":"clutter:block/benches/acacia/none",
-      "y": 180
-    },
-    "facing=east,leg_positions=west,waterlogged=false":{
-      "model":"clutter:block/benches/acacia/none",
-      "y": 270
-    },
-    "facing=west,leg_positions=east,waterlogged=true":{
+    "facing=west,leg_positions=east":{
       "model":"clutter:block/benches/acacia/none",
       "y": 90
     }

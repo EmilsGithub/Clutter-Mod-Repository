@@ -15,6 +15,7 @@ import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.PropertyDelegate;
@@ -24,6 +25,7 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -132,7 +134,8 @@ public class BrickKilnBlockEntity extends BlockEntity implements ExtendedScreenH
                 ItemStack fuelStack = blockEntity.inventory.get(FUEL_ITEM_SLOT);
                 blockEntity.fuelTime = blockEntity.getFuelTime(fuelStack) / 2;
                 blockEntity.burnTime = blockEntity.fuelTime;
-                fuelStack.decrement(1);
+                if(fuelStack.getRecipeRemainder().isOf(Items.BUCKET)) blockEntity.setStack(FUEL_ITEM_SLOT, new ItemStack(Items.BUCKET));
+                else if (!fuelStack.getRecipeRemainder().isOf(Items.BUCKET)) fuelStack.decrement(1);
                 willContinueBurning = true;
             }
         }
@@ -154,9 +157,10 @@ public class BrickKilnBlockEntity extends BlockEntity implements ExtendedScreenH
             blockEntity.resetProgress();
         }
 
-        if (wasBurning != willContinueBurning) {
-            world.setBlockState(pos, state.with(Properties.LIT, willContinueBurning), Block.NOTIFY_ALL);
+        if(!world.isClient) {
+            world.setBlockState(pos, state.with(Properties.LIT, blockEntity.burnTime > 0), Block.NOTIFY_ALL);
         }
+
     }
 
 
@@ -219,7 +223,46 @@ public class BrickKilnBlockEntity extends BlockEntity implements ExtendedScreenH
     }
 
     private boolean canInsertIntoOutputSlot() {
-        return this.getStack(OUTPUT_SLOT).isEmpty() ||
-                this.getStack(OUTPUT_SLOT).getCount() < this.getStack(OUTPUT_SLOT).getMaxCount();
+        return this.getStack(OUTPUT_SLOT).isEmpty() || this.getStack(OUTPUT_SLOT).getCount() < this.getStack(OUTPUT_SLOT).getMaxCount();
+    }
+
+    @Override
+    public boolean isValid(int slot, ItemStack stack) {
+        if (slot == OUTPUT_SLOT) {
+            return false;
+        }
+        if (slot == FUEL_ITEM_SLOT) {
+            ItemStack itemStack = this.inventory.get(1);
+            return canUseAsFuel(stack) || stack.isOf(Items.BUCKET) && !itemStack.isOf(Items.BUCKET);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean canInsert(int slot, ItemStack stack, @Nullable Direction dir) {
+        return this.isValid(slot, stack);
+    }
+
+    @Override
+    public boolean canExtract(int slot, ItemStack stack, Direction dir) {
+        if (dir == Direction.DOWN && slot == FUEL_ITEM_SLOT) {
+            return stack.isOf(Items.WATER_BUCKET) || stack.isOf(Items.BUCKET);
+        }
+        return true;
+    }
+
+    private static final int[] TOP_SLOTS = new int[]{INPUT_SLOT};
+    private static final int[] BOTTOM_SLOTS = new int[]{OUTPUT_SLOT, FUEL_ITEM_SLOT};
+    private static final int[] SIDE_SLOTS = new int[]{FUEL_ITEM_SLOT};
+
+    @Override
+    public int[] getAvailableSlots(Direction side) {
+        if (side == Direction.DOWN) {
+            return BOTTOM_SLOTS;
+        }
+        if (side == Direction.UP) {
+            return TOP_SLOTS;
+        }
+        return SIDE_SLOTS;
     }
 }

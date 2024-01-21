@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top_right",
+  "textures": {
+    "bottom": "clutter:block/redwood_door_bottom",
+    "top": "clutter:block/redwood_door_top"
+  }
+}

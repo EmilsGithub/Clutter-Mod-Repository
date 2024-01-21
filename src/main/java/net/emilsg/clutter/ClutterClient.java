@@ -2,6 +2,7 @@ package net.emilsg.clutter;
 
 import io.netty.buffer.Unpooled;
 import net.emilsg.clutter.block.ModBlockEntities;
+import net.emilsg.clutter.block.custom.WindowSillBlock;
 import net.emilsg.clutter.block.entity.render.CardboardBoxBlockEntityRenderer;
 import net.emilsg.clutter.block.entity.render.PlateBlockEntityRenderer;
 import net.emilsg.clutter.block.entity.render.ShelfBlockEntityRenderer;
@@ -9,15 +10,10 @@ import net.emilsg.clutter.compat.trinkets.client.TrinketsIntegrationClient;
 import net.emilsg.clutter.entity.ModEntities;
 import net.emilsg.clutter.entity.client.*;
 import net.emilsg.clutter.entity.client.layer.ModModelLayers;
-import net.emilsg.clutter.entity.client.model.BeaverModel;
-import net.emilsg.clutter.entity.client.model.ButterflyModel;
-import net.emilsg.clutter.entity.client.model.CrimsonNewtModel;
-import net.emilsg.clutter.entity.client.model.EmberTortoiseModel;
-import net.emilsg.clutter.entity.client.player.ElytraRenderer;
-import net.emilsg.clutter.entity.client.render.BeaverRenderer;
-import net.emilsg.clutter.entity.client.render.ButterflyRenderer;
-import net.emilsg.clutter.entity.client.render.CrimsonNewtRenderer;
-import net.emilsg.clutter.entity.client.render.EmberTortoiseRenderer;
+import net.emilsg.clutter.entity.client.model.*;
+import net.emilsg.clutter.entity.client.player.RendererRegistration;
+import net.emilsg.clutter.entity.client.player.model.ScubaModel;
+import net.emilsg.clutter.entity.client.render.*;
 import net.emilsg.clutter.networking.ModMessages;
 import net.emilsg.clutter.screen.*;
 import net.emilsg.clutter.util.ModKeyInputHandler;
@@ -50,7 +46,7 @@ public class ClutterClient implements ClientModInitializer {
     public void onInitializeClient() {
         if(IS_TRINKETS_LOADED) TrinketsIntegrationClient.registerTrinkets();
 
-        ElytraRenderer.register();
+        RendererRegistration.register();
 
         ModKeyInputHandler.register();
         this.registerColorProviders();
@@ -452,7 +448,9 @@ public class ClutterClient implements ClientModInitializer {
                 GREEN_FIRE,
                 GLOWLILY_CROP,
                 GLOWLILY,
-                IRON_CANDLE_HOLDER,
+                REDWOOD_WALL_BOOKSHELF,
+                REDWOOD_WINDOW_SILL,
+                //IRON_CANDLE_HOLDER,
                 //SILVER_CANDLE_HOLDER,
                 //GOLDEN_CANDLE_HOLDER,
                 //COPPER_CANDLE_HOLDER,
@@ -549,7 +547,10 @@ public class ClutterClient implements ClientModInitializer {
                 ANCHOR_CORAL_WALL_FAN,
                 RED_PRESENT,
                 REDWOOD_LEAVES,
-                REDWOOD_SAPLING
+                REDWOOD_SAPLING,
+                REDWOOD_DOOR,
+                REDWOOD_TRAPDOOR,
+                OVERGROWN_STONE
         );
 
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), blocksToRender.toArray(new Block[0]));
@@ -559,17 +560,18 @@ public class ClutterClient implements ClientModInitializer {
 
     private void registerColorProviders() {
         ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) ->
-                        (world != null && pos != null) ? BiomeColors.getFoliageColor(world, pos)
-                        : FoliageColors.getDefaultColor(),
+                        (world != null && pos != null) ? BiomeColors.getFoliageColor(world, pos) : FoliageColors.getDefaultColor(),
                 RIPE_KIWI_LEAVES,
                 KIWI_LEAVES
         );
 
         ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) ->
-                        (world != null && pos != null) ? BiomeColors.getGrassColor(world, pos)
-                                : FoliageColors.getDefaultColor(),
+                        (world != null && pos != null) ? BiomeColors.getGrassColor(world, pos) : FoliageColors.getDefaultColor(),
                 CATTAILS
         );
+
+
+
 
 
         ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) ->
@@ -601,6 +603,20 @@ public class ClutterClient implements ClientModInitializer {
                         Objects.requireNonNull(ColorProviderRegistry.ITEM.get(Blocks.SPRUCE_LEAVES)).getColor(stack, tintIndex),
                 REDWOOD_LEAVES
         );
+
+
+        ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) ->
+                        Objects.requireNonNull(ColorProviderRegistry.BLOCK.get(Blocks.FERN)).getColor(state, world, pos, tintIndex),
+                REDWOOD_LEAVES
+        );
+
+        ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) -> {
+            if (state.get(WindowSillBlock.CURRENT_MODEL).equals(9)) {
+                return Objects.requireNonNull(ColorProviderRegistry.BLOCK.get(Blocks.FERN)).getColor(state, world, pos, tintIndex);
+            }
+            return 0xFFFFFF;
+        }, OAK_WINDOW_SILL, SPRUCE_WINDOW_SILL, BIRCH_WINDOW_SILL, JUNGLE_WINDOW_SILL, ACACIA_WINDOW_SILL, DARK_OAK_WINDOW_SILL, MANGROVE_WINDOW_SILL, CRIMSON_WINDOW_SILL, WARPED_WINDOW_SILL, BAMBOO_WINDOW_SILL, CHERRY_WINDOW_SILL, REDWOOD_WINDOW_SILL);
+
     }
 
     private void registerConnectionEvents() {
@@ -614,6 +630,9 @@ public class ClutterClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.BEAVER, BeaverModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.BUTTERFLY, ButterflyModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.EMBER_TORTOISE, EmberTortoiseModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.JELLYFISH, JellyfishModel::getTexturedModelData);
+
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.SCUBA_TANK, ScubaModel::getTexturedModelData);
     }
 
     private void registerEntityRenderers() {
@@ -629,6 +648,7 @@ public class ClutterClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.CRIMSON_NEWT, CrimsonNewtRenderer::new);
         EntityRendererRegistry.register(ModEntities.BEAVER, BeaverRenderer::new);
         EntityRendererRegistry.register(ModEntities.EMBER_TORTOISE, EmberTortoiseRenderer::new);
+        EntityRendererRegistry.register(ModEntities.JELLYFISH, JellyfishRenderer::new);
     }
 
     private void registerBlockEntityRenderers() {

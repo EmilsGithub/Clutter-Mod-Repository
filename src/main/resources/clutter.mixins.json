@@ -12,6 +12,7 @@
     "PistonBlockMixin",
     "PlayerEntityMixin",
     "ServerWorldAccessor",
+    "TreeDecoratorTypeInvoker",
     "TrunkPlacerTypeInvoker"
   ],
   "injectors": {
