@@ -1,6 +1,15 @@
 # Clutter-Mod-Repository
 ## The Github repository for the Minecraft mod Clutter
 The source code for the different versions of the mod can be found under the Branches named accordingly.
+Update Logs Below or in the [Wiki](https://github.com/EmilsGithub/Clutter-Mod-Repository/wiki).
+
+## Links  
+
+<p align="center">
+  <a href="https://discord.com/invite/pDMkMxMREA"> <img src="https://raw.githubusercontent.com/EmilsGithub/Clutter-Mod-Repository/main/Images/discord.png" width="75" height="auto">   <a href="https://modrinth.com/mod/clutter"> <img src="https://raw.githubusercontent.com/EmilsGithub/Clutter-Mod-Repository/main/Images/modrinth.png" width="75" height="auto">   <a href="https://www.curseforge.com/minecraft/mc-mods/clutter"> <img src="https://raw.githubusercontent.com/EmilsGithub/Clutter-Mod-Repository/main/Images/curse.png" width="75" height="auto">
+</p>
+
+[![Bisect](https://www.bisecthosting.com/images/CF/Clutter/BH_CL_PromoCard.webp)](https://bisecthosting.com/ClutterMod)
 
 # Update Log - Clutter-0.5.7
 
@@ -113,15 +122,3 @@ The source code for the different versions of the mod can be found under the Bra
 - Major changes to Tags, Recipes, how Models are generated, etc for future updates,
 - Changes to Timings for Redstone Components
 - Sulphur can now be found in Ore Veins in Basalt Deltas
-
-<br>
-
-## Links  
-
-<a href="https://discord.com/invite/pDMkMxMREA"> <img src="https://raw.githubusercontent.com/EmilsGithub/Clutter-Mod-Repository/main/Images/discord.png" width="75" height="auto">
-  
-<a href="https://modrinth.com/mod/clutter"> <img src="https://raw.githubusercontent.com/EmilsGithub/Clutter-Mod-Repository/main/Images/modrinth.png" width="75" height="auto">
-  
-<a href="https://www.curseforge.com/minecraft/mc-mods/clutter"> <img src="https://raw.githubusercontent.com/EmilsGithub/Clutter-Mod-Repository/main/Images/curse.png" width="75" height="auto">
-
-[![Bisect](https://www.bisecthosting.com/images/CF/Clutter/BH_CL_PromoCard.webp)](https://bisecthosting.com/ClutterMod)
