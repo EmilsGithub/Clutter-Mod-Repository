@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "clutter:block/purple_lupine_bottom"
+  }
+}
