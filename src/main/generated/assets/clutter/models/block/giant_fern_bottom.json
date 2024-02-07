@@ -1,0 +1,6 @@
+{
+  "parent": "clutter:block/parent/tinted_large_cross_parent",
+  "textures": {
+    "cross": "clutter:block/giant_fern_bottom"
+  }
+}

@@ -1,5 +1,12 @@
 package net.emilsg.clutter.entity.client.animation;
 
+import net.minecraft.client.render.entity.animation.Animation;
+import net.minecraft.client.render.entity.animation.AnimationHelper;
+import net.minecraft.client.render.entity.animation.Keyframe;
+import net.minecraft.client.render.entity.animation.Transformation;
+
+public class DrownedSkeletonAnimations {
+
 public static final Animation DROWNED_SKELETON_SWIMMING = Animation.Builder.create(3.625f).looping()
 .addBoneAnimation("head",
 	new Transformation(Transformation.Targets.ROTATE,
@@ -128,3 +135,5 @@ public static final Animation DROWNED_SKELETON_IDLE = Animation.Builder.create(7
 			Transformation.Interpolations.LINEAR), 
 		new Keyframe(7.708343f, AnimationHelper.createTranslationalVector(0f, 0f, 0f),
 			Transformation.Interpolations.LINEAR))).build();
+
+}

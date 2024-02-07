@@ -3,6 +3,7 @@ package net.emilsg.clutter;
 import io.netty.buffer.Unpooled;
 import net.emilsg.clutter.block.ModBlockEntities;
 import net.emilsg.clutter.block.custom.WindowSillBlock;
+import net.emilsg.clutter.block.custom.cutout.ICutoutRenderable;
 import net.emilsg.clutter.block.entity.render.CardboardBoxBlockEntityRenderer;
 import net.emilsg.clutter.block.entity.render.PlateBlockEntityRenderer;
 import net.emilsg.clutter.block.entity.render.ShelfBlockEntityRenderer;
@@ -32,6 +33,7 @@ import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.registry.Registries;
 
 import java.util.Arrays;
 import java.util.List;
@@ -55,6 +57,10 @@ public class ClutterClient implements ClientModInitializer {
         this.registerBlockEntityRenderers();
         this.registerScreenHandlers();
         this.registerConnectionEvents();
+
+        for (Block block : Registries.BLOCK) {
+            if (block instanceof ICutoutRenderable) BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getCutout());
+        }
 
         List<Block> blocksToRender = Arrays.asList(
                 FOOD_BOX,
@@ -550,10 +556,26 @@ public class ClutterClient implements ClientModInitializer {
                 REDWOOD_SAPLING,
                 REDWOOD_DOOR,
                 REDWOOD_TRAPDOOR,
-                OVERGROWN_STONE
+                OVERGROWN_STONE,
+                GIANT_FERN
+
         );
 
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), blocksToRender.toArray(new Block[0]));
+
+
+        List<Block> blocksToRenderTranslucent = Arrays.asList(
+                REINFORCED_COPPER_GLASS,
+                EXPOSED_REINFORCED_COPPER_GLASS,
+                WEATHERED_REINFORCED_COPPER_GLASS,
+                OXIDIZED_REINFORCED_COPPER_GLASS,
+                WAXED_REINFORCED_COPPER_GLASS,
+                WAXED_EXPOSED_REINFORCED_COPPER_GLASS,
+                WAXED_WEATHERED_REINFORCED_COPPER_GLASS,
+                WAXED_OXIDIZED_REINFORCED_COPPER_GLASS
+        );
+
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(), blocksToRenderTranslucent.toArray(new Block[0]));
 
         ModMessages.registerS2CPackets();
     }
@@ -569,10 +591,6 @@ public class ClutterClient implements ClientModInitializer {
                         (world != null && pos != null) ? BiomeColors.getGrassColor(world, pos) : FoliageColors.getDefaultColor(),
                 CATTAILS
         );
-
-
-
-
 
         ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) ->
                 Objects.requireNonNull(ColorProviderRegistry.BLOCK.get(Blocks.LILY_PAD)).getColor(state, world, pos, tintIndex),
@@ -607,7 +625,7 @@ public class ClutterClient implements ClientModInitializer {
 
         ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) ->
                         Objects.requireNonNull(ColorProviderRegistry.BLOCK.get(Blocks.FERN)).getColor(state, world, pos, tintIndex),
-                REDWOOD_LEAVES
+                GIANT_FERN
         );
 
         ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) -> {
@@ -631,6 +649,9 @@ public class ClutterClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.BUTTERFLY, ButterflyModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.EMBER_TORTOISE, EmberTortoiseModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.JELLYFISH, JellyfishModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.CRAB, CrabModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.DROWNED_SKELETON, DrownedSkeletonModel::getTexturedModelData);
+
 
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.SCUBA_TANK, ScubaModel::getTexturedModelData);
     }
@@ -649,6 +670,11 @@ public class ClutterClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.BEAVER, BeaverRenderer::new);
         EntityRendererRegistry.register(ModEntities.EMBER_TORTOISE, EmberTortoiseRenderer::new);
         EntityRendererRegistry.register(ModEntities.JELLYFISH, JellyfishRenderer::new);
+        EntityRendererRegistry.register(ModEntities.CRAB, CrabRenderer::new);
+
+
+        EntityRendererRegistry.register(ModEntities.DROWNED_SKELETON, DrownedSkeletonRenderer::new);
+
     }
 
     private void registerBlockEntityRenderers() {

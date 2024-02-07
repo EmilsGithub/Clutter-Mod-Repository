@@ -12,5 +12,14 @@ public class ClutterDefaultBiomeFeatures {
         builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, ModPlacedFeatures.MEDIUM_REDWOOD_PLACED_KEY);
         builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, ModPlacedFeatures.SMALL_REDWOOD_PLACED_KEY);
         builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, ModPlacedFeatures.REDWOOD_BUSH_PLACED_KEY);
+        builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, ModPlacedFeatures.DEAD_REDWOOD_PLACED_KEY);
+    }
+
+    public static void addRedwoodFoliageFeatures(GenerationSettings.LookupBackedBuilder builder) {
+        builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, ModPlacedFeatures.GIANT_FERN_PLACED_KEY);
+    }
+
+    public static void addLupineFieldsFoliageFeatures(GenerationSettings.LookupBackedBuilder builder) {
+        builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, ModPlacedFeatures.LUPINES_PLACED_KEY);
     }
 }

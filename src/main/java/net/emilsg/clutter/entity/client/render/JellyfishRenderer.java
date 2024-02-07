@@ -18,13 +18,8 @@ public class JellyfishRenderer extends MobEntityRenderer<JellyfishEntity, Jellyf
     private static final Identifier BLUE_TEXTURE = new Identifier(Clutter.MOD_ID, "textures/entity/blue_jellyfish.png");
     private static final Identifier GREEN_TEXTURE = new Identifier(Clutter.MOD_ID, "textures/entity/green_jellyfish.png");
 
-    private static final Identifier PURPLE_EMISSIVE = new Identifier(Clutter.MOD_ID, "textures/entity/purple_jellyfish_emissive.png");
-    private static final Identifier BLUE_EMISSIVE = new Identifier(Clutter.MOD_ID, "textures/entity/blue_jellyfish_emissive.png");
-    private static final Identifier GREEN_EMISSIVE = new Identifier(Clutter.MOD_ID, "textures/entity/green_jellyfish_emissive.png");
-
     public JellyfishRenderer(EntityRendererFactory.Context ctx) {
         super(ctx, new JellyfishModel<>(ctx.getPart(ModModelLayers.JELLYFISH)), 0.4f);
-        this.addFeature(new EmissiveRenderer<>(this, this::getEmissiveTextureForVariant));
     }
 
     @Nullable
@@ -50,14 +45,6 @@ public class JellyfishRenderer extends MobEntityRenderer<JellyfishEntity, Jellyf
             case GREEN -> GREEN_TEXTURE;
             case BLUE -> BLUE_TEXTURE;
             default -> PURPLE_TEXTURE;
-        };
-    }
-
-    private Identifier getEmissiveTextureForVariant(JellyfishEntity entity) {
-        return switch (entity.getVariant()) {
-            case BLUE -> BLUE_EMISSIVE;
-            case GREEN -> GREEN_EMISSIVE;
-            case PURPLE -> PURPLE_EMISSIVE;
         };
     }
 }

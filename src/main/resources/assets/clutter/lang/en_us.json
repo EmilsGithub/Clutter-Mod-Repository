@@ -1401,5 +1401,13 @@
   "key.clutter.pet": "Pet Entity",
   "enchantment.clutter.necrosis.description": "Has a chance to Zombify some mobs when slain, depending on enchantment level.",
   "enchantment.clutter.necrosis": "Necrosis",
-  "block.clutter.pet_bed": "Pet Bed"
+  "block.clutter.pet_bed": "Pet Bed",
+
+  "clutter.commands.config.reset": "%s Configs have been reset. Please restart your game or server for the changes to take effect.",
+  "clutter.commands.config.update_configs": "%s Config file, and version number has been updated and any missing config values have been added to it.",
+  "clutter.commands.config.config_prompt": "%s\n%s %s %s",
+  "clutter.commands.config.op_only": "[Clutter: Operator Only]",
+  "clutter.commands.config.config_update_prompt": "The current configuration file version (%s) does not match the expected version",
+  "clutter.commands.config.config_update": "Update Config File",
+  "clutter.commands.config.update_tooltip": "Run Update Command"
 }

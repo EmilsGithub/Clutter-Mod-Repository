@@ -5,10 +5,7 @@ import net.emilsg.clutter.Clutter;
 import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.util.ModProperties;
 import net.emilsg.clutter.world.gen.features.ModFeatures;
-import net.emilsg.clutter.world.gen.tree.RedwoodFoliagePlacer;
-import net.emilsg.clutter.world.gen.tree.RedwoodTrunkPlacer;
-import net.emilsg.clutter.world.gen.tree.SmallRedwoodFoliagePlacer;
-import net.emilsg.clutter.world.gen.tree.WallMushroomTreeDecorator;
+import net.emilsg.clutter.world.gen.tree.*;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.registry.Registerable;
@@ -66,6 +63,10 @@ public class ModConfiguredFeatures {
     public static final RegistryKey<ConfiguredFeature<?,?>> REDWOOD_KEY_2 = registerKey("redwood_2");
     public static final RegistryKey<ConfiguredFeature<?,?>> MEDIUM_REDWOOD_KEY = registerKey("medium_redwood");
     public static final RegistryKey<ConfiguredFeature<?,?>> SMALL_REDWOOD_KEY = registerKey("small_redwood");
+    public static final RegistryKey<ConfiguredFeature<?,?>> DEAD_REDWOOD_KEY = registerKey("dead_redwood");
+    public static final RegistryKey<ConfiguredFeature<?,?>> GIANT_FERN_KEY = registerKey("giant_fern");
+
+    public static final RegistryKey<ConfiguredFeature<?, ?>> LUPINES_KEY = registerKey("lupines");
 
 
     public static void bootstrap(Registerable<ConfiguredFeature<?, ?>> context) {
@@ -159,7 +160,7 @@ public class ModConfiguredFeatures {
                 new TreeFeatureConfig.Builder(BlockStateProvider.of(ModBlocks.REDWOOD_LOG),
                         new RedwoodTrunkPlacer(20, 5, 5), BlockStateProvider.of(ModBlocks.REDWOOD_LEAVES),
                         new RedwoodFoliagePlacer(ConstantIntProvider.create(0), ConstantIntProvider.create(0), UniformIntProvider.create(13, 17)),
-                        new TwoLayersFeatureSize(1, 2, 2)).decorators(ImmutableList.of(new WallMushroomTreeDecorator())).build());
+                        new TwoLayersFeatureSize(1, 2, 2)).build());
 
         register(context, REDWOOD_KEY_2, Feature.TREE,
                 new TreeFeatureConfig.Builder(BlockStateProvider.of(ModBlocks.REDWOOD_LOG),
@@ -179,6 +180,28 @@ public class ModConfiguredFeatures {
                         new SmallRedwoodFoliagePlacer(ConstantIntProvider.create(0), ConstantIntProvider.create(0), UniformIntProvider.create(13, 17)),
                         new TwoLayersFeatureSize(2, 0, 2)).build());
 
+        register(context, DEAD_REDWOOD_KEY, Feature.TREE,
+                new TreeFeatureConfig.Builder(BlockStateProvider.of(ModBlocks.REDWOOD_LOG),
+                        new DeadRedwoodTrunkPlacer(8, 1, 1), BlockStateProvider.of(ModBlocks.REDWOOD_LEAVES),
+                        new EmptyFoliagePlacer(ConstantIntProvider.create(0), ConstantIntProvider.create(0), UniformIntProvider.create(13, 17)),
+                        new TwoLayersFeatureSize(0, 0, 1)).decorators(ImmutableList.of(new WallMushroomTreeDecorator())).build());
+
+
+        register(context, GIANT_FERN_KEY, Feature.RANDOM_PATCH,
+                ConfiguredFeatures.createRandomPatchFeatureConfig(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(BlockStateProvider.of(ModBlocks.GIANT_FERN))));
+
+        register(context, LUPINES_KEY, Feature.RANDOM_PATCH, ConfiguredFeatures.createRandomPatchFeatureConfig(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(
+                new WeightedBlockStateProvider(DataPool.<BlockState>builder()
+                        .add(ModBlocks.SMALL_BLUE_LUPINE.getDefaultState(), 10)
+                        .add(ModBlocks.SMALL_MAGENTA_LUPINE.getDefaultState(), 10)
+                        .add(ModBlocks.SMALL_PURPLE_LUPINE.getDefaultState(), 10)
+                        .add(ModBlocks.SMALL_WHITE_LUPINE.getDefaultState(), 10)
+                        .add(ModBlocks.BLUE_LUPINE.getDefaultState(), 1)
+                        .add(ModBlocks.MAGENTA_LUPINE.getDefaultState(), 1)
+                        .add(ModBlocks.PURPLE_LUPINE.getDefaultState(), 1)
+                        .add(ModBlocks.WHITE_LUPINE.getDefaultState(), 1)
+                        .build())
+        )));
     }
 
     public static RegistryKey<ConfiguredFeature<?, ?>> registerKey(String name) {

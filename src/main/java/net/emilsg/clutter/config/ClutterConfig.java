@@ -4,16 +4,11 @@ import net.emilsg.clutter.Clutter;
 import net.fabricmc.loader.api.FabricLoader;
 import org.slf4j.Logger;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
+import java.io.*;
+import java.util.*;
 
 public class ClutterConfig {
-    private static final String FILE_VERSION = "1.0.0";
+    public static final String FILE_VERSION = "0.6.0";
     private static final Logger LOGGER = Clutter.LOGGER;
     private final Map<String, ConfigEntry<?>> configs;
     private final File configFile;
@@ -63,6 +58,7 @@ public class ClutterConfig {
     public static final String GENERATE_SULPHUR_ORES = "generate_sulphur_ores";
     public static final String GENERATE_BIOMES = "generate_biomes";
     public static final String GENERATE_REDWOOD_FORESTS = "generate_redwood_forests";
+    public static final String GENERATE_LUPINE_FIELDS = "generate_lupine_fields";
     public static final String GENERATE_SEASHELLS = "generate_seashells";
 
     public void initializeConfigs() {
@@ -91,7 +87,33 @@ public class ClutterConfig {
         configs.put(GENERATE_SULPHUR_ORES, new ConfigEntry<>( true, "Generate Sulphur Ores."));
         configs.put(GENERATE_BIOMES, new ConfigEntry<>( true, "Generate Clutter Biomes."));
         configs.put(GENERATE_REDWOOD_FORESTS, new ConfigEntry<>( true, "Generate Redwood Forests."));
+        configs.put(GENERATE_LUPINE_FIELDS, new ConfigEntry<>( true, "Generate Lupine Fields."));
         configs.put(GENERATE_SEASHELLS, new ConfigEntry<>( true, "Generate Seashells."));
+    }
+
+    public boolean isConfigVersionCurrent() {
+        if(getCurrentFileVersion() != null) {
+            return getCurrentFileVersion().equals("# File Version: " + FILE_VERSION);
+        }
+        return false;
+    }
+
+    public String getCurrentFileVersion() {
+        try (BufferedReader reader = new BufferedReader(new FileReader(configFile))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (line.startsWith("# File Version:")) {
+                    return line;
+                }
+            }
+        } catch (IOException e) {
+            LOGGER.error("Error reading config file for version check.", e);
+        }
+        return null;
+    }
+
+    public String getFileVersionNumber(String versionLine) {
+        return versionLine.replace("# File Version: ", "");
     }
 
     private void loadOrCreateConfig() {
@@ -123,6 +145,61 @@ public class ClutterConfig {
         }
     }
 
+    public void addMissingConfigsAndUpdateVersion() {
+        loadConfig();
+
+        StringBuilder newFileContent = new StringBuilder();
+        boolean versionMismatch = true;
+        boolean changesMade = false;
+
+        try (FileReader reader = new FileReader(configFile)) {
+            try (BufferedReader bufferedReader = new BufferedReader(reader)) {
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    if (line.startsWith("# File Version:")) {
+                        if (line.equals("# File Version: " + FILE_VERSION)) {
+                            versionMismatch = false;
+                        } else {
+                            line = "# File Version: " + FILE_VERSION;
+                            changesMade = true;
+                        }
+                    }
+                    newFileContent.append(line).append("\n");
+                }
+            }
+        } catch (IOException e) {
+            LOGGER.error("Failed to read existing configuration for version check.", e);
+        }
+
+        for (Map.Entry<String, ConfigEntry<?>> entry : configs.entrySet()) {
+            if (!newFileContent.toString().contains(entry.getKey() + "=")) {
+                ConfigEntry<?> configEntry = entry.getValue();
+                String key = entry.getKey();
+                String value = configEntry.getValue().toString();
+                String comment = configEntry.getComment();
+
+                if (comment != null && !comment.isEmpty()) {
+                    newFileContent.append("\n# ").append(comment).append(" Default value: ").append(value);
+                }
+                newFileContent.append("\n").append(key).append("=").append(value).append("\n");
+                changesMade = true;
+            }
+        }
+
+        if (changesMade) {
+            try (FileWriter writer = new FileWriter(configFile, false)) {
+                writer.write(newFileContent.toString());
+                LOGGER.info("Configuration file updated with missing entries and/or version update.");
+            } catch (IOException e) {
+                LOGGER.error("Failed to update configuration file.", e);
+            }
+        } else {
+            LOGGER.info("Configuration file up-to-date. No changes made.");
+        }
+    }
+
+
+
     @SuppressWarnings("unchecked")
     private <T> void updateConfigEntry(String key, ConfigEntry<T> configEntry, String value) {
         T convertedValue = (T) convertStringToType(key, value, configEntry.getValue().getClass(), configEntry);
@@ -150,7 +227,7 @@ public class ClutterConfig {
         throw new IllegalArgumentException("Unsupported type for configuration key '" + key + "': " + type);
     }
 
-    private void createDefaultConfig() {
+    public void createDefaultConfig() {
         try (FileWriter writer = new FileWriter(configFile)) {
             writer.write("# File Version: " + ClutterConfig.FILE_VERSION + "\n\n");
 
@@ -168,6 +245,18 @@ public class ClutterConfig {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private <T> void resetConfigEntryValue(ConfigEntry<T> configEntry) {
+        configEntry.setValue(configEntry.getDefaultValue());
+    }
+
+    public void resetConfig() {
+        for (Map.Entry<String, ConfigEntry<?>> entry : configs.entrySet()) {
+            resetConfigEntryValue(entry.getValue());
+        }
+        createDefaultConfig();
+        LOGGER.info("Configuration reset to default values.");
     }
 
     public boolean getBoolean(String key) {

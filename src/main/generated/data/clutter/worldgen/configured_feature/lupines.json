@@ -1,0 +1,89 @@
+{
+  "type": "minecraft:random_patch",
+  "config": {
+    "feature": {
+      "feature": {
+        "type": "minecraft:simple_block",
+        "config": {
+          "to_place": {
+            "type": "minecraft:weighted_state_provider",
+            "entries": [
+              {
+                "data": {
+                  "Name": "clutter:small_blue_lupine"
+                },
+                "weight": 10
+              },
+              {
+                "data": {
+                  "Name": "clutter:small_magenta_lupine"
+                },
+                "weight": 10
+              },
+              {
+                "data": {
+                  "Name": "clutter:small_purple_lupine"
+                },
+                "weight": 10
+              },
+              {
+                "data": {
+                  "Name": "clutter:small_white_lupine"
+                },
+                "weight": 10
+              },
+              {
+                "data": {
+                  "Name": "clutter:blue_lupine",
+                  "Properties": {
+                    "half": "lower"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "clutter:magenta_lupine",
+                  "Properties": {
+                    "half": "lower"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "clutter:purple_lupine",
+                  "Properties": {
+                    "half": "lower"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "clutter:white_lupine",
+                  "Properties": {
+                    "half": "lower"
+                  }
+                },
+                "weight": 1
+              }
+            ]
+          }
+        }
+      },
+      "placement": [
+        {
+          "type": "minecraft:block_predicate_filter",
+          "predicate": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "minecraft:air"
+          }
+        }
+      ]
+    },
+    "tries": 96,
+    "xz_spread": 7,
+    "y_spread": 3
+  }
+}

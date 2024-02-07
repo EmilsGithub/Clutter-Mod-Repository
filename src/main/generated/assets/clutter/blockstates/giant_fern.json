@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "clutter:block/giant_fern_bottom"
+    },
+    "half=upper": {
+      "model": "clutter:block/giant_fern_top"
+    }
+  }
+}

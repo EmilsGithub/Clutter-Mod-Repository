@@ -25,6 +25,7 @@ public class ModOverworldRegion extends Region {
         this.addModifiedVanillaOverworldBiomes(mapper, builder -> {
             if(ClutterConfig.getInstance().getBoolean(ClutterConfig.GENERATE_BIOMES)) {
                 if(ClutterConfig.getInstance().getBoolean(ClutterConfig.GENERATE_REDWOOD_FORESTS)) makeRedwoodForest(builder);
+                if(ClutterConfig.getInstance().getBoolean(ClutterConfig.GENERATE_LUPINE_FIELDS)) makeLupineFields(builder);
             }
         });
     }
@@ -32,5 +33,9 @@ public class ModOverworldRegion extends Region {
     private void makeRedwoodForest(ModifiedVanillaOverworldBuilder builder) {
         builder.replaceBiome(BiomeKeys.OLD_GROWTH_PINE_TAIGA, ModBiomes.GIANT_REDWOOD_FOREST);
         builder.replaceBiome(BiomeKeys.OLD_GROWTH_SPRUCE_TAIGA, ModBiomes.GIANT_REDWOOD_FOREST);
+    }
+
+    private void makeLupineFields(ModifiedVanillaOverworldBuilder builder) {
+        builder.replaceBiome(BiomeKeys.SUNFLOWER_PLAINS, ModBiomes.LUPINE_FIELDS);
     }
 }

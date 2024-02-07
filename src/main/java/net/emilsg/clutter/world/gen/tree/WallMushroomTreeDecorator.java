@@ -2,6 +2,7 @@ package net.emilsg.clutter.world.gen.tree;
 
 import com.mojang.serialization.Codec;
 import net.emilsg.clutter.block.ModBlocks;
+import net.emilsg.clutter.block.custom.plants.PolyporeBlock;
 import net.emilsg.clutter.world.gen.type.ModTreeDecoratorTypes;
 import net.minecraft.block.BlockState;
 import net.minecraft.state.property.Properties;
@@ -32,14 +33,32 @@ public class WallMushroomTreeDecorator extends TreeDecorator {
     }
 
     private void placeMushroomIfPossible(BlockPos mushroomPos, TreeDecorator.Generator generator, Random random, Direction direction) {
-        if (random.nextFloat() < 0.02f && generator.isAir(mushroomPos)) {
+        if (random.nextFloat() <= 0.015f && generator.isAir(mushroomPos)) {
             replaceWithMushrooms(mushroomPos, generator, direction);
         }
     }
 
     private void replaceWithMushrooms(BlockPos pos, Generator generator, Direction direction) {
         java.util.Random random = new java.util.Random();
-        BlockState state = ModBlocks.YELLOW_POLYPORE.getDefaultState();
+        BlockState state;
+
+        boolean b = random.nextBoolean();
+        boolean b2 = random.nextBoolean();
+        if (b) {
+            if(b2) {
+                state = ModBlocks.YELLOW_POLYPORE.getDefaultState().with(PolyporeBlock.POLYPORE_COUNT, 1);
+            } else {
+                state = ModBlocks.RED_POLYPORE.getDefaultState().with(PolyporeBlock.POLYPORE_COUNT, 1);
+            }
+
+        } else {
+            if(b2) {
+                state = ModBlocks.YELLOW_POLYPORE.getDefaultState().with(PolyporeBlock.POLYPORE_COUNT, 2);
+            } else {
+                state = ModBlocks.RED_POLYPORE.getDefaultState().with(PolyporeBlock.POLYPORE_COUNT, 2);
+            }
+        }
+
         generator.replace(pos, state.with(Properties.HORIZONTAL_FACING, direction));
 
     }

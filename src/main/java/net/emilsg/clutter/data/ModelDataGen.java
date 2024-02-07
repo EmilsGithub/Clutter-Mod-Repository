@@ -64,12 +64,24 @@ public class ModelDataGen extends FabricModelProvider {
     public static final Model WINDOW_SILL = block("window_sill_parent", PLANKS, FLOWER);
     public static final Model WINDOW_SILL_EMPTY = block("window_sill_parent_empty", PLANKS);
 
+    public static final Model LARGE_TINTED_CROSS = block("tinted_large_cross_parent", TextureKey.CROSS);
+    public static final Model LARGE_CROSS = block("large_cross_parent", TextureKey.CROSS);
+
     public ModelDataGen(FabricDataOutput output) {
         super(output);
     }
 
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator generator) {
+        generator.registerFlowerPotPlant(ModBlocks.SMALL_BLUE_LUPINE, ModBlocks.POTTED_SMALL_BLUE_LUPINE, BlockStateModelGenerator.TintType.NOT_TINTED);
+        generator.registerFlowerPotPlant(ModBlocks.SMALL_PURPLE_LUPINE, ModBlocks.POTTED_SMALL_PURPLE_LUPINE, BlockStateModelGenerator.TintType.NOT_TINTED);
+        generator.registerFlowerPotPlant(ModBlocks.SMALL_MAGENTA_LUPINE, ModBlocks.POTTED_SMALL_MAGENTA_LUPINE, BlockStateModelGenerator.TintType.NOT_TINTED);
+        generator.registerFlowerPotPlant(ModBlocks.SMALL_WHITE_LUPINE, ModBlocks.POTTED_SMALL_WHITE_LUPINE, BlockStateModelGenerator.TintType.NOT_TINTED);
+        generator.registerDoubleBlock(ModBlocks.MAGENTA_LUPINE, BlockStateModelGenerator.TintType.NOT_TINTED);
+        generator.registerDoubleBlock(ModBlocks.BLUE_LUPINE, BlockStateModelGenerator.TintType.NOT_TINTED);
+        generator.registerDoubleBlock(ModBlocks.PURPLE_LUPINE, BlockStateModelGenerator.TintType.NOT_TINTED);
+        generator.registerDoubleBlock(ModBlocks.WHITE_LUPINE, BlockStateModelGenerator.TintType.NOT_TINTED);
+
         BlockStateModelGenerator.BlockTexturePool blackOnyxTexturePool = generator.registerCubeAllModelTexturePool(ModBlocks.BLACK_ONYX_BLOCK);
         BlockStateModelGenerator.BlockTexturePool polishedBlackOnyxTexturePool = generator.registerCubeAllModelTexturePool(ModBlocks.POLISHED_BLACK_ONYX);
 
@@ -88,25 +100,14 @@ public class ModelDataGen extends FabricModelProvider {
         generator.registerCoral(ModBlocks.DIAMOND_CORAL, ModBlocks.DEAD_DIAMOND_CORAL, ModBlocks.DIAMOND_CORAL_BLOCK, ModBlocks.DEAD_DIAMOND_CORAL_BLOCK, ModBlocks.DIAMOND_CORAL_FAN, ModBlocks.DEAD_DIAMOND_CORAL_FAN, ModBlocks.DIAMOND_CORAL_WALL_FAN, ModBlocks.DEAD_DIAMOND_CORAL_WALL_FAN);
         generator.registerCoral(ModBlocks.ANCHOR_CORAL, ModBlocks.DEAD_ANCHOR_CORAL, ModBlocks.ANCHOR_CORAL_BLOCK, ModBlocks.DEAD_ANCHOR_CORAL_BLOCK, ModBlocks.ANCHOR_CORAL_FAN, ModBlocks.DEAD_ANCHOR_CORAL_FAN, ModBlocks.ANCHOR_CORAL_WALL_FAN, ModBlocks.DEAD_ANCHOR_CORAL_WALL_FAN);
 
-        //Redwood Wood Set, Example for other Wood Sets
-        BlockStateModelGenerator.BlockTexturePool redwoodPlanksTexturePool = generator.registerCubeAllModelTexturePool(ModBlocks.REDWOOD_PLANKS);
-        redwoodPlanksTexturePool.stairs(ModBlocks.REDWOOD_STAIRS).slab(ModBlocks.REDWOOD_SLAB)
-                .button(ModBlocks.REDWOOD_BUTTON).fence(ModBlocks.REDWOOD_FENCE).fenceGate(ModBlocks.REDWOOD_FENCE_GATE)
-                        .pressurePlate(ModBlocks.REDWOOD_PRESSURE_PLATE);
-
-        BlockStateModelGenerator.BlockTexturePool redwoodMosaicTexturePool = generator.registerCubeAllModelTexturePool(ModBlocks.REDWOOD_MOSAIC);
-        redwoodMosaicTexturePool.slab(ModBlocks.REDWOOD_MOSAIC_SLAB).stairs(ModBlocks.REDWOOD_MOSAIC_STAIRS);
-
-        generator.registerLog(ModBlocks.REDWOOD_LOG).log(ModBlocks.REDWOOD_LOG).wood(ModBlocks.REDWOOD_WOOD);
-        generator.registerLog(ModBlocks.STRIPPED_REDWOOD_LOG).log(ModBlocks.STRIPPED_REDWOOD_LOG).wood(ModBlocks.STRIPPED_REDWOOD_WOOD);
-        generator.registerSingleton(ModBlocks.REDWOOD_LEAVES, TexturedModel.LEAVES);
-        generator.registerTintableCross(ModBlocks.REDWOOD_SAPLING, BlockStateModelGenerator.TintType.NOT_TINTED);
-        generator.registerDoor(ModBlocks.REDWOOD_DOOR);
-        generator.registerTrapdoor(ModBlocks.REDWOOD_TRAPDOOR);
-
-        registerClutterWoodSet(generator, ModBlocks.REDWOOD_LOG, ModBlocks.REDWOOD_PLANKS, ModBlocks.REDWOOD_CHAIR, ModBlocks.STRIPPED_REDWOOD_CHAIR, ModBlocks.REDWOOD_TABLE, ModBlocks.STRIPPED_REDWOOD_TABLE, ModBlocks.REDWOOD_BENCH, ModBlocks.STRIPPED_REDWOOD_BENCH, ModBlocks.REDWOOD_SHELF, ModBlocks.REDWOOD_WALL_BOOKSHELF, ModBlocks.REDWOOD_WALL_CUPBOARD, ModBlocks.REDWOOD_CUPBOARD, ModBlocks.REDWOOD_WINDOW_SILL, ModBlocks.REDWOOD_TRELLIS);
+        registerCompleteWoodSet(generator, ModBlocks.REDWOOD_LOG, ModBlocks.REDWOOD_PLANKS, ModBlocks.REDWOOD_CHAIR, ModBlocks.STRIPPED_REDWOOD_CHAIR, ModBlocks.REDWOOD_TABLE, ModBlocks.STRIPPED_REDWOOD_TABLE, ModBlocks.REDWOOD_BENCH,
+                ModBlocks.STRIPPED_REDWOOD_BENCH, ModBlocks.REDWOOD_SHELF, ModBlocks.REDWOOD_WALL_BOOKSHELF, ModBlocks.REDWOOD_WALL_CUPBOARD, ModBlocks.REDWOOD_CUPBOARD, ModBlocks.REDWOOD_WINDOW_SILL, ModBlocks.REDWOOD_TRELLIS, ModBlocks.REDWOOD_STAIRS, ModBlocks.REDWOOD_SLAB,
+                ModBlocks.REDWOOD_BUTTON, ModBlocks.REDWOOD_FENCE, ModBlocks.REDWOOD_FENCE_GATE, ModBlocks.REDWOOD_PRESSURE_PLATE, ModBlocks.REDWOOD_MOSAIC, ModBlocks.REDWOOD_MOSAIC_SLAB, ModBlocks.REDWOOD_MOSAIC_STAIRS, ModBlocks.REDWOOD_WOOD, ModBlocks.STRIPPED_REDWOOD_LOG, ModBlocks.STRIPPED_REDWOOD_WOOD,
+                ModBlocks.REDWOOD_LEAVES, ModBlocks.REDWOOD_SAPLING, ModBlocks.REDWOOD_DOOR, ModBlocks.REDWOOD_TRAPDOOR);
 
         registerClutterWoodSet(generator, Blocks.SPRUCE_LOG, Blocks.SPRUCE_PLANKS, ModBlocks.SPRUCE_CHAIR, ModBlocks.STRIPPED_SPRUCE_CHAIR, ModBlocks.SPRUCE_TABLE, ModBlocks.STRIPPED_SPRUCE_TABLE, ModBlocks.SPRUCE_BENCH, ModBlocks.STRIPPED_SPRUCE_BENCH, ModBlocks.SPRUCE_SHELF, ModBlocks.SPRUCE_WALL_BOOKSHELF, ModBlocks.SPRUCE_WALL_CUPBOARD, ModBlocks.SPRUCE_CUPBOARD, ModBlocks.SPRUCE_WINDOW_SILL, ModBlocks.SPRUCE_TRELLIS);
+
+        registerLargeTintableCross(generator, ModBlocks.GIANT_FERN);
 
         registerWindowSill(generator, ModBlocks.OAK_WINDOW_SILL, Blocks.OAK_PLANKS);
         registerWindowSill(generator, ModBlocks.BIRCH_WINDOW_SILL, Blocks.BIRCH_PLANKS);
@@ -118,6 +119,12 @@ public class ModelDataGen extends FabricModelProvider {
         registerWindowSill(generator, ModBlocks.WARPED_WINDOW_SILL, Blocks.WARPED_PLANKS);
         registerWindowSill(generator, ModBlocks.CHERRY_WINDOW_SILL, Blocks.CHERRY_PLANKS);
         registerWindowSill(generator, ModBlocks.BAMBOO_WINDOW_SILL, Blocks.BAMBOO_PLANKS);
+
+
+        generator.registerCubeAllModelTexturePool(ModBlocks.REINFORCED_COPPER_GLASS).same(ModBlocks.WAXED_REINFORCED_COPPER_GLASS);
+        generator.registerCubeAllModelTexturePool(ModBlocks.EXPOSED_REINFORCED_COPPER_GLASS).same(ModBlocks.WAXED_EXPOSED_REINFORCED_COPPER_GLASS);
+        generator.registerCubeAllModelTexturePool(ModBlocks.WEATHERED_REINFORCED_COPPER_GLASS).same(ModBlocks.WAXED_WEATHERED_REINFORCED_COPPER_GLASS);
+        generator.registerCubeAllModelTexturePool(ModBlocks.OXIDIZED_REINFORCED_COPPER_GLASS).same(ModBlocks.WAXED_OXIDIZED_REINFORCED_COPPER_GLASS);
     }
 
     @Override
@@ -142,6 +149,56 @@ public class ModelDataGen extends FabricModelProvider {
         registerSpawnEggItem(itemGen, ModItems.CAPYBARA_SPAWN_EGG);
         registerSpawnEggItem(itemGen, ModItems.CRIMSON_NEWT_SPAWN_EGG);
         registerSpawnEggItem(itemGen, ModItems.EMBER_TORTOISE_SPAWN_EGG);
+    }
+
+    private void registerGroupCubeAll(BlockStateModelGenerator generator, Block... blocks) {
+        for (Block block : blocks) {
+            generator.registerSimpleCubeAll(block);
+        }
+    }
+
+    private void registerCompleteWoodSet(
+            BlockStateModelGenerator generator,
+            Block logTextureReference,
+            Block planksTextureReference,
+            Block chair,
+            Block strippedChair,
+            Block table,
+            Block strippedTable,
+            Block bench,
+            Block strippedBench,
+            Block shelf,
+            Block wallBookshelf,
+            Block wallCupboard,
+            Block cupboard,
+            Block windowSill,
+            Block trellis,
+            Block stairs,
+            Block slab,
+            Block button,
+            Block fence,
+            Block fenceGate,
+            Block pressurePlate,
+            Block mosaicBlock,
+            Block mosaicSlab,
+            Block mosaicStairs,
+            Block wood,
+            Block strippedLog,
+            Block strippedWood,
+            Block leaves,
+            Block sapling,
+            Block door,
+            Block trapdoor
+    ) {
+        generator.registerLog(logTextureReference).log(logTextureReference).wood(wood);
+        generator.registerLog(strippedLog).log(strippedLog).wood(strippedWood);
+        generator.registerSingleton(leaves, TexturedModel.LEAVES);
+        generator.registerTintableCross(sapling, BlockStateModelGenerator.TintType.NOT_TINTED);
+        generator.registerDoor(door);
+        generator.registerTrapdoor(trapdoor);
+        generator.registerCubeAllModelTexturePool(planksTextureReference).stairs(stairs).slab(slab).button(button).fence(fence).fenceGate(fenceGate).pressurePlate(pressurePlate);
+        generator.registerCubeAllModelTexturePool(mosaicBlock).slab(mosaicSlab).stairs(mosaicStairs);
+        registerClutterWoodSet(generator, logTextureReference, planksTextureReference, chair, strippedChair, table, strippedTable, bench, strippedBench, shelf, wallBookshelf, wallCupboard, cupboard, windowSill, trellis);
     }
 
     private void registerClutterWoodSet(BlockStateModelGenerator generator, Block logTextureReference, Block planksTextureReference, Block chair, Block strippedChair, Block table, Block strippedTable, Block bench, Block strippedBench, Block shelf, Block wallBookshelf, Block wallCupboard, Block cupboard, Block windowSill, Block trellis) {
@@ -381,6 +438,18 @@ public class ModelDataGen extends FabricModelProvider {
                 );
     }
 
+    private void registerLargeTintableCross(BlockStateModelGenerator generator, Block block) {
+        Identifier top = generator.createSubModel(block, "_top", LARGE_TINTED_CROSS, id -> largeCrossMap(block, true));
+        Identifier bottom = generator.createSubModel(block, "_bottom", LARGE_TINTED_CROSS, id -> largeCrossMap(block, false));
+        generator.registerDoubleBlock(block, top, bottom);
+    }
+
+    private void registerLargeCross(BlockStateModelGenerator generator, Block block) {
+        Identifier top = generator.createSubModel(block, "_top", LARGE_CROSS, id -> largeCrossMap(block, true));
+        Identifier bottom = generator.createSubModel(block, "_bottom", LARGE_CROSS, id -> largeCrossMap(block, false));
+        generator.registerDoubleBlock(block, top, bottom);
+    }
+
     private static Model block(String parent, TextureKey ... requiredTextureKeys) {
         return new Model(Optional.of(new Identifier("clutter", "block/parent/" + parent)), Optional.empty(), requiredTextureKeys);
     }
@@ -397,6 +466,13 @@ public class ModelDataGen extends FabricModelProvider {
         Identifier log = TextureMap.getId(logBlock);
         Identifier planks = TextureMap.getId(planksBlock);
         return new TextureMap().put(LOG, log).put(PLANKS, planks);
+    }
+
+    public static TextureMap largeCrossMap(Block crossBlock, boolean top) {
+        Identifier cross = TextureMap.getId(crossBlock);
+        String crossPath = cross.getPath() + (top ? "_top" : "_bottom");
+        Identifier finalCross = new Identifier(Clutter.MOD_ID, crossPath);
+        return new TextureMap().put(TextureKey.CROSS, finalCross);
     }
 
     public static TextureMap planksMap(Block planksBlock) {

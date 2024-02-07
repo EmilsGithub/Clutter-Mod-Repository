@@ -1,0 +1,35 @@
+{
+  "variants": {
+    "facing=north,count=1": {
+        "model": "clutter:block/red_polypore"
+      },
+    "facing=south,count=1": {
+        "model": "clutter:block/red_polypore",
+        "y": 180
+      },
+    "facing=west,count=1": {
+        "model": "clutter:block/red_polypore",
+        "y": 270
+      },
+    "facing=east,count=1": {
+        "model": "clutter:block/red_polypore",
+        "y": 90
+      },
+
+    "facing=north,count=2": {
+      "model": "clutter:block/red_polypore_two"
+    },
+    "facing=south,count=2": {
+      "model": "clutter:block/red_polypore_two",
+      "y": 180
+    },
+    "facing=west,count=2": {
+      "model": "clutter:block/red_polypore_two",
+      "y": 270
+    },
+    "facing=east,count=2": {
+      "model": "clutter:block/red_polypore_two",
+      "y": 90
+    }
+  }
+}

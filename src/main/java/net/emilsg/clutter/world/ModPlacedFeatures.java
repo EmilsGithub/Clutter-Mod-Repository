@@ -7,6 +7,7 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.gen.YOffset;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.placementmodifier.*;
@@ -34,7 +35,11 @@ public class ModPlacedFeatures {
     public static final RegistryKey<PlacedFeature> REDWOOD_PLACED_KEY_2 = registerKey("redwood_placed_2");
     public static final RegistryKey<PlacedFeature> MEDIUM_REDWOOD_PLACED_KEY = registerKey("medium_redwood_placed");
     public static final RegistryKey<PlacedFeature> SMALL_REDWOOD_PLACED_KEY = registerKey("small_redwood_placed");
+    public static final RegistryKey<PlacedFeature> DEAD_REDWOOD_PLACED_KEY = registerKey("dead_redwood_placed");
+    public static final RegistryKey<PlacedFeature> GIANT_FERN_PLACED_KEY = registerKey("giant_fern_placed");
 
+    public static final RegistryKey<PlacedFeature> LUPINES_PLACED_KEY = registerKey("lupines_placed");
+    public static final RegistryKey<PlacedFeature> LUPINES_RIVER_PLACED_KEY = registerKey("lupines_river_placed");
 
     public static void bootstrap(Registerable<PlacedFeature> context) {
         var configuredFeatureRegistryEntryLookup = context.getRegistryLookup(RegistryKeys.CONFIGURED_FEATURE);
@@ -53,27 +58,25 @@ public class ModPlacedFeatures {
 
         register(context, SPONGE_IN_REEFS_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.SPONGE_IN_REEFS_KEY), RarityFilterPlacementModifier.of(4), SquarePlacementModifier.of(), PlacedFeatures.OCEAN_FLOOR_WG_HEIGHTMAP, BiomePlacementModifier.of());
         register(context, CLAM_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.CLAM_KEY), RarityFilterPlacementModifier.of(16), SquarePlacementModifier.of(), PlacedFeatures.OCEAN_FLOOR_WG_HEIGHTMAP, BiomePlacementModifier.of());
-        register(context, BEACH_PATCH_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.BEACH_PATCH_KEY),
-                RarityFilterPlacementModifier.of(24), SquarePlacementModifier.of(), PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of());
+        register(context, BEACH_PATCH_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.BEACH_PATCH_KEY), RarityFilterPlacementModifier.of(24), SquarePlacementModifier.of(), PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of());
 
-        register(context, REDWOOD_BUSH_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.REDWOOD_BUSH_KEY),
-                VegetationPlacedFeatures.treeModifiersWithWouldSurvive(
-                        PlacedFeatures.createCountExtraModifier(2, 0.5f, 1), ModBlocks.REDWOOD_SAPLING));
+        register(context, REDWOOD_BUSH_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.REDWOOD_BUSH_KEY), VegetationPlacedFeatures.treeModifiersWithWouldSurvive(PlacedFeatures.createCountExtraModifier(2, 0.5f, 1), ModBlocks.REDWOOD_SAPLING));
+        register(context, REDWOOD_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.REDWOOD_KEY), VegetationPlacedFeatures.treeModifiersWithWouldSurvive(PlacedFeatures.createCountExtraModifier(4, 0.5f, 3), ModBlocks.REDWOOD_SAPLING));
+        register(context, REDWOOD_PLACED_KEY_2, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.REDWOOD_KEY_2), VegetationPlacedFeatures.treeModifiersWithWouldSurvive(PlacedFeatures.createCountExtraModifier(4, 0.5f, 3), ModBlocks.REDWOOD_SAPLING));
+        register(context, MEDIUM_REDWOOD_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.MEDIUM_REDWOOD_KEY), VegetationPlacedFeatures.treeModifiersWithWouldSurvive(PlacedFeatures.createCountExtraModifier(1, 0.25f, 0), ModBlocks.REDWOOD_SAPLING));
+        register(context, SMALL_REDWOOD_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.SMALL_REDWOOD_KEY), VegetationPlacedFeatures.treeModifiersWithWouldSurvive(PlacedFeatures.createCountExtraModifier(1, 0.2f, 0), ModBlocks.REDWOOD_SAPLING));
+        register(context, DEAD_REDWOOD_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.DEAD_REDWOOD_KEY), VegetationPlacedFeatures.treeModifiersWithWouldSurvive(RarityFilterPlacementModifier.of(32), ModBlocks.REDWOOD_SAPLING));
 
-        register(context, REDWOOD_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.REDWOOD_KEY),
-                VegetationPlacedFeatures.treeModifiersWithWouldSurvive(
-                        PlacedFeatures.createCountExtraModifier(4, 0.5f, 3), ModBlocks.REDWOOD_SAPLING));
+        register(context, GIANT_FERN_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.GIANT_FERN_KEY), RarityFilterPlacementModifier.of(2), SquarePlacementModifier.of(), PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of());
+        //register(context, LUPINES_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.LUPINES_KEY),
+        //        CountPlacementModifier.of(UniformIntProvider.create(8, 12)), RarityFilterPlacementModifier.of(1), SquarePlacementModifier.of(), PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of());
 
-        register(context, REDWOOD_PLACED_KEY_2, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.REDWOOD_KEY_2),
-                VegetationPlacedFeatures.treeModifiersWithWouldSurvive(
-                        PlacedFeatures.createCountExtraModifier(4, 0.5f, 3), ModBlocks.REDWOOD_SAPLING));
+        register(context, LUPINES_RIVER_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.LUPINES_KEY),
+                CountPlacementModifier.of(UniformIntProvider.create(2, 4)), RarityFilterPlacementModifier.of(3), SquarePlacementModifier.of(), PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of());
 
-        register(context, MEDIUM_REDWOOD_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.MEDIUM_REDWOOD_KEY),
-                VegetationPlacedFeatures.treeModifiersWithWouldSurvive(PlacedFeatures.createCountExtraModifier(1, 0.25f, 0), ModBlocks.REDWOOD_SAPLING));
+        register(context, LUPINES_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.LUPINES_KEY),
+                RarityFilterPlacementModifier.of(1), CountPlacementModifier.of(UniformIntProvider.create(8, 16)), SquarePlacementModifier.of(), PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of());
 
-        register(context, SMALL_REDWOOD_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.SMALL_REDWOOD_KEY),
-                VegetationPlacedFeatures.treeModifiersWithWouldSurvive(
-                        PlacedFeatures.createCountExtraModifier(1, 0.2f, 0), ModBlocks.REDWOOD_SAPLING));
     }
 
 

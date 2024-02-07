@@ -1,4 +1,4 @@
-// 1.20.1	2024-01-21T02:03:43.3827667	Clutter/Tags for minecraft:block
+// 1.20.1	2024-02-06T20:25:42.7588841	Clutter/Tags for minecraft:block
 2a1e5827425a69082b28ac486128506cef939a9e data\minecraft\tags\blocks\trapdoors.json
 55a380cd9256f9671993e65b7436596fa240293f data\minecraft\tags\blocks\coral_blocks.json
 5f86340965aeaee98d937e6e0995f3de6809565e data\minecraft\tags\blocks\doors.json
@@ -65,8 +65,8 @@ e655cf32b93eafab387eb9c9b9aeeb22bae3efbb data\clutter\tags\blocks\immovable.json
 deaa57d0817bfd1b604e2479d5b8db9ba623d0d7 data\minecraft\tags\blocks\replaceable.json
 25c67a52d2706592e031a10dc44bb49e28db57e7 data\clutter\tags\blocks\cupboards.json
 e4cf3b77a933090fcc0af777cec78653d2751721 data\clutter\tags\blocks\lanterns.json
-fb0ed73daef6a52c8d841a119c365f0823c58a88 data\clutter\tags\blocks\tables.json
 9239e840cbbd2d60a4f2b062ec4819a4049ff66b data\clutter\tags\blocks\benches.json
+fb0ed73daef6a52c8d841a119c365f0823c58a88 data\clutter\tags\blocks\tables.json
 73da1f42dbf6cf9cddd91ee94e7319886c13b050 data\minecraft\tags\blocks\enchantment_power_provider.json
 a58b6a7e68c88bec6c40a54ffefcff642e83917f data\c\tags\blocks\bookshelves.json
 c2340ad7423b8e8a967b24afd6a66e666e03cde5 data\minecraft\tags\blocks\enderman_holdable.json

@@ -1,44 +1,18 @@
-// Made with Blockbench 4.9.3
-// Exported for Minecraft version 1.17+ for Yarn
-// Paste this class into your mod and generate all required imports
-public class cluttered_crab extends EntityModel<Entity> {
-	private final ModelPart cluttered_crab;
-	private final ModelPart body;
-	private final ModelPart legs;
-	private final ModelPart LeftLegs;
-	private final ModelPart LeftLeg1;
-	private final ModelPart LeftLeg1_r1;
-	private final ModelPart LeftLeg2;
-	private final ModelPart LeftLeg2_r1;
-	private final ModelPart LeftLeg3;
-	private final ModelPart LeftLeg3_r1;
-	private final ModelPart RightLegs;
-	private final ModelPart RightLeg1;
-	private final ModelPart RightLeg1_r1;
-	private final ModelPart RightLeg2;
-	private final ModelPart RightLeg2_r1;
-	private final ModelPart RightLeg3;
-	private final ModelPart RightLeg3_r1;
-	private final ModelPart MainBody;
-	private final ModelPart eyes;
-	private final ModelPart LeftEye;
-	private final ModelPart LeftEye_r1;
-	private final ModelPart RightEye;
-	private final ModelPart RightEye_r1;
-	private final ModelPart Claws;
-	private final ModelPart LeftClaw;
-	private final ModelPart TopLeftClaw;
-	private final ModelPart LeftClawFlat2_r1;
-	private final ModelPart BottomLeftClaw;
-	private final ModelPart LeftClawBottom_r1;
-	private final ModelPart RightClaw;
-	private final ModelPart TopRightClaw;
-	private final ModelPart RightClawFlat2_r1;
-	private final ModelPart BottomRightClaw;
-	private final ModelPart RightClawBottom_r1;
-	public cluttered_crab(ModelPart root) {
-		this.cluttered_crab = root.getChild("cluttered_crab");
+package net.emilsg.clutter.entity.client.model;
+
+import net.emilsg.clutter.entity.client.animation.CrabAnimations;
+import net.emilsg.clutter.entity.custom.CrabEntity;
+import net.minecraft.client.model.*;
+import net.minecraft.client.render.VertexConsumer;
+import net.minecraft.client.util.math.MatrixStack;
+
+public class CrabModel<T extends CrabEntity> extends ClutterModel<T> {
+	private final ModelPart crab;
+
+	public CrabModel(ModelPart root) {
+		this.crab = root.getChild("cluttered_crab");
 	}
+
 	public static TexturedModelData getTexturedModelData() {
 		ModelData modelData = new ModelData();
 		ModelPartData modelPartData = modelData.getRoot();
@@ -117,11 +91,20 @@ public class cluttered_crab extends EntityModel<Entity> {
 		ModelPartData RightClawBottom_r1 = BottomRightClaw.addChild("RightClawBottom_r1", ModelPartBuilder.create().uv(16, 10).cuboid(-2.0F, 0.5F, -3.0F, 2.0F, 1.0F, 4.0F, new Dilation(0.0F)), ModelTransform.of(-5.0F, -5.5F, -2.0F, 0.0F, 0.5236F, 0.0F));
 		return TexturedModelData.of(modelData, 32, 32);
 	}
+
 	@Override
-	public void setAngles(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	public void setAngles(T entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
+		this.getPart().traverse().forEach(ModelPart::resetTransform);
+		this.animateMovement(CrabAnimations.CRAB_WALKING, limbAngle, limbDistance, 1.5f, 2f);
 	}
+
 	@Override
 	public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
-		cluttered_crab.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
+		crab.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
+	}
+
+	@Override
+	public ModelPart getPart() {
+		return crab;
 	}
 }

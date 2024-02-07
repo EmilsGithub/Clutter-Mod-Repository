@@ -5,6 +5,9 @@ import net.emilsg.clutter.block.custom.*;
 import net.emilsg.clutter.block.custom.coins.CopperCoinStackBlock;
 import net.emilsg.clutter.block.custom.coins.GoldenCoinStackBlock;
 import net.emilsg.clutter.block.custom.coins.SilverCoinStackBlock;
+import net.emilsg.clutter.block.custom.cutout.CFlowerPotBlock;
+import net.emilsg.clutter.block.custom.cutout.CLupineBlock;
+import net.emilsg.clutter.block.custom.cutout.CTallFlowerBlock;
 import net.emilsg.clutter.block.custom.oxidizable.*;
 import net.emilsg.clutter.block.custom.plants.*;
 import net.emilsg.clutter.block.custom.plushies.*;
@@ -19,6 +22,7 @@ import net.fabricmc.fabric.api.registry.OxidizableBlocksRegistry;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.Instrument;
 import net.minecraft.block.piston.PistonBehavior;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -34,6 +38,24 @@ import net.minecraft.util.math.intprovider.UniformIntProvider;
 import java.util.function.ToIntFunction;
 
 public class ModBlocks {
+
+    public static final Block GIANT_FERN = registerBlock("giant_fern", new TallPlantBlock(FabricBlockSettings.copy(Blocks.LARGE_FERN)), ModItemGroups.CLUTTER_BLOCKS);
+
+    public static final Block BLUE_LUPINE = registerBlock("blue_lupine", new CTallFlowerBlock(FabricBlockSettings.copy(Blocks.ROSE_BUSH).nonOpaque().noCollision()), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block SMALL_BLUE_LUPINE = registerBlock("small_blue_lupine", new CLupineBlock(StatusEffects.WATER_BREATHING, ModBlocks.BLUE_LUPINE.getDefaultState(), 5, FabricBlockSettings.copy(Blocks.DANDELION).nonOpaque().noCollision()), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block POTTED_SMALL_BLUE_LUPINE = registerBlockWithoutItem("potted_small_blue_lupine", new CFlowerPotBlock(SMALL_BLUE_LUPINE, FabricBlockSettings.copy(Blocks.POTTED_DANDELION).nonOpaque()));
+
+    public static final Block MAGENTA_LUPINE = registerBlock("magenta_lupine", new CTallFlowerBlock(FabricBlockSettings.copy(Blocks.ROSE_BUSH).nonOpaque().noCollision()), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block SMALL_MAGENTA_LUPINE = registerBlock("small_magenta_lupine", new CLupineBlock(StatusEffects.WATER_BREATHING, ModBlocks.MAGENTA_LUPINE.getDefaultState(), 5, FabricBlockSettings.copy(Blocks.DANDELION).nonOpaque().noCollision()), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block POTTED_SMALL_MAGENTA_LUPINE = registerBlockWithoutItem("potted_small_magenta_lupine", new CFlowerPotBlock(SMALL_MAGENTA_LUPINE, FabricBlockSettings.copy(Blocks.POTTED_DANDELION).nonOpaque()));
+
+    public static final Block PURPLE_LUPINE = registerBlock("purple_lupine", new CTallFlowerBlock(FabricBlockSettings.copy(Blocks.ROSE_BUSH).nonOpaque().noCollision()), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block SMALL_PURPLE_LUPINE = registerBlock("small_purple_lupine", new CLupineBlock(StatusEffects.WATER_BREATHING, ModBlocks.PURPLE_LUPINE.getDefaultState(), 5, FabricBlockSettings.copy(Blocks.DANDELION).nonOpaque().noCollision()), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block POTTED_SMALL_PURPLE_LUPINE = registerBlockWithoutItem("potted_small_purple_lupine", new CFlowerPotBlock(SMALL_PURPLE_LUPINE, FabricBlockSettings.copy(Blocks.POTTED_DANDELION).nonOpaque()));
+
+    public static final Block WHITE_LUPINE = registerBlock("white_lupine", new CTallFlowerBlock(FabricBlockSettings.copy(Blocks.ROSE_BUSH).nonOpaque().noCollision()), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block SMALL_WHITE_LUPINE = registerBlock("small_white_lupine", new CLupineBlock(StatusEffects.WATER_BREATHING, ModBlocks.WHITE_LUPINE.getDefaultState(), 5, FabricBlockSettings.copy(Blocks.DANDELION).nonOpaque().noCollision()), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block POTTED_SMALL_WHITE_LUPINE = registerBlockWithoutItem("potted_small_white_lupine", new CFlowerPotBlock(SMALL_WHITE_LUPINE, FabricBlockSettings.copy(Blocks.POTTED_DANDELION).nonOpaque()));
 
     public static final Block WHITE_LAMP = registerBlock("white_lamp", new LampBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).luminance(createLightLevelFromLitBlockState(12))), ModItemGroups.CLUTTER_BLOCKS);
     public static final Block LIGHT_GRAY_LAMP = registerBlock("light_gray_lamp", new LampBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).luminance(createLightLevelFromLitBlockState(12))), ModItemGroups.CLUTTER_BLOCKS);
@@ -223,6 +245,16 @@ public class ModBlocks {
 
     public static final Block OVERGROWN_STONE = registerBlock("overgrown_stone", new SnowyBlock(FabricBlockSettings.copy(Blocks.STONE).mapColor(MapColor.SPRUCE_BROWN)), ModItemGroups.CLUTTER_BLOCKS);
 
+    public static final Block REINFORCED_COPPER_GLASS = registerBlock("reinforced_copper_glass", new OxidizableGlassBlock(Oxidizable.OxidationLevel.UNAFFECTED, FabricBlockSettings.copy(Blocks.GLASS)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block EXPOSED_REINFORCED_COPPER_GLASS = registerBlock("exposed_reinforced_copper_glass", new OxidizableGlassBlock(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.copy(Blocks.GLASS)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block WEATHERED_REINFORCED_COPPER_GLASS = registerBlock("weathered_reinforced_copper_glass", new OxidizableGlassBlock(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.copy(Blocks.GLASS)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block OXIDIZED_REINFORCED_COPPER_GLASS = registerBlock("oxidized_reinforced_copper_glass", new OxidizableGlassBlock(Oxidizable.OxidationLevel.OXIDIZED, FabricBlockSettings.copy(Blocks.GLASS)), ModItemGroups.CLUTTER_BLOCKS);
+
+    public static final Block WAXED_REINFORCED_COPPER_GLASS = registerBlock("waxed_reinforced_copper_glass", new GlassBlock(FabricBlockSettings.copy(Blocks.GLASS)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block WAXED_EXPOSED_REINFORCED_COPPER_GLASS = registerBlock("waxed_exposed_reinforced_copper_glass", new GlassBlock(FabricBlockSettings.copy(Blocks.GLASS)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block WAXED_WEATHERED_REINFORCED_COPPER_GLASS = registerBlock("waxed_weathered_reinforced_copper_glass", new GlassBlock(FabricBlockSettings.copy(Blocks.GLASS)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block WAXED_OXIDIZED_REINFORCED_COPPER_GLASS = registerBlock("waxed_oxidized_reinforced_copper_glass", new GlassBlock(FabricBlockSettings.copy(Blocks.GLASS)), ModItemGroups.CLUTTER_BLOCKS);
+
     public static final Block OAK_WALL_BOOKSHELF = registerBlock("oak_wall_bookshelf", new WallBookshelfBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).luminance(createLightLevelFromLitBlockState(8))), ModItemGroups.CLUTTER_BLOCKS);
     public static final Block OAK_WINDOW_SILL = registerBlock("oak_window_sill", new WindowSillBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS)), ModItemGroups.CLUTTER_BLOCKS);
     public static final Block SPRUCE_WALL_BOOKSHELF = registerBlock("spruce_wall_bookshelf", new WallBookshelfBlock(FabricBlockSettings.copy(Blocks.SPRUCE_PLANKS).luminance(createLightLevelFromLitBlockState(8))), ModItemGroups.CLUTTER_BLOCKS);
@@ -266,6 +298,7 @@ public class ModBlocks {
     public static final Block CRIMSON_WALL_FUNGI = registerBlock("crimson_wall_fungi", new WallMushroomBlock(FabricBlockSettings.copy(ModBlocks.BROWN_WALL_MUSHROOMS).mapColor(MapColor.RED)), ModItemGroups.CLUTTER_BLOCKS);
     public static final Block WARPED_WALL_FUNGI = registerBlock("warped_wall_fungi", new WallMushroomBlock(FabricBlockSettings.copy(ModBlocks.BROWN_WALL_MUSHROOMS).mapColor(MapColor.CYAN)), ModItemGroups.CLUTTER_BLOCKS);
     public static final Block YELLOW_POLYPORE = registerBlock("yellow_polypore", new PolyporeBlock(FabricBlockSettings.create().mapColor(MapColor.PALE_YELLOW).replaceable().strength(0.2f).sounds(BlockSoundGroup.VINE)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block RED_POLYPORE = registerBlock("red_polypore", new PolyporeBlock(FabricBlockSettings.create().mapColor(MapColor.DULL_RED).replaceable().strength(0.2f).sounds(BlockSoundGroup.VINE)), ModItemGroups.CLUTTER_BLOCKS);
 
     public static final Block WHITE_KITCHEN_CURTAINS = registerBlock("white_kitchen_curtains", new KitchenCurtainBlock(FabricBlockSettings.copy(Blocks.WHITE_WOOL).noCollision()), ModItemGroups.CLUTTER_BLOCKS);
     public static final Block LIGHT_GRAY_KITCHEN_CURTAINS = registerBlock("light_gray_kitchen_curtains", new KitchenCurtainBlock(FabricBlockSettings.copy(Blocks.LIGHT_GRAY_WOOL).noCollision()), ModItemGroups.CLUTTER_BLOCKS);
@@ -1414,6 +1447,16 @@ public class ModBlocks {
     }
 
     public static void registerCopperBlockPairs() {
+
+        OxidizableBlocksRegistry.registerOxidizableBlockPair(REINFORCED_COPPER_GLASS, EXPOSED_REINFORCED_COPPER_GLASS);
+        OxidizableBlocksRegistry.registerOxidizableBlockPair(EXPOSED_REINFORCED_COPPER_GLASS, WEATHERED_REINFORCED_COPPER_GLASS);
+        OxidizableBlocksRegistry.registerOxidizableBlockPair(WEATHERED_REINFORCED_COPPER_GLASS, OXIDIZED_REINFORCED_COPPER_GLASS);
+
+        OxidizableBlocksRegistry.registerWaxableBlockPair(REINFORCED_COPPER_GLASS, WAXED_REINFORCED_COPPER_GLASS);
+        OxidizableBlocksRegistry.registerWaxableBlockPair(EXPOSED_REINFORCED_COPPER_GLASS, WAXED_EXPOSED_REINFORCED_COPPER_GLASS);
+        OxidizableBlocksRegistry.registerWaxableBlockPair(WEATHERED_REINFORCED_COPPER_GLASS, WAXED_WEATHERED_REINFORCED_COPPER_GLASS);
+        OxidizableBlocksRegistry.registerWaxableBlockPair(OXIDIZED_REINFORCED_COPPER_GLASS, WAXED_OXIDIZED_REINFORCED_COPPER_GLASS);
+
 
         OxidizableBlocksRegistry.registerOxidizableBlockPair(AQUATIC_TORCH, EXPOSED_AQUATIC_TORCH);
         OxidizableBlocksRegistry.registerOxidizableBlockPair(EXPOSED_AQUATIC_TORCH, WEATHERED_AQUATIC_TORCH);

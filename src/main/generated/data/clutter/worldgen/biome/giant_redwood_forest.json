@@ -84,6 +84,8 @@
       "clutter:medium_redwood_placed",
       "clutter:small_redwood_placed",
       "clutter:redwood_bush_placed",
+      "clutter:dead_redwood_placed",
+      "clutter:giant_fern_placed",
       "minecraft:patch_large_fern",
       "minecraft:flower_default",
       "minecraft:patch_grass_taiga",

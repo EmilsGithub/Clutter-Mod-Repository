@@ -11,6 +11,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.entity.*;
+import net.minecraft.entity.ai.AboveGroundTargeting;
+import net.minecraft.entity.ai.NoPenaltySolidTargeting;
 import net.minecraft.entity.ai.control.FlightMoveControl;
 import net.minecraft.entity.ai.control.LookControl;
 import net.minecraft.entity.ai.goal.AnimalMateGoal;
@@ -48,14 +50,17 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.*;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
+import net.minecraft.world.dimension.DimensionTypes;
 import org.jetbrains.annotations.Nullable;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoField;
+import java.util.EnumSet;
 
 public class ButterflyEntity extends ClutterAnimalEntity {
     private static final TrackedData<Boolean> HAS_COCOON = DataTracker.registerData(ButterflyEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
@@ -108,7 +113,8 @@ public class ButterflyEntity extends ClutterAnimalEntity {
         this.goalSelector.add(0, new AnimalMateGoal(this, 1.0));
         this.goalSelector.add(1, new LayCocoonGoal(this, 1.0));
         this.goalSelector.add(2, new TemptGoal(this, 1.25, Ingredient.ofItems(Items.SUGAR), false));
-        this.goalSelector.add(3, new ButterflyWanderGoal(this));
+        this.goalSelector.add(3, new ButterflyWanderNetherGoal(this));
+        this.goalSelector.add(3, new ButterflyWanderOverworldGoal(this));
     }
 
     protected void initDataTracker() {
@@ -234,14 +240,55 @@ public class ButterflyEntity extends ClutterAnimalEntity {
     }
 
 
-    public static class ButterflyWanderGoal extends Goal {
+    private class ButterflyWanderOverworldGoal extends Goal {
         private final ButterflyEntity butterfly;
-        public ButterflyWanderGoal(ButterflyEntity butterfly) {
+
+        ButterflyWanderOverworldGoal(ButterflyEntity butterfly) {
+            this.setControls(EnumSet.of(Goal.Control.MOVE));
             this.butterfly = butterfly;
         }
+
         @Override
         public boolean canStart() {
-            return !butterfly.isSubmergedInWater() && butterfly.navigation.isIdle() && butterfly.random.nextInt(10) == 0;
+            return butterfly.getWorld().getDimensionKey().equals(DimensionTypes.OVERWORLD) && butterfly.navigation.isIdle() && butterfly.random.nextInt(10) == 0;
+        }
+
+        @Override
+        public boolean shouldContinue() {
+            return butterfly.navigation.isFollowingPath();
+        }
+
+        @Override
+        public void start() {
+            Vec3d vec3d = this.getRandomLocation();
+            if (vec3d != null) {
+                butterfly.navigation.startMovingAlong(butterfly.navigation.findPathTo(BlockPos.ofFloored(vec3d), 1), 1.0);
+            }
+        }
+
+        @Nullable
+        private Vec3d getRandomLocation() {
+            Vec3d vec3d2 = butterfly.getRotationVec(0.0f);
+
+            int i = 8;
+            Vec3d vec3d3 = AboveGroundTargeting.find(butterfly, 8, 7, vec3d2.x, vec3d2.z, 1.5707964f, 4, 2);
+            if (vec3d3 != null) {
+                return vec3d3;
+            }
+            return NoPenaltySolidTargeting.find(butterfly, 8, 4, -2, vec3d2.x, vec3d2.z, 1.5707963705062866);
+        }
+    }
+
+    public static class ButterflyWanderNetherGoal extends Goal {
+        private final ButterflyEntity butterfly;
+
+        public ButterflyWanderNetherGoal(ButterflyEntity butterfly) {
+            this.butterfly = butterfly;
+        }
+
+        @Override
+        public boolean canStart() {
+            return !butterfly.getWorld().getDimensionKey().equals(DimensionTypes.OVERWORLD) && !butterfly.isSubmergedInWater() && butterfly.navigation.isIdle() && butterfly.random.nextInt(10) == 0;
         }
 
         public boolean shouldContinue() {
