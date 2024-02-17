@@ -12,7 +12,7 @@ public class ModModelLayers {
     public static final EntityModelLayer JELLYFISH = new EntityModelLayer(new Identifier(Clutter.MOD_ID, "jellyfish"), "main");
     public static final EntityModelLayer CRAB = new EntityModelLayer(new Identifier(Clutter.MOD_ID, "crab"), "main");
     public static final EntityModelLayer DROWNED_SKELETON = new EntityModelLayer(new Identifier(Clutter.MOD_ID, "drowned_skeleton"), "main");
-
+    public static final EntityModelLayer MANTA_RAY = new EntityModelLayer(new Identifier(Clutter.MOD_ID, "manta_ray"), "main");
 
 
     public static final EntityModelLayer SCUBA_TANK = new EntityModelLayer(new Identifier(Clutter.MOD_ID, "scuba_tank"), "main");

@@ -5,6 +5,7 @@ import net.emilsg.clutter.Clutter;
 import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.util.ModProperties;
 import net.emilsg.clutter.world.gen.features.ModFeatures;
+import net.emilsg.clutter.world.gen.features.WeightedBlockFeatureConfig;
 import net.emilsg.clutter.world.gen.tree.*;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -65,8 +66,11 @@ public class ModConfiguredFeatures {
     public static final RegistryKey<ConfiguredFeature<?,?>> SMALL_REDWOOD_KEY = registerKey("small_redwood");
     public static final RegistryKey<ConfiguredFeature<?,?>> DEAD_REDWOOD_KEY = registerKey("dead_redwood");
     public static final RegistryKey<ConfiguredFeature<?,?>> GIANT_FERN_KEY = registerKey("giant_fern");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> REDWOOD_ROCK = registerKey("redwood_rock");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> FALLEN_REDWOOD_KEY = registerKey("fallen_redwood");
 
     public static final RegistryKey<ConfiguredFeature<?, ?>> LUPINES_KEY = registerKey("lupines");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> LUPINE_FIELDS_ROCK = registerKey("lupine_fields_rock");
 
 
     public static void bootstrap(Registerable<ConfiguredFeature<?, ?>> context) {
@@ -190,6 +194,16 @@ public class ModConfiguredFeatures {
         register(context, GIANT_FERN_KEY, Feature.RANDOM_PATCH,
                 ConfiguredFeatures.createRandomPatchFeatureConfig(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(BlockStateProvider.of(ModBlocks.GIANT_FERN))));
 
+        register(context, REDWOOD_ROCK, ModFeatures.STATED_ROCK,
+                new WeightedBlockFeatureConfig(new WeightedBlockStateProvider(
+                        DataPool.<BlockState>builder()
+                                .add(Blocks.COBBLESTONE.getDefaultState(), 1)
+                                .add(Blocks.MOSSY_COBBLESTONE.getDefaultState(), 2)
+                                .add(Blocks.STONE.getDefaultState(), 1)
+                                .build()), 4));
+
+        register(context, FALLEN_REDWOOD_KEY, ModFeatures.FALLEN_REDWOOD_TREE, new CountConfig(UniformIntProvider.create(0, 1)));
+
         register(context, LUPINES_KEY, Feature.RANDOM_PATCH, ConfiguredFeatures.createRandomPatchFeatureConfig(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(
                 new WeightedBlockStateProvider(DataPool.<BlockState>builder()
                         .add(ModBlocks.SMALL_BLUE_LUPINE.getDefaultState(), 10)
@@ -202,6 +216,14 @@ public class ModConfiguredFeatures {
                         .add(ModBlocks.WHITE_LUPINE.getDefaultState(), 1)
                         .build())
         )));
+
+        register(context, LUPINE_FIELDS_ROCK, ModFeatures.STATED_ROCK,
+                new WeightedBlockFeatureConfig(new WeightedBlockStateProvider(
+                        DataPool.<BlockState>builder()
+                                .add(Blocks.STONE.getDefaultState(), 1)
+                                .add(Blocks.COBBLESTONE.getDefaultState(), 1)
+                                .add(Blocks.MOSSY_COBBLESTONE.getDefaultState(), 2)
+                                .build()), 3));
     }
 
     public static RegistryKey<ConfiguredFeature<?, ?>> registerKey(String name) {

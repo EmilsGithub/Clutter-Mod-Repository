@@ -1,7 +1,0 @@
-{
-  "parent": "clutter:block/tables/table_none_parent",
-  "textures": {
-    "0": "block/warped_planks",
-    "particle": "block/warped_planks"
-  }
-}

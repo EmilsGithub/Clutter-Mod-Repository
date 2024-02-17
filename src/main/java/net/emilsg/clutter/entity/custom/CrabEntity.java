@@ -3,6 +3,7 @@ package net.emilsg.clutter.entity.custom;
 import net.emilsg.clutter.entity.custom.parent.ClutterAnimalEntity;
 import net.emilsg.clutter.entity.variants.CrabVariant;
 import net.minecraft.entity.EntityData;
+import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.EscapeDangerGoal;
@@ -27,6 +28,11 @@ public class CrabEntity extends ClutterAnimalEntity {
     public CrabEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
         this.setStepHeight(1f);
+    }
+
+    @Override
+    public EntityGroup getGroup() {
+        return EntityGroup.AQUATIC;
     }
 
     @Override

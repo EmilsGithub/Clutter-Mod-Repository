@@ -1,7 +1,9 @@
 {
   "replace": false,
   "values": [
-    "clutter:thornbloom",
-    "clutter:glowlily"
+    "clutter:small_blue_lupine",
+    "clutter:small_magenta_lupine",
+    "clutter:small_purple_lupine",
+    "clutter:small_white_lupine"
   ]
 }

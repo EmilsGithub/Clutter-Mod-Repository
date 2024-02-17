@@ -651,6 +651,7 @@ public class ClutterClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.JELLYFISH, JellyfishModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.CRAB, CrabModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.DROWNED_SKELETON, DrownedSkeletonModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.MANTA_RAY, MantaRayModel::getTexturedModelData);
 
 
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.SCUBA_TANK, ScubaModel::getTexturedModelData);
@@ -671,6 +672,7 @@ public class ClutterClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.EMBER_TORTOISE, EmberTortoiseRenderer::new);
         EntityRendererRegistry.register(ModEntities.JELLYFISH, JellyfishRenderer::new);
         EntityRendererRegistry.register(ModEntities.CRAB, CrabRenderer::new);
+        EntityRendererRegistry.register(ModEntities.MANTA_RAY, MantaRayRenderer::new);
 
 
         EntityRendererRegistry.register(ModEntities.DROWNED_SKELETON, DrownedSkeletonRenderer::new);

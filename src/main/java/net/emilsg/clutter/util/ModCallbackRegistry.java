@@ -17,6 +17,7 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Arm;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -47,7 +48,7 @@ public class ModCallbackRegistry {
             boolean noAxe = !(player.getStackInHand(Hand.MAIN_HAND).getItem() instanceof AxeItem || player.getStackInHand(Hand.OFF_HAND).getItem() instanceof AxeItem);
 
             if (state.getBlock() instanceof ArmchairBlock) {
-                return spawnSeat(world, player, blockPos, 0.2, comparePos);
+                return spawnSeat(world, player, blockPos, 0.25, comparePos);
             } else if (noAxe && state.getBlock() instanceof WoodenChairBlock) {
                 return spawnSeat(world, player, blockPos, 0.3, comparePos);
             } else if (state.getBlock() instanceof FloorSeatBlock) {

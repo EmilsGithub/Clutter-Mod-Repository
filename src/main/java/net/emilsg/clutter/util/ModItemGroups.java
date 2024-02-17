@@ -20,11 +20,11 @@ public class ModItemGroups {
     public static void registerItemGroups() {
 
         Registry.register(Registries.ITEM_GROUP, CLUTTER_BLOCKS, FabricItemGroup.builder()
-                .icon(() -> new ItemStack(ModBlocks.COPPER_LANTERN))
+                .icon(() -> new ItemStack(ModBlocks.CYAN_ARMCHAIR))
                 .displayName(Text.translatable("itemgroup.clutter_blocks")).build());
 
         Registry.register(Registries.ITEM_GROUP, CLUTTER_ITEMS, FabricItemGroup.builder()
-                .icon(() -> new ItemStack(ModItems.COPPER_NUGGET))
+                .icon(() -> new ItemStack(ModItems.CYAN_BUTTERFLY_ELYTRA))
                 .displayName(Text.translatable("itemgroup.clutter_items")).build());
     }
 }

@@ -54,6 +54,7 @@ public class ModBiomes {
 
         ClutterDefaultBiomeFeatures.addRedwoodTreeFeatures(builder);
         ClutterDefaultBiomeFeatures.addRedwoodFoliageFeatures(builder);
+        ClutterDefaultBiomeFeatures.addRedwoodRockFeatures(builder);
 
         DefaultBiomeFeatures.addLargeFerns(builder);
         DefaultBiomeFeatures.addDefaultOres(builder);
@@ -99,6 +100,7 @@ public class ModBiomes {
         globalOverworldGeneration(builder);
 
         ClutterDefaultBiomeFeatures.addLupineFieldsFoliageFeatures(builder);
+        ClutterDefaultBiomeFeatures.addLupineFieldsRockFeatures(builder);
         DefaultBiomeFeatures.addDefaultGrass(builder);
         DefaultBiomeFeatures.addDefaultOres(builder);
         DefaultBiomeFeatures.addDefaultDisks(builder);

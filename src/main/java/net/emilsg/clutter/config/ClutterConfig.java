@@ -60,6 +60,8 @@ public class ClutterConfig {
     public static final String GENERATE_REDWOOD_FORESTS = "generate_redwood_forests";
     public static final String GENERATE_LUPINE_FIELDS = "generate_lupine_fields";
     public static final String GENERATE_SEASHELLS = "generate_seashells";
+    public static final String DO_TRINKETS_ELYTRA_FLIGHT = "do_trinkets_elytra_flight";
+
 
     public void initializeConfigs() {
         configs.put(DISABLE_GREED_GENERATION, new ConfigEntry<>( false, "Disables the generation of Greed Books"));
@@ -89,6 +91,7 @@ public class ClutterConfig {
         configs.put(GENERATE_REDWOOD_FORESTS, new ConfigEntry<>( true, "Generate Redwood Forests."));
         configs.put(GENERATE_LUPINE_FIELDS, new ConfigEntry<>( true, "Generate Lupine Fields."));
         configs.put(GENERATE_SEASHELLS, new ConfigEntry<>( true, "Generate Seashells."));
+        configs.put(DO_TRINKETS_ELYTRA_FLIGHT, new ConfigEntry<>( true, "The elytra and butterfly elytra work while being worn in the Cape slot."));
     }
 
     public boolean isConfigVersionCurrent() {
@@ -120,7 +123,7 @@ public class ClutterConfig {
         if (configFile.exists()) {
             loadConfig();
         } else {
-            LOGGER.info( "Clutter config file is missing, generating default one." );
+            LOGGER.info("Clutter config file is missing, generating default one." );
             createDefaultConfig();
         }
     }

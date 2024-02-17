@@ -1,8 +1,0 @@
-{
-	"parent": "clutter:block/benches/wooden_bench_no_legs_parent",
-	"textures": {
-		"0": "block/stripped_cherry_log",
-		"1": "block/cherry_planks",
-		"particle": "block/cherry_planks"
-	}
-}

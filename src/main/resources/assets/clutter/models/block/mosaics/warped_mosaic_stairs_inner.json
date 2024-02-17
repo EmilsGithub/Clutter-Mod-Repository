@@ -1,8 +1,0 @@
-{
-  "parent": "block/inner_stairs",
-  "textures": {
-    "bottom": "clutter:block/warped_mosaic",
-    "side": "clutter:block/warped_mosaic",
-    "top": "clutter:block/warped_mosaic"
-  }
-}

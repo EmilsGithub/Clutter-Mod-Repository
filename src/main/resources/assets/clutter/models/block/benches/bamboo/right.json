@@ -1,8 +1,0 @@
-{
-	"parent": "clutter:block/benches/wooden_bench_leg_right_parent",
-	"textures": {
-		"0": "block/bamboo_block",
-		"1": "block/bamboo_planks",
-		"particle": "block/bamboo_planks"
-	}
-}

@@ -1,0 +1,28 @@
+{
+  "type": "clutter:stated_rock",
+  "config": {
+    "size": 4,
+    "states": {
+      "entries": [
+        {
+          "data": {
+            "Name": "minecraft:cobblestone"
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "minecraft:mossy_cobblestone"
+          },
+          "weight": 2
+        },
+        {
+          "data": {
+            "Name": "minecraft:stone"
+          },
+          "weight": 1
+        }
+      ]
+    }
+  }
+}

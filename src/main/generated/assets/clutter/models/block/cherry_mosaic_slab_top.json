@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "clutter:block/cherry_mosaic",
+    "side": "clutter:block/cherry_mosaic",
+    "top": "clutter:block/cherry_mosaic"
+  }
+}

@@ -54,4 +54,7 @@ public class ModEntities {
 
     public static final EntityType<DrownedSkeletonEntity> DROWNED_SKELETON = Registry.register(Registries.ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "drowned_skeleton"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, DrownedSkeletonEntity::new).dimensions(EntityDimensions.fixed(0.5f, 2.0f)).build());
+
+    public static final EntityType<MantaRayEntity> MANTA_RAY = Registry.register(Registries.ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "manta_ray"),
+            FabricEntityTypeBuilder.create(SpawnGroup.WATER_CREATURE, MantaRayEntity::new).dimensions(EntityDimensions.changing(1f, 0.5f)).build());
 }

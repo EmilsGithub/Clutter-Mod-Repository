@@ -1,8 +1,0 @@
-{
-  "parent": "clutter:block/tables/table_n_parent",
-  "textures": {
-    "0": "block/crimson_planks",
-    "1": "block/crimson_stem",
-    "particle": "block/crimson_planks"
-  }
-}

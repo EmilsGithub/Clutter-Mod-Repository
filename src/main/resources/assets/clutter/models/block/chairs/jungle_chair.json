@@ -1,8 +1,0 @@
-{
-	"parent": "clutter:block/chairs/wooden_chair_parent",
-	"textures": {
-		"0": "block/jungle_log",
-		"1": "block/jungle_planks",
-		"particle": "block/jungle_log"
-	}
-}

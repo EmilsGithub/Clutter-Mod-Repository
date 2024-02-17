@@ -1,0 +1,8 @@
+{
+  "parent": "clutter:block/parent/cupboard_closed_parent",
+  "textures": {
+    "cupboard_door": "clutter:block/warped_cupboard_door",
+    "cupboard_inside": "clutter:block/warped_cupboard_inside",
+    "planks": "minecraft:block/warped_planks"
+  }
+}

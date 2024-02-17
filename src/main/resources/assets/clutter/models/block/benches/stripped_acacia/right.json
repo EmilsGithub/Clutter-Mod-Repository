@@ -1,8 +1,0 @@
-{
-	"parent": "clutter:block/benches/wooden_bench_leg_right_parent",
-	"textures": {
-		"0": "block/stripped_acacia_log",
-		"1": "block/acacia_planks",
-		"particle": "block/acacia_planks"
-	}
-}

@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=east,open=false": {
+      "model": "clutter:block/birch_cupboard_closed",
+      "y": 90
+    },
+    "facing=east,open=true": {
+      "model": "clutter:block/birch_cupboard_open",
+      "y": 90
+    },
+    "facing=north,open=false": {
+      "model": "clutter:block/birch_cupboard_closed"
+    },
+    "facing=north,open=true": {
+      "model": "clutter:block/birch_cupboard_open"
+    },
+    "facing=south,open=false": {
+      "model": "clutter:block/birch_cupboard_closed",
+      "y": 180
+    },
+    "facing=south,open=true": {
+      "model": "clutter:block/birch_cupboard_open",
+      "y": 180
+    },
+    "facing=west,open=false": {
+      "model": "clutter:block/birch_cupboard_closed",
+      "y": 270
+    },
+    "facing=west,open=true": {
+      "model": "clutter:block/birch_cupboard_open",
+      "y": 270
+    }
+  }
+}

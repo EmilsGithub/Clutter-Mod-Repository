@@ -1,0 +1,7 @@
+{
+  "parent": "clutter:block/parent/wooden_bench_none_parent",
+  "textures": {
+    "log": "minecraft:block/stripped_birch_log",
+    "planks": "minecraft:block/birch_planks"
+  }
+}

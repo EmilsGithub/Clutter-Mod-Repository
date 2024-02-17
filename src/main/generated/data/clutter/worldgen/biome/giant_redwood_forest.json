@@ -34,7 +34,8 @@
       "minecraft:lake_lava_surface"
     ],
     [
-      "minecraft:amethyst_geode"
+      "minecraft:amethyst_geode",
+      "clutter:redwood_rock_placed"
     ],
     [
       "minecraft:monster_room",
@@ -52,6 +53,7 @@
       "minecraft:ore_andesite_upper",
       "minecraft:ore_andesite_lower",
       "minecraft:ore_tuff",
+      "clutter:redwood_silver_ore_placed",
       "minecraft:ore_coal_upper",
       "minecraft:ore_coal_lower",
       "minecraft:ore_iron_upper",
@@ -85,6 +87,7 @@
       "clutter:small_redwood_placed",
       "clutter:redwood_bush_placed",
       "clutter:dead_redwood_placed",
+      "clutter:fallen_redwood_placed",
       "clutter:giant_fern_placed",
       "minecraft:patch_large_fern",
       "minecraft:flower_default",

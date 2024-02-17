@@ -415,7 +415,7 @@ public class ButterflyEntity extends ClutterAnimalEntity {
     @Override
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
         RegistryEntry<Biome> registryEntry = world.getBiome(this.getBlockPos());
-        ButterflyVariant variant = ButterflyVariant.byId(1);
+        ButterflyVariant variant = ButterflyVariant.byId(0);
 
         if(spawnReason.equals(SpawnReason.SPAWN_EGG)) {
             variant = Util.getRandom(ButterflyVariant.values(), this.random);

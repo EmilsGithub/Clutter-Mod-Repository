@@ -1,8 +1,0 @@
-{
-	"parent": "clutter:block/chairs/wooden_chair_parent",
-	"textures": {
-		"0": "block/stripped_acacia_log",
-		"1": "block/acacia_planks",
-		"particle": "block/stripped_acacia_log"
-	}
-}

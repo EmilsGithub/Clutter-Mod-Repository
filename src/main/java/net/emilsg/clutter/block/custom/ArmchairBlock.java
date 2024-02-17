@@ -15,57 +15,37 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 public class ArmchairBlock extends SeatBlock{
+    private static final VoxelShape BASE = VoxelShapes.union(
+            Block.createCuboidShape(0, 0, 0, 2, 2, 2),
+            Block.createCuboidShape(14, 0, 0, 16, 2, 2),
+            Block.createCuboidShape(14, 0, 14, 16, 2, 16),
+            Block.createCuboidShape(0, 0, 14, 2, 2, 16),
+            Block.createCuboidShape(0, 2, 0, 16, 7, 16)
+    );
+
     protected static final VoxelShape NORTH = VoxelShapes.union(
-            Block.createCuboidShape(0.0, 0.0, 0.0, 2.0, 2.0, 2.0),
-            Block.createCuboidShape(14.0, 0.0, 0.0, 16.0, 2.0, 2.0),
-            Block.createCuboidShape(0.0, 0.0, 14.0, 2.0, 2.0, 16.0),
-            Block.createCuboidShape(14.0, 0.0, 14.0, 16.0, 2.0, 16.0),
-            Block.createCuboidShape(0.0, 2.0, 0.0, 16.0, 6.0, 16.0),
-            Block.createCuboidShape(0.0, 6.0, 12.0, 16.0, 15.0, 16.0),
-            Block.createCuboidShape(1.0, 15.0, 12.0, 15.0, 16.0, 16.0),
-            Block.createCuboidShape(0.0, 6.0, 0.0, 2.0, 8.0, 13.0),
-            Block.createCuboidShape(14.0, 6.0, 0.0, 16.0, 8.0, 13.0),
-            Block.createCuboidShape(0.0, 8.0, 1.0, 2.0, 9.0, 13.0),
-            Block.createCuboidShape(14.0, 8.0, 1.0, 16.0, 9.0, 13.0)
+            BASE,
+            Block.createCuboidShape(0, 7, 0, 3, 10, 12),
+            Block.createCuboidShape(13, 7, 0, 16, 10, 12),
+            Block.createCuboidShape(0, 7, 12, 16, 16, 16)
     );
     protected static final VoxelShape SOUTH = VoxelShapes.union(
-            Block.createCuboidShape(0.0, 0.0, 0.0, 2.0, 2.0, 2.0),
-            Block.createCuboidShape(14.0, 0.0, 0.0, 16.0, 2.0, 2.0),
-            Block.createCuboidShape(0.0, 0.0, 14.0, 2.0, 2.0, 16.0),
-            Block.createCuboidShape(14.0, 0.0, 14.0, 16.0, 2.0, 16.0),
-            Block.createCuboidShape(0.0, 2.0, 0.0, 16.0, 6.0, 16.0),
-            Block.createCuboidShape(0.0, 6.0, 0.0, 16.0, 15.0, 4.0),
-            Block.createCuboidShape(1.0, 15.0, 0.0, 15.0, 16.0, 4.0),
-            Block.createCuboidShape(0.0, 6.0, 3.0, 2.0, 8.0, 16.0),
-            Block.createCuboidShape(14.0, 6.0, 3.0, 16.0, 8.0, 16.0),
-            Block.createCuboidShape(0.0, 8.0, 3.0, 2.0, 9.0, 15.0),
-            Block.createCuboidShape(14.0, 8.0, 3.0, 16.0, 9.0, 15.0)
+            BASE,
+            Block.createCuboidShape(13, 7, 4, 16, 10, 16),
+            Block.createCuboidShape(0, 7, 4, 3, 10, 16),
+            Block.createCuboidShape(0, 7, 0, 16, 16, 4)
     );
     protected static final VoxelShape EAST = VoxelShapes.union(
-            Block.createCuboidShape(0.0, 0.0, 0.0, 2.0, 2.0, 2.0),
-            Block.createCuboidShape(14.0, 0.0, 0.0, 16.0, 2.0, 2.0),
-            Block.createCuboidShape(0.0, 0.0, 14.0, 2.0, 2.0, 16.0),
-            Block.createCuboidShape(14.0, 0.0, 14.0, 16.0, 2.0, 16.0),
-            Block.createCuboidShape(0.0, 2.0, 0.0, 16.0, 6.0, 16.0),
-            Block.createCuboidShape(0.0, 6.0, 0.0, 4.0, 15.0, 16.0),
-            Block.createCuboidShape(0.0, 15.0, 1.0, 4.0, 16.0, 15.0),
-            Block.createCuboidShape(0.0, 6.0, 0.0, 16.0, 8.0, 2.0),
-            Block.createCuboidShape(0.0, 6.0, 14.0, 16.0, 8.0, 16.0),
-            Block.createCuboidShape(1.0, 8.0, 0.0, 15.0, 9.0, 2.0),
-            Block.createCuboidShape(1.0, 8.0, 14.0, 15.0, 9.0, 16.0)
+            BASE,
+            Block.createCuboidShape(4, 7, 0, 16, 10, 3),
+            Block.createCuboidShape(4, 7, 13, 16, 10, 16),
+            Block.createCuboidShape(0, 7, 0, 4, 16, 16)
     );
     protected static final VoxelShape WEST = VoxelShapes.union(
-            Block.createCuboidShape(0.0, 0.0, 0.0, 2.0, 2.0, 2.0),
-            Block.createCuboidShape(14.0, 0.0, 0.0, 16.0, 2.0, 2.0),
-            Block.createCuboidShape(0.0, 0.0, 14.0, 2.0, 2.0, 16.0),
-            Block.createCuboidShape(14.0, 0.0, 14.0, 16.0, 2.0, 16.0),
-            Block.createCuboidShape(0.0, 2.0, 0.0, 16.0, 6.0, 16.0),
-            Block.createCuboidShape(12.0, 6.0, 0.0, 16.0, 15.0, 16.0),
-            Block.createCuboidShape(12.0, 15.0, 1.0, 16.0, 16.0, 15.0),
-            Block.createCuboidShape(0.0, 6.0, 0.0, 13.0, 8.0, 2.0),
-            Block.createCuboidShape(0.0, 6.0, 14.0, 13.0, 8.0, 16.0),
-            Block.createCuboidShape(1.0, 8.0, 0.0, 13.0, 9.0, 2.0),
-            Block.createCuboidShape(1.0, 8.0, 14.0, 13.0, 9.0, 16.0)
+            BASE,
+            Block.createCuboidShape(0, 7, 13, 12, 10, 16),
+            Block.createCuboidShape(0, 7, 0, 12, 10, 3),
+            Block.createCuboidShape(12, 7, 0, 16, 16, 16)
     );
 
     public ArmchairBlock(Settings settings) {
@@ -80,7 +60,7 @@ public class ArmchairBlock extends SeatBlock{
             case SOUTH -> SOUTH;
             case EAST -> EAST;
             case WEST -> WEST;
-            default -> VoxelShapes.empty(); // return an empty shape if no matching direction is found
+            default -> VoxelShapes.empty();
         };
     }
 

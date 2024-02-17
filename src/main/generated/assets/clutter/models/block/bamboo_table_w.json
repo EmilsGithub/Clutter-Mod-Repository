@@ -1,0 +1,7 @@
+{
+  "parent": "clutter:block/parent/table_w_parent",
+  "textures": {
+    "log": "minecraft:block/bamboo_block",
+    "planks": "minecraft:block/bamboo_planks"
+  }
+}

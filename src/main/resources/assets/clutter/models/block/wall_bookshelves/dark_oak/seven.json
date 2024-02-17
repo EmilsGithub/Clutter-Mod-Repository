@@ -1,7 +1,0 @@
-{
-	"parent": "clutter:block/wall_bookshelves/wall_bookshelf_parent_seven",
-	"textures": {
-		"0": "minecraft:block/dark_oak_planks",
-		"particle": "minecraft:block/dark_oak_planks"
-	}
-}

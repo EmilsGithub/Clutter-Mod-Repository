@@ -99,8 +99,6 @@ public class EmberTortoiseEntity extends ClutterAnimalEntity {
         this.targetSelector.add(2, new ActiveTargetGoal<>(this, HoglinEntity.class, true));
     }
 
-
-
     protected void initDataTracker() {
         super.initDataTracker();
         this.dataTracker.startTracking(MOVING, false);

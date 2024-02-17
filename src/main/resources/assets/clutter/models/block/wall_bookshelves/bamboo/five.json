@@ -1,7 +1,0 @@
-{
-	"parent": "clutter:block/wall_bookshelves/wall_bookshelf_parent_five",
-	"textures": {
-		"0": "minecraft:block/bamboo_planks",
-		"particle": "minecraft:block/bamboo_planks"
-	}
-}

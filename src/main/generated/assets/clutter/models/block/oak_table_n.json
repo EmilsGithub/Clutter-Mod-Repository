@@ -1,0 +1,7 @@
+{
+  "parent": "clutter:block/parent/table_n_parent",
+  "textures": {
+    "log": "minecraft:block/oak_log",
+    "planks": "minecraft:block/oak_planks"
+  }
+}

@@ -1,8 +1,0 @@
-{
-  "parent": "block/slab",
-  "textures": {
-    "bottom": "clutter:block/jungle_mosaic",
-    "side": "clutter:block/jungle_mosaic",
-    "top": "clutter:block/jungle_mosaic"
-  }
-}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "clutter:block/crimson_mosaic",
+    "side": "clutter:block/crimson_mosaic",
+    "top": "clutter:block/crimson_mosaic"
+  }
+}

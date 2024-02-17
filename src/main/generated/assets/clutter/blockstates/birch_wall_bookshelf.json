@@ -1,0 +1,109 @@
+{
+  "variants": {
+    "current_model=0,facing=east": {
+      "model": "clutter:block/birch_wall_bookshelf_one",
+      "y": 90
+    },
+    "current_model=0,facing=north": {
+      "model": "clutter:block/birch_wall_bookshelf_one"
+    },
+    "current_model=0,facing=south": {
+      "model": "clutter:block/birch_wall_bookshelf_one",
+      "y": 180
+    },
+    "current_model=0,facing=west": {
+      "model": "clutter:block/birch_wall_bookshelf_one",
+      "y": 270
+    },
+    "current_model=1,facing=east": {
+      "model": "clutter:block/birch_wall_bookshelf_two",
+      "y": 90
+    },
+    "current_model=1,facing=north": {
+      "model": "clutter:block/birch_wall_bookshelf_two"
+    },
+    "current_model=1,facing=south": {
+      "model": "clutter:block/birch_wall_bookshelf_two",
+      "y": 180
+    },
+    "current_model=1,facing=west": {
+      "model": "clutter:block/birch_wall_bookshelf_two",
+      "y": 270
+    },
+    "current_model=2,facing=east": {
+      "model": "clutter:block/birch_wall_bookshelf_three",
+      "y": 90
+    },
+    "current_model=2,facing=north": {
+      "model": "clutter:block/birch_wall_bookshelf_three"
+    },
+    "current_model=2,facing=south": {
+      "model": "clutter:block/birch_wall_bookshelf_three",
+      "y": 180
+    },
+    "current_model=2,facing=west": {
+      "model": "clutter:block/birch_wall_bookshelf_three",
+      "y": 270
+    },
+    "current_model=3,facing=east": {
+      "model": "clutter:block/birch_wall_bookshelf_four",
+      "y": 90
+    },
+    "current_model=3,facing=north": {
+      "model": "clutter:block/birch_wall_bookshelf_four"
+    },
+    "current_model=3,facing=south": {
+      "model": "clutter:block/birch_wall_bookshelf_four",
+      "y": 180
+    },
+    "current_model=3,facing=west": {
+      "model": "clutter:block/birch_wall_bookshelf_four",
+      "y": 270
+    },
+    "current_model=4,facing=east": {
+      "model": "clutter:block/birch_wall_bookshelf_five",
+      "y": 90
+    },
+    "current_model=4,facing=north": {
+      "model": "clutter:block/birch_wall_bookshelf_five"
+    },
+    "current_model=4,facing=south": {
+      "model": "clutter:block/birch_wall_bookshelf_five",
+      "y": 180
+    },
+    "current_model=4,facing=west": {
+      "model": "clutter:block/birch_wall_bookshelf_five",
+      "y": 270
+    },
+    "current_model=5,facing=east": {
+      "model": "clutter:block/birch_wall_bookshelf_six",
+      "y": 90
+    },
+    "current_model=5,facing=north": {
+      "model": "clutter:block/birch_wall_bookshelf_six"
+    },
+    "current_model=5,facing=south": {
+      "model": "clutter:block/birch_wall_bookshelf_six",
+      "y": 180
+    },
+    "current_model=5,facing=west": {
+      "model": "clutter:block/birch_wall_bookshelf_six",
+      "y": 270
+    },
+    "current_model=6,facing=east": {
+      "model": "clutter:block/birch_wall_bookshelf_seven",
+      "y": 90
+    },
+    "current_model=6,facing=north": {
+      "model": "clutter:block/birch_wall_bookshelf_seven"
+    },
+    "current_model=6,facing=south": {
+      "model": "clutter:block/birch_wall_bookshelf_seven",
+      "y": 180
+    },
+    "current_model=6,facing=west": {
+      "model": "clutter:block/birch_wall_bookshelf_seven",
+      "y": 270
+    }
+  }
+}

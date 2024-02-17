@@ -65,7 +65,7 @@ public class Clutter implements ModInitializer {
 
 		ClutterAttributes.registerAttributes();
 
-		if(IS_TRINKETS_LOADED) TrinketsElytraUse.doFlight();
+		if(IS_TRINKETS_LOADED && ClutterConfig.getInstance().getBoolean(ClutterConfig.DO_TRINKETS_ELYTRA_FLIGHT)) TrinketsElytraUse.doFlight();
 
 		ModMessages.registerHandshakePackets();
 		LOGGER.info("[Clutter] Finished initializing.");

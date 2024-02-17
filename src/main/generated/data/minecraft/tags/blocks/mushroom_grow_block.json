@@ -1,6 +1,10 @@
 {
   "replace": false,
   "values": [
-    "clutter:overgrown_stone"
+    "clutter:overgrown_stone",
+    "clutter:redwood_log",
+    "clutter:redwood_wood",
+    "clutter:stripped_redwood_log",
+    "clutter:stripped_redwood_wood"
   ]
 }

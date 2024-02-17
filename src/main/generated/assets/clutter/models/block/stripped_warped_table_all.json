@@ -1,0 +1,7 @@
+{
+  "parent": "clutter:block/parent/table_all_parent",
+  "textures": {
+    "log": "minecraft:block/stripped_warped_stem",
+    "planks": "minecraft:block/warped_planks"
+  }
+}

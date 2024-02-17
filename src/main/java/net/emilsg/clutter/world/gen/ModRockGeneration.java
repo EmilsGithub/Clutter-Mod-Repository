@@ -1,7 +1,9 @@
 package net.emilsg.clutter.world.gen;
 
+import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.config.ClutterConfig;
 import net.emilsg.clutter.world.ModPlacedFeatures;
+import net.emilsg.clutter.world.biome.ModBiomes;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.minecraft.world.biome.BiomeKeys;

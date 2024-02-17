@@ -69,6 +69,11 @@ public class JellyfishEntity extends WaterCreatureEntity {
         this.thrustTimerSpeed = 1.0f / (this.random.nextFloat() + 1.0f) * 0.2f;
     }
 
+    @Override
+    public EntityGroup getGroup() {
+        return EntityGroup.AQUATIC;
+    }
+
     protected void initDataTracker() {
         super.initDataTracker();
         this.dataTracker.startTracking(DATA_ID_TYPE_VARIANT, 0);

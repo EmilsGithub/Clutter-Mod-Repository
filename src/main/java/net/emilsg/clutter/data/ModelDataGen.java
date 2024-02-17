@@ -100,26 +100,24 @@ public class ModelDataGen extends FabricModelProvider {
         generator.registerCoral(ModBlocks.DIAMOND_CORAL, ModBlocks.DEAD_DIAMOND_CORAL, ModBlocks.DIAMOND_CORAL_BLOCK, ModBlocks.DEAD_DIAMOND_CORAL_BLOCK, ModBlocks.DIAMOND_CORAL_FAN, ModBlocks.DEAD_DIAMOND_CORAL_FAN, ModBlocks.DIAMOND_CORAL_WALL_FAN, ModBlocks.DEAD_DIAMOND_CORAL_WALL_FAN);
         generator.registerCoral(ModBlocks.ANCHOR_CORAL, ModBlocks.DEAD_ANCHOR_CORAL, ModBlocks.ANCHOR_CORAL_BLOCK, ModBlocks.DEAD_ANCHOR_CORAL_BLOCK, ModBlocks.ANCHOR_CORAL_FAN, ModBlocks.DEAD_ANCHOR_CORAL_FAN, ModBlocks.ANCHOR_CORAL_WALL_FAN, ModBlocks.DEAD_ANCHOR_CORAL_WALL_FAN);
 
-        registerCompleteWoodSet(generator, ModBlocks.REDWOOD_LOG, ModBlocks.REDWOOD_PLANKS, ModBlocks.REDWOOD_CHAIR, ModBlocks.STRIPPED_REDWOOD_CHAIR, ModBlocks.REDWOOD_TABLE, ModBlocks.STRIPPED_REDWOOD_TABLE, ModBlocks.REDWOOD_BENCH,
+        registerCompleteWoodSet(generator, ModBlocks.REDWOOD_LOG, ModBlocks.STRIPPED_REDWOOD_LOG, ModBlocks.REDWOOD_PLANKS, ModBlocks.REDWOOD_CHAIR, ModBlocks.STRIPPED_REDWOOD_CHAIR, ModBlocks.REDWOOD_TABLE, ModBlocks.STRIPPED_REDWOOD_TABLE, ModBlocks.REDWOOD_BENCH,
                 ModBlocks.STRIPPED_REDWOOD_BENCH, ModBlocks.REDWOOD_SHELF, ModBlocks.REDWOOD_WALL_BOOKSHELF, ModBlocks.REDWOOD_WALL_CUPBOARD, ModBlocks.REDWOOD_CUPBOARD, ModBlocks.REDWOOD_WINDOW_SILL, ModBlocks.REDWOOD_TRELLIS, ModBlocks.REDWOOD_STAIRS, ModBlocks.REDWOOD_SLAB,
                 ModBlocks.REDWOOD_BUTTON, ModBlocks.REDWOOD_FENCE, ModBlocks.REDWOOD_FENCE_GATE, ModBlocks.REDWOOD_PRESSURE_PLATE, ModBlocks.REDWOOD_MOSAIC, ModBlocks.REDWOOD_MOSAIC_SLAB, ModBlocks.REDWOOD_MOSAIC_STAIRS, ModBlocks.REDWOOD_WOOD, ModBlocks.STRIPPED_REDWOOD_LOG, ModBlocks.STRIPPED_REDWOOD_WOOD,
                 ModBlocks.REDWOOD_LEAVES, ModBlocks.REDWOOD_SAPLING, ModBlocks.REDWOOD_DOOR, ModBlocks.REDWOOD_TRAPDOOR);
 
-        registerClutterWoodSet(generator, Blocks.SPRUCE_LOG, Blocks.SPRUCE_PLANKS, ModBlocks.SPRUCE_CHAIR, ModBlocks.STRIPPED_SPRUCE_CHAIR, ModBlocks.SPRUCE_TABLE, ModBlocks.STRIPPED_SPRUCE_TABLE, ModBlocks.SPRUCE_BENCH, ModBlocks.STRIPPED_SPRUCE_BENCH, ModBlocks.SPRUCE_SHELF, ModBlocks.SPRUCE_WALL_BOOKSHELF, ModBlocks.SPRUCE_WALL_CUPBOARD, ModBlocks.SPRUCE_CUPBOARD, ModBlocks.SPRUCE_WINDOW_SILL, ModBlocks.SPRUCE_TRELLIS);
+        registerClutterWoodSet(generator, Blocks.OAK_LOG, Blocks.STRIPPED_OAK_LOG, Blocks.OAK_PLANKS, ModBlocks.OAK_CHAIR, ModBlocks.STRIPPED_OAK_CHAIR, ModBlocks.OAK_TABLE, ModBlocks.STRIPPED_OAK_TABLE, ModBlocks.OAK_BENCH, ModBlocks.STRIPPED_OAK_BENCH, ModBlocks.OAK_SHELF, ModBlocks.OAK_WALL_BOOKSHELF, ModBlocks.OAK_WALL_CUPBOARD, ModBlocks.OAK_CUPBOARD, ModBlocks.OAK_WINDOW_SILL, ModBlocks.OAK_TRELLIS, ModBlocks.OAK_MOSAIC, ModBlocks.OAK_MOSAIC_STAIRS, ModBlocks.OAK_MOSAIC_SLAB);
+        registerClutterWoodSet(generator, Blocks.BIRCH_LOG, Blocks.STRIPPED_BIRCH_LOG, Blocks.BIRCH_PLANKS, ModBlocks.BIRCH_CHAIR, ModBlocks.STRIPPED_BIRCH_CHAIR, ModBlocks.BIRCH_TABLE, ModBlocks.STRIPPED_BIRCH_TABLE, ModBlocks.BIRCH_BENCH, ModBlocks.STRIPPED_BIRCH_BENCH, ModBlocks.BIRCH_SHELF, ModBlocks.BIRCH_WALL_BOOKSHELF, ModBlocks.BIRCH_WALL_CUPBOARD, ModBlocks.BIRCH_CUPBOARD, ModBlocks.BIRCH_WINDOW_SILL, ModBlocks.BIRCH_TRELLIS, ModBlocks.BIRCH_MOSAIC, ModBlocks.BIRCH_MOSAIC_STAIRS, ModBlocks.BIRCH_MOSAIC_SLAB);
+        registerClutterWoodSet(generator, Blocks.JUNGLE_LOG, Blocks.STRIPPED_JUNGLE_LOG, Blocks.JUNGLE_PLANKS, ModBlocks.JUNGLE_CHAIR, ModBlocks.STRIPPED_JUNGLE_CHAIR, ModBlocks.JUNGLE_TABLE, ModBlocks.STRIPPED_JUNGLE_TABLE, ModBlocks.JUNGLE_BENCH, ModBlocks.STRIPPED_JUNGLE_BENCH, ModBlocks.JUNGLE_SHELF, ModBlocks.JUNGLE_WALL_BOOKSHELF, ModBlocks.JUNGLE_WALL_CUPBOARD, ModBlocks.JUNGLE_CUPBOARD, ModBlocks.JUNGLE_WINDOW_SILL, ModBlocks.JUNGLE_TRELLIS, ModBlocks.JUNGLE_MOSAIC, ModBlocks.JUNGLE_MOSAIC_STAIRS, ModBlocks.JUNGLE_MOSAIC_SLAB);
+        registerClutterWoodSet(generator, Blocks.ACACIA_LOG, Blocks.STRIPPED_ACACIA_LOG, Blocks.ACACIA_PLANKS, ModBlocks.ACACIA_CHAIR, ModBlocks.STRIPPED_ACACIA_CHAIR, ModBlocks.ACACIA_TABLE, ModBlocks.STRIPPED_ACACIA_TABLE, ModBlocks.ACACIA_BENCH, ModBlocks.STRIPPED_ACACIA_BENCH, ModBlocks.ACACIA_SHELF, ModBlocks.ACACIA_WALL_BOOKSHELF, ModBlocks.ACACIA_WALL_CUPBOARD, ModBlocks.ACACIA_CUPBOARD, ModBlocks.ACACIA_WINDOW_SILL, ModBlocks.ACACIA_TRELLIS, ModBlocks.ACACIA_MOSAIC, ModBlocks.ACACIA_MOSAIC_STAIRS, ModBlocks.ACACIA_MOSAIC_SLAB);
+        registerClutterWoodSet(generator, Blocks.SPRUCE_LOG, Blocks.STRIPPED_SPRUCE_LOG, Blocks.SPRUCE_PLANKS, ModBlocks.SPRUCE_CHAIR, ModBlocks.STRIPPED_SPRUCE_CHAIR, ModBlocks.SPRUCE_TABLE, ModBlocks.STRIPPED_SPRUCE_TABLE, ModBlocks.SPRUCE_BENCH, ModBlocks.STRIPPED_SPRUCE_BENCH, ModBlocks.SPRUCE_SHELF, ModBlocks.SPRUCE_WALL_BOOKSHELF, ModBlocks.SPRUCE_WALL_CUPBOARD, ModBlocks.SPRUCE_CUPBOARD, ModBlocks.SPRUCE_WINDOW_SILL, ModBlocks.SPRUCE_TRELLIS, ModBlocks.SPRUCE_MOSAIC, ModBlocks.SPRUCE_MOSAIC_STAIRS, ModBlocks.SPRUCE_MOSAIC_SLAB);
+        registerClutterWoodSet(generator, Blocks.DARK_OAK_LOG, Blocks.STRIPPED_DARK_OAK_LOG, Blocks.DARK_OAK_PLANKS, ModBlocks.DARK_OAK_CHAIR, ModBlocks.STRIPPED_DARK_OAK_CHAIR, ModBlocks.DARK_OAK_TABLE, ModBlocks.STRIPPED_DARK_OAK_TABLE, ModBlocks.DARK_OAK_BENCH, ModBlocks.STRIPPED_DARK_OAK_BENCH, ModBlocks.DARK_OAK_SHELF, ModBlocks.DARK_OAK_WALL_BOOKSHELF, ModBlocks.DARK_OAK_WALL_CUPBOARD, ModBlocks.DARK_OAK_CUPBOARD, ModBlocks.DARK_OAK_WINDOW_SILL, ModBlocks.DARK_OAK_TRELLIS, ModBlocks.DARK_OAK_MOSAIC, ModBlocks.DARK_OAK_MOSAIC_STAIRS, ModBlocks.DARK_OAK_MOSAIC_SLAB);
+        registerClutterWoodSet(generator, Blocks.MANGROVE_LOG, Blocks.STRIPPED_MANGROVE_LOG, Blocks.MANGROVE_PLANKS, ModBlocks.MANGROVE_CHAIR, ModBlocks.STRIPPED_MANGROVE_CHAIR, ModBlocks.MANGROVE_TABLE, ModBlocks.STRIPPED_MANGROVE_TABLE, ModBlocks.MANGROVE_BENCH, ModBlocks.STRIPPED_MANGROVE_BENCH, ModBlocks.MANGROVE_SHELF, ModBlocks.MANGROVE_WALL_BOOKSHELF, ModBlocks.MANGROVE_WALL_CUPBOARD, ModBlocks.MANGROVE_CUPBOARD, ModBlocks.MANGROVE_WINDOW_SILL, ModBlocks.MANGROVE_TRELLIS, ModBlocks.MANGROVE_MOSAIC, ModBlocks.MANGROVE_MOSAIC_STAIRS, ModBlocks.MANGROVE_MOSAIC_SLAB);
+        registerClutterWoodSet(generator, Blocks.CRIMSON_STEM, Blocks.STRIPPED_CRIMSON_STEM, Blocks.CRIMSON_PLANKS, ModBlocks.CRIMSON_CHAIR, ModBlocks.STRIPPED_CRIMSON_CHAIR, ModBlocks.CRIMSON_TABLE, ModBlocks.STRIPPED_CRIMSON_TABLE, ModBlocks.CRIMSON_BENCH, ModBlocks.STRIPPED_CRIMSON_BENCH, ModBlocks.CRIMSON_SHELF, ModBlocks.CRIMSON_WALL_BOOKSHELF, ModBlocks.CRIMSON_WALL_CUPBOARD, ModBlocks.CRIMSON_CUPBOARD, ModBlocks.CRIMSON_WINDOW_SILL, ModBlocks.CRIMSON_TRELLIS, ModBlocks.CRIMSON_MOSAIC, ModBlocks.CRIMSON_MOSAIC_STAIRS, ModBlocks.CRIMSON_MOSAIC_SLAB);
+        registerClutterWoodSet(generator, Blocks.WARPED_STEM, Blocks.STRIPPED_WARPED_STEM, Blocks.WARPED_PLANKS, ModBlocks.WARPED_CHAIR, ModBlocks.STRIPPED_WARPED_CHAIR, ModBlocks.WARPED_TABLE, ModBlocks.STRIPPED_WARPED_TABLE, ModBlocks.WARPED_BENCH, ModBlocks.STRIPPED_WARPED_BENCH, ModBlocks.WARPED_SHELF, ModBlocks.WARPED_WALL_BOOKSHELF, ModBlocks.WARPED_WALL_CUPBOARD, ModBlocks.WARPED_CUPBOARD, ModBlocks.WARPED_WINDOW_SILL, ModBlocks.WARPED_TRELLIS, ModBlocks.WARPED_MOSAIC, ModBlocks.WARPED_MOSAIC_STAIRS, ModBlocks.WARPED_MOSAIC_SLAB);
+        registerClutterWoodSet(generator, Blocks.CHERRY_LOG, Blocks.STRIPPED_CHERRY_LOG, Blocks.CHERRY_PLANKS, ModBlocks.CHERRY_CHAIR, ModBlocks.STRIPPED_CHERRY_CHAIR, ModBlocks.CHERRY_TABLE, ModBlocks.STRIPPED_CHERRY_TABLE, ModBlocks.CHERRY_BENCH, ModBlocks.STRIPPED_CHERRY_BENCH, ModBlocks.CHERRY_SHELF, ModBlocks.CHERRY_WALL_BOOKSHELF, ModBlocks.CHERRY_WALL_CUPBOARD, ModBlocks.CHERRY_CUPBOARD, ModBlocks.CHERRY_WINDOW_SILL, ModBlocks.CHERRY_TRELLIS, ModBlocks.CHERRY_MOSAIC, ModBlocks.CHERRY_MOSAIC_STAIRS, ModBlocks.CHERRY_MOSAIC_SLAB);
+        registerNonStrippedClutterWoodSet(generator, Blocks.BAMBOO_BLOCK, Blocks.BAMBOO_PLANKS, ModBlocks.BAMBOO_CHAIR, ModBlocks.BAMBOO_TABLE, ModBlocks.BAMBOO_BENCH, ModBlocks.BAMBOO_SHELF, ModBlocks.BAMBOO_WALL_BOOKSHELF, ModBlocks.BAMBOO_WALL_CUPBOARD, ModBlocks.BAMBOO_CUPBOARD, ModBlocks.BAMBOO_WINDOW_SILL, ModBlocks.BAMBOO_TRELLIS);
 
         registerLargeTintableCross(generator, ModBlocks.GIANT_FERN);
-
-        registerWindowSill(generator, ModBlocks.OAK_WINDOW_SILL, Blocks.OAK_PLANKS);
-        registerWindowSill(generator, ModBlocks.BIRCH_WINDOW_SILL, Blocks.BIRCH_PLANKS);
-        registerWindowSill(generator, ModBlocks.JUNGLE_WINDOW_SILL, Blocks.JUNGLE_PLANKS);
-        registerWindowSill(generator, ModBlocks.ACACIA_WINDOW_SILL, Blocks.ACACIA_PLANKS);
-        registerWindowSill(generator, ModBlocks.DARK_OAK_WINDOW_SILL, Blocks.DARK_OAK_PLANKS);
-        registerWindowSill(generator, ModBlocks.MANGROVE_WINDOW_SILL, Blocks.MANGROVE_PLANKS);
-        registerWindowSill(generator, ModBlocks.CRIMSON_WINDOW_SILL, Blocks.CRIMSON_PLANKS);
-        registerWindowSill(generator, ModBlocks.WARPED_WINDOW_SILL, Blocks.WARPED_PLANKS);
-        registerWindowSill(generator, ModBlocks.CHERRY_WINDOW_SILL, Blocks.CHERRY_PLANKS);
-        registerWindowSill(generator, ModBlocks.BAMBOO_WINDOW_SILL, Blocks.BAMBOO_PLANKS);
-
 
         generator.registerCubeAllModelTexturePool(ModBlocks.REINFORCED_COPPER_GLASS).same(ModBlocks.WAXED_REINFORCED_COPPER_GLASS);
         generator.registerCubeAllModelTexturePool(ModBlocks.EXPOSED_REINFORCED_COPPER_GLASS).same(ModBlocks.WAXED_EXPOSED_REINFORCED_COPPER_GLASS);
@@ -149,6 +147,9 @@ public class ModelDataGen extends FabricModelProvider {
         registerSpawnEggItem(itemGen, ModItems.CAPYBARA_SPAWN_EGG);
         registerSpawnEggItem(itemGen, ModItems.CRIMSON_NEWT_SPAWN_EGG);
         registerSpawnEggItem(itemGen, ModItems.EMBER_TORTOISE_SPAWN_EGG);
+        registerSpawnEggItem(itemGen, ModItems.CRAB_SPAWN_EGG);
+        registerSpawnEggItem(itemGen, ModItems.DROWNED_SKELETON_SPAWN_EGG);
+        registerSpawnEggItem(itemGen, ModItems.MANTA_RAY_SPAWN_EGG);
     }
 
     private void registerGroupCubeAll(BlockStateModelGenerator generator, Block... blocks) {
@@ -160,6 +161,7 @@ public class ModelDataGen extends FabricModelProvider {
     private void registerCompleteWoodSet(
             BlockStateModelGenerator generator,
             Block logTextureReference,
+            Block strippedLogTextureReference,
             Block planksTextureReference,
             Block chair,
             Block strippedChair,
@@ -197,17 +199,42 @@ public class ModelDataGen extends FabricModelProvider {
         generator.registerDoor(door);
         generator.registerTrapdoor(trapdoor);
         generator.registerCubeAllModelTexturePool(planksTextureReference).stairs(stairs).slab(slab).button(button).fence(fence).fenceGate(fenceGate).pressurePlate(pressurePlate);
-        generator.registerCubeAllModelTexturePool(mosaicBlock).slab(mosaicSlab).stairs(mosaicStairs);
-        registerClutterWoodSet(generator, logTextureReference, planksTextureReference, chair, strippedChair, table, strippedTable, bench, strippedBench, shelf, wallBookshelf, wallCupboard, cupboard, windowSill, trellis);
+        registerClutterWoodSet(generator, logTextureReference, strippedLogTextureReference, planksTextureReference, chair, strippedChair, table, strippedTable, bench, strippedBench, shelf, wallBookshelf, wallCupboard, cupboard, windowSill, trellis, mosaicBlock, mosaicStairs, mosaicSlab);
     }
 
-    private void registerClutterWoodSet(BlockStateModelGenerator generator, Block logTextureReference, Block planksTextureReference, Block chair, Block strippedChair, Block table, Block strippedTable, Block bench, Block strippedBench, Block shelf, Block wallBookshelf, Block wallCupboard, Block cupboard, Block windowSill, Block trellis) {
+    private void registerClutterWoodSet(BlockStateModelGenerator generator, Block logTextureReference, Block strippedLogTextureReference, Block planksTextureReference, Block chair, Block strippedChair, Block table, Block strippedTable, Block bench, Block strippedBench, Block shelf, Block wallBookshelf, Block wallCupboard, Block cupboard, Block windowSill, Block trellis, Block mosaicBlock, Block mosaicStairs, Block mosaicSlab) {
         registerChair(generator, chair, logTextureReference, planksTextureReference);
-        registerChair(generator, strippedChair, logTextureReference, planksTextureReference);
+        registerChair(generator, strippedChair, strippedLogTextureReference, planksTextureReference);
         registerBench(generator, bench, logTextureReference, planksTextureReference);
-        registerBench(generator, strippedBench, logTextureReference, planksTextureReference);
+        registerBench(generator, strippedBench, strippedLogTextureReference, planksTextureReference);
         registerTable(generator, table, logTextureReference, planksTextureReference);
-        registerTable(generator, strippedTable, logTextureReference, planksTextureReference);
+        registerTable(generator, strippedTable, strippedLogTextureReference, planksTextureReference);
+        registerShelf(generator, shelf, logTextureReference, planksTextureReference);
+        registerWallBookshelf(generator, wallBookshelf, planksTextureReference);
+        registerWallCupboard(generator, wallCupboard, planksTextureReference);
+        registerCupboard(generator, cupboard, planksTextureReference);
+        registerWindowSill(generator, windowSill, planksTextureReference);
+        //registerTrellis(generator, trellis, logTextureReference);
+        generator.registerCubeAllModelTexturePool(mosaicBlock).slab(mosaicSlab).stairs(mosaicStairs);
+    }
+
+    private void registerNonStrippedClutterWoodSet(BlockStateModelGenerator generator, Block logTextureReference, Block planksTextureReference, Block chair, Block table, Block bench, Block shelf, Block wallBookshelf, Block wallCupboard, Block cupboard, Block windowSill, Block trellis, Block mosaicBlock, Block mosaicStairs, Block mosaicSlab) {
+        registerChair(generator, chair, logTextureReference, planksTextureReference);
+        registerBench(generator, bench, logTextureReference, planksTextureReference);
+        registerTable(generator, table, logTextureReference, planksTextureReference);
+        registerShelf(generator, shelf, logTextureReference, planksTextureReference);
+        registerWallBookshelf(generator, wallBookshelf, planksTextureReference);
+        registerWallCupboard(generator, wallCupboard, planksTextureReference);
+        registerCupboard(generator, cupboard, planksTextureReference);
+        registerWindowSill(generator, windowSill, planksTextureReference);
+        //registerTrellis(generator, trellis, planksTextureReference);
+        generator.registerCubeAllModelTexturePool(mosaicBlock).slab(mosaicSlab).stairs(mosaicStairs);
+    }
+
+    private void registerNonStrippedClutterWoodSet(BlockStateModelGenerator generator, Block logTextureReference, Block planksTextureReference, Block chair, Block table, Block bench, Block shelf, Block wallBookshelf, Block wallCupboard, Block cupboard, Block windowSill, Block trellis) {
+        registerChair(generator, chair, logTextureReference, planksTextureReference);
+        registerBench(generator, bench, logTextureReference, planksTextureReference);
+        registerTable(generator, table, logTextureReference, planksTextureReference);
         registerShelf(generator, shelf, logTextureReference, planksTextureReference);
         registerWallBookshelf(generator, wallBookshelf, planksTextureReference);
         registerWallCupboard(generator, wallCupboard, planksTextureReference);

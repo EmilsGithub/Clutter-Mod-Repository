@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "clutter:block/jungle_chair",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "clutter:block/jungle_chair"
+    },
+    "facing=south": {
+      "model": "clutter:block/jungle_chair",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "clutter:block/jungle_chair",
+      "y": 270
+    }
+  }
+}

@@ -187,6 +187,7 @@ public class ModItems {
     public static final Item JELLYFISH_SPAWN_EGG = registerItem("jellyfish_spawn_egg", new SpawnEggItem(ModEntities.JELLYFISH, 5487623, 8732643, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
     public static final Item CRAB_SPAWN_EGG = registerItem("crab_spawn_egg", new SpawnEggItem(ModEntities.CRAB, 5487623, 8732643, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
     public static final Item DROWNED_SKELETON_SPAWN_EGG = registerItem("drowned_skeleton_spawn_egg", new SpawnEggItem(ModEntities.DROWNED_SKELETON, 5487623, 8732643, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item MANTA_RAY_SPAWN_EGG = registerItem("manta_ray_spawn_egg", new SpawnEggItem(ModEntities.MANTA_RAY, 12895428, 2566460, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
 
     public static final Item BEACH_HAT = registerItem("beach_hat", new HatItem(new FabricItemSettings().maxCount(1)), ModItemGroups.CLUTTER_ITEMS);
     public static final Item TOP_HAT = registerItem("top_hat", new HatItem(new FabricItemSettings().maxCount(1)), ModItemGroups.CLUTTER_ITEMS);

@@ -37,14 +37,22 @@ public class ModPlacedFeatures {
     public static final RegistryKey<PlacedFeature> SMALL_REDWOOD_PLACED_KEY = registerKey("small_redwood_placed");
     public static final RegistryKey<PlacedFeature> DEAD_REDWOOD_PLACED_KEY = registerKey("dead_redwood_placed");
     public static final RegistryKey<PlacedFeature> GIANT_FERN_PLACED_KEY = registerKey("giant_fern_placed");
+    public static final RegistryKey<PlacedFeature> REDWOOD_ROCK_PLACED_KEY = registerKey("redwood_rock_placed");
+    public static final RegistryKey<PlacedFeature> REDWOOD_SILVER_ORE_PLACED_KEY = registerKey("redwood_silver_ore_placed");
+    public static final RegistryKey<PlacedFeature> FALLEN_REDWOOD_PLACED_KEY = registerKey("fallen_redwood_placed");
 
     public static final RegistryKey<PlacedFeature> LUPINES_PLACED_KEY = registerKey("lupines_placed");
     public static final RegistryKey<PlacedFeature> LUPINES_RIVER_PLACED_KEY = registerKey("lupines_river_placed");
+    public static final RegistryKey<PlacedFeature> LUPINE_FIELDS_ROCK_PLACED_KEY = registerKey("lupine_fields_rock_placed");
 
     public static void bootstrap(Registerable<PlacedFeature> context) {
         var configuredFeatureRegistryEntryLookup = context.getRegistryLookup(RegistryKeys.CONFIGURED_FEATURE);
 
         register(context, SILVER_ORE_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.SILVER_ORE_KEY), ModOrePlacement.modifiersWithCount(4, HeightRangePlacementModifier.trapezoid(YOffset.fixed(-32), YOffset.fixed(32))));
+
+        register(context, REDWOOD_SILVER_ORE_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.SILVER_ORE_KEY),
+                ModOrePlacement.modifiersWithCount(2, HeightRangePlacementModifier.trapezoid(YOffset.fixed(48), YOffset.fixed(128))));
+
         register(context, BLACKSTONE_SULPHUR_ORE_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.BLACKSTONE_SULPHUR_ORE_KEY), ModOrePlacement.modifiersWithCount(10, PlacedFeatures.TEN_ABOVE_AND_BELOW_RANGE));
         register(context, BASALT_SULPHUR_ORE_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.BASALT_SULPHUR_ORE_KEY), ModOrePlacement.modifiersWithCount(7, PlacedFeatures.TEN_ABOVE_AND_BELOW_RANGE));
         register(context, ONYX_GEODE_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.ONYX_GEODE_KEY), RarityFilterPlacementModifier.of(32), SquarePlacementModifier.of(), HeightRangePlacementModifier.uniform(YOffset.aboveBottom(10), YOffset.belowTop(20)), BiomePlacementModifier.of());
@@ -66,32 +74,25 @@ public class ModPlacedFeatures {
         register(context, MEDIUM_REDWOOD_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.MEDIUM_REDWOOD_KEY), VegetationPlacedFeatures.treeModifiersWithWouldSurvive(PlacedFeatures.createCountExtraModifier(1, 0.25f, 0), ModBlocks.REDWOOD_SAPLING));
         register(context, SMALL_REDWOOD_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.SMALL_REDWOOD_KEY), VegetationPlacedFeatures.treeModifiersWithWouldSurvive(PlacedFeatures.createCountExtraModifier(1, 0.2f, 0), ModBlocks.REDWOOD_SAPLING));
         register(context, DEAD_REDWOOD_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.DEAD_REDWOOD_KEY), VegetationPlacedFeatures.treeModifiersWithWouldSurvive(RarityFilterPlacementModifier.of(32), ModBlocks.REDWOOD_SAPLING));
-
         register(context, GIANT_FERN_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.GIANT_FERN_KEY), RarityFilterPlacementModifier.of(2), SquarePlacementModifier.of(), PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of());
-        //register(context, LUPINES_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.LUPINES_KEY),
-        //        CountPlacementModifier.of(UniformIntProvider.create(8, 12)), RarityFilterPlacementModifier.of(1), SquarePlacementModifier.of(), PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of());
+        register(context, REDWOOD_ROCK_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.REDWOOD_ROCK), RarityFilterPlacementModifier.of(8), SquarePlacementModifier.of(), PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of());
+        register(context, FALLEN_REDWOOD_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.FALLEN_REDWOOD_KEY), CountPlacementModifier.of(1), SquarePlacementModifier.of(), PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of());
 
-        register(context, LUPINES_RIVER_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.LUPINES_KEY),
-                CountPlacementModifier.of(UniformIntProvider.create(2, 4)), RarityFilterPlacementModifier.of(3), SquarePlacementModifier.of(), PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of());
-
-        register(context, LUPINES_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.LUPINES_KEY),
-                RarityFilterPlacementModifier.of(1), CountPlacementModifier.of(UniformIntProvider.create(8, 16)), SquarePlacementModifier.of(), PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of());
+        register(context, LUPINES_RIVER_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.LUPINES_KEY), CountPlacementModifier.of(UniformIntProvider.create(2, 4)), RarityFilterPlacementModifier.of(6), SquarePlacementModifier.of(), PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of());
+        register(context, LUPINES_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.LUPINES_KEY), RarityFilterPlacementModifier.of(1), CountPlacementModifier.of(UniformIntProvider.create(8, 16)), SquarePlacementModifier.of(), PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of());
+        register(context, LUPINE_FIELDS_ROCK_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.LUPINE_FIELDS_ROCK), RarityFilterPlacementModifier.of(8), SquarePlacementModifier.of(), PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of());
 
     }
-
 
     public static RegistryKey<PlacedFeature> registerKey(String name) {
         return RegistryKey.of(RegistryKeys.PLACED_FEATURE, new Identifier(Clutter.MOD_ID, name));
     }
 
-    private static void register(Registerable<PlacedFeature> context, RegistryKey<PlacedFeature> key, RegistryEntry<ConfiguredFeature<?, ?>> configuration,
-                                 List<PlacementModifier> modifiers) {
+    private static void register(Registerable<PlacedFeature> context, RegistryKey<PlacedFeature> key, RegistryEntry<ConfiguredFeature<?, ?>> configuration, List<PlacementModifier> modifiers) {
         context.register(key, new PlacedFeature(configuration, List.copyOf(modifiers)));
     }
 
-    private static <FC extends FeatureConfig, F extends Feature<FC>> void register(Registerable<PlacedFeature> context, RegistryKey<PlacedFeature> key,
-                                                                                   RegistryEntry<ConfiguredFeature<?, ?>> configuration,
-                                                                                   PlacementModifier... modifiers) {
+    private static <FC extends FeatureConfig, F extends Feature<FC>> void register(Registerable<PlacedFeature> context, RegistryKey<PlacedFeature> key, RegistryEntry<ConfiguredFeature<?, ?>> configuration, PlacementModifier... modifiers) {
         register(context, key, configuration, List.of(modifiers));
     }
 }

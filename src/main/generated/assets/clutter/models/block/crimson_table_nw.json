@@ -1,0 +1,7 @@
+{
+  "parent": "clutter:block/parent/table_nw_parent",
+  "textures": {
+    "log": "minecraft:block/crimson_stem",
+    "planks": "minecraft:block/crimson_planks"
+  }
+}

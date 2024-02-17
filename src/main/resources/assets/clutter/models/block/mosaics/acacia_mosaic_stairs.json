@@ -1,8 +1,0 @@
-{
-  "parent": "block/stairs",
-  "textures": {
-    "bottom": "clutter:block/acacia_mosaic",
-    "side": "clutter:block/acacia_mosaic",
-    "top": "clutter:block/acacia_mosaic"
-  }
-}

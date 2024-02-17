@@ -320,9 +320,35 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(BlockTags.SOUL_FIRE_BASE_BLOCKS).add(
                 ModBlocks.SULPHUR_BLOCK);
 
+        getOrCreateTagBuilder(BlockTags.MUSHROOM_GROW_BLOCK).add(
+                ModBlocks.REDWOOD_LOG,
+                ModBlocks.REDWOOD_WOOD,
+                ModBlocks.STRIPPED_REDWOOD_LOG,
+                ModBlocks.STRIPPED_REDWOOD_WOOD);
+
         getOrCreateTagBuilder(BlockTags.SMALL_FLOWERS).add(
-                ModBlocks.THORNBLOOM,
-                ModBlocks.GLOWLILY);
+                ModBlocks.SMALL_BLUE_LUPINE,
+                ModBlocks.SMALL_MAGENTA_LUPINE,
+                ModBlocks.SMALL_PURPLE_LUPINE,
+                ModBlocks.SMALL_WHITE_LUPINE);
+
+        getOrCreateTagBuilder(BlockTags.TALL_FLOWERS).add(
+                ModBlocks.BLUE_LUPINE,
+                ModBlocks.MAGENTA_LUPINE,
+                ModBlocks.PURPLE_LUPINE,
+                ModBlocks.WHITE_LUPINE);
+
+        getOrCreateTagBuilder(BlockTags.REPLACEABLE_BY_TREES).add(
+                ModBlocks.BLUE_LUPINE,
+                ModBlocks.MAGENTA_LUPINE,
+                ModBlocks.PURPLE_LUPINE,
+                ModBlocks.WHITE_LUPINE);
+
+        getOrCreateTagBuilder(BlockTags.SWORD_EFFICIENT).add(
+                ModBlocks.BLUE_LUPINE,
+                ModBlocks.MAGENTA_LUPINE,
+                ModBlocks.PURPLE_LUPINE,
+                ModBlocks.WHITE_LUPINE);
 
         getOrCreateTagBuilder(BlockTags.SAPLINGS).add(
                 ModBlocks.KIWI_TREE_SAPLING,

@@ -1,0 +1,7 @@
+{
+  "parent": "clutter:block/parent/table_all_parent",
+  "textures": {
+    "log": "minecraft:block/stripped_mangrove_log",
+    "planks": "minecraft:block/mangrove_planks"
+  }
+}

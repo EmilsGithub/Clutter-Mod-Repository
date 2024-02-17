@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "clutter:block/dark_oak_mosaic_slab"
+    },
+    "type=double": {
+      "model": "clutter:block/dark_oak_mosaic"
+    },
+    "type=top": {
+      "model": "clutter:block/dark_oak_mosaic_slab_top"
+    }
+  }
+}

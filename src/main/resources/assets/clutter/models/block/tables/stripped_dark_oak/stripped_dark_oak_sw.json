@@ -1,8 +1,0 @@
-{
-  "parent": "clutter:block/tables/table_sw_parent",
-  "textures": {
-    "0": "block/dark_oak_planks",
-    "1": "block/stripped_dark_oak_log",
-    "particle": "block/dark_oak_planks"
-  }
-}
