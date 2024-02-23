@@ -3,6 +3,7 @@ package net.emilsg.clutter.compat.trinkets;
 import dev.emi.trinkets.api.SlotReference;
 import dev.emi.trinkets.api.TrinketComponent;
 import dev.emi.trinkets.api.TrinketsApi;
+import net.emilsg.clutter.item.custom.ButterflyElytraItem;
 import net.emilsg.clutter.util.ModItemTags;
 import net.fabricmc.fabric.api.entity.event.v1.EntityElytraEvents;
 import net.minecraft.entity.LivingEntity;
@@ -30,27 +31,25 @@ public class TrinketsElytraUse {
 
     public static List<ItemStack> getEquippedElytra(LivingEntity livingEntity) {
 
-        List<ItemStack> out = new ArrayList<>();
+        List<ItemStack> stackList = new ArrayList<>();
 
         Optional<TrinketComponent> optional = TrinketsApi.getTrinketComponent(livingEntity);
 
-        if(optional.isEmpty()) return out;
+        if(optional.isEmpty()) return stackList;
 
         TrinketComponent trinketComponent = optional.get();
-
-        TagKey<Item> elytronTag = ModItemTags.ELYTRON;
 
         for (Pair<SlotReference, ItemStack> pair : trinketComponent.getAllEquipped()) {
             ItemStack itemStack = pair.getRight();
 
-            if (itemStack.isIn(elytronTag)) {
+            if (itemStack.getItem() instanceof ButterflyElytraItem) {
 
-                if (pair.getLeft().inventory().getSlotType().getName().equals("cape")) out.add(itemStack);
+                if (pair.getLeft().inventory().getSlotType().getName().equals("cape")) stackList.add(itemStack);
 
             }
         }
 
-        return out;
+        return stackList;
     }
 
     public static boolean elytraIsUsable(LivingEntity entity, ItemStack itemStack, boolean tickElytra) {
