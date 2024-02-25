@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(AbstractFireBlock.class)
-public class AbstractFireBlockMixin {
+public abstract class AbstractFireBlockMixin {
 
     @Inject(method = "getState", at = @At("HEAD"), cancellable = true)
     private static void getState(BlockView world, BlockPos pos, CallbackInfoReturnable<BlockState> cir) {

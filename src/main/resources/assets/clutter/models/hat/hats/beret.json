@@ -3,8 +3,8 @@
 	"ambientocclusion": false,
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "clutter:block/hats/beret",
-		"particle": "clutter:block/hats/beret"
+		"0": "clutter:hat/beret",
+		"particle": "clutter:hat/beret"
 	},
 	"elements": [
 		{

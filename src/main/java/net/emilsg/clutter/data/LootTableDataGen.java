@@ -34,7 +34,7 @@ public class LootTableDataGen extends FabricBlockLootTableProvider {
         this.addCoralDrops(ModBlocks.ANCHOR_CORAL, ModBlocks.DEAD_ANCHOR_CORAL, ModBlocks.ANCHOR_CORAL_BLOCK, ModBlocks.DEAD_ANCHOR_CORAL_BLOCK, ModBlocks.ANCHOR_CORAL_FAN, ModBlocks.DEAD_ANCHOR_CORAL_FAN, ModBlocks.ANCHOR_CORAL_WALL_FAN, ModBlocks.DEAD_ANCHOR_CORAL_WALL_FAN);
         this.addDrop(ModBlocks.NAUTILUS_SHELL_BLOCK, Items.NAUTILUS_SHELL);
 
-        this.silkTouchDrops(ModBlocks.OVERGROWN_STONE, Blocks.COBBLESTONE);
+        this.silkTouchDrops(ModBlocks.OVERGROWN_PACKED_MUD, Blocks.COBBLESTONE);
 
         this.addSlabGroupDrops(
                 ModBlocks.REDWOOD_MOSAIC_SLAB,

@@ -245,16 +245,16 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
                 ModBlocks.SMALL_LILY_PADS);
 
         getOrCreateTagBuilder(BlockTags.DIRT).add(
-                ModBlocks.OVERGROWN_STONE);
+                ModBlocks.OVERGROWN_PACKED_MUD);
 
         getOrCreateTagBuilder(BlockTags.ANIMALS_SPAWNABLE_ON).add(
-                ModBlocks.OVERGROWN_STONE);
+                ModBlocks.OVERGROWN_PACKED_MUD);
 
         getOrCreateTagBuilder(BlockTags.SNIFFER_DIGGABLE_BLOCK).add(
-                ModBlocks.OVERGROWN_STONE);
+                ModBlocks.OVERGROWN_PACKED_MUD);
 
         getOrCreateTagBuilder(BlockTags.MUSHROOM_GROW_BLOCK).add(
-                ModBlocks.OVERGROWN_STONE);
+                ModBlocks.OVERGROWN_PACKED_MUD);
 
         getOrCreateTagBuilder(BlockTags.FROGS_SPAWNABLE_ON).add(
                 ModBlocks.GIANT_LILY_PAD,
@@ -1314,6 +1314,11 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
                 ModBlocks.WARPED_TRELLIS,
                 ModBlocks.BAMBOO_TRELLIS,
                 ModBlocks.CHERRY_TRELLIS
+        );
+
+        getOrCreateTagBuilder(ModBlockTags.PACKED_MUD).add(
+                ModBlocks.OVERGROWN_PACKED_MUD,
+                Blocks.PACKED_MUD
         );
 
         getOrCreateTagBuilder(ModBlockTags.SHELVES).add(

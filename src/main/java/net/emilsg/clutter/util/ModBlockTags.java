@@ -26,6 +26,7 @@ public class ModBlockTags {
     public static final TagKey<Block> FOOD_BOXES = create("clutter","food_boxes");
     public static final TagKey<Block> WINDOW_SILLS = create("clutter","window_sills");
     public static final TagKey<Block> WOODEN_CHAIRS = create("clutter","wooden_chairs");
+    public static final TagKey<Block> PACKED_MUD = create("clutter","packed_mud");
 
     public static final TagKey<Block> C_BOOKSHELVES = create("c","bookshelves");
     public static final TagKey<Block> C_ORES = create("c","ores");

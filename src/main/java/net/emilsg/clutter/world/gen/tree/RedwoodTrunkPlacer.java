@@ -72,7 +72,7 @@ public class RedwoodTrunkPlacer extends TrunkPlacer {
     }
 
     public int getHeight(Random random) {
-        return this.baseHeight + random.nextInt(this.firstRandomHeight + 15) + random.nextInt(this.secondRandomHeight + 15);
+        return this.baseHeight + 8 + random.nextInt(this.firstRandomHeight * 4) + random.nextInt(this.secondRandomHeight * 4);
     }
 
     private int calculateRadiusForLayer(int currentHeight, int totalHeight) {
@@ -95,7 +95,7 @@ public class RedwoodTrunkPlacer extends TrunkPlacer {
     protected static void setToDirt(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, BlockPos pos, TreeFeatureConfig config) {
         if(config.forceDirt || !canGenerate(world, pos)) {
             if (world.testBlockState(pos, RedwoodTrunkPlacer::isOvergrown)) {
-                replacer.accept(pos, BlockStateProvider.of(ModBlocks.OVERGROWN_STONE).get(random, pos));
+                replacer.accept(pos, BlockStateProvider.of(ModBlocks.OVERGROWN_PACKED_MUD).get(random, pos));
             } else if (world.testBlockState(pos, RedwoodTrunkPlacer::isDirt)) {
                 replacer.accept(pos, BlockStateProvider.of(Blocks.DIRT).get(random, pos));
             }
@@ -107,10 +107,10 @@ public class RedwoodTrunkPlacer extends TrunkPlacer {
     }
 
     public static boolean isOvergrown(BlockState state) {
-        return state.isOf(ModBlocks.OVERGROWN_STONE);
+        return state.isOf(ModBlocks.OVERGROWN_PACKED_MUD);
     }
 
     public static boolean isDirt(BlockState state) {
-        return state.isIn(BlockTags.DIRT) && !state.isOf(ModBlocks.OVERGROWN_STONE);
+        return state.isIn(BlockTags.DIRT) && !state.isOf(ModBlocks.OVERGROWN_PACKED_MUD);
     }
 }

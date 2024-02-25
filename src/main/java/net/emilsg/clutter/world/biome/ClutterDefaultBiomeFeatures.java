@@ -23,6 +23,7 @@ public class ClutterDefaultBiomeFeatures {
     public static void addRedwoodRockFeatures(GenerationSettings.LookupBackedBuilder builder) {
         builder.feature(GenerationStep.Feature.LOCAL_MODIFICATIONS, ModPlacedFeatures.REDWOOD_ROCK_PLACED_KEY);
         builder.feature(GenerationStep.Feature.UNDERGROUND_ORES, ModPlacedFeatures.REDWOOD_SILVER_ORE_PLACED_KEY);
+        builder.feature(GenerationStep.Feature.UNDERGROUND_ORES, ModPlacedFeatures.REDWOOD_MUD_PLACED_KEY);
     }
 
     public static void addLupineFieldsFoliageFeatures(GenerationSettings.LookupBackedBuilder builder) {

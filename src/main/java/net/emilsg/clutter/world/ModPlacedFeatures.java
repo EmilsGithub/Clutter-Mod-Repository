@@ -40,6 +40,7 @@ public class ModPlacedFeatures {
     public static final RegistryKey<PlacedFeature> REDWOOD_ROCK_PLACED_KEY = registerKey("redwood_rock_placed");
     public static final RegistryKey<PlacedFeature> REDWOOD_SILVER_ORE_PLACED_KEY = registerKey("redwood_silver_ore_placed");
     public static final RegistryKey<PlacedFeature> FALLEN_REDWOOD_PLACED_KEY = registerKey("fallen_redwood_placed");
+    public static final RegistryKey<PlacedFeature> REDWOOD_MUD_PLACED_KEY = registerKey("redwood_mud_placed");
 
     public static final RegistryKey<PlacedFeature> LUPINES_PLACED_KEY = registerKey("lupines_placed");
     public static final RegistryKey<PlacedFeature> LUPINES_RIVER_PLACED_KEY = registerKey("lupines_river_placed");
@@ -52,6 +53,9 @@ public class ModPlacedFeatures {
 
         register(context, REDWOOD_SILVER_ORE_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.SILVER_ORE_KEY),
                 ModOrePlacement.modifiersWithCount(2, HeightRangePlacementModifier.trapezoid(YOffset.fixed(48), YOffset.fixed(128))));
+
+        register(context, REDWOOD_MUD_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.MUD_PATCH_KEY),
+                ModOrePlacement.modifiersWithCount(6, HeightRangePlacementModifier.uniform(YOffset.fixed(48), YOffset.TOP)));
 
         register(context, BLACKSTONE_SULPHUR_ORE_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.BLACKSTONE_SULPHUR_ORE_KEY), ModOrePlacement.modifiersWithCount(10, PlacedFeatures.TEN_ABOVE_AND_BELOW_RANGE));
         register(context, BASALT_SULPHUR_ORE_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.BASALT_SULPHUR_ORE_KEY), ModOrePlacement.modifiersWithCount(7, PlacedFeatures.TEN_ABOVE_AND_BELOW_RANGE));

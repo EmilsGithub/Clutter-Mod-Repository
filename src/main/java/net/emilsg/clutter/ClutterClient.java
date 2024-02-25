@@ -29,6 +29,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.color.world.FoliageColors;
+import net.minecraft.client.color.world.GrassColors;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
@@ -556,7 +557,7 @@ public class ClutterClient implements ClientModInitializer {
                 REDWOOD_SAPLING,
                 REDWOOD_DOOR,
                 REDWOOD_TRAPDOOR,
-                OVERGROWN_STONE,
+                OVERGROWN_PACKED_MUD,
                 GIANT_FERN
 
         );
@@ -581,6 +582,16 @@ public class ClutterClient implements ClientModInitializer {
     }
 
     private void registerColorProviders() {
+        ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) ->
+                        (world != null && pos != null) ? BiomeColors.getGrassColor(world, pos) : GrassColors.getDefaultColor(),
+                OVERGROWN_PACKED_MUD
+        );
+
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) ->
+                        Objects.requireNonNull(ColorProviderRegistry.ITEM.get(Blocks.GRASS_BLOCK)).getColor(stack, tintIndex),
+                OVERGROWN_PACKED_MUD
+        );
+
         ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) ->
                         (world != null && pos != null) ? BiomeColors.getFoliageColor(world, pos) : FoliageColors.getDefaultColor(),
                 RIPE_KIWI_LEAVES,

@@ -243,7 +243,7 @@ public class ModBlocks {
     public static final Block STONE_BRICK_CHIMNEY = registerBlock("stone_brick_chimney", new ChimneyBlock(FabricBlockSettings.copy(Blocks.STONE_BRICK_WALL)), ModItemGroups.CLUTTER_BLOCKS);
     public static final Block PURPUR_CHIMNEY = registerBlock("purpur_chimney", new ChimneyBlock(FabricBlockSettings.copy(Blocks.PURPUR_BLOCK)), ModItemGroups.CLUTTER_BLOCKS);
 
-    public static final Block OVERGROWN_STONE = registerBlock("overgrown_stone", new SnowyBlock(FabricBlockSettings.copy(Blocks.STONE).mapColor(MapColor.SPRUCE_BROWN)), ModItemGroups.CLUTTER_BLOCKS);
+    public static final Block OVERGROWN_PACKED_MUD = registerBlock("overgrown_packed_mud", new OvergrownBlock(FabricBlockSettings.copy(Blocks.PACKED_MUD).mapColor(MapColor.SPRUCE_BROWN)), ModItemGroups.CLUTTER_BLOCKS);
 
     public static final Block REINFORCED_COPPER_GLASS = registerBlock("reinforced_copper_glass", new OxidizableGlassBlock(Oxidizable.OxidationLevel.UNAFFECTED, FabricBlockSettings.copy(Blocks.GLASS)), ModItemGroups.CLUTTER_BLOCKS);
     public static final Block EXPOSED_REINFORCED_COPPER_GLASS = registerBlock("exposed_reinforced_copper_glass", new OxidizableGlassBlock(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.copy(Blocks.GLASS)), ModItemGroups.CLUTTER_BLOCKS);

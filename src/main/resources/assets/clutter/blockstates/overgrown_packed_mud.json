@@ -1,0 +1,39 @@
+{
+  "variants": {
+    "snowy=false": [
+      {
+        "model": "clutter:block/overgrown_packed_mud"
+      },
+      {
+        "model": "clutter:block/overgrown_packed_mud",
+        "y": 90
+      },
+      {
+        "model": "clutter:block/overgrown_packed_mud",
+        "y": 180
+      },
+      {
+        "model": "clutter:block/overgrown_packed_mud",
+        "y": 270
+      },
+      {
+        "model": "clutter:block/overgrown_packed_mud_2"
+      },
+      {
+        "model": "clutter:block/overgrown_packed_mud_2",
+        "y": 90
+      },
+      {
+        "model": "clutter:block/overgrown_packed_mud_2",
+        "y": 180
+      },
+      {
+        "model": "clutter:block/overgrown_packed_mud_2",
+        "y": 270
+      }
+    ],
+    "snowy=true": {
+      "model": "clutter:block/overgrown_packed_mud_snow"
+    }
+  }
+}

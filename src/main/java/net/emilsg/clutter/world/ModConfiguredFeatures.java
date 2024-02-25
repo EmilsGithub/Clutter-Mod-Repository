@@ -3,6 +3,7 @@ package net.emilsg.clutter.world;
 import com.google.common.collect.ImmutableList;
 import net.emilsg.clutter.Clutter;
 import net.emilsg.clutter.block.ModBlocks;
+import net.emilsg.clutter.util.ModBlockTags;
 import net.emilsg.clutter.util.ModProperties;
 import net.emilsg.clutter.world.gen.features.ModFeatures;
 import net.emilsg.clutter.world.gen.features.WeightedBlockFeatureConfig;
@@ -38,6 +39,7 @@ import java.util.List;
 public class ModConfiguredFeatures {
 
     public static final RegistryKey<ConfiguredFeature<?, ?>> SILVER_ORE_KEY = registerKey("silver_ore");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> MUD_PATCH_KEY = registerKey("mud_patch");
 
     public static final RegistryKey<ConfiguredFeature<?, ?>> ONYX_GEODE_KEY = registerKey("onyx_geode");
 
@@ -76,6 +78,7 @@ public class ModConfiguredFeatures {
     public static void bootstrap(Registerable<ConfiguredFeature<?, ?>> context) {
         RuleTest blackstoneReplaceables = new BlockMatchRuleTest(Blocks.BLACKSTONE);
         RuleTest basaltReplaceables = new BlockMatchRuleTest(Blocks.BASALT);
+        RuleTest mudReplaceables = new TagMatchRuleTest(ModBlockTags.PACKED_MUD);
         RuleTest stoneReplaceables = new TagMatchRuleTest(BlockTags.STONE_ORE_REPLACEABLES);
         RuleTest deepslateReplaceables = new TagMatchRuleTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
 
@@ -93,13 +96,17 @@ public class ModConfiguredFeatures {
 
         List<OreFeatureConfig.Target> netherBlackstoneSulphur = List.of(OreFeatureConfig.createTarget(blackstoneReplaceables, ModBlocks.BLACKSTONE_SULPHUR_ORE.getDefaultState()));
         List<OreFeatureConfig.Target> netherBasaltSulphur = List.of(OreFeatureConfig.createTarget(basaltReplaceables, ModBlocks.BASALT_SULPHUR_ORE.getDefaultState()));
+        List<OreFeatureConfig.Target> redwoodMud = List.of(OreFeatureConfig.createTarget(mudReplaceables, Blocks.MUD.getDefaultState()));
 
         register(context, SILVER_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldSilverOres, 8));
 
         register(context, BLACKSTONE_SULPHUR_ORE_KEY, Feature.ORE, new OreFeatureConfig(netherBlackstoneSulphur, 12));
         register(context, BASALT_SULPHUR_ORE_KEY, Feature.ORE, new OreFeatureConfig(netherBasaltSulphur, 20, 0.5f));
 
-                register(context, ONYX_GEODE_KEY, Feature.GEODE,
+        register(context, MUD_PATCH_KEY, Feature.ORE, new OreFeatureConfig(redwoodMud, 64, 0.0f));
+
+
+        register(context, ONYX_GEODE_KEY, Feature.GEODE,
                         new GeodeFeatureConfig(new GeodeLayerConfig(BlockStateProvider.of(Blocks.AIR),
                                 BlockStateProvider.of(ModBlocks.ONYX_BLOCK), BlockStateProvider.of(ModBlocks.BUDDING_ONYX),
                                 new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(ModBlocks.ONYX_ORE.getDefaultState(), 2).add(ModBlocks.SULPHUR_BLOCK.getDefaultState(), 5).build()), BlockStateProvider.of(Blocks.SMOOTH_BASALT),

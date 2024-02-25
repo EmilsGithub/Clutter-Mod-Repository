@@ -3,8 +3,8 @@
 	"ambientocclusion": false,
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "clutter:block/hats/vinking_helmet",
-		"particle": "clutter:block/hats/vinking_helmet"
+		"0": "clutter:hat/vinking_helmet",
+		"particle": "clutter:hat/vinking_helmet"
 	},
 	"elements": [
 		{

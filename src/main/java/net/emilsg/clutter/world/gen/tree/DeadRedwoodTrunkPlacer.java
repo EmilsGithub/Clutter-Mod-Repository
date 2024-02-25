@@ -107,7 +107,7 @@ public class DeadRedwoodTrunkPlacer extends TrunkPlacer {
     protected static void setToDirt(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, BlockPos pos, TreeFeatureConfig config) {
         if(config.forceDirt || !canGenerate(world, pos)) {
             if (world.testBlockState(pos, DeadRedwoodTrunkPlacer::isOvergrown)) {
-                replacer.accept(pos, BlockStateProvider.of(ModBlocks.OVERGROWN_STONE).get(random, pos));
+                replacer.accept(pos, BlockStateProvider.of(ModBlocks.OVERGROWN_PACKED_MUD).get(random, pos));
             } else if (world.testBlockState(pos, DeadRedwoodTrunkPlacer::isDirt)) {
                 replacer.accept(pos, BlockStateProvider.of(Blocks.DIRT).get(random, pos));
             }
@@ -119,10 +119,10 @@ public class DeadRedwoodTrunkPlacer extends TrunkPlacer {
     }
 
     public static boolean isOvergrown(BlockState state) {
-        return state.isOf(ModBlocks.OVERGROWN_STONE);
+        return state.isOf(ModBlocks.OVERGROWN_PACKED_MUD);
     }
 
     public static boolean isDirt(BlockState state) {
-        return state.isIn(BlockTags.DIRT) && !state.isOf(ModBlocks.OVERGROWN_STONE);
+        return state.isIn(BlockTags.DIRT) && !state.isOf(ModBlocks.OVERGROWN_PACKED_MUD);
     }
 }

@@ -19,9 +19,9 @@ import net.minecraft.world.gen.feature.VegetationPlacedFeatures;
 import java.util.List;
 import java.util.Optional;
 
-public class OvergrownStoneBlock extends SnowyBlock implements Fertilizable {
+public class OvergrownBlock extends SnowyBlock implements Fertilizable {
 
-    public OvergrownStoneBlock(Settings settings) {
+    public OvergrownBlock(Settings settings) {
         super(settings);
     }
 
@@ -51,15 +51,15 @@ public class OvergrownStoneBlock extends SnowyBlock implements Fertilizable {
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (!canSurvive(state, world, pos)) {
-            world.setBlockState(pos, Blocks.STONE.getDefaultState());
+            world.setBlockState(pos, Blocks.PACKED_MUD.getDefaultState());
             return;
         }
         if (world.getLightLevel(pos.up()) >= 9) {
             BlockState blockState = this.getDefaultState();
             for (int i = 0; i < 4; ++i) {
                 BlockPos blockPos = pos.add(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
-                if (!world.getBlockState(blockPos).isOf(Blocks.STONE) || !canSpread(blockState, world, blockPos)) continue;
-                world.setBlockState(blockPos, (BlockState)blockState.with(SNOWY, world.getBlockState(blockPos.up()).isOf(Blocks.SNOW)));
+                if (!world.getBlockState(blockPos).isOf(Blocks.PACKED_MUD) || !canSpread(blockState, world, blockPos)) continue;
+                world.setBlockState(blockPos, blockState.with(SNOWY, world.getBlockState(blockPos.up()).isOf(Blocks.SNOW)));
             }
         }
     }

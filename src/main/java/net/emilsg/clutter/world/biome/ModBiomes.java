@@ -76,7 +76,7 @@ public class ModBiomes {
                         .waterColor(2068169)
                         .waterFogColor(271411)
                         .skyColor(OverworldBiomeCreator.getSkyColor(0.3f))
-                        .grassColor(7049587)
+                        .grassColor(6066532)
                         .foliageColor(5019969)
                         .fogColor(12638463)
                         .moodSound(BiomeMoodSound.CAVE)

@@ -10,7 +10,7 @@
   "effects": {
     "fog_color": 12638463,
     "foliage_color": 5019969,
-    "grass_color": 7049587,
+    "grass_color": 6066532,
     "mood_sound": {
       "block_search_extent": 8,
       "offset": 2.0,
@@ -54,6 +54,7 @@
       "minecraft:ore_andesite_lower",
       "minecraft:ore_tuff",
       "clutter:redwood_silver_ore_placed",
+      "clutter:redwood_mud_placed",
       "minecraft:ore_coal_upper",
       "minecraft:ore_coal_lower",
       "minecraft:ore_iron_upper",

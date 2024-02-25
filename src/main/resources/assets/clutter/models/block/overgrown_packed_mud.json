@@ -1,17 +1,17 @@
 {   "parent": "block/block",
 	"textures": {
 		"particle": "#bottom",
-		"bottom": "block/stone",
-		"top": "clutter:block/overgrown_stone_top",
-		"side": "block/stone",
-		"overlay": "clutter:block/overgrown_stone_side"
+		"bottom": "block/packed_mud",
+		"top": "clutter:block/overgrown_packed_mud_top",
+		"side": "block/packed_mud",
+		"overlay": "clutter:block/overgrown_packed_mud_side"
 	},
 	"elements": [
 		{   "from": [ 0, 0, 0 ],
 			"to": [ 16, 16, 16 ],
 			"faces": {
 				"down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#bottom", "cullface": "down" },
-				"up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#top",    "cullface": "up" },
+				"up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#top", "tintindex": 0, "cullface": "up" },
 				"north": { "uv": [ 0, 0, 16, 16 ], "texture": "#side",   "cullface": "north" },
 				"south": { "uv": [ 0, 0, 16, 16 ], "texture": "#side",   "cullface": "south" },
 				"west":  { "uv": [ 0, 0, 16, 16 ], "texture": "#side",   "cullface": "west" },

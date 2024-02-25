@@ -11,8 +11,9 @@ import net.minecraft.world.gen.surfacebuilder.MaterialRules;
 public class ModMaterialRules {
     private static final MaterialRules.MaterialRule DIRT = makeStateRule(Blocks.DIRT);
     private static final MaterialRules.MaterialRule GRASS_BLOCK = makeStateRule(Blocks.GRASS_BLOCK);
-    private static final MaterialRules.MaterialRule OVERGROWN_STONE = makeStateRule(ModBlocks.OVERGROWN_STONE);
+    private static final MaterialRules.MaterialRule OVERGROWN_PACKED_MUD = makeStateRule(ModBlocks.OVERGROWN_PACKED_MUD);
     private static final MaterialRules.MaterialRule STONE = makeStateRule(Blocks.STONE);
+    private static final MaterialRules.MaterialRule PACKED_MUD = makeStateRule(Blocks.PACKED_MUD);
     private static final MaterialRules.MaterialRule COARSE_DIRT = makeStateRule(Blocks.COARSE_DIRT);
     private static final MaterialRules.MaterialRule PODZOL = makeStateRule(Blocks.PODZOL);
     private static final MaterialRules.MaterialRule BEDROCK = makeStateRule(Blocks.BEDROCK);
@@ -25,9 +26,9 @@ public class ModMaterialRules {
                 MaterialRules.condition(
                         MaterialRules.aboveY(YOffset.fixed(62), 0), MaterialRules.condition(
                                 WATER_CHECK, MaterialRules.condition(
-                                        MaterialRules.STONE_DEPTH_FLOOR, OVERGROWN_STONE))),
+                                        MaterialRules.STONE_DEPTH_FLOOR, OVERGROWN_PACKED_MUD))),
                 MaterialRules.condition(
-                        MaterialRules.STONE_DEPTH_FLOOR_WITH_SURFACE_DEPTH_RANGE_6, STONE));
+                        MaterialRules.STONE_DEPTH_FLOOR_WITH_SURFACE_DEPTH, PACKED_MUD));
 
         MaterialRules.MaterialRule redwoodRule =
                 MaterialRules.sequence(

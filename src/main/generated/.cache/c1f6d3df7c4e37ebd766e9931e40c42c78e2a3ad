@@ -1,4 +1,4 @@
-// 1.20.1	2024-02-17T15:53:10.5003624	Clutter/Tags for minecraft:block
+// 1.20.1	2024-02-24T20:35:38.4100345	Clutter/Tags for minecraft:block
 823e88d6c4f2b77de20b46502ccd9cb7f7c2e2a7 data\minecraft\tags\blocks\wooden_slabs.json
 d825d51f61b7397f96c2bc8aea4f90793cc1c686 data\minecraft\tags\blocks\coral_plants.json
 330f59fcbee67b03468a990938347a6ba2f4369e data\clutter\tags\blocks\armchairs.json
@@ -12,7 +12,7 @@ e463cdb06c28cc79d27cbbc1546edf9eb4bc1ec8 data\clutter\tags\blocks\large_chains.j
 89f1938b4e3df21864090d1c7fe7ddb652cb3e79 data\c\tags\blocks\raw_silver_blocks.json
 25c67a52d2706592e031a10dc44bb49e28db57e7 data\clutter\tags\blocks\cupboards.json
 62e0090c3c26aa745e78730a247cf0ee5d019489 data\minecraft\tags\blocks\planks.json
-14b0b640b991754a83ccc9cd7b02dcef9745ea96 data\minecraft\tags\blocks\dirt.json
+51a73041271339706bfe865514cf3c33586e7ba7 data\minecraft\tags\blocks\dirt.json
 fd8697a50e79beccc032de64e1f4ef19942b77e4 data\clutter\tags\blocks\strippable_chairs.json
 d4ab1af1dd3f975f3b8f3aaea3d1e6908e551e26 data\clutter\tags\blocks\strippable_logs.json
 b082460107c8e90898ff881496a5c535683a120b data\minecraft\tags\blocks\saplings.json
@@ -29,7 +29,7 @@ cc1e13c42f33081929c2a443bc4d13915d391686 data\c\tags\blocks\ores.json
 73da1f42dbf6cf9cddd91ee94e7319886c13b050 data\minecraft\tags\blocks\enchantment_power_provider.json
 312236b356fd9cbb3746220d1679499d0ceef07f data\clutter\tags\blocks\trellises.json
 e4cf3b77a933090fcc0af777cec78653d2751721 data\clutter\tags\blocks\lanterns.json
-8bb3ab4a828294a6b2638d70c04439d5177e291e data\minecraft\tags\blocks\mushroom_grow_block.json
+055a246acca8a3a96f4f57e2b1e94b4f811307b7 data\minecraft\tags\blocks\mushroom_grow_block.json
 deaa57d0817bfd1b604e2479d5b8db9ba623d0d7 data\minecraft\tags\blocks\replaceable.json
 0c616f7cd29ac7f1e4c3a53ae280bc2ff928adf8 data\clutter\tags\blocks\chains.json
 dd2e34eb2baf4001dea86d51befc612802571deb data\minecraft\tags\blocks\wooden_buttons.json
@@ -41,9 +41,10 @@ d01bf460facc1bce6f2a643fa837b894eff14fc5 data\clutter\tags\blocks\strippable_ben
 4951dece5d7432b4da68d41b11b301a9b14be08f data\clutter\tags\blocks\wooden_chairs.json
 21e3389c47772bb3c71eb767157a1bfd3611ea25 data\clutter\tags\blocks\window_sills.json
 449eb5f5e50c3b1be761d88f357a8896a17adedc data\clutter\tags\blocks\lamps.json
-14b0b640b991754a83ccc9cd7b02dcef9745ea96 data\minecraft\tags\blocks\sniffer_diggable_block.json
+51a73041271339706bfe865514cf3c33586e7ba7 data\minecraft\tags\blocks\sniffer_diggable_block.json
 076695fa5ec6db7b1ab6e1bb1f8bb764fee5af3f data\minecraft\tags\blocks\wooden_fences.json
 2eee200a94bdde83d47fbc758dc4b545c15c6aff data\minecraft\tags\blocks\climbable.json
+46868a564f39b4b59cb93d5fc888ef036985c10b data\clutter\tags\blocks\packed_mud.json
 e655cf32b93eafab387eb9c9b9aeeb22bae3efbb data\clutter\tags\blocks\immovable.json
 3ac6923c0d0e23977b1a1d5e8fab1793b5250d0b data\clutter\tags\blocks\copper_doors.json
 9239e840cbbd2d60a4f2b062ec4819a4049ff66b data\clutter\tags\blocks\benches.json
@@ -70,7 +71,7 @@ fb0ed73daef6a52c8d841a119c365f0823c58a88 data\clutter\tags\blocks\tables.json
 41803873d5607d5064cd83aae850fe943c68013e data\minecraft\tags\blocks\tall_flowers.json
 0e199b10598b6bf53d4a430152e838347121e5b7 data\minecraft\tags\blocks\frog_prefer_jump_to.json
 deaa57d0817bfd1b604e2479d5b8db9ba623d0d7 data\minecraft\tags\blocks\combination_step_sound_blocks.json
-14b0b640b991754a83ccc9cd7b02dcef9745ea96 data\minecraft\tags\blocks\animals_spawnable_on.json
+51a73041271339706bfe865514cf3c33586e7ba7 data\minecraft\tags\blocks\animals_spawnable_on.json
 b35ba26b723fe9245e0d24e24c3f540e1c88e4c1 data\clutter\tags\blocks\wall_candles.json
 55a380cd9256f9671993e65b7436596fa240293f data\minecraft\tags\blocks\coral_blocks.json
 099d09b5ec1de190f49d20682306829dd3b2fade data\minecraft\tags\blocks\small_flowers.json
