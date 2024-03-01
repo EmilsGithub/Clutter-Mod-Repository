@@ -68,6 +68,7 @@ dependencies {
 	modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:${project.rei_version}"
 	modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}"
 
+	//Including MixinExtras
 	include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:${project.me_version}")))
 	
 	// Uncomment the following line to enable the deprecated Fabric API modules.

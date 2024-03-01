@@ -7,6 +7,7 @@ import net.emilsg.clutter.item.custom.ButterflyElytraItem;
 import net.emilsg.clutter.util.ModItemTags;
 import net.fabricmc.fabric.api.entity.event.v1.EntityElytraEvents;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.ElytraItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.tag.TagKey;
@@ -42,7 +43,7 @@ public class TrinketsElytraUse {
         for (Pair<SlotReference, ItemStack> pair : trinketComponent.getAllEquipped()) {
             ItemStack itemStack = pair.getRight();
 
-            if (itemStack.getItem() instanceof ButterflyElytraItem) {
+            if (itemStack.getItem() instanceof ElytraItem) {
 
                 if (pair.getLeft().inventory().getSlotType().getName().equals("cape")) stackList.add(itemStack);
 

@@ -29,6 +29,8 @@ public class Clutter implements ModInitializer {
 	public static final Logger LOGGER = LoggerFactory.getLogger("Clutter");
 	public static final boolean IS_TRINKETS_LOADED = FabricLoader.getInstance().getModContainer("trinkets").isPresent();
 	public static final boolean IS_SUPPLEMENTARIES_LOADED = FabricLoader.getInstance().getModContainer("supplementaries").isPresent();
+	public static final boolean IS_ELYTRA_SLOT_LOADED = FabricLoader.getInstance().getModContainer("elytraslot").isPresent();
+	public static final boolean IS_ELYTRA_TRINKET_LOADED = FabricLoader.getInstance().getModContainer("elytra_trinket").isPresent();
 
 	@Override
 	public void onInitialize() {
