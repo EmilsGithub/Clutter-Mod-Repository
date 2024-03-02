@@ -10,6 +10,7 @@ import net.emilsg.clutter.world.gen.features.WeightedBlockFeatureConfig;
 import net.emilsg.clutter.world.gen.tree.*;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.FlowerbedBlock;
 import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
@@ -139,27 +140,16 @@ public class ModConfiguredFeatures {
                 ConfiguredFeatures.createRandomPatchFeatureConfig(8, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK,
                         new SimpleBlockFeatureConfig(BlockStateProvider.of(ModBlocks.GIANT_LILY_PAD_SEEDLING)))));
 
+        DataPool.Builder<BlockState> lilypadBuilder = DataPool.builder();
+        for (int i = 1; i <= 4; ++i) {
+            for (Direction direction : Direction.Type.HORIZONTAL) {
+                lilypadBuilder.add(ModBlocks.SMALL_LILY_PADS.getDefaultState().with(ModProperties.PAD_AMOUNT, i).with(Properties.HORIZONTAL_FACING, direction), 1);
+            }
+        }
+
         register(context, SMALL_LILY_PADS_KEY, Feature.FLOWER,
                 ConfiguredFeatures.createRandomPatchFeatureConfig(8, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK,
-                        new SimpleBlockFeatureConfig(new WeightedBlockStateProvider(DataPool.<BlockState>builder()
-                                .add(ModBlocks.SMALL_LILY_PADS.getDefaultState(), 1)
-                                .add(ModBlocks.SMALL_LILY_PADS.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.SOUTH), 1)
-                                .add(ModBlocks.SMALL_LILY_PADS.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.EAST), 1)
-                                .add(ModBlocks.SMALL_LILY_PADS.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.SOUTH), 1)
-                                .add(ModBlocks.SMALL_LILY_PADS.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.NORTH).with(ModProperties.PAD_AMOUNT, 2), 1)
-                                .add(ModBlocks.SMALL_LILY_PADS.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.EAST).with(ModProperties.PAD_AMOUNT, 2), 1)
-                                .add(ModBlocks.SMALL_LILY_PADS.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.SOUTH).with(ModProperties.PAD_AMOUNT, 2), 1)
-                                .add(ModBlocks.SMALL_LILY_PADS.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.WEST).with(ModProperties.PAD_AMOUNT, 2), 1)
-                                .add(ModBlocks.SMALL_LILY_PADS.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.NORTH).with(ModProperties.PAD_AMOUNT, 3), 1)
-                                .add(ModBlocks.SMALL_LILY_PADS.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.EAST).with(ModProperties.PAD_AMOUNT, 3), 1)
-                                .add(ModBlocks.SMALL_LILY_PADS.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.SOUTH).with(ModProperties.PAD_AMOUNT, 3), 1)
-                                .add(ModBlocks.SMALL_LILY_PADS.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.WEST).with(ModProperties.PAD_AMOUNT, 3), 1)
-                                .add(ModBlocks.SMALL_LILY_PADS.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.NORTH).with(ModProperties.PAD_AMOUNT, 4), 1)
-                                .add(ModBlocks.SMALL_LILY_PADS.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.EAST).with(ModProperties.PAD_AMOUNT, 4), 1)
-                                .add(ModBlocks.SMALL_LILY_PADS.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.SOUTH).with(ModProperties.PAD_AMOUNT, 4), 1)
-                                .add(ModBlocks.SMALL_LILY_PADS.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.WEST).with(ModProperties.PAD_AMOUNT, 4), 1)
-                        .build())))));
-
+                        new SimpleBlockFeatureConfig(new WeightedBlockStateProvider(lilypadBuilder)))));
 
         register(context, REDWOOD_BUSH_KEY, Feature.TREE,
                 new TreeFeatureConfig.Builder(BlockStateProvider.of(ModBlocks.REDWOOD_LOG),

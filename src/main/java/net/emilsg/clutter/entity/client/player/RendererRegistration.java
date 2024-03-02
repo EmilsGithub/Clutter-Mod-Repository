@@ -11,6 +11,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRe
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
+import net.minecraft.client.render.entity.feature.ElytraFeatureRenderer;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -21,7 +22,7 @@ public class RendererRegistration {
 
     public static void register() {
         LivingEntityFeatureRenderEvents.ALLOW_CAPE_RENDER.register((AbstractClientPlayerEntity player) -> !(player.getEquippedStack(EquipmentSlot.CHEST).getItem() instanceof ElytraItem));
-        if(Clutter.IS_TRINKETS_LOADED) LivingEntityFeatureRenderEvents.ALLOW_CAPE_RENDER.register((AbstractClientPlayerEntity player) -> !TrinketsElytraUse.getEquippedElytra(player).isEmpty());
+        if(Clutter.IS_TRINKETS_LOADED) LivingEntityFeatureRenderEvents.ALLOW_CAPE_RENDER.register((AbstractClientPlayerEntity player) -> TrinketsElytraUse.getEquippedElytra(player).isEmpty());
 
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register((EntityType<? extends LivingEntity> livingEntity, LivingEntityRenderer<?, ?> livingEntityRenderer, RegistrationHelper registrationHelper, EntityRendererFactory.Context context) -> {
             registrationHelper.register(new ScubaFeatureRenderer<>(livingEntityRenderer, context.getModelLoader()));

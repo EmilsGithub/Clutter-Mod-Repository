@@ -3,8 +3,8 @@
 	"ambientocclusion": false,
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "clutter:hat/cap",
-		"particle": "clutter:hat/cap"
+		"0": "clutter:block/hats/cap",
+		"particle": "clutter:block/hats/cap"
 	},
 	"elements": [
 		{

@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"ambientocclusion": false,
 	"textures": {
-		"0": "clutter:hat/tiara",
-		"particle": "clutter:hat/tiara"
+		"0": "clutter:block/hats/tiara",
+		"particle": "clutter:block/hats/tiara"
 	},
 	"elements": [
 		{

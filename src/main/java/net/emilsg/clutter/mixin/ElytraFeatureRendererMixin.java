@@ -12,6 +12,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ElytraItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
@@ -41,6 +42,10 @@ public abstract class ElytraFeatureRendererMixin {
 
         ItemStack itemStack = getEquippedElytra(livingEntity);
 
+        if(itemStack.getItem() == Items.ELYTRA) {
+            return value;
+        }
+
         if (!(itemStack.getItem() instanceof ButterflyElytraItem butterflyElytraItem)) {
             return value;
         }
@@ -58,7 +63,10 @@ public abstract class ElytraFeatureRendererMixin {
         if (Clutter.IS_TRINKETS_LOADED && !(chestItemStack.getItem() instanceof ElytraItem)) {
             List<ItemStack> trinketsStack = TrinketsElytraUse.getEquippedElytra(livingEntity);
             if(!trinketsStack.isEmpty()) {
-                if(((Clutter.IS_ELYTRA_SLOT_LOADED || Clutter.IS_ELYTRA_TRINKET_LOADED) && trinketsStack.get(0).getItem() != Items.ELYTRA)) itemStack = trinketsStack.get(0);
+                itemStack = trinketsStack.get(0);
+                //if((trinketsStack.get(0).getItem() != Items.ELYTRA)) {
+                //    itemStack = trinketsStack.get(0);
+                //}
             }
         }
 

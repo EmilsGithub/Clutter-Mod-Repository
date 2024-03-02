@@ -69,7 +69,6 @@ public abstract class ItemRendererMixin {
             ModelIdentifier modelIdentifier = itemModelMap.getOrDefault(stack.getItem(), null);
 
             if (modelIdentifier != null) {
-                System.out.println(modelIdentifier.getPath());
                 return ((ItemRendererAccessor) this).getModels().getModelManager().getModel(modelIdentifier);
             }
         }

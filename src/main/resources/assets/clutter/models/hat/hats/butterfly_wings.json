@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"ambientocclusion": false,
 	"textures": {
-		"0": "clutter:hat/butterfly_wings",
-		"particle": "clutter:hat/butterfly_wings"
+		"0": "clutter:block/hats/butterfly_wings",
+		"particle": "clutter:block/hats/butterfly_wings"
 	},
 	"elements": [
 		{

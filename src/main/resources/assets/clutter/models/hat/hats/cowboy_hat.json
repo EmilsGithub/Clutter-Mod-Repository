@@ -3,8 +3,8 @@
 	"ambientocclusion": false,
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "clutter:hat/cowboy_hat",
-		"particle": "clutter:hat/cowboy_hat"
+		"0": "clutter:block/hats/cowboy_hat",
+		"particle": "clutter:block/hats/cowboy_hat"
 	},
 	"elements": [
 		{

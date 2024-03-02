@@ -1,18 +1,18 @@
-// 1.20.1	2024-02-24T20:35:38.3859777	Clutter/Tags for minecraft:item
+// 1.20.1	2024-03-02T17:01:36.4093007	Clutter/Tags for minecraft:item
 f9a00c407878604596cade52dfd15c50f9da9092 data\c\tags\items\ores.json
-27c633842914d7c1c14889f04be544b4c634cb22 data\clutter\tags\items\plushies.json
 337a49036caf8f3e98268c3f3bc58315bf4bc30f data\c\tags\items\copper_nuggets.json
+27c633842914d7c1c14889f04be544b4c634cb22 data\clutter\tags\items\plushies.json
 9d0c67b286d9efdd039d39bb7323530cd4bc1205 data\c\tags\items\silver_blocks.json
 d4ab1af1dd3f975f3b8f3aaea3d1e6908e551e26 data\clutter\tags\items\strippable_logs.json
 f2c6fde89a1c73b85509f604946e00fcd5ac4e78 data\c\tags\items\silver_nuggets.json
 257e4f2e2e94844dde7d1666191f18775eb6ca76 data\minecraft\tags\items\trimmable_armor.json
-3438deadb28260e5d53a2a9e8bcfb3d7d80f9cbe data\clutter\tags\items\elytron.json
 fe28b10a91e8722f59843071a5a221d804b91c5d data\c\tags\items\raw_silvers.json
+3438deadb28260e5d53a2a9e8bcfb3d7d80f9cbe data\clutter\tags\items\elytron.json
 bd0f3317bd601b6ee86f7bda714e07470abf321d data\clutter\tags\items\bottled_butterflies.json
 e49c58904d756946c53d072ee697f945f3af32a8 data\trinkets\tags\items\head\hat.json
 26efbe8b18883130c2e31589fd51f0f85196a6e1 data\clutter\tags\items\fruits_and_berries.json
-bd4f42f4bbf16603f22e6b9933c76db711fb3592 data\clutter\tags\items\seeds.json
 89f1938b4e3df21864090d1c7fe7ddb652cb3e79 data\c\tags\items\raw_silver_blocks.json
+bd4f42f4bbf16603f22e6b9933c76db711fb3592 data\clutter\tags\items\seeds.json
 3c60abbac243d4819f43876b46d752b3f0e42bd7 data\minecraft\tags\items\trim_materials.json
 284b32a649f44be4ff65bc0714386cf8528c94d8 data\trinkets\tags\items\chest\cape.json
 a39a568971c9d554105bb247b313bf8527a1cac3 data\c\tags\items\silver_ingots.json
