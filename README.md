@@ -6,7 +6,7 @@ Update Logs Below or in the [Wiki](https://github.com/EmilsGithub/Clutter-Mod-Re
 ## Links  
 
 <p align="center">
-  <a href="https://discord.com/invite/pDMkMxMREA"> <img src="https://raw.githubusercontent.com/EmilsGithub/Clutter-Mod-Repository/main/Images/discord.png" width="75" height="auto">   <a href="https://modrinth.com/mod/clutter"> <img src="https://raw.githubusercontent.com/EmilsGithub/Clutter-Mod-Repository/main/Images/modrinth.png" width="75" height="auto">   <a href="https://www.curseforge.com/minecraft/mc-mods/clutter"> <img src="https://raw.githubusercontent.com/EmilsGithub/Clutter-Mod-Repository/main/Images/curse.png" width="75" height="auto">
+  <a href="https://discord.com/invite/XCZvfGffku"> <img src="https://raw.githubusercontent.com/EmilsGithub/Clutter-Mod-Repository/main/Images/discord.png" width="75" height="auto">   <a href="https://modrinth.com/mod/clutter"> <img src="https://raw.githubusercontent.com/EmilsGithub/Clutter-Mod-Repository/main/Images/modrinth.png" width="75" height="auto">   <a href="https://www.curseforge.com/minecraft/mc-mods/clutter"> <img src="https://raw.githubusercontent.com/EmilsGithub/Clutter-Mod-Repository/main/Images/curse.png" width="75" height="auto">
 </p>
 
 [![Bisect](https://www.bisecthosting.com/images/CF/Clutter/BH_CL_PromoCard.webp)](https://bisecthosting.com/ClutterMod)
