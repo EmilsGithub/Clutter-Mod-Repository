@@ -12,7 +12,6 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ElytraItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
@@ -27,17 +26,12 @@ import java.util.List;
 @Mixin(value = ElytraFeatureRenderer.class, priority = 1500)
 public abstract class ElytraFeatureRendererMixin {
 
-    @ModifyExpressionValue(
-            method = "render(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;ILnet/minecraft/entity/LivingEntity;FFFFFF)V",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isOf(Lnet/minecraft/item/Item;)Z")
-    )
+    @ModifyExpressionValue(method = "render(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;ILnet/minecraft/entity/LivingEntity;FFFFFF)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isOf(Lnet/minecraft/item/Item;)Z"))
     private boolean canRenderElytra(boolean orgBool, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, LivingEntity livingEntity) {
         return orgBool || getEquippedElytra(livingEntity).getItem() instanceof ElytraItem;
     }
 
-    @ModifyVariable(
-            method = "render(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;ILnet/minecraft/entity/LivingEntity;FFFFFF)V",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/math/MatrixStack;push()V"))
+    @ModifyVariable(method = "render(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;ILnet/minecraft/entity/LivingEntity;FFFFFF)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/math/MatrixStack;push()V"))
     private Identifier getButterflyElytraTexture(Identifier value, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, LivingEntity livingEntity) {
 
         ItemStack itemStack = getEquippedElytra(livingEntity);
@@ -64,9 +58,6 @@ public abstract class ElytraFeatureRendererMixin {
             List<ItemStack> trinketsStack = TrinketsElytraUse.getEquippedElytra(livingEntity);
             if(!trinketsStack.isEmpty()) {
                 itemStack = trinketsStack.get(0);
-                //if((trinketsStack.get(0).getItem() != Items.ELYTRA)) {
-                //    itemStack = trinketsStack.get(0);
-                //}
             }
         }
 

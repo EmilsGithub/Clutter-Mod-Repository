@@ -62,6 +62,16 @@ public class ToiletBlock extends SeatBlock{
         super.appendProperties(builder);
     }
 
+    @Override
+    protected float getYOffset() {
+        return 0.3f;
+    }
+
+    @Override
+    protected boolean isStrippable() {
+        return false;
+    }
+
     public void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
         boolean bl = world.isReceivingRedstonePower(pos);
         if (!this.getDefaultState().isOf(sourceBlock) && bl != (Boolean)state.get(POWERED)) {
@@ -77,6 +87,7 @@ public class ToiletBlock extends SeatBlock{
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        super.onUse(state, world, pos, player, hand, hit);
         if(world.isClient && player.getStackInHand(hand).isEmpty() && player.isSneaking()) return ActionResult.SUCCESS;
 
         if(!world.isClient && player.getStackInHand(hand).isEmpty() && player.isSneaking()) {

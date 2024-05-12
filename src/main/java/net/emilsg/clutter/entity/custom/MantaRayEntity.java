@@ -14,10 +14,7 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.mob.GuardianEntity;
-import net.minecraft.entity.mob.HoglinEntity;
 import net.minecraft.entity.mob.WaterCreatureEntity;
-import net.minecraft.entity.passive.SquidEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -162,7 +159,8 @@ public class MantaRayEntity extends ClutterWaterEntity {
 
     public static DefaultAttributeContainer.Builder setAttributes() {
         return ClutterAnimalEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 16.0D);
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 16.0D)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0D);
     }
 
     public void travel(Vec3d movementInput) {

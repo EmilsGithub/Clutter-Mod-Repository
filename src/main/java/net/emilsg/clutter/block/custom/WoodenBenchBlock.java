@@ -238,9 +238,8 @@ public class WoodenBenchBlock extends SeatBlock {
                 itemStack.damage(1, player, (p) -> p.sendToolBreakStatus(hand));
             }
             return ActionResult.SUCCESS;
-        } else {
-            return ActionResult.PASS;
         }
+        return super.onUse(state, world, pos, player, hand, hit);
     }
 
     private void updateBenchLegs(World world, BlockPos pos, BlockState state) {
@@ -311,6 +310,16 @@ public class WoodenBenchBlock extends SeatBlock {
 
         LegPosition leg_Positions = LegPosition.fromNeighborBlocks(westBench, northBench, eastBench, southBench);
         return state.with(LEG_POSITIONS, leg_Positions);
+    }
+
+    @Override
+    protected float getYOffset() {
+        return 0.3f;
+    }
+
+    @Override
+    protected boolean isStrippable() {
+        return true;
     }
 
     private BlockState getStrippedState(BlockState state) {

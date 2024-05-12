@@ -67,6 +67,11 @@ public class KilningRecipe implements Recipe<SimpleInventory> {
         return this.recipeItems;
     }
 
+    @Override
+    public boolean isIgnoredInRecipeBook() {
+        return true;
+    }
+
     public static class Type implements RecipeType<KilningRecipe> {
         private Type() { }
         public static final Type INSTANCE = new Type();

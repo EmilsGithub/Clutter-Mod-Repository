@@ -68,6 +68,16 @@ public class WoodenChairBlock extends SeatBlock{
     }
 
     @Override
+    protected float getYOffset() {
+        return 0.3f;
+    }
+
+    @Override
+    protected boolean isStrippable() {
+        return true;
+    }
+
+    @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         Direction i = state.get(FACING);
         return switch (i) {
@@ -75,7 +85,7 @@ public class WoodenChairBlock extends SeatBlock{
             case SOUTH -> SOUTH_SHAPE;
             case EAST -> EAST_SHAPE;
             case WEST -> WEST_SHAPE;
-            default -> VoxelShapes.empty(); // return an empty shape if no matching direction is found
+            default -> VoxelShapes.empty();
         };
     }
 
@@ -90,9 +100,8 @@ public class WoodenChairBlock extends SeatBlock{
                 itemStack.damage(1, player, (p) -> p.sendToolBreakStatus(hand));
             }
             return ActionResult.SUCCESS;
-        } else {
-            return ActionResult.PASS;
         }
+        return super.onUse(state, world, pos, player, hand, hit);
     }
 
     private BlockState getStrippedState(BlockState state) {

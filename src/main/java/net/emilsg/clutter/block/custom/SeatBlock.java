@@ -1,6 +1,7 @@
 package net.emilsg.clutter.block.custom;
 
 import net.emilsg.clutter.block.entity.SeatEntity;
+import net.emilsg.clutter.entity.ModEntities;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalFacingBlock;
@@ -9,11 +10,15 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.item.AxeItem;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
@@ -27,15 +32,14 @@ import java.util.List;
 
 import static net.emilsg.clutter.block.entity.SeatEntity.IS_OCCUPIED;
 
-public class SeatBlock extends HorizontalFacingBlock implements Waterloggable {
+public abstract class SeatBlock extends HorizontalFacingBlock implements Waterloggable {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
     public static final DirectionProperty HORIZONTAL_FACING = Properties.HORIZONTAL_FACING;
 
     public SeatBlock(Settings settings) {
         super(settings);
-        this.setDefaultState((BlockState)(this.stateManager.getDefaultState()).with(WATERLOGGED, false));
+        this.setDefaultState((this.stateManager.getDefaultState()).with(WATERLOGGED, false));
     }
-
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
@@ -46,10 +50,10 @@ public class SeatBlock extends HorizontalFacingBlock implements Waterloggable {
     @Override
     @Nullable
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        BlockPos blockPos;
+        BlockPos pos;
         World worldAccess = ctx.getWorld();
-        boolean bl = worldAccess.getFluidState(blockPos = ctx.getBlockPos()).getFluid() == Fluids.WATER;
-        return (BlockState)this.getDefaultState().with(WATERLOGGED, bl).with(HORIZONTAL_FACING, ctx.getHorizontalPlayerFacing().getOpposite());
+        boolean bl = worldAccess.getFluidState(pos = ctx.getBlockPos()).getFluid() == Fluids.WATER;
+        return this.getDefaultState().with(WATERLOGGED, bl).with(HORIZONTAL_FACING, ctx.getHorizontalPlayerFacing().getOpposite());
     }
 
     @Override
@@ -63,7 +67,7 @@ public class SeatBlock extends HorizontalFacingBlock implements Waterloggable {
     public boolean tryFillWithFluid(WorldAccess world, BlockPos pos, BlockState state, FluidState fluidState) {
         if (!state.get(Properties.WATERLOGGED) && fluidState.getFluid() == Fluids.WATER) {
 
-            world.setBlockState(pos, (BlockState)((BlockState)state.with(WATERLOGGED, true)), Block.NOTIFY_ALL);
+            world.setBlockState(pos, (state.with(WATERLOGGED, true)), Block.NOTIFY_ALL);
             world.scheduleFluidTick(pos, fluidState.getFluid(), fluidState.getFluid().getTickRate(world));
             return true;
         }
@@ -76,6 +80,37 @@ public class SeatBlock extends HorizontalFacingBlock implements Waterloggable {
             return Fluids.WATER.getStill(false);
         }
         return super.getFluidState(state);
+    }
+
+    protected abstract float getYOffset();
+
+    protected abstract boolean isStrippable();
+
+    @Override
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        if(player.isSneaking() || !player.getStackInHand(hand).isEmpty()) return ActionResult.PASS;
+        if(isStrippable() && (player.getStackInHand(Hand.MAIN_HAND).getItem() instanceof AxeItem || player.getStackInHand(Hand.OFF_HAND).getItem() instanceof AxeItem)) return ActionResult.PASS;
+
+        Vec3d comparePos = new Vec3d(pos.getX(), pos.getY(), pos.getZ());
+
+        if (world.isClient || !world.canPlayerModifyAt(player, pos) || IS_OCCUPIED.containsKey(comparePos)) {
+            return ActionResult.PASS;
+        }
+
+        return spawnAndSitOnSeat(world, player, pos, getYOffset(), comparePos);
+    }
+
+    private ActionResult spawnAndSitOnSeat(World world, PlayerEntity player, BlockPos blockPos, double yOffset, Vec3d comparePos) {
+        SeatEntity seatEntity = ModEntities.SEAT.create(world);
+        if(seatEntity != null) {
+            Vec3d pos = new Vec3d(blockPos.getX() + 0.5f, blockPos.getY() + yOffset, blockPos.getZ() + 0.5f);
+            IS_OCCUPIED.put(comparePos, player.getBlockPos());
+            seatEntity.updatePosition(pos.getX(), pos.getY(), pos.getZ());
+            world.spawnEntity(seatEntity);
+            player.startRiding(seatEntity);
+            return ActionResult.SUCCESS;
+        }
+        return ActionResult.PASS;
     }
 
     @Override

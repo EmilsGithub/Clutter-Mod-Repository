@@ -340,8 +340,6 @@ public class BonfireBlock extends BlockWithEntity {
         if ((Boolean)state.get(LIT) && entity instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity)entity)) {
             entity.damage(world.getDamageSources().inFire(), 2);
         }
-
-        super.onEntityCollision(state, world, pos, entity);
     }
 
     public static void spawnThickSmokeParticles(World world, BlockPos pos, BlockState state, double yOffset) {

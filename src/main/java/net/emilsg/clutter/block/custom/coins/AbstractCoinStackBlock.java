@@ -86,4 +86,8 @@ public abstract class AbstractCoinStackBlock extends Block implements Waterlogga
         }
         return super.getFluidState(state);
     }
+
+    public static BlockState increaseLayersByOne(BlockState state) {
+        return state.with(COIN_LAYERS, state.get(COIN_LAYERS) + 1);
+    }
 }

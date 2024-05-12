@@ -29,7 +29,7 @@ import java.util.List;
 
 import static net.emilsg.clutter.block.entity.SeatEntity.IS_OCCUPIED;
 
-public class FloorSeatBlock extends Block implements Waterloggable {
+public class FloorSeatBlock extends SeatBlock implements Waterloggable {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 
     protected static final VoxelShape SHAPE = VoxelShapes.union(
@@ -84,6 +84,16 @@ public class FloorSeatBlock extends Block implements Waterloggable {
             return Fluids.WATER.getStill(false);
         }
         return super.getFluidState(state);
+    }
+
+    @Override
+    protected float getYOffset() {
+        return 0;
+    }
+
+    @Override
+    protected boolean isStrippable() {
+        return false;
     }
 
     @Override

@@ -31,6 +31,7 @@ public class Clutter implements ModInitializer {
 	public static final boolean IS_SUPPLEMENTARIES_LOADED = FabricLoader.getInstance().getModContainer("supplementaries").isPresent();
 	public static final boolean IS_ELYTRA_SLOT_LOADED = FabricLoader.getInstance().getModContainer("elytraslot").isPresent();
 	public static final boolean IS_ELYTRA_TRINKET_LOADED = FabricLoader.getInstance().getModContainer("elytra_trinket").isPresent();
+	public static final boolean IS_FIRST_PERSON_MODEL_LOADED = FabricLoader.getInstance().getModContainer("firstperson").isPresent();
 
 	@Override
 	public void onInitialize() {

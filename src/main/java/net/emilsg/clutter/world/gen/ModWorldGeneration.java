@@ -16,12 +16,12 @@ public class ModWorldGeneration {
         if(ClutterConfig.getInstance().getBoolean(ClutterConfig.GENERATE_FOLIAGE)) {
             ModFoliageGeneration.generateFoliage();
         }
-
-        //ModFoliageGeneration.generateModBiomeFoliage();
-
-        MiscFeatureGeneration.generateMiscFeatures();
-
-        ModUnderwaterFeatureGeneration.generateUnderwaterFeatures();
+        if(ClutterConfig.getInstance().getBoolean(ClutterConfig.GENERATE_UNDERWATER_FEATURES)) {
+            ModUnderwaterFeatureGeneration.generateUnderwaterFeatures();
+        }
+        if(ClutterConfig.getInstance().getBoolean(ClutterConfig.GENERATE_MISC_FEATURES)) {
+            MiscFeatureGeneration.generateMiscFeatures();
+        }
     }
 }
 

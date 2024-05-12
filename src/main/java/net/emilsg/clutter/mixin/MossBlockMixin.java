@@ -24,7 +24,6 @@ public class MossBlockMixin {
         }).ifPresent((reference) -> {
             ((ConfiguredFeature<?, ?>)reference.value()).generate(world, world.getChunkManager().getChunkGenerator(), random, pos.up());
 
-            // Custom behavior: also place some LUSH_MOSS blocks
             for (int i = 0; i < 20; ++i) {
                 BlockPos blockPos = pos.up().add(random.nextInt(3) - 1, random.nextInt(2) - random.nextInt(2), random.nextInt(3) - 1);
                 if (world.getBlockState(blockPos).isAir() && ModBlocks.LUSH_MOSS.getDefaultState().canPlaceAt(world, blockPos)) {

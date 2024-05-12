@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.data.server.loottable.BlockLootTableGenerator;
 import net.minecraft.item.Items;
 import net.minecraft.loot.LootPool;
@@ -12,8 +13,11 @@ import net.minecraft.loot.LootTable;
 import net.minecraft.loot.entry.AlternativeEntry;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
+import net.minecraft.state.property.Properties;
 
 public class LootTableDataGen extends FabricBlockLootTableProvider {
+    public static final float[] SAPLING_DROP_CHANCE = new float[]{0.05F, 0.0625F, 0.083333336F, 0.1F};
+    public static final float[] LEAVES_STICK_DROP_CHANCE = new float[]{0.02F, 0.022222223F, 0.025F, 0.033333335F, 0.1F};
 
     public LootTableDataGen(FabricDataOutput dataOutput) {
         super(dataOutput);
@@ -41,6 +45,15 @@ public class LootTableDataGen extends FabricBlockLootTableProvider {
                 ModBlocks.REDWOOD_SLAB,
                 ModBlocks.POLISHED_BLACK_ONYX_SLAB,
                 ModBlocks.BLACK_ONYX_SLAB
+        );
+
+        this.addDoubleBlockGroupDrops(
+                ModBlocks.BLUE_LUPINE,
+                ModBlocks.MAGENTA_LUPINE,
+                ModBlocks.PURPLE_LUPINE,
+                ModBlocks.WHITE_LUPINE,
+                ModBlocks.GIANT_FERN,
+                ModBlocks.REDWOOD_DOOR
         );
 
         this.addSingleGroupDrops(
@@ -82,8 +95,26 @@ public class LootTableDataGen extends FabricBlockLootTableProvider {
                 ModBlocks.REDWOOD_BUTTON,
                 ModBlocks.REDWOOD_PRESSURE_PLATE,
                 ModBlocks.REDWOOD_MOSAIC,
-                ModBlocks.REDWOOD_MOSAIC_STAIRS
+                ModBlocks.REDWOOD_MOSAIC_STAIRS,
+                ModBlocks.REDWOOD_SAPLING,
+                ModBlocks.REDWOOD_TRAPDOOR,
+                ModBlocks.SMALL_BLUE_LUPINE,
+                ModBlocks.SMALL_MAGENTA_LUPINE,
+                ModBlocks.SMALL_PURPLE_LUPINE,
+                ModBlocks.SMALL_WHITE_LUPINE
         );
+
+        this.addLeaves();
+    }
+
+    private void addLeaves() {
+        this.addDrop(ModBlocks.REDWOOD_LEAVES, (block) -> this.leavesDrops(block, ModBlocks.REDWOOD_SAPLING, SAPLING_DROP_CHANCE));
+    }
+
+    private void addDoubleBlockGroupDrops(Block... blocks) {
+        for(Block block1 : blocks) {
+            this.addDrop(block1, (block) -> this.dropsWithProperty(block, Properties.DOUBLE_BLOCK_HALF, DoubleBlockHalf.LOWER));
+        }
     }
 
     private void addSingleGroupDrops(Block... blocks) {

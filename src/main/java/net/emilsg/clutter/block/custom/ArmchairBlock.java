@@ -3,16 +3,12 @@ package net.emilsg.clutter.block.custom;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 
 public class ArmchairBlock extends SeatBlock{
     private static final VoxelShape BASE = VoxelShapes.union(
@@ -70,11 +66,12 @@ public class ArmchairBlock extends SeatBlock{
     }
 
     @Override
-    @Nullable
-    public BlockState getPlacementState(ItemPlacementContext ctx) {
-        BlockPos blockPos;
-        World worldAccess = ctx.getWorld();
-        boolean bl = worldAccess.getFluidState(blockPos = ctx.getBlockPos()).getFluid() == Fluids.WATER;
-        return (BlockState)this.getDefaultState().with(WATERLOGGED, bl).with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
+    protected float getYOffset() {
+        return 0.25f;
+    }
+
+    @Override
+    protected boolean isStrippable() {
+        return false;
     }
 }

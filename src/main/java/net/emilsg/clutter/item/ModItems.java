@@ -109,9 +109,10 @@ public class ModItems {
 
     public static final Item BEER_MUG = registerItem("beer_mug", new BeerItem(ModBlocks.BEER_MUG, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
     public static final Item WOODEN_MUG = registerItem("wooden_mug", new AliasedBlockItem(ModBlocks.WOODEN_MUG, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
-    public static final Item COPPER_COIN = registerItem("copper_coin", new Item(new FabricItemSettings().rarity(Rarity.UNCOMMON)), ModItemGroups.CLUTTER_ITEMS);
-    public static final Item SILVER_COIN = registerItem("silver_coin", new Item(new FabricItemSettings().rarity(Rarity.RARE)), ModItemGroups.CLUTTER_ITEMS);
-    public static final Item GOLDEN_COIN = registerItem("golden_coin", new Item(new FabricItemSettings().rarity(Rarity.EPIC)), ModItemGroups.CLUTTER_ITEMS);
+
+    public static final Item COPPER_COIN = registerItem("copper_coin", new CoinItem(new FabricItemSettings().rarity(Rarity.UNCOMMON), ModBlocks.COPPER_COIN_STACK), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item SILVER_COIN = registerItem("silver_coin", new CoinItem(new FabricItemSettings().rarity(Rarity.RARE), ModBlocks.SILVER_COIN_STACK), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item GOLDEN_COIN = registerItem("golden_coin", new CoinItem(new FabricItemSettings().rarity(Rarity.EPIC), ModBlocks.GOLDEN_COIN_STACK), ModItemGroups.CLUTTER_ITEMS);
 
     public static final Item COMMON_COIN_POUCH = registerItem("common_coin_pouch", new CoinPouchItem(new FabricItemSettings().rarity(Rarity.COMMON), 2, 3), ModItemGroups.CLUTTER_ITEMS);
     public static final Item UNCOMMON_COIN_POUCH = registerItem("uncommon_coin_pouch", new CoinPouchItem(new FabricItemSettings().rarity(Rarity.UNCOMMON), 3, 6), ModItemGroups.CLUTTER_ITEMS);

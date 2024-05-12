@@ -2,65 +2,27 @@ package net.emilsg.clutter.util;
 
 import net.emilsg.clutter.Clutter;
 import net.emilsg.clutter.block.ModBlocks;
-import net.emilsg.clutter.block.custom.*;
-import net.emilsg.clutter.block.entity.SeatEntity;
-import net.emilsg.clutter.entity.ModEntities;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.item.AxeItem;
 import net.minecraft.item.Items;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Arm;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-
-import static net.emilsg.clutter.block.entity.SeatEntity.IS_OCCUPIED;
 
 public class ModCallbackRegistry {
 
     public static void handleCallbacks() {
-        handleSitting();
         if (!Clutter.IS_SUPPLEMENTARIES_LOADED) handlePlacingBooks();
         handlePlacingNautilusShells();
-    }
-
-    public static void handleSitting() {
-        UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> {
-            BlockState state = world.getBlockState(hitResult.getBlockPos());
-            BlockPos blockPos = hitResult.getBlockPos();
-            Vec3d comparePos = new Vec3d(blockPos.getX(), blockPos.getY(), blockPos.getZ());
-            boolean notSneakingAndHandEmpty = !player.isSneaking() && player.getStackInHand(hand).isEmpty();
-
-            if (world.isClient || !world.canPlayerModifyAt(player, blockPos) || IS_OCCUPIED.containsKey(comparePos) || !notSneakingAndHandEmpty) {
-                return ActionResult.PASS;
-            }
-
-            boolean noAxe = !(player.getStackInHand(Hand.MAIN_HAND).getItem() instanceof AxeItem || player.getStackInHand(Hand.OFF_HAND).getItem() instanceof AxeItem);
-
-            if (state.getBlock() instanceof ArmchairBlock) {
-                return spawnSeat(world, player, blockPos, 0.25, comparePos);
-            } else if (noAxe && state.getBlock() instanceof WoodenChairBlock) {
-                return spawnSeat(world, player, blockPos, 0.3, comparePos);
-            } else if (state.getBlock() instanceof FloorSeatBlock) {
-                return spawnSeat(world, player, blockPos, 0, comparePos);
-            } else if (noAxe && state.getBlock() instanceof WoodenBenchBlock) {
-                return spawnSeat(world, player, blockPos, 0.3, comparePos);
-            } else if (noAxe && state.getBlock() instanceof ToiletBlock) {
-                return spawnSeat(world, player, blockPos, 0.3, comparePos);
-            }
-
-            return ActionResult.PASS;
-        });
     }
 
     public static void handlePlacingBooks() {
@@ -114,19 +76,6 @@ public class ModCallbackRegistry {
             }
             return ActionResult.PASS;
         });
-    }
-
-    private static ActionResult spawnSeat(World world, PlayerEntity player, BlockPos blockPos, double yOffset, Vec3d comparePos) {
-        SeatEntity seatEntity = ModEntities.SEAT.create(world);
-        if(seatEntity != null) {
-            Vec3d pos = new Vec3d(blockPos.getX() + 0.5f, blockPos.getY() + yOffset, blockPos.getZ() + 0.5f);
-            IS_OCCUPIED.put(comparePos, player.getBlockPos());
-            seatEntity.updatePosition(pos.getX(), pos.getY(), pos.getZ());
-            world.spawnEntity(seatEntity);
-            player.startRiding(seatEntity);
-            return ActionResult.SUCCESS;
-        }
-        return ActionResult.PASS;
     }
 
     private static ActionResult decrementAndPlaySound(PlayerEntity player, World world, BlockPos blockPos, Hand hand, SoundEvent events) {

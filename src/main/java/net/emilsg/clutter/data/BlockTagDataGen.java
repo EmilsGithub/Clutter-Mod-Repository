@@ -211,6 +211,12 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
                 ModBlocks.SULPHUR_BLOCK,
                 ModBlocks.ONYX_ORE);
 
+        getOrCreateTagBuilder(BlockTags.WOODEN_DOORS).add(
+                ModBlocks.REDWOOD_DOOR);
+
+        getOrCreateTagBuilder(BlockTags.WOODEN_TRAPDOORS).add(
+                ModBlocks.REDWOOD_TRAPDOOR);
+
         getOrCreateTagBuilder(BlockTags.HOE_MINEABLE).add(
                 ModBlocks.RIPE_KIWI_LEAVES,
                 ModBlocks.KIWI_LEAVES,
