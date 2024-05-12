@@ -13,7 +13,7 @@ import net.emilsg.clutter.entity.client.model.BeaverModel;
 import net.emilsg.clutter.entity.client.model.ButterflyModel;
 import net.emilsg.clutter.entity.client.model.CrimsonNewtModel;
 import net.emilsg.clutter.entity.client.model.EmberTortoiseModel;
-import net.emilsg.clutter.entity.client.player.ElytraRenderer;
+import net.emilsg.clutter.entity.client.player.RendererRegistration;
 import net.emilsg.clutter.entity.client.render.BeaverRenderer;
 import net.emilsg.clutter.entity.client.render.ButterflyRenderer;
 import net.emilsg.clutter.entity.client.render.CrimsonNewtRenderer;
@@ -50,7 +50,7 @@ public class ClutterClient implements ClientModInitializer {
     public void onInitializeClient() {
         if(IS_TRINKETS_LOADED) TrinketsIntegrationClient.registerTrinkets();
 
-        ElytraRenderer.register();
+        RendererRegistration.register();
 
         ModKeyInputHandler.register();
         this.registerColorProviders();
@@ -630,6 +630,5 @@ public class ClutterClient implements ClientModInitializer {
         HandledScreens.register(ModScreenHandlers.CARDBOARD_BOX_SCREEN_HANDLER, CardboardBoxScreen::new);
         HandledScreens.register(ModScreenHandlers.WALL_BOOKSHELF_SCREEN_HANDLER, WallBookshelfScreen::new);
         HandledScreens.register(ModScreenHandlers.PRESENT_SCREEN_HANDLER, PresentScreen::new);
-
     }
 }
