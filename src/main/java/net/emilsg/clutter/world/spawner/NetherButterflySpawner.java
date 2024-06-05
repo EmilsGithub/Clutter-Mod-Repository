@@ -57,7 +57,7 @@ public class NetherButterflySpawner implements Spawner {
             double angle = random.nextDouble() * Math.PI * 2;
             int x = playerEntity.getBlockPos().getX() + (int) (spawnDistance * Math.cos(angle));
             int z = playerEntity.getBlockPos().getZ() + (int) (spawnDistance * Math.sin(angle));
-            int maxY = 120;
+            int maxY = 100;
             int minY = 31;
 
             int y = minY + random.nextInt(maxY - minY + 1);

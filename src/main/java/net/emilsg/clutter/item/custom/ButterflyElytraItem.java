@@ -1,9 +1,9 @@
 package net.emilsg.clutter.item.custom;
 
-import net.fabricmc.fabric.api.entity.event.v1.FabricElytraItem;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
-public class ButterflyElytraItem extends ElytraItem implements FabricElytraItem, Equipment {
+public class ButterflyElytraItem extends ClutterElytraItem {
     Item repairItem;
     String color;
 

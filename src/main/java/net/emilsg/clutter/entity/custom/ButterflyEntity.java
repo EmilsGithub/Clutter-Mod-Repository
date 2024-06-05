@@ -1,23 +1,18 @@
 package net.emilsg.clutter.entity.custom;
 
-import net.emilsg.clutter.block.ModBlocks;
+import net.emilsg.clutter.entity.custom.goal.ButterflyWanderNetherGoal;
+import net.emilsg.clutter.entity.custom.goal.ButterflyWanderOverworldGoal;
+import net.emilsg.clutter.entity.custom.goal.ButterflyPlaceCocoonGoal;
 import net.emilsg.clutter.entity.custom.parent.ClutterAnimalEntity;
 import net.emilsg.clutter.entity.variants.ButterflyVariant;
 import net.emilsg.clutter.item.ModItems;
 import net.emilsg.clutter.util.ModBlockTags;
 import net.minecraft.advancement.criterion.Criteria;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.LeavesBlock;
 import net.minecraft.entity.*;
-import net.minecraft.entity.ai.AboveGroundTargeting;
-import net.minecraft.entity.ai.NoPenaltySolidTargeting;
 import net.minecraft.entity.ai.control.FlightMoveControl;
 import net.minecraft.entity.ai.control.LookControl;
 import net.minecraft.entity.ai.goal.AnimalMateGoal;
-import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.entity.ai.goal.MoveToTargetPosGoal;
 import net.minecraft.entity.ai.goal.TemptGoal;
 import net.minecraft.entity.ai.pathing.BirdNavigation;
 import net.minecraft.entity.ai.pathing.EntityNavigation;
@@ -39,7 +34,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.BiomeTags;
-import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -50,17 +45,14 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.*;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
-import net.minecraft.world.dimension.DimensionTypes;
 import org.jetbrains.annotations.Nullable;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoField;
-import java.util.EnumSet;
 
 public class ButterflyEntity extends ClutterAnimalEntity {
     private static final TrackedData<Boolean> HAS_COCOON = DataTracker.registerData(ButterflyEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
@@ -109,9 +101,18 @@ public class ButterflyEntity extends ClutterAnimalEntity {
     }
 
     @Override
+    public void tickMovement() {
+        super.tickMovement();
+
+        if (this.isAlive() && (this.isSubmergedIn(FluidTags.LAVA) || this.isSubmergedIn(FluidTags.WATER))) {
+            this.kill();
+        }
+    }
+
+    @Override
     protected void initGoals() {
         this.goalSelector.add(0, new AnimalMateGoal(this, 1.0));
-        this.goalSelector.add(1, new LayCocoonGoal(this, 1.0));
+        this.goalSelector.add(1, new ButterflyPlaceCocoonGoal(this, 1.0));
         this.goalSelector.add(2, new TemptGoal(this, 1.25, Ingredient.ofItems(Items.SUGAR), false));
         this.goalSelector.add(3, new ButterflyWanderNetherGoal(this));
         this.goalSelector.add(3, new ButterflyWanderOverworldGoal(this));
@@ -154,39 +155,6 @@ public class ButterflyEntity extends ClutterAnimalEntity {
     }
 
     protected void fall(double heightDifference, boolean onGround, BlockState state, BlockPos landedPosition) {
-    }
-
-    public static class LayCocoonGoal extends MoveToTargetPosGoal {
-        private final ButterflyEntity butterfly;
-
-        LayCocoonGoal(ButterflyEntity butterfly, double speed) {
-            super(butterfly, speed, 16);
-            this.butterfly = butterfly;
-        }
-
-        public boolean canStart() {
-            return this.butterfly.hasCocoon() && super.canStart();
-        }
-
-        public boolean shouldContinue() {
-            return super.shouldContinue() && this.butterfly.hasCocoon();
-        }
-
-        public void tick() {
-            super.tick();
-            if (this.hasReached()) {
-                World world = this.butterfly.getWorld();
-                BlockPos cocoonPos = this.targetPos;
-                world.setBlockState(cocoonPos, ModBlocks.BUTTERFLY_COCOON.getDefaultState(), 3);
-                this.butterfly.setHasCocoon(false);
-            }
-        }
-
-        protected boolean isTargetPos(WorldView world, BlockPos pos) {
-            Block block = world.getBlockState(pos.up()).getBlock();
-            BlockState state = world.getBlockState(pos.up());
-            return (world.isAir(pos) || state.isReplaceable()) && (block instanceof LeavesBlock || state.isIn(BlockTags.LOGS) || state.isIn(BlockTags.WART_BLOCKS) || state.isOf(Blocks.BONE_BLOCK));
-        }
     }
 
     @Override
@@ -237,78 +205,6 @@ public class ButterflyEntity extends ClutterAnimalEntity {
         birdNavigation.setCanSwim(false);
         birdNavigation.setCanEnterOpenDoors(true);
         return birdNavigation;
-    }
-
-
-    private class ButterflyWanderOverworldGoal extends Goal {
-        private final ButterflyEntity butterfly;
-
-        ButterflyWanderOverworldGoal(ButterflyEntity butterfly) {
-            this.setControls(EnumSet.of(Goal.Control.MOVE));
-            this.butterfly = butterfly;
-        }
-
-        @Override
-        public boolean canStart() {
-            return butterfly.getWorld().getDimensionKey().equals(DimensionTypes.OVERWORLD) && butterfly.navigation.isIdle() && butterfly.random.nextInt(10) == 0;
-        }
-
-        @Override
-        public boolean shouldContinue() {
-            return butterfly.navigation.isFollowingPath();
-        }
-
-        @Override
-        public void start() {
-            Vec3d vec3d = this.getRandomLocation();
-            if (vec3d != null) {
-                butterfly.navigation.startMovingAlong(butterfly.navigation.findPathTo(BlockPos.ofFloored(vec3d), 1), 1.0);
-            }
-        }
-
-        @Nullable
-        private Vec3d getRandomLocation() {
-            Vec3d vec3d2 = butterfly.getRotationVec(0.0f);
-
-            int i = 8;
-            Vec3d vec3d3 = AboveGroundTargeting.find(butterfly, 8, 7, vec3d2.x, vec3d2.z, 1.5707964f, 4, 2);
-            if (vec3d3 != null) {
-                return vec3d3;
-            }
-            return NoPenaltySolidTargeting.find(butterfly, 8, 4, -2, vec3d2.x, vec3d2.z, 1.5707963705062866);
-        }
-    }
-
-    public static class ButterflyWanderNetherGoal extends Goal {
-        private final ButterflyEntity butterfly;
-
-        public ButterflyWanderNetherGoal(ButterflyEntity butterfly) {
-            this.butterfly = butterfly;
-        }
-
-        @Override
-        public boolean canStart() {
-            return !butterfly.getWorld().getDimensionKey().equals(DimensionTypes.OVERWORLD) && !butterfly.isSubmergedInWater() && butterfly.navigation.isIdle() && butterfly.random.nextInt(10) == 0;
-        }
-
-        public boolean shouldContinue() {
-            return this.butterfly.navigation.isFollowingPath();
-        }
-
-        public void start() {
-            BlockPos butterflyBlockPos = this.butterfly.getBlockPos();
-            BlockPos randomPos = getRandomPos(butterflyBlockPos);
-            if(butterfly.getWorld().getBlockState(randomPos).isReplaceable()) {
-                butterfly.navigation.startMovingTo(randomPos.getX(), randomPos.getY(), randomPos.getZ(), 1.0f);
-            }
-        }
-
-        private static BlockPos getRandomPos(BlockPos center) {
-            int x = center.getX() + (int) (Math.random() * 24 * 2) - 24;
-            int y = center.getY() + (int) (Math.random() * 8 * 2) - 8;
-            int z = center.getZ() + (int) (Math.random() * 24 * 2) - 24;
-            return new BlockPos(x, y, z);
-        }
     }
 
     @Override
@@ -465,10 +361,10 @@ public class ButterflyEntity extends ClutterAnimalEntity {
     }
 
     public boolean hasCocoon() {
-        return (Boolean)this.dataTracker.get(HAS_COCOON);
+        return this.dataTracker.get(HAS_COCOON);
     }
 
-    void setHasCocoon(boolean hasCocoon) {
+    public void setHasCocoon(boolean hasCocoon) {
         this.dataTracker.set(HAS_COCOON, hasCocoon);
     }
 }

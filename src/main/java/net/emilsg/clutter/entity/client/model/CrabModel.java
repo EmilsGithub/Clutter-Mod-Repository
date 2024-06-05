@@ -107,4 +107,9 @@ public class CrabModel<T extends CrabEntity> extends ClutterModel<T> {
 	public ModelPart getPart() {
 		return crab;
 	}
+
+	@Override
+	protected ModelPart getHeadPart() {
+		return null;
+	}
 }

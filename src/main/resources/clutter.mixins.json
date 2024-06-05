@@ -19,6 +19,7 @@
     "defaultRequire": 1
   },
   "client": [
+    "BeaconScreenMixin",
     "ElytraFeatureRendererMixin",
     "ItemRendererAccessor",
     "ItemRendererMixin",

@@ -5,7 +5,6 @@ import net.emilsg.clutter.entity.custom.BeaverEntity;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.math.MathHelper;
 
 public class BeaverModel<T extends BeaverEntity> extends ClutterModel<T> {
 	private final ModelPart all;
@@ -67,6 +66,11 @@ public class BeaverModel<T extends BeaverEntity> extends ClutterModel<T> {
 	}
 
 	@Override
+	protected ModelPart getHeadPart() {
+		return head;
+	}
+
+	@Override
 	public void setAngles(BeaverEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.getPart().traverse().forEach(ModelPart::resetTransform);
 		this.setHeadAngles(entity, netHeadYaw, headPitch, ageInTicks);
@@ -75,13 +79,4 @@ public class BeaverModel<T extends BeaverEntity> extends ClutterModel<T> {
 		if(entity.isTouchingWater()) this.animateMovement(BeaverAnimations.BEAVER_SWIM, limbSwing, limbSwingAmount, 1.5f, 2f);
 		this.updateAnimation(entity.idleTailAnimationState, BeaverAnimations.BEAVER_IDLE_TAIL, ageInTicks, 1f);
 	}
-
-	private void setHeadAngles(BeaverEntity entity, float headYaw, float headPitch, float animationProgress) {
-		headYaw = MathHelper.clamp(headYaw, -30.0F, 30.0F);
-		headPitch = MathHelper.clamp(headPitch, -25.0F, 45.0F);
-
-		this.head.yaw = headYaw * 0.017453292F;
-		this.head.pitch = headPitch * 0.017453292F;
-	}
-
 }

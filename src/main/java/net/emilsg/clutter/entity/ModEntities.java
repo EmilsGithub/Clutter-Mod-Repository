@@ -43,6 +43,9 @@ public class ModEntities {
     public static final EntityType<CrimsonNewtEntity> CRIMSON_NEWT = Registry.register(Registries.ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "crimson_newt"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, CrimsonNewtEntity::new).dimensions(EntityDimensions.changing(0.75f, 0.75f)).fireImmune().build());
 
+    public static final EntityType<WarpedNewtEntity> WARPED_NEWT = Registry.register(Registries.ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "warped_newt"),
+            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, WarpedNewtEntity::new).dimensions(EntityDimensions.changing(0.75f, 0.75f)).fireImmune().build());
+
     public static final EntityType<EmberTortoiseEntity> EMBER_TORTOISE = Registry.register(Registries.ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "ember_tortoise"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, EmberTortoiseEntity::new).dimensions(EntityDimensions.changing(1.5f, 1.45f)).fireImmune().build());
 

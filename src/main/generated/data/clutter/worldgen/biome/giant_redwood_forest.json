@@ -89,6 +89,7 @@
       "clutter:redwood_bush_placed",
       "clutter:dead_redwood_placed",
       "clutter:fallen_redwood_placed",
+      "minecraft:mushroom_island_vegetation",
       "clutter:giant_fern_placed",
       "minecraft:patch_large_fern",
       "minecraft:flower_default",

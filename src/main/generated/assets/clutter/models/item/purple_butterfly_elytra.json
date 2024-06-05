@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "clutter:item/broken_purple_butterfly_elytra",
+      "predicate": {
+        "broken": 1
+      }
+    }
+  ],
+  "textures": {
+    "layer0": "clutter:item/purple_butterfly_elytra"
+  }
+}

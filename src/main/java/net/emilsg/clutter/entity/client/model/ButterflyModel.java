@@ -42,6 +42,11 @@ public class ButterflyModel<T extends ButterflyEntity> extends ClutterModel<T> {
 	}
 
 	@Override
+	protected ModelPart getHeadPart() {
+		return null;
+	}
+
+	@Override
 	public ModelPart getPart() {
 		return all;
 	}

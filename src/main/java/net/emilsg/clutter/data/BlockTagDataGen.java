@@ -1187,6 +1187,14 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
                 ModBlocks.REDWOOD_CHAIR
         );
 
+        getOrCreateTagBuilder(ModBlockTags.KIWI_EGG_HATCH_BOOST).add(
+            Blocks.HAY_BLOCK
+        );
+
+        getOrCreateTagBuilder(ModBlockTags.EMPEROR_PENGUIN_EGG_HATCH_BOOST).add(
+                Blocks.SNOW
+        );
+
         getOrCreateTagBuilder(ModBlockTags.STRIPPABLE_LOGS).add(
                 Blocks.ACACIA_LOG,
                 Blocks.BIRCH_LOG,

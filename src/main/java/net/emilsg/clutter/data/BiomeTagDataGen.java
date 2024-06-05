@@ -1,6 +1,5 @@
 package net.emilsg.clutter.data;
 
-import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.util.ModBiomeTags;
 import net.emilsg.clutter.world.biome.ModBiomes;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -28,6 +27,9 @@ public class BiomeTagDataGen extends FabricTagProvider<Biome> {
 
         getOrCreateTagBuilder(ModBiomeTags.SPAWNS_CRIMSON_NEWTS)
                 .add(BiomeKeys.CRIMSON_FOREST);
+
+        getOrCreateTagBuilder(ModBiomeTags.SPAWNS_WARPED_NEWTS)
+                .add(BiomeKeys.WARPED_FOREST);
 
         getOrCreateTagBuilder(ModBiomeTags.SPAWNS_NETHER_BUTTERFLIES).add(
                 BiomeKeys.CRIMSON_FOREST,

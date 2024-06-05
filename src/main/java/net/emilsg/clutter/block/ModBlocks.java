@@ -11,7 +11,9 @@ import net.emilsg.clutter.block.custom.cutout.CTallFlowerBlock;
 import net.emilsg.clutter.block.custom.oxidizable.*;
 import net.emilsg.clutter.block.custom.plants.*;
 import net.emilsg.clutter.block.custom.plushies.*;
+import net.emilsg.clutter.entity.ModEntities;
 import net.emilsg.clutter.sound.ModSounds;
+import net.emilsg.clutter.util.ModBlockTags;
 import net.emilsg.clutter.util.ModItemGroups;
 import net.emilsg.clutter.world.gen.tree.KiwiTreeSaplingGenerator;
 import net.emilsg.clutter.world.gen.tree.RedwoodTreeSaplingGenerator;
@@ -800,8 +802,8 @@ public class ModBlocks {
     public static final Block PLATE = registerBlockWithoutItem("plate", new PlateBlock(FabricBlockSettings.copy(Blocks.WHITE_TERRACOTTA).breakInstantly()));
 
     public static final Block BUTTERFLY_COCOON = registerBlockWithoutItem("butterfly_cocoon", new ButterflyCocoonBlock(FabricBlockSettings.copy(Blocks.MOSS_BLOCK).breakInstantly().nonOpaque().sounds(BlockSoundGroup.MOSS_BLOCK)));
-    public static final Block KIWI_BIRD_EGG = registerBlockWithoutItem("kiwi_bird_egg", new KiwiBirdEggBlock(FabricBlockSettings.copy(Blocks.SNIFFER_EGG).nonOpaque()));
-    public static final Block EMPEROR_PENGUIN_EGG = registerBlockWithoutItem("emperor_penguin_egg", new EmperorPenguinEggBlock(FabricBlockSettings.copy(Blocks.SNIFFER_EGG).nonOpaque()));
+    public static final Block KIWI_BIRD_EGG = registerBlockWithoutItem("kiwi_bird_egg", new HatchingEggBlock(FabricBlockSettings.copy(Blocks.SNIFFER_EGG).nonOpaque(), ModEntities.KIWI_BIRD, 5, ModBlockTags.KIWI_EGG_HATCH_BOOST, 7, 6));
+    public static final Block EMPEROR_PENGUIN_EGG = registerBlockWithoutItem("emperor_penguin_egg", new HatchingEggBlock(FabricBlockSettings.copy(Blocks.SNIFFER_EGG).nonOpaque(), ModEntities.EMPEROR_PENGUIN, 8, ModBlockTags.EMPEROR_PENGUIN_EGG_HATCH_BOOST, 6, 4));
 
     public static final Block BEER_MUG = registerBlockWithoutItem("beer_mug", new BeerMugBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).breakInstantly()));
     public static final Block WOODEN_MUG = registerBlockWithoutItem("wooden_mug", new MugBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).breakInstantly()));

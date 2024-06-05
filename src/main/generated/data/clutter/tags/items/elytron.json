@@ -20,6 +20,10 @@
     "clutter:pink_butterfly_elytra",
     "clutter:crimson_butterfly_elytra",
     "clutter:warped_butterfly_elytra",
-    "clutter:soul_butterfly_elytra"
+    "clutter:soul_butterfly_elytra",
+    "clutter:amethyst_gemstone_elytra",
+    "clutter:diamond_gemstone_elytra",
+    "clutter:emerald_gemstone_elytra",
+    "clutter:quartz_gemstone_elytra"
   ]
 }

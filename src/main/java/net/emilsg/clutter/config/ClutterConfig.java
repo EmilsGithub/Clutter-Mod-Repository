@@ -74,6 +74,9 @@ public class ClutterConfig {
     public static final String GENERATE_SMALL_SPONGES = "generate_small_sponges";
     public static final String GENERATE_CLAMS = "generate_clams";
 
+    public static final String ENHANCED_BEACON_DISPLAY = "enhanced_beacon_display";
+
+
     public void initializeConfigs() {
         configs.put(DISABLE_GREED_GENERATION, new ConfigEntry<>( false, "Disables the generation of Greed Books"));
         configs.put(GREED_WITH_LOOTING_AND_MENDING, new ConfigEntry<>( false, "Greed compatible with Looting and Mending."));
@@ -115,6 +118,9 @@ public class ClutterConfig {
         configs.put(GENERATE_UNDERWATER_FEATURES, new ConfigEntry<>( true, "Generate Underwater Features."));
         configs.put(GENERATE_SMALL_SPONGES, new ConfigEntry<>( true, "Generate Small Sponges."));
         configs.put(GENERATE_CLAMS, new ConfigEntry<>( true, "Generate Clams."));
+
+        configs.put(ENHANCED_BEACON_DISPLAY, new ConfigEntry<>( true, "Change the way the Payment Items in a Beacon are displayed."));
+
     }
 
     public boolean isConfigVersionCurrent() {

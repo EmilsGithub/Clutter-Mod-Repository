@@ -4,6 +4,8 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import net.emilsg.clutter.Clutter;
 import net.emilsg.clutter.compat.trinkets.TrinketsElytraUse;
 import net.emilsg.clutter.item.custom.ButterflyElytraItem;
+import net.emilsg.clutter.item.custom.ClutterElytraItem;
+import net.emilsg.clutter.item.custom.GemstoneElytraItem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -12,6 +14,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ElytraItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
@@ -35,18 +38,23 @@ public abstract class ElytraFeatureRendererMixin {
     private Identifier getButterflyElytraTexture(Identifier value, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, LivingEntity livingEntity) {
 
         ItemStack itemStack = getEquippedElytra(livingEntity);
+        Item elytraItem = itemStack.getItem();
 
-        if(itemStack.getItem() == Items.ELYTRA) {
+        if(elytraItem == Items.ELYTRA || !(elytraItem instanceof ClutterElytraItem)) {
             return value;
         }
 
-        if (!(itemStack.getItem() instanceof ButterflyElytraItem butterflyElytraItem)) {
-            return value;
+        if(elytraItem instanceof ButterflyElytraItem butterflyElytraItem) {
+            String color = butterflyElytraItem.getColor();
+            return new Identifier(Clutter.MOD_ID, "textures/entity/elytra/" + color + "_butterfly_elytra.png");
         }
 
-        String color = butterflyElytraItem.getColor();
+        if(elytraItem instanceof GemstoneElytraItem gemstoneElytraItem) {
+            String type = gemstoneElytraItem.getType();
+            return new Identifier(Clutter.MOD_ID, "textures/entity/elytra/" + type + "_gemstone_elytra.png");
+        }
 
-        return new Identifier(Clutter.MOD_ID, "textures/entity/" + color + "_butterfly_elytra.png");
+        return value;
     }
 
     @Unique

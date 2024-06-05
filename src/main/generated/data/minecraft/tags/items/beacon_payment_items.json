@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "clutter:silver_coin",
+    "clutter:golden_coin",
+    "clutter:silver_ingot",
+    "minecraft:tadpole_bucket",
+    "minecraft:netherite_hoe",
+    "minecraft:tall_grass"
+  ]
+}

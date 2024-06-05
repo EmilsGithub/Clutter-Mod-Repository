@@ -3,14 +3,10 @@ package net.emilsg.clutter.compat.trinkets;
 import dev.emi.trinkets.api.SlotReference;
 import dev.emi.trinkets.api.TrinketComponent;
 import dev.emi.trinkets.api.TrinketsApi;
-import net.emilsg.clutter.item.custom.ButterflyElytraItem;
-import net.emilsg.clutter.util.ModItemTags;
 import net.fabricmc.fabric.api.entity.event.v1.EntityElytraEvents;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ElytraItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Pair;
 import net.minecraft.world.event.GameEvent;
 

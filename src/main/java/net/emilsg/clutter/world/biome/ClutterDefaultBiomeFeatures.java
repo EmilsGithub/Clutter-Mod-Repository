@@ -3,6 +3,7 @@ package net.emilsg.clutter.world.biome;
 import net.emilsg.clutter.world.ModPlacedFeatures;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.feature.VegetationPlacedFeatures;
 
 public class ClutterDefaultBiomeFeatures {
 
@@ -14,6 +15,7 @@ public class ClutterDefaultBiomeFeatures {
         builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, ModPlacedFeatures.REDWOOD_BUSH_PLACED_KEY);
         builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, ModPlacedFeatures.DEAD_REDWOOD_PLACED_KEY);
         builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, ModPlacedFeatures.FALLEN_REDWOOD_PLACED_KEY);
+        builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, VegetationPlacedFeatures.MUSHROOM_ISLAND_VEGETATION);
     }
 
     public static void addRedwoodFoliageFeatures(GenerationSettings.LookupBackedBuilder builder) {

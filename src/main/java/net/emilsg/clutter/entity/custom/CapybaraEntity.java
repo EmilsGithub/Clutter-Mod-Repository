@@ -1,7 +1,7 @@
 package net.emilsg.clutter.entity.custom;
 
-import net.emilsg.clutter.entity.custom.parent.ClutterTameableEntity;
 import net.emilsg.clutter.entity.ModEntities;
+import net.emilsg.clutter.entity.custom.parent.ClutterTameableEntity;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.ai.pathing.PathNodeType;
@@ -29,38 +29,43 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.Box;
-import net.minecraft.world.EntityView;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.GeoAnimatable;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.object.PlayState;
 
 import java.util.EnumSet;
 import java.util.List;
 
-public class CapybaraEntity extends ClutterTameableEntity implements GeoEntity {
-
-    private final AnimatableInstanceCache CACHE = new SingletonAnimatableInstanceCache(this);
-    private static final RawAnimation IDLE = RawAnimation.begin().thenPlayAndHold("capybara.idle");
-    private static final RawAnimation WALK = RawAnimation.begin().thenLoop("capybara.walk");
-    private static final RawAnimation EAR_TWITCH_ONE = RawAnimation.begin().thenPlayAndHold("capybara.ear_twitch_one");
-    private static final RawAnimation EAR_TWITCH_TWO = RawAnimation.begin().thenPlayAndHold("capybara.ear_twitch_two");
-    private static final RawAnimation LAY_DOWN = RawAnimation.begin().thenLoop("capybara.lay_down");
-    private static final RawAnimation LAY_DOWN_2 = RawAnimation.begin().thenLoop("capybara.lay_down_2");
-    private static final RawAnimation LAY_DOWN_3 = RawAnimation.begin().thenLoop("capybara.lay_down_3");
-
-    private static final TrackedData<Boolean> IS_SLEEPING = DataTracker.registerData(CapybaraEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+public class CapybaraEntity extends ClutterTameableEntity {
+        private static final TrackedData<Boolean> IS_SLEEPING = DataTracker.registerData(CapybaraEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private static final TrackedData<Boolean> FORCE_SLEEPING = DataTracker.registerData(CapybaraEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private static final TrackedData<Integer> SLEEPER = DataTracker.registerData(CapybaraEntity.class, TrackedDataHandlerRegistry.INTEGER);
+
+    public final AnimationState idleAnimationState = new AnimationState();
+    public int idleAnimationTimeout = 0;
+
+    public final AnimationState earTwitchAnimationState = new AnimationState();
+    public int earTwitchAnimationTimeout = 0;
+
+    public final AnimationState sleepingAnimationState = new AnimationState();
+    public int sleepingAnimationTimeout = 0;
+
+    private void setupAnimationStates() {
+        if (this.sleepingAnimationTimeout <= 0) {
+            this.sleepingAnimationTimeout = 80;
+            this.sleepingAnimationState.start(this.age);
+        } else {
+            --this.sleepingAnimationTimeout;
+        }
+
+        if(this.earTwitchAnimationTimeout <= 0) {
+            this.earTwitchAnimationTimeout = 1;
+            this.earTwitchAnimationState.start(this.age);
+        } else {
+            --this.earTwitchAnimationTimeout;
+        }
+    }
 
     private static final Ingredient BREEDING_INGREDIENT = Ingredient.ofItems(Items.MELON);
 
@@ -229,6 +234,16 @@ public class CapybaraEntity extends ClutterTameableEntity implements GeoEntity {
     }
 
     @Override
+    public void tick() {
+        super.tick();
+        World world = this.getWorld();
+
+        if(world.isClient) {
+            this.setupAnimationStates();
+        }
+    }
+
+    @Override
     public boolean isBreedingItem(ItemStack stack) {
         return stack.isOf(Items.MELON);
     }
@@ -237,34 +252,6 @@ public class CapybaraEntity extends ClutterTameableEntity implements GeoEntity {
     @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
         return ModEntities.CAPYBARA.create(world);
-    }
-
-    @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController<>(this, "controller", 10, this::predicate));
-        controllerRegistrar.add(new AnimationController<>(this, "idle_controller", 10, this::idlePredicate));
-    }
-
-    private <T extends GeoAnimatable> PlayState idlePredicate(AnimationState<T> tAnimationState) {
-        if(this.random.nextInt(200) == 0) {
-            tAnimationState.getController().setAnimation(this.getWorld().random.nextBoolean() ? EAR_TWITCH_ONE : EAR_TWITCH_TWO);
-        }
-        return PlayState.CONTINUE;
-    }
-
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
-        tAnimationState.getController().setAnimation(this.isSleeping() ? sleeperType() == 0 ? LAY_DOWN : sleeperType() == 1 ? LAY_DOWN_2 : LAY_DOWN_3 : tAnimationState.isMoving() && !this.isSleeping() ? WALK : IDLE);
-        return PlayState.CONTINUE;
-    }
-
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return CACHE;
-    }
-
-    @Override
-    public EntityView method_48926() {
-        return this.getWorld();
     }
 
     private class CapybaraWanderGoal extends WanderAroundFarGoal {

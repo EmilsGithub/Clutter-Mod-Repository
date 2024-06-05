@@ -33,6 +33,7 @@ public class ModEntitySpawning {
 
             if(world.getDimensionKey().equals(DimensionTypes.THE_NETHER)) {
                 if (ClutterConfig.getInstance().getBoolean(MELTDOWN_DESTROYS_BLOCKS)) registerSpawners(world, new NetherAnimalSpawner(400, ModBiomeTags.SPAWNS_CRIMSON_NEWTS, ModEntities.CRIMSON_NEWT));
+                if (ClutterConfig.getInstance().getBoolean(MELTDOWN_DESTROYS_BLOCKS)) registerSpawners(world, new NetherAnimalSpawner(400, ModBiomeTags.SPAWNS_WARPED_NEWTS, ModEntities.WARPED_NEWT));
                 if (ClutterConfig.getInstance().getBoolean(SPAWN_BUTTERFLIES)) registerSpawners(world, new NetherButterflySpawner(400, ModBiomeTags.SPAWNS_NETHER_BUTTERFLIES));
                 if (ClutterConfig.getInstance().getBoolean(SPAWN_EMBER_TORTOISES)) registerSpawners(world, new NetherAnimalSpawner(400, ModBiomeTags.SPAWNS_EMBER_TORTOISES, ModEntities.EMBER_TORTOISE));
             }

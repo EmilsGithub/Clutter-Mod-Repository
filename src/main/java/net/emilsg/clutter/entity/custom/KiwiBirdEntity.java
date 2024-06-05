@@ -1,15 +1,15 @@
 package net.emilsg.clutter.entity.custom;
 
-import net.emilsg.clutter.block.ModBlocks;
+import net.emilsg.clutter.entity.custom.goal.KiwiBirdLayEggGoal;
+import net.emilsg.clutter.entity.custom.goal.KiwiBirdMateGoal;
+import net.emilsg.clutter.entity.custom.goal.KiwiBirdWanderAroundFarGoal;
 import net.emilsg.clutter.entity.custom.parent.ClutterAnimalEntity;
 import net.emilsg.clutter.entity.ModEntities;
 import net.emilsg.clutter.sound.ModSounds;
 import net.emilsg.clutter.util.ModItemTags;
-import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ExperienceOrbEntity;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -18,24 +18,16 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.recipe.Ingredient;
-import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.stat.Stats;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldView;
-import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
@@ -47,9 +39,6 @@ import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class KiwiBirdEntity extends ClutterAnimalEntity implements GeoEntity {
     private boolean songPlaying;
     @Nullable
@@ -57,6 +46,7 @@ public class KiwiBirdEntity extends ClutterAnimalEntity implements GeoEntity {
 
     private static final Ingredient BREEDING_INGREDIENT = Ingredient.fromTag(ModItemTags.SEEDS);
     private static final TrackedData<Boolean> HAS_EGG = DataTracker.registerData(KiwiBirdEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    private static final TrackedData<Integer> EGG_TIMER = DataTracker.registerData(KiwiBirdEntity.class, TrackedDataHandlerRegistry.INTEGER);
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
     private static final RawAnimation IDLE = RawAnimation.begin().thenLoop("kiwi_bird.idle");
@@ -84,11 +74,11 @@ public class KiwiBirdEntity extends ClutterAnimalEntity implements GeoEntity {
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(1, new EscapeDangerGoal(this,1.25));
-        this.goalSelector.add(2, new KiwiMateGoal(this, 1));
-        this.goalSelector.add(3, new LayEggGoal(this, 1));
+        this.goalSelector.add(2, new KiwiBirdMateGoal(this, 1));
+        this.goalSelector.add(3, new KiwiBirdLayEggGoal(this, 1));
         this.goalSelector.add(4, new TemptGoal(this, 1.1, BREEDING_INGREDIENT, false));
         this.goalSelector.add(5, new FollowParentGoal(this, 1));
-        this.goalSelector.add(6, new KiwiWanderAroundFarGoal(this, 1.0, 1));
+        this.goalSelector.add(6, new KiwiBirdWanderAroundFarGoal(this, this, 1.0, 1));
         this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
         this.goalSelector.add(8, new LookAroundGoal(this));
     }
@@ -96,16 +86,19 @@ public class KiwiBirdEntity extends ClutterAnimalEntity implements GeoEntity {
     protected void initDataTracker() {
         super.initDataTracker();
         this.dataTracker.startTracking(HAS_EGG, false);
+        this.dataTracker.startTracking(EGG_TIMER, 0);
     }
 
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
         nbt.putBoolean("HasEgg", this.hasEgg());
+        nbt.putInt("EggTimer", this.getEggTimer());
     }
 
     public void readCustomDataFromNbt(NbtCompound nbt) {
         super.readCustomDataFromNbt(nbt);
         this.setHasEgg(nbt.getBoolean("HasEgg"));
+        this.setEggTimer(nbt.getInt("EggTimer"));
     }
 
     public void tickMovement() {
@@ -113,6 +106,11 @@ public class KiwiBirdEntity extends ClutterAnimalEntity implements GeoEntity {
             this.songPlaying = false;
             this.songSource = null;
         }
+
+        if(hasEgg()) {
+            setEggTimer(getEggTimer() + 1);
+        }
+
         super.tickMovement();
     }
 
@@ -182,127 +180,16 @@ public class KiwiBirdEntity extends ClutterAnimalEntity implements GeoEntity {
         return this.dataTracker.get(HAS_EGG);
     }
 
-    void setHasEgg(boolean hasEgg) {
+    public void setHasEgg(boolean hasEgg) {
         this.dataTracker.set(HAS_EGG, hasEgg);
     }
 
-    private class KiwiWanderAroundFarGoal extends WanderAroundFarGoal {
-
-        public KiwiWanderAroundFarGoal(PathAwareEntity mob, double speed, float probability) {
-            super(mob, speed, probability);
-        }
-
-        @Override
-        public boolean canStart() {
-            return super.canStart() && !isSongPlaying();
-        }
+    public int getEggTimer() {
+        return this.dataTracker.get(EGG_TIMER);
     }
 
-    private static class KiwiMateGoal extends AnimalMateGoal {
-        private final KiwiBirdEntity kiwiBird;
-
-        KiwiMateGoal(KiwiBirdEntity kiwiBird, double speed) {
-            super(kiwiBird, speed);
-            this.kiwiBird = kiwiBird;
-        }
-
-        public boolean canStart() {
-            return super.canStart() && !this.kiwiBird.hasEgg();
-        }
-
-        protected void breed() {
-            ServerPlayerEntity serverPlayerEntity = this.animal.getLovingPlayer();
-            if (serverPlayerEntity == null && this.mate.getLovingPlayer() != null) {
-                serverPlayerEntity = this.mate.getLovingPlayer();
-            }
-
-            if (serverPlayerEntity != null) {
-                serverPlayerEntity.incrementStat(Stats.ANIMALS_BRED);
-                Criteria.BRED_ANIMALS.trigger(serverPlayerEntity, this.animal, this.mate, null);
-            }
-
-            this.kiwiBird.setHasEgg(true);
-            this.animal.setBreedingAge(6000);
-            this.mate.setBreedingAge(6000);
-            this.animal.resetLoveTicks();
-            this.mate.resetLoveTicks();
-            Random random = this.animal.getRandom();
-            if (this.world.getGameRules().getBoolean(GameRules.DO_MOB_LOOT)) {
-                this.world.spawnEntity(new ExperienceOrbEntity(this.world, this.animal.getX(), this.animal.getY(), this.animal.getZ(), random.nextInt(7) + 1));
-            }
-
-        }
-    }
-
-    public static class LayEggGoal extends Goal {
-        private final KiwiBirdEntity kiwiBird;
-        private final double speed;
-        private BlockPos targetPos;
-
-        LayEggGoal(KiwiBirdEntity kiwiBird, double speed) {
-            this.kiwiBird = kiwiBird;
-            this.speed = speed;
-        }
-
-        @Override
-        public boolean canStart() {
-            if (!this.kiwiBird.hasEgg() || !this.kiwiBird.getNavigation().isIdle()) {
-                return false;
-            }
-            targetPos = findRandomValidPos();
-            return targetPos != null;
-        }
-
-
-        private BlockPos findRandomValidPos() {
-            BlockPos entityPos = this.kiwiBird.getBlockPos();
-            int range = 16;
-            List<BlockPos> validPositions = new ArrayList<>();
-
-            for (int dx = -range; dx <= range; dx++) {
-                for (int dy = -range; dy <= range; dy++) {
-                    for (int dz = -range; dz <= range; dz++) {
-                        BlockPos pos = entityPos.add(dx, dy, dz);
-                        if (isTargetPos(this.kiwiBird.getWorld(), pos)) {
-                            validPositions.add(pos);
-                        }
-                    }
-                }
-            }
-
-            if (validPositions.isEmpty()) {
-                return null;
-            } else {
-                return validPositions.get(this.kiwiBird.getRandom().nextInt(validPositions.size()));
-            }
-        }
-
-
-
-
-        @Override
-        public void start() {
-            this.kiwiBird.getNavigation().startMovingTo(targetPos.getX(), targetPos.getY(), targetPos.getZ(), speed);
-        }
-
-        @Override
-        public boolean shouldContinue() {
-            return this.kiwiBird.hasEgg() && !this.kiwiBird.getNavigation().isIdle();
-        }
-
-        @Override
-        public void stop() {
-            if (targetPos.isWithinDistance(this.kiwiBird.getPos(), 2) && (this.kiwiBird.getWorld().getBlockState(targetPos.up()).isAir() || this.kiwiBird.getWorld().getBlockState(targetPos.up()).isReplaceable())) {
-                World world = this.kiwiBird.getWorld();
-                world.setBlockState(targetPos.up(), ModBlocks.KIWI_BIRD_EGG.getDefaultState(), 3);
-                world.emitGameEvent(GameEvent.BLOCK_PLACE, targetPos, GameEvent.Emitter.of(this.kiwiBird, ModBlocks.KIWI_BIRD_EGG.getDefaultState()));
-                this.kiwiBird.setHasEgg(false);
-            }
-        }
-
-        protected boolean isTargetPos(WorldView world, BlockPos pos) {
-            return world.getBlockState(pos).isIn(BlockTags.DIRT);
-        }
+    public void setEggTimer(int time) {
+        this.dataTracker.set(EGG_TIMER, time);
     }
 
 }

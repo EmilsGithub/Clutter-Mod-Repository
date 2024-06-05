@@ -1,5 +1,7 @@
 package net.emilsg.clutter.data;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import net.emilsg.clutter.Clutter;
 import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.block.custom.TableBlock;
@@ -7,6 +9,7 @@ import net.emilsg.clutter.block.custom.WallBookshelfBlock;
 import net.emilsg.clutter.block.custom.WindowSillBlock;
 import net.emilsg.clutter.block.custom.WoodenBenchBlock;
 import net.emilsg.clutter.item.ModItems;
+import net.emilsg.clutter.item.custom.ClutterElytraItem;
 import net.emilsg.clutter.util.ModProperties;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
@@ -146,10 +149,15 @@ public class ModelDataGen extends FabricModelProvider {
 
         registerSpawnEggItem(itemGen, ModItems.CAPYBARA_SPAWN_EGG);
         registerSpawnEggItem(itemGen, ModItems.CRIMSON_NEWT_SPAWN_EGG);
+        registerSpawnEggItem(itemGen, ModItems.WARPED_NEWT_SPAWN_EGG);
         registerSpawnEggItem(itemGen, ModItems.EMBER_TORTOISE_SPAWN_EGG);
         registerSpawnEggItem(itemGen, ModItems.CRAB_SPAWN_EGG);
         registerSpawnEggItem(itemGen, ModItems.DROWNED_SKELETON_SPAWN_EGG);
         registerSpawnEggItem(itemGen, ModItems.MANTA_RAY_SPAWN_EGG);
+
+        for (Item elytra : Registries.ITEM) {
+            if (elytra instanceof ClutterElytraItem) registerElytra(itemGen, elytra);
+        }
     }
 
     private void registerGroupCubeAll(BlockStateModelGenerator generator, Block... blocks) {
@@ -476,6 +484,29 @@ public class ModelDataGen extends FabricModelProvider {
         Identifier bottom = generator.createSubModel(block, "_bottom", LARGE_CROSS, id -> largeCrossMap(block, false));
         generator.registerDoubleBlock(block, top, bottom);
     }
+
+    private void registerElytra(ItemModelGenerator itemGen, Item elytra) {
+        String idString = ModelIds.getItemModelId(elytra).getPath().replace("item/", "item/broken_");
+        TextureMap brokenMap = (new TextureMap()).put(TextureKey.LAYER0, new Identifier(Clutter.MOD_ID,idString));
+
+        Models.GENERATED.upload(new Identifier(Clutter.MOD_ID, idString), brokenMap, itemGen.writer);
+
+        Models.GENERATED.upload(ModelIds.getItemModelId(elytra), TextureMap.layer0(elytra), itemGen.writer, (id, textures) -> {
+            JsonObject jsonObject = Models.GENERATED.createJson(id, textures);
+            JsonArray overrides = new JsonArray();
+            JsonObject override = new JsonObject();
+            JsonObject predicate = new JsonObject();
+            predicate.addProperty("broken", 1);
+            override.add("predicate", predicate);
+
+            override.addProperty("model", "clutter:item/" + (id.getPath().replace("item/", "broken_")));
+            overrides.add(override);
+            jsonObject.add("overrides", overrides);
+
+            return jsonObject;
+        });
+    }
+
 
     private static Model block(String parent, TextureKey ... requiredTextureKeys) {
         return new Model(Optional.of(new Identifier("clutter", "block/parent/" + parent)), Optional.empty(), requiredTextureKeys);

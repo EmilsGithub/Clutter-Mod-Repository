@@ -36,10 +36,10 @@
       "clutter:kiwi_call_two"
     ]
   },
-  "entity_crimson_newt_hurt": {
-    "subtitle": "sounds.clutter.entity_crimson_newt_hurt",
+  "entity_nether_newt_hurt": {
+    "subtitle": "sounds.clutter.entity_nether_newt_hurt",
     "sounds": [
-      "clutter:crimson_newt_hurt"
+      "clutter:nether_newt_hurt"
     ]
   }
 }

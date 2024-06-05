@@ -113,7 +113,18 @@ public class ItemTagDataGen extends FabricTagProvider.ItemTagProvider {
                 ModItems.PINK_BUTTERFLY_ELYTRA,
                 ModItems.CRIMSON_BUTTERFLY_ELYTRA,
                 ModItems.WARPED_BUTTERFLY_ELYTRA,
-                ModItems.SOUL_BUTTERFLY_ELYTRA
+                ModItems.SOUL_BUTTERFLY_ELYTRA,
+                ModItems.AMETHYST_GEMSTONE_ELYTRA,
+                ModItems.DIAMOND_GEMSTONE_ELYTRA,
+                ModItems.EMERALD_GEMSTONE_ELYTRA,
+                ModItems.QUARTZ_GEMSTONE_ELYTRA
+        );
+
+        getOrCreateTagBuilder(ItemTags.BEACON_PAYMENT_ITEMS).add(
+                ModItems.SILVER_COIN,
+                ModItems.GOLDEN_COIN,
+                ModItems.SILVER_INGOT,
+                ModItems.ONYX
         );
 
         getOrCreateTagBuilder(ModItemTags.SEEDS).add(

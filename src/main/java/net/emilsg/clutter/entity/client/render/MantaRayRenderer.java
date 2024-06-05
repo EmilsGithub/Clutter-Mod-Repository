@@ -2,10 +2,7 @@ package net.emilsg.clutter.entity.client.render;
 
 import net.emilsg.clutter.Clutter;
 import net.emilsg.clutter.entity.client.layer.ModModelLayers;
-import net.emilsg.clutter.entity.client.model.CrabModel;
 import net.emilsg.clutter.entity.client.model.MantaRayModel;
-import net.emilsg.clutter.entity.custom.CrabEntity;
-import net.emilsg.clutter.entity.custom.CrimsonNewtEntity;
 import net.emilsg.clutter.entity.custom.MantaRayEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;

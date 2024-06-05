@@ -175,6 +175,11 @@ public class ModItems {
     public static final Item WARPED_BUTTERFLY_ELYTRA = registerItem("warped_butterfly_elytra", new ButterflyElytraItem(new FabricItemSettings().maxDamage(432), WARPED_BUTTERFLY_IN_A_BOTTLE, "warped"), ModItemGroups.CLUTTER_ITEMS);
     public static final Item SOUL_BUTTERFLY_ELYTRA = registerItem("soul_butterfly_elytra", new ButterflyElytraItem(new FabricItemSettings().maxDamage(432), SOUL_BUTTERFLY_IN_A_BOTTLE, "soul"), ModItemGroups.CLUTTER_ITEMS);
 
+    public static final Item AMETHYST_GEMSTONE_ELYTRA = registerItem("amethyst_gemstone_elytra", new GemstoneElytraItem(new FabricItemSettings().maxDamage(432), Items.AMETHYST_SHARD, "amethyst"), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item DIAMOND_GEMSTONE_ELYTRA = registerItem("diamond_gemstone_elytra", new GemstoneElytraItem(new FabricItemSettings().maxDamage(432), Items.DIAMOND, "diamond"), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item EMERALD_GEMSTONE_ELYTRA = registerItem("emerald_gemstone_elytra", new GemstoneElytraItem(new FabricItemSettings().maxDamage(432), Items.EMERALD, "emerald"), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item QUARTZ_GEMSTONE_ELYTRA = registerItem("quartz_gemstone_elytra", new GemstoneElytraItem(new FabricItemSettings().maxDamage(432), Items.QUARTZ, "quartz"), ModItemGroups.CLUTTER_ITEMS);
+
     public static final Item BUTTERFLY_SPAWN_EGG = registerItem("butterfly_spawn_egg", new SpawnEggItem(ModEntities.BUTTERFLY, 757231, 12, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
     public static final Item CHAMELEON_SPAWN_EGG = registerItem("chameleon_spawn_egg", new SpawnEggItem(ModEntities.CHAMELEON, 1744148, 16228345, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
     public static final Item ECHOFIN_SPAWN_EGG = registerItem("echofin_spawn_egg", new SpawnEggItem(ModEntities.ECHOFIN, 16511998, 4661575, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
@@ -184,6 +189,7 @@ public class ModItems {
     public static final Item BEAVER_SPAWN_EGG = registerItem("beaver_spawn_egg", new SpawnEggItem(ModEntities.BEAVER, 5916211, 3356222, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
     public static final Item CAPYBARA_SPAWN_EGG = registerItem("capybara_spawn_egg", new SpawnEggItem(ModEntities.CAPYBARA, 2169626, 16651589, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
     public static final Item CRIMSON_NEWT_SPAWN_EGG = registerItem("crimson_newt_spawn_egg", new SpawnEggItem(ModEntities.CRIMSON_NEWT, 15783361, 11280416, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item WARPED_NEWT_SPAWN_EGG = registerItem("warped_newt_spawn_egg", new SpawnEggItem(ModEntities.WARPED_NEWT, 1153925, 4464945, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
     public static final Item EMBER_TORTOISE_SPAWN_EGG = registerItem("ember_tortoise_spawn_egg", new SpawnEggItem(ModEntities.EMBER_TORTOISE, 6052956, 8924463, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
     public static final Item JELLYFISH_SPAWN_EGG = registerItem("jellyfish_spawn_egg", new SpawnEggItem(ModEntities.JELLYFISH, 5487623, 8732643, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
     public static final Item CRAB_SPAWN_EGG = registerItem("crab_spawn_egg", new SpawnEggItem(ModEntities.CRAB, 5487623, 8732643, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);

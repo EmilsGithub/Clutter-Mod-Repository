@@ -57,7 +57,7 @@ public class NetherAnimalSpawner implements Spawner {
             double angle = random.nextDouble() * Math.PI * 2;
             int x = playerEntity.getBlockPos().getX() + (int) (spawnDistance * Math.cos(angle));
             int z = playerEntity.getBlockPos().getZ() + (int) (spawnDistance * Math.sin(angle));
-            int maxY = 120;
+            int maxY = 100;
             int minY = 31;
 
             int y = minY + random.nextInt(maxY - minY + 1);
@@ -111,6 +111,6 @@ public class NetherAnimalSpawner implements Spawner {
         animalEntity.initialize(world, world.getLocalDifficulty(pos), SpawnReason.NATURAL, null, null);
         animalEntity.refreshPositionAndAngles(pos, 0.0f, 0.0f);
         world.spawnEntityAndPassengers(animalEntity);
-        return world.random.nextBetween(2, 5) + 1;
+        return world.random.nextBetween(2, 4) + 1;
     }
 }

@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "clutter:item/butterfly_elytra_smithing_template_shards"
-  }
-}

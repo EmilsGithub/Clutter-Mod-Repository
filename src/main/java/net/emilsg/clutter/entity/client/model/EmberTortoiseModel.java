@@ -5,7 +5,6 @@ import net.emilsg.clutter.entity.custom.EmberTortoiseEntity;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.math.MathHelper;
 
 public class EmberTortoiseModel<T extends EmberTortoiseEntity> extends ClutterModel<T> {
 	private final ModelPart all;
@@ -65,14 +64,6 @@ public class EmberTortoiseModel<T extends EmberTortoiseEntity> extends ClutterMo
 		this.updateAnimation(entity.attackAnimationState, EmberTortoiseAnimations.EMBER_TORTOISE_ATTACK, ageInTicks, 1f );
 	}
 
-	private void setHeadAngles(EmberTortoiseEntity entity, float headYaw, float headPitch, float animationProgress) {
-		headYaw = MathHelper.clamp(headYaw, -30.0F, 30.0F);
-		headPitch = MathHelper.clamp(headPitch, -25.0F, 45.0F);
-
-		this.neck.yaw = headYaw * 0.017453292F;
-		this.neck.pitch = headPitch * 0.017453292F;
-	}
-
 	@Override
 	public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
 		if (this.child) {
@@ -94,5 +85,10 @@ public class EmberTortoiseModel<T extends EmberTortoiseEntity> extends ClutterMo
 	@Override
 	public ModelPart getPart() {
 		return all;
+	}
+
+	@Override
+	protected ModelPart getHeadPart() {
+		return head;
 	}
 }
