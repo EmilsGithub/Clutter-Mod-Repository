@@ -52,6 +52,7 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.*;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
+import net.minecraft.world.dimension.DimensionTypes;
 import org.jetbrains.annotations.Nullable;
 
 import java.time.LocalDate;
@@ -90,6 +91,10 @@ public class ButterflyEntity extends ClutterAnimalEntity {
         } else {
             --this.animationTimeout;
         }
+    }
+
+    public boolean canImmediatelyDespawn(double distanceSquared) {
+        return !this.isPersistent() && this.getWorld().getDimensionEntry().matchesKey(DimensionTypes.THE_NETHER);
     }
 
     @Override

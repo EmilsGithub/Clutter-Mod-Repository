@@ -35,6 +35,7 @@ import net.minecraft.world.GameRules;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.dimension.DimensionTypes;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
@@ -82,6 +83,10 @@ public class CrimsonNewtEntity extends ClutterAnimalEntity implements Angerable 
         this.targetSelector.add(2, new UniversalAngerGoal<>(this, true));
     }
 
+    public boolean canImmediatelyDespawn(double distanceSquared) {
+        return !this.isPersistent() && this.getWorld().getDimensionEntry().matchesKey(DimensionTypes.THE_NETHER);
+    }
+
     protected void initDataTracker() {
         super.initDataTracker();
         this.dataTracker.startTracking(ANGER_TIME, 0);
@@ -121,7 +126,12 @@ public class CrimsonNewtEntity extends ClutterAnimalEntity implements Angerable 
     @Nullable
     @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
-        return ModEntities.CRIMSON_NEWT.create(world);
+        CrimsonNewtEntity crimsonNewtEntity = ModEntities.CRIMSON_NEWT.create(world);
+        if (crimsonNewtEntity != null) {
+            crimsonNewtEntity.setPersistent();
+        }
+
+        return crimsonNewtEntity;
     }
 
     @Override

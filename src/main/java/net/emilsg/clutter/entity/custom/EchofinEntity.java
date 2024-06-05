@@ -42,6 +42,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.*;
+import net.minecraft.world.dimension.DimensionTypes;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
@@ -89,6 +90,10 @@ public class EchofinEntity extends ClutterAnimalEntity implements GeoEntity {
 
     public float getPathfindingFavor(BlockPos pos, WorldView world) {
         return world.getBlockState(pos).isAir() ? 10.0F : 0.0F;
+    }
+
+    public boolean canImmediatelyDespawn(double distanceSquared) {
+        return !this.isPersistent() && this.getWorld().getDimensionEntry().matchesKey(DimensionTypes.THE_END);
     }
 
     @Override

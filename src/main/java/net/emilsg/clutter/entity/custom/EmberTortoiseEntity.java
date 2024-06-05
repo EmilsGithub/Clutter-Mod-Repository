@@ -201,7 +201,12 @@ public class EmberTortoiseEntity extends ClutterAnimalEntity {
     @Nullable
     @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
-        return ModEntities.EMBER_TORTOISE.create(world);
+        EmberTortoiseEntity emberTortoiseEntity = ModEntities.EMBER_TORTOISE.create(world);
+        if (emberTortoiseEntity != null) {
+            emberTortoiseEntity.setPersistent();
+        }
+
+        return emberTortoiseEntity;
     }
 
     protected float getActiveEyeHeight(EntityPose pose, EntityDimensions dimensions) {
@@ -236,6 +241,10 @@ public class EmberTortoiseEntity extends ClutterAnimalEntity {
     @Override
     public boolean isFireImmune() {
         return true;
+    }
+
+    public boolean canImmediatelyDespawn(double distanceSquared) {
+        return !this.isPersistent() && this.getWorld().getDimensionEntry().matchesKey(DimensionTypes.THE_NETHER);
     }
 
     @Override
