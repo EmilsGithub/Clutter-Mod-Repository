@@ -11,6 +11,20 @@ Update Logs Below or in the [Wiki](https://github.com/EmilsGithub/Clutter-Mod-Re
 
 [![Bisect](https://www.bisecthosting.com/images/CF/Clutter/BH_CL_PromoCard.webp)](https://bisecthosting.com/ClutterMod)
 
+# Update Log - Clutter-0.5.9
+
+**Bugfix**
+- Fixed Butterflies, Crimsom Newts, Echofins, and Ember Tortoises overspawning.
+
+# Update Log - Clutter-0.5.8
+
+**Changes / Bugfixes**
+- Fixed crash when using Butterfly Elytras and not having Trinkets installed
+- Fixed Brick Kiln eating Lava Buckets
+- Changed Elytra Rendering for better Mod Compatability
+- Adjusted Shelf Item Rendering
+- Adjusted Necrosis Mob Conversion
+
 # Update Log - Clutter-0.5.7
 
 **Bugfix**
