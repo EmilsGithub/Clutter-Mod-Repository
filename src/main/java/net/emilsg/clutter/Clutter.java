@@ -24,55 +24,56 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Clutter implements ModInitializer {
-	public static final String MOD_VERSION = "0.6.0";
-	public static final String MOD_ID = "clutter";
-	public static final Logger LOGGER = LoggerFactory.getLogger("Clutter");
-	public static final boolean IS_TRINKETS_LOADED = FabricLoader.getInstance().getModContainer("trinkets").isPresent();
-	public static final boolean IS_SUPPLEMENTARIES_LOADED = FabricLoader.getInstance().getModContainer("supplementaries").isPresent();
-	public static final boolean IS_ELYTRA_SLOT_LOADED = FabricLoader.getInstance().getModContainer("elytraslot").isPresent();
-	public static final boolean IS_ELYTRA_TRINKET_LOADED = FabricLoader.getInstance().getModContainer("elytra_trinket").isPresent();
-	public static final boolean IS_FIRST_PERSON_MODEL_LOADED = FabricLoader.getInstance().getModContainer("firstperson").isPresent();
+    public static final String MOD_VERSION = "0.6.0";
+    public static final String MOD_ID = "clutter";
+    public static final Logger LOGGER = LoggerFactory.getLogger("Clutter");
+    public static final boolean IS_TRINKETS_LOADED = FabricLoader.getInstance().getModContainer("trinkets").isPresent();
+    public static final boolean IS_SUPPLEMENTARIES_LOADED = FabricLoader.getInstance().getModContainer("supplementaries").isPresent();
+    public static final boolean IS_ELYTRA_SLOT_LOADED = FabricLoader.getInstance().getModContainer("elytraslot").isPresent();
+    public static final boolean IS_ELYTRA_TRINKET_LOADED = FabricLoader.getInstance().getModContainer("elytra_trinket").isPresent();
+    public static final boolean IS_FIRST_PERSON_MODEL_LOADED = FabricLoader.getInstance().getModContainer("firstperson").isPresent();
 
-	@Override
-	public void onInitialize() {
-		ClutterConfig.init();
+    @Override
+    public void onInitialize() {
+        ClutterConfig.init();
 
-		ModItemGroups.registerItemGroups();
-		ModEffects.registerEffects();
-		ModItems.registerModItems();
-		ModBlocks.registerModBlocks();
+        ModItemGroups.registerItemGroups();
+        ModEffects.registerEffects();
+        ModItems.registerModItems();
+        ModBlocks.registerModBlocks();
 
-		ModRecipeSerializers.registerRecipeSerializers();
+        ModRecipeSerializers.registerRecipeSerializers();
 
-		ModEnchantments.registerModEnchantments();
-		ModLootTableModifiers.modifyLootTables();
-		ModScreenHandlers.registerScreenHandlers();
-		ModBlockEntities.registerBlockEntities();
+        ModEnchantments.registerModEnchantments();
+        ModLootTableModifiers.modifyLootTables();
+        ModScreenHandlers.registerScreenHandlers();
+        ModBlockEntities.registerBlockEntities();
 
-		ModFeatures.registerModFeatures();
-		ModTrunkPlacerTypes.register();
-		ModFoliagePlacerTypes.register();
-		ModTreeDecoratorTypes.register();
+        ModFeatures.registerModFeatures();
+        ModTrunkPlacerTypes.register();
+        ModFoliagePlacerTypes.register();
+        ModTreeDecoratorTypes.register();
 
-		ModWorldGeneration.generateModWorldGen();
+        ModWorldGeneration.generateModWorldGen();
 
-		ModUtil.registerModUtil();
-		ModTradeOffers.addTrades();
+        ModUtil.registerModUtil();
+        ModTradeOffers.addTrades();
 
-		ModCallbackRegistry.handleCallbacks();
-		ModMessages.registerC2SPackets();
+        ModCallbackRegistry.handleCallbacks();
+        ModMessages.registerC2SPackets();
 
-		ModPotions.registerPotionRecipes();
+        ModPotions.registerPotionRecipes();
 
-		ModBlocks.registerCopperBlockPairs();
+        ModBlocks.registerCopperBlockPairs();
 
-		ClutterAttributes.registerAttributes();
+        ClutterAttributes.registerAttributes();
 
-		if(IS_TRINKETS_LOADED && ClutterConfig.getInstance().getBoolean(ClutterConfig.DO_TRINKETS_ELYTRA_FLIGHT)) TrinketsElytraUse.doFlight();
+        if (IS_TRINKETS_LOADED && ClutterConfig.getInstance().getBoolean(ClutterConfig.DO_TRINKETS_ELYTRA_FLIGHT))
+            TrinketsElytraUse.doFlight();
 
-		ModMessages.registerHandshakePackets();
-		LOGGER.info("[Clutter] Finished initializing.");
+        ModMessages.registerHandshakePackets();
+        LOGGER.info("[Clutter] Finished initializing.");
 
-	}
+    }
 
 }

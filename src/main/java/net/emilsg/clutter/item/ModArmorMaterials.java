@@ -31,6 +31,17 @@ public enum ModArmorMaterials implements ArmorMaterial {
 
     public static final StringIdentifiable.Codec<ArmorMaterials> CODEC;
     private static final EnumMap<ArmorItem.Type, Integer> BASE_DURABILITY;
+
+    static {
+        CODEC = StringIdentifiable.createCodec(ArmorMaterials::values);
+        BASE_DURABILITY = Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
+            map.put(ArmorItem.Type.BOOTS, 13);
+            map.put(ArmorItem.Type.LEGGINGS, 15);
+            map.put(ArmorItem.Type.CHESTPLATE, 16);
+            map.put(ArmorItem.Type.HELMET, 11);
+        });
+    }
+
     private final String name;
     private final int durabilityMultiplier;
     private final EnumMap<ArmorItem.Type, Integer> protectionAmounts;
@@ -40,8 +51,8 @@ public enum ModArmorMaterials implements ArmorMaterial {
     private final float knockbackResistance;
     private final Lazy<Ingredient> repairIngredientSupplier;
 
-    private ModArmorMaterials(String name, int durabilityMultiplier, EnumMap<ArmorItem.Type, Integer> protectionAmounts,
-                              int enchantability, SoundEvent equipSound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredientSupplier) {
+    ModArmorMaterials(String name, int durabilityMultiplier, EnumMap<ArmorItem.Type, Integer> protectionAmounts,
+                      int enchantability, SoundEvent equipSound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredientSupplier) {
         this.name = name;
         this.durabilityMultiplier = durabilityMultiplier;
         this.protectionAmounts = protectionAmounts;
@@ -54,12 +65,12 @@ public enum ModArmorMaterials implements ArmorMaterial {
 
     @Override
     public int getDurability(ArmorItem.Type type) {
-        return BASE_DURABILITY.get((Object)type) * this.durabilityMultiplier;
+        return BASE_DURABILITY.get(type) * this.durabilityMultiplier;
     }
 
     @Override
     public int getProtection(ArmorItem.Type type) {
-        return this.protectionAmounts.get((Object)type);
+        return this.protectionAmounts.get(type);
     }
 
     @Override
@@ -90,15 +101,5 @@ public enum ModArmorMaterials implements ArmorMaterial {
     @Override
     public float getKnockbackResistance() {
         return this.knockbackResistance;
-    }
-
-    static {
-        CODEC = StringIdentifiable.createCodec(ArmorMaterials::values);
-        BASE_DURABILITY = Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
-            map.put(ArmorItem.Type.BOOTS, 13);
-            map.put(ArmorItem.Type.LEGGINGS, 15);
-            map.put(ArmorItem.Type.CHESTPLATE, 16);
-            map.put(ArmorItem.Type.HELMET, 11);
-        });
     }
 }

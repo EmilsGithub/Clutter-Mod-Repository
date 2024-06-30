@@ -23,7 +23,7 @@ public class RecipeItemBookItem extends DescriptionItem {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        if(!world.isClient){
+        if (!world.isClient) {
             unlockAllRecipesFromNamespace((ServerPlayerEntity) user, Clutter.MOD_ID);
             world.playSound(null, user.getBlockPos(), SoundEvents.ITEM_BOOK_PAGE_TURN, SoundCategory.PLAYERS);
         }
@@ -33,7 +33,7 @@ public class RecipeItemBookItem extends DescriptionItem {
 
     public void unlockAllRecipesFromNamespace(ServerPlayerEntity player, String namespace) {
         List<Recipe<?>> recipes = Objects.requireNonNull(player.getServer()).getRecipeManager().values().stream()
-        .filter(recipe -> recipe.getId().getNamespace().equals(namespace)).collect(Collectors.toList());
+                .filter(recipe -> recipe.getId().getNamespace().equals(namespace)).collect(Collectors.toList());
         if (!recipes.isEmpty()) {
             player.unlockRecipes(recipes);
         }

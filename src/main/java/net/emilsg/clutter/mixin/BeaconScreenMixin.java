@@ -33,7 +33,7 @@ public class BeaconScreenMixin extends Screen {
 
     @Inject(method = "drawBackground", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawTexture(Lnet/minecraft/util/Identifier;IIIIII)V"), cancellable = true)
     private void drawCoinsForBackground(DrawContext context, float delta, int mouseX, int mouseY, CallbackInfo ci) {
-        if(ClutterConfig.getInstance().getBoolean(ClutterConfig.ENHANCED_BEACON_DISPLAY)) {
+        if (ClutterConfig.getInstance().getBoolean(ClutterConfig.ENHANCED_BEACON_DISPLAY)) {
             ticker++;
             int backgroundWidth = 230;
             int backgroundHeight = 219;

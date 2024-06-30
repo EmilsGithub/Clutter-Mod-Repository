@@ -28,11 +28,11 @@ public class SmallLilyPadBlockItem extends PlaceableOnWaterItem {
         PlayerEntity player = context.getPlayer();
         Hand hand = context.getHand();
 
-        if(world.isClient && state.isOf(ModBlocks.SMALL_LILY_PADS) && state.get(SmallLilyPadBlock.PAD_AMOUNT) < 4) {
+        if (world.isClient && state.isOf(ModBlocks.SMALL_LILY_PADS) && state.get(SmallLilyPadBlock.PAD_AMOUNT) < 4) {
             return ActionResult.SUCCESS;
         }
 
-        if(!world.isClient && player != null && state.isOf(ModBlocks.SMALL_LILY_PADS) && state.get(SmallLilyPadBlock.PAD_AMOUNT) < 4) {
+        if (!world.isClient && player != null && state.isOf(ModBlocks.SMALL_LILY_PADS) && state.get(SmallLilyPadBlock.PAD_AMOUNT) < 4) {
             world.setBlockState(pos, state.with(pads, state.get(pads) + 1), Block.NOTIFY_ALL);
             player.getStackInHand(hand).decrement(1);
             return ActionResult.SUCCESS;

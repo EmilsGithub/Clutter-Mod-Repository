@@ -18,7 +18,7 @@ public class StatedRockFeature extends Feature<WeightedBlockFeatureConfig> {
     public boolean generate(FeatureContext<WeightedBlockFeatureConfig> context) {
         WeightedBlockFeatureConfig config = context.getConfig();
         int size = config.size;
-        BlockPos blockPos = context.getOrigin().down((int) (size / 2));
+        BlockPos blockPos = context.getOrigin().down(size / 2);
         StructureWorldAccess structureWorldAccess = context.getWorld();
         Random random = context.getRandom();
 
@@ -40,10 +40,10 @@ public class StatedRockFeature extends Feature<WeightedBlockFeatureConfig> {
                 int j = random.nextInt(size) + 1;
                 int k = random.nextInt(size) + 1;
                 int l = random.nextInt(size) + 1;
-                float f = (float)(j + k + l) * 0.333F + 0.5F;
+                float f = (float) (j + k + l) * 0.333F + 0.5F;
 
                 for (BlockPos targetPos : BlockPos.iterate(blockPos.add(-j, -k, -l), blockPos.add(j, k, l))) {
-                    if (targetPos.getSquaredDistance(blockPos) <= (double)(f * f)) {
+                    if (targetPos.getSquaredDistance(blockPos) <= (double) (f * f)) {
                         BlockState stateToPlace = config.states.get(random, targetPos);
                         structureWorldAccess.setBlockState(targetPos, stateToPlace, 3);
                     }
@@ -55,7 +55,6 @@ public class StatedRockFeature extends Feature<WeightedBlockFeatureConfig> {
             return true;
         }
     }
-
 
 
 }

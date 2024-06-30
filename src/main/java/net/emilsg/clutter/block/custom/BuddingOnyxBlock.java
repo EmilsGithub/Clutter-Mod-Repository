@@ -18,6 +18,10 @@ public class BuddingOnyxBlock extends Block {
         super(settings);
     }
 
+    public static boolean canGrowIn(BlockState state) {
+        return state.isAir() || state.isOf(Blocks.WATER) && state.getFluidState().getLevel() == 8;
+    }
+
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (random.nextInt(5) == 0) {
             Direction direction = DIRECTIONS[random.nextInt(DIRECTIONS.length)];
@@ -35,14 +39,10 @@ public class BuddingOnyxBlock extends Block {
             }
 
             if (block != null) {
-                BlockState blockState2 = (BlockState)((BlockState)block.getDefaultState().with(AmethystClusterBlock.FACING, direction)).with(AmethystClusterBlock.WATERLOGGED, blockState.getFluidState().getFluid() == Fluids.WATER);
+                BlockState blockState2 = block.getDefaultState().with(AmethystClusterBlock.FACING, direction).with(AmethystClusterBlock.WATERLOGGED, blockState.getFluidState().getFluid() == Fluids.WATER);
                 world.setBlockState(blockPos, blockState2);
             }
 
         }
-    }
-
-    public static boolean canGrowIn(BlockState state) {
-        return state.isAir() || state.isOf(Blocks.WATER) && state.getFluidState().getLevel() == 8;
     }
 }

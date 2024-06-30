@@ -62,8 +62,8 @@ public class BrickKilnBlock extends BlockWithEntity implements BlockEntityProvid
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof BrickKilnBlockEntity) {
-                ItemScatterer.spawn(world, pos, (BrickKilnBlockEntity)blockEntity);
-                world.updateComparators(pos,this);
+                ItemScatterer.spawn(world, pos, (BrickKilnBlockEntity) blockEntity);
+                world.updateComparators(pos, this);
             }
             super.onStateReplaced(state, world, pos, newState, moved);
         }
@@ -93,7 +93,7 @@ public class BrickKilnBlock extends BlockWithEntity implements BlockEntityProvid
             Direction direction = state.get(FACING);
             Direction.Axis axis = direction.getAxis();
             double xPos = (double) pos.getX() + 0.5;
-            double yPos = (double) pos.getY();
+            double yPos = pos.getY();
             double zPos = (double) pos.getZ() + 0.5;
             double randomDouble = random.nextDouble() * 0.6 - 0.3;
             double xOffsetFront = axis == Direction.Axis.X ? (double) direction.getOffsetX() * 0.52 : randomDouble;

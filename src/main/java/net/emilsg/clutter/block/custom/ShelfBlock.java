@@ -28,142 +28,143 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
-public class ShelfBlock extends BlockWithEntity implements Waterloggable{
-        protected static final VoxelShape NORTH_SHAPE = Block.createCuboidShape(0.0, 3.0, 0.0, 16.0, 7.0, 8.0);
-        protected static final VoxelShape SOUTH_SHAPE = Block.createCuboidShape(0.0, 3.0, 8.0, 16.0, 7.0, 16.0);
-        protected static final VoxelShape EAST_SHAPE = Block.createCuboidShape(8.0, 3.0, 0.0, 16.0, 7.0, 16.0);
-        protected static final VoxelShape WEST_SHAPE = Block.createCuboidShape(0.0, 3.0, 0.0, 8.0, 7.0, 16.0);
-        public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
-        public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
+public class ShelfBlock extends BlockWithEntity implements Waterloggable {
+    public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
+    public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
+    protected static final VoxelShape NORTH_SHAPE = Block.createCuboidShape(0.0, 3.0, 0.0, 16.0, 7.0, 8.0);
+    protected static final VoxelShape SOUTH_SHAPE = Block.createCuboidShape(0.0, 3.0, 8.0, 16.0, 7.0, 16.0);
+    protected static final VoxelShape EAST_SHAPE = Block.createCuboidShape(8.0, 3.0, 0.0, 16.0, 7.0, 16.0);
+    protected static final VoxelShape WEST_SHAPE = Block.createCuboidShape(0.0, 3.0, 0.0, 8.0, 7.0, 16.0);
 
 
-        public ShelfBlock(Settings settings) {
-                super(settings);
-                this.setDefaultState(this.getDefaultState().with(WATERLOGGED, false));
+    public ShelfBlock(Settings settings) {
+        super(settings);
+        this.setDefaultState(this.getDefaultState().with(WATERLOGGED, false));
+    }
+
+
+    @Override
+    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+        return switch (state.get(FACING)) {
+            case NORTH -> NORTH_SHAPE;
+            case SOUTH -> SOUTH_SHAPE;
+            case EAST -> EAST_SHAPE;
+            case WEST -> WEST_SHAPE;
+            default -> VoxelShapes.empty();
+        };
+    }
+
+    @Override
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        if (world.isClient) {
+            return ActionResult.SUCCESS;
         }
 
-
-        @Override
-        public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-                return switch (state.get(FACING)) {
-                        case NORTH -> NORTH_SHAPE;
-                        case SOUTH -> SOUTH_SHAPE;
-                        case EAST -> EAST_SHAPE;
-                        case WEST -> WEST_SHAPE;
-                        default -> VoxelShapes.empty();
-                };
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        if (blockEntity instanceof ShelfInventoryBlockEntity) {
+            player.openHandledScreen((ShelfInventoryBlockEntity) blockEntity);
         }
+        return ActionResult.CONSUME;
+    }
 
-        @Override
-        public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-                if (world.isClient) {
-                        return ActionResult.SUCCESS;
-                }
+    @Override
+    @Nullable
+    public BlockState getPlacementState(ItemPlacementContext ctx) {
+        BlockPos blockPos;
+        World worldAccess = ctx.getWorld();
+        boolean bl = worldAccess.getFluidState(blockPos = ctx.getBlockPos()).getFluid() == Fluids.WATER;
+        return this.getDefaultState().with(WATERLOGGED, bl).with(FACING, ctx.getHorizontalPlayerFacing());
+    }
 
-                BlockEntity blockEntity = world.getBlockEntity(pos);
-                if (blockEntity instanceof ShelfInventoryBlockEntity) {
-                        player.openHandledScreen((ShelfInventoryBlockEntity)blockEntity);
-                }
-                return ActionResult.CONSUME;
+    @Override
+    public BlockState rotate(BlockState state, BlockRotation rotation) {
+        return state.with(FACING, rotation.rotate(state.get(FACING)));
+    }
+
+    @Override
+    public BlockState mirror(BlockState state, BlockMirror mirror) {
+        return state.rotate(mirror.getRotation(state.get(FACING)));
+    }
+
+    @Override
+    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+        builder.add(FACING, WATERLOGGED);
+
+    }
+
+    @Override
+    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+        if (state.get(WATERLOGGED)) {
+            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
+        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+    }
 
-        @Override
-        @Nullable
-        public BlockState getPlacementState(ItemPlacementContext ctx) {
-                BlockPos blockPos;
-                World worldAccess = ctx.getWorld();
-                boolean bl = worldAccess.getFluidState(blockPos = ctx.getBlockPos()).getFluid() == Fluids.WATER;
-                return (BlockState)this.getDefaultState().with(WATERLOGGED, bl).with(FACING, ctx.getHorizontalPlayerFacing());
+    @Override
+    public boolean tryFillWithFluid(WorldAccess world, BlockPos pos, BlockState state, FluidState fluidState) {
+        if (!state.get(Properties.WATERLOGGED) && fluidState.getFluid() == Fluids.WATER) {
+
+            world.setBlockState(pos, state.with(WATERLOGGED, true), Block.NOTIFY_ALL);
+            world.scheduleFluidTick(pos, fluidState.getFluid(), fluidState.getFluid().getTickRate(world));
+            return true;
         }
+        return false;
+    }
 
-        @Override
-        public BlockState rotate(BlockState state, BlockRotation rotation) {
-                return state.with(FACING, rotation.rotate(state.get(FACING)));
+    @Override
+    public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+        BlockEntity blockEntity;
+        if (itemStack.hasCustomName() && (blockEntity = world.getBlockEntity(pos)) instanceof ShelfInventoryBlockEntity) {
+            ((ShelfInventoryBlockEntity) blockEntity).setCustomName(itemStack.getName());
         }
+    }
 
-        @Override
-        public BlockState mirror(BlockState state, BlockMirror mirror) {
-                return state.rotate(mirror.getRotation(state.get(FACING)));
+    @Override
+    public FluidState getFluidState(BlockState state) {
+        if (state.get(WATERLOGGED)) {
+            return Fluids.WATER.getStill(false);
         }
+        return super.getFluidState(state);
+    }
 
-        @Override
-        protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-                builder.add(FACING, WATERLOGGED);
+    @Nullable
+    @Override
+    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+        return new ShelfInventoryBlockEntity(pos, state);
+    }
 
+    @Override
+    public BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.MODEL;
+    }
+
+    @Override
+    public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        if (blockEntity instanceof ShelfInventoryBlockEntity) {
+            ((ShelfInventoryBlockEntity) blockEntity).tick();
         }
+    }
 
-        @Override
-        public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-                if (state.get(WATERLOGGED)) {
-                        world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
-                }
-                return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
-        }
-        @Override
-        public boolean tryFillWithFluid(WorldAccess world, BlockPos pos, BlockState state, FluidState fluidState) {
-                if (!state.get(Properties.WATERLOGGED) && fluidState.getFluid() == Fluids.WATER) {
+    @Override
+    public boolean hasComparatorOutput(BlockState state) {
+        return true;
+    }
 
-                        world.setBlockState(pos, (BlockState)((BlockState)state.with(WATERLOGGED, true)), Block.NOTIFY_ALL);
-                        world.scheduleFluidTick(pos, fluidState.getFluid(), fluidState.getFluid().getTickRate(world));
-                        return true;
-                }
-                return false;
-        }
+    public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
+        return ScreenHandler.calculateComparatorOutput(world.getBlockEntity(pos));
+    }
 
-        @Override
-        public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
-                BlockEntity blockEntity;
-                if (itemStack.hasCustomName() && (blockEntity = world.getBlockEntity(pos)) instanceof ShelfInventoryBlockEntity) {
-                        ((ShelfInventoryBlockEntity)blockEntity).setCustomName(itemStack.getName());
-                }
+    @Override
+    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+        if (state.isOf(newState.getBlock())) {
+            return;
         }
-
-        @Override
-        public FluidState getFluidState(BlockState state) {
-                if (state.get(WATERLOGGED)) {
-                        return Fluids.WATER.getStill(false);
-                }
-                return super.getFluidState(state);
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        if (blockEntity instanceof Inventory) {
+            ItemScatterer.spawn(world, pos, (Inventory) blockEntity);
+            world.updateComparators(pos, this);
         }
-
-        @Nullable
-        @Override
-        public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-                return new ShelfInventoryBlockEntity(pos, state);
-        }
-
-        @Override
-        public BlockRenderType getRenderType(BlockState state) {
-                return BlockRenderType.MODEL;
-        }
-
-        @Override
-        public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-                BlockEntity blockEntity = world.getBlockEntity(pos);
-                if (blockEntity instanceof ShelfInventoryBlockEntity) {
-                        ((ShelfInventoryBlockEntity)blockEntity).tick();
-                }
-        }
-
-        @Override
-        public boolean hasComparatorOutput(BlockState state) {
-                return true;
-        }
-
-        public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
-                return ScreenHandler.calculateComparatorOutput(world.getBlockEntity(pos));
-        }
-
-        @Override
-        public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
-                if (state.isOf(newState.getBlock())) {
-                        return;
-                }
-                BlockEntity blockEntity = world.getBlockEntity(pos);
-                if (blockEntity instanceof Inventory) {
-                        ItemScatterer.spawn(world, pos, (Inventory)((Object)blockEntity));
-                        world.updateComparators(pos, this);
-                }
-                super.onStateReplaced(state, world, pos, newState, moved);
-        }
+        super.onStateReplaced(state, world, pos, newState, moved);
+    }
 }

@@ -29,15 +29,20 @@ public class MantaRayEntity extends ClutterWaterEntity {
     private static final TrackedData<Float> SIZE = DataTracker.registerData(MantaRayEntity.class, TrackedDataHandlerRegistry.FLOAT);
 
     public final AnimationState swimmingAnimationState = new AnimationState();
-    private int animationTimeout = 0;
-
     public final AnimationState flopAnimationState = new AnimationState();
+    private int animationTimeout = 0;
     private int flopAnimationTimeout = 0;
 
     public MantaRayEntity(EntityType<? extends WaterCreatureEntity> entityType, World world) {
         super(entityType, world);
         this.moveControl = new AquaticMoveControl(this, 65, 10, 0.025F, 0.1F, true);
         this.lookControl = new YawAdjustingLookControl(this, 10);
+    }
+
+    public static DefaultAttributeContainer.Builder setAttributes() {
+        return ClutterAnimalEntity.createMobAttributes()
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 16.0D)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0D);
     }
 
     @Nullable
@@ -61,13 +66,13 @@ public class MantaRayEntity extends ClutterWaterEntity {
         this.dataTracker.startTracking(SIZE, 0f);
     }
 
+    public float getSize() {
+        return this.dataTracker.get(SIZE);
+    }
+
     public void setSize(float size) {
         this.dataTracker.set(SIZE, MathHelper.clamp(size, 0f, 1.5f));
         this.calculateDimensions();
-    }
-
-    public float getSize() {
-        return this.dataTracker.get(SIZE);
     }
 
     protected float getActiveEyeHeight(EntityPose pose, EntityDimensions dimensions) {
@@ -121,7 +126,7 @@ public class MantaRayEntity extends ClutterWaterEntity {
             --this.animationTimeout;
         }
 
-        if(this.flopAnimationTimeout <=0) {
+        if (this.flopAnimationTimeout <= 0) {
             this.flopAnimationTimeout = 10;
             this.flopAnimationState.start(this.age);
         } else {
@@ -133,7 +138,7 @@ public class MantaRayEntity extends ClutterWaterEntity {
     public void tick() {
         super.tick();
         World world = this.getWorld();
-        if(world.isClient) {
+        if (world.isClient) {
             this.setupAnimationStates();
         }
     }
@@ -145,7 +150,7 @@ public class MantaRayEntity extends ClutterWaterEntity {
     @Override
     public void tickMovement() {
         if (!this.isTouchingWater() && this.isOnGround() && this.verticalCollision) {
-            this.setVelocity(this.getVelocity().add((double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), 0.4000000059604645, (double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
+            this.setVelocity(this.getVelocity().add((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F, 0.4000000059604645, (this.random.nextFloat() * 2.0F - 1.0F) * 0.05F));
             this.setOnGround(false);
             this.velocityDirty = true;
             this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getSoundPitch());
@@ -155,12 +160,6 @@ public class MantaRayEntity extends ClutterWaterEntity {
 
     protected EntityNavigation createNavigation(World world) {
         return new SwimNavigation(this, world);
-    }
-
-    public static DefaultAttributeContainer.Builder setAttributes() {
-        return ClutterAnimalEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 16.0D)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0D);
     }
 
     public void travel(Vec3d movementInput) {

@@ -48,18 +48,18 @@ public class TowelBlock extends HorizontalFacingBlock {
     @Nullable
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return (BlockState)this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing());
+        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing());
     }
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-            Direction i = state.get(FACING);
-            return switch (i) {
-                case NORTH -> NORTH_SHAPE;
-                case SOUTH -> SOUTH_SHAPE;
-                case EAST -> EAST_SHAPE;
-                case WEST -> WEST_SHAPE;
-                default -> VoxelShapes.empty();
-            };
+        Direction i = state.get(FACING);
+        return switch (i) {
+            case NORTH -> NORTH_SHAPE;
+            case SOUTH -> SOUTH_SHAPE;
+            case EAST -> EAST_SHAPE;
+            case WEST -> WEST_SHAPE;
+            default -> VoxelShapes.empty();
+        };
     }
 }

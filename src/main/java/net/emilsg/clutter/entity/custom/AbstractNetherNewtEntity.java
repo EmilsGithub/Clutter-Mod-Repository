@@ -31,25 +31,21 @@ import net.minecraft.util.TimeHelper;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
-import net.minecraft.world.GameRules;
-import net.minecraft.world.LocalDifficulty;
-import net.minecraft.world.ServerWorldAccess;
-import net.minecraft.world.World;
+import net.minecraft.world.*;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
 public abstract class AbstractNetherNewtEntity extends ClutterAnimalEntity implements Angerable {
-    int ticker = 6000;
-
-    @Nullable private UUID angryAt;
     private static final TrackedData<Integer> ANGER_TIME = DataTracker.registerData(AbstractNetherNewtEntity.class, TrackedDataHandlerRegistry.INTEGER);
     private static final UniformIntProvider ANGER_TIME_RANGE = TimeHelper.betweenSeconds(20, 39);
     private static final TrackedData<Boolean> MOVING = DataTracker.registerData(AbstractNetherNewtEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private static final TrackedData<Float> SIZE = DataTracker.registerData(AbstractNetherNewtEntity.class, TrackedDataHandlerRegistry.FLOAT);
     private static final TrackedData<Integer> FUNGI = DataTracker.registerData(AbstractNetherNewtEntity.class, TrackedDataHandlerRegistry.INTEGER);
-
     public final AnimationState idleAnimationState = new AnimationState();
+    int ticker = 6000;
+    @Nullable
+    private UUID angryAt;
     private int idleAnimationTimeout = 0;
 
     public AbstractNetherNewtEntity(EntityType<? extends ClutterAnimalEntity> entityType, World world) {
@@ -82,7 +78,7 @@ public abstract class AbstractNetherNewtEntity extends ClutterAnimalEntity imple
         this.goalSelector.add(7, new WanderAroundFarGoal(this, 1.0f, 0.3f));
         this.goalSelector.add(8, new LookAtEntityGoal(this, PlayerEntity.class, 6.0f));
         this.goalSelector.add(9, new LookAroundGoal(this));
-        this.targetSelector.add(1, (new RevengeGoal(this, new Class[0])).setGroupRevenge(new Class[0]));
+        this.targetSelector.add(1, (new RevengeGoal(this)).setGroupRevenge());
         this.targetSelector.add(2, new UniversalAngerGoal<>(this, true));
     }
 
@@ -114,12 +110,21 @@ public abstract class AbstractNetherNewtEntity extends ClutterAnimalEntity imple
         this.limbAnimator.updateLimbs(f, 0.2F);
     }
 
-    public void setMoving(boolean moving) {
-        this.dataTracker.set(MOVING, moving);
+    public boolean canSpawn(WorldView world) {
+        return world.doesNotIntersectEntities(this);
+    }
+
+    @Override
+    public boolean canSpawn(WorldAccess world, SpawnReason spawnReason) {
+        return true;
     }
 
     public boolean isMoving() {
         return this.dataTracker.get(MOVING);
+    }
+
+    public void setMoving(boolean moving) {
+        this.dataTracker.set(MOVING, moving);
     }
 
     @Nullable
@@ -143,7 +148,7 @@ public abstract class AbstractNetherNewtEntity extends ClutterAnimalEntity imple
     public void breed(ServerWorld world, AnimalEntity other) {
         AbstractNetherNewtEntity crimsonNewtEntity = (AbstractNetherNewtEntity) this.createChild(world, other);
 
-        if(crimsonNewtEntity == null) return;
+        if (crimsonNewtEntity == null) return;
 
         float scaledSize;
         switch (random.nextInt(3) + 1) {
@@ -172,13 +177,13 @@ public abstract class AbstractNetherNewtEntity extends ClutterAnimalEntity imple
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
     }
 
+    public float getNewtSize() {
+        return this.dataTracker.get(SIZE);
+    }
+
     public void setNewtSize(float size) {
         this.dataTracker.set(SIZE, MathHelper.clamp(size, 0f, 1.5f));
         this.calculateDimensions();
-    }
-
-    public float getNewtSize() {
-        return this.dataTracker.get(SIZE);
     }
 
     protected float getActiveEyeHeight(EntityPose pose, EntityDimensions dimensions) {
@@ -225,7 +230,7 @@ public abstract class AbstractNetherNewtEntity extends ClutterAnimalEntity imple
             BlockPos oldPos = this.getBlockPos();
             BlockPos newPos = this.getBlockPos();
             this.setMoving(oldPos != newPos);
-            this.tickAngerLogic((ServerWorld)this.getWorld(), true);
+            this.tickAngerLogic((ServerWorld) this.getWorld(), true);
         }
     }
 
@@ -236,8 +241,8 @@ public abstract class AbstractNetherNewtEntity extends ClutterAnimalEntity imple
         BlockPos pos = this.getBlockPos();
         int fungiCount = this.getFungiCount();
 
-        if(stackInHand.getItem() instanceof ShearsItem && !world.isClient && fungiCount != 0) {
-            if(!player.getAbilities().creativeMode) stackInHand.damage(1, player, (p) -> p.sendToolBreakStatus(hand));
+        if (stackInHand.getItem() instanceof ShearsItem && !world.isClient && fungiCount != 0) {
+            if (!player.getAbilities().creativeMode) stackInHand.damage(1, player, (p) -> p.sendToolBreakStatus(hand));
             this.dropStack(new ItemStack(Items.CRIMSON_FUNGUS, fungiCount));
             world.playSound(null, pos, SoundEvents.BLOCK_GROWING_PLANT_CROP, SoundCategory.BLOCKS, 1.0F, 1.0F);
             this.setFungiCount(0);
@@ -252,7 +257,7 @@ public abstract class AbstractNetherNewtEntity extends ClutterAnimalEntity imple
         super.tick();
         World world = this.getWorld();
 
-        if(!world.isClient) {
+        if (!world.isClient) {
             ticker--;
 
             if (ticker <= 0 && this.getFungiCount() != 5) {
@@ -261,7 +266,7 @@ public abstract class AbstractNetherNewtEntity extends ClutterAnimalEntity imple
             }
         }
 
-        if(world.isClient) {
+        if (world.isClient) {
             this.setupAnimationStates();
         }
     }

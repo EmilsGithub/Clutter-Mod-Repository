@@ -10,7 +10,9 @@ import net.minecraft.util.Identifier;
 
 public class ModScreenHandlers {
 
-    public static final ScreenHandlerType<BrickKilnScreenHandler> BRICK_KILN_SCREEN_HANDLER =
+    public static void registerScreenHandlers() {
+
+    }    public static final ScreenHandlerType<BrickKilnScreenHandler> BRICK_KILN_SCREEN_HANDLER =
             Registry.register(Registries.SCREEN_HANDLER, new Identifier(Clutter.MOD_ID, "brick_kiln_screen_handler"),
                     new ExtendedScreenHandlerType<>(BrickKilnScreenHandler::new));
 
@@ -26,7 +28,5 @@ public class ModScreenHandlers {
             Registry.register(Registries.SCREEN_HANDLER, new Identifier(Clutter.MOD_ID, "present_screen_handler"),
                     new ScreenHandlerType<>(PresentScreenHandler::new, FeatureFlags.VANILLA_FEATURES));
 
-    public static void registerScreenHandlers() {
 
-    }
 }

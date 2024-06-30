@@ -33,7 +33,7 @@ public class GlowLilyCropBlock extends CropBlock {
     public static final BooleanProperty CLIPPED = ModProperties.CLIPPED;
     private static final VoxelShape[] AGE_TO_SHAPE = new VoxelShape[]{
             Block.createCuboidShape(5.0, 0.0, 5.0, 11.0, 9.0, 11.0),
-            Block.createCuboidShape(4.0, 0.0, 4.0, 12.0, 12.0,12.0),
+            Block.createCuboidShape(4.0, 0.0, 4.0, 12.0, 12.0, 12.0),
             Block.createCuboidShape(2.0, 0.0, 2.0, 14.0, 16.0, 14.0)};
 
     public GlowLilyCropBlock(Settings settings) {
@@ -44,10 +44,10 @@ public class GlowLilyCropBlock extends CropBlock {
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         ItemStack stackInHand = player.getStackInHand(hand);
-        if(stackInHand.getItem() instanceof ShearsItem && !state.get(CLIPPED)) {
-            if(!world.isClient) world.setBlockState(pos, state.with(CLIPPED, true), Block.NOTIFY_ALL);
+        if (stackInHand.getItem() instanceof ShearsItem && !state.get(CLIPPED)) {
+            if (!world.isClient) world.setBlockState(pos, state.with(CLIPPED, true), Block.NOTIFY_ALL);
             world.playSound(null, pos, SoundEvents.BLOCK_GROWING_PLANT_CROP, SoundCategory.BLOCKS, 1.0F, 1.0F);
-            if(!player.getAbilities().creativeMode) stackInHand.damage(1, player, (p) -> p.sendToolBreakStatus(hand));
+            if (!player.getAbilities().creativeMode) stackInHand.damage(1, player, (p) -> p.sendToolBreakStatus(hand));
             return ActionResult.success(world.isClient);
         }
         return ActionResult.PASS;

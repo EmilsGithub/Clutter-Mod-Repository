@@ -23,17 +23,17 @@ public class WallBookshelfScreenHandler extends ScreenHandler {
         inventory.onOpen(playerInventory.player);
 
         int j;
-        for(j = 0; j < 5; ++j) {
+        for (j = 0; j < 5; ++j) {
             this.addSlot(new WallBookshelfBoxSlot(inventory, j, 44 + j * 18, 20));
         }
 
-        for(j = 0; j < 3; ++j) {
-            for(int k = 0; k < 9; ++k) {
+        for (j = 0; j < 3; ++j) {
+            for (int k = 0; k < 9; ++k) {
                 this.addSlot(new Slot(playerInventory, k + j * 9 + 9, 8 + k * 18, j * 18 + 51));
             }
         }
 
-        for(j = 0; j < 9; ++j) {
+        for (j = 0; j < 9; ++j) {
             this.addSlot(new Slot(playerInventory, j, 8 + j * 18, 109));
         }
 
@@ -45,7 +45,7 @@ public class WallBookshelfScreenHandler extends ScreenHandler {
 
     public ItemStack quickMove(PlayerEntity player, int slot) {
         ItemStack itemStack = ItemStack.EMPTY;
-        Slot slot2 = (Slot)this.slots.get(slot);
+        Slot slot2 = this.slots.get(slot);
         if (slot2 != null && slot2.hasStack()) {
             ItemStack itemStack2 = slot2.getStack();
             itemStack = itemStack2.copy();

@@ -21,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
 public class CattailPlantBlock extends TallFlowerBlock implements Fertilizable, Waterloggable {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 
-    private final VoxelShape SHAPE = Block.createCuboidShape(3,0,3,13,16,13);
+    private final VoxelShape SHAPE = Block.createCuboidShape(3, 0, 3, 13, 16, 13);
 
     public CattailPlantBlock(Settings settings) {
         super(settings);
@@ -75,7 +75,7 @@ public class CattailPlantBlock extends TallFlowerBlock implements Fertilizable, 
         BlockPos blockPos = ctx.getBlockPos();
         World world = ctx.getWorld();
         boolean blockIsWater = world.getFluidState(blockPos).getFluid() == Fluids.WATER;
-        if(blockPos.getY() < world.getTopY() - 1 && world.getBlockState(blockPos.up()).isReplaceable()) {
+        if (blockPos.getY() < world.getTopY() - 1 && world.getBlockState(blockPos.up()).isReplaceable()) {
             return this.getDefaultState().with(HALF, DoubleBlockHalf.LOWER).with(WATERLOGGED, blockIsWater);
         }
         return this.getDefaultState().with(WATERLOGGED, blockIsWater);

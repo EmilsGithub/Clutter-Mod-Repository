@@ -21,13 +21,13 @@ public class SquidPlushieBlock extends AbstractPlushieBlock {
 
     protected static final VoxelShape SHAPE = Block.createCuboidShape(1, 0, 1, 15, 10, 15);
 
+    public SquidPlushieBlock(Settings settings) {
+        super(settings);
+    }
+
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return SHAPE;
-    }
-
-    public SquidPlushieBlock(Settings settings) {
-        super(settings);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class SquidPlushieBlock extends AbstractPlushieBlock {
             return ActionResult.PASS;
         }
 
-        if(world.isClient && hand.equals(Hand.MAIN_HAND) && player.getStackInHand(hand).isEmpty()) {
+        if (world.isClient && hand.equals(Hand.MAIN_HAND) && player.getStackInHand(hand).isEmpty()) {
             world.addParticle(ParticleTypes.NOTE, pos.getX() + 0.5, pos.getY() + 0.7, pos.getZ() + 0.5, random, 0.0, 0.0);
             return ActionResult.SUCCESS;
         }

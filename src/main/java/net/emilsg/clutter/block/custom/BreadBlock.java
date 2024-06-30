@@ -22,10 +22,9 @@ import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
 
 public class BreadBlock extends HorizontalFacingBlock {
+    public static final IntProperty SLICES = ModProperties.SLICES;
     private final int food;
     private final float saturation;
-
-    public static final IntProperty SLICES = ModProperties.SLICES;
 
     public BreadBlock(Settings settings, int food, float saturation) {
         super(settings);
@@ -119,7 +118,7 @@ public class BreadBlock extends HorizontalFacingBlock {
     @Override
     @Nullable
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return (BlockState)this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing()).with(SLICES, 7);
+        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing()).with(SLICES, 7);
     }
 
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {

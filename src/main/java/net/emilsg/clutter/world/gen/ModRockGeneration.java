@@ -10,11 +10,11 @@ import net.minecraft.world.gen.GenerationStep;
 public class ModRockGeneration {
 
     public static void generateOres() {
-        if(ClutterConfig.getInstance().getBoolean(ClutterConfig.GENERATE_SILVER_ORES)) {
+        if (ClutterConfig.getInstance().getBoolean(ClutterConfig.GENERATE_SILVER_ORES)) {
             BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(),
                     GenerationStep.Feature.UNDERGROUND_ORES, ModPlacedFeatures.SILVER_ORE_PLACED_KEY);
         }
-        if(ClutterConfig.getInstance().getBoolean(ClutterConfig.GENERATE_SULPHUR_ORES)) {
+        if (ClutterConfig.getInstance().getBoolean(ClutterConfig.GENERATE_SULPHUR_ORES)) {
             BiomeModifications.addFeature(BiomeSelectors.includeByKey(BiomeKeys.BASALT_DELTAS),
                     GenerationStep.Feature.UNDERGROUND_ORES, ModPlacedFeatures.BLACKSTONE_SULPHUR_ORE_PLACED_KEY);
 
@@ -24,7 +24,7 @@ public class ModRockGeneration {
     }
 
     public static void generateGeodes() {
-        if(ClutterConfig.getInstance().getBoolean(ClutterConfig.GENERATE_ONYX_GEODES)) {
+        if (ClutterConfig.getInstance().getBoolean(ClutterConfig.GENERATE_ONYX_GEODES)) {
             BiomeModifications.addFeature(BiomeSelectors.foundInTheNether(),
                     GenerationStep.Feature.UNDERGROUND_ORES, ModPlacedFeatures.ONYX_GEODE_PLACED_KEY);
         }

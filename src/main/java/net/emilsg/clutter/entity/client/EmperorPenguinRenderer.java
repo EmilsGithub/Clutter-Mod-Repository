@@ -19,7 +19,7 @@ public class EmperorPenguinRenderer extends GeoEntityRenderer<EmperorPenguinEnti
 
     @Override
     public Identifier getTextureLocation(EmperorPenguinEntity animatable) {
-        if(animatable.isBaby()) {
+        if (animatable.isBaby()) {
             return BABY_TEXTURE;
         } else {
             return ADULT_TEXTURE;

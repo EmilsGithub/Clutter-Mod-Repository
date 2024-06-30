@@ -4,39 +4,44 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 public enum ButterflyVariant {
-    YELLOW(0),
-    RED(1),
-    BLUE(2),
-    PURPLE(3),
-    WHITE(4),
-    GRAY(5),
-    ORANGE(6),
-    LIME(7),
-    GREEN(8),
-    BLACK(9),
-    LIGHT_GRAY(10),
-    LIGHT_BLUE(11),
-    BROWN(12),
-    CYAN(13),
-    MAGENTA(14),
-    PINK(15),
-    WARPED(16),
-    CRIMSON(17),
-    SOUL(18);
+    YELLOW(0, "yellow"),
+    RED(1, "red"),
+    BLUE(2, "blue"),
+    PURPLE(3, "purple"),
+    WHITE(4, "white"),
+    GRAY(5, "gray"),
+    ORANGE(6, "orange"),
+    LIME(7, "lime"),
+    GREEN(8, "green"),
+    BLACK(9, "black"),
+    LIGHT_GRAY(10, "light_gray"),
+    LIGHT_BLUE(11, "light_blue"),
+    BROWN(12, "brown"),
+    CYAN(13, "cyan"),
+    MAGENTA(14, "magenta"),
+    PINK(15, "pink"),
+    WARPED(16, "warped"),
+    CRIMSON(17, "crimson"),
+    SOUL(18, "soul");
 
-    private static final ButterflyVariant[] BY_ID = Arrays.stream(values()).sorted(Comparator.
-            comparingInt(ButterflyVariant::getId)).toArray(ButterflyVariant[]::new);
+    private static final ButterflyVariant[] BY_ID = Arrays.stream(values()).sorted(Comparator.comparingInt(ButterflyVariant::getId)).toArray(ButterflyVariant[]::new);
     private final int id;
+    private final String name;
 
-    ButterflyVariant(int id) {
+    ButterflyVariant(int id, String name) {
         this.id = id;
+        this.name = name;
+    }
+
+    public static ButterflyVariant byId(int id) {
+        return BY_ID[id % BY_ID.length];
     }
 
     public int getId() {
         return this.id;
     }
 
-    public static ButterflyVariant byId(int id) {
-        return BY_ID[id % BY_ID.length];
+    public String getName() {
+        return this.name;
     }
 }

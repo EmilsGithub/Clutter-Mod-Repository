@@ -25,7 +25,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class CupboardBlock extends BlockWithEntity{
+public class CupboardBlock extends BlockWithEntity {
     public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
     public static final BooleanProperty OPEN = ModProperties.OPEN;
     protected static final VoxelShape NORTH_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 16.0, 15.0);
@@ -46,7 +46,7 @@ public class CupboardBlock extends BlockWithEntity{
 
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return (BlockState)this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing());
+        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing());
     }
 
 
@@ -64,7 +64,7 @@ public class CupboardBlock extends BlockWithEntity{
     public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
         BlockEntity blockEntity;
         if (itemStack.hasCustomName() && (blockEntity = world.getBlockEntity(pos)) instanceof CupboardInventoryBlockEntity) {
-            ((CupboardInventoryBlockEntity)blockEntity).setCustomName(itemStack.getName());
+            ((CupboardInventoryBlockEntity) blockEntity).setCustomName(itemStack.getName());
         }
     }
 
@@ -72,7 +72,7 @@ public class CupboardBlock extends BlockWithEntity{
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof CupboardInventoryBlockEntity) {
-            ((CupboardInventoryBlockEntity)blockEntity).tick();
+            ((CupboardInventoryBlockEntity) blockEntity).tick();
         }
     }
 
@@ -104,7 +104,7 @@ public class CupboardBlock extends BlockWithEntity{
         }
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof Inventory) {
-            ItemScatterer.spawn(world, pos, (Inventory)((Object)blockEntity));
+            ItemScatterer.spawn(world, pos, (Inventory) blockEntity);
             world.updateComparators(pos, this);
         }
         super.onStateReplaced(state, world, pos, newState, moved);
@@ -117,14 +117,14 @@ public class CupboardBlock extends BlockWithEntity{
         }
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof CupboardInventoryBlockEntity) {
-            player.openHandledScreen((CupboardInventoryBlockEntity)blockEntity);
+            player.openHandledScreen((CupboardInventoryBlockEntity) blockEntity);
         }
         return ActionResult.CONSUME;
     }
 
     @Override
     public BlockState rotate(BlockState state, BlockRotation rotation) {
-        return (BlockState)state.with(FACING, rotation.rotate(state.get(FACING)));
+        return state.with(FACING, rotation.rotate(state.get(FACING)));
     }
 
     @Override

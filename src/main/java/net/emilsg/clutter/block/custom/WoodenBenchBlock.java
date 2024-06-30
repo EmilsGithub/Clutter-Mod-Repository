@@ -86,7 +86,7 @@ public class WoodenBenchBlock extends SeatBlock {
             Block.createCuboidShape(3.0, 8.0, 0.0, 5.0, 11.0, 16.0), Block.createCuboidShape(4.0, 7.0, 0.0, 14.0, 8.0, 16.0),
             Block.createCuboidShape(11.0, 0.0, 1.0, 13.0, 6.0, 2.0), Block.createCuboidShape(5.0, 0.0, 1.0, 7.0, 6.0, 2.0),
             Block.createCuboidShape(4.0, 6.0, 1.0, 14.0, 7.0, 2.0), Block.createCuboidShape(11.0, 6.0, 2.0, 13.0, 7.0, 14.0),
-            Block.createCuboidShape(5.0, 6.0, 2.0, 7.0, 7.0, 14.0),Block.createCuboidShape(4.0, 6.0, 14.0, 14.0, 7.0, 15.0),
+            Block.createCuboidShape(5.0, 6.0, 2.0, 7.0, 7.0, 14.0), Block.createCuboidShape(4.0, 6.0, 14.0, 14.0, 7.0, 15.0),
             Block.createCuboidShape(11.0, 0.0, 14.0, 13.0, 6.0, 15.0), Block.createCuboidShape(5.0, 0.0, 14.0, 7.0, 6.0, 15.0),
             Block.createCuboidShape(2.0, 11.0, 0.0, 4.0, 14.0, 16.0), Block.createCuboidShape(1.0, 13.0, 0.0, 3.0, 16.0, 16.0));
     protected static final VoxelShape WEST_NORTH_SHAPE = VoxelShapes.union(
@@ -127,44 +127,6 @@ public class WoodenBenchBlock extends SeatBlock {
 
     public WoodenBenchBlock(Settings settings) {
         super(settings);
-    }
-
-    public enum LegPosition implements StringIdentifiable {
-        NONE("none"),
-        NORTH("north"),
-        SOUTH("south"),
-        EAST("east"),
-        WEST("west"),
-        ALL("all");
-
-        private final String name;
-
-        LegPosition(String name) {
-            this.name = name;
-        }
-
-        public String asString() {
-            return this.name;
-        }
-
-        @Override
-        public String toString() {
-            return this.name;
-        }
-
-        public static LegPosition fromNeighborBlocks(boolean west, boolean north, boolean east, boolean south) {
-            if (west) {
-                return LegPosition.EAST;
-            } else if (east) {
-                return LegPosition.WEST;
-            } else if (north) {
-                return LegPosition.SOUTH;
-            } else if (south) {
-                return LegPosition.NORTH;
-            } else {
-                return LegPosition.ALL;
-            }
-        }
     }
 
     @Override
@@ -213,7 +175,7 @@ public class WoodenBenchBlock extends SeatBlock {
         BlockPos blockPos;
         World worldAccess = ctx.getWorld();
         boolean bl = worldAccess.getFluidState(blockPos = ctx.getBlockPos()).getFluid() == Fluids.WATER;
-        return (BlockState)this.getDefaultState().with(WATERLOGGED, bl).with(FACING, ctx.getHorizontalPlayerFacing());
+        return this.getDefaultState().with(WATERLOGGED, bl).with(FACING, ctx.getHorizontalPlayerFacing());
     }
 
     @Override
@@ -261,8 +223,7 @@ public class WoodenBenchBlock extends SeatBlock {
             } else if (eastBench) {
                 world.setBlockState(pos, state.with(LEG_POSITIONS, LegPosition.WEST));
             }
-        }
-        else if (facingEW) {
+        } else if (facingEW) {
             if (northBench && southBench) {
                 world.setBlockState(pos, state.with(LEG_POSITIONS, LegPosition.NONE));
             } else if (!northBench && !southBench) {
@@ -295,8 +256,7 @@ public class WoodenBenchBlock extends SeatBlock {
             } else if (eastBench) {
                 return state.with(LEG_POSITIONS, LegPosition.WEST);
             }
-        }
-        else if (facingEW) {
+        } else if (facingEW) {
             if (northBench && southBench) {
                 return state.with(LEG_POSITIONS, LegPosition.NONE);
             } else if (!northBench && !southBench) {
@@ -347,6 +307,44 @@ public class WoodenBenchBlock extends SeatBlock {
             return ModBlocks.STRIPPED_REDWOOD_BENCH.getDefaultState().with(FACING, state.get(FACING));
         } else {
             return state;
+        }
+    }
+
+    public enum LegPosition implements StringIdentifiable {
+        NONE("none"),
+        NORTH("north"),
+        SOUTH("south"),
+        EAST("east"),
+        WEST("west"),
+        ALL("all");
+
+        private final String name;
+
+        LegPosition(String name) {
+            this.name = name;
+        }
+
+        public static LegPosition fromNeighborBlocks(boolean west, boolean north, boolean east, boolean south) {
+            if (west) {
+                return LegPosition.EAST;
+            } else if (east) {
+                return LegPosition.WEST;
+            } else if (north) {
+                return LegPosition.SOUTH;
+            } else if (south) {
+                return LegPosition.NORTH;
+            } else {
+                return LegPosition.ALL;
+            }
+        }
+
+        public String asString() {
+            return this.name;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
         }
     }
 }

@@ -1,8 +1,9 @@
 package net.emilsg.clutter.entity.custom;
 
+import net.emilsg.clutter.entity.custom.goal.ButterflyDupeSporeBlossomGoal;
+import net.emilsg.clutter.entity.custom.goal.ButterflyPlaceCocoonGoal;
 import net.emilsg.clutter.entity.custom.goal.ButterflyWanderNetherGoal;
 import net.emilsg.clutter.entity.custom.goal.ButterflyWanderOverworldGoal;
-import net.emilsg.clutter.entity.custom.goal.ButterflyPlaceCocoonGoal;
 import net.emilsg.clutter.entity.custom.parent.ClutterAnimalEntity;
 import net.emilsg.clutter.entity.variants.ButterflyVariant;
 import net.emilsg.clutter.item.ModItems;
@@ -56,6 +57,7 @@ import java.time.temporal.ChronoField;
 
 public class ButterflyEntity extends ClutterAnimalEntity {
     private static final TrackedData<Boolean> HAS_COCOON = DataTracker.registerData(ButterflyEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    private static final TrackedData<Integer> DUPE_TIMER = DataTracker.registerData(ButterflyEntity.class, TrackedDataHandlerRegistry.INTEGER);
     private static final TrackedData<Integer> DATA_ID_TYPE_VARIANT = DataTracker.registerData(ButterflyEntity.class, TrackedDataHandlerRegistry.INTEGER);
 
     public final AnimationState flyingAnimState = new AnimationState();
@@ -81,6 +83,26 @@ public class ButterflyEntity extends ClutterAnimalEntity {
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0f);
     }
 
+    private static boolean isTodayAroundHalloween() {
+        LocalDate localDate = LocalDate.now();
+        int i = localDate.get(ChronoField.DAY_OF_MONTH);
+        int j = localDate.get(ChronoField.MONTH_OF_YEAR);
+        return j == 10 && i >= 20 || j == 11 && i <= 3;
+    }
+
+    public static boolean isValidSpawn(EntityType<? extends ClutterAnimalEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+        return world.getBlockState(pos.down()).isIn(ModBlockTags.BUTTERFLIES_SPAWN_ON);
+    }
+
+    public boolean canSpawn(WorldView world) {
+        return world.doesNotIntersectEntities(this);
+    }
+
+    @Override
+    public boolean canSpawn(WorldAccess world, SpawnReason spawnReason) {
+        return true;
+    }
+
     private void setupAnimationStates() {
         if (this.animationTimeout <= 0) {
             this.animationTimeout = 10;
@@ -95,7 +117,7 @@ public class ButterflyEntity extends ClutterAnimalEntity {
         super.tick();
         World world = this.getWorld();
 
-        if(world.isClient) {
+        if (world.isClient) {
             this.setupAnimationStates();
         }
     }
@@ -103,6 +125,10 @@ public class ButterflyEntity extends ClutterAnimalEntity {
     @Override
     public void tickMovement() {
         super.tickMovement();
+
+        if (this.getDupeTimer() < 8000) {
+            this.setDupeTimer(this.getDupeTimer() + 1);
+        }
 
         if (this.isAlive() && (this.isSubmergedIn(FluidTags.LAVA) || this.isSubmergedIn(FluidTags.WATER))) {
             this.kill();
@@ -114,13 +140,15 @@ public class ButterflyEntity extends ClutterAnimalEntity {
         this.goalSelector.add(0, new AnimalMateGoal(this, 1.0));
         this.goalSelector.add(1, new ButterflyPlaceCocoonGoal(this, 1.0));
         this.goalSelector.add(2, new TemptGoal(this, 1.25, Ingredient.ofItems(Items.SUGAR), false));
-        this.goalSelector.add(3, new ButterflyWanderNetherGoal(this));
-        this.goalSelector.add(3, new ButterflyWanderOverworldGoal(this));
+        this.goalSelector.add(3, new ButterflyDupeSporeBlossomGoal(this, 1, 1200));
+        this.goalSelector.add(4, new ButterflyWanderNetherGoal(this));
+        this.goalSelector.add(4, new ButterflyWanderOverworldGoal(this));
     }
 
     protected void initDataTracker() {
         super.initDataTracker();
         this.dataTracker.startTracking(HAS_COCOON, false);
+        this.dataTracker.startTracking(DUPE_TIMER, 0);
         this.dataTracker.startTracking(DATA_ID_TYPE_VARIANT, 0);
     }
 
@@ -138,10 +166,6 @@ public class ButterflyEntity extends ClutterAnimalEntity {
             adversary.damage(this.getWorld().getDamageSources().magic(), 6.0f);
         }
         super.onKilledBy(adversary);
-    }
-
-    public boolean canSpawn(WorldAccess world, SpawnReason spawnReason) {
-        return true;
     }
 
     @Override
@@ -175,23 +199,12 @@ public class ButterflyEntity extends ClutterAnimalEntity {
         other.setBreedingAge(6000);
         this.resetLoveTicks();
         other.resetLoveTicks();
-        world.sendEntityStatus(this, (byte)18);
-    }
-
-    private static boolean isTodayAroundHalloween() {
-        LocalDate localDate = LocalDate.now();
-        int i = localDate.get(ChronoField.DAY_OF_MONTH);
-        int j = localDate.get(ChronoField.MONTH_OF_YEAR);
-        return j == 10 && i >= 20 || j == 11 && i <= 3;
+        world.sendEntityStatus(this, (byte) 18);
     }
 
     @Override
     public boolean isExperienceDroppingDisabled() {
         return true;
-    }
-
-    public static boolean isValidSpawn(EntityType<? extends ClutterAnimalEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-        return world.getBlockState(pos.down()).isIn(ModBlockTags.BUTTERFLY_VALID);
     }
 
     protected EntityNavigation createNavigation(World world) {
@@ -237,7 +250,7 @@ public class ButterflyEntity extends ClutterAnimalEntity {
             }
             ItemStack returnStack = new ItemStack(returnItem);
 
-            if(!player.getAbilities().creativeMode) {
+            if (!player.getAbilities().creativeMode) {
                 heldItem.decrement(1);
             }
 
@@ -262,24 +275,11 @@ public class ButterflyEntity extends ClutterAnimalEntity {
         return false;
     }
 
-    static class ButterflyLookControl extends LookControl {
-        ButterflyLookControl(MobEntity entity) {
-            super(entity);
-        }
-
-        public void tick() {
-            super.tick();
-        }
-
-        protected boolean shouldStayHorizontal() {
-            return true;
-        }
-    }
-
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
         nbt.putBoolean("HasCocoon", this.hasCocoon());
         nbt.putInt("Variant", this.getTypeVariant());
+        nbt.putInt("DupeTimer", this.getDupeTimer());
     }
 
     @Override
@@ -287,6 +287,7 @@ public class ButterflyEntity extends ClutterAnimalEntity {
         super.readCustomDataFromNbt(nbt);
         this.setHasCocoon(nbt.getBoolean("HasCocoon"));
         this.dataTracker.set(DATA_ID_TYPE_VARIANT, nbt.getInt("Variant"));
+        this.setDupeTimer(nbt.getInt("DupeTimer"));
     }
 
     @Nullable
@@ -306,21 +307,18 @@ public class ButterflyEntity extends ClutterAnimalEntity {
         return SoundEvents.BLOCK_WOOL_BREAK;
     }
 
-
-
     @Override
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
         RegistryEntry<Biome> registryEntry = world.getBiome(this.getBlockPos());
         ButterflyVariant variant = ButterflyVariant.byId(0);
 
-        if(spawnReason.equals(SpawnReason.SPAWN_EGG)) {
+        if (spawnReason.equals(SpawnReason.SPAWN_EGG)) {
             variant = Util.getRandom(ButterflyVariant.values(), this.random);
         }
 
         if (registryEntry.isIn(BiomeTags.IS_OVERWORLD)) {
             variant = ButterflyVariant.byId(this.random.nextInt(15) + 1);
-        }
-        else if (registryEntry.isIn(BiomeTags.IS_NETHER)) {
+        } else if (registryEntry.isIn(BiomeTags.IS_NETHER)) {
             if (registryEntry.matchesKey(BiomeKeys.WARPED_FOREST)) {
                 variant = ButterflyVariant.WARPED;
             } else if (registryEntry.matchesKey(BiomeKeys.CRIMSON_FOREST)) {
@@ -352,12 +350,12 @@ public class ButterflyEntity extends ClutterAnimalEntity {
         return ButterflyVariant.byId(this.getTypeVariant() & 255);
     }
 
-    private int getTypeVariant() {
-        return this.dataTracker.get(DATA_ID_TYPE_VARIANT);
-    }
-
     public void setVariant(ButterflyVariant variant) {
         this.dataTracker.set(DATA_ID_TYPE_VARIANT, variant.getId() & 255);
+    }
+
+    private int getTypeVariant() {
+        return this.dataTracker.get(DATA_ID_TYPE_VARIANT);
     }
 
     public boolean hasCocoon() {
@@ -366,5 +364,27 @@ public class ButterflyEntity extends ClutterAnimalEntity {
 
     public void setHasCocoon(boolean hasCocoon) {
         this.dataTracker.set(HAS_COCOON, hasCocoon);
+    }
+
+    public int getDupeTimer() {
+        return this.dataTracker.get(DUPE_TIMER);
+    }
+
+    public void setDupeTimer(int time) {
+        this.dataTracker.set(DUPE_TIMER, time);
+    }
+
+    static class ButterflyLookControl extends LookControl {
+        ButterflyLookControl(MobEntity entity) {
+            super(entity);
+        }
+
+        public void tick() {
+            super.tick();
+        }
+
+        protected boolean shouldStayHorizontal() {
+            return true;
+        }
     }
 }

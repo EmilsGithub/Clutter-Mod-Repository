@@ -31,8 +31,6 @@ import org.jetbrains.annotations.Nullable;
 public class ShowerBlock extends HorizontalFacingBlock implements Waterloggable {
     public static final EnumProperty<DoubleBlockHalf> HALF = Properties.DOUBLE_BLOCK_HALF;
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
-    private static final BooleanProperty ON = ModProperties.ON;
-
     protected static final VoxelShape NORTH_TOP_SHAPE = VoxelShapes.union(
             Block.createCuboidShape(3, 9, 3, 13, 11, 13),
             Block.createCuboidShape(7, 12, 2, 9, 14, 9),
@@ -89,10 +87,37 @@ public class ShowerBlock extends HorizontalFacingBlock implements Waterloggable 
             Block.createCuboidShape(0, 4, 4, 2, 4.5, 6),
             Block.createCuboidShape(0, 4, 10, 2, 4.5, 12)
     );
+    private static final BooleanProperty ON = ModProperties.ON;
 
     public ShowerBlock(Settings settings) {
         super(settings);
-        this.setDefaultState((BlockState)((BlockState)this.stateManager.getDefaultState()).with(HALF, DoubleBlockHalf.LOWER).with(ON, false).with(WATERLOGGED, false));
+        this.setDefaultState(this.stateManager.getDefaultState().with(HALF, DoubleBlockHalf.LOWER).with(ON, false).with(WATERLOGGED, false));
+    }
+
+    public static BlockState withWaterloggedState(WorldView world, BlockPos pos, BlockState state) {
+        if (state.contains(Properties.WATERLOGGED)) {
+            return state.with(Properties.WATERLOGGED, world.isWater(pos));
+        }
+        return state;
+    }
+
+    protected static void onBreakInCreative(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+        BlockPos blockPos;
+        BlockState blockState;
+        DoubleBlockHalf doubleBlockHalf = state.get(HALF);
+        if (doubleBlockHalf == DoubleBlockHalf.UPPER && (blockState = world.getBlockState(blockPos = pos.down())).isOf(state.getBlock()) && blockState.get(HALF) == DoubleBlockHalf.LOWER) {
+            BlockState blockState2 = blockState.getFluidState().isOf(Fluids.WATER) ? Blocks.WATER.getDefaultState() : Blocks.AIR.getDefaultState();
+            world.setBlockState(blockPos, blockState2, Block.NOTIFY_ALL | Block.SKIP_DROPS);
+            world.syncWorldEvent(player, WorldEvents.BLOCK_BROKEN, blockPos, Block.getRawIdFromState(blockState));
+        }
+    }
+
+    public static void spawnParticles(World world, BlockPos pos, ParticleEffect particle) {
+        Random random = world.getRandom();
+        for (int i = 0; i < 1; i++) {
+            world.addImportantParticle(particle, true, (double) pos.getX() + 0.5 + random.nextDouble() / 4.0 * (double) (random.nextBoolean() ? 1 : -1), pos.getY() + 0.4 + random.nextDouble() / 24.0, (double) pos.getZ() + 0.5 + random.nextDouble() / 4.0 * (double) (random.nextBoolean() ? 1 : -1), 0.0, 0.0, 0.0);
+            world.addParticle(particle, true, (double) pos.getX() + 0.5 + random.nextDouble() / 4.0 * (double) (random.nextBoolean() ? 1 : -1), pos.getY() + 0.4 + random.nextDouble() / 24.0, (double) pos.getZ() + 0.5 + random.nextDouble() / 4.0 * (double) (random.nextBoolean() ? 1 : -1), 0.0, 0.0, 0.0);
+        }
     }
 
     @Override
@@ -146,7 +171,7 @@ public class ShowerBlock extends HorizontalFacingBlock implements Waterloggable 
         World world = ctx.getWorld();
         if (blockPos.getY() < world.getTopY() - 1 && world.getBlockState(blockPos2).canReplace(ctx)) {
             boolean bl = world.getFluidState(blockPos = ctx.getBlockPos()).getFluid() == Fluids.WATER;
-            return (BlockState)this.getDefaultState().with(WATERLOGGED, bl).with(FACING, ctx.getHorizontalPlayerFacing());
+            return this.getDefaultState().with(WATERLOGGED, bl).with(FACING, ctx.getHorizontalPlayerFacing());
         }
         return null;
     }
@@ -155,7 +180,7 @@ public class ShowerBlock extends HorizontalFacingBlock implements Waterloggable 
     public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
         BlockPos blockPos = pos.up();
         assert placer != null;
-        world.setBlockState(blockPos, ShowerBlock.withWaterloggedState(world, blockPos, (BlockState)this.getDefaultState().with(HALF, DoubleBlockHalf.UPPER).with(FACING, placer.getHorizontalFacing())), Block.NOTIFY_ALL);
+        world.setBlockState(blockPos, ShowerBlock.withWaterloggedState(world, blockPos, this.getDefaultState().with(HALF, DoubleBlockHalf.UPPER).with(FACING, placer.getHorizontalFacing())), Block.NOTIFY_ALL);
     }
 
     @Override
@@ -165,13 +190,6 @@ public class ShowerBlock extends HorizontalFacingBlock implements Waterloggable 
             return blockState.isOf(this) && blockState.get(HALF) == DoubleBlockHalf.LOWER;
         }
         return super.canPlaceAt(state, world, pos);
-    }
-
-    public static BlockState withWaterloggedState(WorldView world, BlockPos pos, BlockState state) {
-        if (state.contains(Properties.WATERLOGGED)) {
-            return (BlockState)state.with(Properties.WATERLOGGED, world.isWater(pos));
-        }
-        return state;
     }
 
     @Override
@@ -189,17 +207,6 @@ public class ShowerBlock extends HorizontalFacingBlock implements Waterloggable 
     @Override
     public void afterBreak(World world, PlayerEntity player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack stack) {
         super.afterBreak(world, player, pos, Blocks.AIR.getDefaultState(), blockEntity, stack);
-    }
-
-    protected static void onBreakInCreative(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-        BlockPos blockPos;
-        BlockState blockState;
-        DoubleBlockHalf doubleBlockHalf = state.get(HALF);
-        if (doubleBlockHalf == DoubleBlockHalf.UPPER && (blockState = world.getBlockState(blockPos = pos.down())).isOf(state.getBlock()) && blockState.get(HALF) == DoubleBlockHalf.LOWER) {
-            BlockState blockState2 = blockState.getFluidState().isOf(Fluids.WATER) ? Blocks.WATER.getDefaultState() : Blocks.AIR.getDefaultState();
-            world.setBlockState(blockPos, blockState2, Block.NOTIFY_ALL | Block.SKIP_DROPS);
-            world.syncWorldEvent(player, WorldEvents.BLOCK_BROKEN, blockPos, Block.getRawIdFromState(blockState));
-        }
     }
 
     @Override
@@ -228,16 +235,8 @@ public class ShowerBlock extends HorizontalFacingBlock implements Waterloggable 
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
         if (state.get(ON) && state.get(HALF) == DoubleBlockHalf.UPPER && !state.get(WATERLOGGED)) {
             spawnParticles(world, pos, ParticleTypes.FALLING_WATER);
-         } else if (state.get(ON) && state.get(HALF) == DoubleBlockHalf.UPPER && state.get(WATERLOGGED)) {
+        } else if (state.get(ON) && state.get(HALF) == DoubleBlockHalf.UPPER && state.get(WATERLOGGED)) {
             spawnParticles(world, pos, ParticleTypes.BUBBLE);
-        }
-    }
-
-    public static void spawnParticles(World world, BlockPos pos, ParticleEffect particle) {
-        Random random = world.getRandom();
-        for (int i = 0; i < 1; i++) {
-            world.addImportantParticle(particle, true, (double) pos.getX() + 0.5 + random.nextDouble() / 4.0 * (double) (random.nextBoolean() ? 1 : -1), pos.getY() + 0.4 + random.nextDouble() / 24.0, (double) pos.getZ() + 0.5 + random.nextDouble() / 4.0 * (double) (random.nextBoolean() ? 1 : -1), 0.0, 0.0, 0.0);
-            world.addParticle(particle, true, (double) pos.getX() + 0.5 + random.nextDouble() / 4.0 * (double) (random.nextBoolean() ? 1 : -1), pos.getY() + 0.4 + random.nextDouble() / 24.0, (double) pos.getZ() + 0.5 + random.nextDouble() / 4.0 * (double) (random.nextBoolean() ? 1 : -1), 0.0, 0.0, 0.0);
         }
     }
 
@@ -250,7 +249,7 @@ public class ShowerBlock extends HorizontalFacingBlock implements Waterloggable 
     public boolean tryFillWithFluid(WorldAccess world, BlockPos pos, BlockState state, FluidState fluidState) {
         if (!state.get(Properties.WATERLOGGED) && fluidState.getFluid() == Fluids.WATER) {
 
-            world.setBlockState(pos, (BlockState)((BlockState)state.with(WATERLOGGED, true)), Block.NOTIFY_ALL);
+            world.setBlockState(pos, state.with(WATERLOGGED, true), Block.NOTIFY_ALL);
             world.scheduleFluidTick(pos, fluidState.getFluid(), fluidState.getFluid().getTickRate(world));
             return true;
         }

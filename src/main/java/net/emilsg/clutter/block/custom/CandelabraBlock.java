@@ -1,6 +1,9 @@
 package net.emilsg.clutter.block.custom;
 
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.particle.ParticleTypes;
@@ -27,8 +30,6 @@ import org.jetbrains.annotations.Nullable;
 public class CandelabraBlock extends WaterloggableLitBlock {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
-    private static final BooleanProperty LIT = Properties.LIT;
-
     protected static final VoxelShape NORTH_SHAPE = VoxelShapes.union(
             Block.createCuboidShape(6.0, 0.0, 6.0, 10.0, 1.0, 10.0),
             Block.createCuboidShape(7.0, 1.0, 7.0, 9.0, 16.0, 9.0),
@@ -43,11 +44,6 @@ public class CandelabraBlock extends WaterloggableLitBlock {
             Block.createCuboidShape(6.0, 5.0, 7.5, 10.0, 8.0, 8.5),
             Block.createCuboidShape(12.0, 8.0, 7.5, 15.0, 9.0, 8.5)
     );
-    private static final Vec3d[] CANDLE_POSITIONS_NORTH = {
-            new Vec3d(0.125, 0.90625, 0.5),
-            new Vec3d(0.5, 1.09375, 0.5),
-            new Vec3d(0.875, 0.96875, 0.5)
-    };
     protected static final VoxelShape SOUTH_SHAPE = VoxelShapes.union(
             Block.createCuboidShape(6.0, 0.0, 6.0, 10.0, 1.0, 10.0),
             Block.createCuboidShape(7.0, 1.0, 7.0, 9.0, 16.0, 9.0),
@@ -62,11 +58,6 @@ public class CandelabraBlock extends WaterloggableLitBlock {
             Block.createCuboidShape(6.0, 5.0, 7.5, 10.0, 8.0, 8.5),
             Block.createCuboidShape(12.0, 8.0, 7.5, 15.0, 9.0, 8.5)
     );
-    private static final Vec3d[] CANDLE_POSITIONS_SOUTH= {
-            new Vec3d(0.125, 0.96875, 0.5),
-            new Vec3d(0.5, 1.09375, 0.5),
-            new Vec3d(0.875, 0.90625, 0.5)
-    };
     protected static final VoxelShape EAST_SHAPE = VoxelShapes.union(
             Block.createCuboidShape(6.0, 9.0, 0.0, 10.0, 10.0, 4.0),
             Block.createCuboidShape(6.0, 9.0, 12.0, 10.0, 10.0, 16.0),
@@ -81,11 +72,6 @@ public class CandelabraBlock extends WaterloggableLitBlock {
             Block.createCuboidShape(7.0, 10.0, 1.0, 9.0, 13.0, 3.0),
             Block.createCuboidShape(7.0, 10.0, 13.0, 9.0, 14.0, 15.0)
     );
-    private static final Vec3d[] CANDLE_POSITIONS_EAST = {
-            new Vec3d(0.5, 0.90625, 0.125),
-            new Vec3d(0.5, 1.09375, 0.5),
-            new Vec3d(0.5, 0.96875, 0.875)
-    };
     protected static final VoxelShape WEST_SHAPE = VoxelShapes.union(
             Block.createCuboidShape(6.0, 9.0, 0.0, 10.0, 10.0, 4.0),
             Block.createCuboidShape(6.0, 9.0, 12.0, 10.0, 10.0, 16.0),
@@ -100,6 +86,22 @@ public class CandelabraBlock extends WaterloggableLitBlock {
             Block.createCuboidShape(7.0, 10.0, 1.0, 9.0, 14.0, 3.0),
             Block.createCuboidShape(7.0, 10.0, 13.0, 9.0, 13.0, 15.0)
     );
+    private static final BooleanProperty LIT = Properties.LIT;
+    private static final Vec3d[] CANDLE_POSITIONS_NORTH = {
+            new Vec3d(0.125, 0.90625, 0.5),
+            new Vec3d(0.5, 1.09375, 0.5),
+            new Vec3d(0.875, 0.96875, 0.5)
+    };
+    private static final Vec3d[] CANDLE_POSITIONS_SOUTH = {
+            new Vec3d(0.125, 0.96875, 0.5),
+            new Vec3d(0.5, 1.09375, 0.5),
+            new Vec3d(0.875, 0.90625, 0.5)
+    };
+    private static final Vec3d[] CANDLE_POSITIONS_EAST = {
+            new Vec3d(0.5, 0.90625, 0.125),
+            new Vec3d(0.5, 1.09375, 0.5),
+            new Vec3d(0.5, 0.96875, 0.875)
+    };
     private static final Vec3d[] CANDLE_POSITIONS_WEST = {
             new Vec3d(0.5, 0.96875, 0.125),
             new Vec3d(0.5, 1.09375, 0.5),
@@ -111,13 +113,24 @@ public class CandelabraBlock extends WaterloggableLitBlock {
         this.setDefaultState(this.getDefaultState().with(WATERLOGGED, false).with(LIT, false));
     }
 
+    private static void spawnCandleParticles(World world, Vec3d vec3d, Random random) {
+        float f = random.nextFloat();
+        if (f < 0.3f) {
+            world.addParticle(ParticleTypes.SMOKE, vec3d.x, vec3d.y, vec3d.z, 0.0, 0.0, 0.0);
+            if (f < 0.17f) {
+                world.playSound(vec3d.x + 0.5, vec3d.y + 0.5, vec3d.z + 0.5, SoundEvents.BLOCK_CANDLE_AMBIENT, SoundCategory.BLOCKS, 1.0f + random.nextFloat(), random.nextFloat() * 0.7f + 0.3f, false);
+            }
+        }
+        world.addParticle(ParticleTypes.SMALL_FLAME, vec3d.x, vec3d.y, vec3d.z, 0.0, 0.0, 0.0);
+    }
+
     @Override
     @Nullable
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         BlockPos blockPos;
         World worldAccess = ctx.getWorld();
         boolean bl = worldAccess.getFluidState(blockPos = ctx.getBlockPos()).getFluid() == Fluids.WATER;
-        return (BlockState)this.getDefaultState().with(WATERLOGGED, bl).with(FACING, ctx.getHorizontalPlayerFacing());
+        return this.getDefaultState().with(WATERLOGGED, bl).with(FACING, ctx.getHorizontalPlayerFacing());
     }
 
     @Override
@@ -177,17 +190,6 @@ public class CandelabraBlock extends WaterloggableLitBlock {
             Vec3d offset = new Vec3d(pos.getX(), pos.getY(), pos.getZ());
             CandelabraBlock.spawnCandleParticles(world, offset.add(candlePos), random);
         }
-    }
-
-    private static void spawnCandleParticles(World world, Vec3d vec3d, Random random) {
-        float f = random.nextFloat();
-        if (f < 0.3f) {
-            world.addParticle(ParticleTypes.SMOKE, vec3d.x, vec3d.y, vec3d.z, 0.0, 0.0, 0.0);
-            if (f < 0.17f) {
-                world.playSound(vec3d.x + 0.5, vec3d.y + 0.5, vec3d.z + 0.5, SoundEvents.BLOCK_CANDLE_AMBIENT, SoundCategory.BLOCKS, 1.0f + random.nextFloat(), random.nextFloat() * 0.7f + 0.3f, false);
-            }
-        }
-        world.addParticle(ParticleTypes.SMALL_FLAME, vec3d.x, vec3d.y, vec3d.z, 0.0, 0.0, 0.0);
     }
 
     @Override

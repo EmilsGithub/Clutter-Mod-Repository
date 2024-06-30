@@ -20,7 +20,7 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class WoodenChairBlock extends SeatBlock{
+public class WoodenChairBlock extends SeatBlock {
 
     protected static final VoxelShape NORTH_SHAPE = VoxelShapes.union(
             Block.createCuboidShape(3, 8, 11, 13, 16, 12),

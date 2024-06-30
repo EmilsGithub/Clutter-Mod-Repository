@@ -10,11 +10,11 @@ public class ModTradeOffers {
     public static void addTrades() {
         TradeOfferHelper.registerWanderingTraderOffers(1, (factories) -> {
             factories.add((entity, random) ->
-                    new TradeOffer(new ItemStack(Items.EMERALD, random.nextBetween(2,4)), new ItemStack(ModItems.GIANT_LILY_PAD, 1), 8, 0, 0.0f));
+                    new TradeOffer(new ItemStack(Items.EMERALD, random.nextBetween(2, 4)), new ItemStack(ModItems.GIANT_LILY_PAD, 1), 8, 0, 0.0f));
             factories.add((entity, random) ->
-                    new TradeOffer(new ItemStack(Items.EMERALD, random.nextBetween(2,4)), new ItemStack(ModItems.SMALL_LILY_PADS, 1), 8, 0, 0.0f));
+                    new TradeOffer(new ItemStack(Items.EMERALD, random.nextBetween(2, 4)), new ItemStack(ModItems.SMALL_LILY_PADS, 1), 8, 0, 0.0f));
             factories.add((entity, random) ->
-                    new TradeOffer(new ItemStack(Items.EMERALD, random.nextBetween(2,4)), new ItemStack(ModItems.GIANT_LILY_PAD_SEEDLING, 1), 8, 0, 0.0f));
+                    new TradeOffer(new ItemStack(Items.EMERALD, random.nextBetween(2, 4)), new ItemStack(ModItems.GIANT_LILY_PAD_SEEDLING, 1), 8, 0, 0.0f));
         });
     }
 }

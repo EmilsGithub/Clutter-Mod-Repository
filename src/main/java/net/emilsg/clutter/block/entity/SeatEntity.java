@@ -2,7 +2,6 @@ package net.emilsg.clutter.block.entity;
 
 import net.emilsg.clutter.block.custom.SeatBlock;
 import net.emilsg.clutter.entity.ModEntities;
-import net.emilsg.clutter.util.ModBlockTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -23,11 +22,7 @@ import java.util.HashMap;
 public class SeatEntity extends Entity {
 
     public static final HashMap<Vec3d, BlockPos> IS_OCCUPIED = new HashMap<>();
-    @Override
-    public Packet<ClientPlayPacketListener> createSpawnPacket()
-    {
-        return new EntitySpawnS2CPacket(this);
-    }
+
     public SeatEntity(EntityType<? extends Entity> type, World world) {
         super(ModEntities.SEAT, world);
     }
@@ -35,6 +30,11 @@ public class SeatEntity extends Entity {
     public SeatEntity(World world) {
         super(ModEntities.SEAT, world);
         noClip = true;
+    }
+
+    @Override
+    public Packet<ClientPlayPacketListener> createSpawnPacket() {
+        return new EntitySpawnS2CPacket(this);
     }
 
     @Override
@@ -57,7 +57,7 @@ public class SeatEntity extends Entity {
                 default -> xOffset = -0.125f;
             }
 
-            BlockPos pos = IS_OCCUPIED.remove(new Vec3d(posX, posY , posZ));
+            BlockPos pos = IS_OCCUPIED.remove(new Vec3d(posX, posY, posZ));
             if (pos != null) {
                 remove(RemovalReason.DISCARDED);
                 return new Vec3d(posX + 0.5f + xOffset, posY + 1.0f, posZ + 0.5f + zOffset);
@@ -70,7 +70,7 @@ public class SeatEntity extends Entity {
 
     @Override
     public void tick() {
-        if (!this.getWorld().isClient && !(!this.getPassengerList().isEmpty() || !(this.getWorld().getBlockState(this.getBlockPos()).getBlock() instanceof SeatBlock))){
+        if (!this.getWorld().isClient && !(!this.getPassengerList().isEmpty() || !(this.getWorld().getBlockState(this.getBlockPos()).getBlock() instanceof SeatBlock))) {
             remove(RemovalReason.DISCARDED);
         }
     }
@@ -82,13 +82,16 @@ public class SeatEntity extends Entity {
     }
 
     @Override
-    protected void initDataTracker() {}
+    protected void initDataTracker() {
+    }
 
     @Override
-    public void readCustomDataFromNbt(NbtCompound nbt) {}
+    public void readCustomDataFromNbt(NbtCompound nbt) {
+    }
 
     @Override
-    public void writeCustomDataToNbt(NbtCompound nbt) {}
+    public void writeCustomDataToNbt(NbtCompound nbt) {
+    }
 
 
 }

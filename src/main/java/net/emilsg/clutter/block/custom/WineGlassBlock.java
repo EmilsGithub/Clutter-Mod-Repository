@@ -72,7 +72,6 @@ public class WineGlassBlock extends DrinkingGlassBlock {
     );
 
 
-
     public WineGlassBlock(Settings settings) {
         super(settings);
     }
@@ -81,8 +80,10 @@ public class WineGlassBlock extends DrinkingGlassBlock {
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return switch (state.get(GLASSES)) {
             default -> SINGLE_SHAPE;
-            case 1 -> state.get(FACING) == Direction.NORTH || state.get(FACING) == Direction.SOUTH ? TWO_NS_SHAPE : TWO_EW_SHAPE;
-            case 2 -> state.get(FACING) == Direction.NORTH || state.get(FACING) == Direction.SOUTH ? THREE_NS_SHAPE : THREE_EW_SHAPE;
+            case 1 ->
+                    state.get(FACING) == Direction.NORTH || state.get(FACING) == Direction.SOUTH ? TWO_NS_SHAPE : TWO_EW_SHAPE;
+            case 2 ->
+                    state.get(FACING) == Direction.NORTH || state.get(FACING) == Direction.SOUTH ? THREE_NS_SHAPE : THREE_EW_SHAPE;
         };
     }
 
@@ -93,16 +94,16 @@ public class WineGlassBlock extends DrinkingGlassBlock {
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         BlockState blockState = ctx.getWorld().getBlockState(ctx.getBlockPos());
         if (blockState.isOf(this)) {
-            return (BlockState)blockState.cycle(GLASSES);
+            return blockState.cycle(GLASSES);
         } else {
             FluidState fluidState = ctx.getWorld().getFluidState(ctx.getBlockPos());
             boolean bl = fluidState.getFluid() == Fluids.WATER;
-            return (BlockState)super.getPlacementState(ctx).with(WATERLOGGED, bl).with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
+            return super.getPlacementState(ctx).with(WATERLOGGED, bl).with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
         }
     }
 
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-        if ((Boolean)state.get(WATERLOGGED)) {
+        if (state.get(WATERLOGGED)) {
             world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
 
@@ -110,12 +111,12 @@ public class WineGlassBlock extends DrinkingGlassBlock {
     }
 
     public FluidState getFluidState(BlockState state) {
-        return (Boolean)state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
+        return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
     }
 
     public boolean tryFillWithFluid(WorldAccess world, BlockPos pos, BlockState state, FluidState fluidState) {
-        if (!(Boolean)state.get(WATERLOGGED) && fluidState.getFluid() == Fluids.WATER) {
-            BlockState blockState = (BlockState)state.with(WATERLOGGED, true);
+        if (!(Boolean) state.get(WATERLOGGED) && fluidState.getFluid() == Fluids.WATER) {
+            BlockState blockState = state.with(WATERLOGGED, true);
             world.setBlockState(pos, blockState, 3);
             world.scheduleFluidTick(pos, fluidState.getFluid(), fluidState.getFluid().getTickRate(world));
             return true;

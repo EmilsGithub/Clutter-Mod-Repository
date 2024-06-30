@@ -128,17 +128,17 @@ public class ItemTagDataGen extends FabricTagProvider.ItemTagProvider {
         );
 
         getOrCreateTagBuilder(ModItemTags.SEEDS).add(
-          ModItems.COTTON_SEEDS,
-          ModItems.GLOWLILY_SEEDLING,
-          ModItems.HOPS_SEEDS,
-          ModItems.KIWI_SEEDS,
-          ModItems.THORNBLOOM_SEEDS,
-          Items.BEETROOT_SEEDS,
-          Items.MELON_SEEDS,
-          Items.PUMPKIN_SEEDS,
-          Items.WHEAT_SEEDS,
-          Items.TORCHFLOWER_SEEDS,
-          Items.PITCHER_POD
+                ModItems.COTTON_SEEDS,
+                ModItems.GLOWLILY_SEEDLING,
+                ModItems.HOPS_SEEDS,
+                ModItems.KIWI_SEEDS,
+                ModItems.THORNBLOOM_SEEDS,
+                Items.BEETROOT_SEEDS,
+                Items.MELON_SEEDS,
+                Items.PUMPKIN_SEEDS,
+                Items.WHEAT_SEEDS,
+                Items.TORCHFLOWER_SEEDS,
+                Items.PITCHER_POD
         );
 
         getOrCreateTagBuilder(ModItemTags.DYES).add(
@@ -220,7 +220,7 @@ public class ItemTagDataGen extends FabricTagProvider.ItemTagProvider {
                 ModItems.TIARA,
                 ModItems.SILVER_TIARA,
                 ModItems.VIKING_HELMET
-                ).addTag(ModItemTags.PLUSHIES);
+        ).addTag(ModItemTags.PLUSHIES);
 
         getOrCreateTagBuilder(ModItemTags.TRINKETS_CAPE).addTag(ModItemTags.ELYTRON);
     }

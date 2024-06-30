@@ -14,7 +14,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.*;
+import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
+import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
 
 public class SmallSpongeBlock extends Block implements Waterloggable {
@@ -50,8 +53,8 @@ public class SmallSpongeBlock extends Block implements Waterloggable {
 
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if(random.nextInt(64) == 0) {
-            if(state.get(AGE) != 3) {
+        if (random.nextInt(64) == 0) {
+            if (state.get(AGE) != 3) {
                 world.setBlockState(pos, state.with(AGE, state.get(AGE) + 1), Block.NOTIFY_ALL);
             }
         }
@@ -99,8 +102,8 @@ public class SmallSpongeBlock extends Block implements Waterloggable {
         if (state.get(WATERLOGGED)) {
             world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
-        if(!canPlaceAt(state, world, pos)) {
-            if(state.get(WATERLOGGED)) {
+        if (!canPlaceAt(state, world, pos)) {
+            if (state.get(WATERLOGGED)) {
                 dropStacks(state, (World) world, pos);
                 return Blocks.WATER.getDefaultState();
             } else return Blocks.AIR.getDefaultState();

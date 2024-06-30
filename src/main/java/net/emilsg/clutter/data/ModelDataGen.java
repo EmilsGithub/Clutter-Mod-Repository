@@ -74,6 +74,177 @@ public class ModelDataGen extends FabricModelProvider {
         super(output);
     }
 
+    public static BlockStateSupplier createBenchBlockState(Block woodenBenchBlock, Identifier allModel, Identifier noneModel, Identifier leftModel, Identifier rightModel) {
+        return VariantsBlockStateSupplier.create(woodenBenchBlock)
+                .coordinate(BlockStateVariantMap.create(Properties.HORIZONTAL_FACING, WoodenBenchBlock.LEG_POSITIONS)
+                        .register(Direction.NORTH, WoodenBenchBlock.LegPosition.ALL, BlockStateVariant.create().put(VariantSettings.MODEL, allModel))
+                        .register(Direction.EAST, WoodenBenchBlock.LegPosition.ALL, BlockStateVariant.create().put(VariantSettings.MODEL, allModel).put(VariantSettings.Y, VariantSettings.Rotation.R90))
+                        .register(Direction.SOUTH, WoodenBenchBlock.LegPosition.ALL, BlockStateVariant.create().put(VariantSettings.MODEL, allModel).put(VariantSettings.Y, VariantSettings.Rotation.R180))
+                        .register(Direction.WEST, WoodenBenchBlock.LegPosition.ALL, BlockStateVariant.create().put(VariantSettings.MODEL, allModel).put(VariantSettings.Y, VariantSettings.Rotation.R270))
+                        .register(Direction.NORTH, WoodenBenchBlock.LegPosition.EAST, BlockStateVariant.create().put(VariantSettings.MODEL, leftModel))
+                        .register(Direction.SOUTH, WoodenBenchBlock.LegPosition.EAST, BlockStateVariant.create().put(VariantSettings.MODEL, rightModel).put(VariantSettings.Y, VariantSettings.Rotation.R180))
+                        .register(Direction.NORTH, WoodenBenchBlock.LegPosition.WEST, BlockStateVariant.create().put(VariantSettings.MODEL, rightModel))
+                        .register(Direction.SOUTH, WoodenBenchBlock.LegPosition.WEST, BlockStateVariant.create().put(VariantSettings.MODEL, leftModel).put(VariantSettings.Y, VariantSettings.Rotation.R180))
+                        .register(Direction.NORTH, WoodenBenchBlock.LegPosition.NONE, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel))
+                        .register(Direction.SOUTH, WoodenBenchBlock.LegPosition.NONE, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel).put(VariantSettings.Y, VariantSettings.Rotation.R180))
+                        .register(Direction.EAST, WoodenBenchBlock.LegPosition.NONE, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel).put(VariantSettings.Y, VariantSettings.Rotation.R90))
+                        .register(Direction.WEST, WoodenBenchBlock.LegPosition.NONE, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel).put(VariantSettings.Y, VariantSettings.Rotation.R270))
+                        .register(Direction.EAST, WoodenBenchBlock.LegPosition.NORTH, BlockStateVariant.create().put(VariantSettings.MODEL, rightModel).put(VariantSettings.Y, VariantSettings.Rotation.R90))
+                        .register(Direction.WEST, WoodenBenchBlock.LegPosition.NORTH, BlockStateVariant.create().put(VariantSettings.MODEL, leftModel).put(VariantSettings.Y, VariantSettings.Rotation.R270))
+                        .register(Direction.EAST, WoodenBenchBlock.LegPosition.SOUTH, BlockStateVariant.create().put(VariantSettings.MODEL, leftModel).put(VariantSettings.Y, VariantSettings.Rotation.R90))
+                        .register(Direction.WEST, WoodenBenchBlock.LegPosition.SOUTH, BlockStateVariant.create().put(VariantSettings.MODEL, rightModel).put(VariantSettings.Y, VariantSettings.Rotation.R270))
+                        .register(Direction.NORTH, WoodenBenchBlock.LegPosition.NORTH, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel))
+                        .register(Direction.EAST, WoodenBenchBlock.LegPosition.EAST, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel).put(VariantSettings.Y, VariantSettings.Rotation.R90))
+                        .register(Direction.NORTH, WoodenBenchBlock.LegPosition.SOUTH, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel).put(VariantSettings.Y, VariantSettings.Rotation.R180))
+                        .register(Direction.WEST, WoodenBenchBlock.LegPosition.WEST, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel).put(VariantSettings.Y, VariantSettings.Rotation.R270))
+                        .register(Direction.SOUTH, WoodenBenchBlock.LegPosition.NORTH, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel))
+                        .register(Direction.SOUTH, WoodenBenchBlock.LegPosition.SOUTH, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel).put(VariantSettings.Y, VariantSettings.Rotation.R180))
+                        .register(Direction.EAST, WoodenBenchBlock.LegPosition.WEST, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel).put(VariantSettings.Y, VariantSettings.Rotation.R270))
+                        .register(Direction.WEST, WoodenBenchBlock.LegPosition.EAST, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel).put(VariantSettings.Y, VariantSettings.Rotation.R90))
+                );
+    }
+
+    public static BlockStateSupplier createWindowSillBlockState(Block windowSill, String[] flowerNames) {
+        int i = 0;
+        VariantsBlockStateSupplier supplier = VariantsBlockStateSupplier.create(windowSill);
+
+        BlockStateVariantMap.DoubleProperty<Direction, Integer> builder = BlockStateVariantMap.create(Properties.HORIZONTAL_FACING, WindowSillBlock.CURRENT_MODEL);
+
+        for (String flower : flowerNames) {
+            builder.register(Direction.NORTH, i, BlockStateVariant.create().put(VariantSettings.MODEL, new Identifier(Clutter.MOD_ID, "block/" + Registries.BLOCK.getId(windowSill).getPath() + "_" + flower)))
+                    .register(Direction.EAST, i, BlockStateVariant.create().put(VariantSettings.MODEL, new Identifier(Clutter.MOD_ID, "block/" + Registries.BLOCK.getId(windowSill).getPath() + "_" + flower)).put(VariantSettings.Y, VariantSettings.Rotation.R90))
+                    .register(Direction.SOUTH, i, BlockStateVariant.create().put(VariantSettings.MODEL, new Identifier(Clutter.MOD_ID, "block/" + Registries.BLOCK.getId(windowSill).getPath() + "_" + flower)).put(VariantSettings.Y, VariantSettings.Rotation.R180))
+                    .register(Direction.WEST, i, BlockStateVariant.create().put(VariantSettings.MODEL, new Identifier(Clutter.MOD_ID, "block/" + Registries.BLOCK.getId(windowSill).getPath() + "_" + flower)).put(VariantSettings.Y, VariantSettings.Rotation.R270));
+
+            i++;
+        }
+
+        return supplier.coordinate(builder);
+    }
+
+    public static BlockStateSupplier createWallBookshelfBlockState(Block wallBookshelfBlock, Identifier oneModel, Identifier twoModel, Identifier threeModel, Identifier fourModel, Identifier fiveModel, Identifier sixModel, Identifier sevenModel) {
+        return VariantsBlockStateSupplier.create(wallBookshelfBlock)
+                .coordinate(BlockStateVariantMap.create(Properties.HORIZONTAL_FACING, WallBookshelfBlock.CURRENT_MODEL)
+                        .register(Direction.NORTH, 0, BlockStateVariant.create().put(VariantSettings.MODEL, oneModel))
+                        .register(Direction.NORTH, 1, BlockStateVariant.create().put(VariantSettings.MODEL, twoModel))
+                        .register(Direction.NORTH, 2, BlockStateVariant.create().put(VariantSettings.MODEL, threeModel))
+                        .register(Direction.NORTH, 3, BlockStateVariant.create().put(VariantSettings.MODEL, fourModel))
+                        .register(Direction.NORTH, 4, BlockStateVariant.create().put(VariantSettings.MODEL, fiveModel))
+                        .register(Direction.NORTH, 5, BlockStateVariant.create().put(VariantSettings.MODEL, sixModel))
+                        .register(Direction.NORTH, 6, BlockStateVariant.create().put(VariantSettings.MODEL, sevenModel))
+                        .register(Direction.SOUTH, 0, BlockStateVariant.create().put(VariantSettings.MODEL, oneModel).put(VariantSettings.Y, VariantSettings.Rotation.R180))
+                        .register(Direction.SOUTH, 1, BlockStateVariant.create().put(VariantSettings.MODEL, twoModel).put(VariantSettings.Y, VariantSettings.Rotation.R180))
+                        .register(Direction.SOUTH, 2, BlockStateVariant.create().put(VariantSettings.MODEL, threeModel).put(VariantSettings.Y, VariantSettings.Rotation.R180))
+                        .register(Direction.SOUTH, 3, BlockStateVariant.create().put(VariantSettings.MODEL, fourModel).put(VariantSettings.Y, VariantSettings.Rotation.R180))
+                        .register(Direction.SOUTH, 4, BlockStateVariant.create().put(VariantSettings.MODEL, fiveModel).put(VariantSettings.Y, VariantSettings.Rotation.R180))
+                        .register(Direction.SOUTH, 5, BlockStateVariant.create().put(VariantSettings.MODEL, sixModel).put(VariantSettings.Y, VariantSettings.Rotation.R180))
+                        .register(Direction.SOUTH, 6, BlockStateVariant.create().put(VariantSettings.MODEL, sevenModel).put(VariantSettings.Y, VariantSettings.Rotation.R180))
+                        .register(Direction.EAST, 0, BlockStateVariant.create().put(VariantSettings.MODEL, oneModel).put(VariantSettings.Y, VariantSettings.Rotation.R90))
+                        .register(Direction.EAST, 1, BlockStateVariant.create().put(VariantSettings.MODEL, twoModel).put(VariantSettings.Y, VariantSettings.Rotation.R90))
+                        .register(Direction.EAST, 2, BlockStateVariant.create().put(VariantSettings.MODEL, threeModel).put(VariantSettings.Y, VariantSettings.Rotation.R90))
+                        .register(Direction.EAST, 3, BlockStateVariant.create().put(VariantSettings.MODEL, fourModel).put(VariantSettings.Y, VariantSettings.Rotation.R90))
+                        .register(Direction.EAST, 4, BlockStateVariant.create().put(VariantSettings.MODEL, fiveModel).put(VariantSettings.Y, VariantSettings.Rotation.R90))
+                        .register(Direction.EAST, 5, BlockStateVariant.create().put(VariantSettings.MODEL, sixModel).put(VariantSettings.Y, VariantSettings.Rotation.R90))
+                        .register(Direction.EAST, 6, BlockStateVariant.create().put(VariantSettings.MODEL, sevenModel).put(VariantSettings.Y, VariantSettings.Rotation.R90))
+                        .register(Direction.WEST, 0, BlockStateVariant.create().put(VariantSettings.MODEL, oneModel).put(VariantSettings.Y, VariantSettings.Rotation.R270))
+                        .register(Direction.WEST, 1, BlockStateVariant.create().put(VariantSettings.MODEL, twoModel).put(VariantSettings.Y, VariantSettings.Rotation.R270))
+                        .register(Direction.WEST, 2, BlockStateVariant.create().put(VariantSettings.MODEL, threeModel).put(VariantSettings.Y, VariantSettings.Rotation.R270))
+                        .register(Direction.WEST, 3, BlockStateVariant.create().put(VariantSettings.MODEL, fourModel).put(VariantSettings.Y, VariantSettings.Rotation.R270))
+                        .register(Direction.WEST, 4, BlockStateVariant.create().put(VariantSettings.MODEL, fiveModel).put(VariantSettings.Y, VariantSettings.Rotation.R270))
+                        .register(Direction.WEST, 5, BlockStateVariant.create().put(VariantSettings.MODEL, sixModel).put(VariantSettings.Y, VariantSettings.Rotation.R270))
+                        .register(Direction.WEST, 6, BlockStateVariant.create().put(VariantSettings.MODEL, sevenModel).put(VariantSettings.Y, VariantSettings.Rotation.R270))
+                );
+    }
+
+    public static BlockStateSupplier createTableBlockState(Block wallBookshelfBlock, Identifier allModel, Identifier nModel, Identifier neModel, Identifier eModel, Identifier seModel, Identifier sModel, Identifier swModel, Identifier wModel, Identifier nwModel, Identifier noneModel) {
+        return VariantsBlockStateSupplier.create(wallBookshelfBlock)
+                .coordinate(BlockStateVariantMap.create(ModProperties.LEGS, TableBlock.LEG_POSITIONS)
+                        .register(true, TableBlock.LegPosition.ALL, BlockStateVariant.create().put(VariantSettings.MODEL, allModel))
+                        .register(true, TableBlock.LegPosition.NORTH, BlockStateVariant.create().put(VariantSettings.MODEL, sModel))
+                        .register(true, TableBlock.LegPosition.NORTH_EAST, BlockStateVariant.create().put(VariantSettings.MODEL, swModel))
+                        .register(true, TableBlock.LegPosition.EAST, BlockStateVariant.create().put(VariantSettings.MODEL, wModel))
+                        .register(true, TableBlock.LegPosition.SOUTH_EAST, BlockStateVariant.create().put(VariantSettings.MODEL, nwModel))
+                        .register(true, TableBlock.LegPosition.SOUTH, BlockStateVariant.create().put(VariantSettings.MODEL, nModel))
+                        .register(true, TableBlock.LegPosition.SOUTH_WEST, BlockStateVariant.create().put(VariantSettings.MODEL, neModel))
+                        .register(true, TableBlock.LegPosition.WEST, BlockStateVariant.create().put(VariantSettings.MODEL, eModel))
+                        .register(true, TableBlock.LegPosition.NORTH_WEST, BlockStateVariant.create().put(VariantSettings.MODEL, seModel))
+                        .register(true, TableBlock.LegPosition.NONE, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel))
+                        .register(false, TableBlock.LegPosition.ALL, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel))
+                        .register(false, TableBlock.LegPosition.NORTH, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel))
+                        .register(false, TableBlock.LegPosition.NORTH_EAST, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel))
+                        .register(false, TableBlock.LegPosition.EAST, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel))
+                        .register(false, TableBlock.LegPosition.SOUTH_EAST, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel))
+                        .register(false, TableBlock.LegPosition.SOUTH, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel))
+                        .register(false, TableBlock.LegPosition.SOUTH_WEST, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel))
+                        .register(false, TableBlock.LegPosition.WEST, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel))
+                        .register(false, TableBlock.LegPosition.NORTH_WEST, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel))
+                        .register(false, TableBlock.LegPosition.NONE, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel))
+                );
+    }
+
+    public static BlockStateSupplier createCupboardModel(Block cupboard, Identifier openModel, Identifier closedModel) {
+        return VariantsBlockStateSupplier.create(cupboard)
+                .coordinate(BlockStateVariantMap.create(ModProperties.OPEN, Properties.HORIZONTAL_FACING)
+                        .register(false, Direction.NORTH, BlockStateVariant.create().put(VariantSettings.MODEL, closedModel))
+                        .register(false, Direction.EAST, BlockStateVariant.create().put(VariantSettings.MODEL, closedModel).put(VariantSettings.Y, VariantSettings.Rotation.R90))
+                        .register(false, Direction.SOUTH, BlockStateVariant.create().put(VariantSettings.MODEL, closedModel).put(VariantSettings.Y, VariantSettings.Rotation.R180))
+                        .register(false, Direction.WEST, BlockStateVariant.create().put(VariantSettings.MODEL, closedModel).put(VariantSettings.Y, VariantSettings.Rotation.R270))
+                        .register(true, Direction.NORTH, BlockStateVariant.create().put(VariantSettings.MODEL, openModel))
+                        .register(true, Direction.EAST, BlockStateVariant.create().put(VariantSettings.MODEL, openModel).put(VariantSettings.Y, VariantSettings.Rotation.R90))
+                        .register(true, Direction.SOUTH, BlockStateVariant.create().put(VariantSettings.MODEL, openModel).put(VariantSettings.Y, VariantSettings.Rotation.R180))
+                        .register(true, Direction.WEST, BlockStateVariant.create().put(VariantSettings.MODEL, openModel).put(VariantSettings.Y, VariantSettings.Rotation.R270))
+                );
+    }
+
+    private static Model block(String parent, TextureKey... requiredTextureKeys) {
+        return new Model(Optional.of(new Identifier("clutter", "block/parent/" + parent)), Optional.empty(), requiredTextureKeys);
+    }
+
+    private static Model item(String parent, TextureKey... requiredTextureKeys) {
+        return new Model(Optional.of(new Identifier("clutter", "item/" + parent)), Optional.empty(), requiredTextureKeys);
+    }
+
+    private static Model block(String parent, String variant, TextureKey... requiredTextureKeys) {
+        return new Model(Optional.of(new Identifier("clutter", "block/parent/" + parent)), Optional.of(variant), requiredTextureKeys);
+    }
+
+    public static TextureMap logAndPlanksMap(Block logBlock, Block planksBlock) {
+        Identifier log = TextureMap.getId(logBlock);
+        Identifier planks = TextureMap.getId(planksBlock);
+        return new TextureMap().put(LOG, log).put(PLANKS, planks);
+    }
+
+    public static TextureMap largeCrossMap(Block crossBlock, boolean top) {
+        Identifier cross = TextureMap.getId(crossBlock);
+        String crossPath = cross.getPath() + (top ? "_top" : "_bottom");
+        Identifier finalCross = new Identifier(Clutter.MOD_ID, crossPath);
+        return new TextureMap().put(TextureKey.CROSS, finalCross);
+    }
+
+    public static TextureMap planksMap(Block planksBlock) {
+        Identifier planks = TextureMap.getId(planksBlock);
+        return new TextureMap().put(PLANKS, planks);
+    }
+
+    public static TextureMap cupboardMap(Block planksBlock) {
+        Identifier planks = TextureMap.getId(planksBlock);
+        String woodType = planks.getPath().replace("_planks", "");
+        Identifier door = new Identifier(Clutter.MOD_ID, woodType + "_cupboard_door");
+        Identifier inside = new Identifier(Clutter.MOD_ID, woodType + "_cupboard_inside");
+        return new TextureMap().put(PLANKS, planks).put(CUPBOARD_DOOR, door).put(CUPBOARD_INSIDE, inside);
+    }
+
+    public static TextureMap windowSillMap(Block planksBlock, String flower) {
+        Identifier flowerId = new Identifier("block/" + flower);
+        Identifier planks = TextureMap.getId(planksBlock);
+        return new TextureMap().put(PLANKS, planks).put(FLOWER, flowerId);
+    }
+
+    public static TextureMap emptyWindowSillMap(Block planksBlock) {
+        Identifier planks = TextureMap.getId(planksBlock);
+        return new TextureMap().put(PLANKS, planks);
+    }
+
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator generator) {
         generator.registerFlowerPotPlant(ModBlocks.SMALL_BLUE_LUPINE, ModBlocks.POTTED_SMALL_BLUE_LUPINE, BlockStateModelGenerator.TintType.NOT_TINTED);
@@ -351,128 +522,6 @@ public class ModelDataGen extends FabricModelProvider {
         generator.registerParentedItemModel(windowSill, emptyModel);
     }
 
-    public static BlockStateSupplier createBenchBlockState(Block woodenBenchBlock, Identifier allModel, Identifier noneModel, Identifier leftModel, Identifier rightModel) {
-        return VariantsBlockStateSupplier.create(woodenBenchBlock)
-                .coordinate(BlockStateVariantMap.create(Properties.HORIZONTAL_FACING, WoodenBenchBlock.LEG_POSITIONS)
-                        .register(Direction.NORTH, WoodenBenchBlock.LegPosition.ALL, BlockStateVariant.create().put(VariantSettings.MODEL, allModel))
-                        .register(Direction.EAST, WoodenBenchBlock.LegPosition.ALL, BlockStateVariant.create().put(VariantSettings.MODEL, allModel).put(VariantSettings.Y, VariantSettings.Rotation.R90))
-                        .register(Direction.SOUTH, WoodenBenchBlock.LegPosition.ALL, BlockStateVariant.create().put(VariantSettings.MODEL, allModel).put(VariantSettings.Y, VariantSettings.Rotation.R180))
-                        .register(Direction.WEST, WoodenBenchBlock.LegPosition.ALL, BlockStateVariant.create().put(VariantSettings.MODEL, allModel).put(VariantSettings.Y, VariantSettings.Rotation.R270))
-                        .register(Direction.NORTH, WoodenBenchBlock.LegPosition.EAST, BlockStateVariant.create().put(VariantSettings.MODEL, leftModel))
-                        .register(Direction.SOUTH, WoodenBenchBlock.LegPosition.EAST, BlockStateVariant.create().put(VariantSettings.MODEL, rightModel).put(VariantSettings.Y, VariantSettings.Rotation.R180))
-                        .register(Direction.NORTH, WoodenBenchBlock.LegPosition.WEST, BlockStateVariant.create().put(VariantSettings.MODEL, rightModel))
-                        .register(Direction.SOUTH, WoodenBenchBlock.LegPosition.WEST, BlockStateVariant.create().put(VariantSettings.MODEL, leftModel).put(VariantSettings.Y, VariantSettings.Rotation.R180))
-                        .register(Direction.NORTH, WoodenBenchBlock.LegPosition.NONE, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel))
-                        .register(Direction.SOUTH, WoodenBenchBlock.LegPosition.NONE, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel).put(VariantSettings.Y, VariantSettings.Rotation.R180))
-                        .register(Direction.EAST, WoodenBenchBlock.LegPosition.NONE, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel).put(VariantSettings.Y, VariantSettings.Rotation.R90))
-                        .register(Direction.WEST, WoodenBenchBlock.LegPosition.NONE, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel).put(VariantSettings.Y, VariantSettings.Rotation.R270))
-                        .register(Direction.EAST, WoodenBenchBlock.LegPosition.NORTH, BlockStateVariant.create().put(VariantSettings.MODEL, rightModel).put(VariantSettings.Y, VariantSettings.Rotation.R90))
-                        .register(Direction.WEST, WoodenBenchBlock.LegPosition.NORTH, BlockStateVariant.create().put(VariantSettings.MODEL, leftModel).put(VariantSettings.Y, VariantSettings.Rotation.R270))
-                        .register(Direction.EAST, WoodenBenchBlock.LegPosition.SOUTH, BlockStateVariant.create().put(VariantSettings.MODEL, leftModel).put(VariantSettings.Y, VariantSettings.Rotation.R90))
-                        .register(Direction.WEST, WoodenBenchBlock.LegPosition.SOUTH, BlockStateVariant.create().put(VariantSettings.MODEL, rightModel).put(VariantSettings.Y, VariantSettings.Rotation.R270))
-                        .register(Direction.NORTH, WoodenBenchBlock.LegPosition.NORTH, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel))
-                        .register(Direction.EAST, WoodenBenchBlock.LegPosition.EAST, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel).put(VariantSettings.Y, VariantSettings.Rotation.R90))
-                        .register(Direction.NORTH, WoodenBenchBlock.LegPosition.SOUTH, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel).put(VariantSettings.Y, VariantSettings.Rotation.R180))
-                        .register(Direction.WEST, WoodenBenchBlock.LegPosition.WEST, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel).put(VariantSettings.Y, VariantSettings.Rotation.R270))
-                        .register(Direction.SOUTH, WoodenBenchBlock.LegPosition.NORTH, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel))
-                        .register(Direction.SOUTH, WoodenBenchBlock.LegPosition.SOUTH, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel).put(VariantSettings.Y, VariantSettings.Rotation.R180))
-                        .register(Direction.EAST, WoodenBenchBlock.LegPosition.WEST, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel).put(VariantSettings.Y, VariantSettings.Rotation.R270))
-                        .register(Direction.WEST, WoodenBenchBlock.LegPosition.EAST, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel).put(VariantSettings.Y, VariantSettings.Rotation.R90))
-                );
-    }
-
-    public static BlockStateSupplier createWindowSillBlockState(Block windowSill, String[] flowerNames) {
-        int i = 0;
-        VariantsBlockStateSupplier supplier = VariantsBlockStateSupplier.create(windowSill);
-
-        BlockStateVariantMap.DoubleProperty<Direction, Integer> builder = BlockStateVariantMap.create(Properties.HORIZONTAL_FACING, WindowSillBlock.CURRENT_MODEL);
-
-        for (String flower : flowerNames) {
-            builder.register(Direction.NORTH, i, BlockStateVariant.create().put(VariantSettings.MODEL, new Identifier(Clutter.MOD_ID, "block/" + Registries.BLOCK.getId(windowSill).getPath() + "_" + flower)))
-                    .register(Direction.EAST, i, BlockStateVariant.create().put(VariantSettings.MODEL, new Identifier(Clutter.MOD_ID, "block/" + Registries.BLOCK.getId(windowSill).getPath() + "_" + flower)).put(VariantSettings.Y, VariantSettings.Rotation.R90))
-                    .register(Direction.SOUTH, i, BlockStateVariant.create().put(VariantSettings.MODEL, new Identifier(Clutter.MOD_ID, "block/" + Registries.BLOCK.getId(windowSill).getPath() + "_" + flower)).put(VariantSettings.Y, VariantSettings.Rotation.R180))
-                    .register(Direction.WEST, i, BlockStateVariant.create().put(VariantSettings.MODEL, new Identifier(Clutter.MOD_ID, "block/" + Registries.BLOCK.getId(windowSill).getPath() + "_" + flower)).put(VariantSettings.Y, VariantSettings.Rotation.R270));
-
-            i++;
-        }
-
-        return supplier.coordinate(builder);
-    }
-
-    public static BlockStateSupplier createWallBookshelfBlockState(Block wallBookshelfBlock, Identifier oneModel, Identifier twoModel, Identifier threeModel, Identifier fourModel, Identifier fiveModel, Identifier sixModel, Identifier sevenModel) {
-        return VariantsBlockStateSupplier.create(wallBookshelfBlock)
-                .coordinate(BlockStateVariantMap.create(Properties.HORIZONTAL_FACING, WallBookshelfBlock.CURRENT_MODEL)
-                        .register(Direction.NORTH, 0, BlockStateVariant.create().put(VariantSettings.MODEL, oneModel))
-                        .register(Direction.NORTH, 1, BlockStateVariant.create().put(VariantSettings.MODEL, twoModel))
-                        .register(Direction.NORTH, 2, BlockStateVariant.create().put(VariantSettings.MODEL, threeModel))
-                        .register(Direction.NORTH, 3, BlockStateVariant.create().put(VariantSettings.MODEL, fourModel))
-                        .register(Direction.NORTH, 4, BlockStateVariant.create().put(VariantSettings.MODEL, fiveModel))
-                        .register(Direction.NORTH, 5, BlockStateVariant.create().put(VariantSettings.MODEL, sixModel))
-                        .register(Direction.NORTH, 6, BlockStateVariant.create().put(VariantSettings.MODEL, sevenModel))
-                        .register(Direction.SOUTH, 0, BlockStateVariant.create().put(VariantSettings.MODEL, oneModel).put(VariantSettings.Y, VariantSettings.Rotation.R180))
-                        .register(Direction.SOUTH, 1, BlockStateVariant.create().put(VariantSettings.MODEL, twoModel).put(VariantSettings.Y, VariantSettings.Rotation.R180))
-                        .register(Direction.SOUTH, 2, BlockStateVariant.create().put(VariantSettings.MODEL, threeModel).put(VariantSettings.Y, VariantSettings.Rotation.R180))
-                        .register(Direction.SOUTH, 3, BlockStateVariant.create().put(VariantSettings.MODEL, fourModel).put(VariantSettings.Y, VariantSettings.Rotation.R180))
-                        .register(Direction.SOUTH, 4, BlockStateVariant.create().put(VariantSettings.MODEL, fiveModel).put(VariantSettings.Y, VariantSettings.Rotation.R180))
-                        .register(Direction.SOUTH, 5, BlockStateVariant.create().put(VariantSettings.MODEL, sixModel).put(VariantSettings.Y, VariantSettings.Rotation.R180))
-                        .register(Direction.SOUTH, 6, BlockStateVariant.create().put(VariantSettings.MODEL, sevenModel).put(VariantSettings.Y, VariantSettings.Rotation.R180))
-                        .register(Direction.EAST, 0, BlockStateVariant.create().put(VariantSettings.MODEL, oneModel).put(VariantSettings.Y, VariantSettings.Rotation.R90))
-                        .register(Direction.EAST, 1, BlockStateVariant.create().put(VariantSettings.MODEL, twoModel).put(VariantSettings.Y, VariantSettings.Rotation.R90))
-                        .register(Direction.EAST, 2, BlockStateVariant.create().put(VariantSettings.MODEL, threeModel).put(VariantSettings.Y, VariantSettings.Rotation.R90))
-                        .register(Direction.EAST, 3, BlockStateVariant.create().put(VariantSettings.MODEL, fourModel).put(VariantSettings.Y, VariantSettings.Rotation.R90))
-                        .register(Direction.EAST, 4, BlockStateVariant.create().put(VariantSettings.MODEL, fiveModel).put(VariantSettings.Y, VariantSettings.Rotation.R90))
-                        .register(Direction.EAST, 5, BlockStateVariant.create().put(VariantSettings.MODEL, sixModel).put(VariantSettings.Y, VariantSettings.Rotation.R90))
-                        .register(Direction.EAST, 6, BlockStateVariant.create().put(VariantSettings.MODEL, sevenModel).put(VariantSettings.Y, VariantSettings.Rotation.R90))
-                        .register(Direction.WEST, 0, BlockStateVariant.create().put(VariantSettings.MODEL, oneModel).put(VariantSettings.Y, VariantSettings.Rotation.R270))
-                        .register(Direction.WEST, 1, BlockStateVariant.create().put(VariantSettings.MODEL, twoModel).put(VariantSettings.Y, VariantSettings.Rotation.R270))
-                        .register(Direction.WEST, 2, BlockStateVariant.create().put(VariantSettings.MODEL, threeModel).put(VariantSettings.Y, VariantSettings.Rotation.R270))
-                        .register(Direction.WEST, 3, BlockStateVariant.create().put(VariantSettings.MODEL, fourModel).put(VariantSettings.Y, VariantSettings.Rotation.R270))
-                        .register(Direction.WEST, 4, BlockStateVariant.create().put(VariantSettings.MODEL, fiveModel).put(VariantSettings.Y, VariantSettings.Rotation.R270))
-                        .register(Direction.WEST, 5, BlockStateVariant.create().put(VariantSettings.MODEL, sixModel).put(VariantSettings.Y, VariantSettings.Rotation.R270))
-                        .register(Direction.WEST, 6, BlockStateVariant.create().put(VariantSettings.MODEL, sevenModel).put(VariantSettings.Y, VariantSettings.Rotation.R270))
-                );
-    }
-
-    public static BlockStateSupplier createTableBlockState(Block wallBookshelfBlock, Identifier allModel, Identifier nModel, Identifier neModel, Identifier eModel, Identifier seModel, Identifier sModel, Identifier swModel, Identifier wModel, Identifier nwModel, Identifier noneModel) {
-        return VariantsBlockStateSupplier.create(wallBookshelfBlock)
-                .coordinate(BlockStateVariantMap.create(ModProperties.LEGS, TableBlock.LEG_POSITIONS)
-                        .register(true, TableBlock.LegPosition.ALL, BlockStateVariant.create().put(VariantSettings.MODEL, allModel))
-                        .register(true, TableBlock.LegPosition.NORTH, BlockStateVariant.create().put(VariantSettings.MODEL, sModel))
-                        .register(true, TableBlock.LegPosition.NORTH_EAST, BlockStateVariant.create().put(VariantSettings.MODEL, swModel))
-                        .register(true, TableBlock.LegPosition.EAST, BlockStateVariant.create().put(VariantSettings.MODEL, wModel))
-                        .register(true, TableBlock.LegPosition.SOUTH_EAST, BlockStateVariant.create().put(VariantSettings.MODEL, nwModel))
-                        .register(true, TableBlock.LegPosition.SOUTH, BlockStateVariant.create().put(VariantSettings.MODEL, nModel))
-                        .register(true, TableBlock.LegPosition.SOUTH_WEST, BlockStateVariant.create().put(VariantSettings.MODEL, neModel))
-                        .register(true, TableBlock.LegPosition.WEST, BlockStateVariant.create().put(VariantSettings.MODEL, eModel))
-                        .register(true, TableBlock.LegPosition.NORTH_WEST, BlockStateVariant.create().put(VariantSettings.MODEL, seModel))
-                        .register(true, TableBlock.LegPosition.NONE, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel))
-                        .register(false, TableBlock.LegPosition.ALL, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel))
-                        .register(false, TableBlock.LegPosition.NORTH, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel))
-                        .register(false, TableBlock.LegPosition.NORTH_EAST, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel))
-                        .register(false, TableBlock.LegPosition.EAST, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel))
-                        .register(false, TableBlock.LegPosition.SOUTH_EAST, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel))
-                        .register(false, TableBlock.LegPosition.SOUTH, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel))
-                        .register(false, TableBlock.LegPosition.SOUTH_WEST, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel))
-                        .register(false, TableBlock.LegPosition.WEST, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel))
-                        .register(false, TableBlock.LegPosition.NORTH_WEST, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel))
-                        .register(false, TableBlock.LegPosition.NONE, BlockStateVariant.create().put(VariantSettings.MODEL, noneModel))
-                );
-    }
-
-    public static BlockStateSupplier createCupboardModel(Block cupboard, Identifier openModel, Identifier closedModel) {
-        return VariantsBlockStateSupplier.create(cupboard)
-                .coordinate(BlockStateVariantMap.create(ModProperties.OPEN, Properties.HORIZONTAL_FACING)
-                        .register(false, Direction.NORTH, BlockStateVariant.create().put(VariantSettings.MODEL, closedModel))
-                        .register(false, Direction.EAST, BlockStateVariant.create().put(VariantSettings.MODEL, closedModel).put(VariantSettings.Y, VariantSettings.Rotation.R90))
-                        .register(false, Direction.SOUTH, BlockStateVariant.create().put(VariantSettings.MODEL, closedModel).put(VariantSettings.Y, VariantSettings.Rotation.R180))
-                        .register(false, Direction.WEST, BlockStateVariant.create().put(VariantSettings.MODEL, closedModel).put(VariantSettings.Y, VariantSettings.Rotation.R270))
-                        .register(true, Direction.NORTH, BlockStateVariant.create().put(VariantSettings.MODEL, openModel))
-                        .register(true, Direction.EAST, BlockStateVariant.create().put(VariantSettings.MODEL, openModel).put(VariantSettings.Y, VariantSettings.Rotation.R90))
-                        .register(true, Direction.SOUTH, BlockStateVariant.create().put(VariantSettings.MODEL, openModel).put(VariantSettings.Y, VariantSettings.Rotation.R180))
-                        .register(true, Direction.WEST, BlockStateVariant.create().put(VariantSettings.MODEL, openModel).put(VariantSettings.Y, VariantSettings.Rotation.R270))
-                );
-    }
-
     private void registerLargeTintableCross(BlockStateModelGenerator generator, Block block) {
         Identifier top = generator.createSubModel(block, "_top", LARGE_TINTED_CROSS, id -> largeCrossMap(block, true));
         Identifier bottom = generator.createSubModel(block, "_bottom", LARGE_TINTED_CROSS, id -> largeCrossMap(block, false));
@@ -487,7 +536,7 @@ public class ModelDataGen extends FabricModelProvider {
 
     private void registerElytra(ItemModelGenerator itemGen, Item elytra) {
         String idString = ModelIds.getItemModelId(elytra).getPath().replace("item/", "item/broken_");
-        TextureMap brokenMap = (new TextureMap()).put(TextureKey.LAYER0, new Identifier(Clutter.MOD_ID,idString));
+        TextureMap brokenMap = (new TextureMap()).put(TextureKey.LAYER0, new Identifier(Clutter.MOD_ID, idString));
 
         Models.GENERATED.upload(new Identifier(Clutter.MOD_ID, idString), brokenMap, itemGen.writer);
 
@@ -505,55 +554,5 @@ public class ModelDataGen extends FabricModelProvider {
 
             return jsonObject;
         });
-    }
-
-
-    private static Model block(String parent, TextureKey ... requiredTextureKeys) {
-        return new Model(Optional.of(new Identifier("clutter", "block/parent/" + parent)), Optional.empty(), requiredTextureKeys);
-    }
-
-    private static Model item(String parent, TextureKey ... requiredTextureKeys) {
-        return new Model(Optional.of(new Identifier("clutter", "item/" + parent)), Optional.empty(), requiredTextureKeys);
-    }
-
-    private static Model block(String parent, String variant, TextureKey ... requiredTextureKeys) {
-        return new Model(Optional.of(new Identifier("clutter", "block/parent/" + parent)), Optional.of(variant), requiredTextureKeys);
-    }
-
-    public static TextureMap logAndPlanksMap(Block logBlock, Block planksBlock) {
-        Identifier log = TextureMap.getId(logBlock);
-        Identifier planks = TextureMap.getId(planksBlock);
-        return new TextureMap().put(LOG, log).put(PLANKS, planks);
-    }
-
-    public static TextureMap largeCrossMap(Block crossBlock, boolean top) {
-        Identifier cross = TextureMap.getId(crossBlock);
-        String crossPath = cross.getPath() + (top ? "_top" : "_bottom");
-        Identifier finalCross = new Identifier(Clutter.MOD_ID, crossPath);
-        return new TextureMap().put(TextureKey.CROSS, finalCross);
-    }
-
-    public static TextureMap planksMap(Block planksBlock) {
-        Identifier planks = TextureMap.getId(planksBlock);
-        return new TextureMap().put(PLANKS, planks);
-    }
-
-    public static TextureMap cupboardMap(Block planksBlock) {
-        Identifier planks = TextureMap.getId(planksBlock);
-        String woodType = planks.getPath().replace("_planks", "");
-        Identifier door = new Identifier(Clutter.MOD_ID, woodType + "_cupboard_door");
-        Identifier inside = new Identifier(Clutter.MOD_ID, woodType + "_cupboard_inside");
-        return new TextureMap().put(PLANKS, planks).put(CUPBOARD_DOOR, door).put(CUPBOARD_INSIDE, inside);
-    }
-
-    public static TextureMap windowSillMap(Block planksBlock, String flower) {
-        Identifier flowerId = new Identifier("block/" + flower);
-        Identifier planks = TextureMap.getId(planksBlock);
-        return new TextureMap().put(PLANKS, planks).put(FLOWER, flowerId);
-    }
-
-    public static TextureMap emptyWindowSillMap(Block planksBlock) {
-        Identifier planks = TextureMap.getId(planksBlock);
-        return new TextureMap().put(PLANKS, planks);
     }
 }

@@ -38,36 +38,16 @@ import java.util.EnumSet;
 import java.util.List;
 
 public class CapybaraEntity extends ClutterTameableEntity {
-        private static final TrackedData<Boolean> IS_SLEEPING = DataTracker.registerData(CapybaraEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    private static final TrackedData<Boolean> IS_SLEEPING = DataTracker.registerData(CapybaraEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private static final TrackedData<Boolean> FORCE_SLEEPING = DataTracker.registerData(CapybaraEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private static final TrackedData<Integer> SLEEPER = DataTracker.registerData(CapybaraEntity.class, TrackedDataHandlerRegistry.INTEGER);
-
-    public final AnimationState idleAnimationState = new AnimationState();
-    public int idleAnimationTimeout = 0;
-
-    public final AnimationState earTwitchAnimationState = new AnimationState();
-    public int earTwitchAnimationTimeout = 0;
-
-    public final AnimationState sleepingAnimationState = new AnimationState();
-    public int sleepingAnimationTimeout = 0;
-
-    private void setupAnimationStates() {
-        if (this.sleepingAnimationTimeout <= 0) {
-            this.sleepingAnimationTimeout = 80;
-            this.sleepingAnimationState.start(this.age);
-        } else {
-            --this.sleepingAnimationTimeout;
-        }
-
-        if(this.earTwitchAnimationTimeout <= 0) {
-            this.earTwitchAnimationTimeout = 1;
-            this.earTwitchAnimationState.start(this.age);
-        } else {
-            --this.earTwitchAnimationTimeout;
-        }
-    }
-
     private static final Ingredient BREEDING_INGREDIENT = Ingredient.ofItems(Items.MELON);
+    public final AnimationState idleAnimationState = new AnimationState();
+    public final AnimationState earTwitchAnimationState = new AnimationState();
+    public final AnimationState sleepingAnimationState = new AnimationState();
+    public int idleAnimationTimeout = 0;
+    public int earTwitchAnimationTimeout = 0;
+    public int sleepingAnimationTimeout = 0;
 
     public CapybaraEntity(EntityType<? extends ClutterTameableEntity> entityType, World world) {
         super(entityType, world);
@@ -84,6 +64,33 @@ public class CapybaraEntity extends ClutterTameableEntity {
                 .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.1f)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.0f)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0f);
+    }
+
+    private void setupAnimationStates() {
+        if (this.sleepingAnimationTimeout <= 0) {
+            this.sleepingAnimationTimeout = 80;
+            this.sleepingAnimationState.start(this.age);
+        } else {
+            --this.sleepingAnimationTimeout;
+        }
+
+        if (this.earTwitchAnimationTimeout <= 0) {
+            this.earTwitchAnimationTimeout = 1;
+            this.earTwitchAnimationState.start(this.age);
+        } else {
+            --this.earTwitchAnimationTimeout;
+        }
+    }
+
+    protected void updateLimbs(float v) {
+        float f;
+        if (this.getPose() == EntityPose.STANDING) {
+            f = Math.min(v * 6.0F, 1.0F);
+        } else {
+            f = 0.0F;
+        }
+
+        this.limbAnimator.updateLimbs(f, 0.2F);
     }
 
     @Override
@@ -121,7 +128,7 @@ public class CapybaraEntity extends ClutterTameableEntity {
                 itemStack.decrement(1);
             }
 
-            this.heal((float)item.getFoodComponent().getHunger());
+            this.heal((float) item.getFoodComponent().getHunger());
             return ActionResult.SUCCESS;
         }
 
@@ -139,18 +146,18 @@ public class CapybaraEntity extends ClutterTameableEntity {
                     this.navigation.recalculatePath();
                     this.setHealth(this.getMaxHealth());
                     this.setTarget(null);
-                    this.getWorld().sendEntityStatus(this, (byte)7);
+                    this.getWorld().sendEntityStatus(this, (byte) 7);
                     setIsForceSleeping(true);
                     setIsSleeping(true);
                 } else {
-                    this.getWorld().sendEntityStatus(this, (byte)6);
+                    this.getWorld().sendEntityStatus(this, (byte) 6);
                 }
 
                 return ActionResult.SUCCESS;
             }
         }
 
-        if(isTamed() && !this.getWorld().isClient() && hand == Hand.MAIN_HAND && !(itemStack.isOf(Items.MELON_SLICE)) && !(itemStack.isOf(Items.MELON)) && isOwner(player)) {
+        if (isTamed() && !this.getWorld().isClient() && hand == Hand.MAIN_HAND && !(itemStack.isOf(Items.MELON_SLICE)) && !(itemStack.isOf(Items.MELON)) && isOwner(player)) {
             setIsForceSleeping(!isSleeping());
             setIsSleeping(!isSleeping());
             return ActionResult.SUCCESS;
@@ -226,9 +233,9 @@ public class CapybaraEntity extends ClutterTameableEntity {
         super.tickMovement();
         if (!this.getWorld().isClient && !this.isTamed()) this.setIsSleeping(!this.getWorld().isDay());
 
-        if(!this.getWorld().isClient && this.isTamed()) this.setIsSleeping(isForceSleeping());
+        if (!this.getWorld().isClient && this.isTamed()) this.setIsSleeping(isForceSleeping());
 
-        if(this.isSleeping()) {
+        if (this.isSleeping()) {
             applyEffectToNearbyEntities(this, new StatusEffectInstance(StatusEffects.REGENERATION, 100, 0), 4);
         }
     }
@@ -238,7 +245,7 @@ public class CapybaraEntity extends ClutterTameableEntity {
         super.tick();
         World world = this.getWorld();
 
-        if(world.isClient) {
+        if (world.isClient) {
             this.setupAnimationStates();
         }
     }
@@ -252,6 +259,23 @@ public class CapybaraEntity extends ClutterTameableEntity {
     @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
         return ModEntities.CAPYBARA.create(world);
+    }
+
+    public void applyEffectToNearbyEntities(Entity centerEntity, StatusEffectInstance effect, double radius) {
+        Box area = new Box(
+                centerEntity.getX() - radius, centerEntity.getY() - radius, centerEntity.getZ() - radius,
+                centerEntity.getX() + radius, centerEntity.getY() + radius, centerEntity.getZ() + radius
+        );
+
+        List<LivingEntity> nearbyEntities = centerEntity.getWorld().getEntitiesByClass(
+                LivingEntity.class,
+                area,
+                e -> e != centerEntity
+        );
+
+        for (LivingEntity entity : nearbyEntities) {
+            entity.addStatusEffect(effect);
+        }
     }
 
     private class CapybaraWanderGoal extends WanderAroundFarGoal {
@@ -357,23 +381,6 @@ public class CapybaraEntity extends ClutterTameableEntity {
         @Override
         public void stop() {
             this.capybara.setIsForceSleeping(false);
-        }
-    }
-
-    public void applyEffectToNearbyEntities(Entity centerEntity, StatusEffectInstance effect, double radius) {
-        Box area = new Box(
-                centerEntity.getX() - radius, centerEntity.getY() - radius, centerEntity.getZ() - radius,
-                centerEntity.getX() + radius, centerEntity.getY() + radius, centerEntity.getZ() + radius
-        );
-
-        List<LivingEntity> nearbyEntities = centerEntity.getWorld().getEntitiesByClass(
-                LivingEntity.class,
-                area,
-                e -> e != centerEntity
-        );
-
-        for (LivingEntity entity : nearbyEntities) {
-            entity.addStatusEffect(effect);
         }
     }
 

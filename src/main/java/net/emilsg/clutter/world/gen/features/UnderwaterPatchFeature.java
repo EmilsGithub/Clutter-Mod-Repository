@@ -14,14 +14,8 @@ import net.minecraft.world.gen.feature.util.FeatureContext;
 
 public class UnderwaterPatchFeature extends Feature<CountConfig> {
 
-    @FunctionalInterface
-    public interface BlockStateModifier {
-        BlockState modify(BlockState originalState, Random random);
-    }
-
     private final BlockState state;
     private final BlockStateModifier stateModifier;
-
     public UnderwaterPatchFeature(Codec<CountConfig> codec, BlockState state, BlockStateModifier stateModifier) {
         super(codec);
         this.state = state;
@@ -40,7 +34,8 @@ public class UnderwaterPatchFeature extends Feature<CountConfig> {
             int m = random.nextInt(8) - random.nextInt(8);
             int n = structureWorldAccess.getTopY(Heightmap.Type.OCEAN_FLOOR, blockPos.getX() + l, blockPos.getZ() + m);
             BlockPos blockPos2 = new BlockPos(blockPos.getX() + l, n, blockPos.getZ() + m);
-            if (!structureWorldAccess.getBlockState(blockPos2).isOf(Blocks.WATER) || !state.canPlaceAt(structureWorldAccess, blockPos2)) continue;
+            if (!structureWorldAccess.getBlockState(blockPos2).isOf(Blocks.WATER) || !state.canPlaceAt(structureWorldAccess, blockPos2))
+                continue;
 
             BlockState newState = stateModifier.modify(state, random);
             structureWorldAccess.setBlockState(blockPos2, newState, Block.NOTIFY_LISTENERS);
@@ -48,6 +43,11 @@ public class UnderwaterPatchFeature extends Feature<CountConfig> {
         }
 
         return i > 0;
+    }
+
+    @FunctionalInterface
+    public interface BlockStateModifier {
+        BlockState modify(BlockState originalState, Random random);
     }
 
 }

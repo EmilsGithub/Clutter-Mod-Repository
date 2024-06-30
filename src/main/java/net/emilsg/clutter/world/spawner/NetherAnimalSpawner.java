@@ -19,10 +19,10 @@ import net.minecraft.world.dimension.DimensionTypes;
 import net.minecraft.world.spawner.Spawner;
 
 public class NetherAnimalSpawner implements Spawner {
-    private int cooldown;
     private final int maxCooldown;
     private final TagKey<Biome> biomeTagKey;
     private final EntityType animalEntityType;
+    private int cooldown;
 
     public NetherAnimalSpawner(int maxCooldownInTicks, TagKey<Biome> biomeTagKey, EntityType animalEntityType) {
         this.maxCooldown = maxCooldownInTicks;

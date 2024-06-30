@@ -28,6 +28,19 @@ public class RecipeDataGen extends FabricRecipeProvider {
         super(output);
     }
 
+    public static void offerClutterWaxingRecipes(Consumer<RecipeJsonProvider> exporter) {
+        HoneycombItem.UNWAXED_TO_WAXED_BLOCKS.get().forEach((input, result) -> {
+            if (Registries.ITEM.getId(input.asItem()).getNamespace().equals(Clutter.MOD_ID)) {
+
+                ShapelessRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, result)
+                        .input(input).input(Items.HONEYCOMB)
+                        .criterion(hasItem(input), conditionsFromItem(input))
+                        .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(result)));
+
+            }
+        });
+    }
+
     @Override
     public void generate(Consumer<RecipeJsonProvider> exporter) {
         kilningRecipe(Items.SAND, Items.GLASS, 1, exporter);
@@ -225,7 +238,6 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output.asItem()) + "_from_" + input.asItem() + "_and_" + input2.asItem()));
     }
 
-
     private void kilningRecipe(ItemConvertible ingredient, ItemConvertible result, int count, Consumer<RecipeJsonProvider> exporter) {
         new KilningRecipeBuilder(ingredient, result, count).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(result)));
     }
@@ -276,18 +288,5 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .criterion(hasItem(component), conditionsFromItem(component))
                 .criterion(hasItem(secondComponent), conditionsFromItem(secondComponent))
                 .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(result)));
-    }
-
-    public static void offerClutterWaxingRecipes(Consumer<RecipeJsonProvider> exporter) {
-        HoneycombItem.UNWAXED_TO_WAXED_BLOCKS.get().forEach((input, result) -> {
-            if (Registries.ITEM.getId(input.asItem()).getNamespace().equals(Clutter.MOD_ID)) {
-
-                ShapelessRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, result)
-                        .input(input).input(Items.HONEYCOMB)
-                        .criterion(hasItem(input), conditionsFromItem(input))
-                        .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(result)));
-
-            }
-        });
     }
 }

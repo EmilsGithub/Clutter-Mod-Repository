@@ -200,6 +200,11 @@ public class LargeChandelierBlock extends Block {
         world.setBlockState(pos.north().west(), this.getDefaultState().with(BLOCK_SHAPE, LargeChandelierDirections.NORTH_WEST));
     }
 
+    public void appendTooltip(ItemStack stack, @Nullable BlockView world, List<Text> tooltip, TooltipContext context) {
+        tooltip.add(Text.translatable("block.clutter.3x1x3_area_tooltip.tooltip").formatted(Formatting.BLUE));
+        super.appendTooltip(stack, world, tooltip, context);
+    }
+
     public enum LargeChandelierDirections implements StringIdentifiable {
         NORTH_WEST("north_west"),
         WEST("west"),
@@ -255,11 +260,6 @@ public class LargeChandelierBlock extends Block {
             };
         }
 
-    }
-
-    public void appendTooltip(ItemStack stack, @Nullable BlockView world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(Text.translatable("block.clutter.3x1x3_area_tooltip.tooltip").formatted(Formatting.BLUE));
-        super.appendTooltip(stack, world, tooltip, context);
     }
 
 }

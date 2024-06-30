@@ -19,6 +19,6 @@ public class EmberTortoiseMateGoal extends AnimalMateGoal {
     @Override
     public void tick() {
         super.tick();
-        if(this.emberTortoise.isShielding()) stop();
+        if (this.emberTortoise.isShielding()) stop();
     }
 }

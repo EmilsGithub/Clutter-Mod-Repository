@@ -14,6 +14,10 @@ public class BrickKilnFuelSlot extends Slot {
         this.handler = handler;
     }
 
+    public static boolean isBucket(ItemStack stack) {
+        return stack.isOf(Items.BUCKET);
+    }
+
     @Override
     public boolean canInsert(ItemStack stack) {
         return this.handler.isFuel(stack) || BrickKilnFuelSlot.isBucket(stack);
@@ -22,9 +26,5 @@ public class BrickKilnFuelSlot extends Slot {
     @Override
     public int getMaxItemCount(ItemStack stack) {
         return BrickKilnFuelSlot.isBucket(stack) ? 1 : super.getMaxItemCount(stack);
-    }
-
-    public static boolean isBucket(ItemStack stack) {
-        return stack.isOf(Items.BUCKET);
     }
 }

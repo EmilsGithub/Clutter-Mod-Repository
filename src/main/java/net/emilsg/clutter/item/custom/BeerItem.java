@@ -31,7 +31,7 @@ public class BeerItem extends AliasedBlockItem {
     @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
         PlayerEntity playerEntity;
-        PlayerEntity playerEntity2 = playerEntity = user instanceof PlayerEntity ? (PlayerEntity)user : null;
+        PlayerEntity playerEntity2 = playerEntity = user instanceof PlayerEntity ? (PlayerEntity) user : null;
         if (playerEntity instanceof ServerPlayerEntity) {
             Criteria.CONSUME_ITEM.trigger((ServerPlayerEntity) playerEntity, stack);
         }

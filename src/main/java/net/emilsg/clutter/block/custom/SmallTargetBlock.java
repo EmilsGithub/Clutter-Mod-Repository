@@ -72,11 +72,16 @@ public class SmallTargetBlock extends HorizontalFacingBlock {
             Block.createCuboidShape(1, 14, 11, 2, 16, 14));
 
 
-
-
     public SmallTargetBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.getDefaultState().with(UP, false));
+    }
+
+    private static void spawnParticles(BlockState state, WorldAccess world, BlockPos pos) {
+        double x = (double) pos.getX() + 0.5 + 0.3 * ((world.getRandom().nextInt(1) + 1) * (world.getRandom().nextBoolean() ? 1 : -1));
+        double y = (double) pos.getY() + 0.8 + (0.1 * (world.getRandom().nextBoolean() ? 1 : -1));
+        double z = (double) pos.getZ() + 0.5 + 0.3 * ((world.getRandom().nextInt(1) + 1) * (world.getRandom().nextBoolean() ? 1 : -1));
+        world.addParticle(new DustParticleEffect(DustParticleEffect.RED, 0.5f), x, y, z, 0.0, 0.0, 0.0);
     }
 
     @Override
@@ -87,7 +92,7 @@ public class SmallTargetBlock extends HorizontalFacingBlock {
     @Override
     @Nullable
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return (BlockState)this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
+        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
     }
 
     @Override
@@ -104,7 +109,7 @@ public class SmallTargetBlock extends HorizontalFacingBlock {
         Direction hitSide = hit.getSide();
         BlockPos pos = hit.getBlockPos();
 
-        if(hitSide == state.get(FACING) && !state.get(UP)) {
+        if (hitSide == state.get(FACING) && !state.get(UP)) {
             world.setBlockState(pos, world.getBlockState(pos).with(UP, true), Block.NOTIFY_ALL);
             world.playSound(null, pos, state.get(UP) ? SoundEvents.BLOCK_WOODEN_TRAPDOOR_OPEN : SoundEvents.BLOCK_WOODEN_TRAPDOOR_CLOSE, SoundCategory.BLOCKS, 1.0F, 1.25f);
         }
@@ -136,15 +141,8 @@ public class SmallTargetBlock extends HorizontalFacingBlock {
         return state.get(UP) ? 15 : 0;
     }
 
-    private static void spawnParticles(BlockState state, WorldAccess world, BlockPos pos) {
-        double x = (double)pos.getX() + 0.5 + 0.3 * ((world.getRandom().nextInt(1) + 1) * (world.getRandom().nextBoolean() ? 1 : -1));
-        double y = (double)pos.getY() + 0.8 + (0.1 * (world.getRandom().nextBoolean() ? 1 : -1));
-        double z = (double)pos.getZ() + 0.5 + 0.3 * ((world.getRandom().nextInt(1) + 1) * (world.getRandom().nextBoolean() ? 1 : -1));
-        world.addParticle(new DustParticleEffect(DustParticleEffect.RED, 0.5f), x, y, z, 0.0, 0.0, 0.0);
-    }
-
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-        if ((Boolean)state.get(UP) && random.nextFloat() < 0.5F) {
+        if (state.get(UP) && random.nextFloat() < 0.5F) {
             spawnParticles(state, world, pos);
         }
 

@@ -25,9 +25,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.function.ToIntFunction;
 
 public class TubeTvBlock extends HorizontalFacingBlock implements Waterloggable {
-    private static final BooleanProperty LIT = Properties.LIT;
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
-
     protected static final VoxelShape NORTH_SHAPE = VoxelShapes.union(
             Block.createCuboidShape(1, 0, 1, 15, 4, 3),
             Block.createCuboidShape(11, 1, 0.5, 12, 2, 1),
@@ -80,6 +78,7 @@ public class TubeTvBlock extends HorizontalFacingBlock implements Waterloggable 
             Block.createCuboidShape(1, 12, 1, 3, 14, 15),
             Block.createCuboidShape(3, 14, 3, 6, 15, 7)
     );
+    private static final BooleanProperty LIT = Properties.LIT;
 
     public TubeTvBlock(Settings settings) {
         super(settings);
@@ -97,8 +96,7 @@ public class TubeTvBlock extends HorizontalFacingBlock implements Waterloggable 
             if (!i) {
                 world.setBlockState(pos, state.with(LIT, true), Block.NOTIFY_ALL);
                 world.playSound(null, pos, SoundEvents.BLOCK_METAL_PRESSURE_PLATE_CLICK_ON, SoundCategory.BLOCKS, 1.0f, 1.25f);
-            }
-            else {
+            } else {
                 world.setBlockState(pos, state.with(LIT, false), Block.NOTIFY_ALL);
                 world.playSound(null, pos, SoundEvents.BLOCK_METAL_PRESSURE_PLATE_CLICK_OFF, SoundCategory.BLOCKS, 1.0f, 1.25f);
             }
@@ -126,7 +124,7 @@ public class TubeTvBlock extends HorizontalFacingBlock implements Waterloggable 
         BlockPos blockPos;
         World worldAccess = ctx.getWorld();
         boolean bl = worldAccess.getFluidState(blockPos = ctx.getBlockPos()).getFluid() == Fluids.WATER;
-        return (BlockState)this.getDefaultState().with(WATERLOGGED, bl).with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
+        return this.getDefaultState().with(WATERLOGGED, bl).with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
     }
 
     @Override

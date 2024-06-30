@@ -28,9 +28,9 @@ public class KiwiBirdRenderer extends GeoEntityRenderer<KiwiBirdEntity> {
         float babyScale = 0.6f;
         float hasEggScale = 1.2f;
 
-        if(entity.hasEgg() && !entity.isBaby()) {
+        if (entity.hasEgg() && !entity.isBaby()) {
             poseStack.scale(hasEggScale, hasEggScale, hasEggScale);
-        } else if(entity.isBaby() && !entity.hasEgg()) {
+        } else if (entity.isBaby() && !entity.hasEgg()) {
             poseStack.scale(babyScale, babyScale, babyScale);
         }
 

@@ -36,8 +36,8 @@ public class BeachPatchFeature extends Feature<CountConfig> {
         for (int k = 0; k < j; ++k) {
             double angle = 2 * Math.PI * random.nextDouble();
             double distance = radius * Math.sqrt(random.nextDouble());
-            int l = (int)(distance * Math.cos(angle));
-            int m = (int)(distance * Math.sin(angle));
+            int l = (int) (distance * Math.cos(angle));
+            int m = (int) (distance * Math.sin(angle));
             int n = structureWorldAccess.getTopY(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, blockPos.getX() + l, blockPos.getZ() + m);
             BlockPos blockPos2 = new BlockPos(blockPos.getX() + l, n, blockPos.getZ() + m);
 

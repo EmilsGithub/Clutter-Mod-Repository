@@ -29,8 +29,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.stream.IntStream;
 
 public class PlateInventoryBlockEntity extends LootableContainerBlockEntity implements SidedInventory, Inventory {
-    private DefaultedList<ItemStack> inventory = DefaultedList.ofSize(3, ItemStack.EMPTY);
     private static final int[] AVAILABLE_SLOTS = IntStream.range(0, 3).toArray();
+    private DefaultedList<ItemStack> inventory = DefaultedList.ofSize(3, ItemStack.EMPTY);
 
     public PlateInventoryBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.PLATE, blockPos, blockState);
@@ -60,10 +60,10 @@ public class PlateInventoryBlockEntity extends LootableContainerBlockEntity impl
     @Override
     public void markDirty() {
         assert world != null;
-        if(!world.isClient) {
+        if (!world.isClient) {
             PacketByteBuf data = PacketByteBufs.create();
             data.writeInt(inventory.size());
-            for(int i = 0; i < inventory.size(); i++) {
+            for (int i = 0; i < inventory.size(); i++) {
                 data.writeItemStack(inventory.get(i));
             }
             data.writeBlockPos(getPos());
@@ -76,7 +76,7 @@ public class PlateInventoryBlockEntity extends LootableContainerBlockEntity impl
     }
 
     public void setInventory(DefaultedList<ItemStack> inventory) {
-        for(int i = 0; i < inventory.size(); i++) {
+        for (int i = 0; i < inventory.size(); i++) {
             this.inventory.set(i, inventory.get(i));
         }
     }

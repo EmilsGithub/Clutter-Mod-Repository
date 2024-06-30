@@ -7,7 +7,6 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.UndergroundConfiguredFeatures;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -22,7 +21,7 @@ public class MossBlockMixin {
         world.getRegistryManager().getOptional(RegistryKeys.CONFIGURED_FEATURE).flatMap((registry) -> {
             return registry.getEntry(UndergroundConfiguredFeatures.MOSS_PATCH_BONEMEAL);
         }).ifPresent((reference) -> {
-            ((ConfiguredFeature<?, ?>)reference.value()).generate(world, world.getChunkManager().getChunkGenerator(), random, pos.up());
+            reference.value().generate(world, world.getChunkManager().getChunkGenerator(), random, pos.up());
 
             for (int i = 0; i < 20; ++i) {
                 BlockPos blockPos = pos.up().add(random.nextInt(3) - 1, random.nextInt(2) - random.nextInt(2), random.nextInt(3) - 1);

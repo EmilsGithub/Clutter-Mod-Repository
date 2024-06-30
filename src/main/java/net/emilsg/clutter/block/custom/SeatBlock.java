@@ -63,6 +63,7 @@ public abstract class SeatBlock extends HorizontalFacingBlock implements Waterlo
         }
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
+
     @Override
     public boolean tryFillWithFluid(WorldAccess world, BlockPos pos, BlockState state, FluidState fluidState) {
         if (!state.get(Properties.WATERLOGGED) && fluidState.getFluid() == Fluids.WATER) {
@@ -88,8 +89,9 @@ public abstract class SeatBlock extends HorizontalFacingBlock implements Waterlo
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if(player.isSneaking() || !player.getStackInHand(hand).isEmpty()) return ActionResult.PASS;
-        if(isStrippable() && (player.getStackInHand(Hand.MAIN_HAND).getItem() instanceof AxeItem || player.getStackInHand(Hand.OFF_HAND).getItem() instanceof AxeItem)) return ActionResult.PASS;
+        if (player.isSneaking() || !player.getStackInHand(hand).isEmpty()) return ActionResult.PASS;
+        if (isStrippable() && (player.getStackInHand(Hand.MAIN_HAND).getItem() instanceof AxeItem || player.getStackInHand(Hand.OFF_HAND).getItem() instanceof AxeItem))
+            return ActionResult.PASS;
 
         Vec3d comparePos = new Vec3d(pos.getX(), pos.getY(), pos.getZ());
 
@@ -102,7 +104,7 @@ public abstract class SeatBlock extends HorizontalFacingBlock implements Waterlo
 
     private ActionResult spawnAndSitOnSeat(World world, PlayerEntity player, BlockPos blockPos, double yOffset, Vec3d comparePos) {
         SeatEntity seatEntity = ModEntities.SEAT.create(world);
-        if(seatEntity != null) {
+        if (seatEntity != null) {
             Vec3d pos = new Vec3d(blockPos.getX() + 0.5f, blockPos.getY() + yOffset, blockPos.getZ() + 0.5f);
             IS_OCCUPIED.put(comparePos, player.getBlockPos());
             seatEntity.updatePosition(pos.getX(), pos.getY(), pos.getZ());
@@ -120,7 +122,7 @@ public abstract class SeatBlock extends HorizontalFacingBlock implements Waterlo
         int yPos = pos.getY();
         int zPos = pos.getZ();
 
-        List<SeatEntity> entities = world.getEntitiesByClass(SeatEntity.class, new Box(xPos,yPos,zPos,xPos+1,yPos+1,zPos+1), Entity::hasPassengers);
+        List<SeatEntity> entities = world.getEntitiesByClass(SeatEntity.class, new Box(xPos, yPos, zPos, xPos + 1, yPos + 1, zPos + 1), Entity::hasPassengers);
         for (SeatEntity entity : entities) {
             entity.remove(Entity.RemovalReason.DISCARDED);
         }

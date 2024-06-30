@@ -37,12 +37,6 @@ public class TableBlock extends Block implements Waterloggable {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
     public static final EnumProperty<LegPosition> LEG_POSITIONS = EnumProperty.of("leg_positions", LegPosition.class);
     public static final BooleanProperty LEGS = ModProperties.LEGS;
-
-    public TableBlock(Settings settings) {
-        super(settings);
-        this.setDefaultState((this.stateManager.getDefaultState()).with(WATERLOGGED, false).with(LEGS,true).with(LEG_POSITIONS, LegPosition.ALL));
-    }
-
     protected static final VoxelShape NORTH_SHAPE = VoxelShapes.union(
             Block.createCuboidShape(0.0, 14.0, 0.0, 16.0, 16.0, 16.0),
             Block.createCuboidShape(0.0, 0.0, 14.0, 2.0, 14.0, 16.0),
@@ -90,6 +84,10 @@ public class TableBlock extends Block implements Waterloggable {
             Block.createCuboidShape(0.0, 0.0, 14.0, 2.0, 14.0, 16.0),
             Block.createCuboidShape(14.0, 0.0, 14.0, 16.0, 14.0, 16.0)
     );
+    public TableBlock(Settings settings) {
+        super(settings);
+        this.setDefaultState((this.stateManager.getDefaultState()).with(WATERLOGGED, false).with(LEGS, true).with(LEG_POSITIONS, LegPosition.ALL));
+    }
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
@@ -107,57 +105,6 @@ public class TableBlock extends Block implements Waterloggable {
             case ALL -> ALL_SHAPE;
         };
     }
-
-    public enum LegPosition implements StringIdentifiable {
-        NONE("none"),
-        NORTH("north"),
-        SOUTH("south"),
-        EAST("east"),
-        WEST("west"),
-        NORTH_WEST("north_west"),
-        NORTH_EAST("north_east"),
-        SOUTH_WEST("south_west"),
-        SOUTH_EAST("south_east"),
-        ALL("all");
-
-        private final String name;
-
-        LegPosition(String name) {
-            this.name = name;
-        }
-
-        public String asString() {
-            return this.name;
-        }
-
-        @Override
-        public String toString() {
-            return this.name;
-        }
-
-        public static LegPosition fromNeighborBlocks(boolean west, boolean north, boolean east, boolean south) {
-            if (west && north) {
-                return LegPosition.NORTH_WEST;
-            } else if (west && south) {
-                return LegPosition.SOUTH_WEST;
-            } else if (east && north) {
-                return LegPosition.NORTH_EAST;
-            } else if (east && south) {
-                return LegPosition.SOUTH_EAST;
-            }  else if (west) {
-                return LegPosition.WEST;
-            } else if (east) {
-                return LegPosition.EAST;
-            } else if (north) {
-                return LegPosition.NORTH;
-            } else if (south) {
-                return LegPosition.SOUTH;
-            } else {
-                return LegPosition.NONE;
-            }
-        }
-    }
-
 
     @Override
     public void appendProperties(StateManager.Builder<Block, BlockState> builder) {
@@ -210,8 +157,6 @@ public class TableBlock extends Block implements Waterloggable {
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos).with(LEG_POSITIONS, legPositions).with(LEGS, legs);
     }
 
-
-
     @Override
     public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
         super.onPlaced(world, pos, state, placer, itemStack);
@@ -245,7 +190,7 @@ public class TableBlock extends Block implements Waterloggable {
         BlockPos blockPos;
         World worldAccess = ctx.getWorld();
         boolean bl = worldAccess.getFluidState(blockPos = ctx.getBlockPos()).getFluid() == Fluids.WATER;
-        return (BlockState)this.getDefaultState().with(WATERLOGGED, bl);
+        return this.getDefaultState().with(WATERLOGGED, bl);
     }
 
     @Override
@@ -296,7 +241,7 @@ public class TableBlock extends Block implements Waterloggable {
     public boolean tryFillWithFluid(WorldAccess world, BlockPos pos, BlockState state, FluidState fluidState) {
         if (!state.get(Properties.WATERLOGGED) && fluidState.getFluid() == Fluids.WATER) {
 
-            world.setBlockState(pos, (BlockState)((BlockState)state.with(WATERLOGGED, true)), Block.NOTIFY_ALL);
+            world.setBlockState(pos, state.with(WATERLOGGED, true), Block.NOTIFY_ALL);
             world.scheduleFluidTick(pos, fluidState.getFluid(), fluidState.getFluid().getTickRate(world));
             return true;
         }
@@ -309,5 +254,55 @@ public class TableBlock extends Block implements Waterloggable {
             return Fluids.WATER.getStill(false);
         }
         return super.getFluidState(state);
+    }
+
+    public enum LegPosition implements StringIdentifiable {
+        NONE("none"),
+        NORTH("north"),
+        SOUTH("south"),
+        EAST("east"),
+        WEST("west"),
+        NORTH_WEST("north_west"),
+        NORTH_EAST("north_east"),
+        SOUTH_WEST("south_west"),
+        SOUTH_EAST("south_east"),
+        ALL("all");
+
+        private final String name;
+
+        LegPosition(String name) {
+            this.name = name;
+        }
+
+        public static LegPosition fromNeighborBlocks(boolean west, boolean north, boolean east, boolean south) {
+            if (west && north) {
+                return LegPosition.NORTH_WEST;
+            } else if (west && south) {
+                return LegPosition.SOUTH_WEST;
+            } else if (east && north) {
+                return LegPosition.NORTH_EAST;
+            } else if (east && south) {
+                return LegPosition.SOUTH_EAST;
+            } else if (west) {
+                return LegPosition.WEST;
+            } else if (east) {
+                return LegPosition.EAST;
+            } else if (north) {
+                return LegPosition.NORTH;
+            } else if (south) {
+                return LegPosition.SOUTH;
+            } else {
+                return LegPosition.NONE;
+            }
+        }
+
+        public String asString() {
+            return this.name;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
     }
 }

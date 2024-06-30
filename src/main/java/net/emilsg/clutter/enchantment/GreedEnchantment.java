@@ -12,6 +12,7 @@ public class GreedEnchantment extends Enchantment {
     public GreedEnchantment(Enchantment.Rarity rarity, EquipmentSlot... slots) {
         super(rarity, EnchantmentTarget.WEAPON, slots);
     }
+
     @Override
     public boolean isAcceptableItem(ItemStack stack) {
         return EnchantmentTarget.WEAPON.isAcceptableItem(stack.getItem()) || EnchantmentTarget.DIGGER.isAcceptableItem(stack.getItem());

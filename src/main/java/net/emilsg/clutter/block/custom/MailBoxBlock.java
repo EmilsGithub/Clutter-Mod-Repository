@@ -43,6 +43,10 @@ public class MailBoxBlock extends BlockWithEntity implements Waterloggable {
         this.setDefaultState(this.stateManager.getDefaultState().with(HATCH_OPEN, false).with(WATERLOGGED, false).with(FLAG_UP, false).with(FACING, Direction.NORTH));
     }
 
+    private static boolean facingToBoolean(BlockState state, Direction direction) {
+        return state.get(FACING) == direction;
+    }
+
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(HATCH_OPEN, WATERLOGGED, FLAG_UP, FACING);
@@ -59,7 +63,7 @@ public class MailBoxBlock extends BlockWithEntity implements Waterloggable {
             return ActionResult.SUCCESS;
         }
 
-        if(!player.isSneaking()) {
+        if (!player.isSneaking()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof MailBoxInventoryBlockEntity) {
                 player.openHandledScreen((MailBoxInventoryBlockEntity) blockEntity);
@@ -107,23 +111,23 @@ public class MailBoxBlock extends BlockWithEntity implements Waterloggable {
         BlockPos blockPos;
         World worldAccess = ctx.getWorld();
         boolean bl = worldAccess.getFluidState(blockPos = ctx.getBlockPos()).getFluid() == Fluids.WATER;
-        return (BlockState)this.getDefaultState().with(WATERLOGGED, bl).with(FACING, ctx.getHorizontalPlayerFacing());
+        return this.getDefaultState().with(WATERLOGGED, bl).with(FACING, ctx.getHorizontalPlayerFacing());
     }
 
     @Override
     public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
         BlockEntity blockEntity;
         if (itemStack.hasCustomName() && (blockEntity = world.getBlockEntity(pos)) instanceof MailBoxInventoryBlockEntity) {
-            ((MailBoxInventoryBlockEntity)blockEntity).setCustomName(itemStack.getName());
+            ((MailBoxInventoryBlockEntity) blockEntity).setCustomName(itemStack.getName());
         }
     }
 
     public BlockState rotate(BlockState state, BlockRotation rotation) {
-        return (BlockState)state.with(FACING, rotation.rotate((Direction)state.get(FACING)));
+        return state.with(FACING, rotation.rotate(state.get(FACING)));
     }
 
     public BlockState mirror(BlockState state, BlockMirror mirror) {
-        return state.rotate(mirror.getRotation((Direction)state.get(FACING)));
+        return state.rotate(mirror.getRotation(state.get(FACING)));
     }
 
     @Override
@@ -133,11 +137,12 @@ public class MailBoxBlock extends BlockWithEntity implements Waterloggable {
         }
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
+
     @Override
     public boolean tryFillWithFluid(WorldAccess world, BlockPos pos, BlockState state, FluidState fluidState) {
         if (!state.get(Properties.WATERLOGGED) && fluidState.getFluid() == Fluids.WATER) {
 
-            world.setBlockState(pos, (BlockState)((BlockState)state.with(WATERLOGGED, true)), Block.NOTIFY_ALL);
+            world.setBlockState(pos, state.with(WATERLOGGED, true), Block.NOTIFY_ALL);
             world.scheduleFluidTick(pos, fluidState.getFluid(), fluidState.getFluid().getTickRate(world));
             return true;
         }
@@ -152,11 +157,6 @@ public class MailBoxBlock extends BlockWithEntity implements Waterloggable {
         return super.getFluidState(state);
     }
 
-
-    private static boolean facingToBoolean(BlockState state, Direction direction) {
-        return state.get(FACING) == direction;
-    }
-
     @Nullable
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
@@ -167,7 +167,7 @@ public class MailBoxBlock extends BlockWithEntity implements Waterloggable {
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof MailBoxInventoryBlockEntity) {
-            ((MailBoxInventoryBlockEntity)blockEntity).tick();
+            ((MailBoxInventoryBlockEntity) blockEntity).tick();
         }
     }
 
@@ -186,16 +186,16 @@ public class MailBoxBlock extends BlockWithEntity implements Waterloggable {
         }
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof Inventory) {
-            ItemScatterer.spawn(world, pos, (Inventory)((Object)blockEntity));
+            ItemScatterer.spawn(world, pos, (Inventory) blockEntity);
             world.updateComparators(pos, this);
         }
         super.onStateReplaced(state, world, pos, newState, moved);
     }
 
     void playSound(SoundEvent soundEvent, BlockPos pos, World world) {
-        double d = (double)pos.getX() + 0.5;
-        double e = (double)pos.getY() + 0.5;
-        double f = (double)pos.getZ() + 0.5;
+        double d = (double) pos.getX() + 0.5;
+        double e = (double) pos.getY() + 0.5;
+        double f = (double) pos.getZ() + 0.5;
         world.playSound(null, d, e, f, soundEvent, SoundCategory.BLOCKS, 0.5f, world.random.nextFloat() * 0.1f + 0.7f);
     }
 }

@@ -16,7 +16,6 @@ import net.minecraft.world.gen.feature.FeatureConfig;
 public class ModFeatures {
 
 
-
     public static final Feature<CountConfig> SMALL_SPONGE = register("small_sponge",
             new UnderwaterPatchFeature(CountConfig.CODEC, ModBlocks.SMALL_SPONGE.getDefaultState(),
                     (state, random) -> state.with(SmallSpongeBlock.AGE, random.nextInt(2) + 1).with(Properties.WATERLOGGED, true)));
@@ -40,6 +39,6 @@ public class ModFeatures {
     }
 
     private static <C extends FeatureConfig, F extends Feature<C>> F register(String name, F feature) {
-        return (F) Registry.register(Registries.FEATURE, new Identifier(Clutter.MOD_ID, (name)), feature);
+        return Registry.register(Registries.FEATURE, new Identifier(Clutter.MOD_ID, (name)), feature);
     }
 }

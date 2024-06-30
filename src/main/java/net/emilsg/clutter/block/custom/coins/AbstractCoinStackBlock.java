@@ -31,9 +31,13 @@ public abstract class AbstractCoinStackBlock extends Block implements Waterlogga
         this.setDefaultState(this.stateManager.getDefaultState().with(COIN_LAYERS, 1).with(WATERLOGGED, false));
     }
 
+    public static BlockState increaseLayersByOne(BlockState state) {
+        return state.with(COIN_LAYERS, state.get(COIN_LAYERS) + 1);
+    }
+
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return Block.createCuboidShape(0,0,0,16,2 * state.get(COIN_LAYERS),16);
+        return Block.createCuboidShape(0, 0, 0, 16, 2 * state.get(COIN_LAYERS), 16);
     }
 
     @Override
@@ -42,7 +46,6 @@ public abstract class AbstractCoinStackBlock extends Block implements Waterlogga
         boolean isWaterlogged = ctx.getWorld().getFluidState(ctx.getBlockPos()).getFluid() == Fluids.WATER;
         return this.getDefaultState().with(WATERLOGGED, isWaterlogged);
     }
-
 
     @Override
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
@@ -72,7 +75,7 @@ public abstract class AbstractCoinStackBlock extends Block implements Waterlogga
     public boolean tryFillWithFluid(WorldAccess world, BlockPos pos, BlockState state, FluidState fluidState) {
         if (!state.get(Properties.WATERLOGGED) && fluidState.getFluid() == Fluids.WATER) {
 
-            world.setBlockState(pos, (BlockState)((BlockState)state.with(WATERLOGGED, true)), Block.NOTIFY_ALL);
+            world.setBlockState(pos, state.with(WATERLOGGED, true), Block.NOTIFY_ALL);
             world.scheduleFluidTick(pos, fluidState.getFluid(), fluidState.getFluid().getTickRate(world));
             return true;
         }
@@ -85,9 +88,5 @@ public abstract class AbstractCoinStackBlock extends Block implements Waterlogga
             return Fluids.WATER.getStill(false);
         }
         return super.getFluidState(state);
-    }
-
-    public static BlockState increaseLayersByOne(BlockState state) {
-        return state.with(COIN_LAYERS, state.get(COIN_LAYERS) + 1);
     }
 }

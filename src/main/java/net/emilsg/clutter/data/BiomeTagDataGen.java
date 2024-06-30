@@ -41,6 +41,12 @@ public class BiomeTagDataGen extends FabricTagProvider<Biome> {
                 BiomeKeys.BASALT_DELTAS
         );
 
+        getOrCreateTagBuilder(ModBiomeTags.SPAWNS_ECHOFINS).add(
+                BiomeKeys.END_BARRENS,
+                BiomeKeys.END_MIDLANDS,
+                BiomeKeys.END_HIGHLANDS
+        );
+
     }
 
     @Override

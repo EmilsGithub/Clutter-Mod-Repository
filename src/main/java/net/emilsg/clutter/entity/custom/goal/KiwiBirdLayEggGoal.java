@@ -1,6 +1,5 @@
 package net.emilsg.clutter.entity.custom.goal;
 
-import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.entity.custom.KiwiBirdEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -14,10 +13,12 @@ import net.minecraft.world.event.GameEvent;
 
 public class KiwiBirdLayEggGoal extends MoveToTargetPosGoal {
     KiwiBirdEntity kiwiBird;
+    BlockState eggState;
 
-    public KiwiBirdLayEggGoal(KiwiBirdEntity kiwiBird, double speed) {
+    public KiwiBirdLayEggGoal(KiwiBirdEntity kiwiBird, double speed, BlockState eggState) {
         super(kiwiBird, speed, 16);
         this.kiwiBird = kiwiBird;
+        this.eggState = eggState;
     }
 
     public boolean canStart() {
@@ -32,8 +33,8 @@ public class KiwiBirdLayEggGoal extends MoveToTargetPosGoal {
         super.tick();
         if (this.hasReached()) {
             World world = this.kiwiBird.getWorld();
-            world.setBlockState(targetPos.up(), ModBlocks.KIWI_BIRD_EGG.getDefaultState(), 3);
-            world.emitGameEvent(GameEvent.BLOCK_PLACE, targetPos.up(), GameEvent.Emitter.of(this.kiwiBird, ModBlocks.KIWI_BIRD_EGG.getDefaultState()));
+            world.setBlockState(targetPos.up(), eggState, 3);
+            world.emitGameEvent(GameEvent.BLOCK_PLACE, targetPos.up(), GameEvent.Emitter.of(this.kiwiBird, eggState));
             this.kiwiBird.setHasEgg(false);
             this.kiwiBird.setEggTimer(0);
         }
@@ -43,6 +44,4 @@ public class KiwiBirdLayEggGoal extends MoveToTargetPosGoal {
         BlockState state = world.getBlockState(pos);
         return (world.isAir(pos.up()) || world.getBlockState(pos.up()).isReplaceable()) && (state.isIn(BlockTags.DIRT) || state.isOf(Blocks.HAY_BLOCK)) && !world.getFluidState(pos.up()).isOf(Fluids.WATER);
     }
-
-
 }

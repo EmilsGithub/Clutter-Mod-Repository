@@ -20,13 +20,13 @@ import net.minecraft.world.World;
 public class PandaPlushieBlock extends AbstractPlushieBlock {
     protected static final VoxelShape SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 6.0, 16.0);
 
+    public PandaPlushieBlock(Settings settings) {
+        super(settings);
+    }
+
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return SHAPE;
-    }
-
-    public PandaPlushieBlock(Settings settings) {
-        super(settings);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class PandaPlushieBlock extends AbstractPlushieBlock {
             return ActionResult.PASS;
         }
 
-        if(world.isClient && hand.equals(Hand.MAIN_HAND) && player.getStackInHand(hand).isEmpty()) {
+        if (world.isClient && hand.equals(Hand.MAIN_HAND) && player.getStackInHand(hand).isEmpty()) {
             world.addParticle(ParticleTypes.NOTE, pos.getX() + 0.5, pos.getY() + 0.7, pos.getZ() + 0.5, random, 0.0, 0.0);
             return ActionResult.SUCCESS;
         }

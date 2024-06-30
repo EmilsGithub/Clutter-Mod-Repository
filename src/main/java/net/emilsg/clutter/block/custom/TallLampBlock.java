@@ -47,19 +47,7 @@ public class TallLampBlock extends Block implements Waterloggable {
 
     public TallLampBlock(Settings settings) {
         super(settings);
-        this.setDefaultState((BlockState)((BlockState)this.stateManager.getDefaultState()).with(HALF, DoubleBlockHalf.LOWER).with(WATERLOGGED, false).with(LIT, false));
-    }
-
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-            BlockState litState = state.cycle(LIT);
-            world.setBlockState(pos, litState.with(HALF, state.get(HALF)), 10);
-            if (state.get(HALF) == DoubleBlockHalf.LOWER) {
-                world.setBlockState(pos.up(), litState.with(HALF, world.getBlockState(pos.up()).get(HALF)).with(WATERLOGGED, world.getBlockState(pos.up()).get(WATERLOGGED)), 10);
-            } else {
-                world.setBlockState(pos.down(), litState.with(HALF, world.getBlockState(pos.down()).get(HALF)).with(WATERLOGGED, world.getBlockState(pos.down()).get(WATERLOGGED)), 10);
-            }
-            playSound(state.get(LIT) ? SoundEvents.BLOCK_METAL_PRESSURE_PLATE_CLICK_OFF : SoundEvents.BLOCK_METAL_PRESSURE_PLATE_CLICK_ON, pos, world);
-            return ActionResult.success(world.isClient);
+        this.setDefaultState(this.stateManager.getDefaultState().with(HALF, DoubleBlockHalf.LOWER).with(WATERLOGGED, false).with(LIT, false));
     }
 
     private static void playSound(SoundEvent soundEvent, BlockPos pos, World world) {
@@ -68,6 +56,36 @@ public class TallLampBlock extends Block implements Waterloggable {
 
     public static ToIntFunction<BlockState> createLightLevelFromLitBlockState(int litLevel) {
         return state -> state.get(LIT) ? litLevel : 0;
+    }
+
+    protected static void onBreakInCreative(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+        BlockPos blockPos;
+        BlockState blockState;
+        DoubleBlockHalf doubleBlockHalf = state.get(HALF);
+        if (doubleBlockHalf == DoubleBlockHalf.UPPER && (blockState = world.getBlockState(blockPos = pos.down())).isOf(state.getBlock()) && blockState.get(HALF) == DoubleBlockHalf.LOWER) {
+            BlockState blockState2 = blockState.getFluidState().isOf(Fluids.WATER) ? Blocks.WATER.getDefaultState() : Blocks.AIR.getDefaultState();
+            world.setBlockState(blockPos, blockState2, Block.NOTIFY_ALL | Block.SKIP_DROPS);
+            world.syncWorldEvent(player, WorldEvents.BLOCK_BROKEN, blockPos, Block.getRawIdFromState(blockState));
+        }
+    }
+
+    public static BlockState withWaterloggedState(WorldView world, BlockPos pos, BlockState state) {
+        if (state.contains(Properties.WATERLOGGED)) {
+            return state.with(Properties.WATERLOGGED, world.isWater(pos));
+        }
+        return state;
+    }
+
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        BlockState litState = state.cycle(LIT);
+        world.setBlockState(pos, litState.with(HALF, state.get(HALF)), 10);
+        if (state.get(HALF) == DoubleBlockHalf.LOWER) {
+            world.setBlockState(pos.up(), litState.with(HALF, world.getBlockState(pos.up()).get(HALF)).with(WATERLOGGED, world.getBlockState(pos.up()).get(WATERLOGGED)), 10);
+        } else {
+            world.setBlockState(pos.down(), litState.with(HALF, world.getBlockState(pos.down()).get(HALF)).with(WATERLOGGED, world.getBlockState(pos.down()).get(WATERLOGGED)), 10);
+        }
+        playSound(state.get(LIT) ? SoundEvents.BLOCK_METAL_PRESSURE_PLATE_CLICK_OFF : SoundEvents.BLOCK_METAL_PRESSURE_PLATE_CLICK_ON, pos, world);
+        return ActionResult.success(world.isClient);
     }
 
     @Override
@@ -98,17 +116,6 @@ public class TallLampBlock extends Block implements Waterloggable {
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
-    protected static void onBreakInCreative(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-        BlockPos blockPos;
-        BlockState blockState;
-        DoubleBlockHalf doubleBlockHalf = state.get(HALF);
-        if (doubleBlockHalf == DoubleBlockHalf.UPPER && (blockState = world.getBlockState(blockPos = pos.down())).isOf(state.getBlock()) && blockState.get(HALF) == DoubleBlockHalf.LOWER) {
-            BlockState blockState2 = blockState.getFluidState().isOf(Fluids.WATER) ? Blocks.WATER.getDefaultState() : Blocks.AIR.getDefaultState();
-            world.setBlockState(blockPos, blockState2, Block.NOTIFY_ALL | Block.SKIP_DROPS);
-            world.syncWorldEvent(player, WorldEvents.BLOCK_BROKEN, blockPos, Block.getRawIdFromState(blockState));
-        }
-    }
-
     @Override
     @Nullable
     public BlockState getPlacementState(ItemPlacementContext ctx) {
@@ -117,14 +124,14 @@ public class TallLampBlock extends Block implements Waterloggable {
         World world = ctx.getWorld();
         if (blockPos.getY() < world.getTopY() - 1 && world.getBlockState(blockPos2).canReplace(ctx)) {
             boolean bl = world.getFluidState(blockPos = ctx.getBlockPos()).getFluid() == Fluids.WATER;
-            return (BlockState)this.getDefaultState().with(WATERLOGGED, bl).with(LIT, ctx.getWorld().isReceivingRedstonePower(ctx.getBlockPos()));
+            return this.getDefaultState().with(WATERLOGGED, bl).with(LIT, ctx.getWorld().isReceivingRedstonePower(ctx.getBlockPos()));
         }
         return null;
     }
 
     public void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
         if (!world.isClient) {
-            boolean bl = (Boolean)state.get(LIT);
+            boolean bl = state.get(LIT);
             if (bl != world.isReceivingRedstonePower(pos)) {
                 if (bl) {
                     world.scheduleBlockTick(pos, this, 4);
@@ -143,7 +150,7 @@ public class TallLampBlock extends Block implements Waterloggable {
     }
 
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if ((Boolean)state.get(LIT) && !world.isReceivingRedstonePower(pos)) {
+        if (state.get(LIT) && !world.isReceivingRedstonePower(pos)) {
             BlockState litState = state.cycle(LIT);
             world.setBlockState(pos, litState.with(HALF, state.get(HALF)), 2);
             if (state.get(HALF) == DoubleBlockHalf.LOWER) {
@@ -158,7 +165,7 @@ public class TallLampBlock extends Block implements Waterloggable {
     @Override
     public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
         BlockPos blockPos = pos.up();
-        world.setBlockState(blockPos, TallLampBlock.withWaterloggedState(world, blockPos, (BlockState)this.getDefaultState().with(HALF, DoubleBlockHalf.UPPER)), Block.NOTIFY_ALL);
+        world.setBlockState(blockPos, TallLampBlock.withWaterloggedState(world, blockPos, this.getDefaultState().with(HALF, DoubleBlockHalf.UPPER)), Block.NOTIFY_ALL);
     }
 
     @Override
@@ -168,13 +175,6 @@ public class TallLampBlock extends Block implements Waterloggable {
             return blockState.isOf(this) && blockState.get(HALF) == DoubleBlockHalf.LOWER;
         }
         return super.canPlaceAt(state, world, pos);
-    }
-
-    public static BlockState withWaterloggedState(WorldView world, BlockPos pos, BlockState state) {
-        if (state.contains(Properties.WATERLOGGED)) {
-            return (BlockState)state.with(Properties.WATERLOGGED, world.isWater(pos));
-        }
-        return state;
     }
 
     @Override
@@ -203,7 +203,7 @@ public class TallLampBlock extends Block implements Waterloggable {
     public boolean tryFillWithFluid(WorldAccess world, BlockPos pos, BlockState state, FluidState fluidState) {
         if (!state.get(Properties.WATERLOGGED) && fluidState.getFluid() == Fluids.WATER) {
 
-            world.setBlockState(pos, (BlockState)((BlockState)state.with(WATERLOGGED, true)), Block.NOTIFY_ALL);
+            world.setBlockState(pos, state.with(WATERLOGGED, true), Block.NOTIFY_ALL);
             world.scheduleFluidTick(pos, fluidState.getFluid(), fluidState.getFluid().getTickRate(world));
             return true;
         }

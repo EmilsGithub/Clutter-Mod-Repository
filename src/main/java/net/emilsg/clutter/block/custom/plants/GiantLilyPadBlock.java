@@ -36,10 +36,13 @@ public class GiantLilyPadBlock extends LilyPadBlock implements Fertilizable {
     protected static final VoxelShape SOUTH_EAST_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 15.0, 1.5, 15.0);
 
 
-
     public GiantLilyPadBlock(Settings settings) {
         super(settings);
         this.setDefaultState((this.stateManager.getDefaultState()).with(LILY_PAD_DIRECTIONS, LilyPadDirections.SOUTH_WEST).with(FLOWERING, false));
+    }
+
+    public static boolean isValidPlacement(World world, BlockPos replacePos) {
+        return world.getBlockState(replacePos).isAir() && world.getFluidState(replacePos.down()).isOf(Fluids.WATER);
     }
 
     @Override
@@ -76,28 +79,24 @@ public class GiantLilyPadBlock extends LilyPadBlock implements Fertilizable {
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         BlockPos blockPos = ctx.getBlockPos();
         World world = ctx.getWorld();
-       return isValidPlacement(world, blockPos.north()) && isValidPlacement(world, blockPos.east()) && isValidPlacement(world, blockPos.north().east()) ? super.getPlacementState(ctx) : null;
-    }
-
-    public static boolean isValidPlacement(World world, BlockPos replacePos) {
-        return world.getBlockState(replacePos).isAir() && world.getFluidState(replacePos.down()).isOf(Fluids.WATER);
+        return isValidPlacement(world, blockPos.north()) && isValidPlacement(world, blockPos.east()) && isValidPlacement(world, blockPos.north().east()) ? super.getPlacementState(ctx) : null;
     }
 
     @Override
     public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-        if(state.get(LILY_PAD_DIRECTIONS) == LilyPadDirections.SOUTH_WEST) {
+        if (state.get(LILY_PAD_DIRECTIONS) == LilyPadDirections.SOUTH_WEST) {
             getAndBreakBlock(world, pos.north());
             getAndBreakBlock(world, pos.north().east());
             getAndBreakBlock(world, pos.east());
-        } else if(state.get(LILY_PAD_DIRECTIONS) == LilyPadDirections.SOUTH_EAST) {
+        } else if (state.get(LILY_PAD_DIRECTIONS) == LilyPadDirections.SOUTH_EAST) {
             getAndBreakBlock(world, pos.north());
             getAndBreakBlock(world, pos.north().west());
             getAndBreakBlock(world, pos.west());
-        } else if(state.get(LILY_PAD_DIRECTIONS) == LilyPadDirections.NORTH_WEST) {
+        } else if (state.get(LILY_PAD_DIRECTIONS) == LilyPadDirections.NORTH_WEST) {
             getAndBreakBlock(world, pos.south());
             getAndBreakBlock(world, pos.south().east());
             getAndBreakBlock(world, pos.east());
-        } else if(state.get(LILY_PAD_DIRECTIONS) == LilyPadDirections.NORTH_EAST) {
+        } else if (state.get(LILY_PAD_DIRECTIONS) == LilyPadDirections.NORTH_EAST) {
             getAndBreakBlock(world, pos.south());
             getAndBreakBlock(world, pos.south().west());
             getAndBreakBlock(world, pos.west());
@@ -106,7 +105,7 @@ public class GiantLilyPadBlock extends LilyPadBlock implements Fertilizable {
     }
 
     private void getAndBreakBlock(WorldAccess world, BlockPos pos) {
-        if(world.getBlockState(pos).getBlock() instanceof GiantLilyPadBlock) world.breakBlock(pos, true);
+        if (world.getBlockState(pos).getBlock() instanceof GiantLilyPadBlock) world.breakBlock(pos, true);
     }
 
     @Override
@@ -121,12 +120,12 @@ public class GiantLilyPadBlock extends LilyPadBlock implements Fertilizable {
 
     @Override
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
-        if(!state.get(FLOWERING)) {
+        if (!state.get(FLOWERING)) {
             Map<LilyPadDirections, BlockPos[]> directionPosMap = Map.of(
-                    LilyPadDirections.SOUTH_WEST, new BlockPos[] {pos, pos.north(), pos.north().east(), pos.east()},
-                    LilyPadDirections.SOUTH_EAST, new BlockPos[] {pos, pos.north(), pos.north().west(), pos.west()},
-                    LilyPadDirections.NORTH_WEST, new BlockPos[] {pos, pos.south(), pos.south().east(), pos.east()},
-                    LilyPadDirections.NORTH_EAST, new BlockPos[] {pos, pos.south(), pos.south().west(), pos.west()}
+                    LilyPadDirections.SOUTH_WEST, new BlockPos[]{pos, pos.north(), pos.north().east(), pos.east()},
+                    LilyPadDirections.SOUTH_EAST, new BlockPos[]{pos, pos.north(), pos.north().west(), pos.west()},
+                    LilyPadDirections.NORTH_WEST, new BlockPos[]{pos, pos.south(), pos.south().east(), pos.east()},
+                    LilyPadDirections.NORTH_EAST, new BlockPos[]{pos, pos.south(), pos.south().west(), pos.west()}
             );
 
             BlockPos[] positions = directionPosMap.get(state.get(LILY_PAD_DIRECTIONS));
@@ -143,28 +142,6 @@ public class GiantLilyPadBlock extends LilyPadBlock implements Fertilizable {
 
     private void setFlowering(BlockState state, ServerWorld world, BlockPos pos) {
         world.setBlockState(pos, state.with(FLOWERING, true).with(LILY_PAD_DIRECTIONS, world.getBlockState(pos).get(LILY_PAD_DIRECTIONS)));
-    }
-
-    public enum LilyPadDirections implements StringIdentifiable {
-        NORTH_EAST("north_east"),
-        NORTH_WEST("north_west"),
-        SOUTH_EAST("south_east"),
-        SOUTH_WEST("south_west");
-
-        private final String name;
-
-        LilyPadDirections(String name) {
-            this.name = name;
-        }
-
-        public String asString() {
-            return this.name;
-        }
-
-        @Override
-        public String toString() {
-            return this.name;
-        }
     }
 
     @Override
@@ -189,5 +166,27 @@ public class GiantLilyPadBlock extends LilyPadBlock implements Fertilizable {
             }
         }
         super.onEntityCollision(state, world, pos, entity);
+    }
+
+    public enum LilyPadDirections implements StringIdentifiable {
+        NORTH_EAST("north_east"),
+        NORTH_WEST("north_west"),
+        SOUTH_EAST("south_east"),
+        SOUTH_WEST("south_west");
+
+        private final String name;
+
+        LilyPadDirections(String name) {
+            this.name = name;
+        }
+
+        public String asString() {
+            return this.name;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
     }
 }

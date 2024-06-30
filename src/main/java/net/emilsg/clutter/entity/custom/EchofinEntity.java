@@ -1,19 +1,18 @@
 package net.emilsg.clutter.entity.custom;
 
+import net.emilsg.clutter.entity.custom.goal.EchofinConditionalActiveTargetGoal;
+import net.emilsg.clutter.entity.custom.goal.EchofinWanderAroundGoal;
 import net.emilsg.clutter.entity.custom.parent.ClutterAnimalEntity;
 import net.emilsg.clutter.entity.variants.EchofinVariant;
 import net.emilsg.clutter.item.ModItems;
+import net.emilsg.clutter.util.ModBlockTags;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.EntityData;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.ai.AboveGroundTargeting;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.control.FlightMoveControl;
 import net.minecraft.entity.ai.control.LookControl;
 import net.minecraft.entity.ai.goal.AnimalMateGoal;
 import net.minecraft.entity.ai.goal.EscapeDangerGoal;
-import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.ai.pathing.BirdNavigation;
 import net.minecraft.entity.ai.pathing.EntityNavigation;
 import net.minecraft.entity.ai.pathing.PathNodeType;
@@ -23,6 +22,8 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -39,28 +40,26 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.*;
+import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.GeoAnimatable;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.object.PlayState;
-import software.bernie.geckolib.util.GeckoLibUtil;
 
-import java.util.EnumSet;
 import java.util.Objects;
 
-public class EchofinEntity extends ClutterAnimalEntity implements GeoEntity {
+public class EchofinEntity extends ClutterAnimalEntity {
 
-    private static final RawAnimation SWIM = RawAnimation.begin().thenLoop("echofin.swimming");
-    private final AnimatableInstanceCache CACHE = GeckoLibUtil.createInstanceCache(this);
-    private static final TrackedData<BlockPos> HOME_POS;
+    private static final TrackedData<BlockPos> HOME_POS = DataTracker.registerData(EchofinEntity.class, TrackedDataHandlerRegistry.BLOCK_POS);
+    private static final TrackedData<Integer> DATA_ID_TYPE_VARIANT = DataTracker.registerData(EchofinEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    private static final TrackedData<Integer> ABILITY_TIMER = DataTracker.registerData(EchofinEntity.class, TrackedDataHandlerRegistry.INTEGER);
+
+    final int maxAbilityTimer = 2400;
+
+    public final AnimationState movingAnimState = new AnimationState();
+    private int animationTimeout = 0;
+
 
     public EchofinEntity(EntityType<? extends ClutterAnimalEntity> entityType, World world) {
         super(entityType, world);
@@ -76,24 +75,75 @@ public class EchofinEntity extends ClutterAnimalEntity implements GeoEntity {
     public static DefaultAttributeContainer.Builder setAttributes() {
         return ClutterAnimalEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 10D)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1D)
                 .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.5f)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.1f)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0f);
+    }
+
+    public static boolean isValidSpawn(EntityType<? extends ClutterAnimalEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+        return world.getBlockState(pos.down()).isIn(ModBlockTags.ECHOFINS_SPAWN_ON);
+    }
+
+    @Override
+    protected void initGoals() {
+        this.goalSelector.add(0, new AnimalMateGoal(this, 1.0));
+        this.goalSelector.add(1, new EscapeDangerGoal(this, 1.25));
+        this.goalSelector.add(2, new MeleeAttackGoal(this, 3.0, true));
+        this.goalSelector.add(3, new EchofinWanderAroundGoal(this));
+        this.targetSelector.add(1, new EchofinConditionalActiveTargetGoal(this, PlayerEntity.class, false));
     }
 
     protected void initDataTracker() {
         super.initDataTracker();
         this.dataTracker.startTracking(HOME_POS, BlockPos.ORIGIN);
         this.dataTracker.startTracking(DATA_ID_TYPE_VARIANT, 0);
+        this.dataTracker.startTracking(ABILITY_TIMER, 0);
     }
 
     public float getPathfindingFavor(BlockPos pos, WorldView world) {
         return world.getBlockState(pos).isAir() ? 10.0F : 0.0F;
     }
 
+    private void setupAnimationStates() {
+        if (this.animationTimeout <= 0) {
+            this.animationTimeout = 20;
+            this.movingAnimState.start(this.age);
+        } else {
+            --this.animationTimeout;
+        }
+    }
+
+    @Override
+    public void onDamaged(DamageSource damageSource) {
+        super.onDamaged(damageSource);
+        this.setAbilityEntitiesTimer(0);
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        World world = this.getWorld();
+        if (world instanceof ServerWorld) {
+            setAbilityEntitiesTimer(getAbilityTimerEntitiesTimer() + random.nextInt(3));
+        }
+
+        if (hasAbility() && random.nextInt(1000) == 0) {
+            setAbilityEntitiesTimer(0);
+        }
+
+        if (world.isClient) {
+            this.setupAnimationStates();
+
+            if (this.getVariant() == EchofinVariant.CHORUS && random.nextBoolean()) {
+                this.getWorld().addParticle(ParticleTypes.PORTAL, true, this.getX() + random.nextDouble() / 4.0 * (double) (random.nextBoolean() ? 1 : -1), this.getY() + random.nextDouble() / 16.0 * (double) (random.nextBoolean() ? 1 : -1), this.getZ() + random.nextDouble() / 4.0 * (double) (random.nextBoolean() ? 1 : -1), (random.nextBoolean() ? 0.1 : -0.1), (random.nextBoolean() ? 0.1 : -0.1), (random.nextBoolean() ? 0.1 : -0.1));
+            }
+        }
+    }
+
     @Override
     public int getLimitPerChunk() {
-        return 5;
+        return 3;
     }
 
     @Override
@@ -108,11 +158,11 @@ public class EchofinEntity extends ClutterAnimalEntity implements GeoEntity {
             } else {
                 returnItem = ModItems.LEVITATING_ECHOFIN_BUCKET;
             }
-            if(player.getStackInHand(hand).getCount() == 1) {
+            if (player.getStackInHand(hand).getCount() == 1) {
                 player.setStackInHand(hand, new ItemStack(returnItem));
             } else {
                 heldItem.decrement(1);
-                if(player.getInventory().getEmptySlot() > 0) {
+                if (player.getInventory().getEmptySlot() > 0) {
                     player.giveItemStack(new ItemStack(returnItem));
                 } else {
                     this.dropItem(returnItem);
@@ -125,21 +175,37 @@ public class EchofinEntity extends ClutterAnimalEntity implements GeoEntity {
         return super.interactMob(player, hand);
     }
 
-    public boolean canSpawn(WorldAccess world, SpawnReason spawnReason) {
-        return true;
-    }
-
     @Override
     public boolean canBeLeashedBy(PlayerEntity player) {
         return false;
+    }
+
+    public BlockPos getHomePos() {
+        return this.dataTracker.get(HOME_POS);
     }
 
     public void setHomePos(BlockPos pos) {
         this.dataTracker.set(HOME_POS, pos);
     }
 
-    BlockPos getHomePos() {
-        return (BlockPos)this.dataTracker.get(HOME_POS);
+    public boolean shouldLevitatePlayers() {
+        return hasAbility() && this.getVariant() == EchofinVariant.LEVITATING;
+    }
+
+    public boolean shouldTeleportPlayers() {
+        return hasAbility() && this.getVariant() == EchofinVariant.CHORUS;
+    }
+
+    public boolean hasAbility() {
+        return this.getAbilityTimerEntitiesTimer() >= maxAbilityTimer;
+    }
+
+    public int getAbilityTimerEntitiesTimer() {
+        return this.dataTracker.get(ABILITY_TIMER);
+    }
+
+    public void setAbilityEntitiesTimer(int timer) {
+        this.dataTracker.set(ABILITY_TIMER, timer);
     }
 
     @Override
@@ -160,11 +226,40 @@ public class EchofinEntity extends ClutterAnimalEntity implements GeoEntity {
     }
 
     @Override
-    protected void initGoals() {
-        this.goalSelector.add(0, new AnimalMateGoal(this, 1.0));
-        this.goalSelector.add(1, new EscapeDangerGoal(this, 1.25));
-        this.goalSelector.add(2, new EchofinWanderAroundGoal());
+    public void applyDamageEffects(LivingEntity attacker, Entity target) {
+        super.applyDamageEffects(attacker, target);
+        World world = target.getWorld();
+
+        if (world.isClient || !(target instanceof PlayerEntity player)) return;
+
+        if (shouldTeleportPlayers()) teleportPlayer(player, world);
+        else if (shouldLevitatePlayers()) levitatePlayer(player);
+
     }
+
+    private void teleportPlayer(PlayerEntity player, World world) {
+        for(int i = 0; i < 16; ++i) {
+            double x = player.getX() + (player.getWorld().getRandom().nextDouble() - 0.5) * 512.0;
+            double y = MathHelper.clamp(player.getY() + (double)(player.getWorld().getRandom().nextInt(16) - 8), (double)world.getBottomY(), (double)(world.getBottomY() + ((ServerWorld)world).getLogicalHeight() - 1));
+            double z = player.getZ() + (player.getWorld().getRandom().nextDouble() - 0.5) * 512.0;
+            if (player.hasVehicle()) {
+                player.stopRiding();
+            }
+
+            Vec3d vec3d = player.getPos();
+            if (player.teleport(x, y, z, true)) {
+                world.emitGameEvent(GameEvent.TELEPORT, vec3d, GameEvent.Emitter.of(player));
+                this.setAbilityEntitiesTimer(0);
+                break;
+            }
+        }
+    }
+
+    private void levitatePlayer(PlayerEntity player) {
+        player.addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 100, 1), this);
+    }
+
+
 
     protected EntityNavigation createNavigation(World world) {
         BirdNavigation birdNavigation = new BirdNavigation(this, world) {
@@ -179,91 +274,10 @@ public class EchofinEntity extends ClutterAnimalEntity implements GeoEntity {
         return birdNavigation;
     }
 
-    class EchofinWanderAroundGoal extends Goal {
-        private BlockPos homePos;
-
-        EchofinWanderAroundGoal() {
-            this.setControls(EnumSet.of(Control.MOVE));
-        }
-
-        public boolean canStart() {
-            return EchofinEntity.this.navigation.isIdle() && EchofinEntity.this.random.nextInt(10) == 0;
-        }
-
-        public boolean shouldContinue() {
-            return EchofinEntity.this.navigation.isFollowingPath();
-        }
-
-        public void start() {
-            Vec3d vec3d = this.getRandomLocation();
-            if (vec3d != null) {
-                EchofinEntity.this.navigation.startMovingAlong(EchofinEntity.this.navigation.findPathTo(BlockPos.ofFloored(vec3d), 1), 1.0);
-            }
-        }
-
-        private Vec3d getRandomLocation() {
-            if (this.homePos == null) {
-                this.homePos = EchofinEntity.this.getHomePos();
-            }
-
-            Vec3d vec3d2 = EchofinEntity.this.getRotationVec(0.0F);
-            Vec3d vec3d3 = AboveGroundTargeting.find(EchofinEntity.this, 24, 7, vec3d2.x, vec3d2.z, 1.5707964F, 3, 2);
-
-            if (vec3d3 != null && EchofinEntity.this.getBlockPos().getSquaredDistance(Vec3d.ofCenter(homePos)) > 2 * 2) {
-                return vec3d3;
-            }
-
-            if (EchofinEntity.this.getWorld().isNight() && EchofinEntity.this.getBlockPos().getSquaredDistance(Vec3d.ofCenter(homePos)) > 8 * 8) {
-                return Vec3d.ofCenter(homePos);
-            }
-
-            BlockPos blockpos = homePos.add(-2 + EchofinEntity.this.random.nextInt(5), -1 + EchofinEntity.this.random.nextInt(3), -2 + EchofinEntity.this.random.nextInt(5));
-
-            if (!EchofinEntity.this.getWorld().getBlockState(blockpos).isOpaque()) {
-                return Vec3d.ofCenter(blockpos);
-            }
-
-            return null;
-        }
-    }
-
     @Override
     public boolean shouldSpawnSprintingParticles() {
         return false;
     }
-
-    static class EchofinLookControl extends LookControl {
-        EchofinLookControl(MobEntity entity) {
-            super(entity);
-        }
-
-        public void tick() {
-            super.tick();
-        }
-
-        protected boolean shouldStayHorizontal() {
-            return true;
-        }
-    }
-
-    @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController<>(this, "controller", 0, this::predicate));
-    }
-
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
-        if(tAnimationState.getController().getCurrentAnimation() == null) {
-            tAnimationState.getController().setAnimation(SWIM);
-        }
-        return PlayState.CONTINUE;
-    }
-
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return CACHE;
-    }
-
-
 
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
@@ -271,6 +285,7 @@ public class EchofinEntity extends ClutterAnimalEntity implements GeoEntity {
         nbt.putInt("HomePosY", this.getHomePos().getY());
         nbt.putInt("HomePosZ", this.getHomePos().getZ());
         nbt.putInt("Variant", this.getTypeVariant());
+        nbt.putInt("AbilityTimer", this.getAbilityTimerEntitiesTimer());
     }
 
     @Override
@@ -281,18 +296,7 @@ public class EchofinEntity extends ClutterAnimalEntity implements GeoEntity {
         int k = nbt.getInt("HomePosZ");
         this.setHomePos(new BlockPos(i, j, k));
         this.dataTracker.set(DATA_ID_TYPE_VARIANT, nbt.getInt("Variant"));
-    }
-
-    public static boolean isValidSpawn(EntityType<? extends ClutterAnimalEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-        return world.getBlockState(pos.down()).isOf(Blocks.END_STONE);
-    }
-
-    @Override
-    public void tick() {
-        if (this.getVariant() == EchofinVariant.CHORUS && random.nextBoolean()) {
-            this.getWorld().addParticle(ParticleTypes.PORTAL, true, (double) this.getX() + random.nextDouble() / 4.0 * (double) (random.nextBoolean() ? 1 : -1), this.getY() + random.nextDouble() / 16.0 * (double) (random.nextBoolean() ? 1 : -1), (double) this.getZ() + random.nextDouble() / 4.0 * (double) (random.nextBoolean() ? 1 : -1), (random.nextBoolean() ? 0.1 : -0.1), (random.nextBoolean() ? 0.1 : -0.1), (random.nextBoolean() ? 0.1 : -0.1));
-        }
-        super.tick();
+        this.setAbilityEntitiesTimer(nbt.getInt("AbilityTimer"));
     }
 
     @Nullable
@@ -311,10 +315,6 @@ public class EchofinEntity extends ClutterAnimalEntity implements GeoEntity {
     protected SoundEvent getDeathSound() {
         return SoundEvents.ENTITY_COD_DEATH;
     }
-
-    /* VARIANTS */
-    private static final TrackedData<Integer> DATA_ID_TYPE_VARIANT =
-            DataTracker.registerData(EchofinEntity.class, TrackedDataHandlerRegistry.INTEGER);
 
     @Override
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason,
@@ -342,15 +342,26 @@ public class EchofinEntity extends ClutterAnimalEntity implements GeoEntity {
         return EchofinVariant.byId(this.getTypeVariant() & 255);
     }
 
-    private int getTypeVariant() {
-        return this.dataTracker.get(DATA_ID_TYPE_VARIANT);
-    }
-
     public void setVariant(EchofinVariant variant) {
         this.dataTracker.set(DATA_ID_TYPE_VARIANT, variant.getId() & 255);
     }
 
-    static {
-        HOME_POS = DataTracker.registerData(EchofinEntity.class, TrackedDataHandlerRegistry.BLOCK_POS);
+    private int getTypeVariant() {
+        return this.dataTracker.get(DATA_ID_TYPE_VARIANT);
     }
+
+    private static class EchofinLookControl extends LookControl {
+        EchofinLookControl(MobEntity entity) {
+            super(entity);
+        }
+
+        public void tick() {
+            super.tick();
+        }
+
+        protected boolean shouldStayHorizontal() {
+            return true;
+        }
+    }
+
 }

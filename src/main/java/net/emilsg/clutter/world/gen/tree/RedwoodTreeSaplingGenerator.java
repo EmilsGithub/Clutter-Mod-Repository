@@ -18,6 +18,18 @@ import org.jetbrains.annotations.Nullable;
 
 public class RedwoodTreeSaplingGenerator extends LargeTreeSaplingGenerator {
 
+    public static boolean canGenerateGiantTree(BlockState state, BlockView world, BlockPos pos, int x, int z) {
+        Block block = state.getBlock();
+        for (int i = x; i < x + 3; i++) {
+            for (int j = z; j < z + 3; j++) {
+                if (!world.getBlockState(pos.add(i, 0, j)).isOf(block)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     @Nullable
     @Override
     protected RegistryKey<ConfiguredFeature<?, ?>> getTreeFeature(Random random, boolean bees) {
@@ -76,18 +88,6 @@ public class RedwoodTreeSaplingGenerator extends LargeTreeSaplingGenerator {
             }
         }
         return false;
-    }
-
-    public static boolean canGenerateGiantTree(BlockState state, BlockView world, BlockPos pos, int x, int z) {
-        Block block = state.getBlock();
-        for (int i = x; i < x + 3; i++) {
-            for (int j = z; j < z + 3; j++) {
-                if (!world.getBlockState(pos.add(i, 0, j)).isOf(block)) {
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 
 }

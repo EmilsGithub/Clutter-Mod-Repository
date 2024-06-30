@@ -8,7 +8,6 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.state.property.Property;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
@@ -22,6 +21,12 @@ import org.jetbrains.annotations.Nullable;
 public class OnyxClusterBlock extends Block implements Waterloggable {
     public static final BooleanProperty WATERLOGGED;
     public static final DirectionProperty FACING;
+
+    static {
+        WATERLOGGED = Properties.WATERLOGGED;
+        FACING = Properties.FACING;
+    }
+
     protected final VoxelShape northShape;
     protected final VoxelShape southShape;
     protected final VoxelShape eastShape;
@@ -31,17 +36,17 @@ public class OnyxClusterBlock extends Block implements Waterloggable {
 
     public OnyxClusterBlock(int height, int xzOffset, AbstractBlock.Settings settings) {
         super(settings);
-        this.setDefaultState((BlockState)((BlockState)this.getDefaultState().with(WATERLOGGED, false)).with(FACING, Direction.UP));
-        this.upShape = Block.createCuboidShape((double)xzOffset, 0.0, (double)xzOffset, (double)(16 - xzOffset), (double)height, (double)(16 - xzOffset));
-        this.downShape = Block.createCuboidShape((double)xzOffset, (double)(16 - height), (double)xzOffset, (double)(16 - xzOffset), 16.0, (double)(16 - xzOffset));
-        this.northShape = Block.createCuboidShape((double)xzOffset, (double)xzOffset, (double)(16 - height), (double)(16 - xzOffset), (double)(16 - xzOffset), 16.0);
-        this.southShape = Block.createCuboidShape((double)xzOffset, (double)xzOffset, 0.0, (double)(16 - xzOffset), (double)(16 - xzOffset), (double)height);
-        this.eastShape = Block.createCuboidShape(0.0, (double)xzOffset, (double)xzOffset, (double)height, (double)(16 - xzOffset), (double)(16 - xzOffset));
-        this.westShape = Block.createCuboidShape((double)(16 - height), (double)xzOffset, (double)xzOffset, 16.0, (double)(16 - xzOffset), (double)(16 - xzOffset));
+        this.setDefaultState(this.getDefaultState().with(WATERLOGGED, false).with(FACING, Direction.UP));
+        this.upShape = Block.createCuboidShape(xzOffset, 0.0, xzOffset, 16 - xzOffset, height, 16 - xzOffset);
+        this.downShape = Block.createCuboidShape(xzOffset, 16 - height, xzOffset, 16 - xzOffset, 16.0, 16 - xzOffset);
+        this.northShape = Block.createCuboidShape(xzOffset, xzOffset, 16 - height, 16 - xzOffset, 16 - xzOffset, 16.0);
+        this.southShape = Block.createCuboidShape(xzOffset, xzOffset, 0.0, 16 - xzOffset, 16 - xzOffset, height);
+        this.eastShape = Block.createCuboidShape(0.0, xzOffset, xzOffset, height, 16 - xzOffset, 16 - xzOffset);
+        this.westShape = Block.createCuboidShape(16 - height, xzOffset, xzOffset, 16.0, 16 - xzOffset, 16 - xzOffset);
     }
 
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        Direction direction = (Direction)state.get(FACING);
+        Direction direction = state.get(FACING);
         switch (direction) {
             case NORTH:
                 return this.northShape;
@@ -60,44 +65,39 @@ public class OnyxClusterBlock extends Block implements Waterloggable {
     }
 
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-        Direction direction = (Direction)state.get(FACING);
+        Direction direction = state.get(FACING);
         BlockPos blockPos = pos.offset(direction.getOpposite());
         return world.getBlockState(blockPos).isSideSolidFullSquare(world, blockPos, direction);
     }
 
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-        if ((Boolean)state.get(WATERLOGGED)) {
+        if (state.get(WATERLOGGED)) {
             world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
 
-        return direction == ((Direction)state.get(FACING)).getOpposite() && !state.canPlaceAt(world, pos) ? Blocks.AIR.getDefaultState() : super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+        return direction == state.get(FACING).getOpposite() && !state.canPlaceAt(world, pos) ? Blocks.AIR.getDefaultState() : super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
     @Nullable
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         WorldAccess worldAccess = ctx.getWorld();
         BlockPos blockPos = ctx.getBlockPos();
-        return (BlockState)((BlockState)this.getDefaultState().with(WATERLOGGED, worldAccess.getFluidState(blockPos).getFluid() == Fluids.WATER)).with(FACING, ctx.getSide());
+        return this.getDefaultState().with(WATERLOGGED, worldAccess.getFluidState(blockPos).getFluid() == Fluids.WATER).with(FACING, ctx.getSide());
     }
 
     public BlockState rotate(BlockState state, BlockRotation rotation) {
-        return (BlockState)state.with(FACING, rotation.rotate((Direction)state.get(FACING)));
+        return state.with(FACING, rotation.rotate(state.get(FACING)));
     }
 
     public BlockState mirror(BlockState state, BlockMirror mirror) {
-        return state.rotate(mirror.getRotation((Direction)state.get(FACING)));
+        return state.rotate(mirror.getRotation(state.get(FACING)));
     }
 
     public FluidState getFluidState(BlockState state) {
-        return (Boolean)state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
+        return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
     }
 
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(new Property[]{WATERLOGGED, FACING});
-    }
-
-    static {
-        WATERLOGGED = Properties.WATERLOGGED;
-        FACING = Properties.FACING;
+        builder.add(WATERLOGGED, FACING);
     }
 }

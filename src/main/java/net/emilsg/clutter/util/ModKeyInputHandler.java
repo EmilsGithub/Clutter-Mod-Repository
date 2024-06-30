@@ -20,7 +20,7 @@ public class ModKeyInputHandler {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (petKey.wasPressed()) {
                 ClientPlayNetworking.send(ModMessages.SYNC_PETS, PacketByteBufs.create());
-                if(client.player != null) client.player.swingHand(Hand.MAIN_HAND);
+                if (client.player != null) client.player.swingHand(Hand.MAIN_HAND);
             }
         });
     }

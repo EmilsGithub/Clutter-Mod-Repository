@@ -47,13 +47,24 @@ public class ChandelierBlock extends WaterloggableLitBlock {
         this.setDefaultState(this.getDefaultState().with(WATERLOGGED, false).with(ON_CHAIN, false).with(LIT, false));
     }
 
+    private static void spawnCandleParticles(World world, Vec3d vec3d, Random random) {
+        float f = random.nextFloat();
+        if (f < 0.3f) {
+            world.addParticle(ParticleTypes.SMOKE, vec3d.x, vec3d.y, vec3d.z, 0.0, 0.0, 0.0);
+            if (f < 0.17f) {
+                world.playSound(vec3d.x + 0.5, vec3d.y + 0.5, vec3d.z + 0.5, SoundEvents.BLOCK_CANDLE_AMBIENT, SoundCategory.BLOCKS, 1.0f + random.nextFloat(), random.nextFloat() * 0.7f + 0.3f, false);
+            }
+        }
+        world.addParticle(ParticleTypes.SMALL_FLAME, vec3d.x, vec3d.y, vec3d.z, 0.0, 0.0, 0.0);
+    }
+
     @Override
     @Nullable
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         BlockPos blockPos;
         World worldAccess = ctx.getWorld();
         boolean bl = worldAccess.getFluidState(blockPos = ctx.getBlockPos()).getFluid() == Fluids.WATER;
-        return (BlockState)this.getDefaultState().with(WATERLOGGED, bl);
+        return this.getDefaultState().with(WATERLOGGED, bl);
     }
 
     @Override
@@ -74,17 +85,6 @@ public class ChandelierBlock extends WaterloggableLitBlock {
             Vec3d offset = new Vec3d(pos.getX(), pos.getY(), pos.getZ());
             ChandelierBlock.spawnCandleParticles(world, offset.add(candlePos), random);
         }
-    }
-
-    private static void spawnCandleParticles(World world, Vec3d vec3d, Random random) {
-        float f = random.nextFloat();
-        if (f < 0.3f) {
-            world.addParticle(ParticleTypes.SMOKE, vec3d.x, vec3d.y, vec3d.z, 0.0, 0.0, 0.0);
-            if (f < 0.17f) {
-                world.playSound(vec3d.x + 0.5, vec3d.y + 0.5, vec3d.z + 0.5, SoundEvents.BLOCK_CANDLE_AMBIENT, SoundCategory.BLOCKS, 1.0f + random.nextFloat(), random.nextFloat() * 0.7f + 0.3f, false);
-            }
-        }
-        world.addParticle(ParticleTypes.SMALL_FLAME, vec3d.x, vec3d.y, vec3d.z, 0.0, 0.0, 0.0);
     }
 
     @Override

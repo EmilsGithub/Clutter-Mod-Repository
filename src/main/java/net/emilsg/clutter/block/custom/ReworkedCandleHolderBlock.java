@@ -15,7 +15,10 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
-import net.minecraft.state.property.*;
+import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.state.property.DirectionProperty;
+import net.minecraft.state.property.EnumProperty;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.StringIdentifiable;
@@ -89,67 +92,9 @@ public class ReworkedCandleHolderBlock extends Block implements Waterloggable {
     }
 
 
-
     public ReworkedCandleHolderBlock(Settings settings) {
         super(settings);
         this.setDefaultState((this.stateManager.getDefaultState()).with(WATERLOGGED, false).with(LIT, false).with(FACING, Direction.NORTH).with(TYPE, Type.FLOOR).with(CANDLES, false).with(CANDLE_COLOR, CandleColor.NULL));
-    }
-
-    public enum Type implements StringIdentifiable {
-        FLOOR("floor"),
-        CEILING("ceiling"),
-        WALL("wall");
-
-        private final String name;
-
-        Type(String name) {
-            this.name = name;
-        }
-
-        public String asString() {
-            return this.name;
-        }
-
-        @Override
-        public String toString() {
-            return this.name;
-        }
-    }
-
-    public enum CandleColor implements StringIdentifiable {
-        WHITE("white"),
-        LIGHT_GRAY("light_gray"),
-        GRAY("gray"),
-        BLACK("black"),
-        BROWN("brown"),
-        RED("red"),
-        ORANGE("orange"),
-        YELLOW("yellow"),
-        LIME("lime"),
-        GREEN("green"),
-        CYAN("cyan"),
-        LIGHT_BLUE("light_blue"),
-        BLUE("blue"),
-        PURPLE("purple"),
-        MAGENTA("magenta"),
-        PINK("pink"),
-        NONE("none"),
-        NULL("null");
-
-        private final String name;
-
-        CandleColor(String name) {
-            this.name = name;
-        }
-
-        public String asString() {
-            return this.name;
-        }
-
-        @Override
-        public String toString() {
-            return this.name;
-        }
     }
 
     @Override
@@ -201,7 +146,6 @@ public class ReworkedCandleHolderBlock extends Block implements Waterloggable {
         return state;
     }
 
-
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         Type type = state.get(TYPE);
@@ -229,7 +173,6 @@ public class ReworkedCandleHolderBlock extends Block implements Waterloggable {
             default -> WEST_FLOOR_SHAPE;
         };
     }
-
 
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!player.getAbilities().allowModifyWorld || state.get(WATERLOGGED)) {
@@ -271,7 +214,7 @@ public class ReworkedCandleHolderBlock extends Block implements Waterloggable {
             return ActionResult.success(world.isClient);
         }
 
-        if(stackInHand.isEmpty() && candles && !isLit) {
+        if (stackInHand.isEmpty() && candles && !isLit) {
             setCandleAndColor(world, state, pos, CandleColor.NULL, false, player);
             CANDLE_TO_COLOR.entrySet().stream().filter(entry -> entry.getValue() == currentColor)
                     .map(Map.Entry::getKey).findFirst().ifPresent(oldCandles -> {
@@ -313,7 +256,8 @@ public class ReworkedCandleHolderBlock extends Block implements Waterloggable {
     }
 
     private void damageItemIfNotCreative(PlayerEntity player, Hand hand) {
-        if (!player.getAbilities().creativeMode) player.getStackInHand(hand).damage(1, player, playerEntity -> playerEntity.sendToolBreakStatus(hand));
+        if (!player.getAbilities().creativeMode)
+            player.getStackInHand(hand).damage(1, player, playerEntity -> playerEntity.sendToolBreakStatus(hand));
     }
 
     private void decrementItemIfNotCreative(PlayerEntity player, Hand hand, int count) {
@@ -327,7 +271,7 @@ public class ReworkedCandleHolderBlock extends Block implements Waterloggable {
     }
 
     protected boolean isNotLit(BlockState state) {
-        return !(Boolean)state.get(LIT);
+        return !(Boolean) state.get(LIT);
     }
 
     public void extinguish(@Nullable PlayerEntity player, BlockState state, WorldAccess world, BlockPos pos) {
@@ -425,5 +369,62 @@ public class ReworkedCandleHolderBlock extends Block implements Waterloggable {
             }
         }
         world.addParticle(ParticleTypes.SMALL_FLAME, vec3d.x, vec3d.y, vec3d.z, 0.0, 0.0, 0.0);
+    }
+
+    public enum Type implements StringIdentifiable {
+        FLOOR("floor"),
+        CEILING("ceiling"),
+        WALL("wall");
+
+        private final String name;
+
+        Type(String name) {
+            this.name = name;
+        }
+
+        public String asString() {
+            return this.name;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+    }
+
+    public enum CandleColor implements StringIdentifiable {
+        WHITE("white"),
+        LIGHT_GRAY("light_gray"),
+        GRAY("gray"),
+        BLACK("black"),
+        BROWN("brown"),
+        RED("red"),
+        ORANGE("orange"),
+        YELLOW("yellow"),
+        LIME("lime"),
+        GREEN("green"),
+        CYAN("cyan"),
+        LIGHT_BLUE("light_blue"),
+        BLUE("blue"),
+        PURPLE("purple"),
+        MAGENTA("magenta"),
+        PINK("pink"),
+        NONE("none"),
+        NULL("null");
+
+        private final String name;
+
+        CandleColor(String name) {
+            this.name = name;
+        }
+
+        public String asString() {
+            return this.name;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
     }
 }

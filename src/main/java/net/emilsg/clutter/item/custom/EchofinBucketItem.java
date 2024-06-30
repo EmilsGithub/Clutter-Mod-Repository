@@ -48,10 +48,10 @@ public class EchofinBucketItem extends Item {
             echofinEntity.setPersistent();
             echofinEntity.updatePosition(blockPos2.getX() + 0.5, blockPos2.getY(), blockPos2.getZ() + 0.5);
             echofinEntity.setHomePos(blockPos2);
-            world.playSound(null, blockPos2, SoundEvents.ITEM_BUCKET_EMPTY_FISH, SoundCategory.NEUTRAL, 1 ,1);
+            world.playSound(null, blockPos2, SoundEvents.ITEM_BUCKET_EMPTY_FISH, SoundCategory.NEUTRAL, 1, 1);
             world.spawnEntity(echofinEntity);
-            if(Objects.requireNonNull(context.getPlayer()).isPlayer()) {
-                if(!context.getPlayer().getAbilities().creativeMode) {
+            if (Objects.requireNonNull(context.getPlayer()).isPlayer()) {
+                if (!context.getPlayer().getAbilities().creativeMode) {
                     context.getPlayer().setStackInHand(context.getHand(), new ItemStack(Items.BUCKET));
                 }
             }

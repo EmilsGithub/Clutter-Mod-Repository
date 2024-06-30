@@ -63,12 +63,12 @@ public class PresentBlock extends BlockWithEntity implements Waterloggable {
             return ActionResult.SUCCESS;
         }
 
-        if(player.isSneaking() && player.getStackInHand(hand).isEmpty()) {
+        if (player.isSneaking() && player.getStackInHand(hand).isEmpty()) {
             world.setBlockState(pos, state.cycle(OPEN));
-        } else if(!player.isSneaking()) {
+        } else if (!player.isSneaking()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof PresentInventoryBlockEntity) {
-                player.openHandledScreen((PresentInventoryBlockEntity)blockEntity);
+                player.openHandledScreen((PresentInventoryBlockEntity) blockEntity);
             }
         }
 
@@ -86,23 +86,23 @@ public class PresentBlock extends BlockWithEntity implements Waterloggable {
         BlockPos blockPos;
         World worldAccess = ctx.getWorld();
         boolean bl = worldAccess.getFluidState(blockPos = ctx.getBlockPos()).getFluid() == Fluids.WATER;
-        return (BlockState)this.getDefaultState().with(WATERLOGGED, bl).with(FACING, ctx.getHorizontalPlayerFacing());
+        return this.getDefaultState().with(WATERLOGGED, bl).with(FACING, ctx.getHorizontalPlayerFacing());
     }
 
     @Override
     public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
         BlockEntity blockEntity;
         if (itemStack.hasCustomName() && (blockEntity = world.getBlockEntity(pos)) instanceof PresentInventoryBlockEntity) {
-            ((PresentInventoryBlockEntity)blockEntity).setCustomName(itemStack.getName());
+            ((PresentInventoryBlockEntity) blockEntity).setCustomName(itemStack.getName());
         }
     }
 
     public BlockState rotate(BlockState state, BlockRotation rotation) {
-        return (BlockState)state.with(FACING, rotation.rotate((Direction)state.get(FACING)));
+        return state.with(FACING, rotation.rotate(state.get(FACING)));
     }
 
     public BlockState mirror(BlockState state, BlockMirror mirror) {
-        return state.rotate(mirror.getRotation((Direction)state.get(FACING)));
+        return state.rotate(mirror.getRotation(state.get(FACING)));
     }
 
     @Override
@@ -112,11 +112,12 @@ public class PresentBlock extends BlockWithEntity implements Waterloggable {
         }
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
+
     @Override
     public boolean tryFillWithFluid(WorldAccess world, BlockPos pos, BlockState state, FluidState fluidState) {
         if (!state.get(Properties.WATERLOGGED) && fluidState.getFluid() == Fluids.WATER) {
 
-            world.setBlockState(pos, (BlockState)((BlockState)state.with(WATERLOGGED, true)), Block.NOTIFY_ALL);
+            world.setBlockState(pos, state.with(WATERLOGGED, true), Block.NOTIFY_ALL);
             world.scheduleFluidTick(pos, fluidState.getFluid(), fluidState.getFluid().getTickRate(world));
             return true;
         }
@@ -141,7 +142,7 @@ public class PresentBlock extends BlockWithEntity implements Waterloggable {
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof CardboardBoxInventoryBlockEntity) {
-            ((CardboardBoxInventoryBlockEntity)blockEntity).tick();
+            ((CardboardBoxInventoryBlockEntity) blockEntity).tick();
         }
     }
 
@@ -167,7 +168,8 @@ public class PresentBlock extends BlockWithEntity implements Waterloggable {
                 ItemEntity itemEntity = new ItemEntity(world, (double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, itemStack);
                 itemEntity.setToDefaultPickupDelay();
 
-                if ((player.getAbilities().creativeMode && !presentBlockEntity.isEmpty() || !player.getAbilities().creativeMode)) world.spawnEntity(itemEntity);
+                if ((player.getAbilities().creativeMode && !presentBlockEntity.isEmpty() || !player.getAbilities().creativeMode))
+                    world.spawnEntity(itemEntity);
             }
         }
 

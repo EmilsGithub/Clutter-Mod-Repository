@@ -45,14 +45,14 @@ public class WallMushroomTreeDecorator extends TreeDecorator {
         boolean b = random.nextBoolean();
         boolean b2 = random.nextBoolean();
         if (b) {
-            if(b2) {
+            if (b2) {
                 state = ModBlocks.YELLOW_POLYPORE.getDefaultState().with(PolyporeBlock.POLYPORE_COUNT, 1);
             } else {
                 state = ModBlocks.RED_POLYPORE.getDefaultState().with(PolyporeBlock.POLYPORE_COUNT, 1);
             }
 
         } else {
-            if(b2) {
+            if (b2) {
                 state = ModBlocks.YELLOW_POLYPORE.getDefaultState().with(PolyporeBlock.POLYPORE_COUNT, 2);
             } else {
                 state = ModBlocks.RED_POLYPORE.getDefaultState().with(PolyporeBlock.POLYPORE_COUNT, 2);

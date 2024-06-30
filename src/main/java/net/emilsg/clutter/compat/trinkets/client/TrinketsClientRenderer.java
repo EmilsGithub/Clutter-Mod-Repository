@@ -41,13 +41,14 @@ public class TrinketsClientRenderer implements TrinketRenderer {
         HAT_CONFIGURATIONS.put(ModItems.TOP_HAT, new float[]{0.65f, 0.1f});
         HAT_CONFIGURATIONS.put(ModItems.VIKING_HELMET, new float[]{0.65f, 0.1f});
     }
-    
+
     @Override
     @SuppressWarnings("unchecked")
     public void render(ItemStack stack, SlotReference slotReference, EntityModel<? extends LivingEntity> contextModel, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, LivingEntity entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
         if (!(entity instanceof AbstractClientPlayerEntity player)) return;
 
-        if(client.options.getPerspective().isFirstPerson() && client.player != null && client.player.isMainPlayer() && Clutter.IS_FIRST_PERSON_MODEL_LOADED && !(client.currentScreen instanceof InventoryScreen)) return;
+        if (client.options.getPerspective().isFirstPerson() && client.player != null && client.player.isMainPlayer() && Clutter.IS_FIRST_PERSON_MODEL_LOADED && !(client.currentScreen instanceof InventoryScreen))
+            return;
 
         TrinketRenderer.translateToFace(matrices, (PlayerEntityModel<AbstractClientPlayerEntity>) contextModel, player, headYaw, headPitch);
 

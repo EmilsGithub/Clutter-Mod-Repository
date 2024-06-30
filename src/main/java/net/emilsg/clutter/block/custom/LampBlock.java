@@ -44,6 +44,14 @@ public class LampBlock extends Block implements Waterloggable {
         this.setDefaultState(this.getDefaultState().with(LIT, false).with(WATERLOGGED, false).with(POWERED, false));
     }
 
+    private static void playSound(SoundEvent soundEvent, BlockPos pos, World world) {
+        world.playSound(null, pos, soundEvent, SoundCategory.BLOCKS, 1.0f, 1.25f);
+    }
+
+    public static ToIntFunction<BlockState> createLightLevelFromLitBlockState(int litLevel) {
+        return state -> state.get(LIT) ? litLevel : 0;
+    }
+
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return SHAPE;
@@ -56,21 +64,17 @@ public class LampBlock extends Block implements Waterloggable {
         return ActionResult.success(world.isClient);
     }
 
-    private static void playSound(SoundEvent soundEvent, BlockPos pos, World world) {
-        world.playSound(null, pos, soundEvent, SoundCategory.BLOCKS, 1.0f, 1.25f);
-    }
-
     public void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
         if (!world.isClient) {
             boolean isReceivingPower = world.isReceivingRedstonePower(pos);
-            if (isReceivingPower != (Boolean)state.get(POWERED)) {
-                if ((Boolean)state.get(LIT) != isReceivingPower) {
-                    state = (BlockState)state.with(LIT, isReceivingPower);
+            if (isReceivingPower != state.get(POWERED)) {
+                if (state.get(LIT) != isReceivingPower) {
+                    state = state.with(LIT, isReceivingPower);
                     playSound(state.get(LIT) ? SoundEvents.BLOCK_METAL_PRESSURE_PLATE_CLICK_OFF : SoundEvents.BLOCK_METAL_PRESSURE_PLATE_CLICK_ON, pos, world);
                 }
 
-                world.setBlockState(pos, (BlockState)state.with(POWERED, isReceivingPower), 2);
-                if ((Boolean)state.get(WATERLOGGED)) {
+                world.setBlockState(pos, state.with(POWERED, isReceivingPower), 2);
+                if (state.get(WATERLOGGED)) {
                     world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
                 }
             }
@@ -81,10 +85,6 @@ public class LampBlock extends Block implements Waterloggable {
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(LIT, WATERLOGGED, POWERED);
-    }
-
-    public static ToIntFunction<BlockState> createLightLevelFromLitBlockState(int litLevel) {
-        return state -> state.get(LIT) ? litLevel : 0;
     }
 
     @Override
@@ -101,14 +101,14 @@ public class LampBlock extends Block implements Waterloggable {
         BlockPos blockPos;
         World worldAccess = ctx.getWorld();
         boolean bl = worldAccess.getFluidState(blockPos = ctx.getBlockPos()).getFluid() == Fluids.WATER;
-        return (BlockState)this.getDefaultState().with(WATERLOGGED, bl).with(LIT, ctx.getWorld().isReceivingRedstonePower(ctx.getBlockPos()));
+        return this.getDefaultState().with(WATERLOGGED, bl).with(LIT, ctx.getWorld().isReceivingRedstonePower(ctx.getBlockPos()));
     }
 
     @Override
     public boolean tryFillWithFluid(WorldAccess world, BlockPos pos, BlockState state, FluidState fluidState) {
         if (!state.get(Properties.WATERLOGGED) && fluidState.getFluid() == Fluids.WATER) {
 
-            world.setBlockState(pos, (BlockState)((BlockState)state.with(WATERLOGGED, true)), Block.NOTIFY_ALL);
+            world.setBlockState(pos, state.with(WATERLOGGED, true), Block.NOTIFY_ALL);
             world.scheduleFluidTick(pos, fluidState.getFluid(), fluidState.getFluid().getTickRate(world));
             return true;
         }

@@ -25,7 +25,7 @@ public class KilningRecipe implements Recipe<SimpleInventory> {
 
     @Override
     public boolean matches(SimpleInventory inventory, World world) {
-        if(world.isClient()) {
+        if (world.isClient()) {
             return false;
         }
 
@@ -73,9 +73,10 @@ public class KilningRecipe implements Recipe<SimpleInventory> {
     }
 
     public static class Type implements RecipeType<KilningRecipe> {
-        private Type() { }
         public static final Type INSTANCE = new Type();
         public static final String ID = "kilning";
+        private Type() {
+        }
     }
 
     public static class Serializer implements RecipeSerializer<KilningRecipe> {

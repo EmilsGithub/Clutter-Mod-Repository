@@ -76,15 +76,16 @@ public class PolyporeBlock extends LadderBlock implements Fertilizable {
         BlockPos blockPos = ctx.getBlockPos();
         FluidState fluidState = ctx.getWorld().getFluidState(ctx.getBlockPos());
         for (Direction direction : ctx.getPlacementDirections()) {
-            if (!direction.getAxis().isHorizontal() || !(blockState = (BlockState)blockState.with(FACING, direction.getOpposite())).canPlaceAt(worldView, blockPos)) continue;
-            return (BlockState)blockState.with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
+            if (!direction.getAxis().isHorizontal() || !(blockState = blockState.with(FACING, direction.getOpposite())).canPlaceAt(worldView, blockPos))
+                continue;
+            return blockState.with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
         }
         return null;
     }
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        if(state.get(POLYPORE_COUNT) == 1) {
+        if (state.get(POLYPORE_COUNT) == 1) {
             return switch (state.get(FACING)) {
                 case NORTH -> NORTH_SHAPE_ONE;
                 case SOUTH -> SOUTH_SHAPE_ONE;

@@ -29,6 +29,28 @@ public class DeadRedwoodTrunkPlacer extends TrunkPlacer {
         super(baseHeight, firstRandomHeight, secondRandomHeight);
     }
 
+    protected static void setToDirt(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, BlockPos pos, TreeFeatureConfig config) {
+        if (config.forceDirt || !canGenerate(world, pos)) {
+            if (world.testBlockState(pos, DeadRedwoodTrunkPlacer::isOvergrown)) {
+                replacer.accept(pos, BlockStateProvider.of(ModBlocks.OVERGROWN_PACKED_MUD).get(random, pos));
+            } else if (world.testBlockState(pos, DeadRedwoodTrunkPlacer::isDirt)) {
+                replacer.accept(pos, BlockStateProvider.of(Blocks.DIRT).get(random, pos));
+            }
+        }
+    }
+
+    private static boolean canGenerate(TestableWorld world, BlockPos pos) {
+        return world.testBlockState(pos, state -> Feature.isSoil(state) && !state.isOf(Blocks.GRASS_BLOCK) && !state.isOf(Blocks.MYCELIUM));
+    }
+
+    public static boolean isOvergrown(BlockState state) {
+        return state.isOf(ModBlocks.OVERGROWN_PACKED_MUD);
+    }
+
+    public static boolean isDirt(BlockState state) {
+        return state.isIn(BlockTags.DIRT) && !state.isOf(ModBlocks.OVERGROWN_PACKED_MUD);
+    }
+
     @Override
     protected TrunkPlacerType<?> getType() {
         return ModTrunkPlacerTypes.DEAD_REDWOOD_TRUNK_PLACER;
@@ -101,28 +123,5 @@ public class DeadRedwoodTrunkPlacer extends TrunkPlacer {
             // Outside the circular pattern, place logs as usual
             this.trySetState(world, replacer, random, tmpPos, config);
         }
-    }
-
-
-    protected static void setToDirt(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, BlockPos pos, TreeFeatureConfig config) {
-        if(config.forceDirt || !canGenerate(world, pos)) {
-            if (world.testBlockState(pos, DeadRedwoodTrunkPlacer::isOvergrown)) {
-                replacer.accept(pos, BlockStateProvider.of(ModBlocks.OVERGROWN_PACKED_MUD).get(random, pos));
-            } else if (world.testBlockState(pos, DeadRedwoodTrunkPlacer::isDirt)) {
-                replacer.accept(pos, BlockStateProvider.of(Blocks.DIRT).get(random, pos));
-            }
-        }
-    }
-
-    private static boolean canGenerate(TestableWorld world, BlockPos pos) {
-        return world.testBlockState(pos, state -> Feature.isSoil(state) && !state.isOf(Blocks.GRASS_BLOCK) && !state.isOf(Blocks.MYCELIUM));
-    }
-
-    public static boolean isOvergrown(BlockState state) {
-        return state.isOf(ModBlocks.OVERGROWN_PACKED_MUD);
-    }
-
-    public static boolean isDirt(BlockState state) {
-        return state.isIn(BlockTags.DIRT) && !state.isOf(ModBlocks.OVERGROWN_PACKED_MUD);
     }
 }

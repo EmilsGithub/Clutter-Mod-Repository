@@ -3,6 +3,7 @@ package net.emilsg.clutter.entity.custom;
 import net.emilsg.clutter.entity.ModEntities;
 import net.emilsg.clutter.entity.custom.goal.*;
 import net.emilsg.clutter.entity.custom.parent.ClutterAnimalEntity;
+import net.emilsg.clutter.util.ModBlockTags;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.ActiveTargetGoal;
 import net.minecraft.entity.ai.goal.RevengeGoal;
@@ -15,6 +16,7 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.HoglinEntity;
+import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
@@ -29,6 +31,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
+import net.minecraft.world.WorldView;
 import net.minecraft.world.dimension.DimensionTypes;
 import org.jetbrains.annotations.Nullable;
 
@@ -41,17 +45,13 @@ public class EmberTortoiseEntity extends ClutterAnimalEntity {
     private static final TrackedData<Boolean> SHIELDING = DataTracker.registerData(EmberTortoiseEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private static final TrackedData<Integer> SHIELDING_DURATION = DataTracker.registerData(EmberTortoiseEntity.class, TrackedDataHandlerRegistry.INTEGER);
     private static final TrackedData<Integer> SHIELDING_COOLDOWN = DataTracker.registerData(EmberTortoiseEntity.class, TrackedDataHandlerRegistry.INTEGER);
-
-    public final AnimationState idleAnimationState = new AnimationState();
-    public int idleAnimationTimeout = 0;
-
-    public final AnimationState shieldingAnimationState = new AnimationState();
-    public int shieldingAnimationTimeout = 0;
-
-    public final AnimationState attackAnimationState = new AnimationState();
-    public int attackAnimationTimeout = 0;
-
     private static final Ingredient BREEDING_INGREDIENT = Ingredient.ofItems(Items.FIRE_CHARGE);
+    public final AnimationState idleAnimationState = new AnimationState();
+    public final AnimationState shieldingAnimationState = new AnimationState();
+    public final AnimationState attackAnimationState = new AnimationState();
+    public int idleAnimationTimeout = 0;
+    public int shieldingAnimationTimeout = 0;
+    public int attackAnimationTimeout = 0;
 
     public EmberTortoiseEntity(EntityType<? extends ClutterAnimalEntity> entityType, World world) {
         super(entityType, world);
@@ -68,7 +68,7 @@ public class EmberTortoiseEntity extends ClutterAnimalEntity {
 
     @Override
     public boolean damage(DamageSource source, float amount) {
-        if(this.isShielding()) {
+        if (this.isShielding()) {
             LivingEntity livingEntity = (LivingEntity) source.getAttacker();
 
             if (source.getSource() instanceof ProjectileEntity projectile) {
@@ -76,7 +76,7 @@ public class EmberTortoiseEntity extends ClutterAnimalEntity {
                 return false;
             }
 
-            if(livingEntity != null && livingEntity.getMainHandStack().getItem() instanceof PickaxeItem) {
+            if (livingEntity != null && livingEntity.getMainHandStack().getItem() instanceof PickaxeItem) {
                 return super.damage(source, amount * 2);
             }
 
@@ -116,21 +116,21 @@ public class EmberTortoiseEntity extends ClutterAnimalEntity {
             --this.idleAnimationTimeout;
         }
 
-        if(this.isAttacking() && attackAnimationTimeout <= 0) {
+        if (this.isAttacking() && attackAnimationTimeout <= 0) {
             attackAnimationTimeout = 20;
             attackAnimationState.start(this.age);
         } else {
             --this.attackAnimationTimeout;
         }
 
-        if(!this.isAttacking()) {
+        if (!this.isAttacking()) {
             attackAnimationState.stop();
         }
 
-        if(this.isShielding() && shieldingAnimationTimeout <= 0) {
+        if (this.isShielding() && shieldingAnimationTimeout <= 0) {
             this.shieldingAnimationState.start(this.age);
             this.shieldingAnimationTimeout = 1;
-        } else if (!this.isShielding()){
+        } else if (!this.isShielding()) {
             this.shieldingAnimationTimeout = 0;
         }
     }
@@ -156,44 +156,57 @@ public class EmberTortoiseEntity extends ClutterAnimalEntity {
         this.limbAnimator.updateLimbs(f, 0.2F);
     }
 
-    public void setAttacking(boolean attacking) {
-        this.dataTracker.set(ATTACKING, attacking);
+    public boolean canSpawn(WorldView world) {
+        return world.doesNotIntersectEntities(this);
+    }
+
+    @Override
+    public boolean canSpawn(WorldAccess world, SpawnReason spawnReason) {
+        return true;
+    }
+
+    public static boolean isValidNaturalSpawn(EntityType<? extends AnimalEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, net.minecraft.util.math.random.Random random) {
+        return world.getBlockState(pos.down()).isIn(ModBlockTags.EMBER_TORTOISES_SPAWN_ON);
     }
 
     public boolean isAttacking() {
         return this.dataTracker.get(ATTACKING);
     }
 
-    public void setMoving(boolean moving) {
-        this.dataTracker.set(MOVING, moving);
+    public void setAttacking(boolean attacking) {
+        this.dataTracker.set(ATTACKING, attacking);
     }
 
     public boolean isMoving() {
         return this.dataTracker.get(MOVING);
     }
 
-    public void setShielding(boolean shielding) {
-        this.dataTracker.set(SHIELDING, shielding);
+    public void setMoving(boolean moving) {
+        this.dataTracker.set(MOVING, moving);
     }
 
     public boolean isShielding() {
         return this.dataTracker.get(SHIELDING);
     }
 
-    public void setShieldingCooldown(int shieldingCooldown) {
-        this.dataTracker.set(SHIELDING_COOLDOWN, shieldingCooldown);
+    public void setShielding(boolean shielding) {
+        this.dataTracker.set(SHIELDING, shielding);
     }
 
     public int getShieldingCooldown() {
         return this.dataTracker.get(SHIELDING_COOLDOWN);
     }
 
-    public void setShieldingDuration(int shieldingDuration) {
-        this.dataTracker.set(SHIELDING_DURATION, shieldingDuration);
+    public void setShieldingCooldown(int shieldingCooldown) {
+        this.dataTracker.set(SHIELDING_COOLDOWN, shieldingCooldown);
     }
 
     public int getShieldingDuration() {
         return this.dataTracker.get(SHIELDING_DURATION);
+    }
+
+    public void setShieldingDuration(int shieldingDuration) {
+        this.dataTracker.set(SHIELDING_DURATION, shieldingDuration);
     }
 
     @Nullable
@@ -270,7 +283,7 @@ public class EmberTortoiseEntity extends ClutterAnimalEntity {
 
             List<LivingEntity> nearbyEntities = world.getEntitiesByClass(LivingEntity.class, new Box(this.getBlockPos()).expand(3), e -> true);
 
-            if(nearbyEntities != null) {
+            if (nearbyEntities != null) {
                 for (LivingEntity entity : nearbyEntities) {
                     entity.setOnFire(true);
                     entity.setFireTicks(100);
@@ -278,11 +291,11 @@ public class EmberTortoiseEntity extends ClutterAnimalEntity {
             }
         }
 
-        if(!world.isClient() && this.getHealth() < this.getMaxHealth() && random.nextInt(200) == 0 && this.getWorld().getDimensionKey() == DimensionTypes.THE_NETHER && this.isAlive()) {
-            this.setHealth((float)(int)(this.getHealth() + 1));
+        if (!world.isClient() && this.getHealth() < this.getMaxHealth() && random.nextInt(200) == 0 && this.getWorld().getDimensionKey() == DimensionTypes.THE_NETHER && this.isAlive()) {
+            this.setHealth((float) (int) (this.getHealth() + 1));
         }
 
-        if(world.isClient) {
+        if (world.isClient) {
             this.setupAnimationStates();
         }
     }

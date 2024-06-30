@@ -1,7 +1,10 @@
 package net.emilsg.clutter.block.custom.plants;
 
 import net.emilsg.clutter.item.ModItems;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.CropBlock;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;

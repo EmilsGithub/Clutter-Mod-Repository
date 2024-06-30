@@ -29,13 +29,13 @@ public class PresentScreenHandler extends ScreenHandler {
         this.addSlot(new Slot(inventory, 0, x, y));
 
 
-        for(i = 0; i < 3; ++i) {
-            for(j = 0; j < 9; ++j) {
+        for (i = 0; i < 3; ++i) {
+            for (j = 0; j < 9; ++j) {
                 this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
             }
         }
 
-        for(i = 0; i < 9; ++i) {
+        for (i = 0; i < 9; ++i) {
             this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
         }
 
@@ -47,7 +47,7 @@ public class PresentScreenHandler extends ScreenHandler {
 
     public ItemStack quickMove(PlayerEntity player, int slot) {
         ItemStack itemStack = ItemStack.EMPTY;
-        Slot slot2 = (Slot)this.slots.get(slot);
+        Slot slot2 = this.slots.get(slot);
         if (slot2.hasStack()) {
             ItemStack itemStack2 = slot2.getStack();
             itemStack = itemStack2.copy();
@@ -74,7 +74,6 @@ public class PresentScreenHandler extends ScreenHandler {
 
         return itemStack;
     }
-
 
 
     public void onClosed(PlayerEntity player) {

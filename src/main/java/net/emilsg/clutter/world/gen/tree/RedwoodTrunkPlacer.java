@@ -29,6 +29,28 @@ public class RedwoodTrunkPlacer extends TrunkPlacer {
         super(baseHeight, firstRandomHeight, secondRandomHeight);
     }
 
+    protected static void setToDirt(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, BlockPos pos, TreeFeatureConfig config) {
+        if (config.forceDirt || !canGenerate(world, pos)) {
+            if (world.testBlockState(pos, RedwoodTrunkPlacer::isOvergrown)) {
+                replacer.accept(pos, BlockStateProvider.of(ModBlocks.OVERGROWN_PACKED_MUD).get(random, pos));
+            } else if (world.testBlockState(pos, RedwoodTrunkPlacer::isDirt)) {
+                replacer.accept(pos, BlockStateProvider.of(Blocks.DIRT).get(random, pos));
+            }
+        }
+    }
+
+    private static boolean canGenerate(TestableWorld world, BlockPos pos) {
+        return world.testBlockState(pos, state -> Feature.isSoil(state) && !state.isOf(Blocks.GRASS_BLOCK) && !state.isOf(Blocks.MYCELIUM));
+    }
+
+    public static boolean isOvergrown(BlockState state) {
+        return state.isOf(ModBlocks.OVERGROWN_PACKED_MUD);
+    }
+
+    public static boolean isDirt(BlockState state) {
+        return state.isIn(BlockTags.DIRT) && !state.isOf(ModBlocks.OVERGROWN_PACKED_MUD);
+    }
+
     @Override
     protected TrunkPlacerType<?> getType() {
         return ModTrunkPlacerTypes.REDWOOD_TRUNK_PLACER;
@@ -76,7 +98,7 @@ public class RedwoodTrunkPlacer extends TrunkPlacer {
     }
 
     private int calculateRadiusForLayer(int currentHeight, int totalHeight) {
-         if (currentHeight < totalHeight * 0.05) {
+        if (currentHeight < totalHeight * 0.05) {
             return 3;
         } else if (currentHeight < totalHeight * 0.3) {
             return 2;
@@ -90,27 +112,5 @@ public class RedwoodTrunkPlacer extends TrunkPlacer {
     private void setLog(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, BlockPos.Mutable tmpPos, TreeFeatureConfig config, BlockPos startPos, int dx, int dy, int dz) {
         tmpPos.set(startPos, dx, dy, dz);
         this.trySetState(world, replacer, random, tmpPos, config);
-    }
-
-    protected static void setToDirt(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, BlockPos pos, TreeFeatureConfig config) {
-        if(config.forceDirt || !canGenerate(world, pos)) {
-            if (world.testBlockState(pos, RedwoodTrunkPlacer::isOvergrown)) {
-                replacer.accept(pos, BlockStateProvider.of(ModBlocks.OVERGROWN_PACKED_MUD).get(random, pos));
-            } else if (world.testBlockState(pos, RedwoodTrunkPlacer::isDirt)) {
-                replacer.accept(pos, BlockStateProvider.of(Blocks.DIRT).get(random, pos));
-            }
-        }
-    }
-
-    private static boolean canGenerate(TestableWorld world, BlockPos pos) {
-        return world.testBlockState(pos, state -> Feature.isSoil(state) && !state.isOf(Blocks.GRASS_BLOCK) && !state.isOf(Blocks.MYCELIUM));
-    }
-
-    public static boolean isOvergrown(BlockState state) {
-        return state.isOf(ModBlocks.OVERGROWN_PACKED_MUD);
-    }
-
-    public static boolean isDirt(BlockState state) {
-        return state.isIn(BlockTags.DIRT) && !state.isOf(ModBlocks.OVERGROWN_PACKED_MUD);
     }
 }

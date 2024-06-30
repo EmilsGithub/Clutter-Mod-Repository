@@ -10,7 +10,7 @@ import static net.minecraft.world.biome.BiomeKeys.BEACH;
 
 public class MiscFeatureGeneration {
     public static void generateMiscFeatures() {
-        if(ClutterConfig.getInstance().getBoolean(ClutterConfig.GENERATE_SEASHELLS)) {
+        if (ClutterConfig.getInstance().getBoolean(ClutterConfig.GENERATE_SEASHELLS)) {
             BiomeModifications.addFeature(BiomeSelectors.includeByKey(BEACH),
                     GenerationStep.Feature.VEGETAL_DECORATION, ModPlacedFeatures.BEACH_PATCH_PLACED_KEY);
         }

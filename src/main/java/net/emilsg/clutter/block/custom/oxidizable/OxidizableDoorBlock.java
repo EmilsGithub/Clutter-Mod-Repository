@@ -4,22 +4,40 @@ import net.emilsg.clutter.util.ModBlockTags;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
+import net.minecraft.world.WorldView;
+
+import java.util.Iterator;
 
 public class OxidizableDoorBlock extends DoorBlock implements Oxidizable {
+    private final Oxidizable.OxidationLevel oxidationLevel;
 
-    private final OxidationLevel oxidationLevel;
-
-    public OxidizableDoorBlock(OxidationLevel oxidationLevel, Settings settings, BlockSetType blockSetType) {
-        super(settings, blockSetType);
+    public OxidizableDoorBlock(Oxidizable.OxidationLevel oxidationLevel, AbstractBlock.Settings settings, BlockSetType type) {
+        super(settings, type);
         this.oxidationLevel = oxidationLevel;
     }
 
+
+    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        if (state.get(DoorBlock.HALF) == DoubleBlockHalf.LOWER) {
+            this.tickDegradation(state, world, pos, random);
+        }
+
+    }
+
+    public boolean hasRandomTicks(BlockState state) {
+        return Oxidizable.getIncreasedOxidationBlock(state.getBlock()).isPresent();
+    }
+
+    @Override
+    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
+        BlockPos posDown = pos.down();
+        BlockState stateDown = world.getBlockState(posDown);
+        return state.get(HALF) == DoubleBlockHalf.LOWER ? stateDown.isSideSolidFullSquare(world, posDown, Direction.UP) : stateDown.isIn(ModBlockTags.COPPER_DOORS);
+    }
 
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
@@ -37,59 +55,52 @@ public class OxidizableDoorBlock extends DoorBlock implements Oxidizable {
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
-    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        this.testLowerOxidation(state, world, pos);
-        this.testUpperOxidation(state, world, pos);
-        this.tickDegradation(state, world, pos, random);
-    }
-
-    public boolean hasRandomTicks(BlockState state) {
-        return Oxidizable.getIncreasedOxidationBlock(state.getBlock()).isPresent();
-    }
-
-    public OxidationLevel getDegradationLevel() {
+    public Oxidizable.OxidationLevel getDegradationLevel() {
         return this.oxidationLevel;
     }
 
-    private void testUpperOxidation(BlockState upperState, World world, BlockPos upperPos) {
-        if(upperState.get(Properties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.UPPER && world.getBlockState(upperPos.down()).getBlock() instanceof OxidizableDoorBlock) {
-            BlockState lowerState = world.getBlockState(upperPos.down());
-            BlockPos lowerPos = upperPos.down();
+    public void tryDegrade(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        int i = this.getDegradationLevel().ordinal();
+        int j = 0;
+        int k = 0;
+        Iterator var8 = BlockPos.iterateOutwards(pos, 4, 4, 4).iterator();
 
-            if(getOxidationValue(world, lowerPos) > getOxidationValue(world, upperPos)) {
-                world.setBlockState(upperPos, lowerState.with(Properties.DOUBLE_BLOCK_HALF, DoubleBlockHalf.UPPER), Block.NOTIFY_ALL);
-            } else if(getOxidationValue(world, upperPos) > getOxidationValue(world, lowerPos)) {
-                world.setBlockState(upperPos.down(), upperState.with(Properties.DOUBLE_BLOCK_HALF, DoubleBlockHalf.LOWER), Block.NOTIFY_ALL);
+        while(var8.hasNext()) {
+            BlockPos blockPos = (BlockPos)var8.next();
+            int l = blockPos.getManhattanDistance(pos);
+            if (l > 4) {
+                break;
+            }
+
+            if (!blockPos.equals(pos)) {
+                BlockState blockState = world.getBlockState(blockPos);
+                Block block = blockState.getBlock();
+                if (block instanceof Degradable) {
+                    Enum<?> enum_ = ((Degradable)block).getDegradationLevel();
+                    if (this.getDegradationLevel().getClass() == enum_.getClass()) {
+                        int m = enum_.ordinal();
+                        if (m < i) {
+                            return;
+                        }
+
+                        if (m > i) {
+                            ++k;
+                        } else {
+                            ++j;
+                        }
+                    }
+                }
             }
         }
-    }
 
-    private void testLowerOxidation(BlockState lowerState, World world, BlockPos lowerPos) {
-        if(lowerState.get(Properties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.LOWER && world.getBlockState(lowerPos.up()).getBlock() instanceof OxidizableDoorBlock) {
-            BlockState upperState = world.getBlockState(lowerPos.up());
-            BlockPos upperPos = lowerPos.up();
-
-            if(getOxidationValue(world, lowerPos) > getOxidationValue(world, upperPos)) {
-                world.setBlockState(lowerPos.up(), lowerState.with(Properties.DOUBLE_BLOCK_HALF, DoubleBlockHalf.UPPER), Block.NOTIFY_ALL);
-            } else if(getOxidationValue(world, upperPos) > getOxidationValue(world, lowerPos)) {
-                world.setBlockState(lowerPos, upperState.with(Properties.DOUBLE_BLOCK_HALF, DoubleBlockHalf.LOWER), Block.NOTIFY_ALL);
-            }
+        float f = (float)(k + 1) / (float)(k + j + 1);
+        float g = f * f * this.getDegradationChanceMultiplier();
+        if (random.nextFloat() < g) {
+            this.getDegradationResult(state).ifPresent((statex) -> {
+                world.setBlockState(pos, statex);
+                if(world.getBlockState(pos.up()).getBlock() instanceof OxidizableDoorBlock && world.getBlockState(pos.up()).get(HALF) == DoubleBlockHalf.UPPER) world.setBlockState(pos.up(), statex.withIfExists(HALF, DoubleBlockHalf.UPPER));
+            });
         }
-    }
 
-    private int getOxidationValue(World world, BlockPos pos) {
-        OxidationLevel level = getOxidationLevel(world, pos);
-        if(level == OxidationLevel.UNAFFECTED) return 1;
-        if(level == OxidationLevel.EXPOSED) return 2;
-        if(level == OxidationLevel.WEATHERED) return 3;
-        return 4;
-    }
-
-    public static OxidationLevel getOxidationLevel(World world, BlockPos pos) {
-        BlockState state = world.getBlockState(pos);
-        if (state.getBlock() instanceof Oxidizable oxidizable) {
-            return oxidizable.getDegradationLevel();
-        }
-        return null;
     }
 }

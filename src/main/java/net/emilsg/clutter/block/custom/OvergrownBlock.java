@@ -58,7 +58,8 @@ public class OvergrownBlock extends SnowyBlock implements Fertilizable {
             BlockState blockState = this.getDefaultState();
             for (int i = 0; i < 4; ++i) {
                 BlockPos blockPos = pos.add(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
-                if (!world.getBlockState(blockPos).isOf(Blocks.PACKED_MUD) || !canSpread(blockState, world, blockPos)) continue;
+                if (!world.getBlockState(blockPos).isOf(Blocks.PACKED_MUD) || !canSpread(blockState, world, blockPos))
+                    continue;
                 world.setBlockState(blockPos, blockState.with(SNOWY, world.getBlockState(blockPos.up()).isOf(Blocks.SNOW)));
             }
         }
@@ -79,26 +80,28 @@ public class OvergrownBlock extends SnowyBlock implements Fertilizable {
         BlockPos blockPos = pos.up();
         BlockState blockState = Blocks.GRASS.getDefaultState();
         Optional<RegistryEntry.Reference<PlacedFeature>> optional = world.getRegistryManager().get(RegistryKeys.PLACED_FEATURE).getEntry(VegetationPlacedFeatures.GRASS_BONEMEAL);
-        block0: for (int i = 0; i < 128; ++i) {
+        block0:
+        for (int i = 0; i < 128; ++i) {
             RegistryEntry<PlacedFeature> registryEntry;
             BlockPos blockPos2 = blockPos;
             for (int j = 0; j < i / 16; ++j) {
-                if (!world.getBlockState((blockPos2 = blockPos2.add(random.nextInt(3) - 1, (random.nextInt(3) - 1) * random.nextInt(3) / 2, random.nextInt(3) - 1)).down()).isOf(this) || world.getBlockState(blockPos2).isFullCube(world, blockPos2)) continue block0;
+                if (!world.getBlockState((blockPos2 = blockPos2.add(random.nextInt(3) - 1, (random.nextInt(3) - 1) * random.nextInt(3) / 2, random.nextInt(3) - 1)).down()).isOf(this) || world.getBlockState(blockPos2).isFullCube(world, blockPos2))
+                    continue block0;
             }
             BlockState blockState2 = world.getBlockState(blockPos2);
             if (blockState2.isOf(blockState.getBlock()) && random.nextInt(10) == 0) {
-                ((Fertilizable)((Object)blockState.getBlock())).grow(world, random, blockPos2, blockState2);
+                ((Fertilizable) blockState.getBlock()).grow(world, random, blockPos2, blockState2);
             }
             if (!blockState2.isAir()) continue;
             if (random.nextInt(8) == 0) {
                 List<ConfiguredFeature<?, ?>> list = world.getBiome(blockPos2).value().getGenerationSettings().getFlowerFeatures();
                 if (list.isEmpty()) continue;
-                registryEntry = ((RandomPatchFeatureConfig)list.get(0).config()).feature();
+                registryEntry = ((RandomPatchFeatureConfig) list.get(0).config()).feature();
             } else {
                 if (!optional.isPresent()) continue;
-                registryEntry = (RegistryEntry<PlacedFeature>)optional.get();
+                registryEntry = optional.get();
             }
-            ((PlacedFeature)registryEntry.value()).generateUnregistered(world, world.getChunkManager().getChunkGenerator(), random, blockPos2);
+            registryEntry.value().generateUnregistered(world, world.getChunkManager().getChunkGenerator(), random, blockPos2);
         }
     }
 }

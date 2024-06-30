@@ -38,34 +38,33 @@ public class ShelfBlockEntityRenderer implements BlockEntityRenderer<ShelfInvent
 
             float translateZ;
             switch (direction) {
-                default -> translateZ  = 0.25f;
+                default -> translateZ = 0.25f;
                 case SOUTH -> translateZ = 0.75f;
                 case EAST, WEST -> translateZ = 0.1f + i * 0.2f;
             }
 
             float translateX;
             switch (direction) {
-                default -> translateX  = 0.1f + i * 0.2f;
+                default -> translateX = 0.1f + i * 0.2f;
                 case EAST -> translateX = 0.75f;
                 case WEST -> translateX = 0.25f;
             }
 
             if (direction == Direction.SOUTH) {
                 translateX = 1.0f - translateX;
-            }
-            else if (direction == Direction.WEST) {
+            } else if (direction == Direction.WEST) {
                 translateZ = 1.0f - translateZ;
             }
 
-            switch(direction) {
+            switch (direction) {
                 case EAST -> itemRot = 91;
                 case SOUTH -> itemRot = 1;
-                case WEST -> itemRot= 271;
+                case WEST -> itemRot = 271;
             }
 
 
             matrices.translate(translateX, 0.55, translateZ);
-            matrices.scale(0.6f,0.6f,0.6f);
+            matrices.scale(0.6f, 0.6f, 0.6f);
 
             matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(itemRot));
 

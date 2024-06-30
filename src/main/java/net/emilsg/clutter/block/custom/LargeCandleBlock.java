@@ -30,6 +30,17 @@ public class LargeCandleBlock extends WaterloggableLitBlock {
         this.setDefaultState(this.getDefaultState().with(WATERLOGGED, false).with(LIT, false));
     }
 
+    private static void spawnCandleParticles(World world, Vec3d vec3d, Random random) {
+        float f = random.nextFloat();
+        if (f < 0.3f) {
+            world.addParticle(ParticleTypes.SMOKE, vec3d.x, vec3d.y, vec3d.z, 0.0, 0.0, 0.0);
+            if (f < 0.17f) {
+                world.playSound(vec3d.x + 0.5, vec3d.y + 0.5, vec3d.z + 0.5, SoundEvents.BLOCK_CANDLE_AMBIENT, SoundCategory.BLOCKS, 1.0f + random.nextFloat(), random.nextFloat() * 0.7f + 0.3f, false);
+            }
+        }
+        world.addParticle(ParticleTypes.FLAME, vec3d.x, vec3d.y, vec3d.z, 0.0, 0.0, 0.0);
+    }
+
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         super.appendProperties(builder);
@@ -50,17 +61,6 @@ public class LargeCandleBlock extends WaterloggableLitBlock {
 
         Vec3d offset = new Vec3d(pos.getX(), pos.getY(), pos.getZ());
         spawnCandleParticles(world, offset.add(flamePosition), random);
-    }
-
-    private static void spawnCandleParticles(World world, Vec3d vec3d, Random random) {
-        float f = random.nextFloat();
-        if (f < 0.3f) {
-            world.addParticle(ParticleTypes.SMOKE, vec3d.x, vec3d.y, vec3d.z, 0.0, 0.0, 0.0);
-            if (f < 0.17f) {
-                world.playSound(vec3d.x + 0.5, vec3d.y + 0.5, vec3d.z + 0.5, SoundEvents.BLOCK_CANDLE_AMBIENT, SoundCategory.BLOCKS, 1.0f + random.nextFloat(), random.nextFloat() * 0.7f + 0.3f, false);
-            }
-        }
-        world.addParticle(ParticleTypes.FLAME, vec3d.x, vec3d.y, vec3d.z, 0.0, 0.0, 0.0);
     }
 
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {

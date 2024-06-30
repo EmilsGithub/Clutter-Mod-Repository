@@ -24,7 +24,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.*;
+import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
+import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayDeque;
@@ -47,32 +50,53 @@ public class TallCurtainBlock extends HorizontalFacingBlock implements Waterlogg
         this.setDefaultState(this.stateManager.getDefaultState().with(WATERLOGGED, false).with(FACING, Direction.NORTH).with(HALF, DoubleBlockHalf.UPPER).with(OPEN, false).with(DIRECTION_SHAPE, DirectionShape.ALONE));
     }
 
+    protected static void onBreakInCreative(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+        DoubleBlockHalf doubleBlockHalf = state.get(HALF);
+        if (doubleBlockHalf == DoubleBlockHalf.UPPER) {
+            BlockPos blockPos = pos.down();
+            BlockState blockState = world.getBlockState(blockPos);
+            if (blockState.isOf(state.getBlock()) && blockState.get(HALF) == DoubleBlockHalf.LOWER) {
+                BlockState blockState2 = blockState.getFluidState().isOf(Fluids.WATER) ? Blocks.WATER.getDefaultState() : Blocks.AIR.getDefaultState();
+                world.setBlockState(blockPos, blockState2, 35);
+                world.syncWorldEvent(player, 2001, blockPos, Block.getRawIdFromState(blockState));
+            }
+        }
+
+    }
+
+    public static BlockState withWaterloggedState(WorldView world, BlockPos pos, BlockState state) {
+        if (state.contains(Properties.WATERLOGGED)) {
+            return state.with(Properties.WATERLOGGED, world.isWater(pos));
+        }
+        return state;
+    }
+
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient && hand.equals(Hand.MAIN_HAND) && player.getStackInHand(hand).isEmpty()) {
             world.playSound(null, pos, SoundEvents.BLOCK_WOOL_STEP, SoundCategory.BLOCKS, 1.0f, 1.0f);
 
-                Deque<BlockPos> queue = new ArrayDeque<>();
-                Set<BlockPos> visited = new HashSet<>();
-                queue.add(pos);
-                visited.add(pos);
-                while (!queue.isEmpty()) {
-                    BlockPos currPos = queue.poll();
-                    BlockState currState = world.getBlockState(currPos);
+            Deque<BlockPos> queue = new ArrayDeque<>();
+            Set<BlockPos> visited = new HashSet<>();
+            queue.add(pos);
+            visited.add(pos);
+            while (!queue.isEmpty()) {
+                BlockPos currPos = queue.poll();
+                BlockState currState = world.getBlockState(currPos);
 
-                    if (currState.isOf(state.getBlock()) && currState.get(FACING) == state.get(FACING) && currState.get(OPEN) == state.get(OPEN)) {
+                if (currState.isOf(state.getBlock()) && currState.get(FACING) == state.get(FACING) && currState.get(OPEN) == state.get(OPEN)) {
 
-                        world.setBlockState(currPos, currState.cycle(OPEN), 3);
-                        for (Direction dir : Direction.values()) {
-                            BlockPos nextPos = currPos.offset(dir);
-                            if (!visited.contains(nextPos)) {
-                                queue.add(nextPos);
-                                visited.add(nextPos);
-                            }
+                    world.setBlockState(currPos, currState.cycle(OPEN), 3);
+                    for (Direction dir : Direction.values()) {
+                        BlockPos nextPos = currPos.offset(dir);
+                        if (!visited.contains(nextPos)) {
+                            queue.add(nextPos);
+                            visited.add(nextPos);
                         }
                     }
                 }
-                return ActionResult.SUCCESS;
+            }
+            return ActionResult.SUCCESS;
         } else if (hand.equals(Hand.MAIN_HAND) && player.getStackInHand(hand).isEmpty()) {
             return ActionResult.SUCCESS;
         }
@@ -82,42 +106,42 @@ public class TallCurtainBlock extends HorizontalFacingBlock implements Waterlogg
 
     @Override
     public void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
-        if(state.get(FACING) == Direction.NORTH) {
-            if(world.getBlockState(pos.west()).getBlock() instanceof TallCurtainBlock && world.getBlockState(pos.east()).getBlock() instanceof TallCurtainBlock) {
+        if (state.get(FACING) == Direction.NORTH) {
+            if (world.getBlockState(pos.west()).getBlock() instanceof TallCurtainBlock && world.getBlockState(pos.east()).getBlock() instanceof TallCurtainBlock) {
                 world.setBlockState(pos, world.getBlockState(pos).with(DIRECTION_SHAPE, DirectionShape.MIDDLE), Block.NOTIFY_ALL);
-            } else if(world.getBlockState(pos.west()).getBlock() instanceof TallCurtainBlock && !(world.getBlockState(pos.east()).getBlock() instanceof TallCurtainBlock)) {
+            } else if (world.getBlockState(pos.west()).getBlock() instanceof TallCurtainBlock && !(world.getBlockState(pos.east()).getBlock() instanceof TallCurtainBlock)) {
                 world.setBlockState(pos, world.getBlockState(pos).with(DIRECTION_SHAPE, DirectionShape.RIGHT), Block.NOTIFY_ALL);
-            } else if(!(world.getBlockState(pos.west()).getBlock() instanceof TallCurtainBlock) && world.getBlockState(pos.east()).getBlock() instanceof TallCurtainBlock) {
+            } else if (!(world.getBlockState(pos.west()).getBlock() instanceof TallCurtainBlock) && world.getBlockState(pos.east()).getBlock() instanceof TallCurtainBlock) {
                 world.setBlockState(pos, world.getBlockState(pos).with(DIRECTION_SHAPE, DirectionShape.LEFT), Block.NOTIFY_ALL);
             } else {
                 world.setBlockState(pos, world.getBlockState(pos).with(DIRECTION_SHAPE, DirectionShape.ALONE), Block.NOTIFY_ALL);
             }
-        } else if(state.get(FACING) == Direction.SOUTH) {
-            if(world.getBlockState(pos.east()).getBlock() instanceof TallCurtainBlock && world.getBlockState(pos.west()).getBlock() instanceof TallCurtainBlock) {
+        } else if (state.get(FACING) == Direction.SOUTH) {
+            if (world.getBlockState(pos.east()).getBlock() instanceof TallCurtainBlock && world.getBlockState(pos.west()).getBlock() instanceof TallCurtainBlock) {
                 world.setBlockState(pos, world.getBlockState(pos).with(DIRECTION_SHAPE, DirectionShape.MIDDLE), Block.NOTIFY_ALL);
-            } else if(world.getBlockState(pos.east()).getBlock() instanceof TallCurtainBlock && !(world.getBlockState(pos.west()).getBlock() instanceof TallCurtainBlock)) {
+            } else if (world.getBlockState(pos.east()).getBlock() instanceof TallCurtainBlock && !(world.getBlockState(pos.west()).getBlock() instanceof TallCurtainBlock)) {
                 world.setBlockState(pos, world.getBlockState(pos).with(DIRECTION_SHAPE, DirectionShape.RIGHT), Block.NOTIFY_ALL);
-            } else if(!(world.getBlockState(pos.east()).getBlock() instanceof TallCurtainBlock) && world.getBlockState(pos.west()).getBlock() instanceof TallCurtainBlock) {
+            } else if (!(world.getBlockState(pos.east()).getBlock() instanceof TallCurtainBlock) && world.getBlockState(pos.west()).getBlock() instanceof TallCurtainBlock) {
                 world.setBlockState(pos, world.getBlockState(pos).with(DIRECTION_SHAPE, DirectionShape.LEFT), Block.NOTIFY_ALL);
             } else {
                 world.setBlockState(pos, world.getBlockState(pos).with(DIRECTION_SHAPE, DirectionShape.ALONE), Block.NOTIFY_ALL);
             }
-        } else if(state.get(FACING) == Direction.WEST) {
-            if(world.getBlockState(pos.north()).getBlock() instanceof TallCurtainBlock && world.getBlockState(pos.south()).getBlock() instanceof TallCurtainBlock) {
+        } else if (state.get(FACING) == Direction.WEST) {
+            if (world.getBlockState(pos.north()).getBlock() instanceof TallCurtainBlock && world.getBlockState(pos.south()).getBlock() instanceof TallCurtainBlock) {
                 world.setBlockState(pos, world.getBlockState(pos).with(DIRECTION_SHAPE, DirectionShape.MIDDLE), Block.NOTIFY_ALL);
-            } else if(world.getBlockState(pos.north()).getBlock() instanceof TallCurtainBlock && !(world.getBlockState(pos.south()).getBlock() instanceof TallCurtainBlock)) {
+            } else if (world.getBlockState(pos.north()).getBlock() instanceof TallCurtainBlock && !(world.getBlockState(pos.south()).getBlock() instanceof TallCurtainBlock)) {
                 world.setBlockState(pos, world.getBlockState(pos).with(DIRECTION_SHAPE, DirectionShape.LEFT), Block.NOTIFY_ALL);
-            } else if(!(world.getBlockState(pos.north()).getBlock() instanceof TallCurtainBlock) && world.getBlockState(pos.south()).getBlock() instanceof TallCurtainBlock) {
+            } else if (!(world.getBlockState(pos.north()).getBlock() instanceof TallCurtainBlock) && world.getBlockState(pos.south()).getBlock() instanceof TallCurtainBlock) {
                 world.setBlockState(pos, world.getBlockState(pos).with(DIRECTION_SHAPE, DirectionShape.RIGHT), Block.NOTIFY_ALL);
             } else {
                 world.setBlockState(pos, world.getBlockState(pos).with(DIRECTION_SHAPE, DirectionShape.ALONE), Block.NOTIFY_ALL);
             }
-        } else if(state.get(FACING) == Direction.EAST) {
-            if(world.getBlockState(pos.south()).getBlock() instanceof TallCurtainBlock && world.getBlockState(pos.north()).getBlock() instanceof TallCurtainBlock) {
+        } else if (state.get(FACING) == Direction.EAST) {
+            if (world.getBlockState(pos.south()).getBlock() instanceof TallCurtainBlock && world.getBlockState(pos.north()).getBlock() instanceof TallCurtainBlock) {
                 world.setBlockState(pos, world.getBlockState(pos).with(DIRECTION_SHAPE, DirectionShape.MIDDLE), Block.NOTIFY_ALL);
-            } else if(world.getBlockState(pos.south()).getBlock() instanceof TallCurtainBlock && !(world.getBlockState(pos.north()).getBlock() instanceof TallCurtainBlock)) {
+            } else if (world.getBlockState(pos.south()).getBlock() instanceof TallCurtainBlock && !(world.getBlockState(pos.north()).getBlock() instanceof TallCurtainBlock)) {
                 world.setBlockState(pos, world.getBlockState(pos).with(DIRECTION_SHAPE, DirectionShape.LEFT), Block.NOTIFY_ALL);
-            } else if(!(world.getBlockState(pos.south()).getBlock() instanceof TallCurtainBlock) && world.getBlockState(pos.north()).getBlock() instanceof TallCurtainBlock) {
+            } else if (!(world.getBlockState(pos.south()).getBlock() instanceof TallCurtainBlock) && world.getBlockState(pos.north()).getBlock() instanceof TallCurtainBlock) {
                 world.setBlockState(pos, world.getBlockState(pos).with(DIRECTION_SHAPE, DirectionShape.RIGHT), Block.NOTIFY_ALL);
             } else {
                 world.setBlockState(pos, world.getBlockState(pos).with(DIRECTION_SHAPE, DirectionShape.ALONE), Block.NOTIFY_ALL);
@@ -128,12 +152,10 @@ public class TallCurtainBlock extends HorizontalFacingBlock implements Waterlogg
 
     @Override
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-        if(state.get(HALF).equals(DoubleBlockHalf.UPPER)) {
+        if (state.get(HALF).equals(DoubleBlockHalf.UPPER)) {
             return true;
-        } else if(state.get(HALF).equals(DoubleBlockHalf.LOWER) && world.getBlockState(pos.up()).getBlock() instanceof TallCurtainBlock){
-            return true;
-        }
-        return false;
+        } else
+            return state.get(HALF).equals(DoubleBlockHalf.LOWER) && world.getBlockState(pos.up()).getBlock() instanceof TallCurtainBlock;
     }
 
     @Override
@@ -175,26 +197,12 @@ public class TallCurtainBlock extends HorizontalFacingBlock implements Waterlogg
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
-    protected static void onBreakInCreative(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-        DoubleBlockHalf doubleBlockHalf = (DoubleBlockHalf)state.get(HALF);
-        if (doubleBlockHalf == DoubleBlockHalf.UPPER) {
-            BlockPos blockPos = pos.down();
-            BlockState blockState = world.getBlockState(blockPos);
-            if (blockState.isOf(state.getBlock()) && blockState.get(HALF) == DoubleBlockHalf.LOWER) {
-                BlockState blockState2 = blockState.getFluidState().isOf(Fluids.WATER) ? Blocks.WATER.getDefaultState() : Blocks.AIR.getDefaultState();
-                world.setBlockState(blockPos, blockState2, 35);
-                world.syncWorldEvent(player, 2001, blockPos, Block.getRawIdFromState(blockState));
-            }
-        }
-
-    }
-
     public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         if (!world.isClient) {
             if (player.isCreative()) {
                 onBreakInCreative(world, pos, state, player);
             } else {
-                dropStacks(state, world, pos, (BlockEntity)null, player, player.getMainHandStack());
+                dropStacks(state, world, pos, null, player, player.getMainHandStack());
             }
         }
 
@@ -205,17 +213,10 @@ public class TallCurtainBlock extends HorizontalFacingBlock implements Waterlogg
         super.afterBreak(world, player, pos, Blocks.AIR.getDefaultState(), blockEntity, tool);
     }
 
-    public static BlockState withWaterloggedState(WorldView world, BlockPos pos, BlockState state) {
-        if (state.contains(Properties.WATERLOGGED)) {
-            return (BlockState)state.with(Properties.WATERLOGGED, world.isWater(pos));
-        }
-        return state;
-    }
-
     @Override
     public boolean tryFillWithFluid(WorldAccess world, BlockPos pos, BlockState state, FluidState fluidState) {
         if (!state.get(Properties.WATERLOGGED) && fluidState.getFluid() == Fluids.WATER) {
-            world.setBlockState(pos, (BlockState)((BlockState)state.with(WATERLOGGED, true)), Block.NOTIFY_ALL);
+            world.setBlockState(pos, state.with(WATERLOGGED, true), Block.NOTIFY_ALL);
             world.scheduleFluidTick(pos, fluidState.getFluid(), fluidState.getFluid().getTickRate(world));
             return true;
         }
@@ -230,9 +231,8 @@ public class TallCurtainBlock extends HorizontalFacingBlock implements Waterlogg
         World world = ctx.getWorld();
         World worldAccess = ctx.getWorld();
         boolean bl = worldAccess.getFluidState(blockPos = ctx.getBlockPos()).getFluid() == Fluids.WATER;
-        return world.getBlockState(pos.down()).canReplace(ctx) ? (BlockState)this.getDefaultState().with(WATERLOGGED, bl).with(FACING, ctx.getHorizontalPlayerFacing()) : null;
+        return world.getBlockState(pos.down()).canReplace(ctx) ? this.getDefaultState().with(WATERLOGGED, bl).with(FACING, ctx.getHorizontalPlayerFacing()) : null;
     }
-
 
 
     @Override

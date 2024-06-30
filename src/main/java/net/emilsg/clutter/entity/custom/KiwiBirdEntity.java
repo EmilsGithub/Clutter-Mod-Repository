@@ -1,10 +1,11 @@
 package net.emilsg.clutter.entity.custom;
 
+import net.emilsg.clutter.block.ModBlocks;
+import net.emilsg.clutter.entity.ModEntities;
 import net.emilsg.clutter.entity.custom.goal.KiwiBirdLayEggGoal;
 import net.emilsg.clutter.entity.custom.goal.KiwiBirdMateGoal;
 import net.emilsg.clutter.entity.custom.goal.KiwiBirdWanderAroundFarGoal;
 import net.emilsg.clutter.entity.custom.parent.ClutterAnimalEntity;
-import net.emilsg.clutter.entity.ModEntities;
 import net.emilsg.clutter.sound.ModSounds;
 import net.emilsg.clutter.util.ModItemTags;
 import net.minecraft.block.BlockState;
@@ -40,18 +41,16 @@ import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class KiwiBirdEntity extends ClutterAnimalEntity implements GeoEntity {
-    private boolean songPlaying;
-    @Nullable
-    private BlockPos songSource;
-
     private static final Ingredient BREEDING_INGREDIENT = Ingredient.fromTag(ModItemTags.SEEDS);
     private static final TrackedData<Boolean> HAS_EGG = DataTracker.registerData(KiwiBirdEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private static final TrackedData<Integer> EGG_TIMER = DataTracker.registerData(KiwiBirdEntity.class, TrackedDataHandlerRegistry.INTEGER);
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
-
     private static final RawAnimation IDLE = RawAnimation.begin().thenLoop("kiwi_bird.idle");
     private static final RawAnimation WALK = RawAnimation.begin().thenLoop("kiwi_bird.walk");
     private static final RawAnimation DANCE = RawAnimation.begin().thenLoop("kiwi_bird.dance");
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+    private boolean songPlaying;
+    @Nullable
+    private BlockPos songSource;
 
     public KiwiBirdEntity(EntityType<? extends ClutterAnimalEntity> entityType, World world) {
         super(entityType, world);
@@ -73,9 +72,9 @@ public class KiwiBirdEntity extends ClutterAnimalEntity implements GeoEntity {
     @Override
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
-        this.goalSelector.add(1, new EscapeDangerGoal(this,1.25));
+        this.goalSelector.add(1, new EscapeDangerGoal(this, 1.25));
         this.goalSelector.add(2, new KiwiBirdMateGoal(this, 1));
-        this.goalSelector.add(3, new KiwiBirdLayEggGoal(this, 1));
+        this.goalSelector.add(3, new KiwiBirdLayEggGoal(this, 1, ModBlocks.KIWI_BIRD_EGG.getDefaultState()));
         this.goalSelector.add(4, new TemptGoal(this, 1.1, BREEDING_INGREDIENT, false));
         this.goalSelector.add(5, new FollowParentGoal(this, 1));
         this.goalSelector.add(6, new KiwiBirdWanderAroundFarGoal(this, this, 1.0, 1));
@@ -107,7 +106,7 @@ public class KiwiBirdEntity extends ClutterAnimalEntity implements GeoEntity {
             this.songSource = null;
         }
 
-        if(hasEgg()) {
+        if (hasEgg()) {
             setEggTimer(getEggTimer() + 1);
         }
 

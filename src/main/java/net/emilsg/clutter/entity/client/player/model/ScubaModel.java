@@ -9,7 +9,7 @@ import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 
-@Environment(value= EnvType.CLIENT)
+@Environment(value = EnvType.CLIENT)
 public class ScubaModel<T extends LivingEntity> extends AnimalModel<T> {
     private final ModelPart tank;
 
@@ -44,7 +44,7 @@ public class ScubaModel<T extends LivingEntity> extends AnimalModel<T> {
 
         if (entity.isSneaking() && (entity instanceof PlayerEntity player && !player.getAbilities().flying) && !entity.getPose().equals(EntityPose.FALL_FLYING)) {
             this.tank.pitch = 0.5f;
-            this.tank.pivotY = 3.2f;;
+            this.tank.pivotY = 3.2f;
         } else {
             this.tank.pitch = 0.0f;
             this.tank.pivotY = 0.0f;

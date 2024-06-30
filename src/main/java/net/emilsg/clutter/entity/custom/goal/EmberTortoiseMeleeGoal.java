@@ -9,6 +9,7 @@ import net.minecraft.util.Hand;
 
 public class EmberTortoiseMeleeGoal extends MeleeAttackGoal {
     private final EmberTortoiseEntity entity;
+    private final double speed;
     private int attackDelay = 10;
     private Path path;
     private int updateCountdownTicks;
@@ -16,7 +17,6 @@ public class EmberTortoiseMeleeGoal extends MeleeAttackGoal {
     private long lastUpdateTime;
     private int ticksUntilNextAttack = 10;
     private boolean shouldCountTillNextAttack = false;
-    private final double speed;
 
     public EmberTortoiseMeleeGoal(PathAwareEntity mob, double speed, boolean pauseWhenMobIdle) {
         super(mob, speed, pauseWhenMobIdle);
@@ -70,11 +70,11 @@ public class EmberTortoiseMeleeGoal extends MeleeAttackGoal {
         if (isEnemyWithinAttackDistance(target)) {
             shouldCountTillNextAttack = true;
 
-            if(isTimeToStartAttackAnimation()) {
+            if (isTimeToStartAttackAnimation()) {
                 entity.setAttacking(true);
             }
 
-            if(isTimeToAttack()) {
+            if (isTimeToAttack()) {
                 this.mob.getLookControl().lookAt(target.getX(), target.getEyeY(), target.getZ());
                 performAttack(target);
             }
@@ -110,7 +110,7 @@ public class EmberTortoiseMeleeGoal extends MeleeAttackGoal {
 
     @Override
     public void tick() {
-        if(this.entity.isShielding()) {
+        if (this.entity.isShielding()) {
             resetAttackCooldown();
             entity.setAttacking(false);
             this.stop();
@@ -118,7 +118,7 @@ public class EmberTortoiseMeleeGoal extends MeleeAttackGoal {
         }
         super.tick();
 
-        if(shouldCountTillNextAttack) {
+        if (shouldCountTillNextAttack) {
             this.ticksUntilNextAttack = Math.max(this.ticksUntilNextAttack - 1, 0);
         }
     }

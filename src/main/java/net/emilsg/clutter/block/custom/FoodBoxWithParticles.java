@@ -17,12 +17,12 @@ public class FoodBoxWithParticles extends FoodBoxBlock {
         for (int i = 0; i < 3; ++i) {
             int randomX = random.nextInt(2) * 2 - 1;
             int randomZ = random.nextInt(2) * 2 - 1;
-            double xPos = (double)pos.getX() + 0.5 + 0.125 * (double)randomX;
-            double yPos = (float)pos.getY() + random.nextFloat();
-            double zPos = (double)pos.getZ() + 0.5 + 0.125 * (double)randomZ;
-            double xVel = random.nextFloat() * (float)randomX;
-            double yVel = ((double)random.nextFloat() - 0.5) * 0.125;
-            double zVel = random.nextFloat() * (float)randomZ;
+            double xPos = (double) pos.getX() + 0.5 + 0.125 * (double) randomX;
+            double yPos = (float) pos.getY() + random.nextFloat();
+            double zPos = (double) pos.getZ() + 0.5 + 0.125 * (double) randomZ;
+            double xVel = random.nextFloat() * (float) randomX;
+            double yVel = ((double) random.nextFloat() - 0.5) * 0.125;
+            double zVel = random.nextFloat() * (float) randomZ;
             world.addParticle(ParticleTypes.PORTAL, xPos, yPos, zPos, xVel, yVel, zVel);
         }
     }

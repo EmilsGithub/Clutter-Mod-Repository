@@ -39,9 +39,8 @@ public class CardboardBoxBlock extends BlockWithEntity implements Waterloggable 
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
     public static final BooleanProperty OPEN = Properties.OPEN;
-
-    private final VoxelShape OPEN_SHAPE = VoxelShapes.union(Block.createCuboidShape(2, 0, 2.0999999999999996, 2.1, 11, 13.9), Block.createCuboidShape(13.9, 0, 2.0999999999999996, 14, 11, 13.9), Block.createCuboidShape(2, 0, 2, 14, 11, 2.1), Block.createCuboidShape(2, 0, 13.9, 14, 11, 14), Block.createCuboidShape(2, 0, 2, 14, 0.1, 14));
     protected static final VoxelShape SHAPE = Block.createCuboidShape(2, 0, 2, 14, 11, 14);
+    private final VoxelShape OPEN_SHAPE = VoxelShapes.union(Block.createCuboidShape(2, 0, 2.0999999999999996, 2.1, 11, 13.9), Block.createCuboidShape(13.9, 0, 2.0999999999999996, 14, 11, 13.9), Block.createCuboidShape(2, 0, 2, 14, 11, 2.1), Block.createCuboidShape(2, 0, 13.9, 14, 11, 14), Block.createCuboidShape(2, 0, 2, 14, 0.1, 14));
 
     public CardboardBoxBlock(Settings settings) {
         super(settings);
@@ -64,12 +63,12 @@ public class CardboardBoxBlock extends BlockWithEntity implements Waterloggable 
             return ActionResult.SUCCESS;
         }
 
-        if(player.isSneaking() && player.getStackInHand(hand).isEmpty()) {
+        if (player.isSneaking() && player.getStackInHand(hand).isEmpty()) {
             world.setBlockState(pos, state.cycle(OPEN));
-        } else if(!player.isSneaking()) {
+        } else if (!player.isSneaking()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof CardboardBoxInventoryBlockEntity) {
-                player.openHandledScreen((CardboardBoxInventoryBlockEntity)blockEntity);
+                player.openHandledScreen((CardboardBoxInventoryBlockEntity) blockEntity);
             }
         }
 
@@ -87,23 +86,23 @@ public class CardboardBoxBlock extends BlockWithEntity implements Waterloggable 
         BlockPos blockPos;
         World worldAccess = ctx.getWorld();
         boolean bl = worldAccess.getFluidState(blockPos = ctx.getBlockPos()).getFluid() == Fluids.WATER;
-        return (BlockState)this.getDefaultState().with(WATERLOGGED, bl).with(FACING, ctx.getHorizontalPlayerFacing());
+        return this.getDefaultState().with(WATERLOGGED, bl).with(FACING, ctx.getHorizontalPlayerFacing());
     }
 
     @Override
     public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
         BlockEntity blockEntity;
         if (itemStack.hasCustomName() && (blockEntity = world.getBlockEntity(pos)) instanceof CardboardBoxInventoryBlockEntity) {
-            ((CardboardBoxInventoryBlockEntity)blockEntity).setCustomName(itemStack.getName());
+            ((CardboardBoxInventoryBlockEntity) blockEntity).setCustomName(itemStack.getName());
         }
     }
 
     public BlockState rotate(BlockState state, BlockRotation rotation) {
-        return (BlockState)state.with(FACING, rotation.rotate((Direction)state.get(FACING)));
+        return state.with(FACING, rotation.rotate(state.get(FACING)));
     }
 
     public BlockState mirror(BlockState state, BlockMirror mirror) {
-        return state.rotate(mirror.getRotation((Direction)state.get(FACING)));
+        return state.rotate(mirror.getRotation(state.get(FACING)));
     }
 
     @Override
@@ -113,11 +112,12 @@ public class CardboardBoxBlock extends BlockWithEntity implements Waterloggable 
         }
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
+
     @Override
     public boolean tryFillWithFluid(WorldAccess world, BlockPos pos, BlockState state, FluidState fluidState) {
         if (!state.get(Properties.WATERLOGGED) && fluidState.getFluid() == Fluids.WATER) {
 
-            world.setBlockState(pos, (BlockState)((BlockState)state.with(WATERLOGGED, true)), Block.NOTIFY_ALL);
+            world.setBlockState(pos, state.with(WATERLOGGED, true), Block.NOTIFY_ALL);
             world.scheduleFluidTick(pos, fluidState.getFluid(), fluidState.getFluid().getTickRate(world));
             return true;
         }
@@ -142,7 +142,7 @@ public class CardboardBoxBlock extends BlockWithEntity implements Waterloggable 
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof CardboardBoxInventoryBlockEntity) {
-            ((CardboardBoxInventoryBlockEntity)blockEntity).tick();
+            ((CardboardBoxInventoryBlockEntity) blockEntity).tick();
         }
     }
 
@@ -163,12 +163,14 @@ public class CardboardBoxBlock extends BlockWithEntity implements Waterloggable 
             if (!world.isClient) {
 
                 if (!cardboardBoxInventoryBlockEntity.isEmpty()) blockEntity.setStackNbt(itemStack);
-                if (cardboardBoxInventoryBlockEntity.hasCustomName()) itemStack.setCustomName(cardboardBoxInventoryBlockEntity.getCustomName());
+                if (cardboardBoxInventoryBlockEntity.hasCustomName())
+                    itemStack.setCustomName(cardboardBoxInventoryBlockEntity.getCustomName());
 
                 ItemEntity itemEntity = new ItemEntity(world, (double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, itemStack);
                 itemEntity.setToDefaultPickupDelay();
 
-                if ((player.getAbilities().creativeMode && !cardboardBoxInventoryBlockEntity.isEmpty() || !player.getAbilities().creativeMode)) world.spawnEntity(itemEntity);
+                if ((player.getAbilities().creativeMode && !cardboardBoxInventoryBlockEntity.isEmpty() || !player.getAbilities().creativeMode))
+                    world.spawnEntity(itemEntity);
             }
         }
 

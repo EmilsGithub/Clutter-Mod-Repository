@@ -12,6 +12,13 @@ public class ButterflyWanderNetherGoal extends Goal {
         this.butterfly = butterfly;
     }
 
+    private static BlockPos getRandomPos(BlockPos center) {
+        int x = center.getX() + (int) (Math.random() * 24 * 2) - 24;
+        int y = center.getY() + (int) (Math.random() * 8 * 2) - 8;
+        int z = center.getZ() + (int) (Math.random() * 24 * 2) - 24;
+        return new BlockPos(x, y, z);
+    }
+
     @Override
     public boolean canStart() {
         return !butterfly.getWorld().getDimensionKey().equals(DimensionTypes.OVERWORLD) && butterfly.getNavigation().isIdle() && butterfly.getRandom().nextInt(5) == 0;
@@ -27,12 +34,5 @@ public class ButterflyWanderNetherGoal extends Goal {
         if (butterfly.getWorld().getBlockState(randomPos).isReplaceable()) {
             butterfly.getNavigation().startMovingTo(randomPos.getX(), randomPos.getY(), randomPos.getZ(), 1.0f);
         }
-    }
-
-    private static BlockPos getRandomPos(BlockPos center) {
-        int x = center.getX() + (int) (Math.random() * 24 * 2) - 24;
-        int y = center.getY() + (int) (Math.random() * 8 * 2) - 8;
-        int z = center.getZ() + (int) (Math.random() * 24 * 2) - 24;
-        return new BlockPos(x, y, z);
     }
 }

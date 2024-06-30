@@ -1,4 +1,4 @@
-package net.emilsg.clutter.entity.client.render;
+package net.emilsg.clutter.entity.client.render.feature;
 
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
@@ -23,9 +23,10 @@ public class EmissiveRenderer<E extends Entity, EM extends EntityModel<E>> exten
 
     @Override
     public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, E entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
-            Identifier emissiveTexture = emissiveTextureProvider.apply(entity);
-            RenderLayer emissiveLayer = RenderLayer.getEyes(emissiveTexture);
-            VertexConsumer vertexConsumer = vertexConsumers.getBuffer(emissiveLayer);
-            this.getContextModel().render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 0.25f);
+        Identifier emissiveTexture = emissiveTextureProvider.apply(entity);
+        if (emissiveTexture == null) return;
+        RenderLayer emissiveLayer = RenderLayer.getEyes(emissiveTexture);
+        VertexConsumer vertexConsumer = vertexConsumers.getBuffer(emissiveLayer);
+        this.getContextModel().render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 0.25f);
     }
 }

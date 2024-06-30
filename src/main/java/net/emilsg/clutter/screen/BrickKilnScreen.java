@@ -11,7 +11,7 @@ import net.minecraft.util.Identifier;
 
 public class BrickKilnScreen extends HandledScreen<BrickKilnScreenHandler> {
 
-    private static final Identifier BACKGROUND_TEXTURE = new Identifier(Clutter.MOD_ID,"textures/gui/container/brick_kiln.png");
+    private static final Identifier BACKGROUND_TEXTURE = new Identifier(Clutter.MOD_ID, "textures/gui/container/brick_kiln.png");
 
     public BrickKilnScreen(BrickKilnScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
@@ -42,7 +42,7 @@ public class BrickKilnScreen extends HandledScreen<BrickKilnScreenHandler> {
     }
 
     private void renderProgressArrow(DrawContext context, int x, int y) {
-        if(handler.isCrafting()) {
+        if (handler.isCrafting()) {
             int kilnProgress = this.handler.getKilnProgress();
             context.drawTexture(BACKGROUND_TEXTURE, x + 79, y + 34, 176, 14, kilnProgress + 1, 16);
         }

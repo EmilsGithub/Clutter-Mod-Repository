@@ -9,6 +9,7 @@ import net.minecraft.world.gen.noise.NoiseParametersKeys;
 import net.minecraft.world.gen.surfacebuilder.MaterialRules;
 
 public class ModMaterialRules {
+    public static final MaterialRules.MaterialCondition WATER_CHECK = MaterialRules.water(-1, 0);
     private static final MaterialRules.MaterialRule DIRT = makeStateRule(Blocks.DIRT);
     private static final MaterialRules.MaterialRule GRASS_BLOCK = makeStateRule(Blocks.GRASS_BLOCK);
     private static final MaterialRules.MaterialRule OVERGROWN_PACKED_MUD = makeStateRule(ModBlocks.OVERGROWN_PACKED_MUD);
@@ -17,8 +18,6 @@ public class ModMaterialRules {
     private static final MaterialRules.MaterialRule COARSE_DIRT = makeStateRule(Blocks.COARSE_DIRT);
     private static final MaterialRules.MaterialRule PODZOL = makeStateRule(Blocks.PODZOL);
     private static final MaterialRules.MaterialRule BEDROCK = makeStateRule(Blocks.BEDROCK);
-
-    public static final MaterialRules.MaterialCondition WATER_CHECK = MaterialRules.water(-1, 0);
 
     public static MaterialRules.MaterialRule makeRules() {
 
@@ -38,10 +37,8 @@ public class ModMaterialRules {
                                 )));
 
 
-
         return MaterialRules.sequence(
                 MaterialRules.condition(MaterialRules.biome(ModBiomes.GIANT_REDWOOD_FOREST), redwoodRule)
-
 
 
         );

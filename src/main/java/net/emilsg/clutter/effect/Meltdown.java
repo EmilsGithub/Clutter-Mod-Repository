@@ -25,7 +25,7 @@ public class Meltdown extends StatusEffect {
         World world = entity.getWorld();
         int duration = Objects.requireNonNull(entity.getStatusEffect(ModEffects.MELTDOWN)).getDuration();
 
-        if(world.isClient && duration <= 20) {
+        if (world.isClient && duration <= 20) {
             double offsetX = random.nextDouble() / 1.5 * (random.nextBoolean() ? 1 : -1);
             double offsetY = 1.0f + random.nextDouble() / 1.5 * (random.nextBoolean() ? 1 : -1);
             double offsetZ = random.nextDouble() / 1.5 * (random.nextBoolean() ? 1 : -1);
@@ -40,12 +40,11 @@ public class Meltdown extends StatusEffect {
             }
         }
 
-        if(!world.isClient) {
-            if(entity.isTouchingWaterOrRain()) {
+        if (!world.isClient) {
+            if (entity.isTouchingWaterOrRain()) {
                 entity.removeStatusEffect(ModEffects.MELTDOWN);
                 world.playSound(null, entity.getBlockPos(), SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.PLAYERS);
-            }
-            else if(duration <= 1 && !entity.isTouchingWater()) {
+            } else if (duration <= 1 && !entity.isTouchingWater()) {
                 if (ClutterConfig.getInstance().getBoolean(ClutterConfig.MELTDOWN_DESTROYS_BLOCKS)) {
                     world.createExplosion(entity, entity.getX(), entity.getBodyY(0.0625f), entity.getZ(), amplifier + 1.0f, World.ExplosionSourceType.TNT);
                 } else {
@@ -56,7 +55,7 @@ public class Meltdown extends StatusEffect {
                 entity.setFireTicks(1);
             }
         }
-        
+
         super.applyUpdateEffect(entity, amplifier);
     }
 

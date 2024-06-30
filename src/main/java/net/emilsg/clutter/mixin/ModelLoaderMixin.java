@@ -15,6 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
 import java.util.Map;
+
 @Mixin(ModelLoader.class)
 public abstract class ModelLoaderMixin {
     @Shadow

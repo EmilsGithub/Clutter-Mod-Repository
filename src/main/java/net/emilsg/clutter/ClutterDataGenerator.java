@@ -10,24 +10,24 @@ import net.minecraft.registry.RegistryBuilder;
 import net.minecraft.registry.RegistryKeys;
 
 public class ClutterDataGenerator implements DataGeneratorEntrypoint {
-	@Override
-	public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
-		FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
+    @Override
+    public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
+        FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
 
-		pack.addProvider(ItemTagDataGen::new);
-		pack.addProvider(EntityTagDataGen::new);
-		pack.addProvider(ModelDataGen::new);
-		pack.addProvider(BlockTagDataGen::new);
-		pack.addProvider(LootTableDataGen::new);
-		pack.addProvider(RecipeDataGen::new);
-		pack.addProvider(BiomeTagDataGen::new);
-		pack.addProvider(WorldDataGen::new);
-	}
+        pack.addProvider(ItemTagDataGen::new);
+        pack.addProvider(EntityTagDataGen::new);
+        pack.addProvider(ModelDataGen::new);
+        pack.addProvider(BlockTagDataGen::new);
+        pack.addProvider(LootTableDataGen::new);
+        pack.addProvider(RecipeDataGen::new);
+        pack.addProvider(BiomeTagDataGen::new);
+        pack.addProvider(WorldDataGen::new);
+    }
 
-	@Override
-	public void buildRegistry(RegistryBuilder registryBuilder) {
-		registryBuilder.addRegistry(RegistryKeys.CONFIGURED_FEATURE, ModConfiguredFeatures::bootstrap);
-		registryBuilder.addRegistry(RegistryKeys.PLACED_FEATURE, ModPlacedFeatures::bootstrap);
-		registryBuilder.addRegistry(RegistryKeys.BIOME, ModBiomes::bootstrap);
-	}
+    @Override
+    public void buildRegistry(RegistryBuilder registryBuilder) {
+        registryBuilder.addRegistry(RegistryKeys.CONFIGURED_FEATURE, ModConfiguredFeatures::bootstrap);
+        registryBuilder.addRegistry(RegistryKeys.PLACED_FEATURE, ModPlacedFeatures::bootstrap);
+        registryBuilder.addRegistry(RegistryKeys.BIOME, ModBiomes::bootstrap);
+    }
 }

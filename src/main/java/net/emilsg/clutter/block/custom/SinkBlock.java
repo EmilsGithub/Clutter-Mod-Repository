@@ -31,10 +31,6 @@ import net.minecraft.world.World;
 
 public class SinkBlock extends HorizontalFacingBlock {
 
-    private static final BooleanProperty HAS_WATER = ModProperties.HAS_WATER;
-    private static final BooleanProperty ON = ModProperties.ON;
-    private static final BooleanProperty INFINITE = ModProperties.INFINITE;
-
     protected static final VoxelShape SHAPE = VoxelShapes.union(
             Block.createCuboidShape(0, 0, 0, 2, 3, 2),
             Block.createCuboidShape(0, 0, 14, 2, 3, 16),
@@ -45,6 +41,9 @@ public class SinkBlock extends HorizontalFacingBlock {
             Block.createCuboidShape(2, 11, 0, 14, 16, 2),
             Block.createCuboidShape(2, 11, 14, 14, 16, 16),
             Block.createCuboidShape(14, 0, 14, 16, 3, 16));
+    private static final BooleanProperty HAS_WATER = ModProperties.HAS_WATER;
+    private static final BooleanProperty ON = ModProperties.ON;
+    private static final BooleanProperty INFINITE = ModProperties.INFINITE;
 
     public SinkBlock(Settings settings) {
         super(settings);
@@ -69,7 +68,7 @@ public class SinkBlock extends HorizontalFacingBlock {
             }
         }
 
-        return (BlockState)this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite()).with(ON, false).with(HAS_WATER, neighbourWater).with(INFINITE, false);
+        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite()).with(ON, false).with(HAS_WATER, neighbourWater).with(INFINITE, false);
     }
 
     @Override
@@ -111,7 +110,7 @@ public class SinkBlock extends HorizontalFacingBlock {
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
         if (state.get(ON)) {
             if (random.nextInt(4) == 0) {
-                world.playSound((double)pos.getX() + 0.5, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.5, SoundEvents.BLOCK_WATER_AMBIENT, SoundCategory.BLOCKS, random.nextFloat() * 0.25f + 0.5f, random.nextFloat() + 0.8f, false);
+                world.playSound((double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, SoundEvents.BLOCK_WATER_AMBIENT, SoundCategory.BLOCKS, random.nextFloat() * 0.25f + 0.5f, random.nextFloat() + 0.8f, false);
             }
         }
     }
@@ -126,31 +125,30 @@ public class SinkBlock extends HorizontalFacingBlock {
         }
 
         if (!world.isClient && bucketsAndBottle) {
-        if (stack.isOf(Items.WATER_BUCKET) && !state.get(HAS_WATER)) {
-            world.setBlockState(pos, state.with(HAS_WATER, true), Block.NOTIFY_ALL);
-            world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0f, 1.0f);
-            if (!player.getAbilities().creativeMode) {
-                player.setStackInHand(hand, ItemUsage.exchangeStack(player.getStackInHand(hand), player, new ItemStack(Items.BUCKET)));
+            if (stack.isOf(Items.WATER_BUCKET) && !state.get(HAS_WATER)) {
+                world.setBlockState(pos, state.with(HAS_WATER, true), Block.NOTIFY_ALL);
+                world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0f, 1.0f);
+                if (!player.getAbilities().creativeMode) {
+                    player.setStackInHand(hand, ItemUsage.exchangeStack(player.getStackInHand(hand), player, new ItemStack(Items.BUCKET)));
+                }
+                return ActionResult.SUCCESS;
+            } else if (stack.isOf(Items.BUCKET) && state.get(ON)) {
+                if (!state.get(INFINITE)) {
+                    world.setBlockState(pos, state.with(HAS_WATER, false).with(ON, false), Block.NOTIFY_ALL);
+                }
+                world.playSound(null, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.BLOCKS, 1.0f, 1.0f);
+                player.setStackInHand(hand, ItemUsage.exchangeStack(player.getStackInHand(hand), player, new ItemStack(Items.WATER_BUCKET)));
+                return ActionResult.SUCCESS;
+            } else if (stack.isOf(Items.GLASS_BOTTLE) && state.get(ON)) {
+                if (!state.get(INFINITE)) {
+                    world.setBlockState(pos, state.with(HAS_WATER, false).with(ON, false), Block.NOTIFY_ALL);
+                }
+                world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.BLOCKS, 1.0f, 1.0f);
+                player.setStackInHand(hand, ItemUsage.exchangeStack(player.getStackInHand(hand), player, PotionUtil.setPotion(new ItemStack(Items.POTION), Potions.WATER)));
+                return ActionResult.SUCCESS;
             }
-            return ActionResult.SUCCESS;
-        } else if (stack.isOf(Items.BUCKET) && state.get(ON)) {
-            if (!state.get(INFINITE)) {
-                world.setBlockState(pos, state.with(HAS_WATER, false).with(ON, false), Block.NOTIFY_ALL);
-            }
-            world.playSound(null, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.BLOCKS, 1.0f, 1.0f);
-            player.setStackInHand(hand, ItemUsage.exchangeStack(player.getStackInHand(hand), player, new ItemStack(Items.WATER_BUCKET)));
-            return ActionResult.SUCCESS;
-        } else if (stack.isOf(Items.GLASS_BOTTLE) && state.get(ON)) {
-            if (!state.get(INFINITE)) {
-                world.setBlockState(pos, state.with(HAS_WATER, false).with(ON, false), Block.NOTIFY_ALL);
-            }
-            world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.BLOCKS, 1.0f, 1.0f);
-            player.setStackInHand(hand, ItemUsage.exchangeStack(player.getStackInHand(hand), player, PotionUtil.setPotion(new ItemStack(Items.POTION), Potions.WATER)));
-            return ActionResult.SUCCESS;
-        }
-        return ActionResult.CONSUME_PARTIAL;
-    }
-        else if (!world.isClient && stack.isOf(Items.AIR) && state.get(HAS_WATER) && hand.equals(Hand.MAIN_HAND)) {
+            return ActionResult.CONSUME_PARTIAL;
+        } else if (!world.isClient && stack.isOf(Items.AIR) && state.get(HAS_WATER) && hand.equals(Hand.MAIN_HAND)) {
             if (state.get(ON)) {
                 world.setBlockState(pos, state.with(ON, false), Block.NOTIFY_ALL);
             } else if (!state.get(ON)) {

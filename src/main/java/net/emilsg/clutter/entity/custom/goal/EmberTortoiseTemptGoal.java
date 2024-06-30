@@ -20,6 +20,6 @@ public class EmberTortoiseTemptGoal extends TemptGoal {
     @Override
     public void tick() {
         super.tick();
-        if(this.emberTortoise.isShielding()) stop();
+        if (this.emberTortoise.isShielding()) stop();
     }
 }

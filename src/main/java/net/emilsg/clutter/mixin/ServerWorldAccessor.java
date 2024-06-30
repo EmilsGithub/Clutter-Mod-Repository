@@ -11,6 +11,11 @@ import java.util.List;
 
 @Mixin(ServerWorld.class)
 public interface ServerWorldAccessor {
-    @Accessor("spawners") List<Spawner> getWorldSpawners();
-    @Accessor("spawners") @Final @Mutable void setWorldSpawners(List<Spawner> spawners);
+    @Accessor("spawners")
+    List<Spawner> getWorldSpawners();
+
+    @Accessor("spawners")
+    @Final
+    @Mutable
+    void setWorldSpawners(List<Spawner> spawners);
 }

@@ -1,8 +1,8 @@
 package net.emilsg.clutter.entity.custom;
 
 import net.emilsg.clutter.block.ModBlocks;
-import net.emilsg.clutter.entity.custom.parent.ClutterAnimalEntity;
 import net.emilsg.clutter.entity.ModEntities;
+import net.emilsg.clutter.entity.custom.parent.ClutterAnimalEntity;
 import net.emilsg.clutter.util.ModItemTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -44,6 +44,7 @@ import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -53,23 +54,6 @@ public class BeaverEntity extends ClutterAnimalEntity {
     private static final TrackedData<BlockPos> HOME_POS;
 
     private static final Ingredient BREEDING_INGREDIENT = getIngredientWithName("sapling");
-
-    public final AnimationState idleTailAnimationState = new AnimationState();
-    private int idleAnimationTimeout = 0;
-
-    private static Ingredient getIngredientWithName(String name) {
-        List<Item> items = new ArrayList<>();
-
-        Registries.ITEM.forEach(item -> {
-            Identifier id = Registries.ITEM.getId(item);
-            if (id.getPath().contains(name)) {
-                items.add(item);
-            }
-        });
-
-        return Ingredient.ofItems(items.toArray(new Item[0]));
-    }
-
     private static final Map<Block, Block> STRIPPABLE_LOGS_MAP = new HashMap<>();
 
     static {
@@ -99,6 +83,9 @@ public class BeaverEntity extends ClutterAnimalEntity {
         STRIPPABLE_LOGS_MAP.put(ModBlocks.REDWOOD_WOOD, ModBlocks.STRIPPED_REDWOOD_WOOD);
     }
 
+    public final AnimationState idleTailAnimationState = new AnimationState();
+    private int idleAnimationTimeout = 0;
+
     public BeaverEntity(EntityType<? extends ClutterAnimalEntity> entityType, World world) {
         super(entityType, world);
         this.setPathfindingPenalty(PathNodeType.WATER, 0.0F);
@@ -107,6 +94,33 @@ public class BeaverEntity extends ClutterAnimalEntity {
         this.setPathfindingPenalty(PathNodeType.COCOA, -1.0F);
         this.setStepHeight(1.0f);
         this.moveControl = new BeaverMoveControl(this);
+    }
+
+    private static Ingredient getIngredientWithName(String name) {
+        List<Item> items = new ArrayList<>();
+
+        Registries.ITEM.forEach(item -> {
+            Identifier id = Registries.ITEM.getId(item);
+            if (id.getPath().contains(name)) {
+                items.add(item);
+            }
+        });
+
+        return Ingredient.ofItems(items.toArray(new Item[0]));
+    }
+
+    public static DefaultAttributeContainer.Builder setAttributes() {
+        return ClutterAnimalEntity.createMobAttributes()
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 10.0D)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25f)
+                .add(EntityAttributes.GENERIC_ATTACK_SPEED, 0.5f)
+                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.1f)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0f)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0f);
+    }
+
+    public static boolean isValidNaturalSpawn(EntityType<? extends AnimalEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+        return (world.getBlockState(pos.down()).isIn(BlockTags.ANIMALS_SPAWNABLE_ON) || world.getBlockState(pos).isOf(Blocks.WATER) && world.getBiome(pos).isIn(BiomeTags.IS_RIVER));
     }
 
     private void setupAnimationStates() {
@@ -123,7 +137,7 @@ public class BeaverEntity extends ClutterAnimalEntity {
         super.tick();
         World world = this.getWorld();
 
-        if(world.isClient) {
+        if (world.isClient) {
             this.setupAnimationStates();
         }
     }
@@ -144,22 +158,12 @@ public class BeaverEntity extends ClutterAnimalEntity {
         this.dataTracker.startTracking(HOME_POS, BlockPos.ORIGIN);
     }
 
+    BlockPos getHomePos() {
+        return this.dataTracker.get(HOME_POS);
+    }
+
     public void setHomePos(BlockPos pos) {
         this.dataTracker.set(HOME_POS, pos);
-    }
-
-    BlockPos getHomePos() {
-        return (BlockPos)this.dataTracker.get(HOME_POS);
-    }
-
-    public static DefaultAttributeContainer.Builder setAttributes() {
-        return ClutterAnimalEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 10.0D)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25f)
-                .add(EntityAttributes.GENERIC_ATTACK_SPEED, 0.5f)
-                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.1f)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0f)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0f);
     }
 
     @Override
@@ -170,7 +174,7 @@ public class BeaverEntity extends ClutterAnimalEntity {
 
     @Override
     protected void initGoals() {
-        this.goalSelector.add(0, new AnimalMateGoal(this,1.0f));
+        this.goalSelector.add(0, new AnimalMateGoal(this, 1.0f));
         this.goalSelector.add(1, new BeaverTemptGoal(this, 1.1f, BREEDING_INGREDIENT, false));
         this.goalSelector.add(2, new FollowParentGoal(this, 1.0f));
         this.goalSelector.add(3, new MeleeAttackGoal(this, 1.2f, true));
@@ -180,21 +184,6 @@ public class BeaverEntity extends ClutterAnimalEntity {
 
         this.targetSelector.add(3, new RevengeGoal(this));
 
-    }
-
-    static class BeaverTemptGoal extends TemptGoal {
-        private final BeaverEntity beaver;
-
-        public BeaverTemptGoal(PathAwareEntity entity, double speed, Ingredient food, boolean canBeScared) {
-            super(entity, speed, food, canBeScared);
-            this.beaver = (BeaverEntity) entity;
-        }
-
-        @Override
-        public void stop() {
-            super.stop();
-            this.beaver.setHomePos(this.beaver.getBlockPos());
-        }
     }
 
     public void writeCustomDataToNbt(NbtCompound nbt) {
@@ -219,10 +208,6 @@ public class BeaverEntity extends ClutterAnimalEntity {
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
     }
 
-    public static boolean isValidNaturalSpawn(EntityType<? extends AnimalEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-        return (world.getBlockState(pos.down()).isIn(BlockTags.ANIMALS_SPAWNABLE_ON) || world.getBlockState(pos).isOf(Blocks.WATER) && world.getBiome(pos).isIn(BiomeTags.IS_RIVER));
-    }
-
     @Override
     public float getScaleFactor() {
         return this.isBaby() ? 0.6F : 1.0F;
@@ -231,23 +216,23 @@ public class BeaverEntity extends ClutterAnimalEntity {
     @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
         ItemStack stackInHand = player.getStackInHand(hand);
-        if(stackInHand.isIn(ModItemTags.STRIPPABLE_LOGS)) {
+        if (stackInHand.isIn(ModItemTags.STRIPPABLE_LOGS)) {
             Block heldBlock = Block.getBlockFromItem(stackInHand.getItem());
             Item strippedBlock = STRIPPABLE_LOGS_MAP.get(heldBlock).asItem();
             dropItem(strippedBlock);
             getWorld().addBlockBreakParticles(getBlockPos(), heldBlock.getDefaultState());
-            if(!player.getAbilities().creativeMode) {
+            if (!player.getAbilities().creativeMode) {
                 stackInHand.decrement(1);
             }
             playSound(SoundEvents.BLOCK_WOOD_BREAK, 1.0f, 1.0f);
             return ActionResult.SUCCESS;
-        } else if(Registries.ITEM.getId(stackInHand.getItem()).getPath().contains("planks")) {
+        } else if (Registries.ITEM.getId(stackInHand.getItem()).getPath().contains("planks")) {
             Block heldBlock = Block.getBlockFromItem(stackInHand.getItem());
             ItemStack sticksWithCount = new ItemStack(Items.STICK);
             sticksWithCount.setCount(random.nextBetween(2, 4));
             dropStack(sticksWithCount);
             getWorld().addBlockBreakParticles(getBlockPos(), heldBlock.getDefaultState());
-            if(!player.getAbilities().creativeMode) {
+            if (!player.getAbilities().creativeMode) {
                 stackInHand.decrement(1);
             }
             playSound(SoundEvents.BLOCK_WOOD_BREAK, 1.0f, 1.0f);
@@ -259,21 +244,6 @@ public class BeaverEntity extends ClutterAnimalEntity {
     @Override
     public boolean isBreedingItem(ItemStack stack) {
         return BREEDING_INGREDIENT.test(stack);
-    }
-
-    public static class BeaverWanderAroundFarGoal extends WanderAroundGoal {
-        protected final float probability;
-
-        public BeaverWanderAroundFarGoal(PathAwareEntity mob, double speed, float probability) {
-            super(mob, speed);
-            this.probability = probability;
-        }
-
-        @Nullable
-        protected Vec3d getWanderTarget() {
-            Vec3d vec3d = FuzzyTargeting.find(this.mob, 15, 7);
-            return vec3d == null ? super.getWanderTarget() : vec3d;
-        }
     }
 
     @Override
@@ -310,6 +280,36 @@ public class BeaverEntity extends ClutterAnimalEntity {
 
     }
 
+    static class BeaverTemptGoal extends TemptGoal {
+        private final BeaverEntity beaver;
+
+        public BeaverTemptGoal(PathAwareEntity entity, double speed, Ingredient food, boolean canBeScared) {
+            super(entity, speed, food, canBeScared);
+            this.beaver = (BeaverEntity) entity;
+        }
+
+        @Override
+        public void stop() {
+            super.stop();
+            this.beaver.setHomePos(this.beaver.getBlockPos());
+        }
+    }
+
+    public static class BeaverWanderAroundFarGoal extends WanderAroundGoal {
+        protected final float probability;
+
+        public BeaverWanderAroundFarGoal(PathAwareEntity mob, double speed, float probability) {
+            super(mob, speed);
+            this.probability = probability;
+        }
+
+        @Nullable
+        protected Vec3d getWanderTarget() {
+            Vec3d vec3d = FuzzyTargeting.find(this.mob, 15, 7);
+            return vec3d == null ? super.getWanderTarget() : vec3d;
+        }
+    }
+
     static class BeaverMoveControl extends MoveControl {
         private final BeaverEntity beaver;
 
@@ -342,12 +342,12 @@ public class BeaverEntity extends ClutterAnimalEntity {
                     this.entity.setMovementSpeed(0.0F);
                 } else {
                     y /= sqrt;
-                    float h = (float)(MathHelper.atan2(z, x) * 57.2957763671875) - 90.0F;
+                    float h = (float) (MathHelper.atan2(z, x) * 57.2957763671875) - 90.0F;
                     this.beaver.setYaw(this.wrapDegrees(this.beaver.getYaw(), h, 90.0F));
                     this.beaver.bodyYaw = this.beaver.getYaw();
-                    float i = (float)(this.speed * this.beaver.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED));
+                    float i = (float) (this.speed * this.beaver.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED));
                     this.beaver.setMovementSpeed(MathHelper.lerp(0.125F, this.beaver.getMovementSpeed(), i));
-                    this.beaver.setVelocity(this.beaver.getVelocity().add(0.0, (double)this.beaver.getMovementSpeed() * y * 0.1, 0.0));
+                    this.beaver.setVelocity(this.beaver.getVelocity().add(0.0, (double) this.beaver.getMovementSpeed() * y * 0.1, 0.0));
                 }
             } else {
                 this.beaver.setMovementSpeed(0.0F);

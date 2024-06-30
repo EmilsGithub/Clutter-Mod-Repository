@@ -5,16 +5,52 @@ import net.fabricmc.loader.api.FabricLoader;
 import org.slf4j.Logger;
 
 import java.io.*;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 
 public class ClutterConfig {
     public static final String FILE_VERSION = "0.6.0";
+    public static final String DISABLE_GREED_GENERATION = "disable_greed_loot_generation";
+    public static final String COIN_DROPS_AND_LOOT_GEN = "coin_drops_and_loot_gen";
+    public static final String CHERRY_DROP_RATE = "cherry_drop_rate";
+    public static final String GREED_CHANCE_PER_LEVEL = "greed_chance_per_level";
+    public static final String GREED_WITH_LOOTING_AND_MENDING = "greed_with_looting_and_mending";
+    public static final String MELTDOWN_DESTROYS_BLOCKS = "meltdown_destroys_blocks";
+    public static final String DO_TRINKETS_ELYTRA_FLIGHT = "do_trinkets_elytra_flight";
+    public static final String SPAWN_CLUTTER_MOBS = "spawn_clutter_mobs";
+    public static final String SPAWN_BUTTERFLIES = "spawn_butterflies";
+    public static final String SPAWN_CHAMELEONS = "spawn_chameleons";
+    public static final String SPAWN_ECHOFINS = "spawn_echofins";
+    public static final String SPAWN_MOSSBLOOMS = "spawn_mossblooms";
+    public static final String SPAWN_KIWIS = "spawn_kiwis";
+    public static final String SPAWN_EMPEROR_PENGUINS = "spawn_emperor_penguins";
+    public static final String SPAWN_BEAVERS = "spawn_beavers";
+    public static final String SPAWN_CAPYBARAS = "spawn_capybaras";
+    public static final String SPAWN_CRIMSON_NEWTS = "spawn_crimson_newts";
+    public static final String SPAWN_WARPED_NEWTS = "spawn_warped_newts";
+    public static final String SPAWN_EMBER_TORTOISES = "spawn_ember_tortoises";
+    public static final String SPAWN_JELLYFISHES = "spawn_jellyfishes";
+    public static final String GENERATE_GEODES = "generate_geodes";
+    public static final String GENERATE_ONYX_GEODES = "generate_onyx_geodes";
+    public static final String GENERATE_ORES = "generate_ores";
+    public static final String GENERATE_SILVER_ORES = "generate_silver_ores";
+    public static final String GENERATE_SULPHUR_ORES = "generate_sulphur_ores";
+    public static final String GENERATE_FOLIAGE = "generate_foliage";
+    public static final String GENERATE_BIOMES = "generate_biomes";
+    public static final String GENERATE_REDWOOD_FORESTS = "generate_redwood_forests";
+    public static final String GENERATE_LUPINE_FIELDS = "generate_lupine_fields";
+    public static final String GENERATE_MISC_FEATURES = "generate_misc_features";
+    public static final String GENERATE_SEASHELLS = "generate_seashells";
+    public static final String GENERATE_UNDERWATER_FEATURES = "generate_ocean_features";
+    public static final String GENERATE_SMALL_SPONGES = "generate_small_sponges";
+    public static final String GENERATE_CLAMS = "generate_clams";
+    public static final String ENHANCED_BEACON_DISPLAY = "enhanced_beacon_display";
     private static final Logger LOGGER = Clutter.LOGGER;
+    private static final String fileName = "clutter.properties";
+    private static ClutterConfig instance;
     private final Map<String, ConfigEntry<?>> configs;
     private final File configFile;
-    private static ClutterConfig instance;
-    private static final String fileName = "clutter.properties";
-
     public ClutterConfig(String configFilePath) {
         this.configFile = new File(configFilePath);
         this.configs = new HashMap<>();
@@ -33,98 +69,55 @@ public class ClutterConfig {
         return instance;
     }
 
-    public static final String DISABLE_GREED_GENERATION = "disable_greed_loot_generation";
-    public static final String COIN_DROPS_AND_LOOT_GEN = "coin_drops_and_loot_gen";
-    public static final String CHERRY_DROP_RATE = "cherry_drop_rate";
-    public static final String GREED_CHANCE_PER_LEVEL = "greed_chance_per_level";
-    public static final String GREED_WITH_LOOTING_AND_MENDING = "greed_with_looting_and_mending";
-    public static final String MELTDOWN_DESTROYS_BLOCKS = "meltdown_destroys_blocks";
-    public static final String DO_TRINKETS_ELYTRA_FLIGHT = "do_trinkets_elytra_flight";
-
-    public static final String SPAWN_CLUTTER_MOBS = "spawn_clutter_mobs";
-    public static final String SPAWN_BUTTERFLIES = "spawn_butterflies";
-    public static final String SPAWN_CHAMELEONS = "spawn_chameleons";
-    public static final String SPAWN_ECHOFINS = "spawn_echofins";
-    public static final String SPAWN_MOSSBLOOMS = "spawn_mossblooms";
-    public static final String SPAWN_KIWIS = "spawn_kiwis";
-    public static final String SPAWN_EMPEROR_PENGUINS = "spawn_emperor_penguins";
-    public static final String SPAWN_BEAVERS = "spawn_beavers";
-    public static final String SPAWN_CAPYBARAS = "spawn_capybaras";
-    public static final String SPAWN_CRIMSON_NEWTS = "spawn_crimson_newts";
-    public static final String SPAWN_EMBER_TORTOISES = "spawn_ember_tortoises";
-    public static final String SPAWN_JELLYFISHES = "spawn_jellyfishes";
-
-    public static final String GENERATE_GEODES = "generate_geodes";
-    public static final String GENERATE_ONYX_GEODES = "generate_onyx_geodes";
-
-    public static final String GENERATE_ORES = "generate_ores";
-    public static final String GENERATE_SILVER_ORES = "generate_silver_ores";
-    public static final String GENERATE_SULPHUR_ORES = "generate_sulphur_ores";
-
-    public static final String GENERATE_FOLIAGE = "generate_foliage";
-
-    public static final String GENERATE_BIOMES = "generate_biomes";
-    public static final String GENERATE_REDWOOD_FORESTS = "generate_redwood_forests";
-    public static final String GENERATE_LUPINE_FIELDS = "generate_lupine_fields";
-
-    public static final String GENERATE_MISC_FEATURES = "generate_misc_features";
-    public static final String GENERATE_SEASHELLS = "generate_seashells";
-
-    public static final String GENERATE_UNDERWATER_FEATURES = "generate_ocean_features";
-    public static final String GENERATE_SMALL_SPONGES = "generate_small_sponges";
-    public static final String GENERATE_CLAMS = "generate_clams";
-
-    public static final String ENHANCED_BEACON_DISPLAY = "enhanced_beacon_display";
-
-
     public void initializeConfigs() {
-        configs.put(DISABLE_GREED_GENERATION, new ConfigEntry<>( false, "Disables the generation of Greed Books"));
-        configs.put(GREED_WITH_LOOTING_AND_MENDING, new ConfigEntry<>( false, "Greed compatible with Looting and Mending."));
-        configs.put(GREED_CHANCE_PER_LEVEL, new ConfigEntry<>( 0.01f, "Coin drop chance per level of Greed. (Default 1% per level of Greed)"));
-        configs.put(CHERRY_DROP_RATE, new ConfigEntry<>( 0.075f, "Drop rate for cherries. (Default, 7.5% chance for 1 to 2 Cherries to Drop, not affected by Fortune)"));
-        configs.put(COIN_DROPS_AND_LOOT_GEN, new ConfigEntry<>( true, "Coin drops and generation."));
-        configs.put(MELTDOWN_DESTROYS_BLOCKS, new ConfigEntry<>( false, "Meltdown destroys blocks."));
-        configs.put(DO_TRINKETS_ELYTRA_FLIGHT, new ConfigEntry<>( true, "The elytra and butterfly elytra work while being worn in the Cape slot."));
+        configs.put(DISABLE_GREED_GENERATION, new ConfigEntry<>(false, "Disables the generation of Greed Books"));
+        configs.put(GREED_WITH_LOOTING_AND_MENDING, new ConfigEntry<>(false, "Greed compatible with Looting and Mending."));
+        configs.put(GREED_CHANCE_PER_LEVEL, new ConfigEntry<>(0.01f, "Coin drop chance per level of Greed. (Default 1% per level of Greed)"));
+        configs.put(CHERRY_DROP_RATE, new ConfigEntry<>(0.075f, "Drop rate for cherries. (Default, 7.5% chance for 1 to 2 Cherries to Drop, not affected by Fortune)"));
+        configs.put(COIN_DROPS_AND_LOOT_GEN, new ConfigEntry<>(true, "Coin drops and generation."));
+        configs.put(MELTDOWN_DESTROYS_BLOCKS, new ConfigEntry<>(false, "Meltdown destroys blocks."));
+        configs.put(DO_TRINKETS_ELYTRA_FLIGHT, new ConfigEntry<>(true, "The elytra and butterfly elytra work while being worn in the Cape slot."));
 
-        configs.put(SPAWN_CLUTTER_MOBS, new ConfigEntry<>( true, "Spawn Clutter Mobs."));
-        configs.put(SPAWN_BUTTERFLIES, new ConfigEntry<>( true, "Spawn Butterflies."));
-        configs.put(SPAWN_CHAMELEONS, new ConfigEntry<>( true, "Spawn Chameleons."));
-        configs.put(SPAWN_ECHOFINS, new ConfigEntry<>( true, "Spawn Echofins."));
-        configs.put(SPAWN_MOSSBLOOMS, new ConfigEntry<>( true, "Spawn Mossblooms."));
-        configs.put(SPAWN_KIWIS, new ConfigEntry<>( true, "Spawn Kiwis."));
-        configs.put(SPAWN_EMPEROR_PENGUINS, new ConfigEntry<>( true, "Spawn Emperor Penguins."));
-        configs.put(SPAWN_BEAVERS, new ConfigEntry<>( true, "Spawn Beavers."));
-        configs.put(SPAWN_CAPYBARAS, new ConfigEntry<>( true, "Spawn Capybaras."));
-        configs.put(SPAWN_CRIMSON_NEWTS, new ConfigEntry<>( true, "Spawn Crimson Newts."));
-        configs.put(SPAWN_EMBER_TORTOISES, new ConfigEntry<>( true, "Spawn Ember Tortoises."));
-        configs.put(SPAWN_JELLYFISHES, new ConfigEntry<>( true, "Spawn Jellyfishes."));
+        configs.put(SPAWN_CLUTTER_MOBS, new ConfigEntry<>(true, "Spawn Clutter Mobs."));
+        configs.put(SPAWN_BUTTERFLIES, new ConfigEntry<>(true, "Spawn Butterflies."));
+        configs.put(SPAWN_CHAMELEONS, new ConfigEntry<>(true, "Spawn Chameleons."));
+        configs.put(SPAWN_ECHOFINS, new ConfigEntry<>(true, "Spawn Echofins."));
+        configs.put(SPAWN_MOSSBLOOMS, new ConfigEntry<>(true, "Spawn Mossblooms."));
+        configs.put(SPAWN_KIWIS, new ConfigEntry<>(true, "Spawn Kiwis."));
+        configs.put(SPAWN_EMPEROR_PENGUINS, new ConfigEntry<>(true, "Spawn Emperor Penguins."));
+        configs.put(SPAWN_BEAVERS, new ConfigEntry<>(true, "Spawn Beavers."));
+        configs.put(SPAWN_CAPYBARAS, new ConfigEntry<>(true, "Spawn Capybaras."));
+        configs.put(SPAWN_CRIMSON_NEWTS, new ConfigEntry<>(true, "Spawn Crimson Newts."));
+        configs.put(SPAWN_WARPED_NEWTS, new ConfigEntry<>(true, "Spawn Warped Newts."));
+        configs.put(SPAWN_EMBER_TORTOISES, new ConfigEntry<>(true, "Spawn Ember Tortoises."));
+        configs.put(SPAWN_JELLYFISHES, new ConfigEntry<>(true, "Spawn Jellyfishes."));
 
-        configs.put(GENERATE_GEODES, new ConfigEntry<>( true, "Generate Geodes."));
-        configs.put(GENERATE_ONYX_GEODES, new ConfigEntry<>( true, "Generate Onyx Geodes."));
+        configs.put(GENERATE_GEODES, new ConfigEntry<>(true, "Generate Geodes."));
+        configs.put(GENERATE_ONYX_GEODES, new ConfigEntry<>(true, "Generate Onyx Geodes."));
 
-        configs.put(GENERATE_ORES, new ConfigEntry<>( true, "Generate Ores."));
-        configs.put(GENERATE_SILVER_ORES, new ConfigEntry<>( true, "Generate Silver Ore."));
-        configs.put(GENERATE_SULPHUR_ORES, new ConfigEntry<>( true, "Generate Sulphur Ores."));
+        configs.put(GENERATE_ORES, new ConfigEntry<>(true, "Generate Ores."));
+        configs.put(GENERATE_SILVER_ORES, new ConfigEntry<>(true, "Generate Silver Ore."));
+        configs.put(GENERATE_SULPHUR_ORES, new ConfigEntry<>(true, "Generate Sulphur Ores."));
 
-        configs.put(GENERATE_FOLIAGE, new ConfigEntry<>( true, "Generate Foliage."));
+        configs.put(GENERATE_FOLIAGE, new ConfigEntry<>(true, "Generate Foliage."));
 
-        configs.put(GENERATE_BIOMES, new ConfigEntry<>( true, "Generate Clutter Biomes."));
-        configs.put(GENERATE_REDWOOD_FORESTS, new ConfigEntry<>( true, "Generate Redwood Forests."));
-        configs.put(GENERATE_LUPINE_FIELDS, new ConfigEntry<>( true, "Generate Lupine Fields."));
+        configs.put(GENERATE_BIOMES, new ConfigEntry<>(true, "Generate Clutter Biomes."));
+        configs.put(GENERATE_REDWOOD_FORESTS, new ConfigEntry<>(true, "Generate Redwood Forests."));
+        configs.put(GENERATE_LUPINE_FIELDS, new ConfigEntry<>(true, "Generate Lupine Fields."));
 
-        configs.put(GENERATE_MISC_FEATURES, new ConfigEntry<>( true, "Generate Misc Features."));
-        configs.put(GENERATE_SEASHELLS, new ConfigEntry<>( true, "Generate Seashells."));
+        configs.put(GENERATE_MISC_FEATURES, new ConfigEntry<>(true, "Generate Misc Features."));
+        configs.put(GENERATE_SEASHELLS, new ConfigEntry<>(true, "Generate Seashells."));
 
-        configs.put(GENERATE_UNDERWATER_FEATURES, new ConfigEntry<>( true, "Generate Underwater Features."));
-        configs.put(GENERATE_SMALL_SPONGES, new ConfigEntry<>( true, "Generate Small Sponges."));
-        configs.put(GENERATE_CLAMS, new ConfigEntry<>( true, "Generate Clams."));
+        configs.put(GENERATE_UNDERWATER_FEATURES, new ConfigEntry<>(true, "Generate Underwater Features."));
+        configs.put(GENERATE_SMALL_SPONGES, new ConfigEntry<>(true, "Generate Small Sponges."));
+        configs.put(GENERATE_CLAMS, new ConfigEntry<>(true, "Generate Clams."));
 
-        configs.put(ENHANCED_BEACON_DISPLAY, new ConfigEntry<>( true, "Change the way the Payment Items in a Beacon are displayed."));
+        configs.put(ENHANCED_BEACON_DISPLAY, new ConfigEntry<>(true, "Change the way the Payment Items in a Beacon are displayed."));
 
     }
 
     public boolean isConfigVersionCurrent() {
-        if(getCurrentFileVersion() != null) {
+        if (getCurrentFileVersion() != null) {
             return getCurrentFileVersion().equals("# File Version: " + FILE_VERSION);
         }
         return false;
@@ -152,7 +145,7 @@ public class ClutterConfig {
         if (configFile.exists()) {
             loadConfig();
         } else {
-            LOGGER.info("Clutter config file is missing, generating default one." );
+            LOGGER.info("Clutter config file is missing, generating default one.");
             createDefaultConfig();
         }
     }
@@ -231,7 +224,6 @@ public class ClutterConfig {
     }
 
 
-
     @SuppressWarnings("unchecked")
     private <T> void updateConfigEntry(String key, ConfigEntry<T> configEntry, String value) {
         T convertedValue = (T) convertStringToType(key, value, configEntry.getValue().getClass(), configEntry);
@@ -308,9 +300,9 @@ public class ClutterConfig {
     }
 
     private static class ConfigEntry<T> {
-        private T value;
         private final T defaultValue;
         private final String comment;
+        private T value;
 
         public ConfigEntry(T defaultValue, String comment) {
             this.defaultValue = defaultValue;

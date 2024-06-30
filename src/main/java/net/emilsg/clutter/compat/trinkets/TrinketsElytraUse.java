@@ -19,7 +19,7 @@ public class TrinketsElytraUse {
     public static void doFlight() {
         EntityElytraEvents.CUSTOM.register((LivingEntity livingEntity, boolean tick) -> {
             for (ItemStack itemStack : getEquippedElytra(livingEntity)) {
-                if(elytraIsUsable(livingEntity, itemStack, tick)) return true;
+                if (elytraIsUsable(livingEntity, itemStack, tick)) return true;
             }
 
             return false;
@@ -32,7 +32,7 @@ public class TrinketsElytraUse {
 
         Optional<TrinketComponent> optional = TrinketsApi.getTrinketComponent(livingEntity);
 
-        if(optional.isEmpty()) return stackList;
+        if (optional.isEmpty()) return stackList;
 
         TrinketComponent trinketComponent = optional.get();
 

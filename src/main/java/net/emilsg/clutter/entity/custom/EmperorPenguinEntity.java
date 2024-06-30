@@ -1,8 +1,9 @@
 package net.emilsg.clutter.entity.custom;
 
 import net.emilsg.clutter.block.ModBlocks;
-import net.emilsg.clutter.entity.custom.parent.ClutterAnimalEntity;
 import net.emilsg.clutter.entity.ModEntities;
+import net.emilsg.clutter.entity.custom.goal.EmperorPenguinLayEggGoal;
+import net.emilsg.clutter.entity.custom.parent.ClutterAnimalEntity;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
@@ -55,6 +56,7 @@ import java.util.List;
 public class EmperorPenguinEntity extends ClutterAnimalEntity implements GeoEntity {
     private static final Ingredient BREEDING_INGREDIENT = Ingredient.fromTag(ItemTags.FISHES);
     private static final TrackedData<Boolean> HAS_EGG = DataTracker.registerData(EmperorPenguinEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    private static final TrackedData<Integer> EGG_TIMER = DataTracker.registerData(EmperorPenguinEntity.class, TrackedDataHandlerRegistry.INTEGER);
     private static final RawAnimation IDLE = RawAnimation.begin().thenLoop("emperor_penguin.idle");
     private static final RawAnimation WADDLE = RawAnimation.begin().thenLoop("emperor_penguin.waddle");
     private static final RawAnimation FLAP = RawAnimation.begin().thenPlay("emperor_penguin.random_flap");
@@ -85,13 +87,13 @@ public class EmperorPenguinEntity extends ClutterAnimalEntity implements GeoEnti
 
     @Override
     protected void initGoals() {
-        this.goalSelector.add(1, new EscapeDangerGoal(this,1.25));
-        this.goalSelector.add(2, new EmperorPenguinMateGoal(this,1));
-        this.goalSelector.add(3, new LayEggGoal(this, 1));
+        this.goalSelector.add(1, new EscapeDangerGoal(this, 1.25));
+        this.goalSelector.add(2, new EmperorPenguinMateGoal(this, 1));
+        this.goalSelector.add(3, new EmperorPenguinLayEggGoal(this, 1, ModBlocks.EMPEROR_PENGUIN_EGG.getDefaultState()));
         this.goalSelector.add(4, new TemptGoal(this, 1.1, BREEDING_INGREDIENT, false));
         this.goalSelector.add(5, new FollowParentGoal(this, 1));
         this.goalSelector.add(6, new MeleeAttackGoal(this, 1.25, true));
-        this.goalSelector.add(7, new WanderAroundFarGoal(this,1, 1));
+        this.goalSelector.add(7, new WanderAroundFarGoal(this, 1, 1));
         this.goalSelector.add(8, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
         this.goalSelector.add(9, new LookAroundGoal(this));
 
@@ -116,6 +118,15 @@ public class EmperorPenguinEntity extends ClutterAnimalEntity implements GeoEnti
     @Override
     public boolean isBreedingItem(ItemStack stack) {
         return stack.isIn(ItemTags.FISHES);
+    }
+
+    @Override
+    public void tickMovement() {
+        super.tickMovement();
+
+        if (hasEgg()) {
+            setEggTimer(getEggTimer() + 1);
+        }
     }
 
     @Nullable
@@ -146,16 +157,19 @@ public class EmperorPenguinEntity extends ClutterAnimalEntity implements GeoEnti
     protected void initDataTracker() {
         super.initDataTracker();
         this.dataTracker.startTracking(HAS_EGG, false);
+        this.dataTracker.startTracking(EGG_TIMER, 0);
     }
 
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
         nbt.putBoolean("HasEgg", this.hasEgg());
+        nbt.putInt("EggTimer", this.getEggTimer());
     }
 
     public void readCustomDataFromNbt(NbtCompound nbt) {
         super.readCustomDataFromNbt(nbt);
         this.setHasEgg(nbt.getBoolean("HasEgg"));
+        this.setEggTimer(nbt.getInt("EggTimer"));
     }
 
     public boolean canEat() {
@@ -166,13 +180,36 @@ public class EmperorPenguinEntity extends ClutterAnimalEntity implements GeoEnti
         return this.dataTracker.get(HAS_EGG);
     }
 
-    void setHasEgg(boolean hasEgg) {
+    public void setHasEgg(boolean hasEgg) {
         this.dataTracker.set(HAS_EGG, hasEgg);
     }
+
+    public int getEggTimer() {
+        return this.dataTracker.get(EGG_TIMER);
+    }
+
+    public void setEggTimer(int time) {
+        this.dataTracker.set(EGG_TIMER, time);
+    }
+
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return this.CACHE;
+    }
+
+    public void travel(Vec3d movementInput) {
+        if (this.isLogicalSideForUpdatingMovement() && this.isTouchingWater()) {
+            this.updateVelocity(0.1F, movementInput);
+            this.move(MovementType.SELF, this.getVelocity());
+            this.setVelocity(this.getVelocity().multiply(0.9));
+            if (this.getTarget() == null) {
+                this.setVelocity(this.getVelocity().add(0.0, -0.005, 0.0));
+            }
+        } else {
+            super.travel(movementInput);
+        }
+
     }
 
     private static class EmperorPenguinMateGoal extends AnimalMateGoal {
@@ -312,12 +349,12 @@ public class EmperorPenguinEntity extends ClutterAnimalEntity implements GeoEnti
                     this.entity.setMovementSpeed(0.0F);
                 } else {
                     y /= sqrt;
-                    float h = (float)(MathHelper.atan2(z, x) * 57.2957763671875) - 90.0F;
+                    float h = (float) (MathHelper.atan2(z, x) * 57.2957763671875) - 90.0F;
                     this.emperorPenguin.setYaw(this.wrapDegrees(this.emperorPenguin.getYaw(), h, 90.0F));
                     this.emperorPenguin.bodyYaw = this.emperorPenguin.getYaw();
-                    float i = (float)(this.speed * this.emperorPenguin.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED));
+                    float i = (float) (this.speed * this.emperorPenguin.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED));
                     this.emperorPenguin.setMovementSpeed(MathHelper.lerp(0.125F, this.emperorPenguin.getMovementSpeed(), i));
-                    this.emperorPenguin.setVelocity(this.emperorPenguin.getVelocity().add(0.0, (double)this.emperorPenguin.getMovementSpeed() * y * 0.1, 0.0));
+                    this.emperorPenguin.setVelocity(this.emperorPenguin.getVelocity().add(0.0, (double) this.emperorPenguin.getMovementSpeed() * y * 0.1, 0.0));
                 }
             } else {
                 this.emperorPenguin.setMovementSpeed(0.0F);
@@ -337,19 +374,5 @@ public class EmperorPenguinEntity extends ClutterAnimalEntity implements GeoEnti
 
             return !this.world.getBlockState(pos.down()).isAir();
         }
-    }
-
-    public void travel(Vec3d movementInput) {
-        if (this.isLogicalSideForUpdatingMovement() && this.isTouchingWater()) {
-            this.updateVelocity(0.1F, movementInput);
-            this.move(MovementType.SELF, this.getVelocity());
-            this.setVelocity(this.getVelocity().multiply(0.9));
-            if (this.getTarget() == null) {
-                this.setVelocity(this.getVelocity().add(0.0, -0.005, 0.0));
-            }
-        } else {
-            super.travel(movementInput);
-        }
-
     }
 }

@@ -32,7 +32,7 @@ public class BunkBedBlock extends BedBlock {
         BlockPos blockPos2 = blockPos.offset(direction);
         World world = ctx.getWorld();
         if (world.getBlockState(blockPos2).canReplace(ctx) && world.getWorldBorder().contains(blockPos2)) {
-            return (BlockState)this.getDefaultState().with(FACING, direction);
+            return this.getDefaultState().with(FACING, direction);
         }
         return null;
     }
@@ -47,7 +47,7 @@ public class BunkBedBlock extends BedBlock {
         super.onPlaced(world, pos, state, placer, itemStack);
         if (!world.isClient) {
             BlockPos blockPos = pos.offset(state.get(FACING));
-            world.setBlockState(blockPos, (BlockState)state.with(PART, BedPart.HEAD), Block.NOTIFY_ALL);
+            world.setBlockState(blockPos, state.with(PART, BedPart.HEAD), Block.NOTIFY_ALL);
             world.updateNeighbors(pos, Blocks.AIR);
             state.updateNeighbors(world, pos, Block.NOTIFY_ALL);
         }
@@ -57,24 +57,24 @@ public class BunkBedBlock extends BedBlock {
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         VoxelShape topShape = TOP_SHAPE;
         Direction direction = BedBlock.getOppositePartDirection(state).getOpposite();
-            final VoxelShape LEG_1_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 3.0, 16.0, 3.0);
-            final VoxelShape LEG_2_SHAPE = Block.createCuboidShape(0.0, 0.0, 13.0, 3.0, 16.0, 16.0);
-            final VoxelShape LEG_3_SHAPE = Block.createCuboidShape(13.0, 0.0, 0.0, 16.0, 16.0, 3.0);
-            final VoxelShape LEG_4_SHAPE = Block.createCuboidShape(13.0, 0.0, 13.0, 16.0, 16.0, 16.0);
-            switch (direction) {
-                case NORTH -> {
-                    return VoxelShapes.union(topShape, LEG_1_SHAPE, LEG_3_SHAPE);
-                }
-                case SOUTH -> {
-                    return VoxelShapes.union(topShape, LEG_2_SHAPE, LEG_4_SHAPE);
-                }
-                case WEST -> {
-                    return VoxelShapes.union(topShape, LEG_1_SHAPE, LEG_2_SHAPE);
-                }
-                case EAST -> {
-                    return VoxelShapes.union(topShape, LEG_3_SHAPE, LEG_4_SHAPE);
-                }
+        final VoxelShape LEG_1_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 3.0, 16.0, 3.0);
+        final VoxelShape LEG_2_SHAPE = Block.createCuboidShape(0.0, 0.0, 13.0, 3.0, 16.0, 16.0);
+        final VoxelShape LEG_3_SHAPE = Block.createCuboidShape(13.0, 0.0, 0.0, 16.0, 16.0, 3.0);
+        final VoxelShape LEG_4_SHAPE = Block.createCuboidShape(13.0, 0.0, 13.0, 16.0, 16.0, 16.0);
+        switch (direction) {
+            case NORTH -> {
+                return VoxelShapes.union(topShape, LEG_1_SHAPE, LEG_3_SHAPE);
             }
+            case SOUTH -> {
+                return VoxelShapes.union(topShape, LEG_2_SHAPE, LEG_4_SHAPE);
+            }
+            case WEST -> {
+                return VoxelShapes.union(topShape, LEG_1_SHAPE, LEG_2_SHAPE);
+            }
+            case EAST -> {
+                return VoxelShapes.union(topShape, LEG_3_SHAPE, LEG_4_SHAPE);
+            }
+        }
         return VoxelShapes.fullCube();
     }
 

@@ -16,7 +16,7 @@ public class ModModelPredicateProvider {
 
     private static void registerElytra(Item elytra) {
         ModelPredicateProviderRegistry.register(elytra, new Identifier("broken"), (stack, world, entity, seed) -> {
-            if(!(stack.getItem() instanceof ClutterElytraItem clutterElytraItem)) return 0;
+            if (!(stack.getItem() instanceof ClutterElytraItem clutterElytraItem)) return 0;
             if (entity == null) return 0.0f;
 
             return clutterElytraItem.isBroken(stack) ? 1 : 0;

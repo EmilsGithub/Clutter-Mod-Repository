@@ -15,7 +15,7 @@ public class ReversedWeightedPressurePlateBlock extends AbstractPressurePlateBlo
 
     public ReversedWeightedPressurePlateBlock(int weight, AbstractBlock.Settings settings, BlockSetType blockSetType) {
         super(settings, blockSetType);
-        this.setDefaultState((BlockState) ((BlockState) this.stateManager.getDefaultState()).with(POWER, 0));
+        this.setDefaultState(this.stateManager.getDefaultState().with(POWER, 0));
         this.weight = weight;
     }
 
@@ -30,11 +30,11 @@ public class ReversedWeightedPressurePlateBlock extends AbstractPressurePlateBlo
     }
 
     protected int getRedstoneOutput(BlockState state) {
-        return (Integer) state.get(POWER);
+        return state.get(POWER);
     }
 
     protected BlockState setRedstoneOutput(BlockState state, int rsOut) {
-        return (BlockState) state.with(POWER, rsOut);
+        return state.with(POWER, rsOut);
     }
 
     protected int getTickRate() {

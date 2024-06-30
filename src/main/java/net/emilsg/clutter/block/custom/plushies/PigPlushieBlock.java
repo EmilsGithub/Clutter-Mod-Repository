@@ -38,7 +38,7 @@ public class PigPlushieBlock extends AbstractPlushieBlock {
             return ActionResult.PASS;
         }
 
-        if(world.isClient && hand.equals(Hand.MAIN_HAND) && player.getStackInHand(hand).isEmpty()) {
+        if (world.isClient && hand.equals(Hand.MAIN_HAND) && player.getStackInHand(hand).isEmpty()) {
             world.addParticle(ParticleTypes.NOTE, pos.getX() + 0.5, pos.getY() + 0.7, pos.getZ() + 0.5, random, 0.0, 0.0);
             return ActionResult.SUCCESS;
         }

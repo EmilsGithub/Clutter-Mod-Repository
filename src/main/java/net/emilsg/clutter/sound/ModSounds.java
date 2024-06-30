@@ -12,13 +12,10 @@ public class ModSounds {
     public static SoundEvent COIN_PILE_PLACE = registerSoundEvent("coin_pile_place");
     public static SoundEvent COIN_PILE_FALL = registerSoundEvent("coin_pile_fall");
     public static SoundEvent COIN_PILE_HIT = registerSoundEvent("coin_pile_hit");
-
+    public static final BlockSoundGroup COIN_PILE_SOUNDS = new BlockSoundGroup(1f, 1f, COIN_PILE_BREAK, COIN_PILE_PLACE, COIN_PILE_PLACE, COIN_PILE_HIT, COIN_PILE_FALL);
     public static SoundEvent COIN_POUCH_USE = registerSoundEvent("coin_pouch_use");
-
     public static SoundEvent ENTITY_KIWI_CALL = registerSoundEvent("entity_kiwi_call");
     public static SoundEvent ENTITY_NETHER_NEWT_HURT = registerSoundEvent("entity_nether_newt_hurt");
-
-    public static final BlockSoundGroup COIN_PILE_SOUNDS = new BlockSoundGroup(1f, 1f, COIN_PILE_BREAK, COIN_PILE_PLACE, COIN_PILE_PLACE, COIN_PILE_HIT, COIN_PILE_FALL);
 
     private static SoundEvent registerSoundEvent(String name) {
         Identifier id = new Identifier(Clutter.MOD_ID, name);

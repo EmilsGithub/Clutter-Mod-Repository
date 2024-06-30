@@ -12,6 +12,7 @@ import net.emilsg.clutter.entity.ModEntities;
 import net.emilsg.clutter.entity.client.*;
 import net.emilsg.clutter.entity.client.layer.ModModelLayers;
 import net.emilsg.clutter.entity.client.model.*;
+import net.emilsg.clutter.entity.client.model.EchofinModel;
 import net.emilsg.clutter.entity.client.player.RendererRegistration;
 import net.emilsg.clutter.entity.client.player.model.ScubaModel;
 import net.emilsg.clutter.entity.client.render.*;
@@ -48,7 +49,7 @@ public class ClutterClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        if(IS_TRINKETS_LOADED) TrinketsIntegrationClient.registerTrinkets();
+        if (IS_TRINKETS_LOADED) TrinketsIntegrationClient.registerTrinkets();
 
         RendererRegistration.register();
 
@@ -63,7 +64,8 @@ public class ClutterClient implements ClientModInitializer {
         ModModelPredicateProvider.registerModModels();
 
         for (Block block : Registries.BLOCK) {
-            if (block instanceof ICutoutRenderable) BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getCutout());
+            if (block instanceof ICutoutRenderable)
+                BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getCutout());
         }
 
         List<Block> blocksToRender = Arrays.asList(
@@ -607,14 +609,14 @@ public class ClutterClient implements ClientModInitializer {
         );
 
         ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) ->
-                Objects.requireNonNull(ColorProviderRegistry.BLOCK.get(Blocks.LILY_PAD)).getColor(state, world, pos, tintIndex),
+                        Objects.requireNonNull(ColorProviderRegistry.BLOCK.get(Blocks.LILY_PAD)).getColor(state, world, pos, tintIndex),
                 GIANT_LILY_PAD,
                 GIANT_LILY_PAD_SEEDLING,
                 SMALL_LILY_PADS
         );
 
         ColorProviderRegistry.ITEM.register((stack, tintIndex) ->
-                Objects.requireNonNull(ColorProviderRegistry.ITEM.get(Blocks.LILY_PAD)).getColor(stack, tintIndex),
+                        Objects.requireNonNull(ColorProviderRegistry.ITEM.get(Blocks.LILY_PAD)).getColor(stack, tintIndex),
                 SMALL_LILY_PADS,
                 GIANT_LILY_PAD
         );
@@ -667,18 +669,22 @@ public class ClutterClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.DROWNED_SKELETON, DrownedSkeletonModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.MANTA_RAY, MantaRayModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.CAPYBARA, CapybaraModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.CHAMELEON, ChameleonModel::getTexturedModelData);
+
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.ECHOFIN, EchofinModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.SEAHORSE, SeahorseModel::getTexturedModelData);
+
 
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.SCUBA_TANK, ScubaModel::getTexturedModelData);
     }
 
     private void registerEntityRenderers() {
         EntityRendererRegistry.register(ModEntities.SEAT, EmptySeatRenderer::new);
-        EntityRendererRegistry.register(ModEntities.CHAMELEON, ChameleonRenderer::new);
-        EntityRendererRegistry.register(ModEntities.ECHOFIN, EchofinRenderer::new);
         EntityRendererRegistry.register(ModEntities.MOSSBLOOM, MossbloomRenderer::new);
         EntityRendererRegistry.register(ModEntities.KIWI_BIRD, KiwiBirdRenderer::new);
         EntityRendererRegistry.register(ModEntities.EMPEROR_PENGUIN, EmperorPenguinRenderer::new);
 
+        EntityRendererRegistry.register(ModEntities.CHAMELEON, ChameleonRenderer::new);
         EntityRendererRegistry.register(ModEntities.BUTTERFLY, ButterflyRenderer::new);
         EntityRendererRegistry.register(ModEntities.CRIMSON_NEWT, CrimsonNewtRenderer::new);
         EntityRendererRegistry.register(ModEntities.WARPED_NEWT, WarpedNewtRenderer::new);
@@ -688,6 +694,9 @@ public class ClutterClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.CRAB, CrabRenderer::new);
         EntityRendererRegistry.register(ModEntities.MANTA_RAY, MantaRayRenderer::new);
         EntityRendererRegistry.register(ModEntities.CAPYBARA, CapybaraRenderer::new);
+        EntityRendererRegistry.register(ModEntities.ECHOFIN, EchofinRenderer::new);
+        EntityRendererRegistry.register(ModEntities.SEAHORSE, SeahorseRenderer::new);
+
 
         EntityRendererRegistry.register(ModEntities.DROWNED_SKELETON, DrownedSkeletonRenderer::new);
 

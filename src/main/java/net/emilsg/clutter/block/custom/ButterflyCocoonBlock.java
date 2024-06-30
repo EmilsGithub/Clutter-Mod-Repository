@@ -38,9 +38,9 @@ public class ButterflyCocoonBlock extends Block {
     public static final BooleanProperty CAN_HATCH = ModProperties.CAN_HATCH;
     public static final IntProperty HATCH = ModProperties.HATCH;
     private static final VoxelShape SHAPE = VoxelShapes.union(
-      Block.createCuboidShape(7,15, 7,9,16,9),
-      Block.createCuboidShape(6,10, 6,10,15,10),
-            Block.createCuboidShape(7,9, 7,9,10,9)
+            Block.createCuboidShape(7, 15, 7, 9, 16, 9),
+            Block.createCuboidShape(6, 10, 6, 10, 15, 10),
+            Block.createCuboidShape(7, 9, 7, 9, 10, 9)
     );
 
     public ButterflyCocoonBlock(Settings settings) {
@@ -61,7 +61,7 @@ public class ButterflyCocoonBlock extends Block {
         }
         if (!world.isClient && heldItem.isOf(Items.SHEARS) && state.get(CAN_HATCH)) {
             player.playSound(SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.PLAYERS, 1.0f, 1.0f);
-            if(!player.getAbilities().creativeMode) {
+            if (!player.getAbilities().creativeMode) {
                 heldItem.damage(1, player, playerEntity -> playerEntity.sendToolBreakStatus(hand));
             }
             world.setBlockState(pos, state.with(CAN_HATCH, false).with(HATCH, 0), Block.NOTIFY_ALL);
@@ -77,18 +77,19 @@ public class ButterflyCocoonBlock extends Block {
 
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (this.shouldHatchProgress(world, state)) {
-            int i = (Integer)state.get(HATCH);
+            int i = state.get(HATCH);
             if (i < 2) {
-                world.playSound((PlayerEntity)null, pos, SoundEvents.BLOCK_MOSS_BREAK, SoundCategory.BLOCKS, 0.7F, 0.9F + random.nextFloat() * 0.2F);
-                world.setBlockState(pos, (BlockState)state.with(HATCH, i + 1), 2);
+                world.playSound(null, pos, SoundEvents.BLOCK_MOSS_BREAK, SoundCategory.BLOCKS, 0.7F, 0.9F + random.nextFloat() * 0.2F);
+                world.setBlockState(pos, state.with(HATCH, i + 1), 2);
             } else {
-                world.playSound((PlayerEntity)null, pos, SoundEvents.BLOCK_MOSS_BREAK, SoundCategory.BLOCKS, 0.7F, 0.9F + random.nextFloat() * 0.2F);
+                world.playSound(null, pos, SoundEvents.BLOCK_MOSS_BREAK, SoundCategory.BLOCKS, 0.7F, 0.9F + random.nextFloat() * 0.2F);
                 world.removeBlock(pos, false);
-                if(random.nextInt(10) == 0) dropStack(world, pos, new ItemStack(ModItems.BUTTERFLY_ELYTRA_SMITHING_TEMPLATE_SHARDS));
+                if (random.nextInt(10) == 0)
+                    dropStack(world, pos, new ItemStack(ModItems.BUTTERFLY_ELYTRA_SMITHING_TEMPLATE_SHARDS));
 
-                for(int j = 0; j < 1; ++j) {
+                for (int j = 0; j < 1; ++j) {
                     world.syncWorldEvent(2001, pos, Block.getRawIdFromState(state));
-                    ButterflyEntity butterflyEntity = (ButterflyEntity) ModEntities.BUTTERFLY.create(world);
+                    ButterflyEntity butterflyEntity = ModEntities.BUTTERFLY.create(world);
                     if (butterflyEntity != null) {
                         RegistryEntry<Biome> registryEntry = world.getBiome(pos);
                         ButterflyVariant variant = ButterflyVariant.byId(1);
@@ -110,7 +111,7 @@ public class ButterflyCocoonBlock extends Block {
                             }
                         }
                         butterflyEntity.setBreedingAge(6000);
-                        butterflyEntity.refreshPositionAndAngles((double)pos.getX() + 0.3 + (double)j * 0.2, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.3, 0.0F, 0.0F);
+                        butterflyEntity.refreshPositionAndAngles((double) pos.getX() + 0.3 + (double) j * 0.2, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.3, 0.0F, 0.0F);
                         butterflyEntity.setVariant(variant);
                         world.spawnEntity(butterflyEntity);
                     }
@@ -122,7 +123,7 @@ public class ButterflyCocoonBlock extends Block {
     private boolean shouldHatchProgress(World world, BlockState state) {
         boolean isDay = world.isDay();
         boolean isNether = world.getDimensionKey() == DimensionTypes.THE_NETHER;
-        if ((isDay && state.get(CAN_HATCH)) || isNether){
+        if ((isDay && state.get(CAN_HATCH)) || isNether) {
             return true;
         } else if (state.get(CAN_HATCH)) {
             return world.random.nextInt(500) == 0;
@@ -151,7 +152,7 @@ public class ButterflyCocoonBlock extends Block {
 
     @Override
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-        return world.getBlockState(pos.up()).getBlock() instanceof LeavesBlock ||  world.getBlockState(pos.up()).isIn(BlockTags.LOGS) || world.getBlockState(pos.up()).isIn(BlockTags.WART_BLOCKS) || world.getBlockState(pos.up()).isOf(Blocks.BONE_BLOCK);
+        return world.getBlockState(pos.up()).getBlock() instanceof LeavesBlock || world.getBlockState(pos.up()).isIn(BlockTags.LOGS) || world.getBlockState(pos.up()).isIn(BlockTags.WART_BLOCKS) || world.getBlockState(pos.up()).isOf(Blocks.BONE_BLOCK);
     }
 
     @Override

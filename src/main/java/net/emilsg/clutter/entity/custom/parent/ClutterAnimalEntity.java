@@ -4,7 +4,6 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.mob.WaterCreatureEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -35,12 +34,12 @@ public class ClutterAnimalEntity extends AnimalEntity {
         super.tickMovement();
     }
 
-    public void setMoving(boolean moving) {
-        this.dataTracker.set(MOVING, moving);
-    }
-
     public boolean isMoving() {
         return this.dataTracker.get(MOVING);
+    }
+
+    public void setMoving(boolean moving) {
+        this.dataTracker.set(MOVING, moving);
     }
 
     @Nullable

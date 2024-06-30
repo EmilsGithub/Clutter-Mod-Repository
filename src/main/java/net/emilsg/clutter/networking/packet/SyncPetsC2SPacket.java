@@ -1,6 +1,6 @@
 package net.emilsg.clutter.networking.packet;
 
-import net.emilsg.clutter.easter_eggs.NameOnPet;
+import net.emilsg.clutter.easter_egg.NameOnPet;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.PassiveEntity;
@@ -45,7 +45,7 @@ public class SyncPetsC2SPacket {
             server.execute(() -> {
                 ParticleEffect particleEffect = ParticleTypes.HEART;
 
-                if(finalClosestEntity instanceof PassiveEntity passiveEntity) {
+                if (finalClosestEntity instanceof PassiveEntity passiveEntity) {
                     passiveEntity.playAmbientSound();
                 }
 
@@ -54,7 +54,7 @@ public class SyncPetsC2SPacket {
                 double hitboxHeight = hitbox.getYLength();
                 double hitboxDepth = hitbox.getZLength();
 
-                for (int i = 0; i < (int)(10 * finalClosestEntity.getWidth()); i++) {
+                for (int i = 0; i < (int) (10 * finalClosestEntity.getWidth()); i++) {
                     Random random = new Random();
 
                     double offsetX = hitbox.minX + (hitboxWidth * random.nextDouble());

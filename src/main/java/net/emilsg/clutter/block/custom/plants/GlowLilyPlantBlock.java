@@ -37,6 +37,16 @@ public class GlowLilyPlantBlock extends PlantBlock implements Fertilizable {
         this.setDefaultState((this.stateManager.getDefaultState()).with(AGE, 0).with(CLIPPED, false));
     }
 
+    public static ToIntFunction<BlockState> createLightLevelFromAge() {
+        return state -> {
+            return switch (state.get(AGE)) {
+                default -> 0;
+                case 1 -> 4;
+                case 2 -> 8;
+            };
+        };
+    }
+
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(AGE, CLIPPED);
@@ -70,10 +80,10 @@ public class GlowLilyPlantBlock extends PlantBlock implements Fertilizable {
         ItemStack stackInHand = player.getStackInHand(hand);
         if (!ageIsTwo && stackInHand.isOf(Items.BONE_MEAL)) {
             return ActionResult.PASS;
-        } else if(stackInHand.getItem() instanceof ShearsItem && !state.get(CLIPPED)) {
-            if(!world.isClient) world.setBlockState(pos, state.with(CLIPPED, true), Block.NOTIFY_ALL);
+        } else if (stackInHand.getItem() instanceof ShearsItem && !state.get(CLIPPED)) {
+            if (!world.isClient) world.setBlockState(pos, state.with(CLIPPED, true), Block.NOTIFY_ALL);
             world.playSound(null, pos, SoundEvents.BLOCK_GROWING_PLANT_CROP, SoundCategory.BLOCKS, 1.0F, 1.0F);
-            if(!player.getAbilities().creativeMode) stackInHand.damage(1, player, (p) -> p.sendToolBreakStatus(hand));
+            if (!player.getAbilities().creativeMode) stackInHand.damage(1, player, (p) -> p.sendToolBreakStatus(hand));
             return ActionResult.success(world.isClient);
         } else if (i > 1) {
             int count = 1 + world.random.nextInt(2);
@@ -97,16 +107,7 @@ public class GlowLilyPlantBlock extends PlantBlock implements Fertilizable {
     }
 
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
-        if(state.get(AGE) < 2) world.setBlockState(pos, state.with(CLIPPED, false).with(AGE, state.get(AGE) + 1), Block.NOTIFY_ALL);
-    }
-
-    public static ToIntFunction<BlockState> createLightLevelFromAge() {
-        return state -> {
-            return switch (state.get(AGE)) {
-                default -> 0;
-                case 1 -> 4;
-                case 2 -> 8;
-            };
-        };
+        if (state.get(AGE) < 2)
+            world.setBlockState(pos, state.with(CLIPPED, false).with(AGE, state.get(AGE) + 1), Block.NOTIFY_ALL);
     }
 }

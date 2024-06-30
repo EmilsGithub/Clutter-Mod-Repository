@@ -23,6 +23,8 @@ public class KiwiBirdMateGoal extends AnimalMateGoal {
 
     protected void breed() {
         ServerPlayerEntity serverPlayerEntity = this.animal.getLovingPlayer();
+        if (this.mate == null) return;
+
         if (serverPlayerEntity == null && this.mate.getLovingPlayer() != null) {
             serverPlayerEntity = this.mate.getLovingPlayer();
         }

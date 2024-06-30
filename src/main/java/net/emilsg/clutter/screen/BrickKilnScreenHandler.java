@@ -16,9 +16,9 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 
 public class BrickKilnScreenHandler extends ScreenHandler {
+    public final BrickKilnBlockEntity blockEntity;
     private final Inventory inventory;
     private final PropertyDelegate propertyDelegate;
-    public final BrickKilnBlockEntity blockEntity;
 
     public BrickKilnScreenHandler(int syncId, PlayerInventory inventory, PacketByteBuf buf) {
         this(syncId, inventory, inventory.player.getWorld().getBlockEntity(buf.readBlockPos()), new ArrayPropertyDelegate(4));
@@ -27,7 +27,7 @@ public class BrickKilnScreenHandler extends ScreenHandler {
     public BrickKilnScreenHandler(int syncId, PlayerInventory playerInventory, BlockEntity blockEntity, PropertyDelegate propertyDelegate) {
         super(ModScreenHandlers.BRICK_KILN_SCREEN_HANDLER, syncId);
         checkSize(((Inventory) blockEntity), 3);
-        this.inventory = (Inventory)blockEntity;
+        this.inventory = (Inventory) blockEntity;
         this.propertyDelegate = propertyDelegate;
         this.blockEntity = ((BrickKilnBlockEntity) blockEntity);
 

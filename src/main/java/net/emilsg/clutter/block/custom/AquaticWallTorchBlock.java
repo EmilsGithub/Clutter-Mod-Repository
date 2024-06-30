@@ -124,10 +124,18 @@ public class AquaticWallTorchBlock extends Block implements Waterloggable {
             double offset = 0.25;
 
             switch (facing) {
-                case NORTH: z += offset; break;
-                case EAST:  x -= offset; break;
-                case SOUTH: z -= offset; break;
-                case WEST:  x += offset; break;
+                case NORTH:
+                    z += offset;
+                    break;
+                case EAST:
+                    x -= offset;
+                    break;
+                case SOUTH:
+                    z -= offset;
+                    break;
+                case WEST:
+                    x += offset;
+                    break;
             }
 
             world.addParticle(random.nextBoolean() ? ParticleTypes.BUBBLE : ParticleTypes.BUBBLE_POP, x, y, z, 0.0, 0.0, 0.0);

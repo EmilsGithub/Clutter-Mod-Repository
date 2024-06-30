@@ -39,8 +39,33 @@ import org.jetbrains.annotations.Nullable;
 import java.util.stream.IntStream;
 
 public class ShelfInventoryBlockEntity extends LootableContainerBlockEntity implements SidedInventory, Inventory {
-    private DefaultedList<ItemStack> inventory = DefaultedList.ofSize(5, ItemStack.EMPTY);
     private static final int[] AVAILABLE_SLOTS = IntStream.range(0, 5).toArray();
+    private final ViewerCountManager stateManager = new ViewerCountManager() {
+
+        @Override
+        protected void onContainerOpen(World world, BlockPos pos, BlockState state) {
+            ShelfInventoryBlockEntity.this.playSound(state, SoundEvents.BLOCK_CHERRY_WOOD_HIT);
+        }
+
+        @Override
+        protected void onContainerClose(World world, BlockPos pos, BlockState state) {
+            ShelfInventoryBlockEntity.this.playSound(state, SoundEvents.BLOCK_CHERRY_WOOD_HIT);
+        }
+
+        @Override
+        protected void onViewerCountUpdate(World world, BlockPos pos, BlockState state, int oldViewerCount, int newViewerCount) {
+        }
+
+        @Override
+        protected boolean isPlayerViewing(PlayerEntity player) {
+            if (player.currentScreenHandler instanceof GenericContainerScreenHandler) {
+                Inventory inventory = ((GenericContainerScreenHandler) player.currentScreenHandler).getInventory();
+                return inventory == ShelfInventoryBlockEntity.this;
+            }
+            return false;
+        }
+    };
+    private DefaultedList<ItemStack> inventory = DefaultedList.ofSize(5, ItemStack.EMPTY);
 
     public ShelfInventoryBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.SHELF, blockPos, blockState);
@@ -57,7 +82,6 @@ public class ShelfInventoryBlockEntity extends LootableContainerBlockEntity impl
         return createNbt();
     }
 
-
     public ItemStack getRenderStack(int slot) {
         return this.getStack(slot);
     }
@@ -65,10 +89,10 @@ public class ShelfInventoryBlockEntity extends LootableContainerBlockEntity impl
     @Override
     public void markDirty() {
         assert world != null;
-        if(!world.isClient) {
+        if (!world.isClient) {
             PacketByteBuf data = PacketByteBufs.create();
             data.writeInt(inventory.size());
-            for(int i = 0; i < inventory.size(); i++) {
+            for (int i = 0; i < inventory.size(); i++) {
                 data.writeItemStack(inventory.get(i));
             }
             data.writeBlockPos(getPos());
@@ -81,7 +105,7 @@ public class ShelfInventoryBlockEntity extends LootableContainerBlockEntity impl
     }
 
     public void setInventory(DefaultedList<ItemStack> inventory) {
-        for(int i = 0; i < inventory.size(); i++) {
+        for (int i = 0; i < inventory.size(); i++) {
             this.inventory.set(i, inventory.get(i));
         }
     }
@@ -99,7 +123,6 @@ public class ShelfInventoryBlockEntity extends LootableContainerBlockEntity impl
             this.stateManager.closeContainer(player, this.getWorld(), this.getPos(), this.getCachedState());
         }
     }
-
 
     public void tick() {
         if (!this.removed) {
@@ -131,32 +154,6 @@ public class ShelfInventoryBlockEntity extends LootableContainerBlockEntity impl
     public int size() {
         return 5;
     }
-
-    private final ViewerCountManager stateManager = new ViewerCountManager(){
-
-        @Override
-        protected void onContainerOpen(World world, BlockPos pos, BlockState state) {
-            ShelfInventoryBlockEntity.this.playSound(state, SoundEvents.BLOCK_CHERRY_WOOD_HIT);
-        }
-
-        @Override
-        protected void onContainerClose(World world, BlockPos pos, BlockState state) {
-            ShelfInventoryBlockEntity.this.playSound(state, SoundEvents.BLOCK_CHERRY_WOOD_HIT);
-        }
-
-        @Override
-        protected void onViewerCountUpdate(World world, BlockPos pos, BlockState state, int oldViewerCount, int newViewerCount) {
-        }
-
-        @Override
-        protected boolean isPlayerViewing(PlayerEntity player) {
-            if (player.currentScreenHandler instanceof GenericContainerScreenHandler) {
-                Inventory inventory = ((GenericContainerScreenHandler)player.currentScreenHandler).getInventory();
-                return inventory == ShelfInventoryBlockEntity.this;
-            }
-            return false;
-        }
-    };
 
     @Override
     public int[] getAvailableSlots(Direction side) {
@@ -192,9 +189,9 @@ public class ShelfInventoryBlockEntity extends LootableContainerBlockEntity impl
 
     void playSound(BlockState state, SoundEvent soundEvent) {
         Vec3i vec3i = state.get(ShelfBlock.FACING).getVector();
-        double d = (double)this.pos.getX() + 0.5 + (double)vec3i.getX() / 2.0;
-        double e = (double)this.pos.getY() + 0.5 + (double)vec3i.getY() / 2.0;
-        double f = (double)this.pos.getZ() + 0.5 + (double)vec3i.getZ() / 2.0;
+        double d = (double) this.pos.getX() + 0.5 + (double) vec3i.getX() / 2.0;
+        double e = (double) this.pos.getY() + 0.5 + (double) vec3i.getY() / 2.0;
+        double f = (double) this.pos.getZ() + 0.5 + (double) vec3i.getZ() / 2.0;
         this.world.playSound(null, d, e, f, soundEvent, SoundCategory.BLOCKS, 0.5f, this.world.random.nextFloat() * 0.1f + 0.7f);
     }
 }

@@ -29,18 +29,18 @@ public class CoinPouchItem extends Item {
         Random random = new Random();
         ItemStack copperCoins = new ItemStack(ModItems.COPPER_COIN);
         copperCoins.setCount(minAmount + random.nextInt(maxAmount - minAmount + 1));
-        if(world.isClient) {
+        if (world.isClient) {
             user.swingHand(hand);
         }
-        if(!world.isClient()){
+        if (!world.isClient()) {
             user.dropItem(copperCoins, true);
-            if(this.getRarity(user.getStackInHand(hand)) == Rarity.EPIC) {
+            if (this.getRarity(user.getStackInHand(hand)) == Rarity.EPIC) {
                 ItemStack silverCoins = new ItemStack(ModItems.SILVER_COIN);
                 silverCoins.setCount(random.nextInt(2));
                 user.dropItem(silverCoins, true);
             }
             itemStack.decrement(1);
-            world.playSound(null, user.getBlockPos(), ModSounds.COIN_POUCH_USE, SoundCategory.PLAYERS,1f,1f);
+            world.playSound(null, user.getBlockPos(), ModSounds.COIN_POUCH_USE, SoundCategory.PLAYERS, 1f, 1f);
         }
         return super.use(world, user, hand);
     }

@@ -66,12 +66,12 @@ public class PearlClamBlock extends HorizontalFacingBlock implements Waterloggab
     }
 
     public FluidState getFluidState(BlockState state) {
-        return (Boolean)state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
+        return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
     }
 
     public boolean tryFillWithFluid(WorldAccess world, BlockPos pos, BlockState state, FluidState fluidState) {
-        if (!(Boolean)state.get(WATERLOGGED) && fluidState.getFluid() == Fluids.WATER) {
-            BlockState blockState = (BlockState)state.with(WATERLOGGED, true);
+        if (!(Boolean) state.get(WATERLOGGED) && fluidState.getFluid() == Fluids.WATER) {
+            BlockState blockState = state.with(WATERLOGGED, true);
             world.setBlockState(pos, blockState, 3);
             world.scheduleFluidTick(pos, fluidState.getFluid(), fluidState.getFluid().getTickRate(world));
             return true;
@@ -82,11 +82,11 @@ public class PearlClamBlock extends HorizontalFacingBlock implements Waterloggab
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if(world.isClient) {
+        if (world.isClient) {
             return ActionResult.PASS;
         }
 
-        if(!world.isClient && state.get(HAS_PEARL) && hand == Hand.MAIN_HAND) {
+        if (!world.isClient && state.get(HAS_PEARL) && hand == Hand.MAIN_HAND) {
             dropStack(world, pos, new ItemStack(ModItems.PEARL));
             world.setBlockState(pos, state.with(HAS_PEARL, false), Block.NOTIFY_ALL);
             world.playSound(null, pos, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.BLOCKS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
@@ -102,7 +102,7 @@ public class PearlClamBlock extends HorizontalFacingBlock implements Waterloggab
 
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if(!world.isClient && !state.get(HAS_PEARL) && random.nextInt(128) == 0) {
+        if (!world.isClient && !state.get(HAS_PEARL) && random.nextInt(128) == 0) {
             world.setBlockState(pos, state.with(HAS_PEARL, true), Block.NOTIFY_ALL);
         }
     }

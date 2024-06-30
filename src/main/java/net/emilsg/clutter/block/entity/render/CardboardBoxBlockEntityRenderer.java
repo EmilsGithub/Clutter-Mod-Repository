@@ -31,7 +31,7 @@ public class CardboardBoxBlockEntityRenderer implements BlockEntityRenderer<Card
         ItemRenderer itemRenderer = MinecraftClient.getInstance().getItemRenderer();
 
 
-        if(entity.getCachedState().get(Properties.OPEN)) {
+        if (entity.getCachedState().get(Properties.OPEN)) {
             for (int i = 0; i < entity.size(); i++) {
                 Direction direction = entity.getCachedState().get(Properties.HORIZONTAL_FACING);
                 ItemStack itemStack = entity.getRenderStack(i);
@@ -41,7 +41,7 @@ public class CardboardBoxBlockEntityRenderer implements BlockEntityRenderer<Card
                 float translateZ;
 
 
-                if(entity.getCachedState().get(Properties.HORIZONTAL_FACING) == Direction.NORTH) {
+                if (entity.getCachedState().get(Properties.HORIZONTAL_FACING) == Direction.NORTH) {
                     switch (i) {
                         case 0, 3, 6 -> translateX = 0.28125f;
                         case 1, 4, 7 -> translateX = 0.5f;
@@ -52,7 +52,7 @@ public class CardboardBoxBlockEntityRenderer implements BlockEntityRenderer<Card
                         case 3, 4, 5 -> translateZ = 0.5f;
                         default -> translateZ = 0.71875f;
                     }
-                } else if(entity.getCachedState().get(Properties.HORIZONTAL_FACING) == Direction.EAST) {
+                } else if (entity.getCachedState().get(Properties.HORIZONTAL_FACING) == Direction.EAST) {
                     switch (i) {
                         case 6, 7, 8 -> translateX = 0.28125f;
                         case 3, 4, 5 -> translateX = 0.5f;
@@ -63,7 +63,7 @@ public class CardboardBoxBlockEntityRenderer implements BlockEntityRenderer<Card
                         case 1, 4, 7 -> translateZ = 0.5f;
                         default -> translateZ = 0.71875f;
                     }
-                } else if(entity.getCachedState().get(Properties.HORIZONTAL_FACING) == Direction.SOUTH) {
+                } else if (entity.getCachedState().get(Properties.HORIZONTAL_FACING) == Direction.SOUTH) {
                     switch (i) {
                         case 2, 5, 8 -> translateX = 0.28125f;
                         case 1, 4, 7 -> translateX = 0.5f;
@@ -88,10 +88,10 @@ public class CardboardBoxBlockEntityRenderer implements BlockEntityRenderer<Card
                 }
 
                 int itemRot = 0;
-                switch(direction) {
+                switch (direction) {
                     case EAST -> itemRot = 270;
                     case SOUTH -> itemRot = 180;
-                    case WEST -> itemRot= 90;
+                    case WEST -> itemRot = 90;
                 }
 
                 matrices.translate(translateX, 0.09375f, translateZ);

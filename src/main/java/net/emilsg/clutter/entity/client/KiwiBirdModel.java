@@ -18,7 +18,7 @@ public class KiwiBirdModel extends GeoModel<KiwiBirdEntity> {
 
     @Override
     public Identifier getModelResource(KiwiBirdEntity animatable) {
-        if(animatable.isBaby()) {
+        if (animatable.isBaby()) {
             return BABY_MODEL;
         } else {
             return MODEL;

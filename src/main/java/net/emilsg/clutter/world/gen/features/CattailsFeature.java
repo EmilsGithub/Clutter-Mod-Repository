@@ -37,7 +37,8 @@ public class CattailsFeature extends Feature<CountConfig> {
             int n = structureWorldAccess.getTopY(Heightmap.Type.OCEAN_FLOOR, blockPos.getX() + l, blockPos.getZ() + m);
             BlockPos placedPos = new BlockPos(blockPos.getX() + l, n, blockPos.getZ() + m);
             BlockState cattailsDefaultState = ModBlocks.CATTAILS.getDefaultState();
-            if (!structureWorldAccess.getBlockState(placedPos).isOf(Blocks.WATER) || !cattailsDefaultState.canPlaceAt(structureWorldAccess, placedPos)) continue;
+            if (!structureWorldAccess.getBlockState(placedPos).isOf(Blocks.WATER) || !cattailsDefaultState.canPlaceAt(structureWorldAccess, placedPos))
+                continue;
             structureWorldAccess.setBlockState(placedPos, cattailsDefaultState.with(Properties.WATERLOGGED, structureWorldAccess.getFluidState(placedPos).isOf(Fluids.WATER)), Block.NOTIFY_LISTENERS);
             structureWorldAccess.setBlockState(placedPos.up(), cattailsDefaultState.with(Properties.DOUBLE_BLOCK_HALF, DoubleBlockHalf.UPPER).with(Properties.WATERLOGGED, structureWorldAccess.getFluidState(placedPos.up()).isOf(Fluids.WATER)), Block.NOTIFY_LISTENERS);
             ++i;

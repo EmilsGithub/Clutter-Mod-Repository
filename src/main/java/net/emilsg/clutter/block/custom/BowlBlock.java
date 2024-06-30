@@ -36,12 +36,12 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Random;
 
 public class BowlBlock extends Block implements Waterloggable {
-    protected static final VoxelShape SHAPE = Block.createCuboidShape(5.0, 0.0, 5.0, 11.0, 3.0, 11.0);
     public static final int MAX_MODEL = 5;
-    public static IntProperty CURRENT_MODEL = IntProperty.of("current_model", 0, MAX_MODEL);
     public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
     public static final BooleanProperty FILLED = ModProperties.FILLED;
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
+    protected static final VoxelShape SHAPE = Block.createCuboidShape(5.0, 0.0, 5.0, 11.0, 3.0, 11.0);
+    public static IntProperty CURRENT_MODEL = IntProperty.of("current_model", 0, MAX_MODEL);
 
     public BowlBlock(Settings settings) {
         super(settings);
@@ -60,23 +60,23 @@ public class BowlBlock extends Block implements Waterloggable {
         if (!world.isClient && !player.isSneaking() && hand.equals(Hand.MAIN_HAND) && player.getStackInHand(hand).isEmpty()) {
             if (i && j == 1) {
                 world.setBlockState(pos, state.with(CURRENT_MODEL, 0).with(FILLED, false), Block.NOTIFY_ALL);
-                player.playSound(SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 1.0F, 1.0F );
+                player.playSound(SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 1.0F, 1.0F);
                 player.getHungerManager().add(6, 0.0f);
             } else if (i && j == 2) {
                 world.setBlockState(pos, state.with(CURRENT_MODEL, 0).with(FILLED, false), Block.NOTIFY_ALL);
-                player.playSound(SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 1.0F, 1.0F );
+                player.playSound(SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 1.0F, 1.0F);
                 player.getHungerManager().add(6, 0.0f);
             } else if (i && j == 3) {
                 world.setBlockState(pos, state.with(CURRENT_MODEL, 0).with(FILLED, false), Block.NOTIFY_ALL);
-                player.playSound(SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 1.0F, 1.0F );
+                player.playSound(SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 1.0F, 1.0F);
                 player.getHungerManager().add(10, 0.0f);
             } else if (i && j == 4) {
                 world.setBlockState(pos, state.with(CURRENT_MODEL, 0).with(FILLED, false), Block.NOTIFY_ALL);
-                player.playSound(SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 1.0F, 1.0F );
+                player.playSound(SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 1.0F, 1.0F);
                 player.getHungerManager().add(4, 0.0f);
             } else if (i && j == 5) {
                 world.setBlockState(pos, state.with(CURRENT_MODEL, 0).with(FILLED, false), Block.NOTIFY_ALL);
-                player.playSound(SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 1.0F, 1.0F );
+                player.playSound(SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 1.0F, 1.0F);
                 giveRandomEffect(player);
                 player.getHungerManager().add(6, 0.0f);
             } else if (!i || j == 0) {
@@ -144,7 +144,7 @@ public class BowlBlock extends Block implements Waterloggable {
         BlockPos blockPos;
         World worldAccess = ctx.getWorld();
         boolean bl = worldAccess.getFluidState(blockPos = ctx.getBlockPos()).getFluid() == Fluids.WATER;
-        return (BlockState)this.getDefaultState().with(WATERLOGGED, bl).with(FACING, ctx.getHorizontalPlayerFacing()).with(CURRENT_MODEL, 0);
+        return this.getDefaultState().with(WATERLOGGED, bl).with(FACING, ctx.getHorizontalPlayerFacing()).with(CURRENT_MODEL, 0);
     }
 
     @Override
@@ -169,11 +169,12 @@ public class BowlBlock extends Block implements Waterloggable {
         }
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
+
     @Override
     public boolean tryFillWithFluid(WorldAccess world, BlockPos pos, BlockState state, FluidState fluidState) {
         if (!state.get(Properties.WATERLOGGED) && fluidState.getFluid() == Fluids.WATER) {
 
-            world.setBlockState(pos, (BlockState)((BlockState)state.with(WATERLOGGED, true)), Block.NOTIFY_ALL);
+            world.setBlockState(pos, state.with(WATERLOGGED, true), Block.NOTIFY_ALL);
             world.scheduleFluidTick(pos, fluidState.getFluid(), fluidState.getFluid().getTickRate(world));
             return true;
         }

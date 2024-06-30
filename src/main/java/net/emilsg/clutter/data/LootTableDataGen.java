@@ -112,7 +112,7 @@ public class LootTableDataGen extends FabricBlockLootTableProvider {
     }
 
     private void addDoubleBlockGroupDrops(Block... blocks) {
-        for(Block block1 : blocks) {
+        for (Block block1 : blocks) {
             this.addDrop(block1, (block) -> this.dropsWithProperty(block, Properties.DOUBLE_BLOCK_HALF, DoubleBlockHalf.LOWER));
         }
     }

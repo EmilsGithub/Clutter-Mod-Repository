@@ -24,12 +24,49 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class MailBoxInventoryBlockEntity extends LootableContainerBlockEntity {
+    private final ViewerCountManager stateManager = new ViewerCountManager() {
+
+        @Override
+        protected void onContainerOpen(World world, BlockPos pos, BlockState state) {
+            MailBoxInventoryBlockEntity.this.playSound(SoundEvents.BLOCK_IRON_TRAPDOOR_OPEN);
+
+            if (!isEmpty()) {
+                world.setBlockState(pos, state.with(MailBoxBlock.HATCH_OPEN, true), Block.NOTIFY_ALL);
+            } else {
+                world.setBlockState(pos, state.with(MailBoxBlock.HATCH_OPEN, true), Block.NOTIFY_ALL);
+            }
+        }
+
+        @Override
+        protected void onContainerClose(World world, BlockPos pos, BlockState state) {
+            MailBoxInventoryBlockEntity.this.playSound(SoundEvents.BLOCK_IRON_TRAPDOOR_CLOSE);
+
+            if (!isEmpty()) {
+                world.setBlockState(pos, state.with(MailBoxBlock.HATCH_OPEN, false), Block.NOTIFY_ALL);
+            } else {
+                world.setBlockState(pos, state.with(MailBoxBlock.HATCH_OPEN, false), Block.NOTIFY_ALL);
+            }
+        }
+
+        @Override
+        protected void onViewerCountUpdate(World world, BlockPos pos, BlockState state, int oldViewerCount, int newViewerCount) {
+        }
+
+        @Override
+        protected boolean isPlayerViewing(PlayerEntity player) {
+            if (player.currentScreenHandler instanceof GenericContainerScreenHandler) {
+                Inventory inventory = ((GenericContainerScreenHandler) player.currentScreenHandler).getInventory();
+                return inventory == MailBoxInventoryBlockEntity.this;
+            }
+            return false;
+        }
+    };
     private DefaultedList<ItemStack> inventory = DefaultedList.ofSize(9, ItemStack.EMPTY);
+
 
     public MailBoxInventoryBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.MAILBOX, blockPos, blockState);
     }
-
 
     @Override
     public void onOpen(PlayerEntity player) {
@@ -44,7 +81,6 @@ public class MailBoxInventoryBlockEntity extends LootableContainerBlockEntity {
             this.stateManager.closeContainer(player, this.getWorld(), this.getPos(), this.getCachedState());
         }
     }
-
 
     public void tick() {
         if (!this.removed) {
@@ -77,44 +113,6 @@ public class MailBoxInventoryBlockEntity extends LootableContainerBlockEntity {
         return 9;
     }
 
-    private final ViewerCountManager stateManager = new ViewerCountManager(){
-
-        @Override
-        protected void onContainerOpen(World world, BlockPos pos, BlockState state) {
-            MailBoxInventoryBlockEntity.this.playSound(SoundEvents.BLOCK_IRON_TRAPDOOR_OPEN);
-
-            if (!isEmpty()) {
-                world.setBlockState(pos, state.with(MailBoxBlock.HATCH_OPEN, true), Block.NOTIFY_ALL);
-            } else {
-                world.setBlockState(pos, state.with(MailBoxBlock.HATCH_OPEN, true), Block.NOTIFY_ALL);
-            }
-        }
-
-        @Override
-        protected void onContainerClose(World world, BlockPos pos, BlockState state) {
-            MailBoxInventoryBlockEntity.this.playSound(SoundEvents.BLOCK_IRON_TRAPDOOR_CLOSE);
-
-            if (!isEmpty()) {
-                world.setBlockState(pos, state.with(MailBoxBlock.HATCH_OPEN, false), Block.NOTIFY_ALL);
-            } else {
-                world.setBlockState(pos, state.with(MailBoxBlock.HATCH_OPEN, false), Block.NOTIFY_ALL);
-            }
-        }
-
-        @Override
-        protected void onViewerCountUpdate(World world, BlockPos pos, BlockState state, int oldViewerCount, int newViewerCount) {
-        }
-
-        @Override
-        protected boolean isPlayerViewing(PlayerEntity player) {
-            if (player.currentScreenHandler instanceof GenericContainerScreenHandler) {
-                Inventory inventory = ((GenericContainerScreenHandler)player.currentScreenHandler).getInventory();
-                return inventory == MailBoxInventoryBlockEntity.this;
-            }
-            return false;
-        }
-    };
-
     @Override
     protected void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
@@ -133,9 +131,9 @@ public class MailBoxInventoryBlockEntity extends LootableContainerBlockEntity {
     }
 
     void playSound(SoundEvent soundEvent) {
-        double d = (double)this.pos.getX() + 0.5;
-        double e = (double)this.pos.getY() + 0.5;
-        double f = (double)this.pos.getZ() + 0.5;
+        double d = (double) this.pos.getX() + 0.5;
+        double e = (double) this.pos.getY() + 0.5;
+        double f = (double) this.pos.getZ() + 0.5;
         this.world.playSound(null, d, e, f, soundEvent, SoundCategory.BLOCKS, 0.5f, this.world.random.nextFloat() * 0.1f + 0.7f);
     }
 }

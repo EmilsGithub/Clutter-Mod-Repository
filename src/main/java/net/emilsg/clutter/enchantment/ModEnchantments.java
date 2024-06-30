@@ -8,7 +8,6 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
 
-
 public class ModEnchantments {
 
     public static Enchantment GREED = register("greed",

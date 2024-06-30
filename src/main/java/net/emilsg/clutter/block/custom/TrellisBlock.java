@@ -50,31 +50,21 @@ public class TrellisBlock extends Block implements Waterloggable {
         this.setDefaultState(this.getDefaultState().with(WATERLOGGED, false).with(PLANT, TrellisBlock.Plant.NONE).with(LIT, false));
     }
 
-    public enum Plant implements StringIdentifiable {
-        NONE("none"),
-        VINES("vines"),
-        ROSE_BUSH("rose_bush"),
-        PEONY("peony"),
-        LILAC("lilac"),
-        CAVE_VINES("cave_vines"),
-        WEEPING_VINES("weeping_vines"),
-        TWISTING_VINES("twisting_vines"),
-        GLOW_LICHEN("glow_lichen");
-
-        private final String name;
-
-        Plant(String name) {
-            this.name = name;
-        }
-
-        public String asString() {
-            return this.name;
-        }
-
-        @Override
-        public String toString() {
-            return this.name;
-        }
+    public static ToIntFunction<BlockState> createLightLevelFromLitBlockState() {
+        return state -> {
+            if (state.get(LIT)) {
+                TrellisBlock.Plant plant = state.get(TrellisBlock.PLANT);
+                if (plant == TrellisBlock.Plant.GLOW_LICHEN) {
+                    return 7;
+                } else if (plant == TrellisBlock.Plant.CAVE_VINES) {
+                    return 14;
+                } else {
+                    return 0;
+                }
+            } else {
+                return 0;
+            }
+        };
     }
 
     @Override
@@ -82,7 +72,7 @@ public class TrellisBlock extends Block implements Waterloggable {
         TrellisBlock.Plant i = state.get(PLANT);
         ItemStack stack = player.getStackInHand(hand);
 
-        if(!stack.isIn(ModItemTags.TRELLIS_ITEMS) && !stack.isOf(Items.AIR)) {
+        if (!stack.isIn(ModItemTags.TRELLIS_ITEMS) && !stack.isOf(Items.AIR)) {
             return ActionResult.PASS;
         }
 
@@ -216,7 +206,6 @@ public class TrellisBlock extends Block implements Waterloggable {
     }
 
 
-
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         if (state.get(UNDER_BLOCK)) {
@@ -244,23 +233,6 @@ public class TrellisBlock extends Block implements Waterloggable {
         return state.rotate(mirror.getRotation(state.get(FACING)));
     }
 
-    public static ToIntFunction<BlockState> createLightLevelFromLitBlockState() {
-        return state -> {
-            if (state.get(LIT)) {
-                TrellisBlock.Plant plant = state.get(TrellisBlock.PLANT);
-                if (plant == TrellisBlock.Plant.GLOW_LICHEN) {
-                    return 7;
-                } else if (plant == TrellisBlock.Plant.CAVE_VINES) {
-                    return 14;
-                } else {
-                    return 0;
-                }
-            } else {
-                return 0;
-            }
-        };
-    }
-
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(PLANT, WATERLOGGED, FACING, LIT, UNDER_BLOCK);
@@ -278,7 +250,7 @@ public class TrellisBlock extends Block implements Waterloggable {
     public boolean tryFillWithFluid(WorldAccess world, BlockPos pos, BlockState state, FluidState fluidState) {
         if (!state.get(Properties.WATERLOGGED) && fluidState.getFluid() == Fluids.WATER) {
 
-            world.setBlockState(pos, (BlockState)((BlockState)state.with(WATERLOGGED, true)), Block.NOTIFY_ALL);
+            world.setBlockState(pos, state.with(WATERLOGGED, true), Block.NOTIFY_ALL);
             world.scheduleFluidTick(pos, fluidState.getFluid(), fluidState.getFluid().getTickRate(world));
             return true;
         }
@@ -291,5 +263,32 @@ public class TrellisBlock extends Block implements Waterloggable {
             return Fluids.WATER.getStill(false);
         }
         return super.getFluidState(state);
+    }
+
+    public enum Plant implements StringIdentifiable {
+        NONE("none"),
+        VINES("vines"),
+        ROSE_BUSH("rose_bush"),
+        PEONY("peony"),
+        LILAC("lilac"),
+        CAVE_VINES("cave_vines"),
+        WEEPING_VINES("weeping_vines"),
+        TWISTING_VINES("twisting_vines"),
+        GLOW_LICHEN("glow_lichen");
+
+        private final String name;
+
+        Plant(String name) {
+            this.name = name;
+        }
+
+        public String asString() {
+            return this.name;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
     }
 }

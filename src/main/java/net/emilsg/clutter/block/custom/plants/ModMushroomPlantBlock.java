@@ -1,6 +1,5 @@
 package net.emilsg.clutter.block.custom.plants;
 
-import net.emilsg.clutter.util.ModBlockTags;
 import net.minecraft.block.*;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.server.world.ServerWorld;

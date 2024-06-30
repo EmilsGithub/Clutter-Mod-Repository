@@ -30,6 +30,12 @@ public class CrabEntity extends ClutterAnimalEntity {
         this.setStepHeight(1f);
     }
 
+    public static DefaultAttributeContainer.Builder setAttributes() {
+        return ClutterAnimalEntity.createMobAttributes()
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 10.0D)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25f);
+    }
+
     @Override
     public EntityGroup getGroup() {
         return EntityGroup.AQUATIC;
@@ -40,12 +46,6 @@ public class CrabEntity extends ClutterAnimalEntity {
         this.goalSelector.add(1, new EscapeDangerGoal(this, 1.25));
         this.goalSelector.add(2, new WanderAroundFarGoal(this, 1.0, 0.1f));
         this.goalSelector.add(3, new LookAroundGoal(this));
-    }
-
-    public static DefaultAttributeContainer.Builder setAttributes() {
-        return ClutterAnimalEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 10.0D)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25f);
     }
 
     protected void initDataTracker() {
@@ -68,12 +68,12 @@ public class CrabEntity extends ClutterAnimalEntity {
         return CrabVariant.byId(this.getTypeVariant() & 255);
     }
 
-    private int getTypeVariant() {
-        return this.dataTracker.get(VARIANT);
-    }
-
     public void setVariant(CrabVariant variant) {
         this.dataTracker.set(VARIANT, variant.getId() & 255);
+    }
+
+    private int getTypeVariant() {
+        return this.dataTracker.get(VARIANT);
     }
 
     @Override

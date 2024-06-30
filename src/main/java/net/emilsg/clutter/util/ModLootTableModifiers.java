@@ -106,10 +106,11 @@ public class ModLootTableModifiers {
             }
 
             if (id.equals(SNIFFER_DIGGING_ID)) {
-                tableBuilder.modifyPools(builder -> { builder
-                        .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.THORNBLOOM_SEEDS)))
-                        .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.KIWI_SEEDS)))
-                        .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.GLOWLILY_SEEDLING)));
+                tableBuilder.modifyPools(builder -> {
+                    builder
+                            .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.THORNBLOOM_SEEDS)))
+                            .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.KIWI_SEEDS)))
+                            .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.GLOWLILY_SEEDLING)));
                 });
             }
 
@@ -120,49 +121,49 @@ public class ModLootTableModifiers {
             }
 
             //Coins
-        if (ClutterConfig.getInstance().getBoolean(ClutterConfig.COIN_DROPS_AND_LOOT_GEN)) {
-            for (Identifier structureId : structureIds) {
-                if (id.equals(structureId)) {
+            if (ClutterConfig.getInstance().getBoolean(ClutterConfig.COIN_DROPS_AND_LOOT_GEN)) {
+                for (Identifier structureId : structureIds) {
+                    if (id.equals(structureId)) {
+                        LootPool.Builder poolBuilder = LootPool.builder()
+                                .rolls(ConstantLootNumberProvider.create(2))
+                                .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.COMMON_COIN_POUCH).conditionally(RandomChanceLootCondition.builder(0.35f)).weight(20)))
+                                .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.UNCOMMON_COIN_POUCH).conditionally(RandomChanceLootCondition.builder(0.35f)).weight(10)))
+                                .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.RARE_COIN_POUCH).conditionally(RandomChanceLootCondition.builder(0.35f)).weight(5)))
+                                .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.EPIC_COIN_POUCH).conditionally(RandomChanceLootCondition.builder(0.35f)).weight(1)))
+                                .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1.0f)).build());
+                        tableBuilder.pool(poolBuilder.build());
+                    }
+                }
+
+                if (id.equals(END_CITY_TREASURE_ID) && !ClutterConfig.getInstance().getBoolean(ClutterConfig.DISABLE_GREED_GENERATION)) {
                     LootPool.Builder poolBuilder = LootPool.builder()
-                            .rolls(ConstantLootNumberProvider.create(2))
-                            .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.COMMON_COIN_POUCH).conditionally(RandomChanceLootCondition.builder(0.35f)).weight(20)))
-                            .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.UNCOMMON_COIN_POUCH).conditionally(RandomChanceLootCondition.builder(0.35f)).weight(10)))
-                            .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.RARE_COIN_POUCH).conditionally(RandomChanceLootCondition.builder(0.35f)).weight(5)))
-                            .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.EPIC_COIN_POUCH).conditionally(RandomChanceLootCondition.builder(0.35f)).weight(1)))
+                            .rolls(ConstantLootNumberProvider.create(1))
+                            .with(ItemEntry.builder(Items.BOOK).conditionally(RandomChanceLootCondition.builder(0.25f))).apply(EnchantRandomlyLootFunction.create().add(ModEnchantments.GREED))
+                            .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1.0f)).build());
+                    tableBuilder.pool(poolBuilder.build());
+                }
+
+                if (id.equals(PIGLIN_BRUTE_ID) || id.equals(ELDER_GUARDIAN_ID)) {
+                    LootPool.Builder poolBuilder = LootPool.builder()
+                            .rolls(ConstantLootNumberProvider.create(1))
+                            .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.COMMON_COIN_POUCH).weight(500)))
+                            .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.UNCOMMON_COIN_POUCH).weight(375)))
+                            .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.RARE_COIN_POUCH).weight(125)))
+                            .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1.0f)).build());
+                    tableBuilder.pool(poolBuilder.build());
+                }
+
+                if (id.equals(WITHER_ID) || id.equals(ENDER_DRAGON_ID)) {
+                    LootPool.Builder poolBuilder = LootPool.builder()
+                            .rolls(ConstantLootNumberProvider.create(6))
+                            .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.RARE_COIN_POUCH).weight(2)))
+                            .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.EPIC_COIN_POUCH).weight(1)))
                             .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1.0f)).build());
                     tableBuilder.pool(poolBuilder.build());
                 }
             }
 
-            if (id.equals(END_CITY_TREASURE_ID) && !ClutterConfig.getInstance().getBoolean(ClutterConfig.DISABLE_GREED_GENERATION)) {
-                LootPool.Builder poolBuilder = LootPool.builder()
-                        .rolls(ConstantLootNumberProvider.create(1))
-                        .with(ItemEntry.builder(Items.BOOK).conditionally(RandomChanceLootCondition.builder(0.25f))).apply(EnchantRandomlyLootFunction.create().add(ModEnchantments.GREED))
-                        .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1.0f)).build());
-                tableBuilder.pool(poolBuilder.build());
-            }
-
-            if (id.equals(PIGLIN_BRUTE_ID) || id.equals(ELDER_GUARDIAN_ID)) {
-                LootPool.Builder poolBuilder = LootPool.builder()
-                        .rolls(ConstantLootNumberProvider.create(1))
-                        .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.COMMON_COIN_POUCH).weight(500)))
-                        .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.UNCOMMON_COIN_POUCH).weight(375)))
-                        .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.RARE_COIN_POUCH).weight(125)))
-                        .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1.0f)).build());
-                tableBuilder.pool(poolBuilder.build());
-            }
-
-            if (id.equals(WITHER_ID) || id.equals(ENDER_DRAGON_ID)) {
-                LootPool.Builder poolBuilder = LootPool.builder()
-                        .rolls(ConstantLootNumberProvider.create(6))
-                        .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.RARE_COIN_POUCH).weight(2)))
-                        .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.EPIC_COIN_POUCH).weight(1)))
-                        .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1.0f)).build());
-                tableBuilder.pool(poolBuilder.build());
-            }
-        }
-
-            if(id.equals(BLAZE_ID)) {
+            if (id.equals(BLAZE_ID)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .with(ItemEntry.builder(ModItems.SULPHUR))
@@ -171,7 +172,7 @@ public class ModLootTableModifiers {
                 tableBuilder.pool(poolBuilder.build());
             }
 
-            if(id.equals(ENDER_DRAGON_ID)) {
+            if (id.equals(ENDER_DRAGON_ID)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .with(AlternativeEntry.builder(ItemEntry.builder(ModBlocks.ENDER_DRAGON_PLUSHIE).weight(1).conditionally(RandomChanceLootCondition.builder(1.0f))))
@@ -179,7 +180,7 @@ public class ModLootTableModifiers {
                 tableBuilder.pool(poolBuilder.build());
             }
 
-            if(id.equals(JUNGLE_TEMPLE_ID)) {
+            if (id.equals(JUNGLE_TEMPLE_ID)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .with(AlternativeEntry.builder(ItemEntry.builder(ModBlocks.PANDA_PLUSHIE).weight(1).conditionally(RandomChanceLootCondition.builder(0.15f))))
@@ -188,7 +189,7 @@ public class ModLootTableModifiers {
                 tableBuilder.pool(poolBuilder.build());
             }
 
-            if(id.equals(BURIED_TREASURE_ID)) {
+            if (id.equals(BURIED_TREASURE_ID)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .with(ItemEntry.builder(ModBlocks.SQUID_PLUSHIE)).conditionally(RandomChanceLootCondition.builder(0.3f))
@@ -196,7 +197,7 @@ public class ModLootTableModifiers {
                 tableBuilder.pool(poolBuilder.build());
             }
 
-            if(id.equals(IGLOO_CHEST_ID)) {
+            if (id.equals(IGLOO_CHEST_ID)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .with(AlternativeEntry.builder(ItemEntry.builder(ModBlocks.FOX_PLUSHIE).weight(1).conditionally(RandomChanceLootCondition.builder(0.2f))))
@@ -205,7 +206,7 @@ public class ModLootTableModifiers {
                 tableBuilder.pool(poolBuilder.build());
             }
 
-            if(id.equals(VILLAGE_SHEPHERD_ID)) {
+            if (id.equals(VILLAGE_SHEPHERD_ID)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .with(ItemEntry.builder(ModBlocks.SHEEP_PLUSHIE)).conditionally(RandomChanceLootCondition.builder(0.4f))
@@ -213,7 +214,7 @@ public class ModLootTableModifiers {
                 tableBuilder.pool(poolBuilder.build());
             }
 
-            if(id.equals(VILLAGE_TANNERY_ID)) {
+            if (id.equals(VILLAGE_TANNERY_ID)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .with(ItemEntry.builder(ModBlocks.COW_PLUSHIE)).conditionally(RandomChanceLootCondition.builder(0.4f))
@@ -221,7 +222,7 @@ public class ModLootTableModifiers {
                 tableBuilder.pool(poolBuilder.build());
             }
 
-            if(id.equals(VILLAGE_BUTCHER_ID)) {
+            if (id.equals(VILLAGE_BUTCHER_ID)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .with(ItemEntry.builder(ModBlocks.PIG_PLUSHIE)).conditionally(RandomChanceLootCondition.builder(0.4f))
@@ -229,7 +230,7 @@ public class ModLootTableModifiers {
                 tableBuilder.pool(poolBuilder.build());
             }
 
-            if(id.equals(VILLAGE_FLETCHER_ID)) {
+            if (id.equals(VILLAGE_FLETCHER_ID)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .with(ItemEntry.builder(ModBlocks.CHICKEN_PLUSHIE)).conditionally(RandomChanceLootCondition.builder(0.4f))
@@ -237,7 +238,7 @@ public class ModLootTableModifiers {
                 tableBuilder.pool(poolBuilder.build());
             }
 
-            if(id.equals(FISHING_JUNK_ID)) {
+            if (id.equals(FISHING_JUNK_ID)) {
                 tableBuilder.modifyPools(builder -> {
                     builder.with(ItemEntry.builder(ModItems.SMALL_LILY_PADS).weight(10));
                     builder.with(ItemEntry.builder(ModItems.GIANT_LILY_PAD).weight(5));

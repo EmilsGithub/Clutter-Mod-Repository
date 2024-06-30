@@ -19,13 +19,14 @@ import net.minecraft.world.World;
 
 public class ChickenPlushieBlock extends AbstractPlushieBlock {
     protected static final VoxelShape SHAPE = Block.createCuboidShape(5.0, 0.0, 5.0, 11.0, 6.0, 11.0);
-    @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return SHAPE;
-    }
 
     public ChickenPlushieBlock(Settings settings) {
         super(settings);
+    }
+
+    @Override
+    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+        return SHAPE;
     }
 
     @Override
@@ -37,7 +38,7 @@ public class ChickenPlushieBlock extends AbstractPlushieBlock {
             return ActionResult.PASS;
         }
 
-        if(world.isClient && hand.equals(Hand.MAIN_HAND) && player.getStackInHand(hand).isEmpty()) {
+        if (world.isClient && hand.equals(Hand.MAIN_HAND) && player.getStackInHand(hand).isEmpty()) {
             world.addParticle(ParticleTypes.NOTE, pos.getX() + 0.5, pos.getY() + 0.7, pos.getZ() + 0.5, random, 0.0, 0.0);
             return ActionResult.SUCCESS;
         }

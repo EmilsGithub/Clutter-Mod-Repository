@@ -32,6 +32,10 @@ public class DrownedSkeletonEntity extends HostileEntity {
         super(entityType, world);
     }
 
+    public static DefaultAttributeContainer.Builder setAttributes() {
+        return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25);
+    }
+
     @Override
     protected void initGoals() {
         this.goalSelector.add(2, new AvoidSunlightGoal(this));
@@ -41,14 +45,10 @@ public class DrownedSkeletonEntity extends HostileEntity {
         this.goalSelector.add(5, new WanderAroundFarGoal(this, 1.0));
         this.goalSelector.add(6, new LookAtEntityGoal(this, PlayerEntity.class, 8.0f));
         this.goalSelector.add(6, new LookAroundGoal(this));
-        this.targetSelector.add(1, new RevengeGoal(this, new Class[0]));
+        this.targetSelector.add(1, new RevengeGoal(this));
         this.targetSelector.add(2, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
         this.targetSelector.add(3, new ActiveTargetGoal<>(this, IronGolemEntity.class, true));
         this.targetSelector.add(3, new ActiveTargetGoal<>(this, TurtleEntity.class, 10, true, false, TurtleEntity.BABY_TURTLE_ON_LAND_FILTER));
-    }
-
-    public static DefaultAttributeContainer.Builder setAttributes() {
-        return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25);
     }
 
     @Override
@@ -87,8 +87,7 @@ public class DrownedSkeletonEntity extends HostileEntity {
     public void tickRiding() {
         super.tickRiding();
         Entity entity = this.getControllingVehicle();
-        if (entity instanceof PathAwareEntity) {
-            PathAwareEntity pathAwareEntity = (PathAwareEntity)entity;
+        if (entity instanceof PathAwareEntity pathAwareEntity) {
             this.bodyYaw = pathAwareEntity.bodyYaw;
         }
     }

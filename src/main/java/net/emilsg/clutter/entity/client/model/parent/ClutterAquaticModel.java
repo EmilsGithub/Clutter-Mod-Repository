@@ -1,6 +1,5 @@
-package net.emilsg.clutter.entity.client.model;
+package net.emilsg.clutter.entity.client.model.parent;
 
-import net.emilsg.clutter.entity.custom.parent.ClutterAnimalEntity;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.entity.mob.WaterCreatureEntity;
 import org.joml.Vector3f;

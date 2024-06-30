@@ -21,9 +21,9 @@ import net.minecraft.world.dimension.DimensionTypes;
 import net.minecraft.world.spawner.Spawner;
 
 public class NetherButterflySpawner implements Spawner {
-    private int cooldown;
     private final int maxCooldown;
     private final TagKey<Biome> biomeTagKey;
+    private int cooldown;
 
     public NetherButterflySpawner(int maxCooldownInTicks, TagKey<Biome> biomeTagKey) {
         this.maxCooldown = maxCooldownInTicks;
@@ -106,9 +106,9 @@ public class NetherButterflySpawner implements Spawner {
 
     private int spawn(BlockPos pos, ServerWorld world, ButterflyEntity butterflyEntity) {
         ButterflyVariant variant;
-        if (world.getBiome(pos).matchesKey(BiomeKeys.WARPED_FOREST)){
+        if (world.getBiome(pos).matchesKey(BiomeKeys.WARPED_FOREST)) {
             variant = ButterflyVariant.WARPED;
-        } else if (world.getBiome(pos).matchesKey(BiomeKeys.CRIMSON_FOREST)){
+        } else if (world.getBiome(pos).matchesKey(BiomeKeys.CRIMSON_FOREST)) {
             variant = ButterflyVariant.CRIMSON;
         } else variant = ButterflyVariant.SOUL;
 

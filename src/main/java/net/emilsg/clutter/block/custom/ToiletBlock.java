@@ -4,7 +4,6 @@ import net.emilsg.clutter.util.ModProperties;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -22,7 +21,9 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 
-public class ToiletBlock extends SeatBlock{
+public class ToiletBlock extends SeatBlock {
+    public static final BooleanProperty OPEN = ModProperties.OPEN;
+    public static final BooleanProperty POWERED = Properties.POWERED;
     protected static final VoxelShape NORTH_SHAPE = VoxelShapes.union(
             Block.createCuboidShape(5, 0, 5, 11, 6, 14),
             Block.createCuboidShape(4, 6, 3, 12, 8.5, 14),
@@ -48,12 +49,9 @@ public class ToiletBlock extends SeatBlock{
             Block.createCuboidShape(12, 14, 5, 14, 16, 11)
     );
 
-    public static final BooleanProperty OPEN = ModProperties.OPEN;
-    public static final BooleanProperty POWERED = Properties.POWERED;
-
     public ToiletBlock(Settings settings) {
         super(settings);
-        this.setDefaultState((BlockState)(this.stateManager.getDefaultState()).with(WATERLOGGED, false).with(OPEN, false).with(POWERED, false));
+        this.setDefaultState((this.stateManager.getDefaultState()).with(WATERLOGGED, false).with(OPEN, false).with(POWERED, false));
     }
 
     @Override
@@ -74,13 +72,13 @@ public class ToiletBlock extends SeatBlock{
 
     public void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
         boolean bl = world.isReceivingRedstonePower(pos);
-        if (!this.getDefaultState().isOf(sourceBlock) && bl != (Boolean)state.get(POWERED)) {
-            if (bl != (Boolean)state.get(OPEN)) {
+        if (!this.getDefaultState().isOf(sourceBlock) && bl != state.get(POWERED)) {
+            if (bl != state.get(OPEN)) {
                 world.playSound(null, pos, SoundEvents.BLOCK_IRON_TRAPDOOR_CLOSE, SoundCategory.BLOCKS, 1.0f, 0.8f);
-                world.emitGameEvent((Entity)null, bl ? GameEvent.BLOCK_OPEN : GameEvent.BLOCK_CLOSE, pos);
+                world.emitGameEvent(null, bl ? GameEvent.BLOCK_OPEN : GameEvent.BLOCK_CLOSE, pos);
             }
 
-            world.setBlockState(pos, (BlockState)((BlockState)state.with(POWERED, bl)).with(OPEN, bl), 2);
+            world.setBlockState(pos, state.with(POWERED, bl).with(OPEN, bl), 2);
         }
 
     }
@@ -88,9 +86,9 @@ public class ToiletBlock extends SeatBlock{
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         super.onUse(state, world, pos, player, hand, hit);
-        if(world.isClient && player.getStackInHand(hand).isEmpty() && player.isSneaking()) return ActionResult.SUCCESS;
+        if (world.isClient && player.getStackInHand(hand).isEmpty() && player.isSneaking()) return ActionResult.SUCCESS;
 
-        if(!world.isClient && player.getStackInHand(hand).isEmpty() && player.isSneaking()) {
+        if (!world.isClient && player.getStackInHand(hand).isEmpty() && player.isSneaking()) {
             world.setBlockState(pos, state.with(OPEN, !world.getBlockState(pos).get(OPEN)), Block.NOTIFY_ALL);
             world.playSound(null, pos, SoundEvents.BLOCK_IRON_TRAPDOOR_CLOSE, SoundCategory.BLOCKS, 1.0f, 0.8f);
             return ActionResult.SUCCESS;

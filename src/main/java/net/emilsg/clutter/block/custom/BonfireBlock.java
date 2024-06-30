@@ -1,8 +1,8 @@
 package net.emilsg.clutter.block.custom;
 
+import net.emilsg.clutter.block.ModBlockEntities;
 import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.block.entity.BonfireBlockEntity;
-import net.emilsg.clutter.block.ModBlockEntities;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -13,7 +13,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.*;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.item.ShovelItem;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -44,87 +46,44 @@ public class BonfireBlock extends BlockWithEntity {
     public static final EnumProperty<BONFIRE_BLOCK_MODEL> BLOCK_SHAPE = EnumProperty.of("block_shape", BONFIRE_BLOCK_MODEL.class);
     private static final BooleanProperty LIT = Properties.LIT;
     private static final VoxelShape UP_NORTH_WEST_SHAPE = VoxelShapes.union(
-            Block.createCuboidShape(5,0,8,16,8,16)
+            Block.createCuboidShape(5, 0, 8, 16, 8, 16)
     );
     private static final VoxelShape UP_WEST_SHAPE = VoxelShapes.union(
-            Block.createCuboidShape(8,0,0,16,8,16)
+            Block.createCuboidShape(8, 0, 0, 16, 8, 16)
     );
     private static final VoxelShape UP_SOUTH_WEST_SHAPE = VoxelShapes.union(
-            Block.createCuboidShape(5,0,0,16,8,8)
+            Block.createCuboidShape(5, 0, 0, 16, 8, 8)
     );
     private static final VoxelShape UP_NORTH_SHAPE = VoxelShapes.union(
-            Block.createCuboidShape(0,0,8,16,8,16)
+            Block.createCuboidShape(0, 0, 8, 16, 8, 16)
     );
-    private static final VoxelShape UP_CENTER_SHAPE  = VoxelShapes.union(
-            Block.createCuboidShape(0,0,0,16,16,16)
+    private static final VoxelShape UP_CENTER_SHAPE = VoxelShapes.union(
+            Block.createCuboidShape(0, 0, 0, 16, 16, 16)
     );
-    private static final VoxelShape UP_SOUTH_SHAPE  = VoxelShapes.union(
-            Block.createCuboidShape(0,0,0,16,8,8)
+    private static final VoxelShape UP_SOUTH_SHAPE = VoxelShapes.union(
+            Block.createCuboidShape(0, 0, 0, 16, 8, 8)
     );
     private static final VoxelShape UP_NORTH_EAST_SHAPE = VoxelShapes.union(
-            Block.createCuboidShape(0,0,8,11,8,16)
+            Block.createCuboidShape(0, 0, 8, 11, 8, 16)
     );
     private static final VoxelShape UP_EAST_SHAPE = VoxelShapes.union(
-            Block.createCuboidShape(0,0,0,8,8,16)
+            Block.createCuboidShape(0, 0, 0, 8, 8, 16)
     );
     private static final VoxelShape UP_SOUTH_EAST_SHAPE = VoxelShapes.union(
-            Block.createCuboidShape(0,0,0,11,8,8)
+            Block.createCuboidShape(0, 0, 0, 11, 8, 8)
     );
-    private static final VoxelShape FULL_SHAPE = Block.createCuboidShape(0,0,0,16,16,16);
-
-    public BonfireBlock(Settings settings) {
-        super(settings);
-        this.setDefaultState((BlockState)((BlockState)this.stateManager.getDefaultState()).with(LIT, true));
-    }
-
-    @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(BLOCK_SHAPE, LIT);
-    }
-
-    public enum BONFIRE_BLOCK_MODEL implements StringIdentifiable {
-        NORTH_WEST("north_west"),
-        WEST("west"),
-        SOUTH_WEST("south_west"),
-        NORTH("north"),
-        CENTER("center"),
-        SOUTH("south"),
-        NORTH_EAST("north_east"),
-        EAST("east"),
-        SOUTH_EAST("south_east"),
-        UP_NORTH_WEST("up_north_west"),
-        UP_WEST("up_west"),
-        UP_SOUTH_WEST("up_south_west"),
-        UP_NORTH("up_north"),
-        UP_CENTER("up_center"),
-        UP_SOUTH("up_south"),
-        UP_NORTH_EAST("up_north_east"),
-        UP_EAST("up_east"),
-        UP_SOUTH_EAST("up_south_east");
-
-        private final String name;
-
-        BONFIRE_BLOCK_MODEL(String name) {
-            this.name = name;
-        }
-
-        @Override
-        public String asString() {
-            return this.name;
-        }
-
-        @Override
-        public String toString() {
-            return this.name;
-        }
-    }
-
+    private static final VoxelShape FULL_SHAPE = Block.createCuboidShape(0, 0, 0, 16, 16, 16);
     private static final Direction[] cardinalDirections = {
             Direction.NORTH,
             Direction.EAST,
             Direction.SOUTH,
             Direction.WEST
     };
+
+    public BonfireBlock(Settings settings) {
+        super(settings);
+        this.setDefaultState(this.stateManager.getDefaultState().with(LIT, true));
+    }
 
     public static boolean checkAirAround(BlockPos pos, World world, boolean checkBonfireBlocks) {
         BlockPos[] positionsToCheck = {pos, pos.up()};
@@ -169,6 +128,24 @@ public class BonfireBlock extends BlockWithEntity {
         return world.getBlockState(pos.up()).getBlock() == Blocks.AIR;
     }
 
+    public static ToIntFunction<BlockState> createLightLevelFromLitBlockState(int litLevel) {
+        return state -> state.get(LIT) ? litLevel : 0;
+    }
+
+    public static void spawnThickSmokeParticles(World world, BlockPos pos, BlockState state, double yOffset) {
+        Random random = world.getRandom();
+        world.addImportantParticle(ParticleTypes.CAMPFIRE_SIGNAL_SMOKE, true, (double) pos.getX() + 0.5 + random.nextDouble() / 3.0 * (double) (random.nextBoolean() ? 1 : -1), (double) pos.getY() + random.nextDouble() + random.nextDouble() + yOffset, (double) pos.getZ() + 0.5 + random.nextDouble() / 3.0 * (double) (random.nextBoolean() ? 1 : -1), random.nextDouble() * 0.04 - 0.02, 0.07, random.nextDouble() * 0.04 - 0.02);
+    }
+
+    public static void spawnSmokeParticles(World world, BlockPos pos, BlockState state, double yOffset) {
+        Random random = world.getRandom();
+        world.addParticle(ParticleTypes.SMOKE, (double) pos.getX() + 0.5 + random.nextDouble() / 2.0 * (double) (random.nextBoolean() ? 1 : -1), (double) pos.getY() + yOffset - 0.1, (double) pos.getZ() + 0.5 + random.nextDouble() / 2.0 * (double) (random.nextBoolean() ? 1 : -1), 0.0, 0.005, 0.0);
+    }
+
+    @Override
+    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+        builder.add(BLOCK_SHAPE, LIT);
+    }
 
     public void placeBonfireBlocks(BlockPos pos, World world) {
         int index = 0;
@@ -230,10 +207,7 @@ public class BonfireBlock extends BlockWithEntity {
                     }
                 }
             }
-        }
-
-
-        else {
+        } else {
             super.onBreak(world, pos, state, player);
         }
     }
@@ -309,10 +283,6 @@ public class BonfireBlock extends BlockWithEntity {
         super.appendTooltip(stack, world, tooltip, context);
     }
 
-    public static ToIntFunction<BlockState> createLightLevelFromLitBlockState(int litLevel) {
-        return state -> state.get(LIT) ? litLevel : 0;
-    }
-
     @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
         if (state.get(LIT)) {
@@ -337,19 +307,9 @@ public class BonfireBlock extends BlockWithEntity {
     }
 
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        if ((Boolean)state.get(LIT) && entity instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity)entity)) {
+        if (state.get(LIT) && entity instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity) entity)) {
             entity.damage(world.getDamageSources().inFire(), 2);
         }
-    }
-
-    public static void spawnThickSmokeParticles(World world, BlockPos pos, BlockState state, double yOffset) {
-        Random random = world.getRandom();
-        world.addImportantParticle(ParticleTypes.CAMPFIRE_SIGNAL_SMOKE, true, (double) pos.getX() + 0.5 + random.nextDouble() / 3.0 * (double) (random.nextBoolean() ? 1 : -1), (double) pos.getY() + random.nextDouble() + random.nextDouble() + yOffset, (double) pos.getZ() + 0.5 + random.nextDouble() / 3.0 * (double) (random.nextBoolean() ? 1 : -1), random.nextDouble() * 0.04 - 0.02, 0.07, random.nextDouble() * 0.04 - 0.02);
-    }
-
-    public static void spawnSmokeParticles(World world, BlockPos pos, BlockState state, double yOffset) {
-        Random random = world.getRandom();
-        world.addParticle(ParticleTypes.SMOKE, (double) pos.getX() + 0.5 + random.nextDouble() / 2.0 * (double) (random.nextBoolean() ? 1 : -1), (double) pos.getY() + yOffset -0.1, (double) pos.getZ() + 0.5 + random.nextDouble() / 2.0 * (double) (random.nextBoolean() ? 1 : -1), 0.0, 0.005, 0.0);
     }
 
     @Nullable
@@ -384,5 +344,42 @@ public class BonfireBlock extends BlockWithEntity {
             case UP_SOUTH_EAST -> UP_SOUTH_EAST_SHAPE;
             default -> FULL_SHAPE;
         };
+    }
+
+    public enum BONFIRE_BLOCK_MODEL implements StringIdentifiable {
+        NORTH_WEST("north_west"),
+        WEST("west"),
+        SOUTH_WEST("south_west"),
+        NORTH("north"),
+        CENTER("center"),
+        SOUTH("south"),
+        NORTH_EAST("north_east"),
+        EAST("east"),
+        SOUTH_EAST("south_east"),
+        UP_NORTH_WEST("up_north_west"),
+        UP_WEST("up_west"),
+        UP_SOUTH_WEST("up_south_west"),
+        UP_NORTH("up_north"),
+        UP_CENTER("up_center"),
+        UP_SOUTH("up_south"),
+        UP_NORTH_EAST("up_north_east"),
+        UP_EAST("up_east"),
+        UP_SOUTH_EAST("up_south_east");
+
+        private final String name;
+
+        BONFIRE_BLOCK_MODEL(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String asString() {
+            return this.name;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
     }
 }

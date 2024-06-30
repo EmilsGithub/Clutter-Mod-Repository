@@ -39,7 +39,7 @@ public class ModUtil {
 
                         MutableText startText = Text.translatable("clutter.commands.config.config_update_prompt", ClutterConfig.getInstance().getFileVersionNumber(ClutterConfig.getInstance().getCurrentFileVersion()));
 
-                        MutableText versionText = Text.literal("(" + ClutterConfig.FILE_VERSION + ")" );
+                        MutableText versionText = Text.literal("(" + ClutterConfig.FILE_VERSION + ")");
 
                         MutableText updatePromptText = Texts.bracketed(
                                 Text.translatable("clutter.commands.config.config_update")).styled(style -> style.withColor(Formatting.GREEN)

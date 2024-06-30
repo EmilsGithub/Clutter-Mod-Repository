@@ -33,7 +33,7 @@ public class CrabRenderer extends MobEntityRenderer<CrabEntity, CrabModel<CrabEn
             case BLUE -> BLUE_TEXTURE;
             case BROWN -> BROWN_TEXTURE;
             case PURPLE -> PURPLE_TEXTURE;
-            case ORANGE ->  ORANGE_TEXTURE;
+            case ORANGE -> ORANGE_TEXTURE;
         };
     }
 }

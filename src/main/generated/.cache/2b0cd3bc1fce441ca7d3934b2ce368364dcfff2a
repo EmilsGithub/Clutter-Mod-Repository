@@ -1,4 +1,4 @@
-// 1.20.1	2024-06-05T21:15:24.568045	Clutter/Block Loot Tables
+// 1.20.1	2024-06-10T19:44:21.3986939	Clutter/Block Loot Tables
 ca0ea8d44826ac4e92924b33abe6e9e45b466ea4 data\clutter\loot_tables\blocks\prismarine_torch.json
 a3217906ff8b53f16230648e1dbb2eeaeb2066f9 data\clutter\loot_tables\blocks\diamond_coral_block.json
 fe70eef16378f9008c9e7abc21f84f336c690243 data\clutter\loot_tables\blocks\dead_toxic_coral.json
@@ -25,8 +25,8 @@ fce634500957a0fe31867e187ac2813d8e3ba298 data\clutter\loot_tables\blocks\cup_cor
 0ec9b54579e85348891fd00daddb579dad363f28 data\clutter\loot_tables\blocks\dead_toxic_coral_fan.json
 09e6904c9f51d2279edceaaaf803770d4544c841 data\clutter\loot_tables\blocks\cocoa_coral_block.json
 ca0ea8d44826ac4e92924b33abe6e9e45b466ea4 data\clutter\loot_tables\blocks\prismarine_wall_torch.json
-824c4413fd6ca5bb45e8de8a46201a28c86058e1 data\clutter\loot_tables\blocks\dead_gem_coral_wall_fan.json
 4dac025770e5e493cd6f0d39e507cd9d5b637c7c data\clutter\loot_tables\blocks\toxic_coral_wall_fan.json
+824c4413fd6ca5bb45e8de8a46201a28c86058e1 data\clutter\loot_tables\blocks\dead_gem_coral_wall_fan.json
 a7797ca87c3bca004921b9adac721287940613d7 data\clutter\loot_tables\blocks\dead_passion_coral_fan.json
 c3cfb0387ca3e00cfda47665ed4e62777a98f3e8 data\clutter\loot_tables\blocks\exposed_aquatic_torch.json
 003263e0be598710ffdb611f950da83fd214d73f data\clutter\loot_tables\blocks\dead_thorn_coral.json
@@ -116,8 +116,8 @@ c3da69431ec628cee03cdd8102c4f2f7df57155d data\clutter\loot_tables\blocks\thorn_c
 8944525f20ade19fc4d82f27faa7e3704ca7a6a6 data\clutter\loot_tables\blocks\dead_diamond_coral_wall_fan.json
 10d89df43bea06f92b626605293d0fa90e673755 data\clutter\loot_tables\blocks\black_onyx_slab.json
 e549dc7597f00cedd0df7f15973c4c0a80bdced5 data\clutter\loot_tables\blocks\waxed_weathered_aquatic_torch.json
-c3cfb0387ca3e00cfda47665ed4e62777a98f3e8 data\clutter\loot_tables\blocks\exposed_aquatic_wall_torch.json
 57f46b07f9e48d683f8ef75b5556026c8e4cf8ee data\clutter\loot_tables\blocks\dead_anchor_coral_block.json
+c3cfb0387ca3e00cfda47665ed4e62777a98f3e8 data\clutter\loot_tables\blocks\exposed_aquatic_wall_torch.json
 c7e69b2a178a367ec5ebfe71cee8bbc384989c72 data\clutter\loot_tables\blocks\nautilus_shell_block.json
 a565322f53321387ef1b8c1563b8a3c75c1549c9 data\clutter\loot_tables\blocks\pet_bed.json
 c600d1f1db88083455f0aac655f441779553ba48 data\clutter\loot_tables\blocks\ghost_coral.json

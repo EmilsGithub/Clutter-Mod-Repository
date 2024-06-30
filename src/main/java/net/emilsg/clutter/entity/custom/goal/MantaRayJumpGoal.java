@@ -32,7 +32,7 @@ public class MantaRayJumpGoal extends DiveJumpingGoal {
             int[] var5 = OFFSET_MULTIPLIERS;
             int var6 = var5.length;
 
-            for(int var7 = 0; var7 < var6; ++var7) {
+            for (int var7 = 0; var7 < var6; ++var7) {
                 int k = var5[var7];
                 if (!this.isWater(blockPos, i, j, k) || !this.isAirAbove(blockPos, i, j, k)) {
                     return false;
@@ -63,7 +63,7 @@ public class MantaRayJumpGoal extends DiveJumpingGoal {
 
     public void start() {
         Direction direction = this.mantaRay.getMovementDirection();
-        this.mantaRay.setVelocity(this.mantaRay.getVelocity().add((double)direction.getOffsetX() * 0.6, 0.7, (double)direction.getOffsetZ() * 0.6));
+        this.mantaRay.setVelocity(this.mantaRay.getVelocity().add((double) direction.getOffsetX() * 0.6, 0.7, (double) direction.getOffsetZ() * 0.6));
         this.mantaRay.getNavigation().stop();
     }
 
@@ -88,7 +88,7 @@ public class MantaRayJumpGoal extends DiveJumpingGoal {
         } else if (vec3d.length() > 9.999999747378752E-6) {
             double d = vec3d.horizontalLength();
             double e = Math.atan2(-vec3d.y, d) * 57.2957763671875;
-            this.mantaRay.setPitch((float)e);
+            this.mantaRay.setPitch((float) e);
         }
 
     }

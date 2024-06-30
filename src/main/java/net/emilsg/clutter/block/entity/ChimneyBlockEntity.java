@@ -17,7 +17,7 @@ public class ChimneyBlockEntity extends BlockEntity {
     }
 
     public static <T extends BlockEntity> void clientTick(World world, BlockPos blockPos, BlockState state, T t) {
-        if(state.get(OPEN)) {
+        if (state.get(OPEN)) {
             int i;
             Random random = world.random;
             if (random.nextFloat() < 0.25f) {

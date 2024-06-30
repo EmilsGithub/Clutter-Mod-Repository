@@ -38,7 +38,7 @@ public class FloorSeatBlock extends SeatBlock implements Waterloggable {
 
     public FloorSeatBlock(Settings settings) {
         super(settings);
-        this.setDefaultState((BlockState)(this.stateManager.getDefaultState()).with(WATERLOGGED, false));
+        this.setDefaultState((this.stateManager.getDefaultState()).with(WATERLOGGED, false));
     }
 
     @Override
@@ -57,7 +57,7 @@ public class FloorSeatBlock extends SeatBlock implements Waterloggable {
         BlockPos blockPos;
         World worldAccess = ctx.getWorld();
         boolean bl = worldAccess.getFluidState(blockPos = ctx.getBlockPos()).getFluid() == Fluids.WATER;
-        return (BlockState)this.getDefaultState().with(WATERLOGGED, bl);
+        return this.getDefaultState().with(WATERLOGGED, bl);
     }
 
     @Override
@@ -67,11 +67,12 @@ public class FloorSeatBlock extends SeatBlock implements Waterloggable {
         }
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
+
     @Override
     public boolean tryFillWithFluid(WorldAccess world, BlockPos pos, BlockState state, FluidState fluidState) {
         if (!state.get(Properties.WATERLOGGED) && fluidState.getFluid() == Fluids.WATER) {
 
-            world.setBlockState(pos, (BlockState)((BlockState)state.with(WATERLOGGED, true)), Block.NOTIFY_ALL);
+            world.setBlockState(pos, state.with(WATERLOGGED, true), Block.NOTIFY_ALL);
             world.scheduleFluidTick(pos, fluidState.getFluid(), fluidState.getFluid().getTickRate(world));
             return true;
         }
@@ -103,7 +104,7 @@ public class FloorSeatBlock extends SeatBlock implements Waterloggable {
         int yPos = pos.getY();
         int zPos = pos.getZ();
 
-        List<SeatEntity> entities = world.getEntitiesByClass(SeatEntity.class, new Box(xPos,yPos,zPos,xPos+1,yPos+1,zPos+1), Entity::hasPassengers);
+        List<SeatEntity> entities = world.getEntitiesByClass(SeatEntity.class, new Box(xPos, yPos, zPos, xPos + 1, yPos + 1, zPos + 1), Entity::hasPassengers);
         for (SeatEntity entity : entities) {
             entity.remove(Entity.RemovalReason.DISCARDED);
         }

@@ -10,7 +10,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 
-public class ArmchairBlock extends SeatBlock{
+public class ArmchairBlock extends SeatBlock {
     private static final VoxelShape BASE = VoxelShapes.union(
             Block.createCuboidShape(0, 0, 0, 2, 2, 2),
             Block.createCuboidShape(14, 0, 0, 16, 2, 2),

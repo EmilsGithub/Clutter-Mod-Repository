@@ -1,7 +1,7 @@
 package net.emilsg.clutter.entity.custom;
 
-import net.emilsg.clutter.entity.custom.parent.ClutterAnimalEntity;
 import net.emilsg.clutter.entity.ModEntities;
+import net.emilsg.clutter.entity.custom.parent.ClutterAnimalEntity;
 import net.emilsg.clutter.entity.variants.MossbloomVariant;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.BlockState;
@@ -43,14 +43,15 @@ import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class MossbloomEntity extends ClutterAnimalEntity implements GeoEntity {
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private static final RawAnimation IDLE = RawAnimation.begin().thenLoop("mossbloom.idle");
     private static final RawAnimation WALK = RawAnimation.begin().thenLoop("mossbloom.walk");
-
     private static final RawAnimation WAG_TAIL = RawAnimation.begin().thenPlay("mossbloom.wag_tail");
     private static final RawAnimation LE_DROP = RawAnimation.begin().thenPlay("mossbloom.le_drop");
     private static final RawAnimation RE_DROP = RawAnimation.begin().thenPlay("mossbloom.re_drop");
     private static final RawAnimation EARS_DROP = RawAnimation.begin().thenPlay("mossbloom.ears_drop");
+    private static final TrackedData<Integer> DATA_ID_TYPE_VARIANT =
+            DataTracker.registerData(MossbloomEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
     public MossbloomEntity(EntityType<? extends ClutterAnimalEntity> entityType, World world) {
         super(entityType, world);
@@ -67,6 +68,20 @@ public class MossbloomEntity extends ClutterAnimalEntity implements GeoEntity {
                 .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.5f)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 6.0f)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0f);
+    }
+
+    public static boolean isValidNaturalSpawn(EntityType<? extends AnimalEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+        return isValidLushSpawn(type, world, spawnReason, pos, random) && isLightLevelValidForNaturalSpawn(world, pos);
+    }
+
+    public static boolean isValidLushSpawn(EntityType<? extends AnimalEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+        return world.getBlockState(pos.down()).isOf(Blocks.MOSS_BLOCK) ||
+                world.getBlockState(pos.down()).isOf(Blocks.MOSS_CARPET) ||
+                world.getBlockState(pos.down()).isOf(Blocks.CLAY);
+    }
+
+    protected static boolean isLightLevelValidForNaturalSpawn(BlockRenderView world, BlockPos pos) {
+        return true;
     }
 
     @Override
@@ -137,26 +152,12 @@ public class MossbloomEntity extends ClutterAnimalEntity implements GeoEntity {
             child.setVariant(Util.getRandom(MossbloomVariant.values(), this.random));
             child.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), 0.0F, 0.0F);
             world.spawnEntityAndPassengers(child);
-            world.sendEntityStatus(this, (byte)18);
+            world.sendEntityStatus(this, (byte) 18);
             if (world.getGameRules().getBoolean(GameRules.DO_MOB_LOOT)) {
                 world.spawnEntity(new ExperienceOrbEntity(world, this.getX(), this.getY(), this.getZ(), this.getRandom().nextInt(7) + 1));
             }
 
         }
-    }
-
-    public static boolean isValidNaturalSpawn(EntityType<? extends AnimalEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-        return isValidLushSpawn(type, world, spawnReason, pos, random) && isLightLevelValidForNaturalSpawn(world, pos);
-    }
-
-    public static boolean isValidLushSpawn(EntityType<? extends AnimalEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-        return world.getBlockState(pos.down()).isOf(Blocks.MOSS_BLOCK) ||
-                world.getBlockState(pos.down()).isOf(Blocks.MOSS_CARPET) ||
-                world.getBlockState(pos.down()).isOf(Blocks.CLAY);
-    }
-
-    protected static boolean isLightLevelValidForNaturalSpawn(BlockRenderView world, BlockPos pos) {
-        return true;
     }
 
     @Nullable
@@ -175,14 +176,14 @@ public class MossbloomEntity extends ClutterAnimalEntity implements GeoEntity {
     }
 
     private <T extends GeoAnimatable> PlayState idlePredicate(AnimationState<T> tAnimationState) {
-        if(this.random.nextInt(200) == 0) {
+        if (this.random.nextInt(200) == 0) {
             tAnimationState.getController().setAnimation(this.random.nextBoolean() ? WAG_TAIL : this.random.nextBoolean() ? LE_DROP : this.random.nextBoolean() ? RE_DROP : EARS_DROP);
         }
         return PlayState.CONTINUE;
     }
 
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
-        if(tAnimationState.isMoving()) {
+        if (tAnimationState.isMoving()) {
             tAnimationState.getController().setAnimation(WALK);
             return PlayState.CONTINUE;
         }
@@ -214,18 +215,15 @@ public class MossbloomEntity extends ClutterAnimalEntity implements GeoEntity {
         this.dataTracker.set(DATA_ID_TYPE_VARIANT, nbt.getInt("Variant"));
     }
 
-    private static final TrackedData<Integer> DATA_ID_TYPE_VARIANT =
-            DataTracker.registerData(MossbloomEntity.class, TrackedDataHandlerRegistry.INTEGER);
-
     public MossbloomVariant getVariant() {
         return MossbloomVariant.byId(this.getTypeVariant() & 255);
     }
 
-    private int getTypeVariant() {
-        return this.dataTracker.get(DATA_ID_TYPE_VARIANT);
-    }
-
     public void setVariant(MossbloomVariant variant) {
         this.dataTracker.set(DATA_ID_TYPE_VARIANT, variant.getId() & 255);
+    }
+
+    private int getTypeVariant() {
+        return this.dataTracker.get(DATA_ID_TYPE_VARIANT);
     }
 }

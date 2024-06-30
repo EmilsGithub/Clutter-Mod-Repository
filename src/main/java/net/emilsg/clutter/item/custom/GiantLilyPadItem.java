@@ -35,7 +35,8 @@ public class GiantLilyPadItem extends AliasedBlockItem {
         BlockHitResult rayTraceResult = raycast(world, user, RaycastContext.FluidHandling.SOURCE_ONLY);
         ItemStack stackInHand = user.getStackInHand(hand);
 
-        if (rayTraceResult.getType() == BlockHitResult.Type.MISS) return new TypedActionResult<>(ActionResult.PASS, stackInHand);
+        if (rayTraceResult.getType() == BlockHitResult.Type.MISS)
+            return new TypedActionResult<>(ActionResult.PASS, stackInHand);
         else if (rayTraceResult.getType() == BlockHitResult.Type.BLOCK) {
             BlockPos blockpos = rayTraceResult.getBlockPos();
             Direction direction = rayTraceResult.getSide();
@@ -47,7 +48,7 @@ public class GiantLilyPadItem extends AliasedBlockItem {
             BlockState blockstate = world.getBlockState(blockpos);
             FluidState fluidState = world.getFluidState(blockpos);
             if ((fluidState.getFluid() == Fluids.WATER || blockstate.getBlock() instanceof IceBlock) && world.isAir(blockPosUp)) {
-                if(world.getBlockState(blockPosUp.north()).isReplaceable()
+                if (world.getBlockState(blockPosUp.north()).isReplaceable()
                         && world.getBlockState(blockPosUp.east()).isReplaceable()
                         && world.getBlockState(blockPosUp.north().east()).isReplaceable()
                         && world.getBlockState(blockPosUp.north()).isAir()

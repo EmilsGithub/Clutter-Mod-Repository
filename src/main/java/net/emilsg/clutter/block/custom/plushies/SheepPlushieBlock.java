@@ -44,16 +44,16 @@ public class SheepPlushieBlock extends AbstractPlushieBlock {
             return ActionResult.PASS;
         }
 
-        if(hand.equals(Hand.MAIN_HAND)) {
+        if (hand.equals(Hand.MAIN_HAND)) {
             if (stack.isEmpty()) {
                 world.playSound(null, pos, SoundEvents.ENTITY_SHEEP_AMBIENT, SoundCategory.BLOCKS, 1.0f, 1.25f);
-                if(world.isClient) {
+                if (world.isClient) {
                     world.addParticle(ParticleTypes.NOTE, pos.getX() + 0.5, pos.getY() + 0.7, pos.getZ() + 0.5, random, 0.0, 0.0);
                     return ActionResult.SUCCESS;
                 }
                 return ActionResult.CONSUME;
             }
-            if(stack.isIn(ModItemTags.DYES)) {
+            if (stack.isIn(ModItemTags.DYES)) {
 
                 Item item = stack.getItem();
                 SheepColors color = state.get(COLOR);
@@ -79,7 +79,7 @@ public class SheepPlushieBlock extends AbstractPlushieBlock {
                 if (dyeColorMap.containsKey(item) && color != dyeColorMap.get(item)) {
                     color = dyeColorMap.get(item);
                     world.playSound(null, pos, SoundEvents.ITEM_DYE_USE, SoundCategory.BLOCKS, 1.0f, 1.0f);
-                    if(!player.getAbilities().creativeMode) {
+                    if (!player.getAbilities().creativeMode) {
                         stack.decrement(1);
                     }
                     world.setBlockState(pos, state.with(COLOR, color), Block.NOTIFY_ALL);

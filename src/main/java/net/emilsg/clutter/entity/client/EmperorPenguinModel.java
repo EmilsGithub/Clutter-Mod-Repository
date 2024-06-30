@@ -19,7 +19,7 @@ public class EmperorPenguinModel extends GeoModel<EmperorPenguinEntity> {
 
     @Override
     public Identifier getModelResource(EmperorPenguinEntity animatable) {
-        if(animatable.isBaby()) {
+        if (animatable.isBaby()) {
             return BABY_MODEL;
         } else {
             return ADULT_MODEL;
@@ -29,7 +29,7 @@ public class EmperorPenguinModel extends GeoModel<EmperorPenguinEntity> {
 
     @Override
     public Identifier getTextureResource(EmperorPenguinEntity animatable) {
-        if(animatable.isBaby()) {
+        if (animatable.isBaby()) {
             return BABY_TEXTURE;
         } else {
             return ADULT_TEXTURE;

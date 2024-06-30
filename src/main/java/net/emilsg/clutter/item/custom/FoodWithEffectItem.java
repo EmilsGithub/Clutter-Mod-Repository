@@ -35,6 +35,6 @@ public class FoodWithEffectItem extends Item {
 
     @Override
     public int getMaxUseTime(ItemStack stack) {
-        return (int) useTimeInTicks;
+        return useTimeInTicks;
     }
 }

@@ -28,15 +28,22 @@ import java.util.Objects;
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
 
-    @Final @Shadow private static TrackedData<Integer> POTION_SWIRLS_COLOR;
+    @Final
+    @Shadow
+    private static TrackedData<Integer> POTION_SWIRLS_COLOR;
 
-    @Final @Shadow private static TrackedData<Boolean> POTION_SWIRLS_AMBIENT;
+    @Final
+    @Shadow
+    private static TrackedData<Boolean> POTION_SWIRLS_AMBIENT;
 
-    @Shadow public abstract Map<StatusEffect, StatusEffectInstance> getActiveStatusEffects();
+    @Shadow
+    public abstract Map<StatusEffect, StatusEffectInstance> getActiveStatusEffects();
 
-    @Shadow public abstract boolean hasStatusEffect(StatusEffect effect);
+    @Shadow
+    public abstract boolean hasStatusEffect(StatusEffect effect);
 
-    @Shadow public abstract @Nullable StatusEffectInstance getStatusEffect(StatusEffect effect);
+    @Shadow
+    public abstract @Nullable StatusEffectInstance getStatusEffect(StatusEffect effect);
 
     @Inject(method = "damage", at = @At("HEAD"), cancellable = true)
     private void onDamage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
@@ -71,9 +78,10 @@ public abstract class LivingEntityMixin {
         World world = livingEntity.getWorld();
         Random random = world.getRandom();
 
-        if(!world.isClient) return;
+        if (!world.isClient) return;
         if (livingEntity instanceof PlayerEntity player && player.isSpectator()) return;
-        if (livingEntity.getActiveStatusEffects().isEmpty() || !livingEntity.hasStatusEffect(ModEffects.SHIMMER)) return;
+        if (livingEntity.getActiveStatusEffects().isEmpty() || !livingEntity.hasStatusEffect(ModEffects.SHIMMER))
+            return;
 
         if (random.nextFloat() < 0.5f) {
             Vec3d entityPos = livingEntity.getPos();

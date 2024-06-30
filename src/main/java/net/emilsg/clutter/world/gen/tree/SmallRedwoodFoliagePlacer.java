@@ -35,8 +35,8 @@ public class SmallRedwoodFoliagePlacer extends FoliagePlacer {
     protected void generate(TestableWorld world, BlockPlacer placer, Random random, TreeFeatureConfig config, int trunkHeight, TreeNode treeNode, int foliageHeight, int radius, int offset) {
         BlockPos blockPos = treeNode.getCenter();
         int y = blockPos.getY() + offset;
-        int[] radii = new int[]{1,1,2,1,2,3,1,2};
-        int[] radii2 = new int[]{1,1,2,1,3,2,1,2,1};
+        int[] radii = new int[]{1, 1, 2, 1, 2, 3, 1, 2};
+        int[] radii2 = new int[]{1, 1, 2, 1, 3, 2, 1, 2, 1};
 
         top(random.nextBoolean() ? radii : radii2, y, random, blockPos, config, placer, world);
     }

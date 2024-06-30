@@ -29,8 +29,33 @@ import org.jetbrains.annotations.Nullable;
 import java.util.stream.IntStream;
 
 public class WallBookshelfInventoryBlockEntity extends LootableContainerBlockEntity implements SidedInventory, Inventory {
-    private DefaultedList<ItemStack> inventory = DefaultedList.ofSize(5, ItemStack.EMPTY);
     private static final int[] AVAILABLE_SLOTS = IntStream.range(0, 5).toArray();
+    private final ViewerCountManager stateManager = new ViewerCountManager() {
+
+        @Override
+        protected void onContainerOpen(World world, BlockPos pos, BlockState state) {
+            WallBookshelfInventoryBlockEntity.this.playSound(state, SoundEvents.ITEM_BOOK_PAGE_TURN);
+        }
+
+        @Override
+        protected void onContainerClose(World world, BlockPos pos, BlockState state) {
+            WallBookshelfInventoryBlockEntity.this.playSound(state, SoundEvents.ITEM_BOOK_PAGE_TURN);
+        }
+
+        @Override
+        protected void onViewerCountUpdate(World world, BlockPos pos, BlockState state, int oldViewerCount, int newViewerCount) {
+        }
+
+        @Override
+        protected boolean isPlayerViewing(PlayerEntity player) {
+            if (player.currentScreenHandler instanceof GenericContainerScreenHandler) {
+                Inventory inventory = ((GenericContainerScreenHandler) player.currentScreenHandler).getInventory();
+                return inventory == WallBookshelfInventoryBlockEntity.this;
+            }
+            return false;
+        }
+    };
+    private DefaultedList<ItemStack> inventory = DefaultedList.ofSize(5, ItemStack.EMPTY);
 
     public WallBookshelfInventoryBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.WALL_BOOKSHELF, blockPos, blockState);
@@ -49,7 +74,6 @@ public class WallBookshelfInventoryBlockEntity extends LootableContainerBlockEnt
             this.stateManager.closeContainer(player, this.getWorld(), this.getPos(), this.getCachedState());
         }
     }
-
 
     public void tick() {
         if (!this.removed) {
@@ -81,32 +105,6 @@ public class WallBookshelfInventoryBlockEntity extends LootableContainerBlockEnt
     public int size() {
         return 5;
     }
-
-    private final ViewerCountManager stateManager = new ViewerCountManager(){
-
-        @Override
-        protected void onContainerOpen(World world, BlockPos pos, BlockState state) {
-            WallBookshelfInventoryBlockEntity.this.playSound(state, SoundEvents.ITEM_BOOK_PAGE_TURN);
-        }
-
-        @Override
-        protected void onContainerClose(World world, BlockPos pos, BlockState state) {
-            WallBookshelfInventoryBlockEntity.this.playSound(state, SoundEvents.ITEM_BOOK_PAGE_TURN);
-        }
-
-        @Override
-        protected void onViewerCountUpdate(World world, BlockPos pos, BlockState state, int oldViewerCount, int newViewerCount) {
-        }
-
-        @Override
-        protected boolean isPlayerViewing(PlayerEntity player) {
-            if (player.currentScreenHandler instanceof GenericContainerScreenHandler) {
-                Inventory inventory = ((GenericContainerScreenHandler)player.currentScreenHandler).getInventory();
-                return inventory == WallBookshelfInventoryBlockEntity.this;
-            }
-            return false;
-        }
-    };
 
     @Override
     public int[] getAvailableSlots(Direction side) {
@@ -142,9 +140,9 @@ public class WallBookshelfInventoryBlockEntity extends LootableContainerBlockEnt
 
     void playSound(BlockState state, SoundEvent soundEvent) {
         Vec3i vec3i = state.get(WallBookshelfBlock.FACING).getVector();
-        double d = (double)this.pos.getX() + 0.5 + (double)vec3i.getX() / 2.0;
-        double e = (double)this.pos.getY() + 0.5 + (double)vec3i.getY() / 2.0;
-        double f = (double)this.pos.getZ() + 0.5 + (double)vec3i.getZ() / 2.0;
+        double d = (double) this.pos.getX() + 0.5 + (double) vec3i.getX() / 2.0;
+        double e = (double) this.pos.getY() + 0.5 + (double) vec3i.getY() / 2.0;
+        double f = (double) this.pos.getZ() + 0.5 + (double) vec3i.getZ() / 2.0;
         this.world.playSound(null, d, e, f, soundEvent, SoundCategory.BLOCKS, 0.5f, this.world.random.nextFloat() * 0.1f + 0.7f);
     }
 }

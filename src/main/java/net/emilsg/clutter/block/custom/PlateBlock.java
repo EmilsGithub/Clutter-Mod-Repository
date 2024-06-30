@@ -65,7 +65,7 @@ public class PlateBlock extends BlockWithEntity implements Waterloggable {
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         VoxelShape finalShape = PLATE_SHAPE;
 
-        if(state.get(GLASS_TYPE) == Glass.WINE) {
+        if (state.get(GLASS_TYPE) == Glass.WINE) {
             switch (state.get(FACING)) {
                 default -> finalShape = VoxelShapes.union(PLATE_SHAPE, GLASS_SHAPE_N);
                 case EAST -> finalShape = VoxelShapes.union(PLATE_SHAPE, GLASS_SHAPE_E);
@@ -85,9 +85,9 @@ public class PlateBlock extends BlockWithEntity implements Waterloggable {
         ItemStack stackInHand = player.getStackInHand(hand);
         BlockEntity blockEntity = world.getBlockEntity(pos);
 
-        if(PLATE_SHAPE.raycast(Vec3d.ZERO, hit.getPos(), pos) != null) {
+        if (PLATE_SHAPE.raycast(Vec3d.ZERO, hit.getPos(), pos) != null) {
             if ((Block.getBlockFromItem(stackInHand.getItem()) instanceof WineGlassBlock) && state.get(GLASS_TYPE).equals(Glass.NONE)) {
-                if(!player.getAbilities().creativeMode) {
+                if (!player.getAbilities().creativeMode) {
                     stackInHand.decrement(1);
                 }
                 world.setBlockState(pos, state.with(GLASS_TYPE, Glass.WINE), 3);
@@ -97,7 +97,7 @@ public class PlateBlock extends BlockWithEntity implements Waterloggable {
                     for (int i = 0; i < plateEntity.size(); i++) {
                         if (plateEntity.getStack(i).isEmpty()) {
                             plateEntity.setStack(i, stackInHand.copyWithCount(1));
-                            if(!player.getAbilities().creativeMode) {
+                            if (!player.getAbilities().creativeMode) {
                                 stackInHand.decrement(1);
                             }
                             return ActionResult.SUCCESS;
@@ -107,7 +107,7 @@ public class PlateBlock extends BlockWithEntity implements Waterloggable {
                     for (int i = plateEntity.size() - 1; i >= 0; i--) {
                         ItemStack stackInPlate = plateEntity.getStack(i);
                         if (!stackInPlate.isEmpty()) {
-                            if(stackInHand.isEmpty() || (stackInHand.isOf(stackInPlate.getItem()) && stackInHand.getCount() != stackInHand.getMaxCount())) {
+                            if (stackInHand.isEmpty() || (stackInHand.isOf(stackInPlate.getItem()) && stackInHand.getCount() != stackInHand.getMaxCount())) {
                                 player.giveItemStack(new ItemStack(stackInPlate.copy().getItem()));
                             } else {
                                 dropStack(world, pos, new ItemStack(stackInPlate.copy().getItem()));
@@ -119,7 +119,7 @@ public class PlateBlock extends BlockWithEntity implements Waterloggable {
                 }
             }
         } else {
-            if(player.getStackInHand(hand).isEmpty() || ((Block.getBlockFromItem(stackInHand.getItem()) instanceof WineGlassBlock) && stackInHand.getCount() != stackInHand.getMaxCount())) {
+            if (player.getStackInHand(hand).isEmpty() || ((Block.getBlockFromItem(stackInHand.getItem()) instanceof WineGlassBlock) && stackInHand.getCount() != stackInHand.getMaxCount())) {
                 player.giveItemStack(new ItemStack(ModBlocks.WINE_GLASS));
             } else {
                 dropStack(world, pos, new ItemStack(ModBlocks.WINE_GLASS));
@@ -143,7 +143,7 @@ public class PlateBlock extends BlockWithEntity implements Waterloggable {
         BlockPos blockPos;
         World worldAccess = ctx.getWorld();
         boolean bl = worldAccess.getFluidState(blockPos = ctx.getBlockPos()).getFluid() == Fluids.WATER;
-        return (BlockState)this.getDefaultState().with(WATERLOGGED, bl).with(FACING, ctx.getHorizontalPlayerFacing());
+        return this.getDefaultState().with(WATERLOGGED, bl).with(FACING, ctx.getHorizontalPlayerFacing());
     }
 
     @Override
@@ -156,18 +156,18 @@ public class PlateBlock extends BlockWithEntity implements Waterloggable {
 
 
     public BlockState rotate(BlockState state, BlockRotation rotation) {
-        return (BlockState)state.with(FACING, rotation.rotate((Direction)state.get(FACING)));
+        return state.with(FACING, rotation.rotate(state.get(FACING)));
     }
 
     public BlockState mirror(BlockState state, BlockMirror mirror) {
-        return state.rotate(mirror.getRotation((Direction)state.get(FACING)));
+        return state.rotate(mirror.getRotation(state.get(FACING)));
     }
 
     @Override
     public boolean tryFillWithFluid(WorldAccess world, BlockPos pos, BlockState state, FluidState fluidState) {
         if (!state.get(Properties.WATERLOGGED) && fluidState.getFluid() == Fluids.WATER) {
 
-            world.setBlockState(pos, (BlockState)((BlockState)state.with(WATERLOGGED, true)), Block.NOTIFY_ALL);
+            world.setBlockState(pos, state.with(WATERLOGGED, true), Block.NOTIFY_ALL);
             world.scheduleFluidTick(pos, fluidState.getFluid(), fluidState.getFluid().getTickRate(world));
             return true;
         }
@@ -209,7 +209,7 @@ public class PlateBlock extends BlockWithEntity implements Waterloggable {
         }
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof Inventory) {
-            ItemScatterer.spawn(world, pos, (Inventory)((Object)blockEntity));
+            ItemScatterer.spawn(world, pos, (Inventory) blockEntity);
             world.updateComparators(pos, this);
         }
         super.onStateReplaced(state, world, pos, newState, moved);

@@ -9,6 +9,7 @@ public class ModTrunkPlacerTypes {
 
     public static final TrunkPlacerType<?> REDWOOD_TRUNK_PLACER = TrunkPlacerTypeInvoker.callRegister("redwood_trunk_placer", RedwoodTrunkPlacer.CODEC);
     public static final TrunkPlacerType<?> DEAD_REDWOOD_TRUNK_PLACER = TrunkPlacerTypeInvoker.callRegister("dead_redwood_trunk_placer", DeadRedwoodTrunkPlacer.CODEC);
+
     public static void register() {
 
     }

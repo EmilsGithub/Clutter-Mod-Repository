@@ -60,19 +60,19 @@ public abstract class PlayerEntityMixin {
 
         if (playerEntity.isInsideWaterOrBubbleColumn() && !playerEntity.isSpectator() && !playerEntity.getAbilities().creativeMode) {
 
-            if(equippedBoots.getItem() instanceof CopperDivingArmorItem) {
+            if (equippedBoots.getItem() instanceof CopperDivingArmorItem) {
                 playerEntity.addVelocity(0, playerEntity.isSneaking() ? -0.1f : -0.05f, 0);
                 playerEntity.setStepHeight(1.0F);
             }
 
-            if(equippedChest.getItem() instanceof CopperDivingArmorItem && equippedHead.getItem() instanceof CopperDivingArmorItem &&
+            if (equippedChest.getItem() instanceof CopperDivingArmorItem && equippedHead.getItem() instanceof CopperDivingArmorItem &&
                     (equippedHead.getDamage() < equippedHead.getMaxDamage() - 1) && (equippedChest.getDamage() < equippedChest.getMaxDamage() - 1)) {
                 playerEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.CONDUIT_POWER, 100, 0, false, false));
-                if(ticker <=0) {
+                if (ticker <= 0) {
                     equippedChest.damage(1, playerEntity, null);
                     ticker = 40;
                 }
-                ticker --;
+                ticker--;
             }
         } else {
             playerEntity.setStepHeight(0.6F);

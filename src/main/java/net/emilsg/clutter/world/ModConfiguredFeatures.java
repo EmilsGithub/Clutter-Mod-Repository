@@ -10,7 +10,6 @@ import net.emilsg.clutter.world.gen.features.WeightedBlockFeatureConfig;
 import net.emilsg.clutter.world.gen.tree.*;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.FlowerbedBlock;
 import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
@@ -44,31 +43,31 @@ public class ModConfiguredFeatures {
 
     public static final RegistryKey<ConfiguredFeature<?, ?>> ONYX_GEODE_KEY = registerKey("onyx_geode");
 
-    public static final RegistryKey<ConfiguredFeature<?,?>> BLACKSTONE_SULPHUR_ORE_KEY = registerKey("blackstone_sulphur_ore");
-    public static final RegistryKey<ConfiguredFeature<?,?>> BASALT_SULPHUR_ORE_KEY = registerKey("basalt_sulphur_ore");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> BLACKSTONE_SULPHUR_ORE_KEY = registerKey("blackstone_sulphur_ore");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> BASALT_SULPHUR_ORE_KEY = registerKey("basalt_sulphur_ore");
 
 
-    public static final RegistryKey<ConfiguredFeature<?,?>> LUSH_MOSS_KEY = registerKey("lush_moss");
-    public static final RegistryKey<ConfiguredFeature<?,?>> SCULK_MUSHROOM_KEY = registerKey("sculk_mushroom");
-    public static final RegistryKey<ConfiguredFeature<?,?>> GIANT_LILY_PAD_SEEDLING_KEY = registerKey("giant_lily_pad_seedling");
-    public static final RegistryKey<ConfiguredFeature<?,?>> SMALL_LILY_PADS_KEY = registerKey("small_lily_pads");
-    public static final RegistryKey<ConfiguredFeature<?,?>> CATTAILS_KEY = registerKey("cattails");
-    public static final RegistryKey<ConfiguredFeature<?,?>> CATTAILS_RIVER_KEY = registerKey("cattails_river");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> LUSH_MOSS_KEY = registerKey("lush_moss");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> SCULK_MUSHROOM_KEY = registerKey("sculk_mushroom");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> GIANT_LILY_PAD_SEEDLING_KEY = registerKey("giant_lily_pad_seedling");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> SMALL_LILY_PADS_KEY = registerKey("small_lily_pads");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> CATTAILS_KEY = registerKey("cattails");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> CATTAILS_RIVER_KEY = registerKey("cattails_river");
 
-    public static final RegistryKey<ConfiguredFeature<?,?>> SPONGE_IN_REEFS_KEY = registerKey("sponge_in_reefs");
-    public static final RegistryKey<ConfiguredFeature<?,?>> CLAM_KEY = registerKey("clam");
-    public static final RegistryKey<ConfiguredFeature<?,?>> BEACH_PATCH_KEY = registerKey("beach_patch");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> SPONGE_IN_REEFS_KEY = registerKey("sponge_in_reefs");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> CLAM_KEY = registerKey("clam");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> BEACH_PATCH_KEY = registerKey("beach_patch");
 
 
-    public static final RegistryKey<ConfiguredFeature<?,?>> KIWI_TREE_KEY = registerKey("kiwi_tree");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> KIWI_TREE_KEY = registerKey("kiwi_tree");
 
-    public static final RegistryKey<ConfiguredFeature<?,?>> REDWOOD_BUSH_KEY = registerKey("redwood_bush");
-    public static final RegistryKey<ConfiguredFeature<?,?>> REDWOOD_KEY = registerKey("redwood");
-    public static final RegistryKey<ConfiguredFeature<?,?>> REDWOOD_KEY_2 = registerKey("redwood_2");
-    public static final RegistryKey<ConfiguredFeature<?,?>> MEDIUM_REDWOOD_KEY = registerKey("medium_redwood");
-    public static final RegistryKey<ConfiguredFeature<?,?>> SMALL_REDWOOD_KEY = registerKey("small_redwood");
-    public static final RegistryKey<ConfiguredFeature<?,?>> DEAD_REDWOOD_KEY = registerKey("dead_redwood");
-    public static final RegistryKey<ConfiguredFeature<?,?>> GIANT_FERN_KEY = registerKey("giant_fern");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> REDWOOD_BUSH_KEY = registerKey("redwood_bush");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> REDWOOD_KEY = registerKey("redwood");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> REDWOOD_KEY_2 = registerKey("redwood_2");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> MEDIUM_REDWOOD_KEY = registerKey("medium_redwood");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> SMALL_REDWOOD_KEY = registerKey("small_redwood");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> DEAD_REDWOOD_KEY = registerKey("dead_redwood");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> GIANT_FERN_KEY = registerKey("giant_fern");
     public static final RegistryKey<ConfiguredFeature<?, ?>> REDWOOD_ROCK = registerKey("redwood_rock");
     public static final RegistryKey<ConfiguredFeature<?, ?>> FALLEN_REDWOOD_KEY = registerKey("fallen_redwood");
 
@@ -88,7 +87,7 @@ public class ModConfiguredFeatures {
                 new StraightTrunkPlacer(2, 0, 1),
                 new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(ModBlocks.KIWI_LEAVES.getDefaultState(), 1).add(ModBlocks.RIPE_KIWI_LEAVES.getDefaultState(), 3).build()),
                 new BlobFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(1), 2),
-                new TwoLayersFeatureSize(1, 0,1)).build()
+                new TwoLayersFeatureSize(1, 0, 1)).build()
         );
 
         List<OreFeatureConfig.Target> overworldSilverOres =
@@ -108,16 +107,16 @@ public class ModConfiguredFeatures {
 
 
         register(context, ONYX_GEODE_KEY, Feature.GEODE,
-                        new GeodeFeatureConfig(new GeodeLayerConfig(BlockStateProvider.of(Blocks.AIR),
-                                BlockStateProvider.of(ModBlocks.ONYX_BLOCK), BlockStateProvider.of(ModBlocks.BUDDING_ONYX),
-                                new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(ModBlocks.ONYX_ORE.getDefaultState(), 2).add(ModBlocks.SULPHUR_BLOCK.getDefaultState(), 5).build()), BlockStateProvider.of(Blocks.SMOOTH_BASALT),
-                                List.of(ModBlocks.SMALL_ONYX_BUD.getDefaultState(), ModBlocks.MEDIUM_ONYX_BUD.getDefaultState(), ModBlocks.LARGE_ONYX_BUD.getDefaultState(), ModBlocks.ONYX_CLUSTER.getDefaultState()),
-                                BlockTags.FEATURES_CANNOT_REPLACE, BlockTags.GEODE_INVALID_BLOCKS),
-                                new GeodeLayerThicknessConfig(0.75D, 1.1D, 1.5D, 2.75D),
-                                new GeodeCrackConfig(0.65D, 1.5D, 2),
-                                0.4D, 0.080D, true,
-                                UniformIntProvider.create(4, 6), UniformIntProvider.create(3, 4), UniformIntProvider.create(1, 2),
-                                -14, 14, 0.04D, 1));
+                new GeodeFeatureConfig(new GeodeLayerConfig(BlockStateProvider.of(Blocks.AIR),
+                        BlockStateProvider.of(ModBlocks.ONYX_BLOCK), BlockStateProvider.of(ModBlocks.BUDDING_ONYX),
+                        new WeightedBlockStateProvider(DataPool.<BlockState>builder().add(ModBlocks.ONYX_ORE.getDefaultState(), 2).add(ModBlocks.SULPHUR_BLOCK.getDefaultState(), 5).build()), BlockStateProvider.of(Blocks.SMOOTH_BASALT),
+                        List.of(ModBlocks.SMALL_ONYX_BUD.getDefaultState(), ModBlocks.MEDIUM_ONYX_BUD.getDefaultState(), ModBlocks.LARGE_ONYX_BUD.getDefaultState(), ModBlocks.ONYX_CLUSTER.getDefaultState()),
+                        BlockTags.FEATURES_CANNOT_REPLACE, BlockTags.GEODE_INVALID_BLOCKS),
+                        new GeodeLayerThicknessConfig(0.75D, 1.1D, 1.5D, 2.75D),
+                        new GeodeCrackConfig(0.65D, 1.5D, 2),
+                        0.4D, 0.080D, true,
+                        UniformIntProvider.create(4, 6), UniformIntProvider.create(3, 4), UniformIntProvider.create(1, 2),
+                        -14, 14, 0.04D, 1));
 
         register(context, LUSH_MOSS_KEY, Feature.FLOWER,
                 ConfiguredFeatures.createRandomPatchFeatureConfig(48, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK,
@@ -173,7 +172,7 @@ public class ModConfiguredFeatures {
                 new TreeFeatureConfig.Builder(BlockStateProvider.of(ModBlocks.REDWOOD_LOG),
                         new GiantTrunkPlacer(10, 2, 7), BlockStateProvider.of(ModBlocks.REDWOOD_LEAVES),
                         new MegaPineFoliagePlacer(ConstantIntProvider.create(0), ConstantIntProvider.create(0), UniformIntProvider.create(3, 7)),
-                        new TwoLayersFeatureSize(0, 0,1)).build());
+                        new TwoLayersFeatureSize(0, 0, 1)).build());
 
         register(context, SMALL_REDWOOD_KEY, Feature.TREE,
                 new TreeFeatureConfig.Builder(BlockStateProvider.of(ModBlocks.REDWOOD_LOG),

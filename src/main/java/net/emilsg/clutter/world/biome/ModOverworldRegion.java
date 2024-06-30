@@ -23,9 +23,11 @@ public class ModOverworldRegion extends Region {
     @Override
     public void addBiomes(Registry<Biome> registry, Consumer<Pair<MultiNoiseUtil.NoiseHypercube, RegistryKey<Biome>>> mapper) {
         this.addModifiedVanillaOverworldBiomes(mapper, builder -> {
-            if(ClutterConfig.getInstance().getBoolean(ClutterConfig.GENERATE_BIOMES)) {
-                if(ClutterConfig.getInstance().getBoolean(ClutterConfig.GENERATE_REDWOOD_FORESTS)) makeRedwoodForest(builder);
-                if(ClutterConfig.getInstance().getBoolean(ClutterConfig.GENERATE_LUPINE_FIELDS)) makeLupineFields(builder);
+            if (ClutterConfig.getInstance().getBoolean(ClutterConfig.GENERATE_BIOMES)) {
+                if (ClutterConfig.getInstance().getBoolean(ClutterConfig.GENERATE_REDWOOD_FORESTS))
+                    makeRedwoodForest(builder);
+                if (ClutterConfig.getInstance().getBoolean(ClutterConfig.GENERATE_LUPINE_FIELDS))
+                    makeLupineFields(builder);
             }
         });
     }

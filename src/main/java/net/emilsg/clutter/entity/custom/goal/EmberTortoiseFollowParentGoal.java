@@ -14,14 +14,15 @@ public class EmberTortoiseFollowParentGoal extends FollowParentGoal {
 
     @Override
     public boolean canStart() {
-        if(animalEntity instanceof EmberTortoiseEntity emberTortoise) return !emberTortoise.isShielding() && super.canStart();
+        if (animalEntity instanceof EmberTortoiseEntity emberTortoise)
+            return !emberTortoise.isShielding() && super.canStart();
         else return super.canStart();
     }
 
     @Override
     public void tick() {
         super.tick();
-        if(animalEntity instanceof EmberTortoiseEntity emberTortoise) {
+        if (animalEntity instanceof EmberTortoiseEntity emberTortoise) {
             if (emberTortoise.isShielding()) stop();
         }
     }

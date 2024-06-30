@@ -30,7 +30,7 @@ public class NecrosisEnchantment extends Enchantment {
 
     @Override
     public void onTargetDamaged(LivingEntity user, Entity target, int level) {
-        if(!(user.getWorld() instanceof ServerWorld serverWorld)) return;
+        if (!(user.getWorld() instanceof ServerWorld serverWorld)) return;
 
         long currentTime = System.currentTimeMillis();
         if (currentTime - lastCallTime < 100) {
@@ -38,25 +38,26 @@ public class NecrosisEnchantment extends Enchantment {
         }
         lastCallTime = currentTime;
 
-        if(!(target instanceof LivingEntity livingTarget) || user.getWorld().isClient() || target.getWorld().isClient()) return;
+        if (!(target instanceof LivingEntity livingTarget) || user.getWorld().isClient() || target.getWorld().isClient())
+            return;
 
         int necrosisLevel = EnchantmentHelper.getLevel(Registries.ENCHANTMENT.get(new Identifier(Clutter.MOD_ID, "necrosis")), user.getEquippedStack(EquipmentSlot.MAINHAND));
 
         boolean targetIsAlive = livingTarget.isAlive();
 
-        if(!targetIsAlive && Math.random() < (0.25 * necrosisLevel)) {
+        if (!targetIsAlive && Math.random() < (0.25 * necrosisLevel)) {
             LivingEntity zombie = EntityType.ZOMBIE.create(serverWorld);
 
-            if(target instanceof PiglinEntity piglin) {
+            if (target instanceof PiglinEntity piglin) {
                 zombie = piglin.convertTo(EntityType.ZOMBIFIED_PIGLIN, true);
-            } else if(target instanceof HoglinEntity hoglin) {
+            } else if (target instanceof HoglinEntity hoglin) {
                 zombie = hoglin.convertTo(EntityType.ZOGLIN, true);
-            } else if(target instanceof VillagerEntity villager) {
+            } else if (target instanceof VillagerEntity villager) {
                 zombie = villager.convertTo(EntityType.ZOMBIE_VILLAGER, true);
             } else if (target instanceof PlayerEntity player) {
                 zombie = convertToZombie(player, true, serverWorld);
             }
-            if(zombie == null) return;
+            if (zombie == null) return;
 
             serverWorld.spawnEntity(zombie);
         }

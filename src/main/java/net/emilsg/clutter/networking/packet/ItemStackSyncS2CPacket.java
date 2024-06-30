@@ -20,9 +20,12 @@ public class ItemStackSyncS2CPacket {
         BlockPos pos = buf.readBlockPos();
 
         assert client.world != null;
-        if(client.world.getBlockEntity(pos) instanceof ShelfInventoryBlockEntity shelfBlockEntity) shelfBlockEntity.setInventory(list);
-        if(client.world.getBlockEntity(pos) instanceof CardboardBoxInventoryBlockEntity cardboardBoxBlockEntity) cardboardBoxBlockEntity.setInventory(list);
-        if(client.world.getBlockEntity(pos) instanceof PlateInventoryBlockEntity plateBlockEntity) plateBlockEntity.setInventory(list);
+        if (client.world.getBlockEntity(pos) instanceof ShelfInventoryBlockEntity shelfBlockEntity)
+            shelfBlockEntity.setInventory(list);
+        if (client.world.getBlockEntity(pos) instanceof CardboardBoxInventoryBlockEntity cardboardBoxBlockEntity)
+            cardboardBoxBlockEntity.setInventory(list);
+        if (client.world.getBlockEntity(pos) instanceof PlateInventoryBlockEntity plateBlockEntity)
+            plateBlockEntity.setInventory(list);
 
     }
 }

@@ -24,7 +24,7 @@ public class ClutterREIClientPlugin implements REIClientPlugin {
 
     @Override
     public void registerScreens(ScreenRegistry registry) {
-        registry.registerClickArea(screen -> new Rectangle(((screen.width - 176) / 2) + 78, ((screen.height - 166) / 2) + 31,  25, 18),
+        registry.registerClickArea(screen -> new Rectangle(((screen.width - 176) / 2) + 78, ((screen.height - 166) / 2) + 31, 25, 18),
                 BrickKilnScreen.class,
                 KilningCategory.KILNING);
     }

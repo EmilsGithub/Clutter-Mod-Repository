@@ -25,6 +25,33 @@ import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 
 public class CupboardInventoryBlockEntity extends LootableContainerBlockEntity {
+    private final ViewerCountManager stateManager = new ViewerCountManager() {
+
+        @Override
+        protected void onContainerOpen(World world, BlockPos pos, BlockState state) {
+            CupboardInventoryBlockEntity.this.playSound(state, SoundEvents.BLOCK_CHEST_OPEN);
+            CupboardInventoryBlockEntity.this.setOpen(state, true);
+        }
+
+        @Override
+        protected void onContainerClose(World world, BlockPos pos, BlockState state) {
+            CupboardInventoryBlockEntity.this.playSound(state, SoundEvents.BLOCK_CHEST_CLOSE);
+            CupboardInventoryBlockEntity.this.setOpen(state, false);
+        }
+
+        @Override
+        protected void onViewerCountUpdate(World world, BlockPos pos, BlockState state, int oldViewerCount, int newViewerCount) {
+        }
+
+        @Override
+        protected boolean isPlayerViewing(PlayerEntity player) {
+            if (player.currentScreenHandler instanceof GenericContainerScreenHandler) {
+                Inventory inventory = ((GenericContainerScreenHandler) player.currentScreenHandler).getInventory();
+                return inventory == CupboardInventoryBlockEntity.this;
+            }
+            return false;
+        }
+    };
     private DefaultedList<ItemStack> inventory = DefaultedList.ofSize(27, ItemStack.EMPTY);
 
     public CupboardInventoryBlockEntity(BlockPos blockPos, BlockState blockState) {
@@ -45,7 +72,6 @@ public class CupboardInventoryBlockEntity extends LootableContainerBlockEntity {
         }
     }
 
-
     public void tick() {
         if (!this.removed) {
             this.stateManager.updateViewerCount(this.getWorld(), this.getPos(), this.getCachedState());
@@ -53,7 +79,7 @@ public class CupboardInventoryBlockEntity extends LootableContainerBlockEntity {
     }
 
     void setOpen(BlockState state, boolean open) {
-        this.world.setBlockState(this.getPos(), (BlockState)state.with(CupboardBlock.OPEN, open), Block.NOTIFY_ALL);
+        this.world.setBlockState(this.getPos(), state.with(CupboardBlock.OPEN, open), Block.NOTIFY_ALL);
     }
 
     @Override
@@ -81,34 +107,6 @@ public class CupboardInventoryBlockEntity extends LootableContainerBlockEntity {
         return 27;
     }
 
-    private final ViewerCountManager stateManager = new ViewerCountManager(){
-
-        @Override
-        protected void onContainerOpen(World world, BlockPos pos, BlockState state) {
-            CupboardInventoryBlockEntity.this.playSound(state, SoundEvents.BLOCK_CHEST_OPEN);
-            CupboardInventoryBlockEntity.this.setOpen(state, true);
-        }
-
-        @Override
-        protected void onContainerClose(World world, BlockPos pos, BlockState state) {
-            CupboardInventoryBlockEntity.this.playSound(state, SoundEvents.BLOCK_CHEST_CLOSE);
-            CupboardInventoryBlockEntity.this.setOpen(state, false);
-        }
-
-        @Override
-        protected void onViewerCountUpdate(World world, BlockPos pos, BlockState state, int oldViewerCount, int newViewerCount) {
-        }
-
-        @Override
-        protected boolean isPlayerViewing(PlayerEntity player) {
-            if (player.currentScreenHandler instanceof GenericContainerScreenHandler) {
-                Inventory inventory = ((GenericContainerScreenHandler)player.currentScreenHandler).getInventory();
-                return inventory == CupboardInventoryBlockEntity.this;
-            }
-            return false;
-        }
-    };
-
     @Override
     protected void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
@@ -128,9 +126,9 @@ public class CupboardInventoryBlockEntity extends LootableContainerBlockEntity {
 
     void playSound(BlockState state, SoundEvent soundEvent) {
         Vec3i vec3i = state.get(CupboardBlock.FACING).getVector();
-        double d = (double)this.pos.getX() + 0.5 + (double)vec3i.getX() / 2.0;
-        double e = (double)this.pos.getY() + 0.5 + (double)vec3i.getY() / 2.0;
-        double f = (double)this.pos.getZ() + 0.5 + (double)vec3i.getZ() / 2.0;
+        double d = (double) this.pos.getX() + 0.5 + (double) vec3i.getX() / 2.0;
+        double e = (double) this.pos.getY() + 0.5 + (double) vec3i.getY() / 2.0;
+        double f = (double) this.pos.getZ() + 0.5 + (double) vec3i.getZ() / 2.0;
         this.world.playSound(null, d, e, f, soundEvent, SoundCategory.BLOCKS, 0.5f, this.world.random.nextFloat() * 0.1f + 0.7f);
     }
 }

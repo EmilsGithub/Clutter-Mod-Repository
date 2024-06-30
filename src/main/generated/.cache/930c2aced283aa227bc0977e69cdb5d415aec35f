@@ -1,4 +1,4 @@
-// 1.20.1	2024-06-05T21:15:24.5434006	Clutter/Tags for minecraft:item
+// 1.20.1	2024-06-10T19:44:21.3761159	Clutter/Tags for minecraft:item
 27c633842914d7c1c14889f04be544b4c634cb22 data\clutter\tags\items\plushies.json
 337a49036caf8f3e98268c3f3bc58315bf4bc30f data\c\tags\items\copper_nuggets.json
 f9a00c407878604596cade52dfd15c50f9da9092 data\c\tags\items\ores.json
@@ -9,7 +9,7 @@ f2c6fde89a1c73b85509f604946e00fcd5ac4e78 data\c\tags\items\silver_nuggets.json
 fe28b10a91e8722f59843071a5a221d804b91c5d data\c\tags\items\raw_silvers.json
 5d10fe660e3f7328960b7874f09c8964e525db5a data\clutter\tags\items\elytron.json
 bd0f3317bd601b6ee86f7bda714e07470abf321d data\clutter\tags\items\bottled_butterflies.json
-7147e73a8da5dd08489c7b3a5f5c8ea03ac68e7a data\minecraft\tags\items\beacon_payment_items.json
+161f41e25050a3cb9e313af829adaab2e2714103 data\minecraft\tags\items\beacon_payment_items.json
 e49c58904d756946c53d072ee697f945f3af32a8 data\trinkets\tags\items\head\hat.json
 26efbe8b18883130c2e31589fd51f0f85196a6e1 data\clutter\tags\items\fruits_and_berries.json
 bd4f42f4bbf16603f22e6b9933c76db711fb3592 data\clutter\tags\items\seeds.json

@@ -27,13 +27,27 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.ToIntFunction;
 
-public  class WaterloggableLitBlock extends Block implements Waterloggable {
+public class WaterloggableLitBlock extends Block implements Waterloggable {
     public static final BooleanProperty LIT = Properties.LIT;
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 
     public WaterloggableLitBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.getDefaultState().with(WATERLOGGED, false).with(LIT, false));
+    }
+
+    public static ToIntFunction<BlockState> createLightLevelFromLitBlockState(int litLevel) {
+        return state -> state.get(LIT) ? litLevel : 0;
+    }
+
+    public static void extinguish(@Nullable PlayerEntity player, BlockState state, WorldAccess world, BlockPos pos) {
+        WaterloggableLitBlock.setLit(world, state, pos, false, player);
+        world.playSound(null, pos, SoundEvents.BLOCK_CANDLE_EXTINGUISH, SoundCategory.BLOCKS, 1.0f, 1.0f);
+    }
+
+    public static void setLit(WorldAccess world, BlockState state, BlockPos pos, boolean lit, @Nullable PlayerEntity player) {
+        world.setBlockState(pos, state.with(LIT, lit), Block.NOTIFY_ALL | Block.REDRAW_ON_MAIN_THREAD);
+        world.emitGameEvent(player, GameEvent.BLOCK_CHANGE, pos);
     }
 
     public void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
@@ -43,7 +57,7 @@ public  class WaterloggableLitBlock extends Block implements Waterloggable {
     }
 
     protected boolean isNotLit(BlockState state) {
-        return !(Boolean)state.get(LIT);
+        return !(Boolean) state.get(LIT);
     }
 
     @Override
@@ -52,11 +66,7 @@ public  class WaterloggableLitBlock extends Block implements Waterloggable {
         BlockPos blockPos;
         World worldAccess = ctx.getWorld();
         boolean bl = worldAccess.getFluidState(blockPos = ctx.getBlockPos()).getFluid() == Fluids.WATER;
-        return (BlockState)this.getDefaultState().with(WATERLOGGED, bl);
-    }
-
-    public static ToIntFunction<BlockState> createLightLevelFromLitBlockState(int litLevel) {
-        return state -> state.get(LIT) ? litLevel : 0;
+        return this.getDefaultState().with(WATERLOGGED, bl);
     }
 
     @Override
@@ -72,12 +82,11 @@ public  class WaterloggableLitBlock extends Block implements Waterloggable {
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
-
     public boolean tryFillWithFluid(WorldAccess world, BlockPos pos, BlockState state, FluidState fluidState) {
-        if (!(Boolean)state.get(WATERLOGGED) && fluidState.getFluid() == Fluids.WATER) {
-            BlockState blockState = (BlockState)state.with(WATERLOGGED, true);
-            if ((Boolean)state.get(LIT)) {
-                extinguish((PlayerEntity)null, blockState, world, pos);
+        if (!(Boolean) state.get(WATERLOGGED) && fluidState.getFluid() == Fluids.WATER) {
+            BlockState blockState = state.with(WATERLOGGED, true);
+            if (state.get(LIT)) {
+                extinguish(null, blockState, world, pos);
             } else {
                 world.setBlockState(pos, blockState, 3);
             }
@@ -101,11 +110,12 @@ public  class WaterloggableLitBlock extends Block implements Waterloggable {
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         ItemStack stackInHand = player.getStackInHand(hand);
 
-        if(player.getAbilities().allowModifyWorld && !state.get(WATERLOGGED)) {
-            if(stackInHand.isOf(Items.FLINT_AND_STEEL) && !state.get(LIT)) {
+        if (player.getAbilities().allowModifyWorld && !state.get(WATERLOGGED)) {
+            if (stackInHand.isOf(Items.FLINT_AND_STEEL) && !state.get(LIT)) {
                 world.playSound(null, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0f, world.getRandom().nextFloat() * 0.4F + 0.8F);
                 setLit(world, state, pos, true, player);
-                if (!player.getAbilities().creativeMode) player.getStackInHand(hand).damage(1, player, playerEntity -> playerEntity.sendToolBreakStatus(hand));
+                if (!player.getAbilities().creativeMode)
+                    player.getStackInHand(hand).damage(1, player, playerEntity -> playerEntity.sendToolBreakStatus(hand));
                 return ActionResult.success(world.isClient);
             } else if (stackInHand.isOf(Items.FIRE_CHARGE) && !state.get(LIT)) {
                 world.playSound(null, pos, SoundEvents.ITEM_FIRECHARGE_USE, SoundCategory.BLOCKS, 1.0F, (world.getRandom().nextFloat() - world.getRandom().nextFloat()) * 0.2F + 1.0F);
@@ -119,15 +129,5 @@ public  class WaterloggableLitBlock extends Block implements Waterloggable {
             return super.onUse(state, world, pos, player, hand, hit);
         }
         return super.onUse(state, world, pos, player, hand, hit);
-    }
-
-    public static void extinguish(@Nullable PlayerEntity player, BlockState state, WorldAccess world, BlockPos pos) {
-        WaterloggableLitBlock.setLit(world, state, pos, false, player);
-        world.playSound(null, pos, SoundEvents.BLOCK_CANDLE_EXTINGUISH, SoundCategory.BLOCKS, 1.0f, 1.0f);
-    }
-
-    public static void setLit(WorldAccess world, BlockState state, BlockPos pos, boolean lit, @Nullable PlayerEntity player) {
-        world.setBlockState(pos, state.with(LIT, lit), Block.NOTIFY_ALL | Block.REDRAW_ON_MAIN_THREAD);
-        world.emitGameEvent(player, GameEvent.BLOCK_CHANGE, pos);
     }
 }

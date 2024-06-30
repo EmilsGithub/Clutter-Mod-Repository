@@ -1,6 +1,7 @@
 package net.emilsg.clutter.entity.client.model;
 
 import net.emilsg.clutter.entity.client.animation.CapybaraAnimations;
+import net.emilsg.clutter.entity.client.model.parent.TameableClutterModel;
 import net.emilsg.clutter.entity.custom.CapybaraEntity;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
@@ -10,9 +11,10 @@ public class CapybaraModel<T extends CapybaraEntity> extends TameableClutterMode
     private final ModelPart all;
     private final ModelPart torso;
     private final ModelPart head;
-
+    private final ModelPart root;
 
     public CapybaraModel(ModelPart root) {
+        this.root = root;
         this.all = root.getChild("all");
         this.torso = all.getChild("torso");
         this.head = torso.getChild("head");
@@ -50,15 +52,14 @@ public class CapybaraModel<T extends CapybaraEntity> extends TameableClutterMode
     public void setAngles(CapybaraEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.getPart().traverse().forEach(ModelPart::resetTransform);
 
-        if(!entity.isSleeping() && !entity.isForceSleeping()) this.setHeadAngles(entity, netHeadYaw, headPitch, ageInTicks);
+        if (!entity.isSleeping() && !entity.isForceSleeping())
+            this.setHeadAngles(entity, netHeadYaw, headPitch, ageInTicks);
 
-        if(!entity.isMoving() && (entity.isForceSleeping()) || entity.isSleeping()) {
+        if (!entity.isMoving() && (entity.isForceSleeping()) || entity.isSleeping()) {
             this.updateAnimation(entity.sleepingAnimationState, entity.sleeperType() == 0 ? CapybaraAnimations.CAPYBARA_LAY_DOWN : entity.sleeperType() == 1 ? CapybaraAnimations.CAPYBARA_LAY_DOWN_2 : CapybaraAnimations.CAPYBARA_LAY_DOWN_3, ageInTicks, 1f);
         } else {
             this.animateMovement(CapybaraAnimations.CAPYBARA_WALK, limbSwing, limbSwingAmount, 1.5f, 2f);
         }
-        ModelTransform pivotAdjustment = ModelTransform.pivot(0F, 19.5F, 0F);
-        this.getPart().setTransform(pivotAdjustment);
 
         if (entity.getRandom().nextInt(100) == 0) {
             this.updateAnimation(entity.earTwitchAnimationState, entity.getRandom().nextBoolean() ? CapybaraAnimations.CAPYBARA_EAR_TWITCH_ONE : CapybaraAnimations.CAPYBARA_EAR_TWITCH_TWO, ageInTicks, 1f);
@@ -72,7 +73,7 @@ public class CapybaraModel<T extends CapybaraEntity> extends TameableClutterMode
             this.head.scale(createVec3f(babyScale));
             matrices.push();
             matrices.scale(babyScale, babyScale, babyScale);
-            matrices.translate(0.0D, 0D, 0D);
+            matrices.translate(0.0D, 1.5D, 0D);
             this.getPart().render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
             matrices.pop();
             this.head.scale(createVec3f(0.9f));
@@ -85,7 +86,7 @@ public class CapybaraModel<T extends CapybaraEntity> extends TameableClutterMode
 
     @Override
     public ModelPart getPart() {
-        return all;
+        return root;
     }
 
     @Override

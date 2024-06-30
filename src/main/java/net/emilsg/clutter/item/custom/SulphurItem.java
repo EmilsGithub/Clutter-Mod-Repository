@@ -1,8 +1,6 @@
 package net.emilsg.clutter.item.custom;
 
-import com.google.common.collect.BiMap;
 import net.emilsg.clutter.block.ModBlocks;
-import net.emilsg.clutter.item.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Oxidizable;
@@ -25,8 +23,23 @@ public class SulphurItem extends Item {
 
     private static final Map<Block, Block> BLOCK_SWITCH_MAP = new HashMap<>();
 
+    static {
+        BLOCK_SWITCH_MAP.put(ModBlocks.ONYX_BLOCK, ModBlocks.BLACK_ONYX_BLOCK);
+        BLOCK_SWITCH_MAP.put(ModBlocks.ONYX_SLAB, ModBlocks.BLACK_ONYX_SLAB);
+        BLOCK_SWITCH_MAP.put(ModBlocks.ONYX_STAIRS, ModBlocks.BLACK_ONYX_STAIRS);
+        BLOCK_SWITCH_MAP.put(ModBlocks.ONYX_WALL, ModBlocks.BLACK_ONYX_WALL);
+        BLOCK_SWITCH_MAP.put(ModBlocks.POLISHED_ONYX, ModBlocks.POLISHED_BLACK_ONYX);
+        BLOCK_SWITCH_MAP.put(ModBlocks.POLISHED_ONYX_SLAB, ModBlocks.POLISHED_BLACK_ONYX_SLAB);
+        BLOCK_SWITCH_MAP.put(ModBlocks.POLISHED_ONYX_STAIRS, ModBlocks.POLISHED_BLACK_ONYX_STAIRS);
+        BLOCK_SWITCH_MAP.put(ModBlocks.POLISHED_ONYX_WALL, ModBlocks.POLISHED_BLACK_ONYX_WALL);
+    }
+
     public SulphurItem(Settings settings) {
         super(settings);
+    }
+
+    static Optional<Block> getBlockResult(Block block) {
+        return Optional.ofNullable(BLOCK_SWITCH_MAP.get(block));
     }
 
     @Override
@@ -45,7 +58,7 @@ public class SulphurItem extends Item {
                 world.playSound(null, pos, SoundEvents.ITEM_DYE_USE, SoundCategory.BLOCKS, 1.0f, 1.1f);
                 world.playSound(null, pos, SoundEvents.ITEM_AXE_SCRAPE, SoundCategory.BLOCKS, 1.0f, 1.25f);
                 for (int i = 0; i < 32; i++) {
-                    world.addParticle(ParticleTypes.SCRAPE, pos.getX() + 0.5f + random.nextDouble() / 1.5 * (double)(random.nextBoolean() ? 1 : -1), pos.getY() + 0.5f + random.nextDouble() / 1.5 * (double)(random.nextBoolean() ? 1 : -1), pos.getZ() + 0.5f + random.nextDouble() / 1.5 * (double)(random.nextBoolean() ? 1 : -1), random.nextDouble() / 2.0 * (double)(random.nextBoolean() ? 1 : -1), random.nextDouble() / 2.0 * (double)(random.nextBoolean() ? 1 : -1), random.nextDouble() / 2.0 * (double)(random.nextBoolean() ? 1 : -1));
+                    world.addParticle(ParticleTypes.SCRAPE, pos.getX() + 0.5f + random.nextDouble() / 1.5 * (double) (random.nextBoolean() ? 1 : -1), pos.getY() + 0.5f + random.nextDouble() / 1.5 * (double) (random.nextBoolean() ? 1 : -1), pos.getZ() + 0.5f + random.nextDouble() / 1.5 * (double) (random.nextBoolean() ? 1 : -1), random.nextDouble() / 2.0 * (double) (random.nextBoolean() ? 1 : -1), random.nextDouble() / 2.0 * (double) (random.nextBoolean() ? 1 : -1), random.nextDouble() / 2.0 * (double) (random.nextBoolean() ? 1 : -1));
                 }
                 stackInHand.decrement(1);
                 return ActionResult.SUCCESS;
@@ -55,7 +68,7 @@ public class SulphurItem extends Item {
             world.playSound(null, pos, SoundEvents.ITEM_DYE_USE, SoundCategory.BLOCKS, 1.0f, 1.1f);
             world.playSound(null, pos, SoundEvents.BLOCK_CALCITE_BREAK, SoundCategory.BLOCKS, 1.0f, 1.25f);
             for (int i = 0; i < 32; i++) {
-                world.addParticle(ParticleTypes.SQUID_INK, pos.getX() + 0.5f + random.nextDouble() / 1.5 * (double)(random.nextBoolean() ? 1 : -1), pos.getY() + 0.5f + random.nextDouble() / 1.5 * (double)(random.nextBoolean() ? 1 : -1), pos.getZ() + 0.5f + random.nextDouble() / 1.5 * (double)(random.nextBoolean() ? 1 : -1), random.nextDouble() / 16.0 * (double)(random.nextBoolean() ? 1 : -1), random.nextDouble() / 16.0 * (double)(random.nextBoolean() ? 1 : -1), random.nextDouble() / 16.0 * (double)(random.nextBoolean() ? 1 : -1));
+                world.addParticle(ParticleTypes.SQUID_INK, pos.getX() + 0.5f + random.nextDouble() / 1.5 * (double) (random.nextBoolean() ? 1 : -1), pos.getY() + 0.5f + random.nextDouble() / 1.5 * (double) (random.nextBoolean() ? 1 : -1), pos.getZ() + 0.5f + random.nextDouble() / 1.5 * (double) (random.nextBoolean() ? 1 : -1), random.nextDouble() / 16.0 * (double) (random.nextBoolean() ? 1 : -1), random.nextDouble() / 16.0 * (double) (random.nextBoolean() ? 1 : -1), random.nextDouble() / 16.0 * (double) (random.nextBoolean() ? 1 : -1));
             }
             stackInHand.decrement(1);
             return ActionResult.SUCCESS;
@@ -64,22 +77,7 @@ public class SulphurItem extends Item {
         return ActionResult.PASS;
     }
 
-
-    static Optional<Block> getBlockResult(Block block) {
-        return Optional.ofNullable(BLOCK_SWITCH_MAP.get(block));
-    }
     private Optional<BlockState> getPolishingResult(BlockState state) {
         return getBlockResult(state.getBlock()).map((block) -> block.getStateWithProperties(state));
-    }
-
-    static {
-        BLOCK_SWITCH_MAP.put(ModBlocks.ONYX_BLOCK, ModBlocks.BLACK_ONYX_BLOCK);
-        BLOCK_SWITCH_MAP.put(ModBlocks.ONYX_SLAB, ModBlocks.BLACK_ONYX_SLAB);
-        BLOCK_SWITCH_MAP.put(ModBlocks.ONYX_STAIRS, ModBlocks.BLACK_ONYX_STAIRS);
-        BLOCK_SWITCH_MAP.put(ModBlocks.ONYX_WALL, ModBlocks.BLACK_ONYX_WALL);
-        BLOCK_SWITCH_MAP.put(ModBlocks.POLISHED_ONYX, ModBlocks.POLISHED_BLACK_ONYX);
-        BLOCK_SWITCH_MAP.put(ModBlocks.POLISHED_ONYX_SLAB, ModBlocks.POLISHED_BLACK_ONYX_SLAB);
-        BLOCK_SWITCH_MAP.put(ModBlocks.POLISHED_ONYX_STAIRS, ModBlocks.POLISHED_BLACK_ONYX_STAIRS);
-        BLOCK_SWITCH_MAP.put(ModBlocks.POLISHED_ONYX_WALL, ModBlocks.POLISHED_BLACK_ONYX_WALL);
     }
 }

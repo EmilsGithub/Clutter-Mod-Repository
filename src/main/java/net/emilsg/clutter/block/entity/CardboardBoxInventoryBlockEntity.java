@@ -41,8 +41,29 @@ import org.jetbrains.annotations.Nullable;
 import java.util.stream.IntStream;
 
 public class CardboardBoxInventoryBlockEntity extends LootableContainerBlockEntity implements SidedInventory {
-    private DefaultedList<ItemStack> inventory = DefaultedList.ofSize(9, ItemStack.EMPTY);
     private static final int[] AVAILABLE_SLOTS = IntStream.range(0, 9).toArray();
+    private final ViewerCountManager stateManager = new ViewerCountManager() {
+
+        protected void onContainerOpen(World world, BlockPos pos, BlockState state) {
+
+        }
+
+        protected void onContainerClose(World world, BlockPos pos, BlockState state) {
+
+        }
+
+        protected void onViewerCountUpdate(World world, BlockPos pos, BlockState state, int oldViewerCount, int newViewerCount) {
+        }
+
+        protected boolean isPlayerViewing(PlayerEntity player) {
+            if (player.currentScreenHandler instanceof GenericContainerScreenHandler) {
+                Inventory inventory = ((GenericContainerScreenHandler) player.currentScreenHandler).getInventory();
+                return inventory == CardboardBoxInventoryBlockEntity.this;
+            }
+            return false;
+        }
+    };
+    private DefaultedList<ItemStack> inventory = DefaultedList.ofSize(9, ItemStack.EMPTY);
 
     public CardboardBoxInventoryBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.CARDBOARD_BOX, blockPos, blockState);
@@ -51,7 +72,7 @@ public class CardboardBoxInventoryBlockEntity extends LootableContainerBlockEnti
     public void onOpen(PlayerEntity player) {
         if (!this.removed && !player.isSpectator()) {
             this.stateManager.openContainer(player, this.getWorld(), this.getPos(), this.getCachedState());
-            if(!this.getCachedState().get(Properties.OPEN)) {
+            if (!this.getCachedState().get(Properties.OPEN)) {
                 this.world.setBlockState(this.getPos(), this.getCachedState().with(Properties.OPEN, true));
             }
             CardboardBoxInventoryBlockEntity.this.playSound(SoundEvents.BLOCK_WOOL_HIT);
@@ -61,7 +82,7 @@ public class CardboardBoxInventoryBlockEntity extends LootableContainerBlockEnti
     public void onClose(PlayerEntity player) {
         if (!this.removed && !player.isSpectator()) {
             this.stateManager.closeContainer(player, this.getWorld(), this.getPos(), this.getCachedState());
-            if(this.getCachedState().get(Properties.OPEN)) {
+            if (this.getCachedState().get(Properties.OPEN)) {
                 this.world.setBlockState(this.getPos(), this.getCachedState().with(Properties.OPEN, false));
             }
             CardboardBoxInventoryBlockEntity.this.playSound(SoundEvents.BLOCK_WOOL_FALL);
@@ -86,28 +107,6 @@ public class CardboardBoxInventoryBlockEntity extends LootableContainerBlockEnti
         return 9;
     }
 
-    private final ViewerCountManager stateManager = new ViewerCountManager(){
-
-        protected void onContainerOpen(World world, BlockPos pos, BlockState state) {
-
-        }
-
-        protected void onContainerClose(World world, BlockPos pos, BlockState state) {
-
-        }
-
-        protected void onViewerCountUpdate(World world, BlockPos pos, BlockState state, int oldViewerCount, int newViewerCount) {
-        }
-
-        protected boolean isPlayerViewing(PlayerEntity player) {
-            if (player.currentScreenHandler instanceof GenericContainerScreenHandler) {
-                Inventory inventory = ((GenericContainerScreenHandler)player.currentScreenHandler).getInventory();
-                return inventory == CardboardBoxInventoryBlockEntity.this;
-            }
-            return false;
-        }
-    };
-
     protected void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
         if (!this.serializeLootTable(nbt)) {
@@ -124,9 +123,9 @@ public class CardboardBoxInventoryBlockEntity extends LootableContainerBlockEnti
     }
 
     void playSound(SoundEvent soundEvent) {
-        double d = (double)this.pos.getX() + 0.5;
-        double e = (double)this.pos.getY() + 0.5;
-        double f = (double)this.pos.getZ() + 0.5;
+        double d = (double) this.pos.getX() + 0.5;
+        double e = (double) this.pos.getY() + 0.5;
+        double f = (double) this.pos.getZ() + 0.5;
         this.world.playSound(null, d, e, f, soundEvent, SoundCategory.BLOCKS, 0.5f, this.world.random.nextFloat() * 0.1f + 1f);
     }
 
@@ -160,10 +159,10 @@ public class CardboardBoxInventoryBlockEntity extends LootableContainerBlockEnti
     @Override
     public void markDirty() {
         assert world != null;
-        if(!world.isClient) {
+        if (!world.isClient) {
             PacketByteBuf data = PacketByteBufs.create();
             data.writeInt(inventory.size());
-            for(int i = 0; i < inventory.size(); i++) {
+            for (int i = 0; i < inventory.size(); i++) {
                 data.writeItemStack(inventory.get(i));
             }
             data.writeBlockPos(getPos());
@@ -176,7 +175,7 @@ public class CardboardBoxInventoryBlockEntity extends LootableContainerBlockEnti
     }
 
     public void setInventory(DefaultedList<ItemStack> inventory) {
-        for(int i = 0; i < inventory.size(); i++) {
+        for (int i = 0; i < inventory.size(); i++) {
             this.inventory.set(i, inventory.get(i));
         }
     }

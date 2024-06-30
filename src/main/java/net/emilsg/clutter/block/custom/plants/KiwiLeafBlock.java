@@ -61,7 +61,7 @@ public class KiwiLeafBlock extends LeavesBlock implements Fertilizable {
     }
 
     protected boolean shouldDecay(BlockState state) {
-        return !(Boolean)state.get(PERSISTENT) && state.get(DISTANCE) == 7;
+        return !(Boolean) state.get(PERSISTENT) && state.get(DISTANCE) == 7;
     }
 
     @Override

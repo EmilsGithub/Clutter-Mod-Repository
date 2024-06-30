@@ -36,20 +36,19 @@ public abstract class ElytraFeatureRendererMixin {
 
     @ModifyVariable(method = "render(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;ILnet/minecraft/entity/LivingEntity;FFFFFF)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/math/MatrixStack;push()V"))
     private Identifier getButterflyElytraTexture(Identifier value, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, LivingEntity livingEntity) {
-
         ItemStack itemStack = getEquippedElytra(livingEntity);
         Item elytraItem = itemStack.getItem();
 
-        if(elytraItem == Items.ELYTRA || !(elytraItem instanceof ClutterElytraItem)) {
+        if (elytraItem == Items.ELYTRA || !(elytraItem instanceof ClutterElytraItem)) {
             return value;
         }
 
-        if(elytraItem instanceof ButterflyElytraItem butterflyElytraItem) {
+        if (elytraItem instanceof ButterflyElytraItem butterflyElytraItem) {
             String color = butterflyElytraItem.getColor();
             return new Identifier(Clutter.MOD_ID, "textures/entity/elytra/" + color + "_butterfly_elytra.png");
         }
 
-        if(elytraItem instanceof GemstoneElytraItem gemstoneElytraItem) {
+        if (elytraItem instanceof GemstoneElytraItem gemstoneElytraItem) {
             String type = gemstoneElytraItem.getType();
             return new Identifier(Clutter.MOD_ID, "textures/entity/elytra/" + type + "_gemstone_elytra.png");
         }
@@ -64,7 +63,7 @@ public abstract class ElytraFeatureRendererMixin {
 
         if (Clutter.IS_TRINKETS_LOADED && !(chestItemStack.getItem() instanceof ElytraItem)) {
             List<ItemStack> trinketsStack = TrinketsElytraUse.getEquippedElytra(livingEntity);
-            if(!trinketsStack.isEmpty()) {
+            if (!trinketsStack.isEmpty()) {
                 itemStack = trinketsStack.get(0);
             }
         }

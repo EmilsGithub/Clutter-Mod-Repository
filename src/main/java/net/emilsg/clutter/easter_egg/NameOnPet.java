@@ -1,4 +1,4 @@
-package net.emilsg.clutter.easter_eggs;
+package net.emilsg.clutter.easter_egg;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.FrogEntity;
@@ -31,13 +31,13 @@ public class NameOnPet {
             "Aatrox", "Xolaani"
     };
 
-    public static Entity giveName (Entity finalClosestEntity, PlayerEntity player) {
-        if(!(finalClosestEntity instanceof FrogEntity)) {
+    public static Entity giveName(Entity finalClosestEntity, PlayerEntity player) {
+        if (!(finalClosestEntity instanceof FrogEntity)) {
             player.sendMessage(Text.of("You pet " + finalClosestEntity.getName().getString() + "."));
         } else if (!Objects.equals(finalClosestEntity.getName().getString(), "Frog")) {
             player.sendMessage(Text.of("You pet " + finalClosestEntity.getName().getString() + "."));
         } else {
-            player.sendMessage(Text.of("You bequeathed " + finalClosestEntity.getName().getString() + " with the name: "  + getRandomFrogName(finalClosestEntity) + "."));
+            player.sendMessage(Text.of("You bequeathed " + finalClosestEntity.getName().getString() + " with the name: " + getRandomFrogName(finalClosestEntity) + "."));
             finalClosestEntity.setCustomName(Text.of(getRandomFrogName(finalClosestEntity)));
         }
 

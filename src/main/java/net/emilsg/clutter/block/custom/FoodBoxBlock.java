@@ -29,7 +29,7 @@ public class FoodBoxBlock extends HorizontalFacingBlock implements Waterloggable
 
     public FoodBoxBlock(Settings settings) {
         super(settings);
-        this.setDefaultState((BlockState)(this.stateManager.getDefaultState()).with(WATERLOGGED, false));
+        this.setDefaultState((this.stateManager.getDefaultState()).with(WATERLOGGED, false));
     }
 
     @Override
@@ -43,7 +43,7 @@ public class FoodBoxBlock extends HorizontalFacingBlock implements Waterloggable
         BlockPos blockPos;
         World worldAccess = ctx.getWorld();
         boolean bl = worldAccess.getFluidState(blockPos = ctx.getBlockPos()).getFluid() == Fluids.WATER;
-        return (BlockState)this.getDefaultState().with(WATERLOGGED, bl).with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
+        return this.getDefaultState().with(WATERLOGGED, bl).with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
     }
 
     @Override
@@ -58,7 +58,7 @@ public class FoodBoxBlock extends HorizontalFacingBlock implements Waterloggable
     public boolean tryFillWithFluid(WorldAccess world, BlockPos pos, BlockState state, FluidState fluidState) {
         if (!state.get(Properties.WATERLOGGED) && fluidState.getFluid() == Fluids.WATER) {
 
-            world.setBlockState(pos, (BlockState)((BlockState)state.with(WATERLOGGED, true)), Block.NOTIFY_ALL);
+            world.setBlockState(pos, state.with(WATERLOGGED, true), Block.NOTIFY_ALL);
             world.scheduleFluidTick(pos, fluidState.getFluid(), fluidState.getFluid().getTickRate(world));
             return true;
         }
@@ -78,4 +78,4 @@ public class FoodBoxBlock extends HorizontalFacingBlock implements Waterloggable
         return super.getFluidState(state);
     }
 
-    }
+}

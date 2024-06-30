@@ -1,7 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
 import net.minecraft.block.*;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.fluid.FluidState;
@@ -69,7 +68,32 @@ public class WallCandleBlock extends HorizontalFacingBlock implements Waterlogga
 
     public WallCandleBlock(Settings settings) {
         super(settings);
-        this.setDefaultState((BlockState)(this.stateManager.getDefaultState()).with(WATERLOGGED, false).with(LIT, false));
+        this.setDefaultState((this.stateManager.getDefaultState()).with(WATERLOGGED, false).with(LIT, false));
+    }
+
+    public static ToIntFunction<BlockState> createLightLevelFromLitBlockState(int litLevel) {
+        return state -> state.get(LIT) ? litLevel : 0;
+    }
+
+    private static void spawnCandleParticles(World world, Vec3d vec3d, Random random) {
+        float f = random.nextFloat();
+        if (f < 0.3f) {
+            world.addParticle(ParticleTypes.SMOKE, vec3d.x, vec3d.y, vec3d.z, 0.0, 0.0, 0.0);
+            if (f < 0.17f) {
+                world.playSound(vec3d.x + 0.5, vec3d.y + 0.5, vec3d.z + 0.5, SoundEvents.BLOCK_CANDLE_AMBIENT, SoundCategory.BLOCKS, 1.0f + random.nextFloat(), random.nextFloat() * 0.7f + 0.3f, false);
+            }
+        }
+        world.addParticle(ParticleTypes.SMALL_FLAME, vec3d.x, vec3d.y, vec3d.z, 0.0, 0.0, 0.0);
+    }
+
+    public static void extinguish(@Nullable PlayerEntity player, BlockState state, World world, BlockPos pos) {
+        WallCandleBlock.setLit(world, state, pos, false);
+        world.playSound(null, pos, SoundEvents.BLOCK_CANDLE_EXTINGUISH, SoundCategory.BLOCKS, 1.0f, 1.0f);
+        world.emitGameEvent(player, GameEvent.BLOCK_CHANGE, pos);
+    }
+
+    private static void setLit(WorldAccess world, BlockState state, BlockPos pos, boolean lit) {
+        world.setBlockState(pos, state.with(LIT, lit), Block.NOTIFY_ALL | Block.REDRAW_ON_MAIN_THREAD);
     }
 
     @Override
@@ -82,11 +106,6 @@ public class WallCandleBlock extends HorizontalFacingBlock implements Waterlogga
             case WEST -> WEST_SHAPE;
             default -> VoxelShapes.empty();
         };
-    }
-
-
-    public static ToIntFunction<BlockState> createLightLevelFromLitBlockState(int litLevel) {
-        return state -> state.get(LIT) ? litLevel : 0;
     }
 
     @Override
@@ -117,18 +136,6 @@ public class WallCandleBlock extends HorizontalFacingBlock implements Waterlogga
 
         Vec3d offset = new Vec3d(pos.getX(), pos.getY(), pos.getZ());
         WallCandleBlock.spawnCandleParticles(world, offset.add(candlePosition), random);
-    }
-
-
-    private static void spawnCandleParticles(World world, Vec3d vec3d, Random random) {
-        float f = random.nextFloat();
-        if (f < 0.3f) {
-            world.addParticle(ParticleTypes.SMOKE, vec3d.x, vec3d.y, vec3d.z, 0.0, 0.0, 0.0);
-            if (f < 0.17f) {
-                world.playSound(vec3d.x + 0.5, vec3d.y + 0.5, vec3d.z + 0.5, SoundEvents.BLOCK_CANDLE_AMBIENT, SoundCategory.BLOCKS, 1.0f + random.nextFloat(), random.nextFloat() * 0.7f + 0.3f, false);
-            }
-        }
-        world.addParticle(ParticleTypes.SMALL_FLAME, vec3d.x, vec3d.y, vec3d.z, 0.0, 0.0, 0.0);
     }
 
     private boolean canPlaceOn(BlockView world, BlockPos pos, Direction side) {
@@ -171,8 +178,9 @@ public class WallCandleBlock extends HorizontalFacingBlock implements Waterlogga
         BlockPos blockPos = ctx.getBlockPos();
         FluidState fluidState = ctx.getWorld().getFluidState(ctx.getBlockPos());
         for (Direction direction : ctx.getPlacementDirections()) {
-            if (!direction.getAxis().isHorizontal() || !(blockState = (BlockState)blockState.with(FACING, direction.getOpposite())).canPlaceAt(worldView, blockPos)) continue;
-            return (BlockState)blockState.with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
+            if (!direction.getAxis().isHorizontal() || !(blockState = blockState.with(FACING, direction.getOpposite())).canPlaceAt(worldView, blockPos))
+                continue;
+            return blockState.with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
         }
         return null;
     }
@@ -181,7 +189,7 @@ public class WallCandleBlock extends HorizontalFacingBlock implements Waterlogga
     public boolean tryFillWithFluid(WorldAccess world, BlockPos pos, BlockState state, FluidState fluidState) {
         if (!state.get(Properties.WATERLOGGED) && fluidState.getFluid() == Fluids.WATER) {
 
-            world.setBlockState(pos, (BlockState)((BlockState)state.with(WATERLOGGED, true)), Block.NOTIFY_ALL);
+            world.setBlockState(pos, state.with(WATERLOGGED, true), Block.NOTIFY_ALL);
             world.scheduleFluidTick(pos, fluidState.getFluid(), fluidState.getFluid().getTickRate(world));
             return true;
         }
@@ -201,7 +209,7 @@ public class WallCandleBlock extends HorizontalFacingBlock implements Waterlogga
         if (player.getAbilities().allowModifyWorld && player.getStackInHand(hand).isEmpty() && state.get(LIT)) {
             WallCandleBlock.extinguish(player, state, world, pos);
             return ActionResult.success(world.isClient);
-        } else if (player.getAbilities().allowModifyWorld && player.getStackInHand(hand).isOf(Items.FLINT_AND_STEEL) && !state.get(LIT)){
+        } else if (player.getAbilities().allowModifyWorld && player.getStackInHand(hand).isOf(Items.FLINT_AND_STEEL) && !state.get(LIT)) {
             WallCandleBlock.setLit(world, state, pos, true);
             if (!player.getAbilities().creativeMode) {
                 player.getStackInHand(hand).damage(1, player, playerEntity -> playerEntity.sendToolBreakStatus(hand));
@@ -220,17 +228,6 @@ public class WallCandleBlock extends HorizontalFacingBlock implements Waterlogga
         return ActionResult.PASS;
     }
 
-    public static void extinguish(@Nullable PlayerEntity player, BlockState state, World world, BlockPos pos) {
-        WallCandleBlock.setLit(world, state, pos, false);
-        world.playSound(null, pos, SoundEvents.BLOCK_CANDLE_EXTINGUISH, SoundCategory.BLOCKS, 1.0f, 1.0f);
-        world.emitGameEvent((Entity)player, GameEvent.BLOCK_CHANGE, pos);
-    }
-
-
-    private static void setLit(WorldAccess world, BlockState state, BlockPos pos, boolean lit) {
-        world.setBlockState(pos, (BlockState)state.with(LIT, lit), Block.NOTIFY_ALL | Block.REDRAW_ON_MAIN_THREAD);
-    }
-
     public void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
         if (!world.isClient && projectile.isOnFire() && this.isNotLit(state)) {
             setLit(world, state, hit.getBlockPos(), true);
@@ -238,6 +235,6 @@ public class WallCandleBlock extends HorizontalFacingBlock implements Waterlogga
     }
 
     protected boolean isNotLit(BlockState state) {
-        return !(Boolean)state.get(LIT);
+        return !(Boolean) state.get(LIT);
     }
 }

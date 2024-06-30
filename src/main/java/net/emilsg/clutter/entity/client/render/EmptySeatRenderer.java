@@ -1,4 +1,4 @@
-package net.emilsg.clutter.entity.client;
+package net.emilsg.clutter.entity.client.render;
 
 import net.emilsg.clutter.block.entity.SeatEntity;
 import net.minecraft.client.render.Frustum;
