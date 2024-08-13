@@ -10,7 +10,9 @@ public class ModConfigs {
     public static boolean DISABLE_GREED_LOOT_GENERATION;
     public static boolean GREED_WITH_LOOTING_AND_MENDING;
     public static float GREED_CHANCE_PER_LEVEL;
-    public static boolean COIN_DROPS_AND_LOOT_GEN;
+    public static boolean GLOBAL_COIN_LOOT;
+    public static boolean CHEST_COIN_LOOT;
+    public static boolean MOB_COIN_LOOT;
 
     public static float CHERRY_DROP_RATE;
 
@@ -51,7 +53,9 @@ public class ModConfigs {
 
         configs.addKeyValuePair(new Pair<>("cherry.drop.rate", 0.075f), "Drop rate for cherries. (Default, 7.5% chance for 1 to 2 Cherries to Drop, not affected by Fortune)");
 
-        configs.addKeyValuePair(new Pair<>("coin.drops.and.loot.gen", true), "Coin drops and generation.");
+        configs.addKeyValuePair(new Pair<>("global.coin.loot", true), "Disables or Enables coins from chest -and mob loot.");
+        configs.addKeyValuePair(new Pair<>("chest.coin.loot", true), "Coin generation in chests.");
+        configs.addKeyValuePair(new Pair<>("mob.coin.loot", true), "Coin drops from certain mobs.");
 
         configs.addKeyValuePair(new Pair<>("meltdown.destroy_blocks", false), "Meltdown destroys blocks.");
 
@@ -79,7 +83,9 @@ public class ModConfigs {
         DISABLE_GREED_LOOT_GENERATION = CONFIG.getOrDefault("disable.greed_loot_generation", false);
         GREED_WITH_LOOTING_AND_MENDING = CONFIG.getOrDefault("greed.with_looting_and_mending", false);
         GREED_CHANCE_PER_LEVEL = (float) CONFIG.getOrDefault("greed.chance.per.level", 0.01f);
-        COIN_DROPS_AND_LOOT_GEN = CONFIG.getOrDefault("coin.drops.and.loot.gen", true);
+        GLOBAL_COIN_LOOT = CONFIG.getOrDefault("global.coin.loot", true);
+        CHEST_COIN_LOOT = CONFIG.getOrDefault("chest.coin.loot", true);
+        MOB_COIN_LOOT = CONFIG.getOrDefault("mob.coin.loot", true);
 
         CHERRY_DROP_RATE = (float) CONFIG.getOrDefault("cherry.drop.rate", 0.075f);
 

@@ -12,21 +12,15 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(AbstractFireBlock.class)
-public class AbstractFireBlockMixin {
+public abstract class AbstractFireBlockMixin {
 
     @Inject(method = "getState", at = @At("HEAD"), cancellable = true)
     private static void getState(BlockView world, BlockPos pos, CallbackInfoReturnable<BlockState> cir) {
         BlockPos blockPos = pos.down();
         BlockState blockState = world.getBlockState(blockPos);
 
-        if (SoulFireBlock.isSoulBase(blockState)) {
-            cir.setReturnValue(Blocks.SOUL_FIRE.getDefaultState());
-        } else if (GreenFireBlock.isFireBase(blockState) && blockState.isSideSolid(world, pos, Direction.UP, SideShapeType.FULL)) {
+        if (GreenFireBlock.isFireBase(blockState) && blockState.isSideSolid(world, pos, Direction.UP, SideShapeType.FULL)) {
             cir.setReturnValue(ModBlocks.GREEN_FIRE.getDefaultState());
-        } else {
-            cir.setReturnValue(((FireBlockInvoker) Blocks.FIRE).invokeGetStateForPosition(world, pos));
         }
-
-        cir.cancel();
     }
 }
