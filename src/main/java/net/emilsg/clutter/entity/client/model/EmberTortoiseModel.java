@@ -73,10 +73,9 @@ public class EmberTortoiseModel<T extends EmberTortoiseEntity> extends ClutterMo
     public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
         if (this.child) {
             float babyScale = 0.5f;
-            this.head.scale(createVec3f(babyScale));
             matrices.push();
             matrices.scale(babyScale, babyScale, babyScale);
-            matrices.translate(0.0D, 1.5f, 0D);
+            matrices.translate(0.0D, 1.5D, 0D);
             this.getPart().render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
             matrices.pop();
             this.head.scale(createVec3f(0.9f));

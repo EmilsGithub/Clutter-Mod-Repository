@@ -218,6 +218,8 @@ public class ModConfiguredFeatures {
                         DataPool.<BlockState>builder()
                                 .add(Blocks.STONE.getDefaultState(), 1)
                                 .add(Blocks.COBBLESTONE.getDefaultState(), 1)
+                                .add(Blocks.DIRT.getDefaultState(), 1)
+                                .add(Blocks.COARSE_DIRT.getDefaultState(), 1)
                                 .add(Blocks.MOSSY_COBBLESTONE.getDefaultState(), 2)
                                 .build()), 3));
     }

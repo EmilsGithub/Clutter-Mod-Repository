@@ -10,6 +10,7 @@ import net.emilsg.clutter.sound.ModSounds;
 import net.emilsg.clutter.util.ModItemTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.AnimationState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.ai.pathing.PathNodeType;
@@ -30,33 +31,42 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.GeoAnimatable;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.object.PlayState;
-import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class KiwiBirdEntity extends ClutterAnimalEntity implements GeoEntity {
+public class KiwiBirdEntity extends ClutterAnimalEntity {
     private static final Ingredient BREEDING_INGREDIENT = Ingredient.fromTag(ModItemTags.SEEDS);
     private static final TrackedData<Boolean> HAS_EGG = DataTracker.registerData(KiwiBirdEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private static final TrackedData<Integer> EGG_TIMER = DataTracker.registerData(KiwiBirdEntity.class, TrackedDataHandlerRegistry.INTEGER);
-    private static final RawAnimation IDLE = RawAnimation.begin().thenLoop("kiwi_bird.idle");
-    private static final RawAnimation WALK = RawAnimation.begin().thenLoop("kiwi_bird.walk");
-    private static final RawAnimation DANCE = RawAnimation.begin().thenLoop("kiwi_bird.dance");
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+    private static final TrackedData<Boolean> IS_DANCING = DataTracker.registerData(KiwiBirdEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+
     private boolean songPlaying;
     @Nullable
     private BlockPos songSource;
+    public final AnimationState idleAnimationState = new AnimationState();
+    public final AnimationState dancingAnimationState = new AnimationState();
+    public int idleAnimationTimeout = 0;
+    public int dancingAnimationTimeout = 0;
 
     public KiwiBirdEntity(EntityType<? extends ClutterAnimalEntity> entityType, World world) {
         super(entityType, world);
         this.setPathfindingPenalty(PathNodeType.DANGER_FIRE, -1.0F);
         this.setPathfindingPenalty(PathNodeType.DAMAGE_FIRE, -1.0F);
         this.setPathfindingPenalty(PathNodeType.COCOA, -1.0F);
+    }
+
+    private void setupAnimationStates() {
+        if (this.idleAnimationTimeout <= 0 && !this.isMoving() && !this.isSongPlaying()) {
+            this.idleAnimationTimeout = 30;
+            this.idleAnimationState.start(this.age);
+        } else {
+            --this.idleAnimationTimeout;
+        }
+
+        if (dancingAnimationTimeout <= 0 && this.isSongPlaying()) {
+            this.dancingAnimationTimeout = 20;
+            this.dancingAnimationState.start(this.age);
+        } else {
+            --this.dancingAnimationTimeout;
+        }
     }
 
     public static DefaultAttributeContainer.Builder setAttributes() {
@@ -86,28 +96,47 @@ public class KiwiBirdEntity extends ClutterAnimalEntity implements GeoEntity {
         super.initDataTracker();
         this.dataTracker.startTracking(HAS_EGG, false);
         this.dataTracker.startTracking(EGG_TIMER, 0);
+        this.dataTracker.startTracking(IS_DANCING, false);
+
     }
 
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
         nbt.putBoolean("HasEgg", this.hasEgg());
         nbt.putInt("EggTimer", this.getEggTimer());
+        nbt.putBoolean("IsDancing", this.isDancing());
     }
 
     public void readCustomDataFromNbt(NbtCompound nbt) {
         super.readCustomDataFromNbt(nbt);
         this.setHasEgg(nbt.getBoolean("HasEgg"));
         this.setEggTimer(nbt.getInt("EggTimer"));
+        this.setDancing(nbt.getBoolean("IsDancing"));
     }
 
-    public void tickMovement() {
+    @Override
+    public void tick() {
+        super.tick();
+        World world = this.getWorld();
+
+        if (world.isClient) {
+            this.setupAnimationStates();
+        }
+
         if (this.songSource == null || !this.songSource.isWithinDistance(this.getPos(), 3.46) || !this.getWorld().getBlockState(this.songSource).isOf(Blocks.JUKEBOX)) {
             this.songPlaying = false;
             this.songSource = null;
         }
 
-        if (hasEgg()) {
-            setEggTimer(getEggTimer() + 1);
+        this.setDancing(this.isSongPlaying());
+
+    }
+
+    public void tickMovement() {
+
+
+        if (this.hasEgg()) {
+            this.setEggTimer(this.getEggTimer() + 1);
         }
 
         super.tickMovement();
@@ -123,7 +152,7 @@ public class KiwiBirdEntity extends ClutterAnimalEntity implements GeoEntity {
     }
 
     public boolean canEat() {
-        return super.canEat() && !this.hasEgg();
+        return super.canEat() && !this.hasEgg() && !this.isDancing();
     }
 
     @Override
@@ -135,21 +164,6 @@ public class KiwiBirdEntity extends ClutterAnimalEntity implements GeoEntity {
     @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
         return ModEntities.KIWI_BIRD.create(world);
-    }
-
-    @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController<>(this, "controller", 10, this::predicate));
-    }
-
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
-        tAnimationState.getController().setAnimation(isSongPlaying() ? DANCE : tAnimationState.isMoving() ? WALK : IDLE);
-        return PlayState.CONTINUE;
-    }
-
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return this.cache;
     }
 
     @Nullable
@@ -173,6 +187,14 @@ public class KiwiBirdEntity extends ClutterAnimalEntity implements GeoEntity {
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
         this.playSound(SoundEvents.ENTITY_PARROT_STEP, 0.15F, 0.75F);
+    }
+
+    public boolean isDancing () {
+        return this.dataTracker.get(IS_DANCING);
+    }
+
+    public void setDancing(boolean dancing) {
+        this.dataTracker.set(IS_DANCING, dancing);
     }
 
     public boolean hasEgg() {

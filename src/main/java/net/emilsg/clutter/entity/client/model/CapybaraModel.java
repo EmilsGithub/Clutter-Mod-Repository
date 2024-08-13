@@ -61,9 +61,8 @@ public class CapybaraModel<T extends CapybaraEntity> extends TameableClutterMode
             this.animateMovement(CapybaraAnimations.CAPYBARA_WALK, limbSwing, limbSwingAmount, 1.5f, 2f);
         }
 
-        if (entity.getRandom().nextInt(100) == 0) {
-            this.updateAnimation(entity.earTwitchAnimationState, entity.getRandom().nextBoolean() ? CapybaraAnimations.CAPYBARA_EAR_TWITCH_ONE : CapybaraAnimations.CAPYBARA_EAR_TWITCH_TWO, ageInTicks, 1f);
-        }
+        this.updateAnimation(entity.earTwitchAnimationStateOne, CapybaraAnimations.CAPYBARA_EAR_TWITCH_ONE, ageInTicks, 1f);
+        this.updateAnimation(entity.earTwitchAnimationStateTwo, CapybaraAnimations.CAPYBARA_EAR_TWITCH_TWO, ageInTicks, 1f);
     }
 
     @Override

@@ -19,14 +19,8 @@ public abstract class AbstractFireBlockMixin {
         BlockPos blockPos = pos.down();
         BlockState blockState = world.getBlockState(blockPos);
 
-        if (SoulFireBlock.isSoulBase(blockState)) {
-            cir.setReturnValue(Blocks.SOUL_FIRE.getDefaultState());
-        } else if (GreenFireBlock.isFireBase(blockState) && blockState.isSideSolid(world, pos, Direction.UP, SideShapeType.FULL)) {
+        if (GreenFireBlock.isFireBase(blockState) && blockState.isSideSolid(world, pos, Direction.UP, SideShapeType.FULL)) {
             cir.setReturnValue(ModBlocks.GREEN_FIRE.getDefaultState());
-        } else {
-            cir.setReturnValue(((FireBlockInvoker) Blocks.FIRE).invokeGetStateForPosition(world, pos));
         }
-
-        cir.cancel();
     }
 }

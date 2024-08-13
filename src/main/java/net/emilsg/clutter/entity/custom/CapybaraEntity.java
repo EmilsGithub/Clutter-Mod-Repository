@@ -42,10 +42,9 @@ public class CapybaraEntity extends ClutterTameableEntity {
     private static final TrackedData<Boolean> FORCE_SLEEPING = DataTracker.registerData(CapybaraEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private static final TrackedData<Integer> SLEEPER = DataTracker.registerData(CapybaraEntity.class, TrackedDataHandlerRegistry.INTEGER);
     private static final Ingredient BREEDING_INGREDIENT = Ingredient.ofItems(Items.MELON);
-    public final AnimationState idleAnimationState = new AnimationState();
-    public final AnimationState earTwitchAnimationState = new AnimationState();
+    public final AnimationState earTwitchAnimationStateOne = new AnimationState();
+    public final AnimationState earTwitchAnimationStateTwo = new AnimationState();
     public final AnimationState sleepingAnimationState = new AnimationState();
-    public int idleAnimationTimeout = 0;
     public int earTwitchAnimationTimeout = 0;
     public int sleepingAnimationTimeout = 0;
 
@@ -74,11 +73,19 @@ public class CapybaraEntity extends ClutterTameableEntity {
             --this.sleepingAnimationTimeout;
         }
 
-        if (this.earTwitchAnimationTimeout <= 0) {
-            this.earTwitchAnimationTimeout = 1;
-            this.earTwitchAnimationState.start(this.age);
+        if (this.earTwitchAnimationTimeout <= 0 && random.nextInt(100) == 0) {
+            this.earTwitchAnimationTimeout = 3;
+            this.pickRandomIdleAnim(random.nextBoolean());
         } else {
             --this.earTwitchAnimationTimeout;
+        }
+    }
+
+    private void pickRandomIdleAnim(boolean bl) {
+        if (bl) {
+            this.earTwitchAnimationStateOne.start(this.age);
+        } else {
+            this.earTwitchAnimationStateTwo.start(this.age);
         }
     }
 

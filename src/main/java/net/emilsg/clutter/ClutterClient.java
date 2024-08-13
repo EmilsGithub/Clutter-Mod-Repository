@@ -9,10 +9,8 @@ import net.emilsg.clutter.block.entity.render.PlateBlockEntityRenderer;
 import net.emilsg.clutter.block.entity.render.ShelfBlockEntityRenderer;
 import net.emilsg.clutter.compat.trinkets.client.TrinketsIntegrationClient;
 import net.emilsg.clutter.entity.ModEntities;
-import net.emilsg.clutter.entity.client.*;
 import net.emilsg.clutter.entity.client.layer.ModModelLayers;
 import net.emilsg.clutter.entity.client.model.*;
-import net.emilsg.clutter.entity.client.model.EchofinModel;
 import net.emilsg.clutter.entity.client.player.RendererRegistration;
 import net.emilsg.clutter.entity.client.player.model.ScubaModel;
 import net.emilsg.clutter.entity.client.render.*;
@@ -665,24 +663,22 @@ public class ClutterClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.BUTTERFLY, ButterflyModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.EMBER_TORTOISE, EmberTortoiseModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.JELLYFISH, JellyfishModel::getTexturedModelData);
-        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.CRAB, CrabModel::getTexturedModelData);
-        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.DROWNED_SKELETON, DrownedSkeletonModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.MANTA_RAY, MantaRayModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.CAPYBARA, CapybaraModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.CHAMELEON, ChameleonModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.KIWI_BIRD, KiwiBirdModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.MOSSBLOOM, MossbloomModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.EMPEROR_PENGUIN, EmperorPenguinModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.BABY_EMPEROR_PENGUIN, BabyEmperorPenguinModel::getTexturedModelData);
 
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.ECHOFIN, EchofinModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.SEAHORSE, SeahorseModel::getTexturedModelData);
-
 
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.SCUBA_TANK, ScubaModel::getTexturedModelData);
     }
 
     private void registerEntityRenderers() {
         EntityRendererRegistry.register(ModEntities.SEAT, EmptySeatRenderer::new);
-        EntityRendererRegistry.register(ModEntities.MOSSBLOOM, MossbloomRenderer::new);
-        EntityRendererRegistry.register(ModEntities.KIWI_BIRD, KiwiBirdRenderer::new);
-        EntityRendererRegistry.register(ModEntities.EMPEROR_PENGUIN, EmperorPenguinRenderer::new);
 
         EntityRendererRegistry.register(ModEntities.CHAMELEON, ChameleonRenderer::new);
         EntityRendererRegistry.register(ModEntities.BUTTERFLY, ButterflyRenderer::new);
@@ -691,15 +687,13 @@ public class ClutterClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.BEAVER, BeaverRenderer::new);
         EntityRendererRegistry.register(ModEntities.EMBER_TORTOISE, EmberTortoiseRenderer::new);
         EntityRendererRegistry.register(ModEntities.JELLYFISH, JellyfishRenderer::new);
-        EntityRendererRegistry.register(ModEntities.CRAB, CrabRenderer::new);
         EntityRendererRegistry.register(ModEntities.MANTA_RAY, MantaRayRenderer::new);
         EntityRendererRegistry.register(ModEntities.CAPYBARA, CapybaraRenderer::new);
         EntityRendererRegistry.register(ModEntities.ECHOFIN, EchofinRenderer::new);
         EntityRendererRegistry.register(ModEntities.SEAHORSE, SeahorseRenderer::new);
-
-
-        EntityRendererRegistry.register(ModEntities.DROWNED_SKELETON, DrownedSkeletonRenderer::new);
-
+        EntityRendererRegistry.register(ModEntities.KIWI_BIRD, KiwiBirdRenderer::new);
+        EntityRendererRegistry.register(ModEntities.MOSSBLOOM, MossbloomRenderer::new);
+        EntityRendererRegistry.register(ModEntities.EMPEROR_PENGUIN, EmperorPenguinRenderer::new);
     }
 
     private void registerBlockEntityRenderers() {
@@ -713,6 +707,5 @@ public class ClutterClient implements ClientModInitializer {
         HandledScreens.register(ModScreenHandlers.CARDBOARD_BOX_SCREEN_HANDLER, CardboardBoxScreen::new);
         HandledScreens.register(ModScreenHandlers.WALL_BOOKSHELF_SCREEN_HANDLER, WallBookshelfScreen::new);
         HandledScreens.register(ModScreenHandlers.PRESENT_SCREEN_HANDLER, PresentScreen::new);
-
     }
 }

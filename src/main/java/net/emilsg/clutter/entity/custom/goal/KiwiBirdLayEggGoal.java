@@ -22,7 +22,7 @@ public class KiwiBirdLayEggGoal extends MoveToTargetPosGoal {
     }
 
     public boolean canStart() {
-        return this.kiwiBird.hasEgg() && super.canStart() && this.kiwiBird.getEggTimer() >= 400;
+        return this.kiwiBird.hasEgg() && super.canStart() && this.kiwiBird.getEggTimer() >= 400 && !this.kiwiBird.isDancing();
     }
 
     public boolean shouldContinue() {

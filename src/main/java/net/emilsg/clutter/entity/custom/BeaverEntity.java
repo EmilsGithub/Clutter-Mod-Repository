@@ -1,18 +1,14 @@
 package net.emilsg.clutter.entity.custom;
 
-import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.entity.ModEntities;
 import net.emilsg.clutter.entity.custom.parent.ClutterAnimalEntity;
-import net.emilsg.clutter.util.ModItemTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.FuzzyTargeting;
 import net.minecraft.entity.ai.control.MoveControl;
 import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.ai.pathing.AmphibiousSwimNavigation;
-import net.minecraft.entity.ai.pathing.EntityNavigation;
-import net.minecraft.entity.ai.pathing.PathNodeType;
+import net.minecraft.entity.ai.pathing.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.data.DataTracker;
@@ -28,7 +24,6 @@ import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.Registries;
-import net.minecraft.registry.tag.BiomeTags;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
@@ -46,54 +41,68 @@ import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class BeaverEntity extends ClutterAnimalEntity {
     private static final TrackedData<BlockPos> HOME_POS;
 
     private static final Ingredient BREEDING_INGREDIENT = getIngredientWithName("sapling");
-    private static final Map<Block, Block> STRIPPABLE_LOGS_MAP = new HashMap<>();
 
     static {
         HOME_POS = DataTracker.registerData(BeaverEntity.class, TrackedDataHandlerRegistry.BLOCK_POS);
-        STRIPPABLE_LOGS_MAP.put(Blocks.OAK_LOG, Blocks.STRIPPED_OAK_LOG);
-        STRIPPABLE_LOGS_MAP.put(Blocks.DARK_OAK_LOG, Blocks.STRIPPED_DARK_OAK_LOG);
-        STRIPPABLE_LOGS_MAP.put(Blocks.MANGROVE_LOG, Blocks.STRIPPED_MANGROVE_LOG);
-        STRIPPABLE_LOGS_MAP.put(Blocks.ACACIA_LOG, Blocks.STRIPPED_ACACIA_LOG);
-        STRIPPABLE_LOGS_MAP.put(Blocks.SPRUCE_LOG, Blocks.STRIPPED_SPRUCE_LOG);
-        STRIPPABLE_LOGS_MAP.put(Blocks.CHERRY_LOG, Blocks.STRIPPED_CHERRY_LOG);
-        STRIPPABLE_LOGS_MAP.put(Blocks.BAMBOO_BLOCK, Blocks.STRIPPED_BAMBOO_BLOCK);
-        STRIPPABLE_LOGS_MAP.put(Blocks.BIRCH_LOG, Blocks.STRIPPED_BIRCH_LOG);
-        STRIPPABLE_LOGS_MAP.put(Blocks.JUNGLE_LOG, Blocks.STRIPPED_JUNGLE_LOG);
-        STRIPPABLE_LOGS_MAP.put(Blocks.CRIMSON_STEM, Blocks.STRIPPED_CRIMSON_STEM);
-        STRIPPABLE_LOGS_MAP.put(Blocks.WARPED_STEM, Blocks.STRIPPED_WARPED_STEM);
-        STRIPPABLE_LOGS_MAP.put(Blocks.OAK_WOOD, Blocks.STRIPPED_OAK_WOOD);
-        STRIPPABLE_LOGS_MAP.put(Blocks.DARK_OAK_WOOD, Blocks.STRIPPED_DARK_OAK_WOOD);
-        STRIPPABLE_LOGS_MAP.put(Blocks.MANGROVE_WOOD, Blocks.STRIPPED_MANGROVE_WOOD);
-        STRIPPABLE_LOGS_MAP.put(Blocks.ACACIA_WOOD, Blocks.STRIPPED_ACACIA_WOOD);
-        STRIPPABLE_LOGS_MAP.put(Blocks.SPRUCE_WOOD, Blocks.STRIPPED_SPRUCE_WOOD);
-        STRIPPABLE_LOGS_MAP.put(Blocks.CHERRY_WOOD, Blocks.STRIPPED_CHERRY_WOOD);
-        STRIPPABLE_LOGS_MAP.put(Blocks.BIRCH_WOOD, Blocks.STRIPPED_BIRCH_WOOD);
-        STRIPPABLE_LOGS_MAP.put(Blocks.JUNGLE_WOOD, Blocks.STRIPPED_JUNGLE_WOOD);
-        STRIPPABLE_LOGS_MAP.put(Blocks.CRIMSON_HYPHAE, Blocks.STRIPPED_CRIMSON_HYPHAE);
-        STRIPPABLE_LOGS_MAP.put(Blocks.WARPED_HYPHAE, Blocks.STRIPPED_WARPED_HYPHAE);
-        STRIPPABLE_LOGS_MAP.put(ModBlocks.REDWOOD_LOG, ModBlocks.STRIPPED_REDWOOD_LOG);
-        STRIPPABLE_LOGS_MAP.put(ModBlocks.REDWOOD_WOOD, ModBlocks.STRIPPED_REDWOOD_WOOD);
     }
+        public final AnimationState waterAnimationState = new AnimationState();
+    private int waterAnimationTimeout = 0;
 
-    public final AnimationState idleTailAnimationState = new AnimationState();
-    private int idleAnimationTimeout = 0;
+    protected final SwimNavigation waterNavigation;
+    protected final MobNavigation landNavigation;
 
     public BeaverEntity(EntityType<? extends ClutterAnimalEntity> entityType, World world) {
         super(entityType, world);
-        this.setPathfindingPenalty(PathNodeType.WATER, 0.0F);
         this.setPathfindingPenalty(PathNodeType.DANGER_FIRE, -1.0F);
         this.setPathfindingPenalty(PathNodeType.DAMAGE_FIRE, -1.0F);
         this.setPathfindingPenalty(PathNodeType.COCOA, -1.0F);
         this.setStepHeight(1.0f);
-        this.moveControl = new BeaverMoveControl(this);
+        this.moveControl = new BeaverMoveControl2(this);
+        this.setPathfindingPenalty(PathNodeType.WATER, 0.0F);
+        this.waterNavigation = new SwimNavigation(this, world);
+        this.landNavigation = new MobNavigation(this, world);
+    }
+
+    private static class BeaverMoveControl2 extends MoveControl {
+        private final BeaverEntity beaver;
+
+        public BeaverMoveControl2(BeaverEntity beaver) {
+            super(beaver);
+            this.beaver = beaver;
+        }
+
+        public void tick() {
+            if (this.beaver.isTouchingWater()) {
+                this.beaver.setVelocity(this.beaver.getVelocity().add(0.0, 0.005, 0.0));
+
+                if (this.state != State.MOVE_TO || this.beaver.getNavigation().isIdle()) {
+                    this.beaver.setMovementSpeed(0.0F);
+                    return;
+                }
+
+                double d = this.targetX - this.beaver.getX();
+                double e = this.targetY - this.beaver.getY();
+                double f = this.targetZ - this.beaver.getZ();
+                double g = Math.sqrt(d * d + e * e + f * f);
+                e /= g;
+                float h = (float)(MathHelper.atan2(f, d) * 57.2957763671875) - 90.0F;
+                this.beaver.setYaw(this.wrapDegrees(this.beaver.getYaw(), h, 90.0F));
+                this.beaver.bodyYaw = this.beaver.getYaw();
+                float i = (float)(this.speed * this.beaver.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED));
+                float j = MathHelper.lerp(0.125F, this.beaver.getMovementSpeed(), i);
+                this.beaver.setMovementSpeed(j);
+                this.beaver.setVelocity(this.beaver.getVelocity().add(0, this.beaver.getMovementSpeed() * e * 0.1, 0));
+            } else {
+                this.beaver.setVelocity(this.beaver.getVelocity().add(0.0, 0, 0.0));
+                super.tick();
+            }
+        }
     }
 
     private static Ingredient getIngredientWithName(String name) {
@@ -112,7 +121,7 @@ public class BeaverEntity extends ClutterAnimalEntity {
     public static DefaultAttributeContainer.Builder setAttributes() {
         return ClutterAnimalEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 10.0D)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25f)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.15f)
                 .add(EntityAttributes.GENERIC_ATTACK_SPEED, 0.5f)
                 .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.1f)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0f)
@@ -120,15 +129,15 @@ public class BeaverEntity extends ClutterAnimalEntity {
     }
 
     public static boolean isValidNaturalSpawn(EntityType<? extends AnimalEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-        return (world.getBlockState(pos.down()).isIn(BlockTags.ANIMALS_SPAWNABLE_ON) || world.getBlockState(pos).isOf(Blocks.WATER) && world.getBiome(pos).isIn(BiomeTags.IS_RIVER));
+        return (world.getBlockState(pos.down()).isIn(BlockTags.ANIMALS_SPAWNABLE_ON) || world.getBlockState(pos).isOf(Blocks.WATER));
     }
 
     private void setupAnimationStates() {
-        if (this.idleAnimationTimeout <= 0 && !this.isMoving()) {
-            this.idleAnimationTimeout = 40;
-            this.idleTailAnimationState.start(this.age);
+        if (this.waterAnimationTimeout <= 0) {
+            this.waterAnimationTimeout = 20;
+            this.waterAnimationState.startIfNotRunning(this.age);
         } else {
-            --this.idleAnimationTimeout;
+            --this.waterAnimationTimeout;
         }
     }
 
@@ -216,20 +225,26 @@ public class BeaverEntity extends ClutterAnimalEntity {
     @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
         ItemStack stackInHand = player.getStackInHand(hand);
-        if (stackInHand.isIn(ModItemTags.STRIPPABLE_LOGS)) {
+
+        String itemID = Registries.ITEM.getId(stackInHand.getItem()).toString();
+
+        if (itemID.contains("log")) {
             Block heldBlock = Block.getBlockFromItem(stackInHand.getItem());
-            Item strippedBlock = STRIPPABLE_LOGS_MAP.get(heldBlock).asItem();
-            dropItem(strippedBlock);
-            getWorld().addBlockBreakParticles(getBlockPos(), heldBlock.getDefaultState());
-            if (!player.getAbilities().creativeMode) {
-                stackInHand.decrement(1);
+            String strippedPath = itemID.replace(":", ":stripped_");
+            Identifier strippedID = new Identifier(strippedPath);
+            if (Registries.ITEM.containsId(strippedID)) {
+                dropStack(new ItemStack(Registries.ITEM.get(strippedID)));
+                getWorld().addBlockBreakParticles(getBlockPos(), heldBlock.getDefaultState());
+                if (!player.getAbilities().creativeMode) {
+                    stackInHand.decrement(1);
+                }
+                playSound(SoundEvents.BLOCK_WOOD_BREAK, 1.0f, 1.0f);
+                return ActionResult.SUCCESS;
             }
-            playSound(SoundEvents.BLOCK_WOOD_BREAK, 1.0f, 1.0f);
-            return ActionResult.SUCCESS;
-        } else if (Registries.ITEM.getId(stackInHand.getItem()).getPath().contains("planks")) {
+        } else if (itemID.contains("planks")) {
             Block heldBlock = Block.getBlockFromItem(stackInHand.getItem());
             ItemStack sticksWithCount = new ItemStack(Items.STICK);
-            sticksWithCount.setCount(random.nextBetween(2, 4));
+            sticksWithCount.setCount(random.nextBetween(2, 3));
             dropStack(sticksWithCount);
             getWorld().addBlockBreakParticles(getBlockPos(), heldBlock.getDefaultState());
             if (!player.getAbilities().creativeMode) {

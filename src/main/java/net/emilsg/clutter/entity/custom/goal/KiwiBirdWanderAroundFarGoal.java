@@ -14,6 +14,11 @@ public class KiwiBirdWanderAroundFarGoal extends WanderAroundFarGoal {
 
     @Override
     public boolean canStart() {
-        return super.canStart() && !kiwiBird.isSongPlaying();
+        return !this.kiwiBird.isDancing() && super.canStart();
+    }
+
+    @Override
+    public boolean shouldContinue() {
+        return super.shouldContinue() && !this.kiwiBird.isDancing();
     }
 }

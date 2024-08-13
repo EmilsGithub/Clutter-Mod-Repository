@@ -322,8 +322,6 @@ public class ModelDataGen extends FabricModelProvider {
         registerSpawnEggItem(itemGen, ModItems.CRIMSON_NEWT_SPAWN_EGG);
         registerSpawnEggItem(itemGen, ModItems.WARPED_NEWT_SPAWN_EGG);
         registerSpawnEggItem(itemGen, ModItems.EMBER_TORTOISE_SPAWN_EGG);
-        registerSpawnEggItem(itemGen, ModItems.CRAB_SPAWN_EGG);
-        registerSpawnEggItem(itemGen, ModItems.DROWNED_SKELETON_SPAWN_EGG);
         registerSpawnEggItem(itemGen, ModItems.MANTA_RAY_SPAWN_EGG);
 
         for (Item elytra : Registries.ITEM) {

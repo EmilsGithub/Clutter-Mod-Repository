@@ -8,10 +8,12 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.util.math.MatrixStack;
 
 public class BeaverModel<T extends BeaverEntity> extends ClutterModel<T> {
+    private final ModelPart root;
     private final ModelPart all;
     private final ModelPart head;
 
     public BeaverModel(ModelPart root) {
+        this.root = root;
         this.all = root.getChild("All");
         this.head = all.getChild("Head");
     }
@@ -64,7 +66,7 @@ public class BeaverModel<T extends BeaverEntity> extends ClutterModel<T> {
 
     @Override
     public ModelPart getPart() {
-        return all;
+        return root;
     }
 
     @Override
@@ -73,14 +75,18 @@ public class BeaverModel<T extends BeaverEntity> extends ClutterModel<T> {
     }
 
     @Override
-    public void setAngles(BeaverEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void setAngles(BeaverEntity beaverEntity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.getPart().traverse().forEach(ModelPart::resetTransform);
-        this.setHeadAngles(entity, netHeadYaw, headPitch, ageInTicks);
+        this.setHeadAngles(beaverEntity, netHeadYaw, headPitch, ageInTicks);
+        boolean isTouchingWater = beaverEntity.isTouchingWater();
 
-        if (!entity.isTouchingWater())
+        if(!isTouchingWater) {
             this.animateMovement(BeaverAnimations.BEAVER_WALK, limbSwing, limbSwingAmount, 1.5f, 2f);
-        if (entity.isTouchingWater())
-            this.animateMovement(BeaverAnimations.BEAVER_SWIM, limbSwing, limbSwingAmount, 1.5f, 2f);
-        this.updateAnimation(entity.idleTailAnimationState, BeaverAnimations.BEAVER_IDLE_TAIL, ageInTicks, 1f);
+        } else {
+            float animationSpeed = (float)(beaverEntity.getVelocity().length() * 5) + Math.abs(0.5f);
+            if (animationSpeed >= 1.2f) animationSpeed = 1.2f;
+            this.updateAnimation(beaverEntity.waterAnimationState, BeaverAnimations.BEAVER_SWIM, ageInTicks, animationSpeed);
+        }
+
     }
 }

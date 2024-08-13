@@ -1,15 +1,13 @@
 package net.emilsg.clutter.entity.custom;
 
 import net.emilsg.clutter.entity.ModEntities;
+import net.emilsg.clutter.entity.custom.goal.MossbloomDropHornsGoal;
 import net.emilsg.clutter.entity.custom.parent.ClutterAnimalEntity;
 import net.emilsg.clutter.entity.variants.MossbloomVariant;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.EntityData;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ExperienceOrbEntity;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -32,32 +30,62 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.*;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.GeoAnimatable;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.object.PlayState;
-import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class MossbloomEntity extends ClutterAnimalEntity implements GeoEntity {
-    private static final RawAnimation IDLE = RawAnimation.begin().thenLoop("mossbloom.idle");
-    private static final RawAnimation WALK = RawAnimation.begin().thenLoop("mossbloom.walk");
-    private static final RawAnimation WAG_TAIL = RawAnimation.begin().thenPlay("mossbloom.wag_tail");
-    private static final RawAnimation LE_DROP = RawAnimation.begin().thenPlay("mossbloom.le_drop");
-    private static final RawAnimation RE_DROP = RawAnimation.begin().thenPlay("mossbloom.re_drop");
-    private static final RawAnimation EARS_DROP = RawAnimation.begin().thenPlay("mossbloom.ears_drop");
-    private static final TrackedData<Integer> DATA_ID_TYPE_VARIANT =
-            DataTracker.registerData(MossbloomEntity.class, TrackedDataHandlerRegistry.INTEGER);
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+public class MossbloomEntity extends ClutterAnimalEntity{
+
+    private static final TrackedData<Integer> VARIANT = DataTracker.registerData(MossbloomEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    private static final TrackedData<Boolean> HAS_HORNS = DataTracker.registerData(MossbloomEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    private static final TrackedData<Integer> HORN_DROP_TIMER = DataTracker.registerData(MossbloomEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    private static final TrackedData<Integer> TIME_TILL_DROP = DataTracker.registerData(MossbloomEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    private static final TrackedData<Boolean> IS_SHAKING = DataTracker.registerData(MossbloomEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+
+    public final AnimationState idleAnimationState = new AnimationState();
+    public final AnimationState shakingAnimationState = new AnimationState();
+    public final AnimationState earTwitchAnimationStateLE = new AnimationState();
+    public final AnimationState earTwitchAnimationStateRE = new AnimationState();
+    public final AnimationState earTwitchAnimationStateBE = new AnimationState();
+    public int idleAnimationTimeout = 0;
+    public int shakingAnimationTimeout = 0;
+    public int earTwitchAnimationTimeout = 0;
+
+    public static int SHOULD_DROP_HORNS_VALUE = 12000;
 
     public MossbloomEntity(EntityType<? extends ClutterAnimalEntity> entityType, World world) {
         super(entityType, world);
         this.setPathfindingPenalty(PathNodeType.DANGER_FIRE, -1.0F);
         this.setPathfindingPenalty(PathNodeType.WATER, -1.0F);
         this.setPathfindingPenalty(PathNodeType.WATER_BORDER, 16.0F);
+    }
+
+    private void setupAnimationStates() {
+        if (this.shakingAnimationTimeout <= 0 && this.getIsShaking()) {
+            this.shakingAnimationTimeout = 60;
+            this.shakingAnimationState.start(this.age);
+        } else {
+            --this.shakingAnimationTimeout;
+        }
+
+        if (this.idleAnimationTimeout <= 0 && !this.isMoving()) {
+            this.idleAnimationTimeout = 10;
+            this.idleAnimationState.startIfNotRunning(this.age);
+        } else {
+            --this.idleAnimationTimeout;
+        }
+
+        if (this.earTwitchAnimationTimeout <= 0 && random.nextInt(100) == 0) {
+            this.earTwitchAnimationTimeout = 5;
+            this.pickRandomIdleAnim(random.nextInt(3));
+        } else {
+            --this.earTwitchAnimationTimeout;
+        }
+    }
+
+    private void pickRandomIdleAnim(int i) {
+        switch (i) {
+            default -> this.earTwitchAnimationStateBE.startIfNotRunning(this.age);
+            case 1 -> this.earTwitchAnimationStateRE.startIfNotRunning(this.age);
+            case 2 -> this.earTwitchAnimationStateLE.startIfNotRunning(this.age);
+        };
     }
 
     public static DefaultAttributeContainer.Builder setAttributes() {
@@ -86,14 +114,15 @@ public class MossbloomEntity extends ClutterAnimalEntity implements GeoEntity {
 
     @Override
     protected void initGoals() {
-        this.goalSelector.add(0, new SwimGoal(this));
-        this.goalSelector.add(1, new EscapeDangerGoal(this, 1.5));
-        this.goalSelector.add(2, new AnimalMateGoal(this, 1));
-        this.goalSelector.add(3, new TemptGoal(this, 1.25, Ingredient.ofItems(Items.BIG_DRIPLEAF), false));
-        this.goalSelector.add(4, new FollowParentGoal(this, 1.0));
-        this.goalSelector.add(5, new WanderAroundFarGoal(this, 1.0, 1));
-        this.goalSelector.add(6, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
-        this.goalSelector.add(7, new LookAroundGoal(this));
+        this.goalSelector.add(0, new MossbloomDropHornsGoal(this));
+        this.goalSelector.add(1, new SwimGoal(this));
+        this.goalSelector.add(2, new EscapeDangerGoal(this, 1.5));
+        this.goalSelector.add(3, new AnimalMateGoal(this, 1));
+        this.goalSelector.add(4, new TemptGoal(this, 1.25, Ingredient.ofItems(Items.BIG_DRIPLEAF), false));
+        this.goalSelector.add(5, new FollowParentGoal(this, 1.0));
+        this.goalSelector.add(6, new WanderAroundFarGoal(this, 1.0, 1));
+        this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
+        this.goalSelector.add(8, new LookAroundGoal(this));
     }
 
     public boolean canSpawn(WorldAccess world, SpawnReason spawnReason) {
@@ -104,7 +133,11 @@ public class MossbloomEntity extends ClutterAnimalEntity implements GeoEntity {
 
     protected void initDataTracker() {
         super.initDataTracker();
-        this.dataTracker.startTracking(DATA_ID_TYPE_VARIANT, 0);
+        this.dataTracker.startTracking(VARIANT, 0);
+        this.dataTracker.startTracking(HAS_HORNS, true);
+        this.dataTracker.startTracking(HORN_DROP_TIMER, 0);
+        this.dataTracker.startTracking(IS_SHAKING, false);
+        this.dataTracker.startTracking(TIME_TILL_DROP, 0);
     }
 
     @Override
@@ -149,7 +182,13 @@ public class MossbloomEntity extends ClutterAnimalEntity implements GeoEntity {
             this.resetLoveTicks();
             other.resetLoveTicks();
             child.setBaby(true);
-            child.setVariant(Util.getRandom(MossbloomVariant.values(), this.random));
+
+            boolean isVariantM = random.nextBoolean();
+            child.setVariant(isVariantM ? MossbloomVariant.M : MossbloomVariant.F);
+
+            child.setHasHorns(isVariantM);
+            if (isVariantM) child.setHornDropTimer(-SHOULD_DROP_HORNS_VALUE);
+
             child.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), 0.0F, 0.0F);
             world.spawnEntityAndPassengers(child);
             world.sendEntityStatus(this, (byte) 18);
@@ -157,6 +196,21 @@ public class MossbloomEntity extends ClutterAnimalEntity implements GeoEntity {
                 world.spawnEntity(new ExperienceOrbEntity(world, this.getX(), this.getY(), this.getZ(), this.getRandom().nextInt(7) + 1));
             }
 
+        }
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        World world = this.getWorld();
+
+        if (world.isClient) {
+            this.setupAnimationStates();
+        }
+
+        if(this.getVariant() == MossbloomVariant.M && !this.isBaby()) {
+            if (this.getHornDropTimer() >= (SHOULD_DROP_HORNS_VALUE / 3)) this.setHasHorns(true);
+            this.setHornDropTimer(this.getHornDropTimer() + random.nextInt(1) + 1);
         }
     }
 
@@ -170,60 +224,74 @@ public class MossbloomEntity extends ClutterAnimalEntity implements GeoEntity {
     }
 
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController<>(this, "controller", 10, this::predicate));
-        controllerRegistrar.add(new AnimationController<>(this, "idle_controller", 10, this::idlePredicate));
-    }
-
-    private <T extends GeoAnimatable> PlayState idlePredicate(AnimationState<T> tAnimationState) {
-        if (this.random.nextInt(200) == 0) {
-            tAnimationState.getController().setAnimation(this.random.nextBoolean() ? WAG_TAIL : this.random.nextBoolean() ? LE_DROP : this.random.nextBoolean() ? RE_DROP : EARS_DROP);
-        }
-        return PlayState.CONTINUE;
-    }
-
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
-        if (tAnimationState.isMoving()) {
-            tAnimationState.getController().setAnimation(WALK);
-            return PlayState.CONTINUE;
-        }
-        tAnimationState.getController().setAnimation(IDLE);
-        return PlayState.CONTINUE;
-    }
-
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return cache;
-    }
-
-    @Override
-    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason,
-                                 @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
+    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
         MossbloomVariant variant = Util.getRandom(MossbloomVariant.values(), this.random);
-        setVariant(variant);
+        this.setVariant(variant);
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
     }
 
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
-        nbt.putInt("Variant", this.getTypeVariant());
+        nbt.putInt("Variant", this.getVariantInt());
+        nbt.putBoolean("HasHorns", this.getHasHorns());
+        nbt.putInt("HornDropTimer", this.getHornDropTimer());
+        nbt.putBoolean("IsShaking", this.getIsShaking());
     }
 
     @Override
     public void readCustomDataFromNbt(NbtCompound nbt) {
         super.readCustomDataFromNbt(nbt);
-        this.dataTracker.set(DATA_ID_TYPE_VARIANT, nbt.getInt("Variant"));
+        this.dataTracker.set(VARIANT, nbt.getInt("Variant"));
+        this.dataTracker.set(HAS_HORNS, nbt.getBoolean("HasHorns"));
+        this.dataTracker.set(HORN_DROP_TIMER, nbt.getInt("HornDropTimer"));
+        this.dataTracker.set(IS_SHAKING, nbt.getBoolean("IsShaking"));
+    }
+
+    public int getTimeTillDrop() {
+        return this.dataTracker.get(TIME_TILL_DROP);
+    }
+
+    public void setTimeTillDrop(int timeTillDrop) {
+        this.dataTracker.set(TIME_TILL_DROP, timeTillDrop);
+    }
+
+    public boolean getIsShaking() {
+        return this.dataTracker.get(IS_SHAKING);
+    }
+
+    public void setIsShaking(boolean isShaking) {
+        this.dataTracker.set(IS_SHAKING, isShaking);
+    }
+
+    public boolean getHasHorns() {
+        return this.dataTracker.get(HAS_HORNS);
+    }
+
+    public void setHasHorns(boolean hasHorns) {
+        this.dataTracker.set(HAS_HORNS, hasHorns);
+    }
+
+    public int getHornDropTimer() {
+        return this.dataTracker.get(HORN_DROP_TIMER);
+    }
+
+    public void setHornDropTimer(int hornDropTimer) {
+        this.dataTracker.set(HORN_DROP_TIMER, hornDropTimer);
     }
 
     public MossbloomVariant getVariant() {
-        return MossbloomVariant.byId(this.getTypeVariant() & 255);
+        return MossbloomVariant.byId(this.getVariantInt() & 255);
+    }
+
+    public boolean isVariantOf(MossbloomVariant variant) {
+        return this.getVariant() == variant;
     }
 
     public void setVariant(MossbloomVariant variant) {
-        this.dataTracker.set(DATA_ID_TYPE_VARIANT, variant.getId() & 255);
+        this.dataTracker.set(VARIANT, variant.getId() & 255);
     }
 
-    private int getTypeVariant() {
-        return this.dataTracker.get(DATA_ID_TYPE_VARIANT);
+    private int getVariantInt() {
+        return this.dataTracker.get(VARIANT);
     }
 }

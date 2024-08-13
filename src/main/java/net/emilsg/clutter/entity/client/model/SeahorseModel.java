@@ -74,7 +74,7 @@ public class SeahorseModel<T extends SeahorseEntity> extends ClutterFishModel<T>
             matrices.translate(0.0D, 1.5D, 0D);
             this.getPart().render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
             matrices.pop();
-            this.head.scale(createVec3f(0.9f));
+            this.getHeadPart().scale(createVec3f(0.9f));
         } else {
             matrices.push();
             this.getPart().render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);

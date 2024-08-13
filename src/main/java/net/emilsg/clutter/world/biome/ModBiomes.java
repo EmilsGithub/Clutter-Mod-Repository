@@ -99,8 +99,8 @@ public class ModBiomes {
 
         globalOverworldGeneration(builder);
 
-        ClutterDefaultBiomeFeatures.addLupineFieldsFoliageFeatures(builder);
         ClutterDefaultBiomeFeatures.addLupineFieldsRockFeatures(builder);
+        ClutterDefaultBiomeFeatures.addLupineFieldsFoliageFeatures(builder);
         DefaultBiomeFeatures.addDefaultGrass(builder);
         DefaultBiomeFeatures.addDefaultOres(builder);
         DefaultBiomeFeatures.addDefaultDisks(builder);

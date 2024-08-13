@@ -1,6 +1,6 @@
 {
   "parent": "clutter:block/lamps/lamp_parent",
   "textures": {
-    "3": "block/cyan_wool"
+    "4": "clutter:block/cyan_lampshade"
   }
 }

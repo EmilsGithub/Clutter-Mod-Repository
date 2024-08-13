@@ -17,8 +17,6 @@ public class ClutterAttributes {
         FabricDefaultAttributeRegistry.register(ModEntities.WARPED_NEWT, WarpedNewtEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.EMBER_TORTOISE, EmberTortoiseEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.JELLYFISH, JellyfishEntity.setAttributes());
-        FabricDefaultAttributeRegistry.register(ModEntities.CRAB, CrabEntity.setAttributes());
-        FabricDefaultAttributeRegistry.register(ModEntities.DROWNED_SKELETON, DrownedSkeletonEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.MANTA_RAY, MantaRayEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.SEAHORSE, SeahorseEntity.setAttributes());
 

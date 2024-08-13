@@ -18,6 +18,18 @@
         },
         {
           "data": {
+            "Name": "minecraft:dirt"
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "minecraft:coarse_dirt"
+          },
+          "weight": 1
+        },
+        {
+          "data": {
             "Name": "minecraft:mossy_cobblestone"
           },
           "weight": 2

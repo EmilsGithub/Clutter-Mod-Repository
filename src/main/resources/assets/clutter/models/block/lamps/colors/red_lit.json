@@ -1,6 +1,6 @@
 {
   "parent": "clutter:block/lamps/lamp_lit_parent",
-    "textures": {
-      "3": "block/red_wool"
-    }
+  "textures": {
+    "4": "clutter:block/red_lampshade_lit"
+  }
 }
