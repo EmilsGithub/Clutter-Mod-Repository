@@ -1,11 +1,11 @@
 package net.emilsg.clutter.world.gen;
 
-import net.emilsg.clutter.config.ClutterConfig;
+import net.emilsg.clutter.config.Configs;
+import net.emilsg.clutter.config.ModConfigManager;
 import net.emilsg.clutter.entity.ModEntities;
 import net.emilsg.clutter.entity.custom.*;
 import net.emilsg.clutter.mixin.ServerWorldAccessor;
 import net.emilsg.clutter.util.ModBiomeTags;
-import net.emilsg.clutter.world.spawner.EndAnimalSpawner;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
@@ -14,18 +14,15 @@ import net.minecraft.entity.SpawnRestriction;
 import net.minecraft.registry.tag.BiomeTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.Heightmap;
-import net.minecraft.world.dimension.DimensionTypes;
 import net.minecraft.world.spawner.Spawner;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.emilsg.clutter.config.ClutterConfig.*;
 import static net.minecraft.world.biome.BiomeKeys.*;
 
 public class ModEntitySpawning {
     public static void addSpawns() {
-        if (!ClutterConfig.getInstance().getBoolean(SPAWN_CLUTTER_MOBS)) return;
 
         ServerWorldEvents.LOAD.register((server, world) -> {
             if (world.isClient) return;
@@ -37,62 +34,67 @@ public class ModEntitySpawning {
             //    if (ClutterConfig.getInstance().getBoolean(SPAWN_EMBER_TORTOISES)) registerSpawners(world, new NetherAnimalSpawner(400, ModBiomeTags.SPAWNS_EMBER_TORTOISES, ModEntities.EMBER_TORTOISE));
             //}
 
-            if (world.getDimensionKey().equals(DimensionTypes.THE_END)) {
-                if (ClutterConfig.getInstance().getBoolean(SPAWN_ECHOFINS))
-                    registerSpawners(world, new EndAnimalSpawner(400, BiomeTags.IS_END, ModEntities.ECHOFIN));
-            }
+            //if (world.getDimensionKey().equals(DimensionTypes.THE_END)) {
+            //    if (ModConfigManager.get(Configs.spawnClutterMobs, true))
+            //        registerSpawners(world, new EndAnimalSpawner(400, BiomeTags.IS_END, ModEntities.ECHOFIN));
+            //}
         });
 
-        if (ClutterConfig.getInstance().getBoolean(SPAWN_ECHOFINS)) {
+        if (ModConfigManager.get(Configs.spawnEchofins, true)) {
             BiomeModifications.addSpawn(BiomeSelectors.tag(ModBiomeTags.SPAWNS_ECHOFINS), SpawnGroup.CREATURE,
                     ModEntities.ECHOFIN, 30, 1, 3);
         }
 
-        if (ClutterConfig.getInstance().getBoolean(SPAWN_CRIMSON_NEWTS)) {
+        if (ModConfigManager.get(Configs.spawnCrimsonNewts, true)) {
             BiomeModifications.addSpawn(BiomeSelectors.tag(ModBiomeTags.SPAWNS_CRIMSON_NEWTS), SpawnGroup.CREATURE,
                     ModEntities.CRIMSON_NEWT, 60, 2, 3);
         }
 
-        if (ClutterConfig.getInstance().getBoolean(SPAWN_WARPED_NEWTS)) {
+        if (ModConfigManager.get(Configs.spawnWarpedNewts, true)) {
             BiomeModifications.addSpawn(BiomeSelectors.tag(ModBiomeTags.SPAWNS_WARPED_NEWTS), SpawnGroup.CREATURE,
                     ModEntities.WARPED_NEWT, 60, 2, 3);
         }
 
-        if (ClutterConfig.getInstance().getBoolean(SPAWN_BUTTERFLIES)) {
+        if (ModConfigManager.get(Configs.spawnEmberTortoises, true)) {
+            BiomeModifications.addSpawn(BiomeSelectors.tag(ModBiomeTags.SPAWNS_WARPED_NEWTS), SpawnGroup.CREATURE,
+                    ModEntities.EMBER_TORTOISE, 60, 1, 2);
+        }
+
+        if (ModConfigManager.get(Configs.spawnButterflies, true)) {
             BiomeModifications.addSpawn(BiomeSelectors.includeByKey(FLOWER_FOREST, SUNFLOWER_PLAINS, MEADOW, CHERRY_GROVE), SpawnGroup.CREATURE,
                     ModEntities.BUTTERFLY, 20, 2, 4);
         }
 
-        if (ClutterConfig.getInstance().getBoolean(SPAWN_CHAMELEONS)) {
+        if (ModConfigManager.get(Configs.spawnChameleons, true)) {
             BiomeModifications.addSpawn(BiomeSelectors.tag(BiomeTags.IS_JUNGLE), SpawnGroup.CREATURE,
                     ModEntities.CHAMELEON, 15, 1, 2);
         }
 
-        if (ClutterConfig.getInstance().getBoolean(SPAWN_MOSSBLOOMS)) {
+        if (ModConfigManager.get(Configs.spawnMossblooms, true)) {
             BiomeModifications.addSpawn(BiomeSelectors.includeByKey(LUSH_CAVES), SpawnGroup.AMBIENT,
                     ModEntities.MOSSBLOOM, 30, 1, 2);
         }
 
-        if (ClutterConfig.getInstance().getBoolean(SPAWN_KIWIS)) {
+        if (ModConfigManager.get(Configs.spawnKiwis, true)) {
             BiomeModifications.addSpawn(BiomeSelectors.tag(BiomeTags.IS_JUNGLE), SpawnGroup.CREATURE,
                     ModEntities.KIWI_BIRD, 30, 2, 3);
         }
 
-        if (ClutterConfig.getInstance().getBoolean(SPAWN_EMPEROR_PENGUINS)) {
+        if (ModConfigManager.get(Configs.spawnEmperorPenguins, true)) {
             BiomeModifications.addSpawn(BiomeSelectors.includeByKey(ICE_SPIKES, SNOWY_PLAINS, SNOWY_BEACH), SpawnGroup.CREATURE,
                     ModEntities.EMPEROR_PENGUIN, 5, 2, 4);
         }
 
-        if (ClutterConfig.getInstance().getBoolean(SPAWN_BEAVERS)) {
+        if (ModConfigManager.get(Configs.spawnBeavers, true)) {
             BiomeModifications.addSpawn(BiomeSelectors.includeByKey(RIVER), SpawnGroup.CREATURE,
                     ModEntities.BEAVER, 5, 2, 3);
         }
 
-        if (ClutterConfig.getInstance().getBoolean(SPAWN_CAPYBARAS)) {
+        if (ModConfigManager.get(Configs.spawnCapybaras, true)) {
             BiomeModifications.addSpawn(BiomeSelectors.tag(BiomeTags.IS_SAVANNA), SpawnGroup.CREATURE,
                     ModEntities.CAPYBARA, 5, 3, 5);
         }
-        if (ClutterConfig.getInstance().getBoolean(SPAWN_JELLYFISHES)) {
+        if (ModConfigManager.get(Configs.spawnJellyfishes, true)) {
             BiomeModifications.addSpawn(BiomeSelectors.includeByKey(DEEP_LUKEWARM_OCEAN, LUKEWARM_OCEAN, WARM_OCEAN), SpawnGroup.WATER_CREATURE,
                     ModEntities.JELLYFISH, 6, 5, 9);
         }

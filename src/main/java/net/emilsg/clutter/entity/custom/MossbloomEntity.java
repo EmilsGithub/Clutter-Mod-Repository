@@ -212,6 +212,19 @@ public class MossbloomEntity extends ClutterAnimalEntity{
             if (this.getHornDropTimer() >= (SHOULD_DROP_HORNS_VALUE / 3)) this.setHasHorns(true);
             this.setHornDropTimer(this.getHornDropTimer() + random.nextInt(1) + 1);
         }
+
+        if(this.getVariant() == MossbloomVariant.M && this.isBaby()) {
+            this.setHasHorns(false);
+        }
+    }
+
+    @Override
+    protected void onGrowUp() {
+        super.onGrowUp();
+
+        if(!this.isBaby() && this.getVariant() == MossbloomVariant.M) {
+            this.setHasHorns(true);
+        }
     }
 
     @Nullable

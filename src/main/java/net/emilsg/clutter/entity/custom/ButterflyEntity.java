@@ -28,8 +28,8 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUsage;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.recipe.Ingredient;
@@ -38,7 +38,6 @@ import net.minecraft.registry.tag.BiomeTags;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
@@ -224,44 +223,46 @@ public class ButterflyEntity extends ClutterAnimalEntity {
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
         ItemStack heldItem = player.getStackInHand(hand);
 
-        if (!this.getWorld().isClient && heldItem.isOf(Items.GLASS_BOTTLE)) {
-            ButterflyVariant variant = this.getVariant();
-            Item returnItem;
-            switch (variant) {
-                case RED -> returnItem = ModItems.RED_BUTTERFLY_IN_A_BOTTLE;
-                case BLUE -> returnItem = ModItems.BLUE_BUTTERFLY_IN_A_BOTTLE;
-                case PURPLE -> returnItem = ModItems.PURPLE_BUTTERFLY_IN_A_BOTTLE;
-                case WHITE -> returnItem = ModItems.WHITE_BUTTERFLY_IN_A_BOTTLE;
-                case GRAY -> returnItem = ModItems.GRAY_BUTTERFLY_IN_A_BOTTLE;
-                case ORANGE -> returnItem = ModItems.ORANGE_BUTTERFLY_IN_A_BOTTLE;
-                case LIME -> returnItem = ModItems.LIME_BUTTERFLY_IN_A_BOTTLE;
-                case GREEN -> returnItem = ModItems.GREEN_BUTTERFLY_IN_A_BOTTLE;
-                case BLACK -> returnItem = ModItems.BLACK_BUTTERFLY_IN_A_BOTTLE;
-                case LIGHT_GRAY -> returnItem = ModItems.LIGHT_GRAY_BUTTERFLY_IN_A_BOTTLE;
-                case LIGHT_BLUE -> returnItem = ModItems.LIGHT_BLUE_BUTTERFLY_IN_A_BOTTLE;
-                case BROWN -> returnItem = ModItems.BROWN_BUTTERFLY_IN_A_BOTTLE;
-                case CYAN -> returnItem = ModItems.CYAN_BUTTERFLY_IN_A_BOTTLE;
-                case MAGENTA -> returnItem = ModItems.MAGENTA_BUTTERFLY_IN_A_BOTTLE;
-                case PINK -> returnItem = ModItems.PINK_BUTTERFLY_IN_A_BOTTLE;
-                case CRIMSON -> returnItem = ModItems.CRIMSON_BUTTERFLY_IN_A_BOTTLE;
-                case WARPED -> returnItem = ModItems.WARPED_BUTTERFLY_IN_A_BOTTLE;
-                case SOUL -> returnItem = ModItems.SOUL_BUTTERFLY_IN_A_BOTTLE;
-                default -> returnItem = ModItems.YELLOW_BUTTERFLY_IN_A_BOTTLE;
-            }
-            ItemStack returnStack = new ItemStack(returnItem);
+        tryBottle(player, hand, this);
 
-            if (!player.getAbilities().creativeMode) {
-                heldItem.decrement(1);
-            }
-
-            if (!player.getInventory().insertStack(returnStack)) {
-                player.dropItem(returnStack, false);
-            }
-
-            player.playSound(SoundEvents.BLOCK_WOOL_FALL, SoundCategory.PLAYERS, 1.0f, 1.5f);
-            this.remove(RemovalReason.DISCARDED);
-            return ActionResult.SUCCESS;
-        }
+        //if (!this.getWorld().isClient && heldItem.isOf(Items.GLASS_BOTTLE)) {
+        //    ButterflyVariant variant = this.getVariant();
+        //    Item returnItem;
+        //    switch (variant) {
+        //        case RED -> returnItem = ModItems.RED_BUTTERFLY_IN_A_BOTTLE;
+        //        case BLUE -> returnItem = ModItems.BLUE_BUTTERFLY_IN_A_BOTTLE;
+        //        case PURPLE -> returnItem = ModItems.PURPLE_BUTTERFLY_IN_A_BOTTLE;
+        //        case WHITE -> returnItem = ModItems.WHITE_BUTTERFLY_IN_A_BOTTLE;
+        //        case GRAY -> returnItem = ModItems.GRAY_BUTTERFLY_IN_A_BOTTLE;
+        //        case ORANGE -> returnItem = ModItems.ORANGE_BUTTERFLY_IN_A_BOTTLE;
+        //        case LIME -> returnItem = ModItems.LIME_BUTTERFLY_IN_A_BOTTLE;
+        //        case GREEN -> returnItem = ModItems.GREEN_BUTTERFLY_IN_A_BOTTLE;
+        //        case BLACK -> returnItem = ModItems.BLACK_BUTTERFLY_IN_A_BOTTLE;
+        //        case LIGHT_GRAY -> returnItem = ModItems.LIGHT_GRAY_BUTTERFLY_IN_A_BOTTLE;
+        //        case LIGHT_BLUE -> returnItem = ModItems.LIGHT_BLUE_BUTTERFLY_IN_A_BOTTLE;
+        //        case BROWN -> returnItem = ModItems.BROWN_BUTTERFLY_IN_A_BOTTLE;
+        //        case CYAN -> returnItem = ModItems.CYAN_BUTTERFLY_IN_A_BOTTLE;
+        //        case MAGENTA -> returnItem = ModItems.MAGENTA_BUTTERFLY_IN_A_BOTTLE;
+        //        case PINK -> returnItem = ModItems.PINK_BUTTERFLY_IN_A_BOTTLE;
+        //        case CRIMSON -> returnItem = ModItems.CRIMSON_BUTTERFLY_IN_A_BOTTLE;
+        //        case WARPED -> returnItem = ModItems.WARPED_BUTTERFLY_IN_A_BOTTLE;
+        //        case SOUL -> returnItem = ModItems.SOUL_BUTTERFLY_IN_A_BOTTLE;
+        //        default -> returnItem = ModItems.YELLOW_BUTTERFLY_IN_A_BOTTLE;
+        //    }
+        //    ItemStack returnStack = new ItemStack(returnItem);
+//
+        //    if (!player.getAbilities().creativeMode) {
+        //        heldItem.decrement(1);
+        //    }
+//
+        //    if (!player.getInventory().insertStack(returnStack)) {
+        //        player.dropItem(returnStack, false);
+        //    }
+//
+        //    player.playSound(SoundEvents.BLOCK_WOOL_FALL, SoundCategory.PLAYERS, 1.0f, 1.5f);
+        //    this.remove(RemovalReason.DISCARDED);
+        //    return ActionResult.SUCCESS;
+        //}
         return super.interactMob(player, hand);
     }
 
@@ -386,5 +387,83 @@ public class ButterflyEntity extends ClutterAnimalEntity {
         protected boolean shouldStayHorizontal() {
             return true;
         }
+    }
+
+    public void copyDataToStack(ButterflyEntity entity, ItemStack stack) {
+        NbtCompound nbtCompound = stack.getOrCreateNbt();
+        if (entity.hasCustomName()) {
+            stack.setCustomName(entity.getCustomName());
+        }
+
+        if (entity.isAiDisabled()) {
+            nbtCompound.putBoolean("NoAI", entity.isAiDisabled());
+        }
+
+        if (entity.isSilent()) {
+            nbtCompound.putBoolean("Silent", entity.isSilent());
+        }
+
+        if (entity.hasNoGravity()) {
+            nbtCompound.putBoolean("NoGravity", entity.hasNoGravity());
+        }
+
+        if (entity.isGlowingLocal()) {
+            nbtCompound.putBoolean("Glowing", entity.isGlowingLocal());
+        }
+
+        if (entity.isInvulnerable()) {
+            nbtCompound.putBoolean("Invulnerable", entity.isInvulnerable());
+        }
+
+        nbtCompound.putInt("Variant", entity.getTypeVariant());
+        nbtCompound.putFloat("Health", entity.getHealth());
+    }
+
+    public void copyDataFromNbt(ButterflyEntity entity, NbtCompound nbt) {
+        if (nbt.contains("NoAI")) {
+            entity.setAiDisabled(nbt.getBoolean("NoAI"));
+        }
+
+        if (nbt.contains("Silent")) {
+            entity.setSilent(nbt.getBoolean("Silent"));
+        }
+
+        if (nbt.contains("NoGravity")) {
+            entity.setNoGravity(nbt.getBoolean("NoGravity"));
+        }
+
+        if (nbt.contains("Glowing")) {
+            entity.setGlowing(nbt.getBoolean("Glowing"));
+        }
+
+        if (nbt.contains("Invulnerable")) {
+            entity.setInvulnerable(nbt.getBoolean("Invulnerable"));
+        }
+
+        if (nbt.contains("Variant")) {
+            entity.setVariant(ButterflyVariant.byId(nbt.getInt("Variant")));
+        }
+
+        if (nbt.contains("Health", 99)) {
+            entity.setHealth(nbt.getFloat("Health"));
+        }
+
+    }
+
+    private ActionResult tryBottle(PlayerEntity player, Hand hand, ButterflyEntity entity) {
+        ItemStack itemStack = player.getStackInHand(hand);
+        if (itemStack.getItem() == Items.GLASS_BOTTLE && entity.isAlive()) {
+            entity.playSound(SoundEvents.ITEM_BOTTLE_FILL_DRAGONBREATH, 1.0F, 1.0F);
+            ItemStack bottleStack = new ItemStack(ModItems.BUTTERFLY_IN_A_BOTTLE);
+            copyDataToStack(entity, bottleStack);
+            ItemStack butterflyBottleStack = ItemUsage.exchangeStack(itemStack, player, bottleStack, false);
+            player.setStackInHand(hand, butterflyBottleStack);
+            World world = entity.getWorld();
+
+            entity.discard();
+            return ActionResult.success(world.isClient);
+        }
+
+        return ActionResult.PASS;
     }
 }

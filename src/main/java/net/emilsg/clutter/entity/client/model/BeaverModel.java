@@ -81,7 +81,8 @@ public class BeaverModel<T extends BeaverEntity> extends ClutterModel<T> {
         boolean isTouchingWater = beaverEntity.isTouchingWater();
 
         if(!isTouchingWater) {
-            this.animateMovement(BeaverAnimations.BEAVER_WALK, limbSwing, limbSwingAmount, 1.5f, 2f);
+            this.animateMovement(BeaverAnimations.BEAVER_WALK, limbSwing, limbSwingAmount, 2.0f, 2.5f);
+            this.updateAnimation(beaverEntity.idleAnimationState, BeaverAnimations.BEAVER_IDLE, ageInTicks, 1.0f);
         } else {
             float animationSpeed = (float)(beaverEntity.getVelocity().length() * 5) + Math.abs(0.5f);
             if (animationSpeed >= 1.2f) animationSpeed = 1.2f;

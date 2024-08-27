@@ -15,6 +15,8 @@ public class EchofinRenderer extends MobEntityRenderer<EchofinEntity, EchofinMod
 
     public static final Identifier CHORUS_TEXTURE = new Identifier(Clutter.MOD_ID, "textures/entity/chorus_echofin_box.png");
     public static final Identifier EMISSIVE_CHORUS_TEXTURE = new Identifier(Clutter.MOD_ID, "textures/entity/chorus_echofin_box_emissive.png");
+    public static final Identifier LEVITATING_TEXTURE = new Identifier(Clutter.MOD_ID, "textures/entity/levitating_echofin_box.png");
+    public static final Identifier EMISSIVE_LEVITATING_TEXTURE = new Identifier(Clutter.MOD_ID, "textures/entity/levitating_echofin_box_emissive.png");
 
     public EchofinRenderer(EntityRendererFactory.Context ctx) {
         super(ctx, new EchofinModel<>(ctx.getPart(ModModelLayers.ECHOFIN)), 0.4f);
@@ -31,7 +33,7 @@ public class EchofinRenderer extends MobEntityRenderer<EchofinEntity, EchofinMod
     public static Identifier getEmissiveTexture(EchofinEntity echofinEntity) {
         return echofinEntity.hasAbility()
         ? switch (echofinEntity.getVariant()) {
-            case LEVITATING -> null;
+            case LEVITATING -> EMISSIVE_LEVITATING_TEXTURE;
             case CHORUS -> EMISSIVE_CHORUS_TEXTURE;
         }
         : null;
@@ -40,7 +42,7 @@ public class EchofinRenderer extends MobEntityRenderer<EchofinEntity, EchofinMod
     @Override
     public Identifier getTexture(EchofinEntity echofinEntity) {
         return switch (echofinEntity.getVariant()) {
-            case LEVITATING -> CHORUS_TEXTURE;
+            case LEVITATING -> LEVITATING_TEXTURE;
             case CHORUS -> CHORUS_TEXTURE;
         };
     }

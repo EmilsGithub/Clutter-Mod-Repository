@@ -2,19 +2,12 @@ package net.emilsg.clutter.util;
 
 import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.command.ResetConfigCommand;
-import net.emilsg.clutter.command.UpdateConfigsCommand;
-import net.emilsg.clutter.config.ClutterConfig;
 import net.emilsg.clutter.item.ModItems;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.*;
-import net.minecraft.util.Formatting;
 
 
 public class ModUtil {
@@ -28,34 +21,15 @@ public class ModUtil {
     }
 
     private static void registerJoinServerEvents() {
-        ServerLifecycleEvents.SERVER_STARTED.register(server -> {
-            ServerPlayConnectionEvents.JOIN.register((handler, sender, server1) -> {
-                ServerPlayerEntity player = handler.player;
-                if (server1.getPlayerManager().isOperator(player.getGameProfile())) {
-                    boolean isCurrent = ClutterConfig.getInstance().isConfigVersionCurrent();
-                    if (!isCurrent) {
-
-                        MutableText operatorOnlyText = Text.translatable("clutter.commands.config.op_only").formatted(Formatting.RED);
-
-                        MutableText startText = Text.translatable("clutter.commands.config.config_update_prompt", ClutterConfig.getInstance().getFileVersionNumber(ClutterConfig.getInstance().getCurrentFileVersion()));
-
-                        MutableText versionText = Text.literal("(" + ClutterConfig.FILE_VERSION + ")");
-
-                        MutableText updatePromptText = Texts.bracketed(
-                                Text.translatable("clutter.commands.config.config_update")).styled(style -> style.withColor(Formatting.GREEN)
-                                .withClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/clutter update_configs"))
-                                .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Text.literal("clutter.commands.config.update_tooltip"))));
-
-                        player.sendMessage(Text.translatable("clutter.commands.config.config_prompt", operatorOnlyText, startText, versionText, updatePromptText), false);
-                    }
-                }
-            });
-        });
+        //ServerLifecycleEvents.SERVER_STARTED.register(server -> {
+        //    ServerPlayConnectionEvents.JOIN.register((handler, sender, server1) -> {
+        //
+        //    });
+        //});
     }
 
     public static void registerCommands() {
         CommandRegistrationCallback.EVENT.register(ResetConfigCommand::register);
-        CommandRegistrationCallback.EVENT.register(UpdateConfigsCommand::register);
     }
 
     public static void registerFlammableBlocks() {

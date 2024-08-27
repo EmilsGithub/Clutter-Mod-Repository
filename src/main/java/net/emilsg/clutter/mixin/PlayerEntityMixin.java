@@ -1,7 +1,8 @@
 package net.emilsg.clutter.mixin;
 
 import net.emilsg.clutter.Clutter;
-import net.emilsg.clutter.config.ClutterConfig;
+import net.emilsg.clutter.config.Configs;
+import net.emilsg.clutter.config.ModConfigManager;
 import net.emilsg.clutter.item.ModItems;
 import net.emilsg.clutter.item.custom.CopperDivingArmorItem;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -34,7 +35,7 @@ public abstract class PlayerEntityMixin {
         ItemStack stack = playerEntity.getMainHandStack();
         int greedLevel = EnchantmentHelper.getLevel(Registries.ENCHANTMENT.get(new Identifier(Clutter.MOD_ID, "greed")), stack);
 
-        if (greedLevel > 0 && Math.random() < (ClutterConfig.getInstance().getFloat("greed_chance_per_level") * greedLevel)) {
+        if (greedLevel > 0 && Math.random() < (ModConfigManager.get(Configs.greedChancePerLevel, 0.01f) * greedLevel)) {
             other.dropItem(ModItems.COMMON_COIN_POUCH);
         }
     }

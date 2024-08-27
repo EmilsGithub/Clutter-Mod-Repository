@@ -94,8 +94,8 @@ public class MossbloomModel<T extends MossbloomEntity> extends ClutterModel<T> {
     private void updateVisibleParts(MossbloomEntity mossbloom) {
         boolean horns = mossbloom.getHasHorns();
 
-        leftHorn.visible = horns;
-        rightHorn.visible = horns;
+        leftHorn.visible = horns && !mossbloom.isBaby();
+        rightHorn.visible = horns && !mossbloom.isBaby();
     }
 
     @Override

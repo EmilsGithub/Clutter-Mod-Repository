@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "clutter:item/decorated_elytra_smithing_template_shards"
+  }
+}

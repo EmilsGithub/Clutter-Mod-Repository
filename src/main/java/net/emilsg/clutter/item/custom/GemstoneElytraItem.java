@@ -5,16 +5,16 @@ import net.minecraft.item.ItemStack;
 
 public class GemstoneElytraItem extends ClutterElytraItem {
     Item repairItem;
-    String type;
+    String stringType;
 
-    public GemstoneElytraItem(Settings settings, Item wingType, String type) {
-        super(settings);
-        this.repairItem = wingType;
-        this.type = type;
+    public GemstoneElytraItem(Settings settings, Item component, String stringType) {
+        super(settings, component);
+        this.repairItem = component;
+        this.stringType = stringType;
     }
 
-    public String getType() {
-        return type;
+    public String getTypeString() {
+        return stringType;
     }
 
     public boolean canRepair(ItemStack stack, ItemStack ingredient) {

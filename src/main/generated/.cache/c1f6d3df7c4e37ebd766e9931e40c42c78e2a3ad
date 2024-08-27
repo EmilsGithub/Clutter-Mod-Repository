@@ -1,4 +1,4 @@
-// 1.20.1	2024-08-13T23:09:22.0437113	Clutter/Tags for minecraft:block
+// 1.20.1	2024-08-23T23:20:54.5198778	Clutter/Tags for minecraft:block
 823e88d6c4f2b77de20b46502ccd9cb7f7c2e2a7 data\minecraft\tags\blocks\wooden_slabs.json
 d825d51f61b7397f96c2bc8aea4f90793cc1c686 data\minecraft\tags\blocks\coral_plants.json
 330f59fcbee67b03468a990938347a6ba2f4369e data\clutter\tags\blocks\armchairs.json
@@ -15,7 +15,6 @@ e463cdb06c28cc79d27cbbc1546edf9eb4bc1ec8 data\clutter\tags\blocks\large_chains.j
 62e0090c3c26aa745e78730a247cf0ee5d019489 data\minecraft\tags\blocks\planks.json
 51a73041271339706bfe865514cf3c33586e7ba7 data\minecraft\tags\blocks\dirt.json
 fd8697a50e79beccc032de64e1f4ef19942b77e4 data\clutter\tags\blocks\strippable_chairs.json
-d4ab1af1dd3f975f3b8f3aaea3d1e6908e551e26 data\clutter\tags\blocks\strippable_logs.json
 b082460107c8e90898ff881496a5c535683a120b data\minecraft\tags\blocks\saplings.json
 83b4f54ce48b4732e09d5d67d4f721eba9ec5568 data\minecraft\tags\blocks\mineable\pickaxe.json
 932be1264b983266e3e46b0e2a706071afa9dadc data\minecraft\tags\blocks\mineable\hoe.json
@@ -30,8 +29,8 @@ cc1e13c42f33081929c2a443bc4d13915d391686 data\c\tags\blocks\ores.json
 73da1f42dbf6cf9cddd91ee94e7319886c13b050 data\minecraft\tags\blocks\enchantment_power_provider.json
 70a5006cc59ffc6e4d2dd58d1e02aa2e293bc0d2 data\minecraft\tags\blocks\wooden_trapdoors.json
 5b7ef7e84e647b2340b20105a638d804a739b213 data\clutter\tags\blocks\emperor_penguin_egg_hatch_boost.json
-6faabaf765c140240c01204b7393d1f2cc25d43f data\clutter\tags\blocks\echofins_spawn_on.json
 312236b356fd9cbb3746220d1679499d0ceef07f data\clutter\tags\blocks\trellises.json
+6faabaf765c140240c01204b7393d1f2cc25d43f data\clutter\tags\blocks\echofins_spawn_on.json
 e4cf3b77a933090fcc0af777cec78653d2751721 data\clutter\tags\blocks\lanterns.json
 43741a3c067b04f12e8da1c0e45f7dbe0bda10b8 data\clutter\tags\blocks\ember_tortoises_spawn_on.json
 055a246acca8a3a96f4f57e2b1e94b4f811307b7 data\minecraft\tags\blocks\mushroom_grow_block.json
@@ -50,8 +49,8 @@ d01bf460facc1bce6f2a643fa837b894eff14fc5 data\clutter\tags\blocks\strippable_ben
 51a73041271339706bfe865514cf3c33586e7ba7 data\minecraft\tags\blocks\sniffer_diggable_block.json
 076695fa5ec6db7b1ab6e1bb1f8bb764fee5af3f data\minecraft\tags\blocks\wooden_fences.json
 2eee200a94bdde83d47fbc758dc4b545c15c6aff data\minecraft\tags\blocks\climbable.json
-46868a564f39b4b59cb93d5fc888ef036985c10b data\clutter\tags\blocks\packed_mud.json
 e655cf32b93eafab387eb9c9b9aeeb22bae3efbb data\clutter\tags\blocks\immovable.json
+46868a564f39b4b59cb93d5fc888ef036985c10b data\clutter\tags\blocks\packed_mud.json
 3ac6923c0d0e23977b1a1d5e8fab1793b5250d0b data\clutter\tags\blocks\copper_doors.json
 9239e840cbbd2d60a4f2b062ec4819a4049ff66b data\clutter\tags\blocks\benches.json
 d7909c39e4c64af8d9bff426413f9b8c8941007e data\minecraft\tags\blocks\slabs.json

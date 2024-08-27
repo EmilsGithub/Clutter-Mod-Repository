@@ -66,7 +66,7 @@ public class EmperorPenguinModel<T extends EmperorPenguinEntity> extends Clutter
         this.getPart().traverse().forEach(ModelPart::resetTransform);
         this.setHeadAngles(emperorPenguinEntity, netHeadYaw, headPitch, ageInTicks);
 
-        this.animateMovement(EmperorPenguinAnimations.EMPEROR_PENGUIN_WALK, limbSwing, limbSwingAmount, 1.5f, 2f);
+        this.animateMovement(EmperorPenguinAnimations.EMPEROR_PENGUIN_WALK, limbSwing, limbSwingAmount, 2.0f, 2.5f);
 
         this.updateAnimation(emperorPenguinEntity.flapAnimationStateOne, EmperorPenguinAnimations.EMPEROR_PENGUIN_RANDOM_FLAP, ageInTicks, 1f);
         this.updateAnimation(emperorPenguinEntity.flapAnimationStateTwo, EmperorPenguinAnimations.EMPEROR_PENGUIN_RANDOM_FLAP_TWO, ageInTicks, 1f);

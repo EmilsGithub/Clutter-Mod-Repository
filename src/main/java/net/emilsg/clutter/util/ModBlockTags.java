@@ -41,7 +41,6 @@ public class ModBlockTags {
     public static final TagKey<Block> IMMOVABLE = create("clutter", "immovable");
     public static final TagKey<Block> COPPER_DOORS = create("clutter", "copper_doors");
     public static final TagKey<Block> GREEN_FIRE_BASE_BLOCKS = create("clutter", "green_fire_base_blocks");
-    public static final TagKey<Block> STRIPPABLE_LOGS = create("clutter", "strippable_logs");
     public static final TagKey<Block> KIWI_EGG_HATCH_BOOST = create("clutter", "kiwi_egg_hatch_boost");
     public static final TagKey<Block> EMPEROR_PENGUIN_EGG_HATCH_BOOST = create("clutter", "emperor_penguin_egg_hatch_boost");
 

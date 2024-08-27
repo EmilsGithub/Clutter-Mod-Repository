@@ -49,7 +49,7 @@ public abstract class ElytraFeatureRendererMixin {
         }
 
         if (elytraItem instanceof GemstoneElytraItem gemstoneElytraItem) {
-            String type = gemstoneElytraItem.getType();
+            String type = gemstoneElytraItem.getTypeString();
             return new Identifier(Clutter.MOD_ID, "textures/entity/elytra/" + type + "_gemstone_elytra.png");
         }
 

@@ -3,7 +3,7 @@ package net.emilsg.clutter.command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import net.emilsg.clutter.config.ClutterConfig;
+import net.emilsg.clutter.config.ModConfigManager;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
@@ -20,7 +20,7 @@ public class ResetConfigCommand {
     }
 
     private static int run(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
-        ClutterConfig.getInstance().resetConfig();
+        ModConfigManager.resetConfigs();
         MutableText operatorOnlyText = Text.translatable("clutter.commands.config.op_only").formatted(Formatting.RED);
         context.getSource().sendFeedback(() -> Text.translatable("clutter.commands.config.reset", operatorOnlyText).formatted(Formatting.YELLOW).formatted(Formatting.ITALIC), true);
         return 1;

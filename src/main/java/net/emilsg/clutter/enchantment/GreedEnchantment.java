@@ -1,9 +1,7 @@
 package net.emilsg.clutter.enchantment;
 
-import net.emilsg.clutter.config.ClutterConfig;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
 
@@ -33,9 +31,5 @@ public class GreedEnchantment extends Enchantment {
     @Override
     public int getMaxLevel() {
         return 3;
-    }
-
-    public boolean canAccept(Enchantment other) {
-        return !ClutterConfig.getInstance().getBoolean("greed_with_looting_and_mending") ? (super.canAccept(other) && other != Enchantments.LOOTING && other != Enchantments.FORTUNE && other != Enchantments.MENDING) : super.canAccept(other);
     }
 }

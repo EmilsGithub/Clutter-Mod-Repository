@@ -117,7 +117,7 @@ public class EchofinEntity extends ClutterAnimalEntity {
     @Override
     public void onDamaged(DamageSource damageSource) {
         super.onDamaged(damageSource);
-        this.setAbilityEntitiesTimer(0);
+        this.setEntityAbilityTimer(0);
     }
 
     @Override
@@ -125,11 +125,11 @@ public class EchofinEntity extends ClutterAnimalEntity {
         super.tick();
         World world = this.getWorld();
         if (world instanceof ServerWorld) {
-            setAbilityEntitiesTimer(getAbilityTimerEntitiesTimer() + random.nextInt(3));
+            setEntityAbilityTimer(getAbilityTimerEntitiesTimer() + random.nextInt(3));
         }
 
         if (hasAbility() && random.nextInt(1000) == 0) {
-            setAbilityEntitiesTimer(0);
+            setEntityAbilityTimer(0);
         }
 
         if (world.isClient) {
@@ -204,7 +204,7 @@ public class EchofinEntity extends ClutterAnimalEntity {
         return this.dataTracker.get(ABILITY_TIMER);
     }
 
-    public void setAbilityEntitiesTimer(int timer) {
+    public void setEntityAbilityTimer(int timer) {
         this.dataTracker.set(ABILITY_TIMER, timer);
     }
 
@@ -249,14 +249,14 @@ public class EchofinEntity extends ClutterAnimalEntity {
             Vec3d vec3d = player.getPos();
             if (player.teleport(x, y, z, true)) {
                 world.emitGameEvent(GameEvent.TELEPORT, vec3d, GameEvent.Emitter.of(player));
-                this.setAbilityEntitiesTimer(0);
+                this.setEntityAbilityTimer(0);
                 break;
             }
         }
     }
 
     private void levitatePlayer(PlayerEntity player) {
-        player.addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 100, 1), this);
+        player.addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 100, 2), this);
     }
 
 
@@ -296,7 +296,7 @@ public class EchofinEntity extends ClutterAnimalEntity {
         int k = nbt.getInt("HomePosZ");
         this.setHomePos(new BlockPos(i, j, k));
         this.dataTracker.set(DATA_ID_TYPE_VARIANT, nbt.getInt("Variant"));
-        this.setAbilityEntitiesTimer(nbt.getInt("AbilityTimer"));
+        this.setEntityAbilityTimer(nbt.getInt("AbilityTimer"));
     }
 
     @Nullable

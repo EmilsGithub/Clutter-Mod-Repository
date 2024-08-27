@@ -1195,30 +1195,6 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
                 Blocks.SNOW
         );
 
-        getOrCreateTagBuilder(ModBlockTags.STRIPPABLE_LOGS).add(
-                Blocks.ACACIA_LOG,
-                Blocks.BIRCH_LOG,
-                Blocks.CRIMSON_STEM,
-                Blocks.DARK_OAK_LOG,
-                Blocks.JUNGLE_LOG,
-                Blocks.MANGROVE_LOG,
-                Blocks.OAK_LOG,
-                Blocks.SPRUCE_LOG,
-                Blocks.WARPED_STEM,
-                Blocks.CHERRY_LOG,
-                Blocks.ACACIA_WOOD,
-                Blocks.BIRCH_WOOD,
-                Blocks.CRIMSON_HYPHAE,
-                Blocks.DARK_OAK_WOOD,
-                Blocks.JUNGLE_WOOD,
-                Blocks.MANGROVE_WOOD,
-                Blocks.OAK_WOOD,
-                Blocks.SPRUCE_WOOD,
-                Blocks.WARPED_HYPHAE,
-                Blocks.CHERRY_WOOD,
-                Blocks.BAMBOO_BLOCK
-        );
-
         getOrCreateTagBuilder(ModBlockTags.STRIPPABLE_BENCHES).add(
                 ModBlocks.ACACIA_BENCH,
                 ModBlocks.BIRCH_BENCH,

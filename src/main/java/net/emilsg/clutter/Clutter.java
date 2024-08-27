@@ -3,7 +3,8 @@ package net.emilsg.clutter;
 import net.emilsg.clutter.block.ModBlockEntities;
 import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.compat.trinkets.TrinketsElytraUse;
-import net.emilsg.clutter.config.ClutterConfig;
+import net.emilsg.clutter.config.Configs;
+import net.emilsg.clutter.config.ModConfigManager;
 import net.emilsg.clutter.effect.ModEffects;
 import net.emilsg.clutter.enchantment.ModEnchantments;
 import net.emilsg.clutter.entity.ClutterAttributes;
@@ -35,7 +36,7 @@ public class Clutter implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        ClutterConfig.init();
+        ModConfigManager.loadConfig();
 
         ModItemGroups.registerItemGroups();
         ModEffects.registerEffects();
@@ -68,7 +69,7 @@ public class Clutter implements ModInitializer {
 
         ClutterAttributes.registerAttributes();
 
-        if (IS_TRINKETS_LOADED && ClutterConfig.getInstance().getBoolean(ClutterConfig.DO_TRINKETS_ELYTRA_FLIGHT))
+        if (IS_TRINKETS_LOADED && ModConfigManager.get(Configs.doTrinketsElytraFlight, true))
             TrinketsElytraUse.doFlight();
 
         ModMessages.registerHandshakePackets();

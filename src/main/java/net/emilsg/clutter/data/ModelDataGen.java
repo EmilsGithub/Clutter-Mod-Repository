@@ -324,8 +324,19 @@ public class ModelDataGen extends FabricModelProvider {
         registerSpawnEggItem(itemGen, ModItems.EMBER_TORTOISE_SPAWN_EGG);
         registerSpawnEggItem(itemGen, ModItems.MANTA_RAY_SPAWN_EGG);
 
+        groupRegisterGeneratedItemModels(itemGen,
+                ModItems.DECORATED_ELYTRA_SMITHING_TEMPLATE,
+                ModItems.DECORATED_ELYTRA_SMITHING_TEMPLATE_SHARDS
+        );
+
         for (Item elytra : Registries.ITEM) {
             if (elytra instanceof ClutterElytraItem) registerElytra(itemGen, elytra);
+        }
+    }
+
+    private void groupRegisterGeneratedItemModels(ItemModelGenerator generator, Item... items) {
+        for (Item item : items) {
+            generator.register(item, Models.GENERATED);
         }
     }
 

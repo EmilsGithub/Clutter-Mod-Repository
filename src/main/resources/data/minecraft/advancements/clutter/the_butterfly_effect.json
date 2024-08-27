@@ -1,7 +1,7 @@
 {
   "display": {
     "icon": {
-      "item": "clutter:red_butterfly_in_a_bottle"
+      "item": "clutter:butterfly_in_a_bottle"
     },
     "title": {
       "translate": "advancements.clutter.the_butterfly_effect.title"

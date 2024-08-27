@@ -47,27 +47,27 @@ public class ItemTagDataGen extends FabricTagProvider.ItemTagProvider {
                 Items.SWEET_BERRIES
         );
 
-        getOrCreateTagBuilder(ModItemTags.BOTTLED_BUTTERFLIES).add(
-                ModItems.WHITE_BUTTERFLY_IN_A_BOTTLE,
-                ModItems.LIGHT_GRAY_BUTTERFLY_IN_A_BOTTLE,
-                ModItems.GRAY_BUTTERFLY_IN_A_BOTTLE,
-                ModItems.BLACK_BUTTERFLY_IN_A_BOTTLE,
-                ModItems.BROWN_BUTTERFLY_IN_A_BOTTLE,
-                ModItems.RED_BUTTERFLY_IN_A_BOTTLE,
-                ModItems.ORANGE_BUTTERFLY_IN_A_BOTTLE,
-                ModItems.YELLOW_BUTTERFLY_IN_A_BOTTLE,
-                ModItems.LIME_BUTTERFLY_IN_A_BOTTLE,
-                ModItems.GREEN_BUTTERFLY_IN_A_BOTTLE,
-                ModItems.CYAN_BUTTERFLY_IN_A_BOTTLE,
-                ModItems.LIGHT_BLUE_BUTTERFLY_IN_A_BOTTLE,
-                ModItems.BLUE_BUTTERFLY_IN_A_BOTTLE,
-                ModItems.PURPLE_BUTTERFLY_IN_A_BOTTLE,
-                ModItems.MAGENTA_BUTTERFLY_IN_A_BOTTLE,
-                ModItems.PINK_BUTTERFLY_IN_A_BOTTLE,
-                ModItems.CRIMSON_BUTTERFLY_IN_A_BOTTLE,
-                ModItems.WARPED_BUTTERFLY_IN_A_BOTTLE,
-                ModItems.SOUL_BUTTERFLY_IN_A_BOTTLE
-        );
+        //getOrCreateTagBuilder(ModItemTags.BOTTLED_BUTTERFLIES).add(
+        //        ModItems.WHITE_BUTTERFLY_IN_A_BOTTLE,
+        //        ModItems.LIGHT_GRAY_BUTTERFLY_IN_A_BOTTLE,
+        //        ModItems.GRAY_BUTTERFLY_IN_A_BOTTLE,
+        //        ModItems.BLACK_BUTTERFLY_IN_A_BOTTLE,
+        //        ModItems.BROWN_BUTTERFLY_IN_A_BOTTLE,
+        //        ModItems.RED_BUTTERFLY_IN_A_BOTTLE,
+        //        ModItems.ORANGE_BUTTERFLY_IN_A_BOTTLE,
+        //        ModItems.YELLOW_BUTTERFLY_IN_A_BOTTLE,
+        //        ModItems.LIME_BUTTERFLY_IN_A_BOTTLE,
+        //        ModItems.GREEN_BUTTERFLY_IN_A_BOTTLE,
+        //        ModItems.CYAN_BUTTERFLY_IN_A_BOTTLE,
+        //        ModItems.LIGHT_BLUE_BUTTERFLY_IN_A_BOTTLE,
+        //        ModItems.BLUE_BUTTERFLY_IN_A_BOTTLE,
+        //        ModItems.PURPLE_BUTTERFLY_IN_A_BOTTLE,
+        //        ModItems.MAGENTA_BUTTERFLY_IN_A_BOTTLE,
+        //        ModItems.PINK_BUTTERFLY_IN_A_BOTTLE,
+        //        ModItems.CRIMSON_BUTTERFLY_IN_A_BOTTLE,
+        //        ModItems.WARPED_BUTTERFLY_IN_A_BOTTLE,
+        //        ModItems.SOUL_BUTTERFLY_IN_A_BOTTLE
+        //);
 
         getOrCreateTagBuilder(ModItemTags.PLUSHIES).add(
                 ModBlocks.SHEEP_PLUSHIE.asItem(),

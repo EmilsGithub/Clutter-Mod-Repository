@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:amethyst_shard"
+  },
+  "base": {
+    "tag": "clutter:elytron"
+  },
+  "result": {
+    "item": "clutter:amethyst_gemstone_elytra"
+  },
+  "template": {
+    "item": "clutter:decorated_elytra_smithing_template"
+  }
+}

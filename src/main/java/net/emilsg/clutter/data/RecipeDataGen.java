@@ -3,6 +3,7 @@ package net.emilsg.clutter.data;
 import net.emilsg.clutter.Clutter;
 import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.item.ModItems;
+import net.emilsg.clutter.item.custom.ClutterElytraItem;
 import net.emilsg.clutter.recipe.KilningRecipeBuilder;
 import net.emilsg.clutter.util.ModItemTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -11,6 +12,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.SmithingTransformRecipeJsonBuilder;
 import net.minecraft.item.HoneycombItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
@@ -26,19 +28,6 @@ import java.util.function.Consumer;
 public class RecipeDataGen extends FabricRecipeProvider {
     public RecipeDataGen(FabricDataOutput output) {
         super(output);
-    }
-
-    public static void offerClutterWaxingRecipes(Consumer<RecipeJsonProvider> exporter) {
-        HoneycombItem.UNWAXED_TO_WAXED_BLOCKS.get().forEach((input, result) -> {
-            if (Registries.ITEM.getId(input.asItem()).getNamespace().equals(Clutter.MOD_ID)) {
-
-                ShapelessRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, result)
-                        .input(input).input(Items.HONEYCOMB)
-                        .criterion(hasItem(input), conditionsFromItem(input))
-                        .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(result)));
-
-            }
-        });
     }
 
     @Override
@@ -72,6 +61,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
         kilningRecipe(Items.PURPLE_TERRACOTTA, Items.PURPLE_GLAZED_TERRACOTTA, 1, exporter);
         kilningRecipe(Items.MAGENTA_TERRACOTTA, Items.MAGENTA_GLAZED_TERRACOTTA, 1, exporter);
         kilningRecipe(Items.PINK_TERRACOTTA, Items.PINK_GLAZED_TERRACOTTA, 1, exporter);
+
 
         offerClutterWaxingRecipes(exporter);
 
@@ -227,6 +217,29 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .criterion(hasItem(Items.STRING), conditionsFromItem(Items.STRING))
                 .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(ModItems.BUTTERFLY_WINGS)));
 
+        for (Item elytra : Registries.ITEM) {
+            if (elytra instanceof ClutterElytraItem clutterElytraItem) offerDecoratedElytraRecipes(exporter, elytra, clutterElytraItem.getComponent());
+        }
+    }
+
+    private void offerDecoratedElytraRecipes(Consumer<RecipeJsonProvider> exporter, Item result, Item addition) {
+        SmithingTransformRecipeJsonBuilder
+                .create(Ingredient.ofItems(ModItems.DECORATED_ELYTRA_SMITHING_TEMPLATE), Ingredient.fromTag(ModItemTags.ELYTRON), Ingredient.ofItems(addition), RecipeCategory.MISC, result)
+                .criterion("has_elytra", conditionsFromItem(ModItems.BUTTERFLY_IN_A_BOTTLE))
+                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(result)));
+    }
+
+    public void offerClutterWaxingRecipes(Consumer<RecipeJsonProvider> exporter) {
+        HoneycombItem.UNWAXED_TO_WAXED_BLOCKS.get().forEach((input, result) -> {
+            if (Registries.ITEM.getId(input.asItem()).getNamespace().equals(Clutter.MOD_ID)) {
+
+                ShapelessRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, result)
+                        .input(input).input(Items.HONEYCOMB)
+                        .criterion(hasItem(input), conditionsFromItem(input))
+                        .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(result)));
+
+            }
+        });
     }
 
     private void offerCombinationRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible input, ItemConvertible input2, ItemConvertible output, int count, RecipeCategory recipeCategory) {

@@ -44,18 +44,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BeaverEntity extends ClutterAnimalEntity {
-    private static final TrackedData<BlockPos> HOME_POS;
+    private static final TrackedData<BlockPos> HOME_POS = DataTracker.registerData(BeaverEntity.class, TrackedDataHandlerRegistry.BLOCK_POS);
 
     private static final Ingredient BREEDING_INGREDIENT = getIngredientWithName("sapling");
 
-    static {
-        HOME_POS = DataTracker.registerData(BeaverEntity.class, TrackedDataHandlerRegistry.BLOCK_POS);
-    }
-        public final AnimationState waterAnimationState = new AnimationState();
-    private int waterAnimationTimeout = 0;
-
+    public final AnimationState waterAnimationState = new AnimationState();
+    public final AnimationState idleAnimationState = new AnimationState();
     protected final SwimNavigation waterNavigation;
     protected final MobNavigation landNavigation;
+    private int waterAnimationTimeout = 0;
+    private int idleAnimationTimeout = 0;
 
     public BeaverEntity(EntityType<? extends ClutterAnimalEntity> entityType, World world) {
         super(entityType, world);
@@ -67,42 +65,6 @@ public class BeaverEntity extends ClutterAnimalEntity {
         this.setPathfindingPenalty(PathNodeType.WATER, 0.0F);
         this.waterNavigation = new SwimNavigation(this, world);
         this.landNavigation = new MobNavigation(this, world);
-    }
-
-    private static class BeaverMoveControl2 extends MoveControl {
-        private final BeaverEntity beaver;
-
-        public BeaverMoveControl2(BeaverEntity beaver) {
-            super(beaver);
-            this.beaver = beaver;
-        }
-
-        public void tick() {
-            if (this.beaver.isTouchingWater()) {
-                this.beaver.setVelocity(this.beaver.getVelocity().add(0.0, 0.005, 0.0));
-
-                if (this.state != State.MOVE_TO || this.beaver.getNavigation().isIdle()) {
-                    this.beaver.setMovementSpeed(0.0F);
-                    return;
-                }
-
-                double d = this.targetX - this.beaver.getX();
-                double e = this.targetY - this.beaver.getY();
-                double f = this.targetZ - this.beaver.getZ();
-                double g = Math.sqrt(d * d + e * e + f * f);
-                e /= g;
-                float h = (float)(MathHelper.atan2(f, d) * 57.2957763671875) - 90.0F;
-                this.beaver.setYaw(this.wrapDegrees(this.beaver.getYaw(), h, 90.0F));
-                this.beaver.bodyYaw = this.beaver.getYaw();
-                float i = (float)(this.speed * this.beaver.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED));
-                float j = MathHelper.lerp(0.125F, this.beaver.getMovementSpeed(), i);
-                this.beaver.setMovementSpeed(j);
-                this.beaver.setVelocity(this.beaver.getVelocity().add(0, this.beaver.getMovementSpeed() * e * 0.1, 0));
-            } else {
-                this.beaver.setVelocity(this.beaver.getVelocity().add(0.0, 0, 0.0));
-                super.tick();
-            }
-        }
     }
 
     private static Ingredient getIngredientWithName(String name) {
@@ -139,6 +101,13 @@ public class BeaverEntity extends ClutterAnimalEntity {
         } else {
             --this.waterAnimationTimeout;
         }
+
+        if (this.idleAnimationTimeout <= 0 && !this.isMoving() && this.getNavigation().isIdle()) {
+            this.idleAnimationTimeout = 40;
+            this.idleAnimationState.startIfNotRunning(this.age);
+        } else {
+            --this.idleAnimationTimeout;
+        }
     }
 
     @Override
@@ -159,7 +128,7 @@ public class BeaverEntity extends ClutterAnimalEntity {
             f = 0.0F;
         }
 
-        this.limbAnimator.updateLimbs(f, 0.2F);
+        this.limbAnimator.updateLimbs(f, 0.5F);
     }
 
     protected void initDataTracker() {
@@ -227,33 +196,33 @@ public class BeaverEntity extends ClutterAnimalEntity {
         ItemStack stackInHand = player.getStackInHand(hand);
 
         String itemID = Registries.ITEM.getId(stackInHand.getItem()).toString();
+        Block heldBlock = Block.getBlockFromItem(stackInHand.getItem());
 
-        if (itemID.contains("log")) {
-            Block heldBlock = Block.getBlockFromItem(stackInHand.getItem());
-            String strippedPath = itemID.replace(":", ":stripped_");
-            Identifier strippedID = new Identifier(strippedPath);
-            if (Registries.ITEM.containsId(strippedID)) {
-                dropStack(new ItemStack(Registries.ITEM.get(strippedID)));
-                getWorld().addBlockBreakParticles(getBlockPos(), heldBlock.getDefaultState());
-                if (!player.getAbilities().creativeMode) {
-                    stackInHand.decrement(1);
-                }
-                playSound(SoundEvents.BLOCK_WOOD_BREAK, 1.0f, 1.0f);
-                return ActionResult.SUCCESS;
-            }
-        } else if (itemID.contains("planks")) {
-            Block heldBlock = Block.getBlockFromItem(stackInHand.getItem());
+        if (itemID.contains("planks")) {
             ItemStack sticksWithCount = new ItemStack(Items.STICK);
             sticksWithCount.setCount(random.nextBetween(2, 3));
-            dropStack(sticksWithCount);
-            getWorld().addBlockBreakParticles(getBlockPos(), heldBlock.getDefaultState());
+            this.dropStack(sticksWithCount);
+            this.getWorld().addBlockBreakParticles(this.getBlockPos(), heldBlock.getDefaultState());
             if (!player.getAbilities().creativeMode) {
                 stackInHand.decrement(1);
             }
             playSound(SoundEvents.BLOCK_WOOD_BREAK, 1.0f, 1.0f);
             return ActionResult.SUCCESS;
         }
-        return super.interactMob(player, hand);
+
+        String strippedPath = itemID.replace(":", ":stripped_");
+        Identifier strippedID = new Identifier(strippedPath);
+        if (Registries.ITEM.containsId(strippedID)) {
+            this.dropStack(new ItemStack(Registries.ITEM.get(strippedID)));
+            this.getWorld().addBlockBreakParticles(this.getBlockPos(), heldBlock.getDefaultState());
+            if (!player.getAbilities().creativeMode) {
+                stackInHand.decrement(1);
+            }
+            playSound(SoundEvents.BLOCK_WOOD_BREAK, 1.0f, 1.0f);
+            return ActionResult.SUCCESS;
+        }
+
+        return ActionResult.PASS;
     }
 
     @Override
@@ -295,6 +264,42 @@ public class BeaverEntity extends ClutterAnimalEntity {
 
     }
 
+    private static class BeaverMoveControl2 extends MoveControl {
+        private final BeaverEntity beaver;
+
+        public BeaverMoveControl2(BeaverEntity beaver) {
+            super(beaver);
+            this.beaver = beaver;
+        }
+
+        public void tick() {
+            if (this.beaver.isTouchingWater()) {
+                this.beaver.setVelocity(this.beaver.getVelocity().add(0.0, 0.005, 0.0));
+
+                if (this.state != State.MOVE_TO || this.beaver.getNavigation().isIdle()) {
+                    this.beaver.setMovementSpeed(0.0F);
+                    return;
+                }
+
+                double d = this.targetX - this.beaver.getX();
+                double e = this.targetY - this.beaver.getY();
+                double f = this.targetZ - this.beaver.getZ();
+                double g = Math.sqrt(d * d + e * e + f * f);
+                e /= g;
+                float h = (float) (MathHelper.atan2(f, d) * 57.2957763671875) - 90.0F;
+                this.beaver.setYaw(this.wrapDegrees(this.beaver.getYaw(), h, 90.0F));
+                this.beaver.bodyYaw = this.beaver.getYaw();
+                float i = (float) (this.speed * this.beaver.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED));
+                float j = MathHelper.lerp(0.125F, this.beaver.getMovementSpeed(), i);
+                this.beaver.setMovementSpeed(j);
+                this.beaver.setVelocity(this.beaver.getVelocity().add(0, this.beaver.getMovementSpeed() * e * 0.1, 0));
+            } else {
+                this.beaver.setVelocity(this.beaver.getVelocity().add(0.0, 0, 0.0));
+                super.tick();
+            }
+        }
+    }
+
     static class BeaverTemptGoal extends TemptGoal {
         private final BeaverEntity beaver;
 
@@ -322,51 +327,6 @@ public class BeaverEntity extends ClutterAnimalEntity {
         protected Vec3d getWanderTarget() {
             Vec3d vec3d = FuzzyTargeting.find(this.mob, 15, 7);
             return vec3d == null ? super.getWanderTarget() : vec3d;
-        }
-    }
-
-    static class BeaverMoveControl extends MoveControl {
-        private final BeaverEntity beaver;
-
-        BeaverMoveControl(BeaverEntity beaver) {
-            super(beaver);
-            this.beaver = beaver;
-        }
-
-        private void updateVelocity() {
-            if (this.beaver.isTouchingWater()) {
-                this.beaver.setVelocity(this.beaver.getVelocity().add(0.0, 0.005, 0.0));
-                this.beaver.setMovementSpeed(Math.max(this.beaver.getMovementSpeed() / 2.0F, 0.08F));
-                if (this.beaver.isBaby()) {
-                    this.beaver.setMovementSpeed(Math.max(this.beaver.getMovementSpeed() / 3.0F, 0.06F));
-                }
-            } else if (this.beaver.isOnGround()) {
-                this.beaver.setMovementSpeed(this.beaver.getMovementSpeed());
-            }
-
-        }
-
-        public void tick() {
-            this.updateVelocity();
-            if (this.state == State.MOVE_TO && !this.beaver.getNavigation().isIdle()) {
-                double x = this.targetX - this.beaver.getX();
-                double y = this.targetY - this.beaver.getY();
-                double z = this.targetZ - this.beaver.getZ();
-                double sqrt = Math.sqrt(x * x + y * y + z * z);
-                if (sqrt < 9.999999747378752E-6) {
-                    this.entity.setMovementSpeed(0.0F);
-                } else {
-                    y /= sqrt;
-                    float h = (float) (MathHelper.atan2(z, x) * 57.2957763671875) - 90.0F;
-                    this.beaver.setYaw(this.wrapDegrees(this.beaver.getYaw(), h, 90.0F));
-                    this.beaver.bodyYaw = this.beaver.getYaw();
-                    float i = (float) (this.speed * this.beaver.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED));
-                    this.beaver.setMovementSpeed(MathHelper.lerp(0.125F, this.beaver.getMovementSpeed(), i));
-                    this.beaver.setVelocity(this.beaver.getVelocity().add(0.0, (double) this.beaver.getMovementSpeed() * y * 0.1, 0.0));
-                }
-            } else {
-                this.beaver.setMovementSpeed(0.0F);
-            }
         }
     }
 

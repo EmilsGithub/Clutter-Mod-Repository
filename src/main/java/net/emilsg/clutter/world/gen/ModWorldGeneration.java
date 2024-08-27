@@ -1,25 +1,26 @@
 package net.emilsg.clutter.world.gen;
 
-import net.emilsg.clutter.config.ClutterConfig;
+import net.emilsg.clutter.config.Configs;
+import net.emilsg.clutter.config.ModConfigManager;
 
 public class ModWorldGeneration {
     public static void generateModWorldGen() {
-        if (ClutterConfig.getInstance().getBoolean(ClutterConfig.GENERATE_ORES)) {
+        if (ModConfigManager.get(Configs.generateOres, true)) {
             ModRockGeneration.generateOres();
         }
-        if (ClutterConfig.getInstance().getBoolean(ClutterConfig.GENERATE_GEODES)) {
+        if (ModConfigManager.get(Configs.generateGeodes, true)) {
             ModRockGeneration.generateGeodes();
         }
-        if (ClutterConfig.getInstance().getBoolean(ClutterConfig.SPAWN_CLUTTER_MOBS)) {
+        if (ModConfigManager.get(Configs.spawnClutterMobs, true)) {
             ModEntitySpawning.addSpawns();
         }
-        if (ClutterConfig.getInstance().getBoolean(ClutterConfig.GENERATE_FOLIAGE)) {
+        if (ModConfigManager.get(Configs.generateFoliage, true)) {
             ModFoliageGeneration.generateFoliage();
         }
-        if (ClutterConfig.getInstance().getBoolean(ClutterConfig.GENERATE_UNDERWATER_FEATURES)) {
+        if (ModConfigManager.get(Configs.generateUnderwaterFeatures, true)) {
             ModUnderwaterFeatureGeneration.generateUnderwaterFeatures();
         }
-        if (ClutterConfig.getInstance().getBoolean(ClutterConfig.GENERATE_MISC_FEATURES)) {
+        if (ModConfigManager.get(Configs.generateMiscFeatures, true)) {
             MiscFeatureGeneration.generateMiscFeatures();
         }
     }

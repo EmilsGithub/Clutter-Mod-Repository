@@ -1,0 +1,122 @@
+{
+  "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "clutter:item/yellow_butterfly_in_a_bottle",
+      "predicate": {
+        "type": 0.0
+      }
+    },
+    {
+      "model": "clutter:item/red_butterfly_in_a_bottle",
+      "predicate": {
+        "type": 0.01
+      }
+    },
+    {
+      "model": "clutter:item/blue_butterfly_in_a_bottle",
+      "predicate": {
+        "type": 0.02
+      }
+    },
+    {
+      "model": "clutter:item/purple_butterfly_in_a_bottle",
+      "predicate": {
+        "type": 0.03
+      }
+    },
+    {
+      "model": "clutter:item/white_butterfly_in_a_bottle",
+      "predicate": {
+        "type": 0.04
+      }
+    },
+    {
+      "model": "clutter:item/gray_butterfly_in_a_bottle",
+      "predicate": {
+        "type": 0.05
+      }
+    },
+    {
+      "model": "clutter:item/orange_butterfly_in_a_bottle",
+      "predicate": {
+        "type": 0.06
+      }
+    },
+    {
+      "model": "clutter:item/lime_butterfly_in_a_bottle",
+      "predicate": {
+        "type": 0.07
+      }
+    },
+    {
+      "model": "clutter:item/green_butterfly_in_a_bottle",
+      "predicate": {
+        "type": 0.08
+      }
+    },
+    {
+      "model": "clutter:item/black_butterfly_in_a_bottle",
+      "predicate": {
+        "type": 0.09
+      }
+    },
+    {
+      "model": "clutter:item/light_gray_butterfly_in_a_bottle",
+      "predicate": {
+        "type": 0.10
+      }
+    },
+    {
+      "model": "clutter:item/light_blue_butterfly_in_a_bottle",
+      "predicate": {
+        "type": 0.11
+      }
+    },
+    {
+      "model": "clutter:item/brown_butterfly_in_a_bottle",
+      "predicate": {
+        "type": 0.12
+      }
+    },
+    {
+      "model": "clutter:item/cyan_butterfly_in_a_bottle",
+      "predicate": {
+        "type": 0.13
+      }
+    },
+    {
+      "model": "clutter:item/magenta_butterfly_in_a_bottle",
+      "predicate": {
+        "type": 0.14
+      }
+    },
+    {
+      "model": "clutter:item/pink_butterfly_in_a_bottle",
+      "predicate": {
+        "type": 0.15
+      }
+    },
+    {
+      "model": "clutter:item/warped_butterfly_in_a_bottle",
+      "predicate": {
+        "type": 0.16
+      }
+    },
+    {
+      "model": "clutter:item/crimson_butterfly_in_a_bottle",
+      "predicate": {
+        "type": 0.17
+      }
+    },
+    {
+      "model": "clutter:item/soul_butterfly_in_a_bottle",
+      "predicate": {
+        "type": 0.18
+      }
+    }
+  ],
+  "textures": {
+    "layer0": "clutter:item/white_butterfly_in_a_bottle"
+  }
+}
