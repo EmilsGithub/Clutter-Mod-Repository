@@ -8,11 +8,9 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.util.math.MatrixStack;
 
 public class MantaRayModel<T extends MantaRayEntity> extends ClutterAquaticModel<T> {
-    private final ModelPart manta_ray;
     private final ModelPart root;
 
     public MantaRayModel(ModelPart root) {
-        this.manta_ray = root.getChild("manta_ray");
         this.root = root;
     }
 
@@ -53,16 +51,18 @@ public class MantaRayModel<T extends MantaRayEntity> extends ClutterAquaticModel
         return TexturedModelData.of(modelData, 64, 64);
     }
 
+    //TODO Fix root Pivot
+
     @Override
-    public void setAngles(T entity, float limbAngle, float limbDistance, float ageInTicks, float headYaw, float headPitch) {
+    public void setAngles(MantaRayEntity ray, float limbAngle, float limbDistance, float ageInTicks, float headYaw, float headPitch) {
         this.getPart().traverse().forEach(ModelPart::resetTransform);
         this.getPart().pitch = headPitch * 0.017453292F;
         this.getPart().yaw = headYaw * 0.017453292F;
 
-        if (entity.isTouchingWater() && !entity.isDead())
-            this.updateAnimation(entity.swimmingAnimationState, MantaRayAnimations.MANTA_RAY_SWIM, ageInTicks, 1.0f);
-        else if (!entity.isDead())
-            this.updateAnimation(entity.flopAnimationState, MantaRayAnimations.MANTA_RAY_FLOP, ageInTicks, 1.0f);
+        if (ray.isTouchingWater() && !ray.isDead())
+            this.updateAnimation(ray.swimmingAnimationState, MantaRayAnimations.MANTA_RAY_SWIM, ageInTicks, 1.0f);
+        else if (!ray.isDead())
+            this.updateAnimation(ray.flopAnimationState, MantaRayAnimations.MANTA_RAY_FLOP, ageInTicks, 1.0f);
     }
 
     @Override

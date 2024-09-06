@@ -1,11 +1,11 @@
 package net.emilsg.clutter.entity.custom;
 
 import net.emilsg.clutter.entity.ModEntities;
+import net.emilsg.clutter.entity.custom.goal.HighWanderAroundFarGoal;
 import net.emilsg.clutter.entity.custom.parent.ClutterAnimalEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
-import net.minecraft.entity.ai.FuzzyTargeting;
 import net.minecraft.entity.ai.control.MoveControl;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.ai.pathing.*;
@@ -61,7 +61,7 @@ public class BeaverEntity extends ClutterAnimalEntity {
         this.setPathfindingPenalty(PathNodeType.DAMAGE_FIRE, -1.0F);
         this.setPathfindingPenalty(PathNodeType.COCOA, -1.0F);
         this.setStepHeight(1.0f);
-        this.moveControl = new BeaverMoveControl2(this);
+        this.moveControl = new BeaverMoveControl(this);
         this.setPathfindingPenalty(PathNodeType.WATER, 0.0F);
         this.waterNavigation = new SwimNavigation(this, world);
         this.landNavigation = new MobNavigation(this, world);
@@ -156,7 +156,7 @@ public class BeaverEntity extends ClutterAnimalEntity {
         this.goalSelector.add(1, new BeaverTemptGoal(this, 1.1f, BREEDING_INGREDIENT, false));
         this.goalSelector.add(2, new FollowParentGoal(this, 1.0f));
         this.goalSelector.add(3, new MeleeAttackGoal(this, 1.2f, true));
-        this.goalSelector.add(4, new BeaverWanderAroundFarGoal(this, 1.0f, 0.001f));
+        this.goalSelector.add(4, new HighWanderAroundFarGoal(this, 1.0f, 0.001f));
         this.goalSelector.add(5, new LookAtEntityGoal(this, PlayerEntity.class, 6.0f));
         this.goalSelector.add(6, new LookAroundGoal(this));
 
@@ -264,10 +264,10 @@ public class BeaverEntity extends ClutterAnimalEntity {
 
     }
 
-    private static class BeaverMoveControl2 extends MoveControl {
+    private static class BeaverMoveControl extends MoveControl {
         private final BeaverEntity beaver;
 
-        public BeaverMoveControl2(BeaverEntity beaver) {
+        public BeaverMoveControl(BeaverEntity beaver) {
             super(beaver);
             this.beaver = beaver;
         }
@@ -300,7 +300,7 @@ public class BeaverEntity extends ClutterAnimalEntity {
         }
     }
 
-    static class BeaverTemptGoal extends TemptGoal {
+    private static class BeaverTemptGoal extends TemptGoal {
         private final BeaverEntity beaver;
 
         public BeaverTemptGoal(PathAwareEntity entity, double speed, Ingredient food, boolean canBeScared) {
@@ -315,22 +315,7 @@ public class BeaverEntity extends ClutterAnimalEntity {
         }
     }
 
-    public static class BeaverWanderAroundFarGoal extends WanderAroundGoal {
-        protected final float probability;
-
-        public BeaverWanderAroundFarGoal(PathAwareEntity mob, double speed, float probability) {
-            super(mob, speed);
-            this.probability = probability;
-        }
-
-        @Nullable
-        protected Vec3d getWanderTarget() {
-            Vec3d vec3d = FuzzyTargeting.find(this.mob, 15, 7);
-            return vec3d == null ? super.getWanderTarget() : vec3d;
-        }
-    }
-
-    static class BeaverSwimNavigation extends AmphibiousSwimNavigation {
+    private static class BeaverSwimNavigation extends AmphibiousSwimNavigation {
         BeaverSwimNavigation(BeaverEntity owner, World world) {
             super(owner, world);
         }

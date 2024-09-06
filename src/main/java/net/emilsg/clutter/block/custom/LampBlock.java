@@ -26,8 +26,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.function.ToIntFunction;
-
 public class LampBlock extends Block implements Waterloggable {
     public static final BooleanProperty LIT = Properties.LIT;
     public static final BooleanProperty POWERED = Properties.POWERED;
@@ -46,10 +44,6 @@ public class LampBlock extends Block implements Waterloggable {
 
     private static void playSound(SoundEvent soundEvent, BlockPos pos, World world) {
         world.playSound(null, pos, soundEvent, SoundCategory.BLOCKS, 1.0f, 1.25f);
-    }
-
-    public static ToIntFunction<BlockState> createLightLevelFromLitBlockState(int litLevel) {
-        return state -> state.get(LIT) ? litLevel : 0;
     }
 
     @Override
@@ -74,11 +68,10 @@ public class LampBlock extends Block implements Waterloggable {
                 }
 
                 world.setBlockState(pos, state.with(POWERED, isReceivingPower), 2);
-                if (state.get(WATERLOGGED)) {
-                    world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
-                }
             }
-
+            if (state.get(WATERLOGGED)) {
+                world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+            }
         }
     }
 

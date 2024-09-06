@@ -5,7 +5,6 @@ import net.emilsg.clutter.block.ModBlockEntities;
 import net.emilsg.clutter.block.custom.WindowSillBlock;
 import net.emilsg.clutter.block.custom.cutout.ICutoutRenderable;
 import net.emilsg.clutter.block.entity.render.CardboardBoxBlockEntityRenderer;
-import net.emilsg.clutter.block.entity.render.PlateBlockEntityRenderer;
 import net.emilsg.clutter.block.entity.render.ShelfBlockEntityRenderer;
 import net.emilsg.clutter.compat.trinkets.client.TrinketsIntegrationClient;
 import net.emilsg.clutter.entity.ModEntities;
@@ -449,8 +448,6 @@ public class ClutterClient implements ClientModInitializer {
                 GIANT_LILY_PAD,
                 GIANT_LILY_PAD_SEEDLING,
                 SMALL_LILY_PADS,
-                WINE_GLASS,
-                PLATE,
                 SMALL_ONYX_BUD,
                 MEDIUM_ONYX_BUD,
                 LARGE_ONYX_BUD,
@@ -460,17 +457,6 @@ public class ClutterClient implements ClientModInitializer {
                 GLOWLILY,
                 REDWOOD_WALL_BOOKSHELF,
                 REDWOOD_WINDOW_SILL,
-                //IRON_CANDLE_HOLDER,
-                //SILVER_CANDLE_HOLDER,
-                //GOLDEN_CANDLE_HOLDER,
-                //COPPER_CANDLE_HOLDER,
-                //EXPOSED_COPPER_CANDLE_HOLDER,
-                //WEATHERED_COPPER_CANDLE_HOLDER,
-                //OXIDIZED_COPPER_CANDLE_HOLDER,
-                //WAXED_COPPER_CANDLE_HOLDER,
-                //WAXED_EXPOSED_COPPER_CANDLE_HOLDER,
-                //WAXED_WEATHERED_COPPER_CANDLE_HOLDER,
-                //WAXED_OXIDIZED_COPPER_CANDLE_HOLDER,
                 PRISMARINE_TORCH,
                 PRISMARINE_WALL_TORCH,
                 AQUATIC_TORCH,
@@ -698,7 +684,6 @@ public class ClutterClient implements ClientModInitializer {
 
     private void registerBlockEntityRenderers() {
         BlockEntityRendererFactories.register(ModBlockEntities.SHELF, ShelfBlockEntityRenderer::new);
-        BlockEntityRendererFactories.register(ModBlockEntities.PLATE, PlateBlockEntityRenderer::new);
         BlockEntityRendererFactories.register(ModBlockEntities.CARDBOARD_BOX, CardboardBoxBlockEntityRenderer::new);
     }
 

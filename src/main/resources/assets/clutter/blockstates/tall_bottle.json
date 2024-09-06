@@ -1,37 +1,40 @@
 {
   "variants": {
-    "bottles=0": {
+    "count=1": {
       "model": "clutter:block/bottles/tall_bottle"
     },
-    "facing=north,bottles=1": {
+    "facing=north,count=2": {
       "model": "clutter:block/bottles/two_tall_bottles"
     },
-    "facing=south,bottles=1": {
+    "facing=south,count=2": {
       "model": "clutter:block/bottles/two_tall_bottles",
       "y": 180
     },
-    "facing=east,bottles=1": {
+    "facing=east,count=2": {
       "model": "clutter:block/bottles/two_tall_bottles",
       "y": 90
     },
-    "facing=west,bottles=1": {
+    "facing=west,count=2": {
       "model": "clutter:block/bottles/two_tall_bottles",
       "y": 270
     },
-    "facing=north,bottles=2": {
+    "facing=north,count=3": {
       "model": "clutter:block/bottles/three_tall_bottles"
     },
-    "facing=south,bottles=2": {
+    "facing=south,count=3": {
       "model": "clutter:block/bottles/three_tall_bottles",
       "y": 180
     },
-    "facing=east,bottles=2": {
+    "facing=east,count=3": {
       "model": "clutter:block/bottles/three_tall_bottles",
       "y": 90
     },
-    "facing=west,bottles=2": {
+    "facing=west,count=3": {
       "model": "clutter:block/bottles/three_tall_bottles",
       "y": 270
+    },
+    "count=4": {
+      "model": "clutter:block/bottles/four_tall_bottles"
     }
   }
 }

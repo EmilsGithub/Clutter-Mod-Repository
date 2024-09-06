@@ -205,11 +205,16 @@ public class ModConfiguredFeatures {
                         .add(ModBlocks.SMALL_BLUE_LUPINE.getDefaultState(), 10)
                         .add(ModBlocks.SMALL_MAGENTA_LUPINE.getDefaultState(), 10)
                         .add(ModBlocks.SMALL_PURPLE_LUPINE.getDefaultState(), 10)
-                        .add(ModBlocks.SMALL_WHITE_LUPINE.getDefaultState(), 10)
-                        .add(ModBlocks.BLUE_LUPINE.getDefaultState(), 1)
-                        .add(ModBlocks.MAGENTA_LUPINE.getDefaultState(), 1)
-                        .add(ModBlocks.PURPLE_LUPINE.getDefaultState(), 1)
+                        .add(ModBlocks.SMALL_YELLOW_LUPINE.getDefaultState(), 8)
+                        .add(ModBlocks.SMALL_RED_LUPINE.getDefaultState(), 8)
+                        .add(ModBlocks.SMALL_WHITE_LUPINE.getDefaultState(), 5)
+                        .add(ModBlocks.BLUE_LUPINE.getDefaultState(), 2)
+                        .add(ModBlocks.MAGENTA_LUPINE.getDefaultState(), 2)
+                        .add(ModBlocks.PURPLE_LUPINE.getDefaultState(), 2)
+                        .add(ModBlocks.YELLOW_LUPINE.getDefaultState(), 2)
+                        .add(ModBlocks.RED_LUPINE.getDefaultState(), 2)
                         .add(ModBlocks.WHITE_LUPINE.getDefaultState(), 1)
+
                         .build())
         )));
 

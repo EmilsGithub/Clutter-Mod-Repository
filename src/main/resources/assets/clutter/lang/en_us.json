@@ -1310,8 +1310,12 @@
 
   "enchantment.clutter.greed": "Greed",
 
-  "itemgroup.clutter_blocks": "Clutter Blocks",
-  "itemgroup.clutter_items": "Clutter Items",
+  "itemgroup.clutter_blocks": "Blocks",
+  "itemgroup.clutter_items": "Items",
+  "itemgroup.clutter_spawn_eggs": "Spawn Eggs",
+  "itemgroup.clutter_nature": "Nature",
+
+  "clutter.identifier": "[Clutter] ",
 
   "advancements.clutter.root.title": "Clutter",
   "advancements.clutter.root.description": "What a Mess of a Mod",

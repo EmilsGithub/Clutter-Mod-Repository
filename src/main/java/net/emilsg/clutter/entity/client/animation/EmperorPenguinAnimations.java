@@ -155,6 +155,7 @@ public class EmperorPenguinAnimations {
                                     Transformation.Interpolations.LINEAR),
                             new Keyframe(1.4167667f, AnimationHelper.createRotationalVector(0f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR))).build();
+
     public static final Animation EMPEROR_PENGUIN_SWIM = Animation.Builder.create(1f).looping()
             .addBoneAnimation("All",
                     new Transformation(Transformation.Targets.TRANSLATE,
@@ -208,6 +209,13 @@ public class EmperorPenguinAnimations {
                                     Transformation.Interpolations.LINEAR),
                             new Keyframe(1f, AnimationHelper.createRotationalVector(0f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR))).build();
+
+    public static final Animation EMPEROR_PENGUIN_SWIM_STATE = Animation.Builder.create(1f)
+            .addBoneAnimation("All",
+                    new Transformation(Transformation.Targets.ROTATE,
+                            new Keyframe(0f, AnimationHelper.createRotationalVector(80f, 0f, 0f),
+                                    Transformation.Interpolations.LINEAR))).build();
+
     public static final Animation EMPEROR_PENGUIN_PADDLE = Animation.Builder.create(1f).looping()
             .addBoneAnimation("All",
                     new Transformation(Transformation.Targets.TRANSLATE,

@@ -6,6 +6,7 @@ import net.emilsg.clutter.entity.custom.EmperorPenguinEntity;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.util.math.MatrixStack;
+import org.apache.logging.log4j.core.util.Transform;
 
 public class EmperorPenguinModel<T extends EmperorPenguinEntity> extends ClutterModel<T> {
     private final ModelPart root;
@@ -62,11 +63,17 @@ public class EmperorPenguinModel<T extends EmperorPenguinEntity> extends Clutter
     }
 
     @Override
-    public void setAngles(EmperorPenguinEntity emperorPenguinEntity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void setAngles(EmperorPenguinEntity emperorPenguinEntity, float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw, float headPitch) {
         this.getPart().traverse().forEach(ModelPart::resetTransform);
-        this.setHeadAngles(emperorPenguinEntity, netHeadYaw, headPitch, ageInTicks);
+        this.setHeadAngles(emperorPenguinEntity, headYaw, headPitch, ageInTicks);
+        if (emperorPenguinEntity.isTouchingWater()) {
+            this.getPart().pitch = headPitch * 0.017453292F;
+            this.getPart().yaw = headYaw * 0.017453292F;
+        }
 
-        this.animateMovement(EmperorPenguinAnimations.EMPEROR_PENGUIN_WALK, limbSwing, limbSwingAmount, 2.0f, 2.5f);
+        if(!emperorPenguinEntity.isTouchingWater()) this.animateMovement(EmperorPenguinAnimations.EMPEROR_PENGUIN_WALK, limbSwing, limbSwingAmount, 2.0f, 2.5f);
+
+        this.updateAnimation(emperorPenguinEntity.swimAnimationState, EmperorPenguinAnimations.EMPEROR_PENGUIN_SWIM_STATE, ageInTicks, 1f);
 
         this.updateAnimation(emperorPenguinEntity.flapAnimationStateOne, EmperorPenguinAnimations.EMPEROR_PENGUIN_RANDOM_FLAP, ageInTicks, 1f);
         this.updateAnimation(emperorPenguinEntity.flapAnimationStateTwo, EmperorPenguinAnimations.EMPEROR_PENGUIN_RANDOM_FLAP_TWO, ageInTicks, 1f);

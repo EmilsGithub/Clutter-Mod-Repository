@@ -36,9 +36,10 @@ public class NameOnPet {
             player.sendMessage(Text.of("You pet " + finalClosestEntity.getName().getString() + "."));
         } else if (!Objects.equals(finalClosestEntity.getName().getString(), "Frog")) {
             player.sendMessage(Text.of("You pet " + finalClosestEntity.getName().getString() + "."));
-        } else {
-            player.sendMessage(Text.of("You bequeathed " + finalClosestEntity.getName().getString() + " with the name: " + getRandomFrogName(finalClosestEntity) + "."));
-            finalClosestEntity.setCustomName(Text.of(getRandomFrogName(finalClosestEntity)));
+        } else if (player.getName().getString().equals("E7Smy")) {
+            String randomFrogName = getRandomFrogName(finalClosestEntity);
+            player.sendMessage(Text.of("You bequeathed " + finalClosestEntity.getName().getString() + " with the name: " + randomFrogName + "."));
+            finalClosestEntity.setCustomName(Text.of(randomFrogName));
         }
 
         return finalClosestEntity;
@@ -47,7 +48,6 @@ public class NameOnPet {
 
     private static String getRandomFrogName(Entity entity) {
         String entityId = String.valueOf(entity.getUuid());
-        assert entityId != null;
         long idAsLong = stingToHash(entityId);
         int longAsInt = (int) Math.abs(idAsLong);
         Random random = new Random(longAsInt);

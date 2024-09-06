@@ -7,7 +7,6 @@ import net.emilsg.clutter.entity.variants.EchofinVariant;
 import net.emilsg.clutter.item.custom.*;
 import net.emilsg.clutter.util.ModItemGroups;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
@@ -161,20 +160,20 @@ public class ModItems {
     public static final Item EMERALD_GEMSTONE_ELYTRA = registerItem("emerald_gemstone_elytra", new GemstoneElytraItem(new FabricItemSettings().maxDamage(432), Items.EMERALD, "emerald"), ModItemGroups.CLUTTER_ITEMS);
     public static final Item QUARTZ_GEMSTONE_ELYTRA = registerItem("quartz_gemstone_elytra", new GemstoneElytraItem(new FabricItemSettings().maxDamage(432), Items.QUARTZ, "quartz"), ModItemGroups.CLUTTER_ITEMS);
 
-    public static final Item BUTTERFLY_SPAWN_EGG = registerItem("butterfly_spawn_egg", new SpawnEggItem(ModEntities.BUTTERFLY, 757231, 12, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
-    public static final Item CHAMELEON_SPAWN_EGG = registerItem("chameleon_spawn_egg", new SpawnEggItem(ModEntities.CHAMELEON, 1744148, 16228345, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
-    public static final Item ECHOFIN_SPAWN_EGG = registerItem("echofin_spawn_egg", new SpawnEggItem(ModEntities.ECHOFIN, 16511998, 4661575, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
-    public static final Item MOSSBLOOM_SPAWN_EGG = registerItem("mossbloom_spawn_egg", new SpawnEggItem(ModEntities.MOSSBLOOM, 16053485, 7377453, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
-    public static final Item KIWI_BIRD_SPAWN_EGG = registerItem("kiwi_bird_spawn_egg", new SpawnEggItem(ModEntities.KIWI_BIRD, 6243108, 6275609, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
-    public static final Item EMPEROR_PENGUIN_SPAWN_EGG = registerItem("emperor_penguin_spawn_egg", new SpawnEggItem(ModEntities.EMPEROR_PENGUIN, 1973800, 16777210, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
-    public static final Item BEAVER_SPAWN_EGG = registerItem("beaver_spawn_egg", new SpawnEggItem(ModEntities.BEAVER, 5916211, 3356222, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
-    public static final Item CAPYBARA_SPAWN_EGG = registerItem("capybara_spawn_egg", new SpawnEggItem(ModEntities.CAPYBARA, 2169626, 16651589, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
-    public static final Item CRIMSON_NEWT_SPAWN_EGG = registerItem("crimson_newt_spawn_egg", new SpawnEggItem(ModEntities.CRIMSON_NEWT, 15783361, 11280416, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
-    public static final Item WARPED_NEWT_SPAWN_EGG = registerItem("warped_newt_spawn_egg", new SpawnEggItem(ModEntities.WARPED_NEWT, 1153925, 4464945, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
-    public static final Item EMBER_TORTOISE_SPAWN_EGG = registerItem("ember_tortoise_spawn_egg", new SpawnEggItem(ModEntities.EMBER_TORTOISE, 6052956, 8924463, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
-    public static final Item JELLYFISH_SPAWN_EGG = registerItem("jellyfish_spawn_egg", new SpawnEggItem(ModEntities.JELLYFISH, 5487623, 8732643, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
-    public static final Item MANTA_RAY_SPAWN_EGG = registerItem("manta_ray_spawn_egg", new SpawnEggItem(ModEntities.MANTA_RAY, 12895428, 2566460, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
-    public static final Item SEAHORSE_SPAWN_EGG = registerItem("seahorse_spawn_egg", new SpawnEggItem(ModEntities.SEAHORSE, 0, 111, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item BUTTERFLY_SPAWN_EGG = registerItem("butterfly_spawn_egg", new ClutterSpawnEggItem(ModEntities.BUTTERFLY, 757231, 12, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item CHAMELEON_SPAWN_EGG = registerItem("chameleon_spawn_egg", new ClutterSpawnEggItem(ModEntities.CHAMELEON, 1744148, 16228345, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item ECHOFIN_SPAWN_EGG = registerItem("echofin_spawn_egg", new ClutterSpawnEggItem(ModEntities.ECHOFIN, 16511998, 4661575, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item MOSSBLOOM_SPAWN_EGG = registerItem("mossbloom_spawn_egg", new ClutterSpawnEggItem(ModEntities.MOSSBLOOM, 16053485, 7377453, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item KIWI_BIRD_SPAWN_EGG = registerItem("kiwi_bird_spawn_egg", new ClutterSpawnEggItem(ModEntities.KIWI_BIRD, 6243108, 6275609, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item EMPEROR_PENGUIN_SPAWN_EGG = registerItem("emperor_penguin_spawn_egg", new ClutterSpawnEggItem(ModEntities.EMPEROR_PENGUIN, 1973800, 16777210, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item BEAVER_SPAWN_EGG = registerItem("beaver_spawn_egg", new ClutterSpawnEggItem(ModEntities.BEAVER, 5916211, 3356222, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item CAPYBARA_SPAWN_EGG = registerItem("capybara_spawn_egg", new ClutterSpawnEggItem(ModEntities.CAPYBARA, 2169626, 16651589, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item CRIMSON_NEWT_SPAWN_EGG = registerItem("crimson_newt_spawn_egg", new ClutterSpawnEggItem(ModEntities.CRIMSON_NEWT, 15783361, 11280416, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item WARPED_NEWT_SPAWN_EGG = registerItem("warped_newt_spawn_egg", new ClutterSpawnEggItem(ModEntities.WARPED_NEWT, 1153925, 4464945, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item EMBER_TORTOISE_SPAWN_EGG = registerItem("ember_tortoise_spawn_egg", new ClutterSpawnEggItem(ModEntities.EMBER_TORTOISE, 6052956, 8924463, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item JELLYFISH_SPAWN_EGG = registerItem("jellyfish_spawn_egg", new ClutterSpawnEggItem(ModEntities.JELLYFISH, 5487623, 8732643, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item MANTA_RAY_SPAWN_EGG = registerItem("manta_ray_spawn_egg", new ClutterSpawnEggItem(ModEntities.MANTA_RAY, 12895428, 2566460, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
+    public static final Item SEAHORSE_SPAWN_EGG = registerItem("seahorse_spawn_egg", new ClutterSpawnEggItem(ModEntities.SEAHORSE, 0, 111, new FabricItemSettings()), ModItemGroups.CLUTTER_ITEMS);
 
     public static final Item BEACH_HAT = registerItem("beach_hat", new HatItem(new FabricItemSettings().maxCount(1)), ModItemGroups.CLUTTER_ITEMS);
     public static final Item TOP_HAT = registerItem("top_hat", new HatItem(new FabricItemSettings().maxCount(1)), ModItemGroups.CLUTTER_ITEMS);
@@ -189,12 +188,7 @@ public class ModItems {
     public static final Item VIKING_HELMET = registerItem("viking_helmet", new HatItem(new FabricItemSettings().maxCount(1)), ModItemGroups.CLUTTER_ITEMS);
 
     private static Item registerItem(String name, Item item, RegistryKey<ItemGroup> group) {
-        addToItemGroup(group, item);
         return Registry.register(Registries.ITEM, new Identifier(Clutter.MOD_ID, name), item);
-    }
-
-    private static void addToItemGroup(RegistryKey<ItemGroup> group, Item item) {
-        ItemGroupEvents.modifyEntriesEvent(group).register(entries -> entries.add(item));
     }
 
     public static void registerModItems() {

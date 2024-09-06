@@ -7,10 +7,10 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 
-public class OxidizableLargeChandelier extends LargeChandelierBlock implements Oxidizable {
+public class OxidizableLargeChandelierBlock extends LargeChandelierBlock implements Oxidizable {
     private final OxidationLevel oxidationLevel;
 
-    public OxidizableLargeChandelier(OxidationLevel oxidationLevel, Settings settings) {
+    public OxidizableLargeChandelierBlock(OxidationLevel oxidationLevel, Settings settings) {
         super(settings);
         this.oxidationLevel = oxidationLevel;
     }

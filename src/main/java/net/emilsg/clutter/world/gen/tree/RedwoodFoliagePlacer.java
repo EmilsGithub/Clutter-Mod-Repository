@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.emilsg.clutter.world.gen.type.ModFoliagePlacerTypes;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.intprovider.IntProvider;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.TestableWorld;
@@ -48,10 +49,43 @@ public class RedwoodFoliagePlacer extends FoliagePlacer {
             if (i == 0) {
                 placer.placeBlock(blockPos, config.foliageProvider.get(random, blockPos));
             } else {
-                this.generateSquareWithHangingLeaves(world, placer, random, config, new BlockPos(blockPos.getX(), y - i, blockPos.getZ()), currentRadius, 0, false, 0.5f, 0.0f);
+                this.generateSquareWithSporadicLeaves(world, placer, random, config, new BlockPos(blockPos.getX(), y - i, blockPos.getZ()), currentRadius, 0, false, 0.5f);
             }
         }
     }
+
+    protected final void generateSquareWithSporadicLeaves(TestableWorld world, BlockPlacer placer, Random random, TreeFeatureConfig config, BlockPos centerPos, int radius, int y, boolean giantTrunk, float leafChance) {
+        this.generateSquare(world, placer, random, config, centerPos, radius, y, giantTrunk);
+        int trunkOffset = giantTrunk ? 1 : 0;
+        BlockPos.Mutable mutablePos = new BlockPos.Mutable();
+
+        for (int xOffset = -radius; xOffset <= radius + trunkOffset; ++xOffset) {
+            for (int zOffset = -radius; zOffset <= radius + trunkOffset; ++zOffset) {
+                mutablePos.set(centerPos, xOffset, y - 1, zOffset);
+
+                // Check if a block was placed
+                boolean hasPlacedBlockAbove = placer.hasPlacedBlock(mutablePos.move(Direction.UP));
+                mutablePos.move(Direction.DOWN);
+
+                if (hasPlacedBlockAbove) {
+                    if (random.nextFloat() < leafChance) {
+                        placeFoliageBlock(world, placer, random, config, mutablePos);
+
+                        // Pick a random direction and move in that direction
+                        Direction randomDirection = Direction.values()[random.nextInt(Direction.values().length)];
+                        BlockPos targetPos = mutablePos.offset(randomDirection);
+
+                        // Place another leaf block in the random direction
+                        placeFoliageBlock(world, placer, random, config, targetPos);
+                    }
+                }
+            }
+        }
+    }
+
+
+
+
 
     @Override
     public int getRandomHeight(Random random, int trunkHeight, TreeFeatureConfig config) {

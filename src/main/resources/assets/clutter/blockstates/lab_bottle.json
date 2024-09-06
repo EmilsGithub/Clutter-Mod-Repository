@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "count=1": {
+      "model": "clutter:block/bottles/lab_bottle"
+    },
+    "facing=north,count=2": {
+      "model": "clutter:block/bottles/two_lab_bottles"
+    },
+    "facing=south,count=2": {
+      "model": "clutter:block/bottles/two_lab_bottles",
+      "y": 180
+    },
+    "facing=east,count=2": {
+      "model": "clutter:block/bottles/two_lab_bottles",
+      "y": 90
+    },
+    "facing=west,count=2": {
+      "model": "clutter:block/bottles/two_lab_bottles",
+      "y": 270
+    },
+    "facing=north,count=3": {
+      "model": "clutter:block/bottles/three_lab_bottles"
+    },
+    "facing=south,count=3": {
+      "model": "clutter:block/bottles/three_lab_bottles",
+      "y": 180
+    },
+    "facing=east,count=3": {
+      "model": "clutter:block/bottles/three_lab_bottles",
+      "y": 90
+    },
+    "facing=west,count=3": {
+      "model": "clutter:block/bottles/three_lab_bottles",
+      "y": 270
+    },
+    "facing=north,count=4": {
+      "model": "clutter:block/bottles/four_lab_bottles"
+    },
+    "facing=south,count=4": {
+      "model": "clutter:block/bottles/four_lab_bottles",
+      "y": 180
+    },
+    "facing=east,count=4": {
+      "model": "clutter:block/bottles/four_lab_bottles",
+      "y": 90
+    },
+    "facing=west,count=4": {
+      "model": "clutter:block/bottles/four_lab_bottles",
+      "y": 270
+    }
+  }
+}

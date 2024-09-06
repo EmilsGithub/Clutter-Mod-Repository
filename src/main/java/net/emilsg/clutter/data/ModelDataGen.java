@@ -10,6 +10,7 @@ import net.emilsg.clutter.block.custom.WindowSillBlock;
 import net.emilsg.clutter.block.custom.WoodenBenchBlock;
 import net.emilsg.clutter.item.ModItems;
 import net.emilsg.clutter.item.custom.ClutterElytraItem;
+import net.emilsg.clutter.item.custom.ClutterSpawnEggItem;
 import net.emilsg.clutter.util.ModProperties;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
@@ -250,10 +251,14 @@ public class ModelDataGen extends FabricModelProvider {
         generator.registerFlowerPotPlant(ModBlocks.SMALL_BLUE_LUPINE, ModBlocks.POTTED_SMALL_BLUE_LUPINE, BlockStateModelGenerator.TintType.NOT_TINTED);
         generator.registerFlowerPotPlant(ModBlocks.SMALL_PURPLE_LUPINE, ModBlocks.POTTED_SMALL_PURPLE_LUPINE, BlockStateModelGenerator.TintType.NOT_TINTED);
         generator.registerFlowerPotPlant(ModBlocks.SMALL_MAGENTA_LUPINE, ModBlocks.POTTED_SMALL_MAGENTA_LUPINE, BlockStateModelGenerator.TintType.NOT_TINTED);
+        generator.registerFlowerPotPlant(ModBlocks.SMALL_YELLOW_LUPINE, ModBlocks.POTTED_SMALL_YELLOW_LUPINE, BlockStateModelGenerator.TintType.NOT_TINTED);
+        generator.registerFlowerPotPlant(ModBlocks.SMALL_RED_LUPINE, ModBlocks.POTTED_SMALL_RED_LUPINE, BlockStateModelGenerator.TintType.NOT_TINTED);
         generator.registerFlowerPotPlant(ModBlocks.SMALL_WHITE_LUPINE, ModBlocks.POTTED_SMALL_WHITE_LUPINE, BlockStateModelGenerator.TintType.NOT_TINTED);
         generator.registerDoubleBlock(ModBlocks.MAGENTA_LUPINE, BlockStateModelGenerator.TintType.NOT_TINTED);
         generator.registerDoubleBlock(ModBlocks.BLUE_LUPINE, BlockStateModelGenerator.TintType.NOT_TINTED);
         generator.registerDoubleBlock(ModBlocks.PURPLE_LUPINE, BlockStateModelGenerator.TintType.NOT_TINTED);
+        generator.registerDoubleBlock(ModBlocks.YELLOW_LUPINE, BlockStateModelGenerator.TintType.NOT_TINTED);
+        generator.registerDoubleBlock(ModBlocks.RED_LUPINE, BlockStateModelGenerator.TintType.NOT_TINTED);
         generator.registerDoubleBlock(ModBlocks.WHITE_LUPINE, BlockStateModelGenerator.TintType.NOT_TINTED);
 
         BlockStateModelGenerator.BlockTexturePool blackOnyxTexturePool = generator.registerCubeAllModelTexturePool(ModBlocks.BLACK_ONYX_BLOCK);
@@ -316,21 +321,15 @@ public class ModelDataGen extends FabricModelProvider {
         registerGeneratedItem(itemGen, ModItems.SEASHELL);
         registerGeneratedItem(itemGen, ModItems.CLAM);
         registerGeneratedItem(itemGen, ModItems.PEARL);
-        registerGeneratedItem(itemGen, ModItems.JELLYFISH_SPAWN_EGG);
-
-        registerSpawnEggItem(itemGen, ModItems.CAPYBARA_SPAWN_EGG);
-        registerSpawnEggItem(itemGen, ModItems.CRIMSON_NEWT_SPAWN_EGG);
-        registerSpawnEggItem(itemGen, ModItems.WARPED_NEWT_SPAWN_EGG);
-        registerSpawnEggItem(itemGen, ModItems.EMBER_TORTOISE_SPAWN_EGG);
-        registerSpawnEggItem(itemGen, ModItems.MANTA_RAY_SPAWN_EGG);
 
         groupRegisterGeneratedItemModels(itemGen,
                 ModItems.DECORATED_ELYTRA_SMITHING_TEMPLATE,
                 ModItems.DECORATED_ELYTRA_SMITHING_TEMPLATE_SHARDS
         );
 
-        for (Item elytra : Registries.ITEM) {
-            if (elytra instanceof ClutterElytraItem) registerElytra(itemGen, elytra);
+        for (Item item : Registries.ITEM) {
+            if (item instanceof ClutterElytraItem elytra) registerElytra(itemGen, elytra);
+            if (item instanceof ClutterSpawnEggItem spawnEggItem) registerSpawnEggItem(itemGen, spawnEggItem);
         }
     }
 

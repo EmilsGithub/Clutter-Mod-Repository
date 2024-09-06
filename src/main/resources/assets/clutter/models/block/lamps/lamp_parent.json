@@ -7,7 +7,7 @@
 		"1": "block/redstone_lamp",
 		"2": "block/spruce_planks",
 		"4": "clutter:block/white_lampshade",
-		"particle": "clutter:block/white_lampshade"
+		"particle": "#4"
 	},
 	"elements": [
 		{

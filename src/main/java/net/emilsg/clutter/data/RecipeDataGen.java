@@ -101,14 +101,6 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .criterion(hasItem(Items.GLASS), conditionsFromItem(Items.GLASS))
                 .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(ModBlocks.TALL_BOTTLE)));
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.WINE_GLASS)
-                .pattern("G G")
-                .pattern(" G ")
-                .pattern(" G ")
-                .input('G', Items.GLASS)
-                .criterion(hasItem(Items.GLASS), conditionsFromItem(Items.GLASS))
-                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(ModBlocks.WINE_GLASS)));
-
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.BRICK_KILN)
                 .pattern("SSS")
                 .pattern("BFB")

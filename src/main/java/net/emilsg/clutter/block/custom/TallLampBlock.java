@@ -29,12 +29,12 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.*;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.function.ToIntFunction;
-
 public class TallLampBlock extends Block implements Waterloggable {
     public static final BooleanProperty LIT = Properties.LIT;
     public static final EnumProperty<DoubleBlockHalf> HALF = Properties.DOUBLE_BLOCK_HALF;
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
+    public static final BooleanProperty POWERED = Properties.POWERED;
+
 
     private static final VoxelShape TOP_SHAPE = VoxelShapes.union(
             Block.createCuboidShape(3.0, 7.0, 3.0, 13.0, 16.0, 13.0),
@@ -47,15 +47,11 @@ public class TallLampBlock extends Block implements Waterloggable {
 
     public TallLampBlock(Settings settings) {
         super(settings);
-        this.setDefaultState(this.stateManager.getDefaultState().with(HALF, DoubleBlockHalf.LOWER).with(WATERLOGGED, false).with(LIT, false));
+        this.setDefaultState(this.stateManager.getDefaultState().with(HALF, DoubleBlockHalf.LOWER).with(WATERLOGGED, false).with(LIT, false).with(POWERED, false));
     }
 
     private static void playSound(SoundEvent soundEvent, BlockPos pos, World world) {
         world.playSound(null, pos, soundEvent, SoundCategory.BLOCKS, 1.0f, 1.25f);
-    }
-
-    public static ToIntFunction<BlockState> createLightLevelFromLitBlockState(int litLevel) {
-        return state -> state.get(LIT) ? litLevel : 0;
     }
 
     protected static void onBreakInCreative(World world, BlockPos pos, BlockState state, PlayerEntity player) {
@@ -77,12 +73,15 @@ public class TallLampBlock extends Block implements Waterloggable {
     }
 
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        BlockState litState = state.cycle(LIT);
-        world.setBlockState(pos, litState.with(HALF, state.get(HALF)), 10);
+        boolean lit = state.get(LIT);
+        if (state.get(POWERED)) return ActionResult.PASS;
+        world.setBlockState(pos, state.with(LIT, !lit));
         if (state.get(HALF) == DoubleBlockHalf.LOWER) {
-            world.setBlockState(pos.up(), litState.with(HALF, world.getBlockState(pos.up()).get(HALF)).with(WATERLOGGED, world.getBlockState(pos.up()).get(WATERLOGGED)), 10);
+            BlockState upperState = world.getBlockState(pos.up());
+            world.setBlockState(pos.up(), upperState.with(LIT, !lit));
         } else {
-            world.setBlockState(pos.down(), litState.with(HALF, world.getBlockState(pos.down()).get(HALF)).with(WATERLOGGED, world.getBlockState(pos.down()).get(WATERLOGGED)), 10);
+            BlockState lowerState = world.getBlockState(pos.down());
+            world.setBlockState(pos.down(), lowerState.with(LIT, !lit));
         }
         playSound(state.get(LIT) ? SoundEvents.BLOCK_METAL_PRESSURE_PLATE_CLICK_OFF : SoundEvents.BLOCK_METAL_PRESSURE_PLATE_CLICK_ON, pos, world);
         return ActionResult.success(world.isClient);
@@ -90,7 +89,7 @@ public class TallLampBlock extends Block implements Waterloggable {
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(LIT, WATERLOGGED, HALF);
+        builder.add(LIT, WATERLOGGED, HALF, POWERED);
     }
 
     @Override
@@ -131,21 +130,23 @@ public class TallLampBlock extends Block implements Waterloggable {
 
     public void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
         if (!world.isClient) {
-            boolean bl = state.get(LIT);
-            if (bl != world.isReceivingRedstonePower(pos)) {
-                if (bl) {
-                    world.scheduleBlockTick(pos, this, 4);
+            boolean isReceivingPower = world.isReceivingRedstonePower(pos);
+            if (isReceivingPower != state.get(POWERED)) {
+                if (state.get(LIT) != isReceivingPower) {
+                    state = state.with(LIT, isReceivingPower);
+                    playSound(state.get(LIT) ? SoundEvents.BLOCK_METAL_PRESSURE_PLATE_CLICK_OFF : SoundEvents.BLOCK_METAL_PRESSURE_PLATE_CLICK_ON, pos, world);
+                }
+
+                world.setBlockState(pos, state.with(POWERED, isReceivingPower), 2);
+                if (state.get(HALF) == DoubleBlockHalf.UPPER) {
+                    world.setBlockState(pos.down(), state.with(POWERED, isReceivingPower).with(HALF, DoubleBlockHalf.LOWER), 2);
                 } else {
-                    BlockState litState = state.cycle(LIT);
-                    world.setBlockState(pos, litState.with(HALF, state.get(HALF)), 2);
-                    if (state.get(HALF) == DoubleBlockHalf.LOWER) {
-                        world.setBlockState(pos.up(), litState.with(HALF, world.getBlockState(pos.up()).get(HALF)).with(WATERLOGGED, world.getBlockState(pos.up()).get(WATERLOGGED)), 2);
-                    } else {
-                        world.setBlockState(pos.down(), litState.with(HALF, world.getBlockState(pos.down()).get(HALF)).with(WATERLOGGED, world.getBlockState(pos.down()).get(WATERLOGGED)), 2);
-                    }
+                    world.setBlockState(pos.up(), state.with(POWERED, isReceivingPower).with(HALF, DoubleBlockHalf.UPPER), 2);
                 }
             }
-
+            if (state.get(WATERLOGGED)) {
+                world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+            }
         }
     }
 

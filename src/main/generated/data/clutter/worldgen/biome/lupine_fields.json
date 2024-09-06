@@ -80,6 +80,10 @@
     ],
     [
       "minecraft:glow_lichen",
+      "minecraft:oak_bees_002",
+      "minecraft:fancy_oak_bees",
+      "minecraft:fancy_oak_bees_002",
+      "minecraft:oak_bees_0002",
       "clutter:lupines_placed",
       "minecraft:patch_grass_badlands"
     ],
@@ -102,9 +106,9 @@
     "creature": [
       {
         "type": "clutter:butterfly",
-        "maxCount": 5,
-        "minCount": 3,
-        "weight": 4
+        "maxCount": 8,
+        "minCount": 5,
+        "weight": 10
       },
       {
         "type": "minecraft:sheep",

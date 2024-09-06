@@ -19,8 +19,7 @@ public class ModProperties {
     public static final BooleanProperty INFINITE = BooleanProperty.of("infinite");
     public static final BooleanProperty UP = BooleanProperty.of("up");
     public static final BooleanProperty LEGS = BooleanProperty.of("legs");
-    public static final IntProperty BOTTLES = IntProperty.of("bottles", 0, 2);
-    public static final IntProperty GLASSES = IntProperty.of("glasses", 0, 2);
+    public static final IntProperty COUNT_4 = IntProperty.of("count", 1, 4);
     public static final BooleanProperty CANDLES = BooleanProperty.of("candles");
     public static final IntProperty PAD_AMOUNT = IntProperty.of("pad_amount", 1, 4);
     public static final IntProperty AMOUNT = IntProperty.of("amount", 1, 4);

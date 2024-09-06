@@ -39,6 +39,17 @@ public class MantaRayEntity extends ClutterWaterEntity {
         this.lookControl = new YawAdjustingLookControl(this, 10);
     }
 
+    protected void initGoals() {
+        this.goalSelector.add(0, new MoveIntoWaterGoal(this));
+        this.goalSelector.add(1, new SwimAroundGoal(this, 1.0, 10));
+        this.goalSelector.add(2, new LookAroundGoal(this));
+        this.goalSelector.add(3, new MantaRayJumpGoal(this, 10));
+        this.goalSelector.add(4, new MeleeAttackGoal(this, 1.2000000476837158, true));
+        this.goalSelector.add(5, new ChaseBoatGoal(this));
+        this.targetSelector.add(1, new RevengeGoal(this));
+        this.targetSelector.add(2, new ActiveTargetGoal<>(this, JellyfishEntity.class, true));
+    }
+
     public static DefaultAttributeContainer.Builder setAttributes() {
         return ClutterAnimalEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 16.0D)
@@ -100,17 +111,6 @@ public class MantaRayEntity extends ClutterWaterEntity {
     @Override
     public EntityDimensions getDimensions(EntityPose pose) {
         return super.getDimensions(pose).scaled(0.65f * this.getSize());
-    }
-
-    protected void initGoals() {
-        this.goalSelector.add(0, new MoveIntoWaterGoal(this));
-        this.goalSelector.add(1, new SwimAroundGoal(this, 1.0, 10));
-        this.goalSelector.add(2, new LookAroundGoal(this));
-        this.goalSelector.add(3, new MantaRayJumpGoal(this, 10));
-        this.goalSelector.add(4, new MeleeAttackGoal(this, 1.2000000476837158, true));
-        this.goalSelector.add(5, new ChaseBoatGoal(this));
-        this.targetSelector.add(1, new RevengeGoal(this));
-        this.targetSelector.add(2, new ActiveTargetGoal<>(this, JellyfishEntity.class, true));
     }
 
     @Override

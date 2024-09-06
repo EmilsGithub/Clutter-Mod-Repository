@@ -16,7 +16,6 @@ public class ModBlockEntities {
     public static BlockEntityType<WallBookshelfInventoryBlockEntity> WALL_BOOKSHELF;
     public static BlockEntityType<WallCupboardInventoryBlockEntity> WALL_CUPBOARD;
     public static BlockEntityType<ShelfInventoryBlockEntity> SHELF;
-    public static BlockEntityType<PlateInventoryBlockEntity> PLATE;
     public static BlockEntityType<BrickKilnBlockEntity> BRICK_KILN_ENTITY;
     public static BlockEntityType<CupboardInventoryBlockEntity> CUPBOARD;
     public static BlockEntityType<MailBoxInventoryBlockEntity> MAILBOX;
@@ -106,10 +105,6 @@ public class ModBlockEntities {
         BONFIRE = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "bonfire"),
                 FabricBlockEntityTypeBuilder.create(BonfireBlockEntity::new,
                         ModBlocks.BONFIRE, SOUL_BONFIRE).build());
-
-        PLATE = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "plate"),
-                FabricBlockEntityTypeBuilder.create(PlateInventoryBlockEntity::new,
-                        ModBlocks.PLATE).build());
 
         BRICK_KILN_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "brick_kiln"),
                 FabricBlockEntityTypeBuilder.create(BrickKilnBlockEntity::new,

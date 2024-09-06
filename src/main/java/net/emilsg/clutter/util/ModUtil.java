@@ -8,6 +8,8 @@ import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
+import net.minecraft.block.Block;
+import net.minecraft.util.shape.VoxelShape;
 
 
 public class ModUtil {
@@ -18,6 +20,10 @@ public class ModUtil {
         registerFuel();
         registerCommands();
         registerJoinServerEvents();
+    }
+
+    public static VoxelShape createBasicShape(float xLength, float yHeight, float zDepth) {
+        return Block.createCuboidShape(8 - (xLength / 2), 0, 8 - (zDepth / 2), 8 + (xLength / 2), yHeight, 8 + (zDepth/ 2));
     }
 
     private static void registerJoinServerEvents() {

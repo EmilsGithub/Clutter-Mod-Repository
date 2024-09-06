@@ -88,9 +88,8 @@ public class ModBiomes {
     private static Biome lupineFields(Registerable<Biome> context) {
         SpawnSettings.Builder spawnBuilder = new SpawnSettings.Builder();
 
-        spawnBuilder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(ModEntities.BUTTERFLY, 4, 3, 5));
+        spawnBuilder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(ModEntities.BUTTERFLY, 10, 5, 8));
 
-        DefaultBiomeFeatures.addFarmAnimals(spawnBuilder);
         DefaultBiomeFeatures.addBatsAndMonsters(spawnBuilder);
 
         GenerationSettings.LookupBackedBuilder builder =
@@ -104,6 +103,8 @@ public class ModBiomes {
         DefaultBiomeFeatures.addDefaultGrass(builder);
         DefaultBiomeFeatures.addDefaultOres(builder);
         DefaultBiomeFeatures.addDefaultDisks(builder);
+
+
 
         return new Biome.Builder()
                 .precipitation(true)

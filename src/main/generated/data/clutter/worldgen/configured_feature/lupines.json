@@ -28,9 +28,21 @@
               },
               {
                 "data": {
+                  "Name": "clutter:small_yellow_lupine"
+                },
+                "weight": 8
+              },
+              {
+                "data": {
+                  "Name": "clutter:small_red_lupine"
+                },
+                "weight": 8
+              },
+              {
+                "data": {
                   "Name": "clutter:small_white_lupine"
                 },
-                "weight": 10
+                "weight": 5
               },
               {
                 "data": {
@@ -39,7 +51,7 @@
                     "half": "lower"
                   }
                 },
-                "weight": 1
+                "weight": 2
               },
               {
                 "data": {
@@ -48,7 +60,7 @@
                     "half": "lower"
                   }
                 },
-                "weight": 1
+                "weight": 2
               },
               {
                 "data": {
@@ -57,7 +69,25 @@
                     "half": "lower"
                   }
                 },
-                "weight": 1
+                "weight": 2
+              },
+              {
+                "data": {
+                  "Name": "clutter:yellow_lupine",
+                  "Properties": {
+                    "half": "lower"
+                  }
+                },
+                "weight": 2
+              },
+              {
+                "data": {
+                  "Name": "clutter:red_lupine",
+                  "Properties": {
+                    "half": "lower"
+                  }
+                },
+                "weight": 2
               },
               {
                 "data": {

@@ -16,7 +16,7 @@
                   "condition": "minecraft:block_state_property",
                   "block": "clutter:tall_bottle",
                   "properties": {
-                    "bottles": "1"
+                    "count": "2"
                   }
                 }
               ]
@@ -29,7 +29,20 @@
                   "condition": "minecraft:block_state_property",
                   "block": "clutter:tall_bottle",
                   "properties": {
-                    "bottles": "2"
+                    "count": "3"
+                  }
+                }
+              ]
+            },
+            {
+              "function": "minecraft:set_count",
+              "count": 4,
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "clutter:tall_bottle",
+                  "properties": {
+                    "count": "4"
                   }
                 }
               ]

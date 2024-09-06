@@ -40,6 +40,15 @@ public class LootTableDataGen extends FabricBlockLootTableProvider {
 
         this.silkTouchDrops(ModBlocks.OVERGROWN_PACKED_MUD, Blocks.COBBLESTONE);
 
+        this.addPottedPlantGroupDrops(
+                ModBlocks.POTTED_SMALL_BLUE_LUPINE,
+                ModBlocks.POTTED_SMALL_MAGENTA_LUPINE,
+                ModBlocks.POTTED_SMALL_PURPLE_LUPINE,
+                ModBlocks.POTTED_SMALL_YELLOW_LUPINE,
+                ModBlocks.POTTED_SMALL_RED_LUPINE,
+                ModBlocks.POTTED_SMALL_WHITE_LUPINE
+        );
+
         this.addSlabGroupDrops(
                 ModBlocks.REDWOOD_MOSAIC_SLAB,
                 ModBlocks.REDWOOD_SLAB,
@@ -51,7 +60,9 @@ public class LootTableDataGen extends FabricBlockLootTableProvider {
                 ModBlocks.BLUE_LUPINE,
                 ModBlocks.MAGENTA_LUPINE,
                 ModBlocks.PURPLE_LUPINE,
+                ModBlocks.YELLOW_LUPINE,
                 ModBlocks.WHITE_LUPINE,
+                ModBlocks.RED_LUPINE,
                 ModBlocks.GIANT_FERN,
                 ModBlocks.REDWOOD_DOOR
         );
@@ -101,6 +112,8 @@ public class LootTableDataGen extends FabricBlockLootTableProvider {
                 ModBlocks.SMALL_BLUE_LUPINE,
                 ModBlocks.SMALL_MAGENTA_LUPINE,
                 ModBlocks.SMALL_PURPLE_LUPINE,
+                ModBlocks.SMALL_YELLOW_LUPINE,
+                ModBlocks.SMALL_RED_LUPINE,
                 ModBlocks.SMALL_WHITE_LUPINE
         );
 
@@ -126,6 +139,12 @@ public class LootTableDataGen extends FabricBlockLootTableProvider {
     private void addSlabGroupDrops(Block... blocks) {
         for (Block block : blocks) {
             this.addDrop(block, slabDrops(block));
+        }
+    }
+
+    private void addPottedPlantGroupDrops(Block... blocks) {
+        for (Block block : blocks) {
+            this.addPottedPlantDrops(block);
         }
     }
 

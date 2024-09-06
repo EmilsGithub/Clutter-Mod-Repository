@@ -7,6 +7,7 @@ import net.emilsg.clutter.entity.variants.SeahorseVariant;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.EscapeDangerGoal;
 import net.minecraft.entity.ai.goal.TemptGoal;
+import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
@@ -75,6 +76,7 @@ public class SeahorseEntity extends ClutterFishEntity {
 
     public SeahorseEntity(EntityType<? extends FishEntity> entityType, World world) {
         super(entityType, world);
+        this.setPathfindingPenalty(PathNodeType.WATER, 0.0F);
     }
 
     protected void initGoals() {
@@ -331,8 +333,6 @@ public class SeahorseEntity extends ClutterFishEntity {
         }
 
     }
-
-    //TODO - Manage breeding and variants.
 
     public float getHasChildrenTimer() {
         return this.dataTracker.get(HAS_CHILDREN_TIMER);

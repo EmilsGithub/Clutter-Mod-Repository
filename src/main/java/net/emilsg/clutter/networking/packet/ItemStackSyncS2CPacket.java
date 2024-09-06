@@ -1,7 +1,6 @@
 package net.emilsg.clutter.networking.packet;
 
 import net.emilsg.clutter.block.entity.CardboardBoxInventoryBlockEntity;
-import net.emilsg.clutter.block.entity.PlateInventoryBlockEntity;
 import net.emilsg.clutter.block.entity.ShelfInventoryBlockEntity;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.client.MinecraftClient;
@@ -22,6 +21,5 @@ public class ItemStackSyncS2CPacket {
         assert client.world != null;
         if (client.world.getBlockEntity(pos) instanceof ShelfInventoryBlockEntity shelfBlockEntity) shelfBlockEntity.setInventory(list);
         if (client.world.getBlockEntity(pos) instanceof CardboardBoxInventoryBlockEntity cardboardBoxBlockEntity) cardboardBoxBlockEntity.setInventory(list);
-        if (client.world.getBlockEntity(pos) instanceof PlateInventoryBlockEntity plateBlockEntity) plateBlockEntity.setInventory(list);
     }
 }
