@@ -24,4 +24,8 @@ public class ModProperties {
     public static final IntProperty PAD_AMOUNT = IntProperty.of("pad_amount", 1, 4);
     public static final IntProperty AMOUNT = IntProperty.of("amount", 1, 4);
     public static final BooleanProperty HAS_PEARL = BooleanProperty.of("has_pearl");
+    public static final BooleanProperty NORTH_EAST = BooleanProperty.of("north_east");
+    public static final BooleanProperty NORTH_WEST = BooleanProperty.of("north_west");
+    public static final BooleanProperty SOUTH_EAST = BooleanProperty.of("south_east");
+    public static final BooleanProperty SOUTH_WEST = BooleanProperty.of("south_west");
 }

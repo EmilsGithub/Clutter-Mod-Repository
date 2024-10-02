@@ -8,6 +8,7 @@ import net.minecraft.client.render.entity.animation.Transformation;
 
 public class MantaRayAnimations {
 
+
     public static final Animation MANTA_RAY_SWIM = Animation.Builder.create(2f).looping()
             .addBoneAnimation("lf",
                     new Transformation(Transformation.Targets.ROTATE,
@@ -56,10 +57,18 @@ public class MantaRayAnimations {
                             new Keyframe(0.75f, AnimationHelper.createRotationalVector(0f, 0f, 6.25f),
                                     Transformation.Interpolations.LINEAR),
                             new Keyframe(2f, AnimationHelper.createRotationalVector(0f, 0f, -5f),
+                                    Transformation.Interpolations.LINEAR)))
+            .addBoneAnimation("root",
+                    new Transformation(Transformation.Targets.ROTATE,
+                            new Keyframe(0f, AnimationHelper.createRotationalVector(5f, 0f, 0f),
+                                    Transformation.Interpolations.LINEAR),
+                            new Keyframe(0.75f, AnimationHelper.createRotationalVector(-10f, 0f, 0f),
+                                    Transformation.Interpolations.LINEAR),
+                            new Keyframe(1.5f, AnimationHelper.createRotationalVector(0f, 0f, 0f),
+                                    Transformation.Interpolations.LINEAR),
+                            new Keyframe(2f, AnimationHelper.createRotationalVector(5f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR))).build();
-
     public static final Animation MANTA_RAY_IDLE = Animation.Builder.create(0f).looping().build();
-
     public static final Animation MANTA_RAY_FLOP = Animation.Builder.create(0.5f).looping()
             .addBoneAnimation("lf",
                     new Transformation(Transformation.Targets.ROTATE,

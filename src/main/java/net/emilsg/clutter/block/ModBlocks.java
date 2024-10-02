@@ -39,6 +39,8 @@ import java.util.function.ToIntFunction;
 
 public class ModBlocks {
 
+    public static final Block FISH_TANK = registerBlock("fish_tank", new FishTankBlock(FabricBlockSettings.copy(Blocks.GLASS)));
+
     public static final Block GIANT_FERN = registerBlock("giant_fern", new TallPlantBlock(FabricBlockSettings.copy(Blocks.LARGE_FERN)));
 
     public static final Block BLUE_LUPINE = registerBlock("blue_lupine", new CTallFlowerBlock(FabricBlockSettings.copy(Blocks.ROSE_BUSH).nonOpaque().noCollision()));

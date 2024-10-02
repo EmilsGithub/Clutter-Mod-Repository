@@ -184,6 +184,7 @@ public class ModItemGroups {
                     entries.add(ModBlocks.CARDBOARD_BOX);
                     entries.add(ModBlocks.RED_PRESENT);
                     entries.add(ModBlocks.BRICK_KILN);
+                    entries.add(ModBlocks.FISH_TANK);
 
                     entries.add(ModBlocks.TALL_BOTTLE);
                     entries.add(ModBlocks.LAB_BOTTLE);

@@ -1,0 +1,132 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "clutter:block/fish_tank/fish_tank_single"
+      },
+      "when": {
+        "type": "single"
+      }
+    },
+    {
+      "apply": {
+        "model": "clutter:block/fish_tank/fish_tank_side",
+        "y": 270
+      },
+      "when": {
+        "facing": "north",
+        "type": "left"
+      }
+    },
+    {
+      "apply": {
+        "model": "clutter:block/fish_tank/fish_tank_side",
+        "y": 90
+      },
+      "when": {
+        "facing": "north",
+        "type": "right"
+      }
+    },
+    {
+      "apply": {
+        "model": "clutter:block/fish_tank/fish_tank_side",
+        "y": 180
+      },
+      "when": {
+        "facing": "east",
+        "type": "right"
+      }
+    },
+    {
+      "apply": {
+        "model": "clutter:block/fish_tank/fish_tank_side"
+      },
+      "when": {
+        "facing": "east",
+        "type": "left"
+      }
+    },
+    {
+      "apply": {
+        "model": "clutter:block/fish_tank/fish_tank_side"
+      },
+      "when": {
+        "facing": "west",
+        "type": "right"
+      }
+    },
+    {
+      "apply": {
+        "model": "clutter:block/fish_tank/fish_tank_side",
+        "y": 180
+      },
+      "when": {
+        "facing": "west",
+        "type": "left"
+      }
+    },
+    {
+      "apply": {
+        "model": "clutter:block/fish_tank/fish_tank_side",
+        "y": 270
+      },
+      "when": {
+        "facing": "south",
+        "type": "right"
+      }
+    },
+    {
+      "apply": {
+        "model": "clutter:block/fish_tank/fish_tank_side",
+        "y": 90
+      },
+      "when": {
+        "facing": "south",
+        "type": "left"
+      }
+    },
+
+
+
+    {
+      "apply": {
+        "model": "clutter:block/fish_tank/coral_interior"
+      },
+      "when": {
+        "facing": "north",
+        "interior": "coral"
+      }
+    },
+    {
+      "apply": {
+        "model": "clutter:block/fish_tank/coral_interior",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "interior": "coral"
+      }
+    },
+    {
+      "apply": {
+        "model": "clutter:block/fish_tank/coral_interior",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "interior": "coral"
+      }
+    },
+    {
+      "apply": {
+        "model": "clutter:block/fish_tank/coral_interior",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "interior": "coral"
+      }
+    }
+  ]
+}

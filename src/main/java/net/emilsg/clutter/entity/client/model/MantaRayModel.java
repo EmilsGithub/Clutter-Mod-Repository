@@ -17,9 +17,9 @@ public class MantaRayModel<T extends MantaRayEntity> extends ClutterAquaticModel
     public static TexturedModelData getTexturedModelData() {
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
-        ModelPartData manta_ray = modelPartData.addChild("manta_ray", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 24.0F, -2.0F));
+        ModelPartData root = modelPartData.addChild("root", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 24.0F, 1.0F));
 
-        ModelPartData b = manta_ray.addChild("b", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
+        ModelPartData b = root.addChild("b", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 0.0F, -3.0F));
 
         ModelPartData cube_r1 = b.addChild("cube_r1", ModelPartBuilder.create().uv(0, 0).mirrored().cuboid(-5.5F, -1.5F, -1.5F, 1.0F, 3.0F, 3.0F, new Dilation(0.0F)).mirrored(false), ModelTransform.of(-2.5F, -1.5F, -7.5F, 0.0F, 3.1416F, 0.0F));
 
@@ -51,13 +51,11 @@ public class MantaRayModel<T extends MantaRayEntity> extends ClutterAquaticModel
         return TexturedModelData.of(modelData, 64, 64);
     }
 
-    //TODO Fix root Pivot
-
     @Override
     public void setAngles(MantaRayEntity ray, float limbAngle, float limbDistance, float ageInTicks, float headYaw, float headPitch) {
         this.getPart().traverse().forEach(ModelPart::resetTransform);
-        this.getPart().pitch = headPitch * 0.017453292F;
-        this.getPart().yaw = headYaw * 0.017453292F;
+        this.getPart().getChild("root").pitch = headPitch * 0.017453292F;
+        this.getPart().getChild("root").yaw = headYaw * 0.017453292F;
 
         if (ray.isTouchingWater() && !ray.isDead())
             this.updateAnimation(ray.swimmingAnimationState, MantaRayAnimations.MANTA_RAY_SWIM, ageInTicks, 1.0f);
