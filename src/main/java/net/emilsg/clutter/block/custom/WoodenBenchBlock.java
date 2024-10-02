@@ -129,7 +129,7 @@ public class WoodenBenchBlock extends SeatBlock {
         super(settings);
     }
 
-    private enum LegPosition implements StringIdentifiable {
+    public enum LegPosition implements StringIdentifiable {
         NONE("none"),
         NORTH("north"),
         SOUTH("south"),
