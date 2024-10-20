@@ -42,7 +42,7 @@ public class GiantLilyPadSeedlingBlock extends LilyPadBlock implements Fertiliza
     }
 
     @Override
-    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state) {
         return (state.get(AGE) != 3 || (GiantLilyPadBlock.isValidPlacement((World) world, pos.north()) && GiantLilyPadBlock.isValidPlacement((World) world, pos.north().east()) && GiantLilyPadBlock.isValidPlacement((World) world, pos.east())));
     }
 

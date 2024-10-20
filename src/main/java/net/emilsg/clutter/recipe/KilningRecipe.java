@@ -1,31 +1,31 @@
 package net.emilsg.clutter.recipe;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.*;
 import net.minecraft.registry.DynamicRegistryManager;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.JsonHelper;
 import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.util.dynamic.Codecs;
 import net.minecraft.world.World;
 
-public class KilningRecipe implements Recipe<SimpleInventory> {
-    private final Identifier id;
-    private final ItemStack output;
-    private final DefaultedList<Ingredient> recipeItems;
+import java.util.List;
 
-    public KilningRecipe(Identifier id, ItemStack output, DefaultedList<Ingredient> recipeItems) {
-        this.id = id;
+public class KilningRecipe implements Recipe<SimpleInventory> {
+    private final ItemStack output;
+    private final List<Ingredient> recipeItems;
+
+    public KilningRecipe(List<Ingredient> recipeItems, ItemStack output) {
         this.output = output;
         this.recipeItems = recipeItems;
     }
 
     @Override
     public boolean matches(SimpleInventory inventory, World world) {
-        if (world.isClient()) {
+        if(world.isClient()) {
             return false;
         }
 
@@ -43,13 +43,8 @@ public class KilningRecipe implements Recipe<SimpleInventory> {
     }
 
     @Override
-    public ItemStack getOutput(DynamicRegistryManager registryManager) {
+    public ItemStack getResult(DynamicRegistryManager registryManager) {
         return output.copy();
-    }
-
-    @Override
-    public Identifier getId() {
-        return this.id;
     }
 
     @Override
@@ -64,41 +59,37 @@ public class KilningRecipe implements Recipe<SimpleInventory> {
 
     @Override
     public DefaultedList<Ingredient> getIngredients() {
-        return this.recipeItems;
-    }
-
-    @Override
-    public boolean isIgnoredInRecipeBook() {
-        return true;
+        return DefaultedList.copyOf(Ingredient.EMPTY, recipeItems.toArray(new Ingredient[0]));
     }
 
     public static class Type implements RecipeType<KilningRecipe> {
+        private Type() { }
         public static final Type INSTANCE = new Type();
         public static final String ID = "kilning";
-        private Type() {
-        }
     }
 
     public static class Serializer implements RecipeSerializer<KilningRecipe> {
         public static final Serializer INSTANCE = new Serializer();
         public static final String ID = "kilning";
 
-        @Override
-        public KilningRecipe read(Identifier id, JsonObject json) {
-            ItemStack output = ShapedRecipe.outputFromJson(JsonHelper.getObject(json, "output"));
+        public static final Codec<KilningRecipe> CODEC = RecordCodecBuilder.create(in -> in.group(
+                validateAmount(Ingredient.DISALLOW_EMPTY_CODEC, 9).fieldOf("ingredients").forGetter(KilningRecipe::getIngredients),
+                RecipeCodecs.CRAFTING_RESULT.fieldOf("output").forGetter(r -> r.output)
+        ).apply(in, KilningRecipe::new));
 
-            JsonArray input = JsonHelper.getArray(json, "ingredients");
-            DefaultedList<Ingredient> inputs = DefaultedList.ofSize(1, Ingredient.EMPTY);
-
-            for (int i = 0; i < inputs.size(); i++) {
-                inputs.set(i, Ingredient.fromJson(input.get(i)));
-            }
-
-            return new KilningRecipe(id, output, inputs);
+        private static Codec<List<Ingredient>> validateAmount(Codec<Ingredient> delegate, int max) {
+            return Codecs.validate(Codecs.validate(
+                    delegate.listOf(), list -> list.size() > max ? DataResult.error(() -> "Recipe has too many ingredients!") : DataResult.success(list)
+            ), list -> list.isEmpty() ? DataResult.error(() -> "Recipe has no ingredients!") : DataResult.success(list));
         }
 
         @Override
-        public KilningRecipe read(Identifier id, PacketByteBuf buf) {
+        public Codec<KilningRecipe> codec() {
+            return CODEC;
+        }
+
+        @Override
+        public KilningRecipe read(PacketByteBuf buf) {
             DefaultedList<Ingredient> inputs = DefaultedList.ofSize(buf.readInt(), Ingredient.EMPTY);
 
             for (int i = 0; i < inputs.size(); i++) {
@@ -106,7 +97,7 @@ public class KilningRecipe implements Recipe<SimpleInventory> {
             }
 
             ItemStack output = buf.readItemStack();
-            return new KilningRecipe(id, output, inputs);
+            return new KilningRecipe(inputs, output);
         }
 
         @Override
@@ -115,7 +106,7 @@ public class KilningRecipe implements Recipe<SimpleInventory> {
             for (Ingredient ing : recipe.getIngredients()) {
                 ing.write(buf);
             }
-            buf.writeItemStack(recipe.getOutput(null));
+            buf.writeItemStack(recipe.getResult(null));
         }
     }
 }

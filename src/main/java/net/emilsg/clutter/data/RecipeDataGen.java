@@ -11,7 +11,7 @@ import net.emilsg.clutter.util.RegistryType;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.block.Blocks;
-import net.minecraft.data.server.recipe.RecipeJsonProvider;
+import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.SmithingTransformRecipeJsonBuilder;
@@ -25,15 +25,13 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.Identifier;
 
-import java.util.function.Consumer;
-
 public class RecipeDataGen extends FabricRecipeProvider {
     public RecipeDataGen(FabricDataOutput output) {
         super(output);
     }
 
     @Override
-    public void generate(Consumer<RecipeJsonProvider> exporter) {
+    public void generate(RecipeExporter exporter) {
         kilningRecipe(Items.SAND, Items.GLASS, 1, exporter);
         kilningRecipe(Items.RED_SAND, Items.GLASS, 1, exporter);
         kilningRecipe(Items.CLAY_BALL, Items.BRICK, 1, exporter);
@@ -263,14 +261,14 @@ public class RecipeDataGen extends FabricRecipeProvider {
 
 
 
-    public void offerDecoratedElytraRecipes(Consumer<RecipeJsonProvider> exporter, Item result, Item addition) {
+    public void offerDecoratedElytraRecipes(RecipeExporter exporter, Item result, Item addition) {
         SmithingTransformRecipeJsonBuilder
                 .create(Ingredient.ofItems(ModItems.DECORATED_ELYTRA_SMITHING_TEMPLATE), Ingredient.fromTag(ModItemTags.ELYTRON), Ingredient.ofItems(addition), RecipeCategory.MISC, result)
                 .criterion("has_elytra", conditionsFromItem(ModItems.BUTTERFLY_IN_A_BOTTLE))
                 .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(result)));
     }
 
-    public void offerClutterWaxingRecipes(Consumer<RecipeJsonProvider> exporter) {
+    public void offerClutterWaxingRecipes(RecipeExporter exporter) {
         HoneycombItem.UNWAXED_TO_WAXED_BLOCKS.get().forEach((input, result) -> {
             if (Registries.ITEM.getId(input.asItem()).getNamespace().equals(Clutter.MOD_ID)) {
 
@@ -283,7 +281,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
         });
     }
 
-    private void offerCombinationRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible input, ItemConvertible input2, ItemConvertible output, int count, RecipeCategory recipeCategory) {
+    private void offerCombinationRecipe(RecipeExporter exporter, ItemConvertible input, ItemConvertible input2, ItemConvertible output, int count, RecipeCategory recipeCategory) {
         ShapelessRecipeJsonBuilder.create(recipeCategory, output.asItem(), count)
                 .input(input.asItem())
                 .input(input2.asItem())
@@ -292,49 +290,49 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output.asItem()) + "_from_" + input.asItem() + "_and_" + input2.asItem()));
     }
 
-    private void kilningRecipe(ItemConvertible ingredient, ItemConvertible result, int count, Consumer<RecipeJsonProvider> exporter) {
+    private void kilningRecipe(ItemConvertible ingredient, ItemConvertible result, int count, RecipeExporter exporter) {
         new KilningRecipeBuilder(ingredient, result, count).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(result)));
     }
 
-    private void offerArmorRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible component, Item helmet, Item chestplate, Item leggings, Item boots) {
+    private void offerArmorRecipe(RecipeExporter exporter, ItemConvertible component, Item helmet, Item chestplate, Item leggings, Item boots) {
         offerHelmetRecipe(exporter, component, helmet);
         offerChestplateRecipe(exporter, component, chestplate);
         offerLeggingsRecipe(exporter, component, leggings);
         offerBootsRecipe(exporter, component, boots);
     }
 
-    private void offerHelmetRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible component, Item helmet) {
+    private void offerHelmetRecipe(RecipeExporter exporter, ItemConvertible component, Item helmet) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, helmet)
                 .pattern("###").pattern("# #").input('#', component)
                 .criterion(hasItem(component), conditionsFromItem(component)).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(helmet)));
     }
 
-    private void offerChestplateRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible component, Item chestplate) {
+    private void offerChestplateRecipe(RecipeExporter exporter, ItemConvertible component, Item chestplate) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, chestplate)
                 .pattern("# #").pattern("###").pattern("###").input('#', component)
                 .criterion(hasItem(component), conditionsFromItem(component)).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(chestplate)));
     }
 
-    private void offerLeggingsRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible component, Item leggings) {
+    private void offerLeggingsRecipe(RecipeExporter exporter, ItemConvertible component, Item leggings) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, leggings)
                 .pattern("###").pattern("# #").pattern("# #").input('#', component)
                 .criterion(hasItem(component), conditionsFromItem(component)).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(leggings)));
     }
 
-    private void offerBootsRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible component, Item boots) {
+    private void offerBootsRecipe(RecipeExporter exporter, ItemConvertible component, Item boots) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, boots)
                 .pattern("# #").pattern("# #").input('#', component)
                 .criterion(hasItem(component), conditionsFromItem(component)).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(boots)));
     }
 
-    private void offerSimpleDyeRecipeWithCount(Consumer<RecipeJsonProvider> exporter, ItemConvertible component, ItemConvertible result, RecipeCategory category, int count) {
+    private void offerSimpleDyeRecipeWithCount(RecipeExporter exporter, ItemConvertible component, ItemConvertible result, RecipeCategory category, int count) {
         ShapelessRecipeJsonBuilder.create(category, result, count)
                 .input(component)
                 .criterion(hasItem(component), conditionsFromItem(component))
                 .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(result) + "_from_" + getRecipeName(component)));
     }
 
-    private void offerSulphurRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible component, ItemConvertible result, RecipeCategory category) {
+    private void offerSulphurRecipe(RecipeExporter exporter, ItemConvertible component, ItemConvertible result, RecipeCategory category) {
         ShapelessRecipeJsonBuilder.create(category, result)
                 .input(component).input(ModItems.SULPHUR)
                 .criterion(hasItem(component), conditionsFromItem(component))
@@ -342,7 +340,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(result)));
     }
 
-    private void offerHatRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible component, ItemConvertible secondComponent, Item result) {
+    private void offerHatRecipe(RecipeExporter exporter, ItemConvertible component, ItemConvertible secondComponent, Item result) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, result)
                 .pattern(" C ").pattern("CSC")
                 .input('C', component).input('S', secondComponent)
@@ -351,7 +349,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(result)));
     }
 
-    private void offerPlusRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible inner, ItemConvertible outer, ItemConvertible output, RecipeCategory category) {
+    private void offerPlusRecipe(RecipeExporter exporter, ItemConvertible inner, ItemConvertible outer, ItemConvertible output, RecipeCategory category) {
         ShapedRecipeJsonBuilder.create(category, output)
                 .pattern(" O ")
                 .pattern("OIO")
@@ -363,7 +361,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
     }
 
-    private void offerWoodRecipes(Consumer<RecipeJsonProvider> exporter, ClutterWoodType woodType) {
+    private void offerWoodRecipes(RecipeExporter exporter, ClutterWoodType woodType) {
         RegistryType registryType = woodType.registryType();
 
         if(registryType.isOf(RegistryType.MODDED)) offerBarkBlockRecipe(exporter, woodType.strippedWood(), woodType.strippedLog());
@@ -399,43 +397,43 @@ public class RecipeDataGen extends FabricRecipeProvider {
         offerTrellisRecipe(exporter, woodType.slab(), woodType.trellis());
     }
 
-    private static void offerStairsRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible input, ItemConvertible output) {
+    private static void offerStairsRecipe(RecipeExporter exporter, ItemConvertible input, ItemConvertible output) {
         createStairsRecipe(output, Ingredient.ofItems(input)).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
     }
 
-    public static void offerPressurePlateRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible output, ItemConvertible input) {
+    public static void offerPressurePlateRecipe(RecipeExporter exporter, ItemConvertible output, ItemConvertible input) {
         createPressurePlateRecipe(RecipeCategory.REDSTONE, output, Ingredient.ofItems(input)).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
     }
 
-    public static void offerSlabRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible output, ItemConvertible input) {
+    public static void offerSlabRecipe(RecipeExporter exporter, ItemConvertible output, ItemConvertible input) {
         createSlabRecipe(RecipeCategory.BUILDING_BLOCKS, output, Ingredient.ofItems(input)).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
     }
 
-    public static void offerTrapdoorRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible output, ItemConvertible input) {
+    public static void offerTrapdoorRecipe(RecipeExporter exporter, ItemConvertible output, ItemConvertible input) {
         createTrapdoorRecipe(output, Ingredient.ofItems(input)).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
     }
 
-    public static void offerSingleItemRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible output, ItemConvertible input, RecipeCategory category) {
+    public static void offerSingleItemRecipe(RecipeExporter exporter, ItemConvertible output, ItemConvertible input, RecipeCategory category) {
         ShapelessRecipeJsonBuilder.create(category, output).input(input).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
     }
 
-    public static void offerFenceRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible output, ItemConvertible input) {
+    public static void offerFenceRecipe(RecipeExporter exporter, ItemConvertible output, ItemConvertible input) {
         createFenceRecipe(output, Ingredient.ofItems(input)).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
     }
 
-    public static void offerFenceGateRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible output, ItemConvertible input) {
+    public static void offerFenceGateRecipe(RecipeExporter exporter, ItemConvertible output, ItemConvertible input) {
         createFenceGateRecipe(output, Ingredient.ofItems(input)).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
     }
 
-    public static void offerDoorRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible output, ItemConvertible input) {
+    public static void offerDoorRecipe(RecipeExporter exporter, ItemConvertible output, ItemConvertible input) {
         createDoorRecipe(output, Ingredient.ofItems(input)).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
     }
 
-    public static void offerSignRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible output, ItemConvertible input) {
+    public static void offerSignRecipe(RecipeExporter exporter, ItemConvertible output, ItemConvertible input) {
         createSignRecipe(output, Ingredient.ofItems(input)).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
     }
 
-    private void offerShortBenchRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible planks, ItemConvertible log, ItemConvertible output) {
+    private void offerShortBenchRecipe(RecipeExporter exporter, ItemConvertible planks, ItemConvertible log, ItemConvertible output) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, output, 6)
                 .pattern("PPP")
                 .pattern("L L")
@@ -447,7 +445,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
     }
 
-    private void offerChairRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible planks, ItemConvertible log, ItemConvertible output) {
+    private void offerChairRecipe(RecipeExporter exporter, ItemConvertible planks, ItemConvertible log, ItemConvertible output) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, output, 4)
                 .pattern("P  ")
                 .pattern("PP ")
@@ -460,7 +458,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
     }
 
-    private void offerBenchRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible planks, ItemConvertible log, ItemConvertible output) {
+    private void offerBenchRecipe(RecipeExporter exporter, ItemConvertible planks, ItemConvertible log, ItemConvertible output) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, output, 4)
                 .pattern("PSP")
                 .pattern("PPP")
@@ -474,7 +472,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
     }
 
-    private void offerTableRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible planks, ItemConvertible log, ItemConvertible output) {
+    private void offerTableRecipe(RecipeExporter exporter, ItemConvertible planks, ItemConvertible log, ItemConvertible output) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, output)
                 .pattern("PPP")
                 .pattern("L L")
@@ -487,7 +485,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
     }
 
-    private void offerShelfRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible slab, ItemConvertible output) {
+    private void offerShelfRecipe(RecipeExporter exporter, ItemConvertible slab, ItemConvertible output) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, output, 2)
                 .pattern("SSS")
                 .input('S', slab)
@@ -496,7 +494,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
     }
 
-    private void offerTrellisRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible slab, ItemConvertible output) {
+    private void offerTrellisRecipe(RecipeExporter exporter, ItemConvertible slab, ItemConvertible output) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, output, 2)
                 .pattern(" S ")
                 .pattern("SSS")
@@ -507,7 +505,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
     }
 
-    private void offerCupboardRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible planks, ItemConvertible slab, ItemConvertible output) {
+    private void offerCupboardRecipe(RecipeExporter exporter, ItemConvertible planks, ItemConvertible slab, ItemConvertible output) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, output)
                 .pattern("PSP")
                 .pattern("PSP")
@@ -520,7 +518,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
     }
 
-    private void offerWallCupboardRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible planks, ItemConvertible slab, ItemConvertible output) {
+    private void offerWallCupboardRecipe(RecipeExporter exporter, ItemConvertible planks, ItemConvertible slab, ItemConvertible output) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, output, 2)
                 .pattern("PS ")
                 .pattern("PS ")
@@ -533,7 +531,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
     }
 
-    private void offerWindowSillRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible slab, ItemConvertible output) {
+    private void offerWindowSillRecipe(RecipeExporter exporter, ItemConvertible slab, ItemConvertible output) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, output)
                 .pattern("P  ")
                 .pattern("SSS")
@@ -545,7 +543,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
     }
 
-    private void offerWallBookshelfRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible slab, ItemConvertible output) {
+    private void offerWallBookshelfRecipe(RecipeExporter exporter, ItemConvertible slab, ItemConvertible output) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, output)
                 .pattern("BBB")
                 .pattern("SSS")

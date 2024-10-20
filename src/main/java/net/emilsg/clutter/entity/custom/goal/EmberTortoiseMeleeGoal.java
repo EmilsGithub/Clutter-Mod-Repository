@@ -46,7 +46,8 @@ public class EmberTortoiseMeleeGoal extends MeleeAttackGoal {
         if (this.path != null) {
             return true;
         }
-        return this.getSquaredMaxAttackDistance(livingEntity) >= this.mob.squaredDistanceTo(livingEntity.getX(), livingEntity.getY(), livingEntity.getZ());
+
+        return this.isEnemyWithinAttackDistance(livingEntity);
     }
 
     @Override
@@ -60,7 +61,7 @@ public class EmberTortoiseMeleeGoal extends MeleeAttackGoal {
     }
 
     @Override
-    protected void attack(LivingEntity target, double squaredDistance) {
+    protected void attack(LivingEntity target) {
         if (this.entity.isShielding()) {
             entity.getNavigation().stop();
             resetAttackCooldown();

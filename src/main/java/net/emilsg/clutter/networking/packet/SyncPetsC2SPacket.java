@@ -50,9 +50,9 @@ public class SyncPetsC2SPacket {
                 }
 
                 Box hitbox = finalClosestEntity.getBoundingBox();
-                double hitboxWidth = hitbox.getXLength();
-                double hitboxHeight = hitbox.getYLength();
-                double hitboxDepth = hitbox.getZLength();
+                double hitboxWidth = hitbox.getLengthX();
+                double hitboxHeight = hitbox.getLengthY();
+                double hitboxDepth = hitbox.getLengthZ();
 
                 for (int i = 0; i < (int) (10 * finalClosestEntity.getWidth()); i++) {
                     Random random = new Random();

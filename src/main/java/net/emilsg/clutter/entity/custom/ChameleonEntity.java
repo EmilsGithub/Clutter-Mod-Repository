@@ -6,6 +6,7 @@ import net.emilsg.clutter.item.ModItems;
 import net.emilsg.clutter.item.custom.ButterflyBottleItem;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.AnimationState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.*;
@@ -93,8 +94,8 @@ public class ChameleonEntity extends ClutterTameableEntity {
     }
 
     @Override
-    public double getMountedHeightOffset() {
-        return 0.15D;
+    protected float getUnscaledRidingOffset(Entity vehicle) {
+        return 0.15F;
     }
 
     @Override

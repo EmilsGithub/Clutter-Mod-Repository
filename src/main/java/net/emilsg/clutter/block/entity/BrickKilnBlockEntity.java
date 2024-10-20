@@ -15,9 +15,9 @@ import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -25,21 +25,19 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
 public class BrickKilnBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, ImplementedInventory {
+    private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(3, ItemStack.EMPTY);
+
     private static final int INPUT_SLOT = 0;
     private static final int OUTPUT_SLOT = 1;
     private static final int FUEL_ITEM_SLOT = 2;
-    private static final int[] TOP_SLOTS = new int[]{INPUT_SLOT};
-    private static final int[] BOTTOM_SLOTS = new int[]{OUTPUT_SLOT, FUEL_ITEM_SLOT};
-    private static final int[] SIDE_SLOTS = new int[]{FUEL_ITEM_SLOT};
+
     protected final PropertyDelegate propertyDelegate;
-    private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(3, ItemStack.EMPTY);
     private int progress = 0;
     private int maxProgress = 100;
     private int burnTime;
@@ -74,10 +72,6 @@ public class BrickKilnBlockEntity extends BlockEntity implements ExtendedScreenH
                 return 4;
             }
         };
-    }
-
-    public static boolean canUseAsFuel(ItemStack stack) {
-        return AbstractFurnaceBlockEntity.createFuelTimeMap().containsKey(stack.getItem());
     }
 
     protected int getFuelTime(ItemStack fuel) {
@@ -139,9 +133,7 @@ public class BrickKilnBlockEntity extends BlockEntity implements ExtendedScreenH
                 ItemStack fuelStack = blockEntity.inventory.get(FUEL_ITEM_SLOT);
                 blockEntity.fuelTime = blockEntity.getFuelTime(fuelStack) / 2;
                 blockEntity.burnTime = blockEntity.fuelTime;
-                if (fuelStack.getRecipeRemainder().isOf(Items.BUCKET))
-                    blockEntity.setStack(FUEL_ITEM_SLOT, new ItemStack(Items.BUCKET));
-                else if (!fuelStack.getRecipeRemainder().isOf(Items.BUCKET)) fuelStack.decrement(1);
+                fuelStack.decrement(1);
                 willContinueBurning = true;
             }
         }
@@ -163,10 +155,14 @@ public class BrickKilnBlockEntity extends BlockEntity implements ExtendedScreenH
             blockEntity.resetProgress();
         }
 
-        if (!world.isClient) {
-            world.setBlockState(pos, state.with(Properties.LIT, blockEntity.burnTime > 0), Block.NOTIFY_ALL);
+        if (wasBurning != willContinueBurning) {
+            world.setBlockState(pos, state.with(Properties.LIT, willContinueBurning), Block.NOTIFY_ALL);
         }
+    }
 
+
+    public static boolean canUseAsFuel(ItemStack stack) {
+        return AbstractFurnaceBlockEntity.createFuelTimeMap().containsKey(stack.getItem());
     }
 
     private boolean isBurning() {
@@ -174,12 +170,12 @@ public class BrickKilnBlockEntity extends BlockEntity implements ExtendedScreenH
     }
 
     private void craftItem() {
-        Optional<KilningRecipe> recipe = getCurrentRecipe();
+        Optional<RecipeEntry<KilningRecipe>> recipe = getCurrentRecipe();
 
         this.removeStack(INPUT_SLOT, 1);
 
-        this.setStack(OUTPUT_SLOT, new ItemStack(recipe.get().getOutput(null).getItem(),
-                this.getStack(OUTPUT_SLOT).getCount() + recipe.get().getOutput(null).getCount()));
+        this.setStack(OUTPUT_SLOT, new ItemStack(recipe.get().value().getResult(null).getItem(),
+                this.getStack(OUTPUT_SLOT).getCount() + recipe.get().value().getResult(null).getCount()));
     }
 
     private void resetProgress() {
@@ -191,16 +187,16 @@ public class BrickKilnBlockEntity extends BlockEntity implements ExtendedScreenH
     }
 
     private void increaseCraftingProgress() {
-        if (this.isBurning()) this.progress++;
+        if(this.isBurning()) this.progress++;
     }
 
     private boolean hasRecipe() {
-        Optional<KilningRecipe> recipe = getCurrentRecipe();
+        Optional<RecipeEntry<KilningRecipe>> recipe = getCurrentRecipe();
 
         if (recipe.isEmpty()) {
             return false;
         }
-        ItemStack output = recipe.get().getOutput(null);
+        ItemStack output = recipe.get().value().getResult(null);
 
         return canInsertAmountIntoOutputSlot(output.getCount())
                 && canInsertItemIntoOutputSlot(output);
@@ -214,9 +210,9 @@ public class BrickKilnBlockEntity extends BlockEntity implements ExtendedScreenH
         return this.getStack(OUTPUT_SLOT).getMaxCount() >= this.getStack(OUTPUT_SLOT).getCount() + count;
     }
 
-    private Optional<KilningRecipe> getCurrentRecipe() {
+    private Optional<RecipeEntry<KilningRecipe>> getCurrentRecipe() {
         SimpleInventory inventory = new SimpleInventory((this.size()));
-        for (int i = 0; i < this.size(); i++) {
+        for(int i = 0; i < this.size(); i++) {
             inventory.setStack(i, this.getStack(i));
         }
 
@@ -224,42 +220,7 @@ public class BrickKilnBlockEntity extends BlockEntity implements ExtendedScreenH
     }
 
     private boolean canInsertIntoOutputSlot() {
-        return this.getStack(OUTPUT_SLOT).isEmpty() || this.getStack(OUTPUT_SLOT).getCount() < this.getStack(OUTPUT_SLOT).getMaxCount();
-    }
-
-    @Override
-    public boolean isValid(int slot, ItemStack stack) {
-        if (slot == OUTPUT_SLOT) {
-            return false;
-        }
-        if (slot == FUEL_ITEM_SLOT) {
-            ItemStack itemStack = this.inventory.get(1);
-            return canUseAsFuel(stack) || stack.isOf(Items.BUCKET) && !itemStack.isOf(Items.BUCKET);
-        }
-        return true;
-    }
-
-    @Override
-    public boolean canInsert(int slot, ItemStack stack, @Nullable Direction dir) {
-        return this.isValid(slot, stack);
-    }
-
-    @Override
-    public boolean canExtract(int slot, ItemStack stack, Direction dir) {
-        if (dir == Direction.DOWN && slot == FUEL_ITEM_SLOT) {
-            return stack.isOf(Items.WATER_BUCKET) || stack.isOf(Items.BUCKET);
-        }
-        return true;
-    }
-
-    @Override
-    public int[] getAvailableSlots(Direction side) {
-        if (side == Direction.DOWN) {
-            return BOTTOM_SLOTS;
-        }
-        if (side == Direction.UP) {
-            return TOP_SLOTS;
-        }
-        return SIDE_SLOTS;
+        return this.getStack(OUTPUT_SLOT).isEmpty() ||
+                this.getStack(OUTPUT_SLOT).getCount() < this.getStack(OUTPUT_SLOT).getMaxCount();
     }
 }

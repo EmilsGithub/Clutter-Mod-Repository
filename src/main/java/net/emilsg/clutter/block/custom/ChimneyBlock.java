@@ -1,7 +1,7 @@
 package net.emilsg.clutter.block.custom;
 
-import net.emilsg.clutter.block.ModBlockEntities;
 import net.emilsg.clutter.block.entity.ChimneyBlockEntity;
+import net.emilsg.clutter.block.ModBlockEntities;
 import net.emilsg.clutter.util.ModProperties;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -35,24 +35,17 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class ChimneyBlock extends BlockWithEntity implements FluidFillable, Waterloggable {
+public class ChimneyBlock extends BlockWithEntity implements FluidFillable, Waterloggable{
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
+    public static BooleanProperty OPEN = ModProperties.OPEN;
     protected static final VoxelShape SHAPE = VoxelShapes.union(
             Block.createCuboidShape(2.0, 0.0, 2.0, 14.0, 13.0, 14.0),
             Block.createCuboidShape(1.0, 13.0, 1.0, 15.0, 16.0, 15.0)
     );
-    public static BooleanProperty OPEN = ModProperties.OPEN;
 
     public ChimneyBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.stateManager.getDefaultState().with(OPEN, true).with(WATERLOGGED, false));
-    }
-
-    public static void spawnSmokeParticles(World world, BlockPos pos, BlockState state) {
-        Random random = world.getRandom();
-        if (!state.get(WATERLOGGED)) {
-            world.addImportantParticle(ParticleTypes.CAMPFIRE_SIGNAL_SMOKE, true, (double) pos.getX() + 0.5 + random.nextDouble() / 3.0 * (double) (random.nextBoolean() ? 1 : -1), (double) pos.getY() + random.nextDouble() + random.nextDouble() + 0.65, (double) pos.getZ() + 0.5 + random.nextDouble() / 3.0 * (double) (random.nextBoolean() ? 1 : -1), random.nextDouble() * 0.02 - 0.01, 0.07, random.nextDouble() * 0.02 - 0.01);
-        }
     }
 
     @Override
@@ -66,7 +59,7 @@ public class ChimneyBlock extends BlockWithEntity implements FluidFillable, Wate
         BlockPos blockPos;
         World worldAccess = ctx.getWorld();
         boolean bl = worldAccess.getFluidState(blockPos = ctx.getBlockPos()).getFluid() == Fluids.WATER;
-        return this.getDefaultState().with(WATERLOGGED, bl);
+        return (BlockState)this.getDefaultState().with(WATERLOGGED, bl);
     }
 
     @Override
@@ -113,15 +106,22 @@ public class ChimneyBlock extends BlockWithEntity implements FluidFillable, Wate
 
     @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-        if (state.get(OPEN)) {
+        if(state.get(OPEN)) {
             ChimneyBlock.spawnSmokeParticles(world, pos, state);
+        }
+    }
+
+    public static void spawnSmokeParticles(World world, BlockPos pos, BlockState state) {
+        Random random = world.getRandom();
+        if (!state.get(WATERLOGGED)) {
+            world.addImportantParticle(ParticleTypes.CAMPFIRE_SIGNAL_SMOKE, true, (double) pos.getX() + 0.5 + random.nextDouble() / 3.0 * (double) (random.nextBoolean() ? 1 : -1), (double) pos.getY() + random.nextDouble() + random.nextDouble() + 0.65, (double) pos.getZ() + 0.5 + random.nextDouble() / 3.0 * (double) (random.nextBoolean() ? 1 : -1), random.nextDouble() * 0.02 - 0.01, 0.07, random.nextDouble() * 0.02 - 0.01);
         }
     }
 
     @Override
     public boolean tryFillWithFluid(WorldAccess world, BlockPos pos, BlockState state, FluidState fluidState) {
         if (!state.get(Properties.WATERLOGGED) && fluidState.getFluid() == Fluids.WATER) {
-            world.setBlockState(pos, state.with(WATERLOGGED, true), Block.NOTIFY_ALL);
+            world.setBlockState(pos, (BlockState)((BlockState)state.with(WATERLOGGED, true)), Block.NOTIFY_ALL);
             world.scheduleFluidTick(pos, fluidState.getFluid(), fluidState.getFluid().getTickRate(world));
             return true;
         }
@@ -129,7 +129,7 @@ public class ChimneyBlock extends BlockWithEntity implements FluidFillable, Wate
     }
 
     @Override
-    public boolean canFillWithFluid(BlockView world, BlockPos pos, BlockState state, Fluid fluid) {
+    public boolean canFillWithFluid(@Nullable PlayerEntity player, BlockView world, BlockPos pos, BlockState state, Fluid fluid) {
         return true;
     }
 
