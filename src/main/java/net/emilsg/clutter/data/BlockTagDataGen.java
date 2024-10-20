@@ -1,12 +1,16 @@
 package net.emilsg.clutter.data;
 
+import net.emilsg.clutter.block.ClutterWoodType;
 import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.util.ModBlockTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.util.Identifier;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -19,9 +23,45 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
     @Override
     protected void configure(RegistryWrapper.WrapperLookup arg) {
 
+        for (Block block : ClutterWoodType.CLUTTER_WOOD_BLOCKS) {
+            Identifier blockID = Registries.BLOCK.getId(block);
+            if(!blockID.getPath().contains("warped") && !blockID.getPath().contains("crimson") && !blockID.getNamespace().contains("minecraft")) getOrCreateTagBuilder(ModBlockTags.FLAMMABLE).add(block);
+            if(!blockID.getNamespace().contains("minecraft")) getOrCreateTagBuilder(BlockTags.AXE_MINEABLE).add(block);
+        }
+
+        for (ClutterWoodType woodType : ClutterWoodType.CLUTTER_WOOD_TYPES) {
+            if(woodType.chair() != null) getOrCreateTagBuilder(ModBlockTags.WOODEN_CHAIRS).add(woodType.chair());
+            if(woodType.strippedChair() != null) getOrCreateTagBuilder(ModBlockTags.WOODEN_CHAIRS).add(woodType.strippedChair());
+            if(woodType.door() != null) getOrCreateTagBuilder(BlockTags.WOODEN_DOORS).add(woodType.door());
+            if(woodType.trapdoor() != null) getOrCreateTagBuilder(BlockTags.WOODEN_TRAPDOORS).add(woodType.trapdoor());
+            if(woodType.shortBench() != null) getOrCreateTagBuilder(ModBlockTags.SHORT_BENCHES).add(woodType.shortBench());
+            if(woodType.windowSill() != null) getOrCreateTagBuilder(ModBlockTags.WINDOW_SILLS).add(woodType.windowSill());
+            if(woodType.mosaic() != null) getOrCreateTagBuilder(ModBlockTags.WOODEN_MOSAICS).add(woodType.mosaic());
+            if(woodType.mosaicSlab() != null) getOrCreateTagBuilder(ModBlockTags.WOODEN_MOSAICS).add(woodType.mosaicSlab());
+            if(woodType.mosaicStairs() != null) getOrCreateTagBuilder(ModBlockTags.WOODEN_MOSAICS).add(woodType.mosaicStairs());
+            if(woodType.bench() != null) getOrCreateTagBuilder(ModBlockTags.STRIPPABLE_BENCHES).add(woodType.bench());
+            if(woodType.table() != null) getOrCreateTagBuilder(ModBlockTags.STRIPPABLE_TABLES).add(woodType.table());
+            if(woodType.chair() != null) getOrCreateTagBuilder(ModBlockTags.STRIPPABLE_CHAIRS).add(woodType.chair());
+            if(woodType.cupboard() != null) getOrCreateTagBuilder(ModBlockTags.CUPBOARDS).add(woodType.cupboard());
+            if(woodType.wallCupboard() != null) getOrCreateTagBuilder(ModBlockTags.CUPBOARDS).add(woodType.wallCupboard());
+            if(woodType.slab() != null) getOrCreateTagBuilder(BlockTags.WOODEN_SLABS).add(woodType.slab());
+            if(woodType.mosaicSlab() != null) getOrCreateTagBuilder(BlockTags.WOODEN_SLABS).add(woodType.mosaicSlab());
+            if(woodType.stairs() != null) getOrCreateTagBuilder(BlockTags.WOODEN_STAIRS).add(woodType.stairs());
+            if(woodType.mosaicStairs() != null) getOrCreateTagBuilder(BlockTags.WOODEN_STAIRS).add(woodType.mosaicStairs());
+            if(woodType.strippedBench() != null) getOrCreateTagBuilder(ModBlockTags.BENCHES).add(woodType.strippedBench());
+            if(woodType.bench() != null) getOrCreateTagBuilder(ModBlockTags.STRIPPABLE_BENCHES).add(woodType.bench());
+            if(woodType.trellis() != null) getOrCreateTagBuilder(ModBlockTags.TRELLISES).add(woodType.trellis());
+            if(woodType.strippedTable() != null) getOrCreateTagBuilder(ModBlockTags.TABLES).add(woodType.strippedTable());
+            if(woodType.table() != null) getOrCreateTagBuilder(ModBlockTags.STRIPPABLE_TABLES).add(woodType.table());
+            if(woodType.wallBookshelf() != null) getOrCreateTagBuilder(ModBlockTags.BOOKSHELVES).add(woodType.wallBookshelf());
+        }
+
         /** Vanilla **/
 
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(
+                        ModBlocks.OVERGROWN_PACKED_MUD,
+                        ModBlocks.QUARTZ_CRYSTAL,
+                        ModBlocks.ANCHOR_BLOCK,
                         ModBlocks.AQUATIC_TORCH,
                         ModBlocks.EXPOSED_AQUATIC_TORCH,
                         ModBlocks.WEATHERED_AQUATIC_TORCH,
@@ -191,31 +231,15 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
 
         getOrCreateTagBuilder(BlockTags.AXE_MINEABLE).add(
                         ModBlocks.BONFIRE,
-                        ModBlocks.SOUL_BONFIRE,
-                        ModBlocks.REDWOOD_LOG
+                        ModBlocks.SOUL_BONFIRE
                 )
-                .addTag(ModBlockTags.SHELVES)
-                .addTag(ModBlockTags.TRELLISES)
-                .addTag(ModBlockTags.BENCHES)
                 .addTag(ModBlockTags.ARMCHAIRS)
-                .addTag(ModBlockTags.WOODEN_MOSAICS)
-                .addTag(ModBlockTags.CUPBOARDS)
                 .addTag(ModBlockTags.LAMPS)
-                .addTag(ModBlockTags.TABLES)
-                .addTag(ModBlockTags.FOOD_BOXES)
-                .addTag(ModBlockTags.WINDOW_SILLS)
-                .addTag(ModBlockTags.WOODEN_CHAIRS)
-                .addTag(ModBlockTags.BOOKSHELVES);
+                .addTag(ModBlockTags.FOOD_BOXES);
 
         getOrCreateTagBuilder(BlockTags.SHOVEL_MINEABLE).add(
                 ModBlocks.SULPHUR_BLOCK,
                 ModBlocks.ONYX_ORE);
-
-        getOrCreateTagBuilder(BlockTags.WOODEN_DOORS).add(
-                ModBlocks.REDWOOD_DOOR);
-
-        getOrCreateTagBuilder(BlockTags.WOODEN_TRAPDOORS).add(
-                ModBlocks.REDWOOD_TRAPDOOR);
 
         getOrCreateTagBuilder(BlockTags.HOE_MINEABLE).add(
                 ModBlocks.RIPE_KIWI_LEAVES,
@@ -431,65 +455,17 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
                 ModBlocks.POLISHED_BLACK_ONYX_WALL,
                 ModBlocks.POLISHED_ONYX_WALL);
 
-        getOrCreateTagBuilder(BlockTags.STAIRS).add(
-                ModBlocks.ONYX_STAIRS,
-                ModBlocks.POLISHED_ONYX_STAIRS,
-                ModBlocks.BLACK_ONYX_STAIRS,
-                ModBlocks.POLISHED_BLACK_ONYX_STAIRS,
-                ModBlocks.OAK_MOSAIC_STAIRS,
-                ModBlocks.SPRUCE_MOSAIC_STAIRS,
-                ModBlocks.BIRCH_MOSAIC_STAIRS,
-                ModBlocks.JUNGLE_MOSAIC_STAIRS,
-                ModBlocks.ACACIA_MOSAIC_STAIRS,
-                ModBlocks.DARK_OAK_MOSAIC_STAIRS,
-                ModBlocks.MANGROVE_MOSAIC_STAIRS,
-                ModBlocks.CRIMSON_MOSAIC_STAIRS,
-                ModBlocks.WARPED_MOSAIC_STAIRS,
-                ModBlocks.CHERRY_MOSAIC_STAIRS);
+        getOrCreateTagBuilder(BlockTags.STAIRS).addTag(
+                BlockTags.WOODEN_STAIRS
+        );
 
-        getOrCreateTagBuilder(BlockTags.SLABS).add(
+        getOrCreateTagBuilder(BlockTags.SLABS)
+                .addTag(BlockTags.WOODEN_SLABS)
+                .add(
                 ModBlocks.ONYX_SLAB,
                 ModBlocks.POLISHED_ONYX_SLAB,
                 ModBlocks.BLACK_ONYX_SLAB,
-                ModBlocks.POLISHED_BLACK_ONYX_SLAB,
-                ModBlocks.OAK_MOSAIC_SLAB,
-                ModBlocks.SPRUCE_MOSAIC_SLAB,
-                ModBlocks.BIRCH_MOSAIC_SLAB,
-                ModBlocks.JUNGLE_MOSAIC_SLAB,
-                ModBlocks.ACACIA_MOSAIC_SLAB,
-                ModBlocks.DARK_OAK_MOSAIC_SLAB,
-                ModBlocks.MANGROVE_MOSAIC_SLAB,
-                ModBlocks.CRIMSON_MOSAIC_SLAB,
-                ModBlocks.WARPED_MOSAIC_SLAB,
-                ModBlocks.CHERRY_MOSAIC_SLAB);
-
-        getOrCreateTagBuilder(BlockTags.WOODEN_SLABS).add(
-                ModBlocks.OAK_MOSAIC_SLAB,
-                ModBlocks.SPRUCE_MOSAIC_SLAB,
-                ModBlocks.BIRCH_MOSAIC_SLAB,
-                ModBlocks.JUNGLE_MOSAIC_SLAB,
-                ModBlocks.ACACIA_MOSAIC_SLAB,
-                ModBlocks.DARK_OAK_MOSAIC_SLAB,
-                ModBlocks.MANGROVE_MOSAIC_SLAB,
-                ModBlocks.CRIMSON_MOSAIC_SLAB,
-                ModBlocks.WARPED_MOSAIC_SLAB,
-                ModBlocks.CHERRY_MOSAIC_SLAB,
-                ModBlocks.REDWOOD_MOSAIC_SLAB,
-                ModBlocks.REDWOOD_SLAB);
-
-        getOrCreateTagBuilder(BlockTags.WOODEN_STAIRS).add(
-                ModBlocks.OAK_MOSAIC_STAIRS,
-                ModBlocks.SPRUCE_MOSAIC_STAIRS,
-                ModBlocks.BIRCH_MOSAIC_STAIRS,
-                ModBlocks.JUNGLE_MOSAIC_STAIRS,
-                ModBlocks.ACACIA_MOSAIC_STAIRS,
-                ModBlocks.DARK_OAK_MOSAIC_STAIRS,
-                ModBlocks.MANGROVE_MOSAIC_STAIRS,
-                ModBlocks.CRIMSON_MOSAIC_STAIRS,
-                ModBlocks.WARPED_MOSAIC_STAIRS,
-                ModBlocks.CHERRY_MOSAIC_STAIRS,
-                ModBlocks.REDWOOD_MOSAIC_STAIRS,
-                ModBlocks.REDWOOD_STAIRS);
+                ModBlocks.POLISHED_BLACK_ONYX_SLAB);
 
         getOrCreateTagBuilder(BlockTags.TRAPDOORS).add(
                 ModBlocks.SILVER_TRAPDOOR,
@@ -516,6 +492,10 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
                 ModBlocks.WAXED_OXIDIZED_COPPER_DOOR);
 
         /** Modded **/
+
+        getOrCreateTagBuilder(ModBlockTags.BENCHES).addTag(ModBlockTags.STRIPPABLE_BENCHES);
+        getOrCreateTagBuilder(ModBlockTags.TABLES).addTag(ModBlockTags.STRIPPABLE_TABLES);
+
 
         getOrCreateTagBuilder(ModBlockTags.GREEN_FIRE_BASE_BLOCKS).add(
                 Blocks.COPPER_BLOCK,
@@ -605,42 +585,6 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
                 ModBlocks.PINK_ARMCHAIR
         );
 
-        getOrCreateTagBuilder(ModBlockTags.WOODEN_MOSAICS).add(
-                ModBlocks.OAK_MOSAIC,
-                ModBlocks.SPRUCE_MOSAIC,
-                ModBlocks.BIRCH_MOSAIC,
-                ModBlocks.JUNGLE_MOSAIC,
-                ModBlocks.ACACIA_MOSAIC,
-                ModBlocks.DARK_OAK_MOSAIC,
-                ModBlocks.MANGROVE_MOSAIC,
-                ModBlocks.CRIMSON_MOSAIC,
-                ModBlocks.WARPED_MOSAIC,
-                ModBlocks.CHERRY_MOSAIC,
-                ModBlocks.REDWOOD_MOSAIC,
-                ModBlocks.OAK_MOSAIC_STAIRS,
-                ModBlocks.SPRUCE_MOSAIC_STAIRS,
-                ModBlocks.BIRCH_MOSAIC_STAIRS,
-                ModBlocks.JUNGLE_MOSAIC_STAIRS,
-                ModBlocks.ACACIA_MOSAIC_STAIRS,
-                ModBlocks.DARK_OAK_MOSAIC_STAIRS,
-                ModBlocks.MANGROVE_MOSAIC_STAIRS,
-                ModBlocks.CRIMSON_MOSAIC_STAIRS,
-                ModBlocks.WARPED_MOSAIC_STAIRS,
-                ModBlocks.CHERRY_MOSAIC_STAIRS,
-                ModBlocks.REDWOOD_MOSAIC_STAIRS,
-                ModBlocks.OAK_MOSAIC_SLAB,
-                ModBlocks.SPRUCE_MOSAIC_SLAB,
-                ModBlocks.BIRCH_MOSAIC_SLAB,
-                ModBlocks.JUNGLE_MOSAIC_SLAB,
-                ModBlocks.ACACIA_MOSAIC_SLAB,
-                ModBlocks.DARK_OAK_MOSAIC_SLAB,
-                ModBlocks.MANGROVE_MOSAIC_SLAB,
-                ModBlocks.CRIMSON_MOSAIC_SLAB,
-                ModBlocks.WARPED_MOSAIC_SLAB,
-                ModBlocks.CHERRY_MOSAIC_SLAB,
-                ModBlocks.REDWOOD_MOSAIC_SLAB
-        );
-
         getOrCreateTagBuilder(ModBlockTags.LAMPS).add(
                 ModBlocks.WHITE_LAMP,
                 ModBlocks.LIGHT_GRAY_LAMP,
@@ -674,32 +618,6 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
                 ModBlocks.TALL_PURPLE_LAMP,
                 ModBlocks.TALL_MAGENTA_LAMP,
                 ModBlocks.TALL_PINK_LAMP
-        );
-
-        getOrCreateTagBuilder(ModBlockTags.WOODEN_CHAIRS).add(
-                ModBlocks.OAK_CHAIR,
-                ModBlocks.SPRUCE_CHAIR,
-                ModBlocks.BIRCH_CHAIR,
-                ModBlocks.JUNGLE_CHAIR,
-                ModBlocks.ACACIA_CHAIR,
-                ModBlocks.DARK_OAK_CHAIR,
-                ModBlocks.MANGROVE_CHAIR,
-                ModBlocks.CRIMSON_CHAIR,
-                ModBlocks.WARPED_CHAIR,
-                ModBlocks.CHERRY_CHAIR,
-                ModBlocks.BAMBOO_CHAIR,
-                ModBlocks.REDWOOD_CHAIR,
-                ModBlocks.STRIPPED_OAK_CHAIR,
-                ModBlocks.STRIPPED_SPRUCE_CHAIR,
-                ModBlocks.STRIPPED_BIRCH_CHAIR,
-                ModBlocks.STRIPPED_JUNGLE_CHAIR,
-                ModBlocks.STRIPPED_ACACIA_CHAIR,
-                ModBlocks.STRIPPED_DARK_OAK_CHAIR,
-                ModBlocks.STRIPPED_MANGROVE_CHAIR,
-                ModBlocks.STRIPPED_CRIMSON_CHAIR,
-                ModBlocks.STRIPPED_WARPED_CHAIR,
-                ModBlocks.STRIPPED_CHERRY_CHAIR,
-                ModBlocks.STRIPPED_REDWOOD_CHAIR
         );
 
         getOrCreateTagBuilder(ModBlockTags.WALL_CANDLES).add(
@@ -1129,31 +1047,6 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
                 ModBlocks.WAXED_OXIDIZED_LARGE_COPPER_CHAIN
         );
 
-        getOrCreateTagBuilder(ModBlockTags.CUPBOARDS).add(
-                ModBlocks.OAK_CUPBOARD,
-                ModBlocks.SPRUCE_CUPBOARD,
-                ModBlocks.BIRCH_CUPBOARD,
-                ModBlocks.JUNGLE_CUPBOARD,
-                ModBlocks.ACACIA_CUPBOARD,
-                ModBlocks.DARK_OAK_CUPBOARD,
-                ModBlocks.MANGROVE_CUPBOARD,
-                ModBlocks.CRIMSON_CUPBOARD,
-                ModBlocks.WARPED_CUPBOARD,
-                ModBlocks.BAMBOO_CUPBOARD,
-                ModBlocks.CHERRY_CUPBOARD,
-                ModBlocks.OAK_WALL_CUPBOARD,
-                ModBlocks.SPRUCE_WALL_CUPBOARD,
-                ModBlocks.BIRCH_WALL_CUPBOARD,
-                ModBlocks.JUNGLE_WALL_CUPBOARD,
-                ModBlocks.ACACIA_WALL_CUPBOARD,
-                ModBlocks.DARK_OAK_WALL_CUPBOARD,
-                ModBlocks.MANGROVE_WALL_CUPBOARD,
-                ModBlocks.CRIMSON_WALL_CUPBOARD,
-                ModBlocks.WARPED_WALL_CUPBOARD,
-                ModBlocks.BAMBOO_WALL_CUPBOARD,
-                ModBlocks.CHERRY_WALL_CUPBOARD
-        );
-
         getOrCreateTagBuilder(ModBlockTags.FOOD_BOXES).add(
                 ModBlocks.APPLE_FOOD_BOX,
                 ModBlocks.BEETROOT_FOOD_BOX,
@@ -1167,34 +1060,6 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
                 ModBlocks.FOOD_BOX
         );
 
-        getOrCreateTagBuilder(ModBlockTags.WINDOW_SILLS).add(
-                ModBlocks.OAK_WINDOW_SILL,
-                ModBlocks.SPRUCE_WINDOW_SILL,
-                ModBlocks.BIRCH_WINDOW_SILL,
-                ModBlocks.JUNGLE_WINDOW_SILL,
-                ModBlocks.ACACIA_WINDOW_SILL,
-                ModBlocks.DARK_OAK_WINDOW_SILL,
-                ModBlocks.MANGROVE_WINDOW_SILL,
-                ModBlocks.CRIMSON_WINDOW_SILL,
-                ModBlocks.WARPED_WINDOW_SILL,
-                ModBlocks.BAMBOO_WINDOW_SILL,
-                ModBlocks.CHERRY_WINDOW_SILL
-        );
-
-        getOrCreateTagBuilder(ModBlockTags.STRIPPABLE_CHAIRS).add(
-                ModBlocks.ACACIA_CHAIR,
-                ModBlocks.BIRCH_CHAIR,
-                ModBlocks.CRIMSON_CHAIR,
-                ModBlocks.DARK_OAK_CHAIR,
-                ModBlocks.JUNGLE_CHAIR,
-                ModBlocks.MANGROVE_CHAIR,
-                ModBlocks.OAK_CHAIR,
-                ModBlocks.SPRUCE_CHAIR,
-                ModBlocks.WARPED_CHAIR,
-                ModBlocks.CHERRY_CHAIR,
-                ModBlocks.REDWOOD_CHAIR
-        );
-
         getOrCreateTagBuilder(ModBlockTags.KIWI_EGG_HATCH_BOOST).add(
                 Blocks.HAY_BLOCK
         );
@@ -1203,47 +1068,7 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
                 Blocks.SNOW
         );
 
-        getOrCreateTagBuilder(ModBlockTags.STRIPPABLE_BENCHES).add(
-                ModBlocks.ACACIA_BENCH,
-                ModBlocks.BIRCH_BENCH,
-                ModBlocks.CRIMSON_BENCH,
-                ModBlocks.DARK_OAK_BENCH,
-                ModBlocks.JUNGLE_BENCH,
-                ModBlocks.MANGROVE_BENCH,
-                ModBlocks.OAK_BENCH,
-                ModBlocks.SPRUCE_BENCH,
-                ModBlocks.WARPED_BENCH,
-                ModBlocks.CHERRY_BENCH
-        );
 
-        getOrCreateTagBuilder(ModBlockTags.TABLES).add(
-                        ModBlocks.STRIPPED_ACACIA_TABLE,
-                        ModBlocks.STRIPPED_BIRCH_TABLE,
-                        ModBlocks.STRIPPED_CRIMSON_TABLE,
-                        ModBlocks.STRIPPED_DARK_OAK_TABLE,
-                        ModBlocks.STRIPPED_JUNGLE_TABLE,
-                        ModBlocks.STRIPPED_MANGROVE_TABLE,
-                        ModBlocks.STRIPPED_OAK_TABLE,
-                        ModBlocks.STRIPPED_SPRUCE_TABLE,
-                        ModBlocks.STRIPPED_WARPED_TABLE,
-                        ModBlocks.STRIPPED_CHERRY_TABLE,
-                        ModBlocks.BAMBOO_TABLE)
-                .addTag(
-                        ModBlockTags.STRIPPABLE_TABLES
-                );
-
-        getOrCreateTagBuilder(ModBlockTags.STRIPPABLE_TABLES).add(
-                ModBlocks.ACACIA_TABLE,
-                ModBlocks.BIRCH_TABLE,
-                ModBlocks.CRIMSON_TABLE,
-                ModBlocks.DARK_OAK_TABLE,
-                ModBlocks.JUNGLE_TABLE,
-                ModBlocks.MANGROVE_TABLE,
-                ModBlocks.OAK_TABLE,
-                ModBlocks.SPRUCE_TABLE,
-                ModBlocks.WARPED_TABLE,
-                ModBlocks.CHERRY_TABLE
-        );
 
         getOrCreateTagBuilder(ModBlockTags.IMMOVABLE).add(
                 ModBlocks.BUDDING_ONYX,
@@ -1276,36 +1101,6 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
                 ModBlocks.WAXED_OXIDIZED_COPPER_DOOR
         );
 
-        getOrCreateTagBuilder(ModBlockTags.BENCHES).add(
-                ModBlocks.STRIPPED_ACACIA_BENCH,
-                ModBlocks.STRIPPED_BIRCH_BENCH,
-                ModBlocks.STRIPPED_CRIMSON_BENCH,
-                ModBlocks.STRIPPED_DARK_OAK_BENCH,
-                ModBlocks.STRIPPED_JUNGLE_BENCH,
-                ModBlocks.STRIPPED_MANGROVE_BENCH,
-                ModBlocks.STRIPPED_OAK_BENCH,
-                ModBlocks.STRIPPED_SPRUCE_BENCH,
-                ModBlocks.STRIPPED_WARPED_BENCH,
-                ModBlocks.STRIPPED_CHERRY_BENCH,
-                ModBlocks.BAMBOO_BENCH
-        ).addTag(
-                ModBlockTags.STRIPPABLE_BENCHES
-        );
-
-        getOrCreateTagBuilder(ModBlockTags.TRELLISES).add(
-                ModBlocks.ACACIA_TRELLIS,
-                ModBlocks.BIRCH_TRELLIS,
-                ModBlocks.CRIMSON_TRELLIS,
-                ModBlocks.DARK_OAK_TRELLIS,
-                ModBlocks.JUNGLE_TRELLIS,
-                ModBlocks.MANGROVE_TRELLIS,
-                ModBlocks.OAK_TRELLIS,
-                ModBlocks.SPRUCE_TRELLIS,
-                ModBlocks.WARPED_TRELLIS,
-                ModBlocks.BAMBOO_TRELLIS,
-                ModBlocks.CHERRY_TRELLIS
-        );
-
         getOrCreateTagBuilder(ModBlockTags.PACKED_MUD).add(
                 ModBlocks.OVERGROWN_PACKED_MUD,
                 Blocks.PACKED_MUD
@@ -1323,20 +1118,6 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
                 ModBlocks.WARPED_SHELF,
                 ModBlocks.BAMBOO_SHELF,
                 ModBlocks.CHERRY_SHELF
-        );
-
-        getOrCreateTagBuilder(ModBlockTags.BOOKSHELVES).add(
-                ModBlocks.ACACIA_WALL_BOOKSHELF,
-                ModBlocks.BIRCH_WALL_BOOKSHELF,
-                ModBlocks.CRIMSON_WALL_BOOKSHELF,
-                ModBlocks.DARK_OAK_WALL_BOOKSHELF,
-                ModBlocks.JUNGLE_WALL_BOOKSHELF,
-                ModBlocks.MANGROVE_WALL_BOOKSHELF,
-                ModBlocks.OAK_WALL_BOOKSHELF,
-                ModBlocks.SPRUCE_WALL_BOOKSHELF,
-                ModBlocks.WARPED_WALL_BOOKSHELF,
-                ModBlocks.BAMBOO_WALL_BOOKSHELF,
-                ModBlocks.CHERRY_WALL_BOOKSHELF
         );
 
         getOrCreateTagBuilder(ModBlockTags.ECHOFINS_SPAWN_ON).add(
@@ -1559,147 +1340,7 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
                 ModBlocks.WAXED_OXIDIZED_PINK_COPPER_CHANDELIER
         );
 
-        getOrCreateTagBuilder(ModBlockTags.FLAMMABLE).add(
-                        ModBlocks.OAK_MOSAIC,
-                        ModBlocks.SPRUCE_MOSAIC,
-                        ModBlocks.BIRCH_MOSAIC,
-                        ModBlocks.JUNGLE_MOSAIC,
-                        ModBlocks.ACACIA_MOSAIC,
-                        ModBlocks.DARK_OAK_MOSAIC,
-                        ModBlocks.MANGROVE_MOSAIC,
-                        ModBlocks.CHERRY_MOSAIC,
-                        ModBlocks.OAK_MOSAIC_STAIRS,
-                        ModBlocks.SPRUCE_MOSAIC_STAIRS,
-                        ModBlocks.BIRCH_MOSAIC_STAIRS,
-                        ModBlocks.JUNGLE_MOSAIC_STAIRS,
-                        ModBlocks.ACACIA_MOSAIC_STAIRS,
-                        ModBlocks.DARK_OAK_MOSAIC_STAIRS,
-                        ModBlocks.MANGROVE_MOSAIC_STAIRS,
-                        ModBlocks.CHERRY_MOSAIC_STAIRS,
-                        ModBlocks.OAK_MOSAIC_SLAB,
-                        ModBlocks.SPRUCE_MOSAIC_SLAB,
-                        ModBlocks.BIRCH_MOSAIC_SLAB,
-                        ModBlocks.JUNGLE_MOSAIC_SLAB,
-                        ModBlocks.ACACIA_MOSAIC_SLAB,
-                        ModBlocks.DARK_OAK_MOSAIC_SLAB,
-                        ModBlocks.MANGROVE_MOSAIC_SLAB,
-                        ModBlocks.CHERRY_MOSAIC_SLAB,
-                        ModBlocks.STRIPPED_OAK_CHAIR,
-                        ModBlocks.STRIPPED_SPRUCE_CHAIR,
-                        ModBlocks.STRIPPED_BIRCH_CHAIR,
-                        ModBlocks.STRIPPED_JUNGLE_CHAIR,
-                        ModBlocks.STRIPPED_ACACIA_CHAIR,
-                        ModBlocks.STRIPPED_DARK_OAK_CHAIR,
-                        ModBlocks.STRIPPED_MANGROVE_CHAIR,
-                        ModBlocks.STRIPPED_CHERRY_CHAIR,
-                        ModBlocks.STRIPPED_REDWOOD_CHAIR,
-                        ModBlocks.OAK_CUPBOARD,
-                        ModBlocks.SPRUCE_CUPBOARD,
-                        ModBlocks.BIRCH_CUPBOARD,
-                        ModBlocks.JUNGLE_CUPBOARD,
-                        ModBlocks.ACACIA_CUPBOARD,
-                        ModBlocks.DARK_OAK_CUPBOARD,
-                        ModBlocks.MANGROVE_CUPBOARD,
-                        ModBlocks.BAMBOO_CUPBOARD,
-                        ModBlocks.CHERRY_CUPBOARD,
-                        ModBlocks.OAK_WALL_CUPBOARD,
-                        ModBlocks.SPRUCE_WALL_CUPBOARD,
-                        ModBlocks.BIRCH_WALL_CUPBOARD,
-                        ModBlocks.JUNGLE_WALL_CUPBOARD,
-                        ModBlocks.ACACIA_WALL_CUPBOARD,
-                        ModBlocks.DARK_OAK_WALL_CUPBOARD,
-                        ModBlocks.MANGROVE_WALL_CUPBOARD,
-                        ModBlocks.BAMBOO_WALL_CUPBOARD,
-                        ModBlocks.CHERRY_WALL_CUPBOARD,
-                        ModBlocks.OAK_WINDOW_SILL,
-                        ModBlocks.SPRUCE_WINDOW_SILL,
-                        ModBlocks.BIRCH_WINDOW_SILL,
-                        ModBlocks.JUNGLE_WINDOW_SILL,
-                        ModBlocks.ACACIA_WINDOW_SILL,
-                        ModBlocks.DARK_OAK_WINDOW_SILL,
-                        ModBlocks.MANGROVE_WINDOW_SILL,
-                        ModBlocks.BAMBOO_WINDOW_SILL,
-                        ModBlocks.CHERRY_WINDOW_SILL,
-                        ModBlocks.CHERRY_CHAIR,
-                        ModBlocks.ACACIA_CHAIR,
-                        ModBlocks.BIRCH_CHAIR,
-                        ModBlocks.DARK_OAK_CHAIR,
-                        ModBlocks.JUNGLE_CHAIR,
-                        ModBlocks.MANGROVE_CHAIR,
-                        ModBlocks.OAK_CHAIR,
-                        ModBlocks.BAMBOO_CHAIR,
-                        ModBlocks.SPRUCE_CHAIR,
-                        ModBlocks.REDWOOD_CHAIR,
-                        ModBlocks.ACACIA_BENCH,
-                        ModBlocks.BIRCH_BENCH,
-                        ModBlocks.DARK_OAK_BENCH,
-                        ModBlocks.JUNGLE_BENCH,
-                        ModBlocks.MANGROVE_BENCH,
-                        ModBlocks.OAK_BENCH,
-                        ModBlocks.SPRUCE_BENCH,
-                        ModBlocks.CHERRY_BENCH,
-                        ModBlocks.BAMBOO_BENCH,
-                        ModBlocks.STRIPPED_ACACIA_BENCH,
-                        ModBlocks.STRIPPED_BIRCH_BENCH,
-                        ModBlocks.STRIPPED_DARK_OAK_BENCH,
-                        ModBlocks.STRIPPED_JUNGLE_BENCH,
-                        ModBlocks.STRIPPED_MANGROVE_BENCH,
-                        ModBlocks.STRIPPED_OAK_BENCH,
-                        ModBlocks.STRIPPED_SPRUCE_BENCH,
-                        ModBlocks.STRIPPED_CHERRY_BENCH,
-                        ModBlocks.STRIPPED_ACACIA_TABLE,
-                        ModBlocks.STRIPPED_BIRCH_TABLE,
-                        ModBlocks.STRIPPED_DARK_OAK_TABLE,
-                        ModBlocks.STRIPPED_JUNGLE_TABLE,
-                        ModBlocks.STRIPPED_MANGROVE_TABLE,
-                        ModBlocks.STRIPPED_OAK_TABLE,
-                        ModBlocks.STRIPPED_SPRUCE_TABLE,
-                        ModBlocks.STRIPPED_CHERRY_TABLE,
-                        ModBlocks.BAMBOO_TABLE,
-                        ModBlocks.ACACIA_TABLE,
-                        ModBlocks.BIRCH_TABLE,
-                        ModBlocks.DARK_OAK_TABLE,
-                        ModBlocks.JUNGLE_TABLE,
-                        ModBlocks.MANGROVE_TABLE,
-                        ModBlocks.OAK_TABLE,
-                        ModBlocks.SPRUCE_TABLE,
-                        ModBlocks.CHERRY_TABLE,
-                        ModBlocks.FLOOR_SEATING,
-                        ModBlocks.ACACIA_WALL_BOOKSHELF,
-                        ModBlocks.BIRCH_WALL_BOOKSHELF,
-                        ModBlocks.DARK_OAK_WALL_BOOKSHELF,
-                        ModBlocks.JUNGLE_WALL_BOOKSHELF,
-                        ModBlocks.MANGROVE_WALL_BOOKSHELF,
-                        ModBlocks.OAK_WALL_BOOKSHELF,
-                        ModBlocks.SPRUCE_WALL_BOOKSHELF,
-                        ModBlocks.BAMBOO_WALL_BOOKSHELF,
-                        ModBlocks.CHERRY_WALL_BOOKSHELF,
-                        ModBlocks.ACACIA_TRELLIS,
-                        ModBlocks.BIRCH_TRELLIS,
-                        ModBlocks.DARK_OAK_TRELLIS,
-                        ModBlocks.JUNGLE_TRELLIS,
-                        ModBlocks.MANGROVE_TRELLIS,
-                        ModBlocks.OAK_TRELLIS,
-                        ModBlocks.SPRUCE_TRELLIS,
-                        ModBlocks.BAMBOO_TRELLIS,
-                        ModBlocks.CHERRY_TRELLIS,
-                        ModBlocks.REDWOOD_SAPLING,
-                        ModBlocks.REDWOOD_LEAVES,
-                        ModBlocks.REDWOOD_LOG,
-                        ModBlocks.REDWOOD_WOOD,
-                        ModBlocks.STRIPPED_REDWOOD_LOG,
-                        ModBlocks.STRIPPED_REDWOOD_WOOD,
-                        ModBlocks.REDWOOD_PLANKS,
-                        ModBlocks.REDWOOD_STAIRS,
-                        ModBlocks.REDWOOD_SLAB,
-                        ModBlocks.REDWOOD_FENCE,
-                        ModBlocks.REDWOOD_FENCE_GATE,
-                        ModBlocks.REDWOOD_BUTTON,
-                        ModBlocks.REDWOOD_PRESSURE_PLATE,
-                        ModBlocks.REDWOOD_MOSAIC,
-                        ModBlocks.REDWOOD_MOSAIC_STAIRS,
-                        ModBlocks.REDWOOD_MOSAIC_SLAB
-                )
+        getOrCreateTagBuilder(ModBlockTags.FLAMMABLE)
                 .addTag(ModBlockTags.ARMCHAIRS)
                 .addTag(ModBlockTags.FOOD_BOXES)
                 .addTag(ModBlockTags.LAMPS);
@@ -1743,5 +1384,6 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(ModBlockTags.C_RAW_SILVER_BLOCKS).add(
                 ModBlocks.RAW_SILVER_BLOCK
         );
+
     }
 }

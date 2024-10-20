@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "short_benches",
+  "key": {
+    "L": {
+      "item": "minecraft:bamboo_block"
+    },
+    "P": {
+      "item": "minecraft:bamboo_planks"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "L L"
+  ],
+  "result": {
+    "count": 6,
+    "item": "clutter:bamboo_short_bench"
+  },
+  "show_notification": true
+}

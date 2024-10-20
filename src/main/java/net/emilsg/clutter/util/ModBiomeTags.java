@@ -13,6 +13,10 @@ public class ModBiomeTags {
     public static final TagKey<Biome> SPAWNS_NETHER_BUTTERFLIES = create(Clutter.MOD_ID, "spawns_nether_butterflies");
     public static final TagKey<Biome> SPAWNS_EMBER_TORTOISES = create(Clutter.MOD_ID, "spawns_ember_tortoises");
     public static final TagKey<Biome> SPAWNS_ECHOFINS = create(Clutter.MOD_ID, "spawns_echofins");
+    public static final TagKey<Biome> SPAWNS_SEAHORSES = create(Clutter.MOD_ID, "spawns_seahorses");
+    public static final TagKey<Biome> SPAWNS_MANTA_RAYS = create(Clutter.MOD_ID, "spawns_manta_rays");
+    public static final TagKey<Biome> SPAWNS_JELLYFISHES = create(Clutter.MOD_ID, "spawns_jellyfishes");
+
 
 
     private static TagKey<Biome> create(String namespace, String path) {

@@ -1,0 +1,32 @@
+{
+  "parent": "item/generated",
+  "overrides": [
+    {
+      "model": "clutter:item/coin_pouch_0",
+      "predicate": {
+        "coins": 0.1
+      }
+    },
+    {
+      "model": "clutter:item/coin_pouch_1",
+      "predicate": {
+        "coins": 0.2
+      }
+    },
+    {
+      "model": "clutter:item/coin_pouch_2",
+      "predicate": {
+        "coins": 0.3
+      }
+    },
+    {
+      "model": "clutter:item/coin_pouch_3",
+      "predicate": {
+        "coins": 0.4
+      }
+    }
+  ],
+  "textures": {
+    "layer0": "clutter:item/coin_pouch_empty"
+  }
+}

@@ -1,0 +1,54 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"ambientocclusion": true,
+	"textures": {
+		"particle": "#planks",
+		"planks": "clutter:block/redwood_planks",
+		"log": "clutter:block/redwood_log"
+	},
+	"elements": [
+		{
+			"name": "Seat",
+			"from": [0, 2, 4],
+			"to": [16, 6, 12],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 2.5, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 4], "texture": "#planks"},
+				"east": {"uv": [0, 0, 8, 4], "texture": "#planks"},
+				"south": {"uv": [0, 0, 16, 4], "texture": "#planks"},
+				"west": {"uv": [0, 0, 8, 4], "texture": "#planks"},
+				"up": {"uv": [0, 0, 16, 8], "texture": "#planks"},
+				"down": {"uv": [0, 0, 16, 8], "texture": "#planks"}
+			}
+		},
+		{
+			"name": "Leg",
+			"from": [2, 0, 3],
+			"to": [5, 2, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 2.5, 8]},
+			"faces": {
+				"north": {"uv": [1, 1, 4, 3], "texture": "#log"},
+				"east": {"uv": [1, 3, 3, 13], "rotation": 90, "texture": "#log"},
+				"south": {"uv": [1, 13, 4, 15], "texture": "#log"},
+				"west": {"uv": [1, 3, 3, 13], "rotation": 90, "texture": "#log"},
+				"up": {"uv": [1, 3, 4, 13], "texture": "#log"},
+				"down": {"uv": [1, 3, 4, 13], "texture": "#log"}
+			}
+		},
+		{
+			"name": "Leg",
+			"from": [11, 0, 3],
+			"to": [14, 2, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 2.5, 8]},
+			"faces": {
+				"north": {"uv": [4, 1, 7, 3], "texture": "#log"},
+				"east": {"uv": [4, 3, 6, 13], "rotation": 90, "texture": "#log"},
+				"south": {"uv": [4, 13, 7, 15], "texture": "#log"},
+				"west": {"uv": [4, 3, 6, 13], "rotation": 90, "texture": "#log"},
+				"up": {"uv": [4, 3, 7, 13], "texture": "#log"},
+				"down": {"uv": [4, 3, 7, 13], "texture": "#log"}
+			}
+		}
+	]
+}

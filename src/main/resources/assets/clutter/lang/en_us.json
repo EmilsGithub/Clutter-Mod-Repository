@@ -109,6 +109,22 @@
   "block.clutter.waxed_weathered_large_copper_chain": "Waxed Weathered Large Copper Chain",
   "block.clutter.waxed_oxidized_large_copper_chain": "Waxed Oxidized Large Copper Chain",
 
+  "block.clutter.acacia_short_bench": "Acacia Short Bench",
+  "block.clutter.birch_short_bench": "Birch Short Bench",
+  "block.clutter.crimson_short_bench": "Crimson Short Bench",
+  "block.clutter.dark_oak_short_bench": "Dark Oak Short Bench",
+  "block.clutter.jungle_short_bench": "Jungle Short Bench",
+  "block.clutter.mangrove_short_bench": "Mangrove Short Bench",
+  "block.clutter.oak_short_bench": "Oak Short Bench",
+  "block.clutter.spruce_short_bench": "Spruce Short Bench",
+  "block.clutter.warped_short_bench": "Warped Short Bench",
+  "block.clutter.cherry_short_bench": "Cherry Short Bench",
+  "block.clutter.bamboo_short_bench": "Bamboo Short Bench",
+  "block.clutter.redwood_short_bench": "Redwood Short Bench",
+
+  "block.clutter.redwood_sign": "Redwood Sign",
+  "block.clutter.redwood_hanging_sign": "Redwood Hanging Sign",
+
   "block.clutter.acacia_mosaic": "Acacia Mosaic",
   "block.clutter.birch_mosaic": "Birch Mosaic",
   "block.clutter.crimson_mosaic": "Crimson Mosaic",
@@ -119,6 +135,7 @@
   "block.clutter.spruce_mosaic": "Spruce Mosaic",
   "block.clutter.warped_mosaic": "Warped Mosaic",
   "block.clutter.cherry_mosaic": "Cherry Mosaic",
+  "block.clutter.redwood_mosaic": "Redwood Mosaic",
 
   "block.clutter.acacia_mosaic_slab": "Acacia Mosaic Slab",
   "block.clutter.birch_mosaic_slab": "Birch Mosaic Slab",
@@ -130,6 +147,7 @@
   "block.clutter.spruce_mosaic_slab": "Spruce Mosaic Slab",
   "block.clutter.warped_mosaic_slab": "Warped Mosaic Slab",
   "block.clutter.cherry_mosaic_slab": "Cherry Mosaic Slab",
+  "block.clutter.redwood_mosaic_slab": "Redwood Mosaic Slab",
 
   "block.clutter.acacia_mosaic_stairs": "Acacia Mosaic Stairs",
   "block.clutter.birch_mosaic_stairs": "Birch Mosaic Stairs",
@@ -141,6 +159,7 @@
   "block.clutter.spruce_mosaic_stairs": "Spruce Mosaic Stairs",
   "block.clutter.warped_mosaic_stairs": "Warped Mosaic Stairs",
   "block.clutter.cherry_mosaic_stairs": "Cherry Mosaic Stairs",
+  "block.clutter.redwood_mosaic_stairs": "Redwood Mosaic Stairs",
 
   "block.clutter.brick_kiln": "Brick Kiln",
   "block.clutter.green_fire": "Green Fire",
@@ -265,6 +284,8 @@
   "block.clutter.nether_brick_chimney": "Nether Brick Chimney",
   "block.clutter.oak_wall_bookshelf": "Oak Wall Bookshelf",
   "block.clutter.oak_window_sill": "Oak Window Sill",
+  "block.clutter.redwood_wall_bookshelf": "Redwood Wall Bookshelf",
+  "block.clutter.redwood_window_sill": "Redwood Window Sill",
   "block.clutter.orange_armchair": "Orange Armchair",
   "block.clutter.orange_bunk_bed": "Orange Bunk Bed",
   "block.clutter.orange_lamp": "Orange Lamp",
@@ -969,6 +990,7 @@
   "block.clutter.jungle_chair": "Jungle Chair",
   "block.clutter.mangrove_chair": "Mangrove Chair",
   "block.clutter.oak_chair": "Oak Chair",
+  "block.clutter.redwood_chair": "Redwood Chair",
   "block.clutter.spruce_chair": "Spruce Chair",
   "block.clutter.warped_chair": "Warped Chair",
   "block.clutter.stripped_acacia_chair": "Stripped Acacia Chair",
@@ -978,6 +1000,7 @@
   "block.clutter.stripped_jungle_chair": "Stripped Jungle Chair",
   "block.clutter.stripped_mangrove_chair": "Stripped Mangrove Chair",
   "block.clutter.stripped_oak_chair": "Stripped Oak Chair",
+  "block.clutter.stripped_redwood_chair": "Stripped Redwood Chair",
   "block.clutter.stripped_spruce_chair": "Stripped Spruce Chair",
   "block.clutter.stripped_warped_chair": "Stripped Warped Chair",
 
@@ -1010,6 +1033,7 @@
   "block.clutter.jungle_table": "Jungle Table",
   "block.clutter.mangrove_table": "Mangrove Table",
   "block.clutter.oak_table": "Oak Table",
+  "block.clutter.redwood_table": "Redwood Table",
   "block.clutter.spruce_table": "Spruce Table",
   "block.clutter.warped_table": "Warped Table",
   "block.clutter.stripped_acacia_table": "Stripped Acacia Table",
@@ -1019,6 +1043,7 @@
   "block.clutter.stripped_jungle_table": "Stripped Jungle Table",
   "block.clutter.stripped_mangrove_table": "Stripped Mangrove Table",
   "block.clutter.stripped_oak_table": "Stripped Oak Table",
+  "block.clutter.stripped_redwood_table": "Stripped Redwood Table",
   "block.clutter.stripped_spruce_table": "Stripped Spruce Table",
   "block.clutter.stripped_warped_table": "Stripped Warped Table",
 
@@ -1029,6 +1054,7 @@
   "block.clutter.jungle_bench": "Jungle Bench",
   "block.clutter.mangrove_bench": "Mangrove Bench",
   "block.clutter.oak_bench": "Oak Bench",
+  "block.clutter.redwood_bench": "Redwood Bench",
   "block.clutter.spruce_bench": "Spruce Bench",
   "block.clutter.warped_bench": "Warped Bench",
   "block.clutter.stripped_acacia_bench": "Stripped Acacia Bench",
@@ -1038,6 +1064,7 @@
   "block.clutter.stripped_jungle_bench": "Stripped Jungle Bench",
   "block.clutter.stripped_mangrove_bench": "Stripped Mangrove Bench",
   "block.clutter.stripped_oak_bench": "Stripped Oak Bench",
+  "block.clutter.stripped_redwood_bench": "Stripped Redwood Bench",
   "block.clutter.stripped_spruce_bench": "Stripped Spruce Bench",
   "block.clutter.stripped_warped_bench": "Stripped Warped Bench",
 
@@ -1048,6 +1075,7 @@
   "block.clutter.jungle_shelf": "Jungle Shelf",
   "block.clutter.mangrove_shelf": "Mangrove Shelf",
   "block.clutter.oak_shelf": "Oak Shelf",
+  "block.clutter.redwood_shelf": "Redwood Shelf",
   "block.clutter.spruce_shelf": "Spruce Shelf",
   "block.clutter.warped_shelf": "Warped Shelf",
   "block.clutter.cherry_shelf": "Cherry Shelf",
@@ -1060,6 +1088,7 @@
   "block.clutter.jungle_trellis": "Jungle Trellis",
   "block.clutter.mangrove_trellis": "Mangrove Trellis",
   "block.clutter.oak_trellis": "Oak Trellis",
+  "block.clutter.redwood_trellis": "Redwood Trellis",
   "block.clutter.spruce_trellis": "Spruce Trellis",
   "block.clutter.warped_trellis": "Warped Trellis",
 
@@ -1070,6 +1099,7 @@
   "block.clutter.jungle_wall_cupboard": "Jungle Wall Cupboard",
   "block.clutter.mangrove_wall_cupboard": "Mangrove Wall Cupboard",
   "block.clutter.oak_wall_cupboard": "Oak Wall Cupboard",
+  "block.clutter.redwood_wall_cupboard": "Redwood Wall Cupboard",
   "block.clutter.spruce_wall_cupboard": "Spruce Wall Cupboard",
   "block.clutter.warped_wall_cupboard": "Warped Wall Cupboard",
 
@@ -1084,8 +1114,24 @@
   "block.clutter.jungle_cupboard": "Jungle Cupboard",
   "block.clutter.mangrove_cupboard": "Mangrove Cupboard",
   "block.clutter.oak_cupboard": "Oak Cupboard",
+  "block.clutter.redwood_cupboard": "Redwood Cupboard",
   "block.clutter.spruce_cupboard": "Spruce Cupboard",
   "block.clutter.warped_cupboard": "Warped Cupboard",
+
+  "block.clutter.redwood_leaves": "Redwood Leaves",
+  "block.clutter.redwood_log": "Redwood Log",
+  "block.clutter.redwood_wood": "Redwood Wood",
+  "block.clutter.stripped_redwood_log": "Stripped Redwood Log",
+  "block.clutter.stripped_redwood_wood": "Stripped Redwood Wood",
+  "block.clutter.redwood_planks": "Redwood Planks",
+  "block.clutter.redwood_stairs": "Redwood Stairs",
+  "block.clutter.redwood_slab": "Redwood Slab",
+  "block.clutter.redwood_fence": "Redwood Fence",
+  "block.clutter.redwood_fence_gate": "Redwood Fence Gate",
+  "block.clutter.redwood_button": "Redwood Button",
+  "block.clutter.redwood_pressure_plate": "Redwood Pressure Plate",
+  "block.clutter.redwood_door": "Redwood Door",
+  "block.clutter.redwood_trapdoor": "Redwood Trapdoor",
 
   "block.clutter.cherry_wall_bookshelf": "Cherry Wall Bookshelf",
   "block.clutter.cherry_window_sill": "Cherry Window Sill",
@@ -1107,6 +1153,10 @@
   "block.clutter.bamboo_trellis": "Bamboo Trellis",
   "block.clutter.bamboo_wall_cupboard": "Bamboo Wall Cupboard",
   "block.clutter.bamboo_cupboard": "Bamboo Cupboard",
+
+  "block.clutter.redwood_sing": "Redwood Sign",
+  "block.clutter.redwood_hanging_sing": "Redwood Hanging Sign",
+  "block.clutter.redwood_sapling": "Redwood Sapling",
 
   "block.clutter.towel": "Towel",
   "block.clutter.sink": "Sink",
@@ -1171,13 +1221,6 @@
   "item.clutter.warped_butterfly_elytra": "Warped Butterfly Elytra",
   "item.clutter.soul_butterfly_elytra": "Soul Butterfly Elytra",
 
-  "item.clutter.butterfly_spawn_egg": "Butterfly Spawn Egg",
-  "item.clutter.chameleon_spawn_egg": "Chameleon Spawn Egg",
-  "item.clutter.echofin_spawn_egg": "Echofin Spawn Egg",
-  "item.clutter.mossbloom_spawn_egg": "Mossbloom Spawn Egg",
-  "item.clutter.emperor_penguin_spawn_egg": "Emperor Penguin Spawn Egg",
-  "item.clutter.beaver_spawn_egg": "Beaver Spawn Egg",
-
   "item.clutter.decorated_elytra_smithing_template": "Decorated Elytra Smithing Template",
   "item.clutter.decorated_elytra_smithing_template_shards": "Decorated Elytra Smithing Template Shards",
 
@@ -1216,7 +1259,6 @@
   "item.clutter.silver_boots": "Silver Boots",
   "item.clutter.glowlily_seedling": "Glowlily Seedling",
   "item.clutter.glowlily_bulb": "Glowlily Bulb",
-  "item.clutter.capybara_spawn_egg": "Capybara Spawn Egg",
 
   "item.clutter.beach_hat": "Beach Hat",
   "item.clutter.top_hat": "Top Hat",
@@ -1227,6 +1269,8 @@
   "item.clutter.cap": "Cap",
   "item.clutter.propeller_cap": "Propeller Cap",
   "item.clutter.tiara": "Tiara",
+  "item.clutter.silver_tiara": "Silver Tiara",
+
   "item.clutter.viking_helmet": "Viking Helmet",
 
   "block.clutter.aquatic_torch": "Aquatic Torch",
@@ -1270,7 +1314,7 @@
   "item.clutter.baked_thornbloom_pear": "Baked Thornbloom Pear",
   "item.clutter.kiwi": "Kiwi",
   "item.clutter.kiwi_seeds": "Kiwi Seeds",
-  "item.clutter.kiwi_bird_spawn_egg": "Kiwi Bird Spawn Egg",
+
   "item.clutter.cherries": "Cherries",
   "item.clutter.cherry_pie": "Cherry Pie",
   "item.clutter.kiwi_pie": "Kiwi Pie",
@@ -1307,6 +1351,27 @@
   "entity.clutter.emperor_penguin": "Emperor Penguin",
   "entity.clutter.beaver": "Beaver",
   "entity.clutter.capybara": "Capybara",
+  "entity.clutter.jellyfish": "Jellyfish",
+  "entity.clutter.manta_ray": "Manta Ray",
+  "entity.clutter.seahorse": "Seahorse",
+  "entity.clutter.ember_tortoise": "Ember Tortoise",
+  "entity.clutter.crimson_newt": "Crimson Newt",
+  "entity.clutter.warped_newt": "Warped Newt",
+
+  "item.clutter.butterfly_spawn_egg": "Butterfly Spawn Egg",
+  "item.clutter.chameleon_spawn_egg": "Chameleon Spawn Egg",
+  "item.clutter.echofin_spawn_egg": "Echofin Spawn Egg",
+  "item.clutter.mossbloom_spawn_egg": "Mossbloom Spawn Egg",
+  "item.clutter.kiwi_bird_spawn_egg": "Kiwi Bird Spawn Egg",
+  "item.clutter.emperor_penguin_spawn_egg": "Emperor Penguin Spawn Egg",
+  "item.clutter.beaver_spawn_egg": "Beaver Spawn Egg",
+  "item.clutter.capybara_spawn_egg": "Capybara Spawn Egg",
+  "item.clutter.jellyfish_spawn_egg": "Jellyfish Spawn Egg",
+  "item.clutter.manta_ray_spawn_egg": "Manta Ray Spawn Egg",
+  "item.clutter.seahorse_spawn_egg": "Seahorse Spawn Egg",
+  "item.clutter.ember_tortoise_spawn_egg": "Ember Tortoise Spawn Egg",
+  "item.clutter.crimson_newt_spawn_egg": "Crimson Newt Spawn Egg",
+  "item.clutter.warped_newt_spawn_egg": "Warped Newt Spawn Egg",
 
   "enchantment.clutter.greed": "Greed",
 
@@ -1378,24 +1443,16 @@
   "block.clutter.pearl_clam_block": "Pearl Clam Block",
   "block.clutter.red_present": "Red Present",
   "container.clutter.present": "Present",
-  "entity.clutter.crimson_newt": "Crimson Newt",
-  "item.clutter.crimson_newt_spawn_egg": "Crimson Newt Spawn Egg",
 
-  "entity.clutter.ember_tortoise": "Ember Tortoise",
-  "item.clutter.ember_tortoise_spawn_egg": "Ember Tortoise Spawn Egg",
   "key.category.clutter": "Clutter",
   "key.clutter.pet": "Pet Entity",
   "enchantment.clutter.necrosis.description": "Has a chance to Zombify some mobs when slain, depending on enchantment level.",
   "enchantment.clutter.necrosis": "Necrosis",
   "block.clutter.pet_bed": "Pet Bed",
 
-  "clutter.commands.config.reset": "%s Configs have been reset. Please restart your game or server for the changes to take effect.",
-  "clutter.commands.config.update_configs": "%s Config file, and version number has been updated and any missing config values have been added to it.",
+  "clutter.commands.config.reset": "%s Configs have been reset. Please restart your game, or server for the changes to take effect.",
   "clutter.commands.config.config_prompt": "%s\n%s %s %s",
   "clutter.commands.config.op_only": "[Clutter: Operator Only]",
-  "clutter.commands.config.config_update_prompt": "The current configuration file version (%s) does not match the expected version",
-  "clutter.commands.config.config_update": "Update Config File",
-  "clutter.commands.config.update_tooltip": "Run Update Command",
 
   "clutter.yellow.butterfly": "Yellow Butterfly",
   "clutter.red.butterfly": "Red Butterfly",
@@ -1415,5 +1472,65 @@
   "clutter.pink.butterfly": "Pink Butterfly",
   "clutter.warped.butterfly": "Warped Butterfly",
   "clutter.crimson.butterfly": "Crimson Butterfly",
-  "clutter.soul.butterfly": "Soul Butterfly"
+  "clutter.soul.butterfly": "Soul Butterfly",
+
+  "item.clutter.coin_pouch": "Coin Pouch",
+  "clutter.coin_pouch_0": "Common",
+  "clutter.coin_pouch_1": "Uncommon",
+  "clutter.coin_pouch_2": "Rare",
+  "clutter.coin_pouch_3": "Epic",
+  "clutter.coin_pouch_empty": "Empty",
+
+  "block.clutter.anchor": "Anchor",
+
+  "block.clutter.red_lupine": "Red Lupine",
+  "block.clutter.small_red_lupine": "Small Red Lupine",
+  "block.clutter.white_lupine": "White Lupine",
+  "block.clutter.small_white_lupine": "Small White Lupine",
+  "block.clutter.blue_lupine": "Blue Lupine",
+  "block.clutter.small_blue_lupine": "Small Blue Lupine",
+  "block.clutter.purple_lupine": "Purple Lupine",
+  "block.clutter.small_purple_lupine": "Small Purple Lupine",
+  "block.clutter.magenta_lupine": "Magenta Lupine",
+  "block.clutter.small_magenta_lupine": "Small Magenta Lupine",
+  "block.clutter.yellow_lupine": "Yellow Lupine",
+  "block.clutter.small_yellow_lupine": "Small Yellow Lupine",
+
+  "block.clutter.overgrown_packed_mud": "Overgrown Packed Mud",
+
+  "block.clutter.red_polypore": "Red Polypore",
+  "block.clutter.yellow_polypore": "Yellow Polypore",
+
+  "block.clutter.quartz_crystal": "Quartz Crystal",
+
+  "death.attack.anchor": "%1$s was squashed by a falling anchor",
+  "death.attack.anchor.player": "%1$s was squashed by a falling anchor whilst fighting %2$s",
+
+  "item.clutter.amethyst_gemstone_elytra": "Amethyst Gemstone Elytra",
+  "item.clutter.diamond_gemstone_elytra": "Diamond Gemstone Elytra",
+  "item.clutter.quartz_gemstone_elytra": "Quartz Gemstone Elytra",
+  "item.clutter.emerald_gemstone_elytra": "Emerald Gemstone Elytra",
+
+  "block.clutter.reinforced_copper_glass": "Reinforced Copper Glass",
+  "block.clutter.exposed_reinforced_copper_glass": "Exposed Reinforced Copper Glass",
+  "block.clutter.weathered_reinforced_copper_glass": "Weathered Reinforced Copper Glass",
+  "block.clutter.oxidized_reinforced_copper_glass": "Oxidized Reinforced Copper Glass",
+  "block.clutter.waxed_reinforced_copper_glass": "Waxed Reinforced Copper Glass",
+  "block.clutter.waxed_exposed_reinforced_copper_glass": "Waxed Exposed Reinforced Copper Glass",
+  "block.clutter.waxed_weathered_reinforced_copper_glass": "Waxed Weathered Reinforced Copper Glass",
+  "block.clutter.waxed_oxidized_reinforced_copper_glass": "Waxed Oxidized Reinforced Copper Glass",
+
+  "block.clutter.giant_fern": "Giant Fern",
+  "block.clutter.lab_bottle": "Lab Bottle",
+
+  "item.clutter.seahorse_bucket": "Bucket of Seahorse",
+
+  "advancements.clutter.bet_i_could_climb_that.title": "Bet I Could Climb That!",
+  "advancements.clutter.bet_i_could_climb_that.description": "Discover a Giant Redwood Forest!",
+
+  "advancements.clutter.tiny_water_dragon.title": "Tiny Water Dragon",
+  "advancements.clutter.tiny_water_dragon.description": "It Looks Like a Dragon at Least!",
+
+  "biome.clutter.lupine_fields": "Lupine Fields",
+  "biome.clutter.giant_redwood_forest": "Giant Redwood Forest"
 }

@@ -4,6 +4,7 @@ import net.emilsg.clutter.entity.ModEntities;
 import net.emilsg.clutter.entity.custom.goal.*;
 import net.emilsg.clutter.entity.custom.parent.ClutterFishEntity;
 import net.emilsg.clutter.entity.variants.SeahorseVariant;
+import net.emilsg.clutter.item.ModItems;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.EscapeDangerGoal;
 import net.minecraft.entity.ai.goal.TemptGoal;
@@ -14,10 +15,12 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.mob.WaterCreatureEntity;
 import net.minecraft.entity.passive.FishEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.vehicle.BoatEntity;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
@@ -30,15 +33,14 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Util;
-import net.minecraft.world.GameRules;
-import net.minecraft.world.LocalDifficulty;
-import net.minecraft.world.ServerWorldAccess;
-import net.minecraft.world.World;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
+import net.minecraft.world.*;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
-public class SeahorseEntity extends ClutterFishEntity {
+public class SeahorseEntity extends ClutterFishEntity implements Bucketable {
     private static final TrackedData<Integer> VARIANT = DataTracker.registerData(SeahorseEntity.class, TrackedDataHandlerRegistry.INTEGER);
     private static final TrackedData<Boolean> HAS_CHILDREN = DataTracker.registerData(SeahorseEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private static final TrackedData<Float> HAS_CHILDREN_TIMER = DataTracker.registerData(SeahorseEntity.class, TrackedDataHandlerRegistry.FLOAT);
@@ -93,6 +95,28 @@ public class SeahorseEntity extends ClutterFishEntity {
     public static DefaultAttributeContainer.Builder setAttributes() {
         return SeahorseEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 2D);
+    }
+
+    public static boolean isValidNaturalSpawn(EntityType<? extends WaterCreatureEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+        return world.getBlockState(pos).getFluidState().isOf(Fluids.WATER);
+    }
+
+
+
+    @Override
+    public void copyDataToStack(ItemStack stack) {
+        NbtCompound nbtCompound = stack.getOrCreateNbt();
+        nbtCompound.putInt("Variant", this.getTypeVariant());
+        super.copyDataToStack(stack);
+    }
+
+    @Override
+    public void copyDataFromNbt(NbtCompound nbt) {
+        if (nbt.contains("Variant")) {
+            this.setVariant(SeahorseVariant.byId(nbt.getInt("Variant")));
+        }
+
+        super.copyDataFromNbt(nbt);
     }
 
     protected void initDataTracker() {
@@ -434,6 +458,18 @@ public class SeahorseEntity extends ClutterFishEntity {
 
     }
 
+    public boolean cannotDespawn() {
+        return super.cannotDespawn() || this.isFromBucket();
+    }
+
+    public boolean canImmediatelyDespawn(double distanceSquared) {
+        return !this.isFromBucket() && !this.hasCustomName();
+    }
+
+    public SoundEvent getBucketFillSound() {
+        return SoundEvents.ITEM_BUCKET_FILL_FISH;
+    }
+
     public boolean isBaby() {
         return this.getBreedingAge() < 0;
     }
@@ -463,7 +499,7 @@ public class SeahorseEntity extends ClutterFishEntity {
 
     @Override
     public ItemStack getBucketItem() {
-        return null;
+        return new ItemStack(ModItems.SEAHORSE_BUCKET);
     }
 
     public int getMaxChildren() {

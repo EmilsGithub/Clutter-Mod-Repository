@@ -1,11 +1,13 @@
 package net.emilsg.clutter.data;
 
 import net.emilsg.clutter.Clutter;
+import net.emilsg.clutter.block.ClutterWoodType;
 import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.item.ModItems;
 import net.emilsg.clutter.item.custom.ClutterElytraItem;
 import net.emilsg.clutter.recipe.KilningRecipeBuilder;
 import net.emilsg.clutter.util.ModItemTags;
+import net.emilsg.clutter.util.RegistryType;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.block.Blocks;
@@ -62,6 +64,37 @@ public class RecipeDataGen extends FabricRecipeProvider {
         kilningRecipe(Items.MAGENTA_TERRACOTTA, Items.MAGENTA_GLAZED_TERRACOTTA, 1, exporter);
         kilningRecipe(Items.PINK_TERRACOTTA, Items.PINK_GLAZED_TERRACOTTA, 1, exporter);
 
+        offerWoodRecipes(exporter, ClutterWoodType.REDWOOD);
+        offerWoodRecipes(exporter, ClutterWoodType.OAK);
+        offerWoodRecipes(exporter, ClutterWoodType.BIRCH);
+        offerWoodRecipes(exporter, ClutterWoodType.JUNGLE);
+        offerWoodRecipes(exporter, ClutterWoodType.ACACIA);
+        offerWoodRecipes(exporter, ClutterWoodType.SPRUCE);
+        offerWoodRecipes(exporter, ClutterWoodType.DARK_OAK);
+        offerWoodRecipes(exporter, ClutterWoodType.MANGROVE);
+        offerWoodRecipes(exporter, ClutterWoodType.CRIMSON);
+        offerWoodRecipes(exporter, ClutterWoodType.WARPED);
+        offerWoodRecipes(exporter, ClutterWoodType.CHERRY);
+        offerWoodRecipes(exporter, ClutterWoodType.BAMBOO);
+
+        offerSimpleDyeRecipeWithCount(exporter, ModBlocks.BLUE_LUPINE, Items.BLUE_DYE, RecipeCategory.MISC, 2);
+        offerSimpleDyeRecipeWithCount(exporter, ModBlocks.SMALL_BLUE_LUPINE, Items.BLUE_DYE, RecipeCategory.MISC, 1);
+
+        offerSimpleDyeRecipeWithCount(exporter, ModBlocks.RED_LUPINE, Items.RED_DYE, RecipeCategory.MISC, 2);
+        offerSimpleDyeRecipeWithCount(exporter, ModBlocks.SMALL_RED_LUPINE, Items.RED_DYE, RecipeCategory.MISC, 1);
+
+        offerSimpleDyeRecipeWithCount(exporter, ModBlocks.MAGENTA_LUPINE, Items.MAGENTA_DYE, RecipeCategory.MISC, 2);
+        offerSimpleDyeRecipeWithCount(exporter, ModBlocks.SMALL_MAGENTA_LUPINE, Items.MAGENTA_DYE, RecipeCategory.MISC, 1);
+
+        offerSimpleDyeRecipeWithCount(exporter, ModBlocks.YELLOW_LUPINE, Items.YELLOW_DYE, RecipeCategory.MISC, 2);
+        offerSimpleDyeRecipeWithCount(exporter, ModBlocks.SMALL_YELLOW_LUPINE, Items.YELLOW_DYE, RecipeCategory.MISC, 1);
+
+        offerSimpleDyeRecipeWithCount(exporter, ModBlocks.WHITE_LUPINE, Items.WHITE_DYE, RecipeCategory.MISC, 2);
+        offerSimpleDyeRecipeWithCount(exporter, ModBlocks.SMALL_WHITE_LUPINE, Items.WHITE_DYE, RecipeCategory.MISC, 1);
+
+        offerSimpleDyeRecipeWithCount(exporter, ModBlocks.PURPLE_LUPINE, Items.PURPLE_DYE, RecipeCategory.MISC, 2);
+        offerSimpleDyeRecipeWithCount(exporter, ModBlocks.SMALL_PURPLE_LUPINE, Items.PURPLE_DYE, RecipeCategory.MISC, 1);
+
 
         offerClutterWaxingRecipes(exporter);
 
@@ -69,6 +102,14 @@ public class RecipeDataGen extends FabricRecipeProvider {
         offerCombinationRecipe(exporter, Items.SCULK_VEIN, Items.BROWN_MUSHROOM, ModBlocks.SCULK_MUSHROOM, 2, RecipeCategory.MISC);
         offerCombinationRecipe(exporter, Items.SCULK_VEIN, ModBlocks.BROWN_WALL_MUSHROOMS, ModBlocks.SCULK_WALL_MUSHROOMS, 2, RecipeCategory.MISC);
         offerCombinationRecipe(exporter, Items.SCULK_VEIN, ModBlocks.RED_WALL_MUSHROOMS, ModBlocks.SCULK_WALL_MUSHROOMS, 2, RecipeCategory.MISC);
+        offerPlusRecipe(exporter, Blocks.GLASS, ModItems.COPPER_NUGGET, ModBlocks.REINFORCED_COPPER_GLASS, RecipeCategory.BUILDING_BLOCKS);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, ModBlocks.QUARTZ_CRYSTAL)
+                .pattern("Q")
+                .pattern("Q")
+                .input('Q', Items.QUARTZ)
+                .criterion(hasItem(Items.QUARTZ), conditionsFromItem(Items.QUARTZ))
+                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(ModBlocks.QUARTZ_CRYSTAL)));
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModItems.AQUATIC_TORCH)
                 .pattern(" N ")
@@ -91,7 +132,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .criterion(hasItem(Items.PRISMARINE_CRYSTALS), conditionsFromItem(Items.PRISMARINE_CRYSTALS))
                 .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(ModItems.PRISMARINE_TORCH)));
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.TALL_BOTTLE)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, ModBlocks.TALL_BOTTLE)
                 .pattern(" G ")
                 .pattern(" G ")
                 .pattern("GDG")
@@ -100,6 +141,12 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .criterion(hasItem(Items.GREEN_DYE), conditionsFromItem(Items.GREEN_DYE))
                 .criterion(hasItem(Items.GLASS), conditionsFromItem(Items.GLASS))
                 .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(ModBlocks.TALL_BOTTLE)));
+
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, ModBlocks.LAB_BOTTLE)
+                .input(Items.GLASS_BOTTLE)
+                .criterion(hasItem(Items.GLASS_BOTTLE), conditionsFromItem(Items.GLASS_BOTTLE))
+                .criterion(hasItem(Items.GLASS), conditionsFromItem(Items.GLASS))
+                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(ModBlocks.LAB_BOTTLE)));
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.BRICK_KILN)
                 .pattern("SSS")
@@ -155,24 +202,24 @@ public class RecipeDataGen extends FabricRecipeProvider {
 
         offerArmorRecipe(exporter, ModItems.SILVER_INGOT, ModItems.SILVER_HELMET, ModItems.SILVER_CHESTPLATE, ModItems.SILVER_LEGGINGS, ModItems.SILVER_BOOTS);
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.COPPER_DIVING_HELMET)
-                .pattern("###").pattern("#G#")
-                .input('#', Items.COPPER_INGOT)
-                .input('G', Items.GLASS)
-                .criterion(hasItem(Items.COPPER_INGOT), conditionsFromItem(Items.COPPER_INGOT))
-                .criterion(hasItem(Items.GLASS), conditionsFromItem(Items.GLASS))
-                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(ModItems.COPPER_DIVING_HELMET)));
+        //ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.COPPER_DIVING_HELMET)
+        //        .pattern("###").pattern("#G#")
+        //        .input('#', Items.COPPER_INGOT)
+        //        .input('G', Items.GLASS)
+        //        .criterion(hasItem(Items.COPPER_INGOT), conditionsFromItem(Items.COPPER_INGOT))
+        //        .criterion(hasItem(Items.GLASS), conditionsFromItem(Items.GLASS))
+        //        .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(ModItems.COPPER_DIVING_HELMET)));
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.COPPER_DIVING_CHESTPLATE)
-                .pattern("# #").pattern("#H#").pattern("###")
-                .input('#', Items.COPPER_INGOT)
-                .input('H', Items.HEART_OF_THE_SEA)
-                .criterion(hasItem(Items.COPPER_INGOT), conditionsFromItem(Items.COPPER_INGOT))
-                .criterion(hasItem(Items.HEART_OF_THE_SEA), conditionsFromItem(Items.HEART_OF_THE_SEA))
-                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(ModItems.COPPER_DIVING_CHESTPLATE)));
+        //ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.COPPER_DIVING_CHESTPLATE)
+        //        .pattern("# #").pattern("#H#").pattern("###")
+        //        .input('#', Items.COPPER_INGOT)
+        //        .input('H', Items.HEART_OF_THE_SEA)
+        //        .criterion(hasItem(Items.COPPER_INGOT), conditionsFromItem(Items.COPPER_INGOT))
+        //        .criterion(hasItem(Items.HEART_OF_THE_SEA), conditionsFromItem(Items.HEART_OF_THE_SEA))
+        //        .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(ModItems.COPPER_DIVING_CHESTPLATE)));
 
-        offerLeggingsRecipe(exporter, Items.COPPER_INGOT, ModItems.COPPER_DIVING_LEGGINGS);
-        offerBootsRecipe(exporter, Items.COPPER_INGOT, ModItems.COPPER_DIVING_BOOTS);
+        //offerLeggingsRecipe(exporter, Items.COPPER_INGOT, ModItems.COPPER_DIVING_LEGGINGS);
+        //offerBootsRecipe(exporter, Items.COPPER_INGOT, ModItems.COPPER_DIVING_BOOTS);
 
         offerSulphurRecipe(exporter, ModBlocks.ONYX_BLOCK, ModBlocks.BLACK_ONYX_BLOCK, RecipeCategory.BUILDING_BLOCKS);
         offerSulphurRecipe(exporter, ModBlocks.ONYX_SLAB, ModBlocks.BLACK_ONYX_SLAB, RecipeCategory.BUILDING_BLOCKS);
@@ -214,7 +261,9 @@ public class RecipeDataGen extends FabricRecipeProvider {
         }
     }
 
-    private void offerDecoratedElytraRecipes(Consumer<RecipeJsonProvider> exporter, Item result, Item addition) {
+
+
+    public void offerDecoratedElytraRecipes(Consumer<RecipeJsonProvider> exporter, Item result, Item addition) {
         SmithingTransformRecipeJsonBuilder
                 .create(Ingredient.ofItems(ModItems.DECORATED_ELYTRA_SMITHING_TEMPLATE), Ingredient.fromTag(ModItemTags.ELYTRON), Ingredient.ofItems(addition), RecipeCategory.MISC, result)
                 .criterion("has_elytra", conditionsFromItem(ModItems.BUTTERFLY_IN_A_BOTTLE))
@@ -278,6 +327,13 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .criterion(hasItem(component), conditionsFromItem(component)).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(boots)));
     }
 
+    private void offerSimpleDyeRecipeWithCount(Consumer<RecipeJsonProvider> exporter, ItemConvertible component, ItemConvertible result, RecipeCategory category, int count) {
+        ShapelessRecipeJsonBuilder.create(category, result, count)
+                .input(component)
+                .criterion(hasItem(component), conditionsFromItem(component))
+                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(result) + "_from_" + getRecipeName(component)));
+    }
+
     private void offerSulphurRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible component, ItemConvertible result, RecipeCategory category) {
         ShapelessRecipeJsonBuilder.create(category, result)
                 .input(component).input(ModItems.SULPHUR)
@@ -293,5 +349,211 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .criterion(hasItem(component), conditionsFromItem(component))
                 .criterion(hasItem(secondComponent), conditionsFromItem(secondComponent))
                 .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(result)));
+    }
+
+    private void offerPlusRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible inner, ItemConvertible outer, ItemConvertible output, RecipeCategory category) {
+        ShapedRecipeJsonBuilder.create(category, output)
+                .pattern(" O ")
+                .pattern("OIO")
+                .pattern(" O ")
+                .input('I', inner)
+                .input('O', outer)
+                .criterion(hasItem(inner), conditionsFromItem(inner))
+                .criterion(hasItem(outer), conditionsFromItem(outer))
+                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
+    }
+
+    private void offerWoodRecipes(Consumer<RecipeJsonProvider> exporter, ClutterWoodType woodType) {
+        RegistryType registryType = woodType.registryType();
+
+        if(registryType.isOf(RegistryType.MODDED)) offerBarkBlockRecipe(exporter, woodType.strippedWood(), woodType.strippedLog());
+        if(registryType.isOf(RegistryType.MODDED)) offerBarkBlockRecipe(exporter, woodType.wood(), woodType.log());
+        if(registryType.isOf(RegistryType.MODDED)) offerPlanksRecipe(exporter, woodType.planks(), woodType.logTag(), 4);
+        if(registryType.isOf(RegistryType.MODDED)) offerStairsRecipe(exporter, woodType.planks(), woodType.stairs());
+        if(registryType.isOf(RegistryType.MODDED)) offerSlabRecipe(exporter, woodType.slab(), woodType.planks());
+        if(registryType.isOf(RegistryType.MODDED)) offerPressurePlateRecipe(exporter, woodType.pressurePlate(), woodType.planks());
+        if(registryType.isOf(RegistryType.MODDED)) offerTrapdoorRecipe(exporter, woodType.trapdoor(), woodType.planks());
+        if(registryType.isOf(RegistryType.MODDED)) offerSingleItemRecipe(exporter, woodType.button(), woodType.planks(), RecipeCategory.REDSTONE);
+        if(registryType.isOf(RegistryType.MODDED)) offerFenceRecipe(exporter, woodType.fence(), woodType.planks());
+        if(registryType.isOf(RegistryType.MODDED)) offerFenceGateRecipe(exporter, woodType.fenceGate(), woodType.planks());
+        if(registryType.isOf(RegistryType.MODDED)) offerDoorRecipe(exporter, woodType.door(), woodType.planks());
+        if(registryType.isOf(RegistryType.MODDED)) offerSignRecipe(exporter, woodType.signItem(), woodType.planks());
+        if(registryType.isOf(RegistryType.MODDED)) offerHangingSignRecipe(exporter, woodType.hangingSignItem(), woodType.strippedLog());
+
+        if(woodType.mosaic() != null) offerMosaicRecipe(exporter, RecipeCategory.DECORATIONS, woodType.mosaic(), woodType.slab());
+        if(woodType.mosaicSlab() != null) offerSlabRecipe(exporter, woodType.mosaicSlab(), woodType.mosaic());
+        if(woodType.mosaicStairs() != null) offerStairsRecipe(exporter, woodType.mosaic(), woodType.mosaicStairs());
+
+        offerShortBenchRecipe(exporter, woodType.planks(), woodType.log(), woodType.shortBench());
+        offerChairRecipe(exporter, woodType.planks(), woodType.log(), woodType.chair());
+        if(woodType.strippedChair() != null) offerChairRecipe(exporter, woodType.planks(), woodType.strippedLog(), woodType.strippedChair());
+        offerBenchRecipe(exporter, woodType.planks(), woodType.log(), woodType.bench());
+        if(woodType.strippedBench() != null) offerBenchRecipe(exporter, woodType.planks(), woodType.strippedLog(), woodType.strippedBench());
+        offerTableRecipe(exporter, woodType.planks(), woodType.log(), woodType.table());
+        if(woodType.strippedTable() != null) offerTableRecipe(exporter, woodType.planks(), woodType.strippedLog(), woodType.strippedTable());
+        offerCupboardRecipe(exporter, woodType.planks(), woodType.slab(), woodType.cupboard());
+        offerWallCupboardRecipe(exporter, woodType.planks(), woodType.slab(), woodType.wallCupboard());
+        offerWallBookshelfRecipe(exporter, woodType.slab(), woodType.wallBookshelf());
+        offerWindowSillRecipe(exporter, woodType.slab(), woodType.windowSill());
+        offerShelfRecipe(exporter, woodType.slab(), woodType.shelf());
+        offerTrellisRecipe(exporter, woodType.slab(), woodType.trellis());
+    }
+
+    private static void offerStairsRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible input, ItemConvertible output) {
+        createStairsRecipe(output, Ingredient.ofItems(input)).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
+    }
+
+    public static void offerPressurePlateRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible output, ItemConvertible input) {
+        createPressurePlateRecipe(RecipeCategory.REDSTONE, output, Ingredient.ofItems(input)).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
+    }
+
+    public static void offerSlabRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible output, ItemConvertible input) {
+        createSlabRecipe(RecipeCategory.BUILDING_BLOCKS, output, Ingredient.ofItems(input)).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
+    }
+
+    public static void offerTrapdoorRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible output, ItemConvertible input) {
+        createTrapdoorRecipe(output, Ingredient.ofItems(input)).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
+    }
+
+    public static void offerSingleItemRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible output, ItemConvertible input, RecipeCategory category) {
+        ShapelessRecipeJsonBuilder.create(category, output).input(input).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
+    }
+
+    public static void offerFenceRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible output, ItemConvertible input) {
+        createFenceRecipe(output, Ingredient.ofItems(input)).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
+    }
+
+    public static void offerFenceGateRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible output, ItemConvertible input) {
+        createFenceGateRecipe(output, Ingredient.ofItems(input)).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
+    }
+
+    public static void offerDoorRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible output, ItemConvertible input) {
+        createDoorRecipe(output, Ingredient.ofItems(input)).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
+    }
+
+    public static void offerSignRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible output, ItemConvertible input) {
+        createSignRecipe(output, Ingredient.ofItems(input)).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
+    }
+
+    private void offerShortBenchRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible planks, ItemConvertible log, ItemConvertible output) {
+        ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, output, 6)
+                .pattern("PPP")
+                .pattern("L L")
+                .input('P', planks)
+                .input('L', log)
+                .group("short_benches")
+                .criterion(hasItem(planks), conditionsFromItem(planks))
+                .criterion(hasItem(log), conditionsFromItem(log))
+                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
+    }
+
+    private void offerChairRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible planks, ItemConvertible log, ItemConvertible output) {
+        ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, output, 4)
+                .pattern("P  ")
+                .pattern("PP ")
+                .pattern("LL ")
+                .input('P', planks)
+                .input('L', log)
+                .group("chairs")
+                .criterion(hasItem(planks), conditionsFromItem(planks))
+                .criterion(hasItem(log), conditionsFromItem(log))
+                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
+    }
+
+    private void offerBenchRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible planks, ItemConvertible log, ItemConvertible output) {
+        ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, output, 4)
+                .pattern("PSP")
+                .pattern("PPP")
+                .pattern("L L")
+                .input('S', Items.STICK)
+                .input('P', planks)
+                .input('L', log)
+                .group("benches")
+                .criterion(hasItem(planks), conditionsFromItem(planks))
+                .criterion(hasItem(log), conditionsFromItem(log))
+                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
+    }
+
+    private void offerTableRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible planks, ItemConvertible log, ItemConvertible output) {
+        ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, output)
+                .pattern("PPP")
+                .pattern("L L")
+                .pattern("L L")
+                .input('P', planks)
+                .input('L', log)
+                .group("tables")
+                .criterion(hasItem(planks), conditionsFromItem(planks))
+                .criterion(hasItem(log), conditionsFromItem(log))
+                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
+    }
+
+    private void offerShelfRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible slab, ItemConvertible output) {
+        ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, output, 2)
+                .pattern("SSS")
+                .input('S', slab)
+                .group("shelves")
+                .criterion(hasItem(slab), conditionsFromItem(slab))
+                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
+    }
+
+    private void offerTrellisRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible slab, ItemConvertible output) {
+        ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, output, 2)
+                .pattern(" S ")
+                .pattern("SSS")
+                .pattern(" S ")
+                .input('S', slab)
+                .group("trellises")
+                .criterion(hasItem(slab), conditionsFromItem(slab))
+                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
+    }
+
+    private void offerCupboardRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible planks, ItemConvertible slab, ItemConvertible output) {
+        ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, output)
+                .pattern("PSP")
+                .pattern("PSP")
+                .pattern("PSP")
+                .input('S', slab)
+                .input('P', planks)
+                .group("cupboards")
+                .criterion(hasItem(slab), conditionsFromItem(slab))
+                .criterion(hasItem(planks), conditionsFromItem(planks))
+                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
+    }
+
+    private void offerWallCupboardRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible planks, ItemConvertible slab, ItemConvertible output) {
+        ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, output, 2)
+                .pattern("PS ")
+                .pattern("PS ")
+                .pattern("PS ")
+                .input('S', slab)
+                .input('P', planks)
+                .group("wall_cupboards")
+                .criterion(hasItem(slab), conditionsFromItem(slab))
+                .criterion(hasItem(planks), conditionsFromItem(planks))
+                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
+    }
+
+    private void offerWindowSillRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible slab, ItemConvertible output) {
+        ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, output)
+                .pattern("P  ")
+                .pattern("SSS")
+                .input('S', slab)
+                .input('P', Items.FLOWER_POT)
+                .group("window_sills")
+                .criterion(hasItem(slab), conditionsFromItem(slab))
+                .criterion(hasItem(Items.FLOWER_POT), conditionsFromItem(Items.FLOWER_POT))
+                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
+    }
+
+    private void offerWallBookshelfRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible slab, ItemConvertible output) {
+        ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, output)
+                .pattern("BBB")
+                .pattern("SSS")
+                .input('B', Items.BOOK)
+                .input('S', slab)
+                .group("wall_bookshelves")
+                .criterion(hasItem(slab), conditionsFromItem(slab))
+                .criterion(hasItem(Items.BOOK), conditionsFromItem(Items.BOOK))
+                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
     }
 }

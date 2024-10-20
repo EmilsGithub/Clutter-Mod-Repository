@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "wall_cupboards",
+  "key": {
+    "P": {
+      "item": "clutter:redwood_planks"
+    },
+    "S": {
+      "item": "clutter:redwood_slab"
+    }
+  },
+  "pattern": [
+    "PS ",
+    "PS ",
+    "PS "
+  ],
+  "result": {
+    "count": 2,
+    "item": "clutter:redwood_wall_cupboard"
+  },
+  "show_notification": true
+}

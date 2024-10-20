@@ -1,10 +1,12 @@
 package net.emilsg.clutter.entity.custom;
 
+import net.emilsg.clutter.effect.ModEffects;
 import net.emilsg.clutter.entity.ModEntities;
 import net.emilsg.clutter.entity.custom.parent.ClutterAnimalEntity;
 import net.emilsg.clutter.util.ModBlockTags;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.item.Item;
@@ -34,5 +36,10 @@ public class CrimsonNewtEntity extends AbstractNetherNewtEntity {
     @Override
     public @Nullable PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
         return ModEntities.CRIMSON_NEWT.create(world);
+    }
+
+    @Override
+    public StatusEffect getOnAttackEffect() {
+        return ModEffects.VULNERABILITY;
     }
 }

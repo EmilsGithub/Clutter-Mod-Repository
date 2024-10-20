@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "tables",
+  "key": {
+    "L": {
+      "item": "minecraft:dark_oak_log"
+    },
+    "P": {
+      "item": "minecraft:dark_oak_planks"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "L L",
+    "L L"
+  ],
+  "result": {
+    "item": "clutter:dark_oak_table"
+  },
+  "show_notification": true
+}

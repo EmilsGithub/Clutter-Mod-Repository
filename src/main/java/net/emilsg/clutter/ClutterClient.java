@@ -32,6 +32,8 @@ import net.minecraft.client.color.world.GrassColors;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
+import net.minecraft.client.render.block.entity.HangingSignBlockEntityRenderer;
+import net.minecraft.client.render.block.entity.SignBlockEntityRenderer;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.registry.Registries;
 
@@ -407,17 +409,6 @@ public class ClutterClient implements ClientModInitializer {
                 GOLDEN_DOOR,
                 GOLDEN_TRAPDOOR,
                 SILVER_TRAPDOOR,
-                OAK_TRELLIS,
-                DARK_OAK_TRELLIS,
-                BIRCH_TRELLIS,
-                JUNGLE_TRELLIS,
-                ACACIA_TRELLIS,
-                SPRUCE_TRELLIS,
-                BAMBOO_TRELLIS,
-                CHERRY_TRELLIS,
-                CRIMSON_TRELLIS,
-                WARPED_TRELLIS,
-                MANGROVE_TRELLIS,
                 BONFIRE,
                 SOUL_BONFIRE,
                 CATTAILS,
@@ -448,10 +439,6 @@ public class ClutterClient implements ClientModInitializer {
                 GIANT_LILY_PAD,
                 GIANT_LILY_PAD_SEEDLING,
                 SMALL_LILY_PADS,
-                SMALL_ONYX_BUD,
-                MEDIUM_ONYX_BUD,
-                LARGE_ONYX_BUD,
-                ONYX_CLUSTER,
                 GREEN_FIRE,
                 GLOWLILY_CROP,
                 GLOWLILY,
@@ -622,6 +609,10 @@ public class ClutterClient implements ClientModInitializer {
                 REDWOOD_LEAVES
         );
 
+        ColorProviderRegistry.ITEM.register((state, tintIndex) ->
+                        Objects.requireNonNull(ColorProviderRegistry.ITEM.get(Blocks.FERN)).getColor(state, tintIndex),
+                GIANT_FERN
+        );
 
         ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) ->
                         Objects.requireNonNull(ColorProviderRegistry.BLOCK.get(Blocks.FERN)).getColor(state, world, pos, tintIndex),
@@ -685,6 +676,9 @@ public class ClutterClient implements ClientModInitializer {
     private void registerBlockEntityRenderers() {
         BlockEntityRendererFactories.register(ModBlockEntities.SHELF, ShelfBlockEntityRenderer::new);
         BlockEntityRendererFactories.register(ModBlockEntities.CARDBOARD_BOX, CardboardBoxBlockEntityRenderer::new);
+
+        BlockEntityRendererFactories.register(ModBlockEntities.MOD_SIGN_BLOCK_ENTITY, SignBlockEntityRenderer::new);
+        BlockEntityRendererFactories.register(ModBlockEntities.MOD_HANGING_SIGN_BLOCK_ENTITY, HangingSignBlockEntityRenderer::new);
     }
 
     private void registerScreenHandlers() {

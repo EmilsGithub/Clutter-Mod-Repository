@@ -55,7 +55,7 @@ public class PolyporeBlock extends LadderBlock implements Fertilizable {
 
     @Override
     public boolean canReplace(BlockState state, ItemPlacementContext context) {
-        if (!context.shouldCancelInteraction() && context.getStack().isOf(this.asItem()) && state.get(POLYPORE_COUNT) != 2) {
+        if (!context.shouldCancelInteraction() && state.getBlock() == this && context.getStack().isOf(this.asItem()) && state.get(POLYPORE_COUNT) != 2) {
             return true;
         }
         return super.canReplace(state, context);

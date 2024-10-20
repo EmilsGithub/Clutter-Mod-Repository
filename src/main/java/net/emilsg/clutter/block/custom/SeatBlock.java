@@ -50,9 +50,8 @@ public abstract class SeatBlock extends HorizontalFacingBlock implements Waterlo
     @Override
     @Nullable
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        BlockPos pos;
         World worldAccess = ctx.getWorld();
-        boolean bl = worldAccess.getFluidState(pos = ctx.getBlockPos()).getFluid() == Fluids.WATER;
+        boolean bl = worldAccess.getFluidState(ctx.getBlockPos()).getFluid() == Fluids.WATER;
         return this.getDefaultState().with(WATERLOGGED, bl).with(HORIZONTAL_FACING, ctx.getHorizontalPlayerFacing().getOpposite());
     }
 
@@ -104,12 +103,17 @@ public abstract class SeatBlock extends HorizontalFacingBlock implements Waterlo
 
     private ActionResult spawnAndSitOnSeat(World world, PlayerEntity player, BlockPos blockPos, double yOffset, Vec3d comparePos) {
         SeatEntity seatEntity = ModEntities.SEAT.create(world);
-        if (seatEntity != null) {
-            Vec3d pos = new Vec3d(blockPos.getX() + 0.5f, blockPos.getY() + yOffset, blockPos.getZ() + 0.5f);
+        if(seatEntity != null) {
+            Vec3d pos = new Vec3d(
+                    blockPos.getX() + 0.5f,
+                    blockPos.getY() + yOffset,
+                    blockPos.getZ() + 0.5f
+            );
             IS_OCCUPIED.put(comparePos, player.getBlockPos());
             seatEntity.updatePosition(pos.getX(), pos.getY(), pos.getZ());
             world.spawnEntity(seatEntity);
             player.startRiding(seatEntity);
+
             return ActionResult.SUCCESS;
         }
         return ActionResult.PASS;
@@ -117,7 +121,6 @@ public abstract class SeatBlock extends HorizontalFacingBlock implements Waterlo
 
     @Override
     public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-
         int xPos = pos.getX();
         int yPos = pos.getY();
         int zPos = pos.getZ();

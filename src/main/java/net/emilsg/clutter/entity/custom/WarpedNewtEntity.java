@@ -5,6 +5,8 @@ import net.emilsg.clutter.entity.custom.parent.ClutterAnimalEntity;
 import net.emilsg.clutter.util.ModBlockTags;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.item.Item;
@@ -34,5 +36,10 @@ public class WarpedNewtEntity extends AbstractNetherNewtEntity {
     @Override
     public @Nullable PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
         return ModEntities.WARPED_NEWT.create(world);
+    }
+
+    @Override
+    public StatusEffect getOnAttackEffect() {
+        return StatusEffects.POISON;
     }
 }

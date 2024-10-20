@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "wall_bookshelves",
+  "key": {
+    "B": {
+      "item": "minecraft:book"
+    },
+    "S": {
+      "item": "minecraft:mangrove_slab"
+    }
+  },
+  "pattern": [
+    "BBB",
+    "SSS"
+  ],
+  "result": {
+    "item": "clutter:mangrove_wall_bookshelf"
+  },
+  "show_notification": true
+}

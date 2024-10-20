@@ -108,6 +108,11 @@ public class MossbloomEntity extends ClutterAnimalEntity{
                 world.getBlockState(pos.down()).isOf(Blocks.CLAY);
     }
 
+    @Override
+    public int getLimitPerChunk() {
+        return 2;
+    }
+
     protected static boolean isLightLevelValidForNaturalSpawn(BlockRenderView world, BlockPos pos) {
         return true;
     }

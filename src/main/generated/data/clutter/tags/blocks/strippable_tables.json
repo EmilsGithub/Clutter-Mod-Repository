@@ -1,15 +1,29 @@
 {
   "replace": false,
   "values": [
-    "clutter:acacia_table",
-    "clutter:birch_table",
-    "clutter:crimson_table",
-    "clutter:dark_oak_table",
-    "clutter:jungle_table",
-    "clutter:mangrove_table",
+    "clutter:redwood_table",
+    "clutter:redwood_table",
     "clutter:oak_table",
+    "clutter:oak_table",
+    "clutter:birch_table",
+    "clutter:birch_table",
+    "clutter:jungle_table",
+    "clutter:jungle_table",
+    "clutter:acacia_table",
+    "clutter:acacia_table",
     "clutter:spruce_table",
+    "clutter:spruce_table",
+    "clutter:dark_oak_table",
+    "clutter:dark_oak_table",
+    "clutter:mangrove_table",
+    "clutter:mangrove_table",
+    "clutter:crimson_table",
+    "clutter:crimson_table",
     "clutter:warped_table",
-    "clutter:cherry_table"
+    "clutter:warped_table",
+    "clutter:cherry_table",
+    "clutter:cherry_table",
+    "clutter:bamboo_table",
+    "clutter:bamboo_table"
   ]
 }

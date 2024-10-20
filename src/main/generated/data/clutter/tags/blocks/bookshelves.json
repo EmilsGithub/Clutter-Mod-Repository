@@ -1,16 +1,17 @@
 {
   "replace": false,
   "values": [
-    "clutter:acacia_wall_bookshelf",
-    "clutter:birch_wall_bookshelf",
-    "clutter:crimson_wall_bookshelf",
-    "clutter:dark_oak_wall_bookshelf",
-    "clutter:jungle_wall_bookshelf",
-    "clutter:mangrove_wall_bookshelf",
+    "clutter:redwood_wall_bookshelf",
     "clutter:oak_wall_bookshelf",
+    "clutter:birch_wall_bookshelf",
+    "clutter:jungle_wall_bookshelf",
+    "clutter:acacia_wall_bookshelf",
     "clutter:spruce_wall_bookshelf",
+    "clutter:dark_oak_wall_bookshelf",
+    "clutter:mangrove_wall_bookshelf",
+    "clutter:crimson_wall_bookshelf",
     "clutter:warped_wall_bookshelf",
-    "clutter:bamboo_wall_bookshelf",
-    "clutter:cherry_wall_bookshelf"
+    "clutter:cherry_wall_bookshelf",
+    "clutter:bamboo_wall_bookshelf"
   ]
 }

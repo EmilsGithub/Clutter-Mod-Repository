@@ -1,0 +1,7 @@
+{
+  "parent": "clutter:block/parent/short_bench_parent",
+  "textures": {
+    "log": "clutter:block/redwood_log",
+    "planks": "clutter:block/redwood_planks"
+  }
+}

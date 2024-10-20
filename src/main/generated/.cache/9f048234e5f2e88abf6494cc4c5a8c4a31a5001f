@@ -1,7 +1,10 @@
-// 1.20.1	2024-09-03T20:00:39.2049421	Clutter/Tags for minecraft:worldgen/biome
-e1c68db131bb6e95e587abee48f5d52971cf226a data\clutter\tags\worldgen\biome\spawns_ember_tortoises.json
+// 1.20.1	2024-10-20T21:34:56.8383986	Clutter/Tags for minecraft:worldgen/biome
+85c39d767e49df328354e9e98ca0ea1624bd6ede data\clutter\tags\worldgen\biome\spawns_seahorses.json
+b3235b8457ee029f4b83b07b6c8e8cf9c6578c23 data\clutter\tags\worldgen\biome\spawns_manta_rays.json
 0742a65a3fec9bc40a1473db359be9cb844844c7 data\clutter\tags\worldgen\biome\spawns_echofins.json
-2ebd83139988003e7e09aa944a90ac44d84f31a4 data\clutter\tags\worldgen\biome\spawns_warped_newts.json
 e92ee3348f9ddee60357b75b089aafd71348efeb data\minecraft\tags\worldgen\biome\is_overworld.json
-f4dbe208d601489c428cfb2ad9d48ca33a6d3ca6 data\clutter\tags\worldgen\biome\spawns_nether_butterflies.json
+e1c68db131bb6e95e587abee48f5d52971cf226a data\clutter\tags\worldgen\biome\spawns_ember_tortoises.json
 05d858a614165375893da65d55ec5c3bfb04df2e data\clutter\tags\worldgen\biome\spawns_crimson_newts.json
+2ebd83139988003e7e09aa944a90ac44d84f31a4 data\clutter\tags\worldgen\biome\spawns_warped_newts.json
+b3235b8457ee029f4b83b07b6c8e8cf9c6578c23 data\clutter\tags\worldgen\biome\spawns_jellyfishes.json
+f4dbe208d601489c428cfb2ad9d48ca33a6d3ca6 data\clutter\tags\worldgen\biome\spawns_nether_butterflies.json

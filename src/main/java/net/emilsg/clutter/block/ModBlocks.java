@@ -11,11 +11,16 @@ import net.emilsg.clutter.block.custom.cutout.CTallFlowerBlock;
 import net.emilsg.clutter.block.custom.oxidizable.*;
 import net.emilsg.clutter.block.custom.plants.*;
 import net.emilsg.clutter.block.custom.plushies.*;
+import net.emilsg.clutter.block.custom.sign.ModHangingSignBlock;
+import net.emilsg.clutter.block.custom.sign.ModStandingSignBlock;
+import net.emilsg.clutter.block.custom.sign.ModWallHangingSignBlock;
+import net.emilsg.clutter.block.custom.sign.ModWallSignBlock;
 import net.emilsg.clutter.block.custom.stacking.LabBottleBlock;
 import net.emilsg.clutter.block.custom.stacking.TallBottleBlock;
 import net.emilsg.clutter.entity.ModEntities;
 import net.emilsg.clutter.sound.ModSounds;
 import net.emilsg.clutter.util.ModBlockTags;
+import net.emilsg.clutter.util.ModWoodTypes;
 import net.emilsg.clutter.world.gen.tree.KiwiTreeSaplingGenerator;
 import net.emilsg.clutter.world.gen.tree.RedwoodTreeSaplingGenerator;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -39,7 +44,12 @@ import java.util.function.ToIntFunction;
 
 public class ModBlocks {
 
-    public static final Block FISH_TANK = registerBlock("fish_tank", new FishTankBlock(FabricBlockSettings.copy(Blocks.GLASS)));
+    //TODO Big Anchor
+    public static final Block ANCHOR_BLOCK = registerBlock("anchor", new AnchorBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK).nonOpaque()));
+
+    public static final Block QUARTZ_CRYSTAL = registerBlock("quartz_crystal", new ClusterBlock(7, 3, FabricBlockSettings.create().mapColor(MapColor.WHITE).solid().nonOpaque().sounds(BlockSoundGroup.NETHERRACK).strength(1.5F).pistonBehavior(PistonBehavior.DESTROY)));
+
+    public static final Block FISH_TANK = registerBlockWithoutItem("fish_tank", new FishTankBlock(FabricBlockSettings.copy(Blocks.GLASS)));
 
     public static final Block GIANT_FERN = registerBlock("giant_fern", new TallPlantBlock(FabricBlockSettings.copy(Blocks.LARGE_FERN)));
 
@@ -137,6 +147,11 @@ public class ModBlocks {
 
     public static final Block REDWOOD_DOOR = registerBlock("redwood_door", new DoorBlock(FabricBlockSettings.copy(Blocks.SPRUCE_DOOR), BlockSetType.SPRUCE));
     public static final Block REDWOOD_TRAPDOOR = registerBlock("redwood_trapdoor", new TrapdoorBlock(FabricBlockSettings.copy(Blocks.SPRUCE_TRAPDOOR), BlockSetType.SPRUCE));
+
+    public static final Block REDWOOD_SIGN = registerBlockWithoutItem("redwood_sign", new ModStandingSignBlock(FabricBlockSettings.copyOf(Blocks.CHERRY_SIGN), ModWoodTypes.REDWOOD));
+    public static final Block REDWOOD_WALL_SIGN = registerBlockWithoutItem("redwood_wall_sign", new ModWallSignBlock(FabricBlockSettings.copyOf(Blocks.CHERRY_WALL_SIGN), ModWoodTypes.REDWOOD));
+    public static final Block REDWOOD_HANGING_SIGN = registerBlockWithoutItem("redwood_hanging_sign", new ModHangingSignBlock(FabricBlockSettings.copyOf(Blocks.CHERRY_HANGING_SIGN), ModWoodTypes.REDWOOD));
+    public static final Block REDWOOD_HANGING_WALL_SIGN = registerBlockWithoutItem("redwood_hanging_wall_sign", new ModWallHangingSignBlock(FabricBlockSettings.copyOf(Blocks.CHERRY_WALL_HANGING_SIGN), ModWoodTypes.REDWOOD));
 
     public static final Block DEEPSLATE_SILVER_ORE = registerBlock("deepslate_silver_ore", new ExperienceDroppingBlock(FabricBlockSettings.copy(Blocks.DEEPSLATE).strength(4.5f, 3.0f).requiresTool().mapColor(MapColor.DEEPSLATE_GRAY), UniformIntProvider.create(4, 8)));
     public static final Block SILVER_DOOR = registerBlock("silver_door", new DoorBlock(FabricBlockSettings.copy(Blocks.IRON_DOOR).requiresTool().strength(3.0f).sounds(BlockSoundGroup.METAL).nonOpaque(), BlockSetType.IRON));
@@ -399,6 +414,20 @@ public class ModBlocks {
     public static final Block STRIPPED_WARPED_CHAIR = registerBlock("stripped_warped_chair", new WoodenChairBlock(FabricBlockSettings.copy(Blocks.WARPED_PLANKS)));
     public static final Block STRIPPED_CHERRY_CHAIR = registerBlock("stripped_cherry_chair", new WoodenChairBlock(FabricBlockSettings.copy(Blocks.CHERRY_PLANKS)));
     public static final Block STRIPPED_REDWOOD_CHAIR = registerBlock("stripped_redwood_chair", new WoodenChairBlock(FabricBlockSettings.copy(Blocks.SPRUCE_PLANKS)));
+
+    public static final Block OAK_SHORT_BENCH = registerBlock("oak_short_bench", new ShortBenchBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS)));
+    public static final Block SPRUCE_SHORT_BENCH = registerBlock("spruce_short_bench", new ShortBenchBlock(FabricBlockSettings.copy(Blocks.SPRUCE_PLANKS)));
+    public static final Block BIRCH_SHORT_BENCH = registerBlock("birch_short_bench", new ShortBenchBlock(FabricBlockSettings.copy(Blocks.BIRCH_PLANKS)));
+    public static final Block JUNGLE_SHORT_BENCH = registerBlock("jungle_short_bench", new ShortBenchBlock(FabricBlockSettings.copy(Blocks.JUNGLE_PLANKS)));
+    public static final Block ACACIA_SHORT_BENCH = registerBlock("acacia_short_bench", new ShortBenchBlock(FabricBlockSettings.copy(Blocks.ACACIA_PLANKS)));
+    public static final Block DARK_OAK_SHORT_BENCH = registerBlock("dark_oak_short_bench", new ShortBenchBlock(FabricBlockSettings.copy(Blocks.DARK_OAK_PLANKS)));
+    public static final Block MANGROVE_SHORT_BENCH = registerBlock("mangrove_short_bench", new ShortBenchBlock(FabricBlockSettings.copy(Blocks.MANGROVE_PLANKS)));
+    public static final Block CRIMSON_SHORT_BENCH = registerBlock("crimson_short_bench", new ShortBenchBlock(FabricBlockSettings.copy(Blocks.CRIMSON_PLANKS)));
+    public static final Block WARPED_SHORT_BENCH = registerBlock("warped_short_bench", new ShortBenchBlock(FabricBlockSettings.copy(Blocks.WARPED_PLANKS)));
+    public static final Block BAMBOO_SHORT_BENCH = registerBlock("bamboo_short_bench", new ShortBenchBlock(FabricBlockSettings.copy(Blocks.BAMBOO_PLANKS)));
+    public static final Block CHERRY_SHORT_BENCH = registerBlock("cherry_short_bench", new ShortBenchBlock(FabricBlockSettings.copy(Blocks.CHERRY_PLANKS)));
+    public static final Block REDWOOD_SHORT_BENCH = registerBlock("redwood_short_bench", new ShortBenchBlock(FabricBlockSettings.copy(Blocks.SPRUCE_PLANKS)));
+
     public static final Block OAK_WALL_CUPBOARD = registerBlock("oak_wall_cupboard", new WallCupboardBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).nonOpaque()));
     public static final Block SPRUCE_WALL_CUPBOARD = registerBlock("spruce_wall_cupboard", new WallCupboardBlock(FabricBlockSettings.copy(Blocks.SPRUCE_PLANKS).nonOpaque()));
     public static final Block BIRCH_WALL_CUPBOARD = registerBlock("birch_wall_cupboard", new WallCupboardBlock(FabricBlockSettings.copy(Blocks.BIRCH_PLANKS).nonOpaque()));
@@ -582,10 +611,10 @@ public class ModBlocks {
     public static final Block SULPHUR_BLOCK = registerBlock("sulphur_block", new Block(FabricBlockSettings.create().instrument(Instrument.BASEDRUM).strength(1f, 1.5f).mapColor(MapColor.TERRACOTTA_YELLOW).sounds(BlockSoundGroup.SAND)));
     public static final Block ONYX_ORE = registerBlock("onyx_ore", new ExperienceDroppingBlock(FabricBlockSettings.create().instrument(Instrument.BASEDRUM).strength(1f, 1.5f).mapColor(MapColor.TERRACOTTA_YELLOW).sounds(BlockSoundGroup.SAND), UniformIntProvider.create(3, 7)));
 
-    public static final Block SMALL_ONYX_BUD = registerBlock("small_onyx_bud", new OnyxClusterBlock(3, 4, FabricBlockSettings.create().mapColor(MapColor.BLACK).solid().nonOpaque().ticksRandomly().sounds(BlockSoundGroup.SMALL_AMETHYST_BUD).strength(1.5F).luminance((state) -> 1).pistonBehavior(PistonBehavior.DESTROY)));
-    public static final Block MEDIUM_ONYX_BUD = registerBlock("medium_onyx_bud", new OnyxClusterBlock(4, 3, FabricBlockSettings.copy(SMALL_ONYX_BUD).sounds(BlockSoundGroup.LARGE_AMETHYST_BUD).solid().luminance((state) -> 2).pistonBehavior(PistonBehavior.DESTROY)));
-    public static final Block LARGE_ONYX_BUD = registerBlock("large_onyx_bud", new OnyxClusterBlock(5, 3, FabricBlockSettings.copy(SMALL_ONYX_BUD).sounds(BlockSoundGroup.MEDIUM_AMETHYST_BUD).solid().luminance((state) -> 4).pistonBehavior(PistonBehavior.DESTROY)));
-    public static final Block ONYX_CLUSTER = registerBlock("onyx_cluster", new OnyxClusterBlock(7, 3, FabricBlockSettings.copy(SMALL_ONYX_BUD).sounds(BlockSoundGroup.AMETHYST_CLUSTER).strength(1.5F).luminance((state) -> 5).pistonBehavior(PistonBehavior.DESTROY)));
+    public static final Block SMALL_ONYX_BUD = registerBlock("small_onyx_bud", new ClusterBlock(3, 4, FabricBlockSettings.create().mapColor(MapColor.BLACK).solid().nonOpaque().ticksRandomly().sounds(BlockSoundGroup.SMALL_AMETHYST_BUD).strength(1.5F).luminance((state) -> 1).pistonBehavior(PistonBehavior.DESTROY)));
+    public static final Block MEDIUM_ONYX_BUD = registerBlock("medium_onyx_bud", new ClusterBlock(4, 3, FabricBlockSettings.copy(SMALL_ONYX_BUD).sounds(BlockSoundGroup.LARGE_AMETHYST_BUD).solid().luminance((state) -> 2).pistonBehavior(PistonBehavior.DESTROY)));
+    public static final Block LARGE_ONYX_BUD = registerBlock("large_onyx_bud", new ClusterBlock(5, 3, FabricBlockSettings.copy(SMALL_ONYX_BUD).sounds(BlockSoundGroup.MEDIUM_AMETHYST_BUD).solid().luminance((state) -> 4).pistonBehavior(PistonBehavior.DESTROY)));
+    public static final Block ONYX_CLUSTER = registerBlock("onyx_cluster", new ClusterBlock(7, 3, FabricBlockSettings.copy(SMALL_ONYX_BUD).sounds(BlockSoundGroup.AMETHYST_CLUSTER).strength(1.5F).luminance((state) -> 5).pistonBehavior(PistonBehavior.DESTROY)));
     public static final Block BUDDING_ONYX = registerBlock("budding_onyx", new BuddingOnyxBlock(FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F).ticksRandomly()));
     public static final Block ONYX_BLOCK = registerBlock("onyx_block", new Block(FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)));
     public static final Block ONYX_SLAB = registerBlock("onyx_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.OBSIDIAN).mapColor(MapColor.BLACK).strength(4.0F, 1200.0F)));
@@ -1377,6 +1406,7 @@ public class ModBlocks {
     public static final Block PURPLE_IRON_CANDELABRA = registerBlock("purple_iron_candelabra", new CandelabraBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK).luminance(createLightLevelFromLitBlockState(12))));
     public static final Block MAGENTA_IRON_CANDELABRA = registerBlock("magenta_iron_candelabra", new CandelabraBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK).luminance(createLightLevelFromLitBlockState(12))));
     public static final Block PINK_IRON_CANDELABRA = registerBlock("pink_iron_candelabra", new CandelabraBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK).luminance(createLightLevelFromLitBlockState(12))));
+
 
     private static Block registerBlock(String name, Block block) {
         registerBlockItem(name, block);

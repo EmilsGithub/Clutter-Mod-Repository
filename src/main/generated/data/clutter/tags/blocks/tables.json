@@ -1,17 +1,17 @@
 {
   "replace": false,
   "values": [
-    "clutter:stripped_acacia_table",
-    "clutter:stripped_birch_table",
-    "clutter:stripped_crimson_table",
-    "clutter:stripped_dark_oak_table",
-    "clutter:stripped_jungle_table",
-    "clutter:stripped_mangrove_table",
+    "clutter:stripped_redwood_table",
     "clutter:stripped_oak_table",
+    "clutter:stripped_birch_table",
+    "clutter:stripped_jungle_table",
+    "clutter:stripped_acacia_table",
     "clutter:stripped_spruce_table",
+    "clutter:stripped_dark_oak_table",
+    "clutter:stripped_mangrove_table",
+    "clutter:stripped_crimson_table",
     "clutter:stripped_warped_table",
     "clutter:stripped_cherry_table",
-    "clutter:bamboo_table",
     "#clutter:strippable_tables"
   ]
 }

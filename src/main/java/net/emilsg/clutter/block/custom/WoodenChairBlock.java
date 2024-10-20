@@ -22,7 +22,7 @@ import net.minecraft.world.World;
 
 public class WoodenChairBlock extends SeatBlock {
 
-    protected static final VoxelShape NORTH_SHAPE = VoxelShapes.union(
+    public final VoxelShape NORTH_SHAPE = VoxelShapes.union(
             Block.createCuboidShape(3, 8, 11, 13, 16, 12),
             Block.createCuboidShape(4, 6, 12, 6, 16, 13),
             Block.createCuboidShape(10, 6, 12, 12, 16, 13),
@@ -32,7 +32,8 @@ public class WoodenChairBlock extends SeatBlock {
             Block.createCuboidShape(3, 0, 3, 5, 6, 5),
             Block.createCuboidShape(11, 0, 3, 13, 6, 5)
     );
-    protected static final VoxelShape EAST_SHAPE = VoxelShapes.union(
+
+    public final VoxelShape EAST_SHAPE = VoxelShapes.union(
             Block.createCuboidShape(4, 8, 3, 5, 16, 13),
             Block.createCuboidShape(3, 6, 4, 4, 16, 6),
             Block.createCuboidShape(3, 6, 10, 4, 16, 12),
@@ -42,7 +43,8 @@ public class WoodenChairBlock extends SeatBlock {
             Block.createCuboidShape(11, 0, 3, 13, 6, 5),
             Block.createCuboidShape(11, 0, 11, 13, 6, 13)
     );
-    protected static final VoxelShape SOUTH_SHAPE = VoxelShapes.union(
+
+    public final VoxelShape SOUTH_SHAPE = VoxelShapes.union(
             Block.createCuboidShape(3, 8, 4, 13, 16, 5),
             Block.createCuboidShape(10, 6, 3, 12, 16, 4),
             Block.createCuboidShape(4, 6, 3, 6, 16, 4),
@@ -52,7 +54,8 @@ public class WoodenChairBlock extends SeatBlock {
             Block.createCuboidShape(11, 0, 11, 13, 6, 13),
             Block.createCuboidShape(3, 0, 11, 5, 6, 13)
     );
-    protected static final VoxelShape WEST_SHAPE = VoxelShapes.union(
+
+    public final VoxelShape WEST_SHAPE = VoxelShapes.union(
             Block.createCuboidShape(11, 8, 3, 12, 16, 13),
             Block.createCuboidShape(12, 6, 10, 13, 16, 12),
             Block.createCuboidShape(12, 6, 4, 13, 16, 6),

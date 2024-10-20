@@ -1,5 +1,6 @@
 package net.emilsg.clutter.data;
 
+import net.emilsg.clutter.block.ClutterWoodType;
 import net.emilsg.clutter.block.ModBlocks;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
@@ -7,11 +8,13 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.data.server.loottable.BlockLootTableGenerator;
+import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.entry.AlternativeEntry;
 import net.minecraft.loot.entry.ItemEntry;
+import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.state.property.Properties;
 
@@ -38,7 +41,8 @@ public class LootTableDataGen extends FabricBlockLootTableProvider {
         this.addCoralDrops(ModBlocks.ANCHOR_CORAL, ModBlocks.DEAD_ANCHOR_CORAL, ModBlocks.ANCHOR_CORAL_BLOCK, ModBlocks.DEAD_ANCHOR_CORAL_BLOCK, ModBlocks.ANCHOR_CORAL_FAN, ModBlocks.DEAD_ANCHOR_CORAL_FAN, ModBlocks.ANCHOR_CORAL_WALL_FAN, ModBlocks.DEAD_ANCHOR_CORAL_WALL_FAN);
         this.addDrop(ModBlocks.NAUTILUS_SHELL_BLOCK, Items.NAUTILUS_SHELL);
 
-        this.silkTouchDrops(ModBlocks.OVERGROWN_PACKED_MUD, Blocks.COBBLESTONE);
+        this.addDrop(ModBlocks.OVERGROWN_PACKED_MUD, this.silkTouchDrops(ModBlocks.OVERGROWN_PACKED_MUD, Blocks.PACKED_MUD));
+        this.addDrop(ModBlocks.GIANT_FERN, (block) -> this.tallGrassDrops(block, Blocks.LARGE_FERN));
 
         this.addPottedPlantGroupDrops(
                 ModBlocks.POTTED_SMALL_BLUE_LUPINE,
@@ -63,7 +67,6 @@ public class LootTableDataGen extends FabricBlockLootTableProvider {
                 ModBlocks.YELLOW_LUPINE,
                 ModBlocks.WHITE_LUPINE,
                 ModBlocks.RED_LUPINE,
-                ModBlocks.GIANT_FERN,
                 ModBlocks.REDWOOD_DOOR
         );
 
@@ -114,14 +117,75 @@ public class LootTableDataGen extends FabricBlockLootTableProvider {
                 ModBlocks.SMALL_PURPLE_LUPINE,
                 ModBlocks.SMALL_YELLOW_LUPINE,
                 ModBlocks.SMALL_RED_LUPINE,
-                ModBlocks.SMALL_WHITE_LUPINE
+                ModBlocks.SMALL_WHITE_LUPINE,
+                ModBlocks.ANCHOR_BLOCK
         );
 
-        this.addLeaves();
+        this.addWoodDrops(ClutterWoodType.REDWOOD);
+        this.addWoodDrops(ClutterWoodType.OAK);
+        this.addWoodDrops(ClutterWoodType.BIRCH);
+        this.addWoodDrops(ClutterWoodType.JUNGLE);
+        this.addWoodDrops(ClutterWoodType.ACACIA);
+        this.addWoodDrops(ClutterWoodType.SPRUCE);
+        this.addWoodDrops(ClutterWoodType.DARK_OAK);
+        this.addWoodDrops(ClutterWoodType.MANGROVE);
+        this.addWoodDrops(ClutterWoodType.CRIMSON);
+        this.addWoodDrops(ClutterWoodType.WARPED);
+        this.addWoodDrops(ClutterWoodType.CHERRY);
+        this.addWoodDrops(ClutterWoodType.BAMBOO);
+
+        this.addDrop(ModBlocks.QUARTZ_CRYSTAL, (block) -> {
+            return dropsWithSilkTouch(block, (ItemEntry.builder(Items.QUARTZ).apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(2)))));
+        });
     }
 
-    private void addLeaves() {
-        this.addDrop(ModBlocks.REDWOOD_LEAVES, (block) -> this.leavesDrops(block, ModBlocks.REDWOOD_SAPLING, SAPLING_DROP_CHANCE));
+    public void silkTouchWithCount(Block dropWithSilkTouch, Item drop, int count) {
+        dropsWithSilkTouch(dropWithSilkTouch, this.applyExplosionDecay(dropWithSilkTouch, ItemEntry.builder(drop)
+                .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(count)))));
+    }
+
+
+
+    private void addWoodDrops(ClutterWoodType woodType) {
+        if(woodType.sapling() != null) this.addDrop(woodType.sapling());
+        if(woodType.leaves() != null) this.addLeaves(woodType.leaves(), woodType.sapling());
+        if(woodType.log() != null) this.addDrop(woodType.log());
+        if(woodType.wood() != null) this.addDrop(woodType.wood());
+        if(woodType.strippedLog() != null) this.addDrop(woodType.strippedLog());
+        if(woodType.strippedWood() != null) this.addDrop(woodType.strippedWood());
+        if(woodType.planks() != null) this.addDrop(woodType.planks());
+        if(woodType.stairs() != null) this.addDrop(woodType.stairs());
+        if(woodType.slab() != null) this.addDrop(woodType.slab(), slabDrops(woodType.slab()));
+        if(woodType.fence() != null) this.addDrop(woodType.fence());
+        if(woodType.fenceGate() != null) this.addDrop(woodType.fenceGate());
+        if(woodType.button() != null) this.addDrop(woodType.button());
+        if(woodType.pressurePlate() != null) this.addDrop(woodType.pressurePlate());
+        if(woodType.mosaic() != null) this.addDrop(woodType.mosaic());
+        if(woodType.mosaicStairs() != null) this.addDrop(woodType.mosaicStairs());
+        if(woodType.mosaicSlab() != null) this.addDrop(woodType.mosaicSlab(), slabDrops(woodType.mosaicSlab()));
+        if(woodType.door() != null) this.addDrop(woodType.door(), doorDrops(woodType.door()));
+        if(woodType.trapdoor() != null) this.addDrop(woodType.trapdoor());
+        if(woodType.wallBookshelf() != null) this.addDrop(woodType.wallBookshelf());
+        if(woodType.shelf() != null) this.addDrop(woodType.shelf());
+        if(woodType.table() != null) this.addDrop(woodType.table());
+        if(woodType.strippedTable() != null) this.addDrop(woodType.strippedTable());
+        if(woodType.chair() != null) this.addDrop(woodType.chair());
+        if(woodType.strippedChair() != null) this.addDrop(woodType.strippedChair());
+        if(woodType.shortBench() != null) this.addDrop(woodType.shortBench());
+        if(woodType.wallCupboard() != null) this.addDrop(woodType.wallCupboard());
+        if(woodType.windowSill() != null) this.addDrop(woodType.windowSill());
+        if(woodType.cupboard() != null) this.addDrop(woodType.cupboard());
+        //if(woodType.trellis() != null) this.addDrop(woodType.trellis());
+        if(woodType.bench() != null) this.addDrop(woodType.bench());
+        if(woodType.strippedBench() != null) this.addDrop(woodType.strippedBench());
+        if(woodType.signBlock() != null) this.addDrop(woodType.signBlock(), woodType.signItem());
+        if(woodType.wallSignBlock() != null) this.addDrop(woodType.wallSignBlock(), woodType.signItem());
+        if(woodType.hangingSignBlock() != null) this.addDrop(woodType.hangingSignBlock(), woodType.hangingSignItem());
+        if(woodType.hangingWallSignBlock() != null) this.addDrop(woodType.hangingWallSignBlock(), woodType.hangingSignItem());
+    }
+
+    private void addLeaves(Block leaves, Block sapling) {
+        this.addDrop(leaves, (block) -> this.leavesDrops(block, sapling, SAPLING_DROP_CHANCE));
     }
 
     private void addDoubleBlockGroupDrops(Block... blocks) {

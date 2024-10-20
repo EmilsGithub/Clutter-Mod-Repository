@@ -21,6 +21,8 @@ public class ModBlockEntities {
     public static BlockEntityType<MailBoxInventoryBlockEntity> MAILBOX;
     public static BlockEntityType<CardboardBoxInventoryBlockEntity> CARDBOARD_BOX;
     public static BlockEntityType<PresentInventoryBlockEntity> PRESENT;
+    public static BlockEntityType<ModSignBlockEntity> MOD_SIGN_BLOCK_ENTITY;
+    public static BlockEntityType<ModHangingSignBlockEntity> MOD_HANGING_SIGN_BLOCK_ENTITY;
 
     public static void registerBlockEntities() {
         CHIMNEY = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "chimney"),
@@ -122,5 +124,14 @@ public class ModBlockEntities {
                 FabricBlockEntityTypeBuilder.create(PresentInventoryBlockEntity::new,
                         ModBlocks.RED_PRESENT).build());
 
+        MOD_SIGN_BLOCK_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE,
+                new Identifier(Clutter.MOD_ID, "sign_entity"),
+                FabricBlockEntityTypeBuilder.create(ModSignBlockEntity::new,
+                        ModBlocks.REDWOOD_SIGN, ModBlocks.REDWOOD_WALL_SIGN).build());
+
+        MOD_HANGING_SIGN_BLOCK_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE,
+                new Identifier(Clutter.MOD_ID, "hanging_sign_entity"),
+                FabricBlockEntityTypeBuilder.create(ModHangingSignBlockEntity::new,
+                        ModBlocks.REDWOOD_HANGING_SIGN, ModBlocks.REDWOOD_HANGING_WALL_SIGN).build(null));
     }
 }

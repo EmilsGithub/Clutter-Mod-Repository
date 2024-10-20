@@ -95,8 +95,18 @@ public class ModEntitySpawning {
                     ModEntities.CAPYBARA, 5, 3, 5);
         }
         if (ModConfigManager.get(Configs.spawnJellyfishes, true)) {
-            BiomeModifications.addSpawn(BiomeSelectors.includeByKey(DEEP_LUKEWARM_OCEAN, LUKEWARM_OCEAN, WARM_OCEAN), SpawnGroup.WATER_CREATURE,
+            BiomeModifications.addSpawn(BiomeSelectors.tag(ModBiomeTags.SPAWNS_JELLYFISHES), SpawnGroup.WATER_AMBIENT,
                     ModEntities.JELLYFISH, 6, 5, 9);
+        }
+
+        if (ModConfigManager.get(Configs.spawnSeahorses, true)) {
+            BiomeModifications.addSpawn(BiomeSelectors.tag(ModBiomeTags.SPAWNS_SEAHORSES), SpawnGroup.WATER_AMBIENT,
+                    ModEntities.SEAHORSE, 20, 4, 7);
+        }
+
+        if (ModConfigManager.get(Configs.spawnMantaRays, true)) {
+            BiomeModifications.addSpawn(BiomeSelectors.tag(ModBiomeTags.SPAWNS_MANTA_RAYS), SpawnGroup.WATER_CREATURE,
+                    ModEntities.MANTA_RAY, 20, 1, 3);
         }
 
         SpawnRestriction.register(ModEntities.MOSSBLOOM, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MossbloomEntity::isValidNaturalSpawn);
@@ -106,6 +116,8 @@ public class ModEntitySpawning {
         SpawnRestriction.register(ModEntities.BEAVER, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, BeaverEntity::isValidNaturalSpawn);
         SpawnRestriction.register(ModEntities.CAPYBARA, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, CapybaraEntity::isValidNaturalSpawn);
         SpawnRestriction.register(ModEntities.JELLYFISH, SpawnRestriction.Location.IN_WATER, Heightmap.Type.OCEAN_FLOOR, JellyfishEntity::isValidNaturalSpawn);
+        SpawnRestriction.register(ModEntities.SEAHORSE, SpawnRestriction.Location.IN_WATER, Heightmap.Type.OCEAN_FLOOR, SeahorseEntity::isValidNaturalSpawn);
+        SpawnRestriction.register(ModEntities.MANTA_RAY, SpawnRestriction.Location.IN_WATER, Heightmap.Type.OCEAN_FLOOR, MantaRayEntity::isValidNaturalSpawn);
 
         SpawnRestriction.register(ModEntities.BUTTERFLY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, ButterflyEntity::isValidSpawn);
         SpawnRestriction.register(ModEntities.CRIMSON_NEWT, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, CrimsonNewtEntity::isValidNaturalSpawn);

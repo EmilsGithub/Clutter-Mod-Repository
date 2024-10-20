@@ -1,0 +1,9 @@
+{
+	"parent": "clutter:block/trellises/trellis_parent",
+	"textures": {
+		"0": "clutter:block/redwood_log",
+		"1": "clutter:block/cave_vines2",
+		"2": "clutter:block/cave_vines_glow_berries2",
+		"particle": "clutter:block/redwood_log"
+	}
+}

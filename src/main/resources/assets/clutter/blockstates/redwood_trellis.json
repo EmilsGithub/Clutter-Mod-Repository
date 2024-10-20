@@ -1,0 +1,982 @@
+{
+  "variants": {
+    "waterlogged=false,under_block=false,facing=north,plant=none": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "waterlogged=false,under_block=false,facing=south,plant=none": {
+      "model": "clutter:block/trellises/redwood/empty",
+      "y": 180
+    },
+    "waterlogged=false,under_block=false,facing=east,plant=none": {
+      "model": "clutter:block/trellises/redwood/empty",
+      "y": 90
+    },
+    "waterlogged=false,under_block=false,facing=west,plant=none": {
+      "model": "clutter:block/trellises/redwood/empty",
+      "y": 270
+    },
+    "waterlogged=false,under_block=false,facing=north,plant=vines": [
+      {
+        "model": "clutter:block/trellises/redwood/vines"
+      },
+      {
+        "model": "clutter:block/trellises/redwood/vines2"
+      }
+    ],
+    "waterlogged=false,under_block=false,facing=south,plant=vines": [
+      {
+        "model": "clutter:block/trellises/redwood/vines",
+        "y": 180
+      },
+      {
+        "model": "clutter:block/trellises/redwood/vines2",
+        "y": 180
+      }
+    ],
+    "waterlogged=false,under_block=false,facing=east,plant=vines": [
+      {
+        "model": "clutter:block/trellises/redwood/vines",
+        "y": 90
+      },
+      {
+        "model": "clutter:block/trellises/redwood/vines2",
+        "y": 90
+      }
+    ],
+    "waterlogged=false,under_block=false,facing=west,plant=vines": [
+      {
+        "model": "clutter:block/trellises/redwood/vines",
+        "y": 270
+      },
+      {
+        "model": "clutter:block/trellises/redwood/vines2",
+        "y": 270
+      }
+    ],
+    "waterlogged=false,under_block=false,facing=north,plant=rose_bush": [
+      {
+        "model": "clutter:block/trellises/redwood/rose_bush"
+      },
+      {
+        "model": "clutter:block/trellises/redwood/rose_bush2"
+      },
+      {
+        "model": "clutter:block/trellises/redwood/rose_bush3"
+      }
+    ],
+    "waterlogged=false,under_block=false,facing=south,plant=rose_bush": [
+      {
+        "model": "clutter:block/trellises/redwood/rose_bush",
+        "y": 180
+      },
+      {
+        "model": "clutter:block/trellises/redwood/rose_bush2",
+        "y": 180
+      }
+    ],
+    "waterlogged=false,under_block=false,facing=east,plant=rose_bush": [
+      {
+        "model": "clutter:block/trellises/redwood/rose_bush",
+        "y": 90
+      },
+      {
+        "model": "clutter:block/trellises/redwood/rose_bush2",
+        "y": 90
+      }
+    ],
+    "waterlogged=false,under_block=false,facing=west,plant=rose_bush": [
+      {
+        "model": "clutter:block/trellises/redwood/rose_bush",
+        "y": 270
+      },
+      {
+        "model": "clutter:block/trellises/redwood/rose_bush2",
+        "y": 270
+      }
+    ],
+    "waterlogged=false,under_block=false,facing=north,plant=peony": [
+      {
+        "model": "clutter:block/trellises/redwood/peony"
+      },
+      {
+        "model": "clutter:block/trellises/redwood/peony2"
+      },
+      {
+        "model": "clutter:block/trellises/redwood/peony3"
+      }
+    ],
+    "waterlogged=false,under_block=false,facing=south,plant=peony": [
+      {
+        "model": "clutter:block/trellises/redwood/peony",
+        "y": 180
+      },
+      {
+        "model": "clutter:block/trellises/redwood/peony2",
+        "y": 180
+      },
+      {
+        "model": "clutter:block/trellises/redwood/peony3",
+        "y": 180
+      }
+    ],
+    "waterlogged=false,under_block=false,facing=east,plant=peony": [
+      {
+        "model": "clutter:block/trellises/redwood/peony",
+        "y": 90
+      },
+      {
+        "model": "clutter:block/trellises/redwood/peony2",
+        "y": 90
+      },
+      {
+        "model": "clutter:block/trellises/redwood/peony3",
+        "y": 90
+      }
+    ],
+    "waterlogged=false,under_block=false,facing=west,plant=peony": [
+      {
+        "model": "clutter:block/trellises/redwood/peony",
+        "y": 270
+      },
+      {
+        "model": "clutter:block/trellises/redwood/peony2",
+        "y": 270
+      },
+      {
+        "model": "clutter:block/trellises/redwood/peony3",
+        "y": 270
+      }
+    ],
+    "waterlogged=false,under_block=false,facing=north,plant=lilac": [
+      {
+        "model": "clutter:block/trellises/redwood/lilac"
+      },
+      {
+        "model": "clutter:block/trellises/redwood/lilac2"
+      }
+    ],
+    "waterlogged=false,under_block=false,facing=south,plant=lilac": [
+      {
+        "model": "clutter:block/trellises/redwood/lilac",
+        "y": 180
+      },
+      {
+        "model": "clutter:block/trellises/redwood/lilac2",
+        "y": 180
+      }
+    ],
+    "waterlogged=false,under_block=false,facing=east,plant=lilac": [
+      {
+        "model": "clutter:block/trellises/redwood/lilac",
+        "y": 90
+      },
+      {
+        "model": "clutter:block/trellises/redwood/lilac2",
+        "y": 90
+      }
+    ],
+    "waterlogged=false,under_block=false,facing=west,plant=lilac": [
+      {
+        "model": "clutter:block/trellises/redwood/lilac",
+        "y": 270
+      },
+      {
+        "model": "clutter:block/trellises/redwood/lilac2",
+        "y": 270
+      }
+    ],
+    "waterlogged=false,under_block=false,facing=north,plant=cave_vines": [
+      {
+        "model": "clutter:block/trellises/redwood/cave_vines"
+      },
+      {
+        "model": "clutter:block/trellises/redwood/cave_vines2"
+      },
+      {
+        "model": "clutter:block/trellises/redwood/cave_vines3"
+      },
+      {
+        "model": "clutter:block/trellises/redwood/cave_vines4"
+      },
+      {
+        "model": "clutter:block/trellises/redwood/cave_vines5"
+      }
+    ],
+    "waterlogged=false,under_block=false,facing=south,plant=cave_vines": [
+      {
+        "model": "clutter:block/trellises/redwood/cave_vines",
+        "y": 180
+      },
+      {
+        "model": "clutter:block/trellises/redwood/cave_vines2",
+        "y": 180
+      },
+      {
+        "model": "clutter:block/trellises/redwood/cave_vines3",
+        "y": 180
+      },
+      {
+        "model": "clutter:block/trellises/redwood/cave_vines4",
+        "y": 180
+      },
+      {
+        "model": "clutter:block/trellises/redwood/cave_vines5",
+        "y": 180
+      }
+    ],
+    "waterlogged=false,under_block=false,facing=east,plant=cave_vines": [
+      {
+        "model": "clutter:block/trellises/redwood/cave_vines",
+        "y": 90
+      },
+      {
+        "model": "clutter:block/trellises/redwood/cave_vines2",
+        "y": 90
+      },
+      {
+        "model": "clutter:block/trellises/redwood/cave_vines3",
+        "y": 90
+      },
+      {
+        "model": "clutter:block/trellises/redwood/cave_vines4",
+        "y": 90
+      },
+      {
+        "model": "clutter:block/trellises/redwood/cave_vines5",
+        "y": 90
+      }
+    ],
+    "waterlogged=false,under_block=false,facing=west,plant=cave_vines": [
+      {
+        "model": "clutter:block/trellises/redwood/cave_vines",
+        "y": 270
+      },
+      {
+        "model": "clutter:block/trellises/redwood/cave_vines2",
+        "y": 270
+      },
+      {
+        "model": "clutter:block/trellises/redwood/cave_vines3",
+        "y": 270
+      },
+      {
+        "model": "clutter:block/trellises/redwood/cave_vines4",
+        "y": 270
+      },
+      {
+        "model": "clutter:block/trellises/redwood/cave_vines5",
+        "y": 270
+      }
+    ],
+    "waterlogged=false,under_block=false,facing=north,plant=weeping_vines": {
+      "model": "clutter:block/trellises/redwood/weeping_vines"
+    },
+    "waterlogged=false,under_block=false,facing=south,plant=weeping_vines": {
+      "model": "clutter:block/trellises/redwood/weeping_vines",
+      "y": 180
+    },
+    "waterlogged=false,under_block=false,facing=east,plant=weeping_vines": {
+      "model": "clutter:block/trellises/redwood/weeping_vines",
+      "y": 90
+    },
+    "waterlogged=false,under_block=false,facing=west,plant=weeping_vines": {
+      "model": "clutter:block/trellises/redwood/weeping_vines",
+      "y": 270
+    },
+    "waterlogged=false,under_block=false,facing=north,plant=twisting_vines": {
+      "model": "clutter:block/trellises/redwood/twisting_vines"
+    },
+    "waterlogged=false,under_block=false,facing=south,plant=twisting_vines": {
+      "model": "clutter:block/trellises/redwood/twisting_vines",
+      "y": 180
+    },
+    "waterlogged=false,under_block=false,facing=east,plant=twisting_vines": {
+      "model": "clutter:block/trellises/redwood/twisting_vines",
+      "y": 90
+    },
+    "waterlogged=false,under_block=false,facing=west,plant=twisting_vines": {
+      "model": "clutter:block/trellises/redwood/twisting_vines",
+      "y": 270
+    },
+    "waterlogged=false,under_block=false,facing=north,plant=glow_lichen": {
+      "model": "clutter:block/trellises/redwood/glow_lichen"
+    },
+    "waterlogged=false,under_block=false,facing=south,plant=glow_lichen": {
+      "model": "clutter:block/trellises/redwood/glow_lichen",
+      "y": 180
+    },
+    "waterlogged=false,under_block=false,facing=east,plant=glow_lichen": {
+      "model": "clutter:block/trellises/redwood/glow_lichen",
+      "y": 90
+    },
+    "waterlogged=false,under_block=false,facing=west,plant=glow_lichen": {
+      "model": "clutter:block/trellises/redwood/glow_lichen",
+      "y": 270
+    },
+    "waterlogged=false,under_block=true,plant=none": {
+      "model": "clutter:block/trellises/redwood/horizontal_empty"
+    },
+    "waterlogged=false,under_block=true,plant=vines": [
+      {
+        "model": "clutter:block/trellises/redwood/horizontal_vines"
+      },
+      {
+        "model": "clutter:block/trellises/redwood/horizontal_vines2"
+      }
+    ],
+    "waterlogged=false,under_block=true,plant=rose_bush": [
+      {
+        "model": "clutter:block/trellises/redwood/horizontal_rose_bush"
+      },
+      {
+        "model": "clutter:block/trellises/redwood/horizontal_rose_bush2"
+      },
+      {
+        "model": "clutter:block/trellises/redwood/horizontal_rose_bush3"
+      }
+    ],
+    "waterlogged=false,under_block=true,plant=peony": [
+      {
+        "model": "clutter:block/trellises/redwood/horizontal_peony"
+      },
+      {
+        "model": "clutter:block/trellises/redwood/horizontal_peony2"
+      },
+      {
+        "model": "clutter:block/trellises/redwood/horizontal_peony3"
+      }
+    ],
+    "waterlogged=false,under_block=true,plant=lilac": [
+      {
+        "model": "clutter:block/trellises/redwood/horizontal_lilac"
+      },
+      {
+        "model": "clutter:block/trellises/redwood/horizontal_lilac2"
+      }
+    ],
+    "waterlogged=false,under_block=true,plant=cave_vines": [
+      {
+        "model": "clutter:block/trellises/redwood/horizontal_cave_vines"
+      },
+      {
+        "model": "clutter:block/trellises/redwood/horizontal_cave_vines2"
+      }
+    ],
+    "waterlogged=false,under_block=true,plant=weeping_vines": [
+      {
+        "model": "clutter:block/trellises/redwood/horizontal_weeping_vines"
+      },
+      {
+        "model": "clutter:block/trellises/redwood/horizontal_weeping_vines2"
+      }
+    ],
+    "waterlogged=false,under_block=true,plant=twisting_vines": [
+      {
+        "model": "clutter:block/trellises/redwood/horizontal_twisting_vines"
+      },
+      {
+        "model": "clutter:block/trellises/redwood/horizontal_twisting_vines2"
+      }
+    ],
+    "waterlogged=false,under_block=true,plant=glow_lichen": {
+      "model": "clutter:block/trellises/redwood/horizontal_glow_lichen"
+    },
+    "waterlogged=true,under_block=false,facing=north,plant=none": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "waterlogged=true,under_block=false,facing=south,plant=none": {
+      "model": "clutter:block/trellises/redwood/empty",
+      "y": 180
+    },
+    "waterlogged=true,under_block=false,facing=east,plant=none": {
+      "model": "clutter:block/trellises/redwood/empty",
+      "y": 90
+    },
+    "waterlogged=true,under_block=false,facing=west,plant=none": {
+      "model": "clutter:block/trellises/redwood/empty",
+      "y": 270
+    },
+    "waterlogged=true,under_block=false,facing=north,plant=vines": [
+      {
+        "model": "clutter:block/trellises/redwood/vines"
+      },
+      {
+        "model": "clutter:block/trellises/redwood/vines2"
+      }
+    ],
+    "waterlogged=true,under_block=false,facing=south,plant=vines": [
+      {
+        "model": "clutter:block/trellises/redwood/vines",
+        "y": 180
+      },
+      {
+        "model": "clutter:block/trellises/redwood/vines2",
+        "y": 180
+      }
+    ],
+    "waterlogged=true,under_block=false,facing=east,plant=vines": [
+      {
+        "model": "clutter:block/trellises/redwood/vines",
+        "y": 90
+      },
+      {
+        "model": "clutter:block/trellises/redwood/vines2",
+        "y": 90
+      }
+    ],
+    "waterlogged=true,under_block=false,facing=west,plant=vines": [
+      {
+        "model": "clutter:block/trellises/redwood/vines",
+        "y": 270
+      },
+      {
+        "model": "clutter:block/trellises/redwood/vines2",
+        "y": 270
+      }
+    ],
+    "waterlogged=true,under_block=false,facing=north,plant=rose_bush": [
+      {
+        "model": "clutter:block/trellises/redwood/rose_bush"
+      },
+      {
+        "model": "clutter:block/trellises/redwood/rose_bush2"
+      },
+      {
+        "model": "clutter:block/trellises/redwood/rose_bush3"
+      }
+    ],
+    "waterlogged=true,under_block=false,facing=south,plant=rose_bush": [
+      {
+        "model": "clutter:block/trellises/redwood/rose_bush",
+        "y": 180
+      },
+      {
+        "model": "clutter:block/trellises/redwood/rose_bush2",
+        "y": 180
+      }
+    ],
+    "waterlogged=true,under_block=false,facing=east,plant=rose_bush": [
+      {
+        "model": "clutter:block/trellises/redwood/rose_bush",
+        "y": 90
+      },
+      {
+        "model": "clutter:block/trellises/redwood/rose_bush2",
+        "y": 90
+      }
+    ],
+    "waterlogged=true,under_block=false,facing=west,plant=rose_bush": [
+      {
+        "model": "clutter:block/trellises/redwood/rose_bush",
+        "y": 270
+      },
+      {
+        "model": "clutter:block/trellises/redwood/rose_bush2",
+        "y": 270
+      }
+    ],
+    "waterlogged=true,under_block=false,facing=north,plant=peony": [
+      {
+        "model": "clutter:block/trellises/redwood/peony"
+      },
+      {
+        "model": "clutter:block/trellises/redwood/peony2"
+      },
+      {
+        "model": "clutter:block/trellises/redwood/peony3"
+      }
+    ],
+    "waterlogged=true,under_block=false,facing=south,plant=peony": [
+      {
+        "model": "clutter:block/trellises/redwood/peony",
+        "y": 180
+      },
+      {
+        "model": "clutter:block/trellises/redwood/peony2",
+        "y": 180
+      },
+      {
+        "model": "clutter:block/trellises/redwood/peony3",
+        "y": 180
+      }
+    ],
+    "waterlogged=true,under_block=false,facing=east,plant=peony": [
+      {
+        "model": "clutter:block/trellises/redwood/peony",
+        "y": 90
+      },
+      {
+        "model": "clutter:block/trellises/redwood/peony2",
+        "y": 90
+      },
+      {
+        "model": "clutter:block/trellises/redwood/peony3",
+        "y": 90
+      }
+    ],
+    "waterlogged=true,under_block=false,facing=west,plant=peony": [
+      {
+        "model": "clutter:block/trellises/redwood/peony",
+        "y": 270
+      },
+      {
+        "model": "clutter:block/trellises/redwood/peony2",
+        "y": 270
+      },
+      {
+        "model": "clutter:block/trellises/redwood/peony3",
+        "y": 270
+      }
+    ],
+    "waterlogged=true,under_block=false,facing=north,plant=lilac": [
+      {
+        "model": "clutter:block/trellises/redwood/lilac"
+      },
+      {
+        "model": "clutter:block/trellises/redwood/lilac2"
+      }
+    ],
+    "waterlogged=true,under_block=false,facing=south,plant=lilac": [
+      {
+        "model": "clutter:block/trellises/redwood/lilac",
+        "y": 180
+      },
+      {
+        "model": "clutter:block/trellises/redwood/lilac2",
+        "y": 180
+      }
+    ],
+    "waterlogged=true,under_block=false,facing=east,plant=lilac": [
+      {
+        "model": "clutter:block/trellises/redwood/lilac",
+        "y": 90
+      },
+      {
+        "model": "clutter:block/trellises/redwood/lilac2",
+        "y": 90
+      }
+    ],
+    "waterlogged=true,under_block=false,facing=west,plant=lilac": [
+      {
+        "model": "clutter:block/trellises/redwood/lilac",
+        "y": 270
+      },
+      {
+        "model": "clutter:block/trellises/redwood/lilac2",
+        "y": 270
+      }
+    ],
+    "waterlogged=true,under_block=false,facing=north,plant=cave_vines": [
+      {
+        "model": "clutter:block/trellises/redwood/cave_vines"
+      },
+      {
+        "model": "clutter:block/trellises/redwood/cave_vines2"
+      },
+      {
+        "model": "clutter:block/trellises/redwood/cave_vines3"
+      },
+      {
+        "model": "clutter:block/trellises/redwood/cave_vines4"
+      },
+      {
+        "model": "clutter:block/trellises/redwood/cave_vines5"
+      }
+    ],
+    "waterlogged=true,under_block=false,facing=south,plant=cave_vines": [
+      {
+        "model": "clutter:block/trellises/redwood/cave_vines",
+        "y": 180
+      },
+      {
+        "model": "clutter:block/trellises/redwood/cave_vines2",
+        "y": 180
+      },
+      {
+        "model": "clutter:block/trellises/redwood/cave_vines3",
+        "y": 180
+      },
+      {
+        "model": "clutter:block/trellises/redwood/cave_vines4",
+        "y": 180
+      },
+      {
+        "model": "clutter:block/trellises/redwood/cave_vines5",
+        "y": 180
+      }
+    ],
+    "waterlogged=true,under_block=false,facing=east,plant=cave_vines": [
+      {
+        "model": "clutter:block/trellises/redwood/cave_vines",
+        "y": 90
+      },
+      {
+        "model": "clutter:block/trellises/redwood/cave_vines2",
+        "y": 90
+      },
+      {
+        "model": "clutter:block/trellises/redwood/cave_vines3",
+        "y": 90
+      },
+      {
+        "model": "clutter:block/trellises/redwood/cave_vines4",
+        "y": 90
+      },
+      {
+        "model": "clutter:block/trellises/redwood/cave_vines5",
+        "y": 90
+      }
+    ],
+    "waterlogged=true,under_block=false,facing=west,plant=cave_vines": [
+      {
+        "model": "clutter:block/trellises/redwood/cave_vines",
+        "y": 270
+      },
+      {
+        "model": "clutter:block/trellises/redwood/cave_vines2",
+        "y": 270
+      },
+      {
+        "model": "clutter:block/trellises/redwood/cave_vines3",
+        "y": 270
+      },
+      {
+        "model": "clutter:block/trellises/redwood/cave_vines4",
+        "y": 270
+      },
+      {
+        "model": "clutter:block/trellises/redwood/cave_vines5",
+        "y": 270
+      }
+    ],
+    "waterlogged=true,under_block=false,facing=north,plant=weeping_vines": {
+      "model": "clutter:block/trellises/redwood/weeping_vines"
+    },
+    "waterlogged=true,under_block=false,facing=south,plant=weeping_vines": {
+      "model": "clutter:block/trellises/redwood/weeping_vines",
+      "y": 180
+    },
+    "waterlogged=true,under_block=false,facing=east,plant=weeping_vines": {
+      "model": "clutter:block/trellises/redwood/weeping_vines",
+      "y": 90
+    },
+    "waterlogged=true,under_block=false,facing=west,plant=weeping_vines": {
+      "model": "clutter:block/trellises/redwood/weeping_vines",
+      "y": 270
+    },
+    "waterlogged=true,under_block=false,facing=north,plant=twisting_vines": {
+      "model": "clutter:block/trellises/redwood/twisting_vines"
+    },
+    "waterlogged=true,under_block=false,facing=south,plant=twisting_vines": {
+      "model": "clutter:block/trellises/redwood/twisting_vines",
+      "y": 180
+    },
+    "waterlogged=true,under_block=false,facing=east,plant=twisting_vines": {
+      "model": "clutter:block/trellises/redwood/twisting_vines",
+      "y": 90
+    },
+    "waterlogged=true,under_block=false,facing=west,plant=twisting_vines": {
+      "model": "clutter:block/trellises/redwood/twisting_vines",
+      "y": 270
+    },
+    "waterlogged=true,under_block=false,facing=north,plant=glow_lichen": {
+      "model": "clutter:block/trellises/redwood/glow_lichen"
+    },
+    "waterlogged=true,under_block=false,facing=south,plant=glow_lichen": {
+      "model": "clutter:block/trellises/redwood/glow_lichen",
+      "y": 180
+    },
+    "waterlogged=true,under_block=false,facing=east,plant=glow_lichen": {
+      "model": "clutter:block/trellises/redwood/glow_lichen",
+      "y": 90
+    },
+    "waterlogged=true,under_block=false,facing=west,plant=glow_lichen": {
+      "model": "clutter:block/trellises/redwood/glow_lichen",
+      "y": 270
+    },
+    "waterlogged=true,under_block=true,plant=none": {
+      "model": "clutter:block/trellises/redwood/horizontal_empty"
+    },
+    "waterlogged=true,under_block=true,plant=vines": [
+      {
+        "model": "clutter:block/trellises/redwood/horizontal_vines"
+      },
+      {
+        "model": "clutter:block/trellises/redwood/horizontal_vines2"
+      }
+    ],
+    "waterlogged=true,under_block=true,plant=rose_bush": [
+      {
+        "model": "clutter:block/trellises/redwood/horizontal_rose_bush"
+      },
+      {
+        "model": "clutter:block/trellises/redwood/horizontal_rose_bush2"
+      },
+      {
+        "model": "clutter:block/trellises/redwood/horizontal_rose_bush3"
+      }
+    ],
+    "waterlogged=true,under_block=true,plant=peony": [
+      {
+        "model": "clutter:block/trellises/redwood/horizontal_peony"
+      },
+      {
+        "model": "clutter:block/trellises/redwood/horizontal_peony2"
+      },
+      {
+        "model": "clutter:block/trellises/redwood/horizontal_peony3"
+      }
+    ],
+    "waterlogged=true,under_block=true,plant=lilac": [
+      {
+        "model": "clutter:block/trellises/redwood/horizontal_lilac"
+      },
+      {
+        "model": "clutter:block/trellises/redwood/horizontal_lilac2"
+      }
+    ],
+    "waterlogged=true,under_block=true,plant=cave_vines": [
+      {
+        "model": "clutter:block/trellises/redwood/horizontal_cave_vines"
+      },
+      {
+        "model": "clutter:block/trellises/redwood/horizontal_cave_vines2"
+      }
+    ],
+    "waterlogged=true,under_block=true,plant=weeping_vines": [
+      {
+        "model": "clutter:block/trellises/redwood/horizontal_weeping_vines"
+      },
+      {
+        "model": "clutter:block/trellises/redwood/horizontal_weeping_vines2"
+      }
+    ],
+    "waterlogged=true,under_block=true,plant=twisting_vines": [
+      {
+        "model": "clutter:block/trellises/redwood/horizontal_twisting_vines"
+      },
+      {
+        "model": "clutter:block/trellises/redwood/horizontal_twisting_vines2"
+      }
+    ],
+    "waterlogged=true,under_block=true,plant=glow_lichen": {
+      "model": "clutter:block/trellises/redwood/horizontal_glow_lichen"
+    },
+    "facing=down,lit=false,plant=peony,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=up,lit=false,plant=rose_bush,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=up,lit=true,plant=peony,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=up,lit=false,plant=lilac,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=down,lit=true,plant=peony,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=down,lit=true,plant=lilac,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=up,lit=false,plant=weeping_vines,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=up,lit=false,plant=cave_vines,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=down,lit=false,plant=twisting_vines,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=up,lit=false,plant=none,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=down,lit=true,plant=lilac,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=up,lit=true,plant=peony,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=down,lit=false,plant=twisting_vines,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=down,lit=false,plant=weeping_vines,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=down,lit=true,plant=weeping_vines,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=down,lit=false,plant=rose_bush,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=down,lit=false,plant=vines,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=up,lit=true,plant=rose_bush,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=down,lit=false,plant=weeping_vines,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=up,lit=false,plant=none,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=down,lit=true,plant=rose_bush,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=up,lit=false,plant=vines,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=down,lit=true,plant=glow_lichen,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=up,lit=true,plant=lilac,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=up,lit=true,plant=vines,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=down,lit=true,plant=weeping_vines,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=up,lit=false,plant=weeping_vines,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=down,lit=true,plant=cave_vines,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=down,lit=true,plant=vines,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=up,lit=true,plant=weeping_vines,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=up,lit=false,plant=rose_bush,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=up,lit=true,plant=rose_bush,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=down,lit=true,plant=none,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=up,lit=false,plant=vines,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=down,lit=false,plant=vines,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=up,lit=true,plant=none,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=up,lit=true,plant=none,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=down,lit=false,plant=peony,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=up,lit=false,plant=twisting_vines,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=up,lit=true,plant=lilac,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=down,lit=false,plant=glow_lichen,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=up,lit=true,plant=glow_lichen,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=down,lit=false,plant=cave_vines,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=down,lit=true,plant=cave_vines,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=down,lit=true,plant=peony,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=down,lit=false,plant=none,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=up,lit=true,plant=cave_vines,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=up,lit=false,plant=peony,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=down,lit=false,plant=none,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=up,lit=true,plant=glow_lichen,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=up,lit=false,plant=glow_lichen,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=down,lit=true,plant=vines,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=down,lit=true,plant=twisting_vines,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=down,lit=true,plant=twisting_vines,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=down,lit=false,plant=lilac,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=down,lit=true,plant=none,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=down,lit=true,plant=glow_lichen,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=up,lit=false,plant=peony,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=up,lit=true,plant=twisting_vines,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=down,lit=false,plant=glow_lichen,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=up,lit=false,plant=cave_vines,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=down,lit=true,plant=rose_bush,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=up,lit=true,plant=weeping_vines,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=down,lit=false,plant=cave_vines,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=up,lit=true,plant=twisting_vines,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=up,lit=false,plant=glow_lichen,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=up,lit=false,plant=twisting_vines,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=up,lit=false,plant=lilac,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=up,lit=true,plant=vines,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=down,lit=false,plant=rose_bush,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=up,lit=true,plant=cave_vines,under_block=false,waterlogged=false": {
+      "model": "clutter:block/trellises/redwood/empty"
+    },
+    "facing=down,lit=false,plant=lilac,under_block=false,waterlogged=true": {
+      "model": "clutter:block/trellises/redwood/empty"
+    }
+  }
+}

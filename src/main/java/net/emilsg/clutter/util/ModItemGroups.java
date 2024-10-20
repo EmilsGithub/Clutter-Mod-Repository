@@ -184,7 +184,9 @@ public class ModItemGroups {
                     entries.add(ModBlocks.CARDBOARD_BOX);
                     entries.add(ModBlocks.RED_PRESENT);
                     entries.add(ModBlocks.BRICK_KILN);
-                    entries.add(ModBlocks.FISH_TANK);
+                    entries.add(ModBlocks.ANCHOR_BLOCK);
+                    entries.add(ModBlocks.QUARTZ_CRYSTAL);
+                    //entries.add(ModBlocks.FISH_TANK);
 
                     entries.add(ModBlocks.TALL_BOTTLE);
                     entries.add(ModBlocks.LAB_BOTTLE);
@@ -237,6 +239,8 @@ public class ModItemGroups {
                     entries.add(ModBlocks.POLISHED_BLACK_ONYX_WALL);
 
                     //Redwood
+                    entries.add(ModItems.REDWOOD_SIGN);
+                    entries.add(ModItems.REDWOOD_HANGING_SIGN);
                     entries.add(ModBlocks.REDWOOD_LEAVES);
                     entries.add(ModBlocks.REDWOOD_LOG);
                     entries.add(ModBlocks.REDWOOD_WOOD);
@@ -311,6 +315,20 @@ public class ModItemGroups {
                     entries.add(ModBlocks.STRIPPED_WARPED_TABLE);
                     entries.add(ModBlocks.STRIPPED_CHERRY_TABLE);
                     entries.add(ModBlocks.STRIPPED_REDWOOD_TABLE);
+
+                    //Short Benches
+                    entries.add(ModBlocks.OAK_SHORT_BENCH);
+                    entries.add(ModBlocks.SPRUCE_SHORT_BENCH);
+                    entries.add(ModBlocks.BIRCH_SHORT_BENCH);
+                    entries.add(ModBlocks.JUNGLE_SHORT_BENCH);
+                    entries.add(ModBlocks.ACACIA_SHORT_BENCH);
+                    entries.add(ModBlocks.DARK_OAK_SHORT_BENCH);
+                    entries.add(ModBlocks.MANGROVE_SHORT_BENCH);
+                    entries.add(ModBlocks.CRIMSON_SHORT_BENCH);
+                    entries.add(ModBlocks.WARPED_SHORT_BENCH);
+                    entries.add(ModBlocks.BAMBOO_SHORT_BENCH);
+                    entries.add(ModBlocks.CHERRY_SHORT_BENCH);
+                    entries.add(ModBlocks.REDWOOD_SHORT_BENCH);
 
                     //Chairs
                     entries.add(ModBlocks.OAK_CHAIR);
@@ -592,10 +610,10 @@ public class ModItemGroups {
                     entries.add(ModItems.SILVER_BOOTS);
 
                     entries.add(ModItems.COPPER_NUGGET);
-                    entries.add(ModItems.COPPER_DIVING_HELMET);
-                    entries.add(ModItems.COPPER_DIVING_CHESTPLATE);
-                    entries.add(ModItems.COPPER_DIVING_LEGGINGS);
-                    entries.add(ModItems.COPPER_DIVING_BOOTS);
+                    //entries.add(ModItems.COPPER_DIVING_HELMET);
+                    //entries.add(ModItems.COPPER_DIVING_CHESTPLATE);
+                    //entries.add(ModItems.COPPER_DIVING_LEGGINGS);
+                    //entries.add(ModItems.COPPER_DIVING_BOOTS);
 
                     entries.add(ModItems.SEASHELL);
                     entries.add(ModItems.SEA_CONCH);
@@ -637,6 +655,7 @@ public class ModItemGroups {
 
                     entries.add(ModItems.CHORUS_ECHOFIN_BUCKET);
                     entries.add(ModItems.LEVITATING_ECHOFIN_BUCKET);
+                    entries.add(ModItems.SEAHORSE_BUCKET);
                     entries.add(ModItems.BUTTERFLY_IN_A_BOTTLE);
 
                     entries.add(ModItems.KIWI_BIRD_EGG);
@@ -649,10 +668,7 @@ public class ModItemGroups {
                     entries.add(ModItems.COPPER_COIN);
                     entries.add(ModItems.SILVER_COIN);
                     entries.add(ModItems.GOLDEN_COIN);
-                    entries.add(ModItems.COMMON_COIN_POUCH);
-                    entries.add(ModItems.UNCOMMON_COIN_POUCH);
-                    entries.add(ModItems.RARE_COIN_POUCH);
-                    entries.add(ModItems.EPIC_COIN_POUCH);
+                    entries.add(ModItems.COIN_POUCH);
 
                     entries.add(ModItems.DECORATED_ELYTRA_SMITHING_TEMPLATE);
                     entries.add(ModItems.DECORATED_ELYTRA_SMITHING_TEMPLATE_SHARDS);

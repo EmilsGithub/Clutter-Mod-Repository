@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
+    "clutter:overgrown_packed_mud",
+    "clutter:quartz_crystal",
+    "clutter:anchor",
     "clutter:aquatic_torch",
     "clutter:exposed_aquatic_torch",
     "clutter:weathered_aquatic_torch",

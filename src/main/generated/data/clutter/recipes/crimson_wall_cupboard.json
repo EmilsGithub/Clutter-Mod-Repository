@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "wall_cupboards",
+  "key": {
+    "P": {
+      "item": "minecraft:crimson_planks"
+    },
+    "S": {
+      "item": "minecraft:crimson_slab"
+    }
+  },
+  "pattern": [
+    "PS ",
+    "PS ",
+    "PS "
+  ],
+  "result": {
+    "count": 2,
+    "item": "clutter:crimson_wall_cupboard"
+  },
+  "show_notification": true
+}

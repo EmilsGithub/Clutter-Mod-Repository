@@ -80,10 +80,6 @@
     ],
     [
       "minecraft:glow_lichen",
-      "minecraft:oak_bees_002",
-      "minecraft:fancy_oak_bees",
-      "minecraft:fancy_oak_bees_002",
-      "minecraft:oak_bees_0002",
       "clutter:lupines_placed",
       "minecraft:patch_grass_badlands"
     ],
@@ -109,30 +105,6 @@
         "maxCount": 8,
         "minCount": 5,
         "weight": 10
-      },
-      {
-        "type": "minecraft:sheep",
-        "maxCount": 4,
-        "minCount": 4,
-        "weight": 12
-      },
-      {
-        "type": "minecraft:pig",
-        "maxCount": 4,
-        "minCount": 4,
-        "weight": 10
-      },
-      {
-        "type": "minecraft:chicken",
-        "maxCount": 4,
-        "minCount": 4,
-        "weight": 10
-      },
-      {
-        "type": "minecraft:cow",
-        "maxCount": 4,
-        "minCount": 4,
-        "weight": 8
       }
     ],
     "misc": [],

@@ -1,16 +1,17 @@
 {
   "replace": false,
   "values": [
-    "clutter:acacia_trellis",
-    "clutter:birch_trellis",
-    "clutter:crimson_trellis",
-    "clutter:dark_oak_trellis",
-    "clutter:jungle_trellis",
-    "clutter:mangrove_trellis",
+    "clutter:redwood_trellis",
     "clutter:oak_trellis",
+    "clutter:birch_trellis",
+    "clutter:jungle_trellis",
+    "clutter:acacia_trellis",
     "clutter:spruce_trellis",
+    "clutter:dark_oak_trellis",
+    "clutter:mangrove_trellis",
+    "clutter:crimson_trellis",
     "clutter:warped_trellis",
-    "clutter:bamboo_trellis",
-    "clutter:cherry_trellis"
+    "clutter:cherry_trellis",
+    "clutter:bamboo_trellis"
   ]
 }

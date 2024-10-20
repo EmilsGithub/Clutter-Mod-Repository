@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "clutter:item/yellow_seahorse_bucket",
+      "predicate": {
+        "type": 0.0
+      }
+    },
+    {
+      "model": "clutter:item/light_blue_seahorse_bucket",
+      "predicate": {
+        "type": 0.1
+      }
+    },
+    {
+      "model": "clutter:item/red_seahorse_bucket",
+      "predicate": {
+        "type": 0.2
+      }
+    },
+    {
+      "model": "clutter:item/purple_seahorse_bucket",
+      "predicate": {
+        "type": 0.3
+      }
+    }
+  ],
+  "textures": {
+    "layer0": "clutter:item/yellow_seahorse_bucket"
+  }
+}

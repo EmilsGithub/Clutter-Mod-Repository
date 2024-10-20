@@ -12,6 +12,7 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.Registries;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
@@ -36,7 +37,10 @@ public abstract class PlayerEntityMixin {
         int greedLevel = EnchantmentHelper.getLevel(Registries.ENCHANTMENT.get(new Identifier(Clutter.MOD_ID, "greed")), stack);
 
         if (greedLevel > 0 && Math.random() < (ModConfigManager.get(Configs.greedChancePerLevel, 0.01f) * greedLevel)) {
-            other.dropItem(ModItems.COMMON_COIN_POUCH);
+            ItemStack droppedStack = new ItemStack(ModItems.COIN_POUCH);
+            NbtCompound nbt = droppedStack.getOrCreateNbt();
+            nbt.putInt("Rarity", 0);
+            other.dropStack(droppedStack);
         }
     }
 

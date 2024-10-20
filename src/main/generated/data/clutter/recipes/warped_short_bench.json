@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "short_benches",
+  "key": {
+    "L": {
+      "item": "minecraft:warped_stem"
+    },
+    "P": {
+      "item": "minecraft:warped_planks"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "L L"
+  ],
+  "result": {
+    "count": 6,
+    "item": "clutter:warped_short_bench"
+  },
+  "show_notification": true
+}

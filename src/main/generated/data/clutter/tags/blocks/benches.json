@@ -1,17 +1,17 @@
 {
   "replace": false,
   "values": [
-    "clutter:stripped_acacia_bench",
-    "clutter:stripped_birch_bench",
-    "clutter:stripped_crimson_bench",
-    "clutter:stripped_dark_oak_bench",
-    "clutter:stripped_jungle_bench",
-    "clutter:stripped_mangrove_bench",
+    "clutter:stripped_redwood_bench",
     "clutter:stripped_oak_bench",
+    "clutter:stripped_birch_bench",
+    "clutter:stripped_jungle_bench",
+    "clutter:stripped_acacia_bench",
     "clutter:stripped_spruce_bench",
+    "clutter:stripped_dark_oak_bench",
+    "clutter:stripped_mangrove_bench",
+    "clutter:stripped_crimson_bench",
     "clutter:stripped_warped_bench",
     "clutter:stripped_cherry_bench",
-    "clutter:bamboo_bench",
     "#clutter:strippable_benches"
   ]
 }

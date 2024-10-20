@@ -6,6 +6,7 @@ import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
@@ -15,6 +16,7 @@ import net.minecraft.entity.mob.WaterCreatureEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
@@ -70,6 +72,16 @@ public class JellyfishEntity extends WaterCreatureEntity {
 
     public static boolean isValidNaturalSpawn(EntityType<? extends WaterCreatureEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
         return world.getBlockState(pos).getFluidState().isOf(Fluids.WATER);
+    }
+
+    @Override
+    public boolean damage(DamageSource source, float amount) {
+        if(source.getAttacker() instanceof LivingEntity attacker && attacker.getWorld() instanceof ServerWorld) {
+            if(random.nextInt(3) == 0) {
+                attacker.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 100, 1), this);
+            }
+        }
+        return super.damage(source, amount);
     }
 
     @Override

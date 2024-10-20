@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
+import net.emilsg.clutter.block.custom.cutout.ICutoutRenderable;
 import net.emilsg.clutter.util.ModItemTags;
 import net.minecraft.block.*;
 import net.minecraft.entity.ai.pathing.NavigationType;
@@ -32,7 +33,7 @@ import net.minecraft.world.event.GameEvent;
 
 import java.util.function.ToIntFunction;
 
-public class TrellisBlock extends Block implements Waterloggable {
+public class TrellisBlock extends Block implements Waterloggable, ICutoutRenderable {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
     public static final DirectionProperty FACING = Properties.FACING;
     public static final BooleanProperty UNDER_BLOCK = BooleanProperty.of("under_block");

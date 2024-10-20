@@ -224,45 +224,6 @@ public class ButterflyEntity extends ClutterAnimalEntity {
         ItemStack heldItem = player.getStackInHand(hand);
 
         tryBottle(player, hand, this);
-
-        //if (!this.getWorld().isClient && heldItem.isOf(Items.GLASS_BOTTLE)) {
-        //    ButterflyVariant variant = this.getVariant();
-        //    Item returnItem;
-        //    switch (variant) {
-        //        case RED -> returnItem = ModItems.RED_BUTTERFLY_IN_A_BOTTLE;
-        //        case BLUE -> returnItem = ModItems.BLUE_BUTTERFLY_IN_A_BOTTLE;
-        //        case PURPLE -> returnItem = ModItems.PURPLE_BUTTERFLY_IN_A_BOTTLE;
-        //        case WHITE -> returnItem = ModItems.WHITE_BUTTERFLY_IN_A_BOTTLE;
-        //        case GRAY -> returnItem = ModItems.GRAY_BUTTERFLY_IN_A_BOTTLE;
-        //        case ORANGE -> returnItem = ModItems.ORANGE_BUTTERFLY_IN_A_BOTTLE;
-        //        case LIME -> returnItem = ModItems.LIME_BUTTERFLY_IN_A_BOTTLE;
-        //        case GREEN -> returnItem = ModItems.GREEN_BUTTERFLY_IN_A_BOTTLE;
-        //        case BLACK -> returnItem = ModItems.BLACK_BUTTERFLY_IN_A_BOTTLE;
-        //        case LIGHT_GRAY -> returnItem = ModItems.LIGHT_GRAY_BUTTERFLY_IN_A_BOTTLE;
-        //        case LIGHT_BLUE -> returnItem = ModItems.LIGHT_BLUE_BUTTERFLY_IN_A_BOTTLE;
-        //        case BROWN -> returnItem = ModItems.BROWN_BUTTERFLY_IN_A_BOTTLE;
-        //        case CYAN -> returnItem = ModItems.CYAN_BUTTERFLY_IN_A_BOTTLE;
-        //        case MAGENTA -> returnItem = ModItems.MAGENTA_BUTTERFLY_IN_A_BOTTLE;
-        //        case PINK -> returnItem = ModItems.PINK_BUTTERFLY_IN_A_BOTTLE;
-        //        case CRIMSON -> returnItem = ModItems.CRIMSON_BUTTERFLY_IN_A_BOTTLE;
-        //        case WARPED -> returnItem = ModItems.WARPED_BUTTERFLY_IN_A_BOTTLE;
-        //        case SOUL -> returnItem = ModItems.SOUL_BUTTERFLY_IN_A_BOTTLE;
-        //        default -> returnItem = ModItems.YELLOW_BUTTERFLY_IN_A_BOTTLE;
-        //    }
-        //    ItemStack returnStack = new ItemStack(returnItem);
-//
-        //    if (!player.getAbilities().creativeMode) {
-        //        heldItem.decrement(1);
-        //    }
-//
-        //    if (!player.getInventory().insertStack(returnStack)) {
-        //        player.dropItem(returnStack, false);
-        //    }
-//
-        //    player.playSound(SoundEvents.BLOCK_WOOL_FALL, SoundCategory.PLAYERS, 1.0f, 1.5f);
-        //    this.remove(RemovalReason.DISCARDED);
-        //    return ActionResult.SUCCESS;
-        //}
         return super.interactMob(player, hand);
     }
 

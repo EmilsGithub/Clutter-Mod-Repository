@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "clutter:magenta_lupine"
+    }
+  ],
+  "result": {
+    "count": 2,
+    "item": "minecraft:magenta_dye"
+  }
+}

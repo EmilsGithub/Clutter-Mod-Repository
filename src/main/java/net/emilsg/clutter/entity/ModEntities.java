@@ -38,7 +38,7 @@ public class ModEntities {
     public static final EntityType<EmberTortoiseEntity> EMBER_TORTOISE = Registry.register(Registries.ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "ember_tortoise"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, EmberTortoiseEntity::new).dimensions(EntityDimensions.changing(1.5f, 1.45f)).fireImmune().build());
     public static final EntityType<JellyfishEntity> JELLYFISH = Registry.register(Registries.ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "jellyfish"),
-            FabricEntityTypeBuilder.create(SpawnGroup.WATER_CREATURE, JellyfishEntity::new).dimensions(EntityDimensions.changing(0.5f, 0.5f)).build());
+            FabricEntityTypeBuilder.create(SpawnGroup.WATER_AMBIENT, JellyfishEntity::new).dimensions(EntityDimensions.changing(0.5f, 0.5f)).build());
     public static final EntityType<MantaRayEntity> MANTA_RAY = Registry.register(Registries.ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "manta_ray"),
             FabricEntityTypeBuilder.create(SpawnGroup.WATER_CREATURE, MantaRayEntity::new).dimensions(EntityDimensions.changing(1f, 0.5f)).build());
     public static final EntityType<SeahorseEntity> SEAHORSE = Registry.register(Registries.ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "seahorse"),

@@ -25,11 +25,11 @@ public class ItemTagDataGen extends FabricTagProvider.ItemTagProvider {
                 ModItems.SILVER_HELMET,
                 ModItems.SILVER_CHESTPLATE,
                 ModItems.SILVER_LEGGINGS,
-                ModItems.SILVER_BOOTS,
-                ModItems.COPPER_DIVING_HELMET,
-                ModItems.COPPER_DIVING_CHESTPLATE,
-                ModItems.COPPER_DIVING_LEGGINGS,
-                ModItems.COPPER_DIVING_BOOTS
+                ModItems.SILVER_BOOTS
+                //ModItems.COPPER_DIVING_HELMET,
+                //ModItems.COPPER_DIVING_CHESTPLATE,
+                //ModItems.COPPER_DIVING_LEGGINGS,
+                //ModItems.COPPER_DIVING_BOOTS
         );
 
         getOrCreateTagBuilder(ItemTags.TRIM_MATERIALS).add(
@@ -68,6 +68,13 @@ public class ItemTagDataGen extends FabricTagProvider.ItemTagProvider {
         //        ModItems.WARPED_BUTTERFLY_IN_A_BOTTLE,
         //        ModItems.SOUL_BUTTERFLY_IN_A_BOTTLE
         //);
+
+        getOrCreateTagBuilder(ModItemTags.REDWOOD_LOGS).add(
+                ModBlocks.REDWOOD_LOG.asItem(),
+                ModBlocks.STRIPPED_REDWOOD_LOG.asItem(),
+                ModBlocks.REDWOOD_WOOD.asItem(),
+                ModBlocks.STRIPPED_REDWOOD_WOOD.asItem()
+        );
 
         getOrCreateTagBuilder(ModItemTags.PLUSHIES).add(
                 ModBlocks.SHEEP_PLUSHIE.asItem(),
@@ -185,6 +192,10 @@ public class ItemTagDataGen extends FabricTagProvider.ItemTagProvider {
         );
 
         /** Common **/
+
+        getOrCreateTagBuilder(ModItemTags.C_ENTITY_WATER_BUCKETS).add(
+                ModItems.SEAHORSE_BUCKET
+        );
 
         getOrCreateTagBuilder(ModItemTags.C_COPPER_NUGGETS).add(
                 ModItems.COPPER_NUGGET

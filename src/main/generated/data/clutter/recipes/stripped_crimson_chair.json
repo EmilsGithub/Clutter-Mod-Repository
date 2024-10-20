@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "chairs",
+  "key": {
+    "L": {
+      "item": "minecraft:stripped_crimson_stem"
+    },
+    "P": {
+      "item": "minecraft:crimson_planks"
+    }
+  },
+  "pattern": [
+    "P  ",
+    "PP ",
+    "LL "
+  ],
+  "result": {
+    "count": 4,
+    "item": "clutter:stripped_crimson_chair"
+  },
+  "show_notification": true
+}

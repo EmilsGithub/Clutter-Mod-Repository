@@ -4,17 +4,17 @@ import net.emilsg.clutter.Clutter;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentTarget;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.mob.HoglinEntity;
 import net.minecraft.entity.mob.PiglinEntity;
 import net.minecraft.entity.mob.ZombieEntity;
+import net.minecraft.entity.mob.ZombieVillagerEntity;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.registry.Registries;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
@@ -53,7 +53,7 @@ public class NecrosisEnchantment extends Enchantment {
             } else if (target instanceof HoglinEntity hoglin) {
                 zombie = hoglin.convertTo(EntityType.ZOGLIN, true);
             } else if (target instanceof VillagerEntity villager) {
-                zombie = villager.convertTo(EntityType.ZOMBIE_VILLAGER, true);
+                zombie = convertToZombieVillager(villager, serverWorld, user);
             } else if (target instanceof PlayerEntity player) {
                 zombie = convertToZombie(player, true, serverWorld);
             }
@@ -112,6 +112,22 @@ public class NecrosisEnchantment extends Enchantment {
             zombie.startRiding(entity, true);
         }
         return zombie;
+    }
+
+    private ZombieEntity convertToZombieVillager(VillagerEntity villagerEntity, ServerWorld world, LivingEntity user) {
+        ZombieVillagerEntity zombieVillagerEntity = villagerEntity.convertTo(EntityType.ZOMBIE_VILLAGER, false);
+        if (zombieVillagerEntity != null) {
+            zombieVillagerEntity.initialize(world, world.getLocalDifficulty(zombieVillagerEntity.getBlockPos()), SpawnReason.CONVERSION, new ZombieEntity.ZombieData(false, true), (NbtCompound)null);
+            zombieVillagerEntity.setVillagerData(villagerEntity.getVillagerData());
+            zombieVillagerEntity.setGossipData(villagerEntity.getGossip().serialize(NbtOps.INSTANCE));
+            zombieVillagerEntity.setOfferData(villagerEntity.getOffers().toNbt());
+            zombieVillagerEntity.setXp(villagerEntity.getExperience());
+
+            world.syncWorldEvent(null, 1026, user.getBlockPos(), 0);
+
+            return zombieVillagerEntity;
+        }
+        return null;
     }
 
 }

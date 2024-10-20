@@ -4,10 +4,6 @@
     "clutter:silver_helmet",
     "clutter:silver_chestplate",
     "clutter:silver_leggings",
-    "clutter:silver_boots",
-    "clutter:copper_diving_helmet",
-    "clutter:copper_diving_chestplate",
-    "clutter:copper_diving_leggings",
-    "clutter:copper_diving_boots"
+    "clutter:silver_boots"
   ]
 }

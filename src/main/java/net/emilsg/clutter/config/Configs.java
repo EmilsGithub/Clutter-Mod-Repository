@@ -47,6 +47,8 @@ public class Configs {
     public static final String spawnWarpedNewts = ModConfigManager.register("spawn_warped_newts", true, "Spawn Warped Newts.").getKey();
     public static final String spawnEmberTortoises = ModConfigManager.register("spawn_ember_tortoises", true, "Spawn Ember Tortoises.").getKey();
     public static final String spawnJellyfishes = ModConfigManager.register("spawn_jellyfishes", true, "Spawn Jellyfishes.").getKey();
+    public static final String spawnSeahorses = ModConfigManager.register("spawn_seahorses", true, "Spawn Seahorses.").getKey();
+    public static final String spawnMantaRays = ModConfigManager.register("spawn_manta_rays", true, "Spawn Manta Rays.").getKey();
 
     public static final String doGreedGeneration = ModConfigManager.register("do_greed_generation", true, "Will Greed generate in certain chests.").getKey();
     public static final String greedChancePerLevel = ModConfigManager.register("greed_chance_per_level", 0.01f, "Coin drop rate per level of Greed. (expressed as a decimal number where the default, 0.01, is equal to 1%)").getKey();

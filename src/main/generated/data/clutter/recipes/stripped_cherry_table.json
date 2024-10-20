@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "tables",
+  "key": {
+    "L": {
+      "item": "minecraft:stripped_cherry_log"
+    },
+    "P": {
+      "item": "minecraft:cherry_planks"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "L L",
+    "L L"
+  ],
+  "result": {
+    "item": "clutter:stripped_cherry_table"
+  },
+  "show_notification": true
+}

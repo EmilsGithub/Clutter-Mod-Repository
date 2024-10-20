@@ -14,6 +14,7 @@ public class ModItemTags {
     public static final TagKey<Item> DYES = create("dyes");
     public static final TagKey<Item> STRIPPABLE_LOGS = create("strippable_logs");
     public static final TagKey<Item> BOTTLED_BUTTERFLIES = create("bottled_butterflies");
+    public static final TagKey<Item> REDWOOD_LOGS = create("redwood_logs");
 
     public static final TagKey<Item> PLUSHIES = create("plushies");
 
@@ -25,6 +26,7 @@ public class ModItemTags {
     public static final TagKey<Item> C_SILVER_BLOCKS = create("silver_blocks", "c");
     public static final TagKey<Item> C_SILVER_INGOTS = create("silver_ingots", "c");
     public static final TagKey<Item> C_SILVER_NUGGETS = create("silver_nuggets", "c");
+    public static final TagKey<Item> C_ENTITY_WATER_BUCKETS = create("entity_water_buckets", "c");
 
     public static final TagKey<Item> TRINKETS_HAT = create("head/hat", "trinkets");
     public static final TagKey<Item> TRINKETS_CAPE = create("chest/cape", "trinkets");

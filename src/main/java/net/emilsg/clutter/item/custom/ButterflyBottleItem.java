@@ -45,34 +45,6 @@ public class ButterflyBottleItem extends Item {
             player.setStackInHand(hand, getEmptiedStack(stack, player));
         }
         return ActionResult.success(world.isClient);
-
-        //else {
-        //    ItemStack itemStack = context.getStack();
-        //    BlockPos blockPos = context.getBlockPos();
-        //    Direction direction = context.getSide();
-        //    BlockState blockState = world.getBlockState(blockPos);
-        //    BlockPos blockPos2;
-        //    if (blockState.getCollisionShape(world, blockPos).isEmpty()) {
-        //        blockPos2 = blockPos;
-        //    } else {
-        //        blockPos2 = blockPos.offset(direction);
-        //    }
-//
-        //    ButterflyEntity butterflyEntity = ModEntities.BUTTERFLY.create(context.getWorld());
-        //    butterflyEntity.setVariant(variant);
-        //    butterflyEntity.setPersistent();
-        //    butterflyEntity.updatePosition(blockPos2.getX() + 0.5, blockPos2.getY(), blockPos2.getZ() + 0.5);
-        //    butterflyEntity.setBreedingAge(6000);
-        //    world.playSound(null, blockPos2, SoundEvents.BLOCK_WOOL_FALL, SoundCategory.NEUTRAL, 1, 1);
-        //    world.spawnEntity(butterflyEntity);
-        //    if (Objects.requireNonNull(context.getPlayer()).isPlayer() && !context.getPlayer().getAbilities().creativeMode) {
-        //        context.getPlayer().giveItemStack(new ItemStack(Items.GLASS_BOTTLE));
-        //        itemStack.decrement(1);
-        //    }
-        //    world.emitGameEvent(context.getPlayer(), GameEvent.ENTITY_PLACE, blockPos);
-//
-        //    return ActionResult.CONSUME;
-        //}
     }
 
     public static ItemStack getEmptiedStack(ItemStack stack, PlayerEntity player) {

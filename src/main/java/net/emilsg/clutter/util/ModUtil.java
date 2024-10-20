@@ -40,7 +40,6 @@ public class ModUtil {
 
     public static void registerFlammableBlocks() {
         FlammableBlockRegistry registry = FlammableBlockRegistry.getDefaultInstance();
-
         registry.add(ModBlockTags.FLAMMABLE, 60, 20);
     }
 

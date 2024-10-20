@@ -1,16 +1,17 @@
 {
   "replace": false,
   "values": [
-    "clutter:acacia_chair",
-    "clutter:birch_chair",
-    "clutter:crimson_chair",
-    "clutter:dark_oak_chair",
-    "clutter:jungle_chair",
-    "clutter:mangrove_chair",
+    "clutter:redwood_chair",
     "clutter:oak_chair",
+    "clutter:birch_chair",
+    "clutter:jungle_chair",
+    "clutter:acacia_chair",
     "clutter:spruce_chair",
+    "clutter:dark_oak_chair",
+    "clutter:mangrove_chair",
+    "clutter:crimson_chair",
     "clutter:warped_chair",
     "clutter:cherry_chair",
-    "clutter:redwood_chair"
+    "clutter:bamboo_chair"
   ]
 }

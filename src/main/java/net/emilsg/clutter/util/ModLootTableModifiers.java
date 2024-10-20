@@ -18,8 +18,10 @@ import net.minecraft.loot.entry.AlternativeEntry;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.function.EnchantRandomlyLootFunction;
 import net.minecraft.loot.function.SetCountLootFunction;
+import net.minecraft.loot.function.SetNbtLootFunction;
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.predicate.NumberRange;
 import net.minecraft.predicate.TagPredicate;
 import net.minecraft.predicate.entity.DamageSourcePredicate;
@@ -28,10 +30,7 @@ import net.minecraft.predicate.item.ItemPredicate;
 import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.util.Identifier;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ModLootTableModifiers {
 
@@ -127,10 +126,10 @@ public class ModLootTableModifiers {
                     if (id.equals(structureId) && ModConfigManager.get(Configs.chestLootCoinPouches, true)) {
                         LootPool.Builder poolBuilder = LootPool.builder()
                                 .rolls(ConstantLootNumberProvider.create(2))
-                                .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.COMMON_COIN_POUCH).conditionally(RandomChanceLootCondition.builder(0.35f)).weight(20)))
-                                .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.UNCOMMON_COIN_POUCH).conditionally(RandomChanceLootCondition.builder(0.35f)).weight(10)))
-                                .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.RARE_COIN_POUCH).conditionally(RandomChanceLootCondition.builder(0.35f)).weight(5)))
-                                .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.EPIC_COIN_POUCH).conditionally(RandomChanceLootCondition.builder(0.35f)).weight(1)))
+                                .conditionally(RandomChanceLootCondition.builder(0.5f))
+                                .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.COIN_POUCH).weight(12).apply(SetNbtLootFunction.builder(createCoinPouchNbt(0)))))
+                                .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.COIN_POUCH).weight(4).apply(SetNbtLootFunction.builder(createCoinPouchNbt(1)))))
+                                .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.COIN_POUCH).weight(1).apply(SetNbtLootFunction.builder(createCoinPouchNbt(2)))))
                                 .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1.0f)).build());
                         tableBuilder.pool(poolBuilder.build());
                     }
@@ -148,9 +147,8 @@ public class ModLootTableModifiers {
                     if (id.equals(PIGLIN_BRUTE_ID) || id.equals(ELDER_GUARDIAN_ID)) {
                         LootPool.Builder poolBuilder = LootPool.builder()
                                 .rolls(ConstantLootNumberProvider.create(1))
-                                .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.COMMON_COIN_POUCH).weight(500)))
-                                .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.UNCOMMON_COIN_POUCH).weight(375)))
-                                .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.RARE_COIN_POUCH).weight(125)))
+                                .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.COIN_POUCH).weight(10).apply(SetNbtLootFunction.builder(createCoinPouchNbt(1)))))
+                                .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.COIN_POUCH).weight(2).apply(SetNbtLootFunction.builder(createCoinPouchNbt(2)))))
                                 .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1.0f)).build());
                         tableBuilder.pool(poolBuilder.build());
                     }
@@ -158,8 +156,8 @@ public class ModLootTableModifiers {
                     if (id.equals(WITHER_ID) || id.equals(ENDER_DRAGON_ID)) {
                         LootPool.Builder poolBuilder = LootPool.builder()
                                 .rolls(ConstantLootNumberProvider.create(6))
-                                .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.RARE_COIN_POUCH).weight(2)))
-                                .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.EPIC_COIN_POUCH).weight(1)))
+                                .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.COIN_POUCH).weight(2).apply(SetNbtLootFunction.builder(createCoinPouchNbt(2)))))
+                                .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.COIN_POUCH).weight(1).apply(SetNbtLootFunction.builder(createCoinPouchNbt(3)))))
                                 .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1.0f)).build());
                         tableBuilder.pool(poolBuilder.build());
                     }
@@ -249,5 +247,11 @@ public class ModLootTableModifiers {
                 });
             }
         }));
+    }
+
+    private static NbtCompound createCoinPouchNbt(int rarity) {
+        NbtCompound nbt = new NbtCompound();
+        nbt.putInt("Rarity", rarity);
+        return nbt;
     }
 }

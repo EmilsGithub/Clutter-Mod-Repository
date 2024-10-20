@@ -11,6 +11,9 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.Angerable;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
@@ -143,6 +146,18 @@ public abstract class AbstractNetherNewtEntity extends ClutterAnimalEntity imple
         this.setFungiCount(random.nextInt(5) + 1);
         super.setBaby(baby);
     }
+
+    @Override
+    public boolean damage(DamageSource source, float amount) {
+        if(source.getAttacker() instanceof LivingEntity attacker && attacker.getWorld() instanceof ServerWorld && !this.isBaby() && this.getFungiCount() >= 1) {
+            if(random.nextInt(8) == 0) {
+                attacker.addStatusEffect(new StatusEffectInstance(getOnAttackEffect(), getOnAttackEffect() == StatusEffects.POISON ? 100 : 200, 1), this);
+            }
+        }
+        return super.damage(source, amount);
+    }
+
+    public abstract StatusEffect getOnAttackEffect();
 
     @Override
     public void breed(ServerWorld world, AnimalEntity other) {

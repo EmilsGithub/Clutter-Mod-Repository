@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "clutter:block/jungle_short_bench",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "clutter:block/jungle_short_bench"
+    },
+    "facing=south": {
+      "model": "clutter:block/jungle_short_bench",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "clutter:block/jungle_short_bench",
+      "y": 270
+    }
+  }
+}

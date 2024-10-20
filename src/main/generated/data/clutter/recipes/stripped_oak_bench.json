@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "benches",
+  "key": {
+    "L": {
+      "item": "minecraft:stripped_oak_log"
+    },
+    "P": {
+      "item": "minecraft:oak_planks"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "PSP",
+    "PPP",
+    "L L"
+  ],
+  "result": {
+    "count": 4,
+    "item": "clutter:stripped_oak_bench"
+  },
+  "show_notification": true
+}

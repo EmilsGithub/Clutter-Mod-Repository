@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "clutter:block/mangrove_short_bench",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "clutter:block/mangrove_short_bench"
+    },
+    "facing=south": {
+      "model": "clutter:block/mangrove_short_bench",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "clutter:block/mangrove_short_bench",
+      "y": 270
+    }
+  }
+}

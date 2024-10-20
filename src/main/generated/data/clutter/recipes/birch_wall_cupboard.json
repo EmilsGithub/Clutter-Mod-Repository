@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "wall_cupboards",
+  "key": {
+    "P": {
+      "item": "minecraft:birch_planks"
+    },
+    "S": {
+      "item": "minecraft:birch_slab"
+    }
+  },
+  "pattern": [
+    "PS ",
+    "PS ",
+    "PS "
+  ],
+  "result": {
+    "count": 2,
+    "item": "clutter:birch_wall_cupboard"
+  },
+  "show_notification": true
+}

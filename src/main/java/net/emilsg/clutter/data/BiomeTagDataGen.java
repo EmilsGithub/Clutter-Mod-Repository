@@ -47,6 +47,20 @@ public class BiomeTagDataGen extends FabricTagProvider<Biome> {
                 BiomeKeys.END_HIGHLANDS
         );
 
+        getOrCreateTagBuilder(ModBiomeTags.SPAWNS_JELLYFISHES).add(
+                BiomeKeys.WARM_OCEAN,
+                BiomeKeys.LUKEWARM_OCEAN
+        );
+
+        getOrCreateTagBuilder(ModBiomeTags.SPAWNS_MANTA_RAYS).add(
+                BiomeKeys.WARM_OCEAN,
+                BiomeKeys.LUKEWARM_OCEAN
+        );
+
+        getOrCreateTagBuilder(ModBiomeTags.SPAWNS_SEAHORSES).add(
+                BiomeKeys.WARM_OCEAN
+        );
+
     }
 
     @Override

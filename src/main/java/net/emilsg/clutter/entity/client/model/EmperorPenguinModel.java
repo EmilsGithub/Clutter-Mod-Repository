@@ -6,7 +6,6 @@ import net.emilsg.clutter.entity.custom.EmperorPenguinEntity;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.util.math.MatrixStack;
-import org.apache.logging.log4j.core.util.Transform;
 
 public class EmperorPenguinModel<T extends EmperorPenguinEntity> extends ClutterModel<T> {
     private final ModelPart root;
@@ -72,8 +71,6 @@ public class EmperorPenguinModel<T extends EmperorPenguinEntity> extends Clutter
         }
 
         if(!emperorPenguinEntity.isTouchingWater()) this.animateMovement(EmperorPenguinAnimations.EMPEROR_PENGUIN_WALK, limbSwing, limbSwingAmount, 2.0f, 2.5f);
-
-        this.updateAnimation(emperorPenguinEntity.swimAnimationState, EmperorPenguinAnimations.EMPEROR_PENGUIN_SWIM_STATE, ageInTicks, 1f);
 
         this.updateAnimation(emperorPenguinEntity.flapAnimationStateOne, EmperorPenguinAnimations.EMPEROR_PENGUIN_RANDOM_FLAP, ageInTicks, 1f);
         this.updateAnimation(emperorPenguinEntity.flapAnimationStateTwo, EmperorPenguinAnimations.EMPEROR_PENGUIN_RANDOM_FLAP_TWO, ageInTicks, 1f);

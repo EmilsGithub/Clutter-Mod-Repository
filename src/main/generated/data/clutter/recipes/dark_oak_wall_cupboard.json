@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "wall_cupboards",
+  "key": {
+    "P": {
+      "item": "minecraft:dark_oak_planks"
+    },
+    "S": {
+      "item": "minecraft:dark_oak_slab"
+    }
+  },
+  "pattern": [
+    "PS ",
+    "PS ",
+    "PS "
+  ],
+  "result": {
+    "count": 2,
+    "item": "clutter:dark_oak_wall_cupboard"
+  },
+  "show_notification": true
+}
