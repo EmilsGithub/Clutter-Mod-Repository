@@ -11,6 +11,47 @@ Update Logs Below or in the [Wiki](https://github.com/EmilsGithub/Clutter-Mod-Re
 
 [![Bisect](https://www.bisecthosting.com/images/CF/Clutter/BH_CL_PromoCard.webp)](https://bisecthosting.com/ClutterMod)
 
+# Update Log - Clutter-0.6.0
+
+### Biomes!
+ - Giant Redwood Forest
+ - Lupine Fields
+
+-More to come in the future!
+ 
+
+### Entities
+ - Seahorses (Spawning in Warm Oceans)
+ - Manta Rays (Spawning in Warm, and Lukewarm Oceans)
+ - Jellyfishes (Spawning in Warm, and Lukewarm Oceans)
+ - Warped Newts (Spawning in Warped Forests)
+ 
+ -I will let you all figure out what they do!
+
+### Blocks
+ - Blue, Red, White, Purple, Magenta, and Yellow Lupines, which come in short and tall versions. (**Lupine Fields**)
+ - Giant Ferns (**Redwood Forest**)
+ - Polypores (**Redwood Forest**)
+ - Overgrown Packed Mud  (**Redwood Forest**)
+ - An entire wood set for Redwood!
+ - Short Benches 
+ - Anchor
+ - Lab Bottles
+ - Tall Bottles
+ - Quartz Crystal
+
+### Items
+- Gemstone Elytras (Amethyst, Diamond, Emerald, and Quartz)
+- Silver Tiara
+
+### Changes
+- Major changes to Tags, Recipes, how Models are generated, etc. for future updates
+- **Massive!** changes in the way Configs are being managed. - Make sure to update your configs if you plan on updating Clutter to 0.6.0!
+-  New Textures for some Items
+ - TLC for some Entities (**Geckolib is no longer a Dependency**)
+ - Butterflies in Bottles are now 1 item instead of 16
+ - Coin Puches are now 1 item instead of 4
+
 # Update Log - Clutter-0.5.9
 
 **Bugfix**
