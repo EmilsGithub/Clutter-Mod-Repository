@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_spruce_slab",
-      "has_spruce_planks",
-      "has_the_recipe"
+      "has_spruce_planks"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:spruce_wall_cupboard"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_polished_onyx_slab",
-      "has_sulphur",
-      "has_the_recipe"
+      "has_sulphur"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:polished_black_onyx_slab"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

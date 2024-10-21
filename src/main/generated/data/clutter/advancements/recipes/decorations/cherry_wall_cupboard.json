@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_cherry_slab",
-      "has_cherry_planks",
-      "has_the_recipe"
+      "has_cherry_planks"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:cherry_wall_cupboard"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

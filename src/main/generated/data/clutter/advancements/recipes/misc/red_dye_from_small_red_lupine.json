@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_small_red_lupine",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_small_red_lupine"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:red_dye_from_small_red_lupine"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

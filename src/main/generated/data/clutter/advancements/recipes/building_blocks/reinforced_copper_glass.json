@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_glass",
-      "has_copper_nugget",
-      "has_the_recipe"
+      "has_copper_nugget"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:reinforced_copper_glass"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

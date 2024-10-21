@@ -1,11 +1,11 @@
 {
   "type": "clutter:kilning",
-  "ingredients": [
-    {
-      "item": "minecraft:magenta_terracotta"
-    }
-  ],
-  "output": {
-    "item": "minecraft:magenta_glazed_terracotta"
-  }
+  "category": "blocks",
+  "cookingtime": 50,
+  "experience": 1.0,
+  "group": "magenta_glazed_terracotta",
+  "ingredient": {
+    "item": "minecraft:magenta_terracotta"
+  },
+  "result": "minecraft:magenta_glazed_terracotta"
 }

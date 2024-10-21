@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_acacia_slab",
-      "has_book",
-      "has_the_recipe"
+      "has_book"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:acacia_wall_bookshelf"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

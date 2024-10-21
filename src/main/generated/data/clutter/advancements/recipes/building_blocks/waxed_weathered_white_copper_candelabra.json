@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_weathered_white_copper_candelabra",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_weathered_white_copper_candelabra"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:waxed_weathered_white_copper_candelabra"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

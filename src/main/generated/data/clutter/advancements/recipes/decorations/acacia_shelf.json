@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_acacia_slab",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_acacia_slab"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:acacia_shelf"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

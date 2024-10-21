@@ -1,11 +1,20 @@
 package net.emilsg.clutter.block.custom.stacking;
 
+import com.mojang.serialization.MapCodec;
+import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.item.Item;
 
 public class TallBottleBlock extends AbstractStackableGlassBlock4 {
 
     public TallBottleBlock(Settings settings) {
         super(settings);
+    }
+
+    public static final MapCodec<TallBottleBlock> CODEC = createCodec(TallBottleBlock::new);
+
+    @Override
+    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
+        return CODEC;
     }
 
     @Override

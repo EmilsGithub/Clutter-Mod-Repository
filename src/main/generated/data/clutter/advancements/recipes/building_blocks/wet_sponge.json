@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_sponge_shard",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_sponge_shard"
     ]
   ],
   "rewards": {
     "recipes": [
       "minecraft:wet_sponge"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

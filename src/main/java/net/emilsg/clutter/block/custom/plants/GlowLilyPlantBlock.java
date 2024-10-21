@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom.plants;
 
+import com.mojang.serialization.MapCodec;
 import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.item.ModItems;
 import net.emilsg.clutter.util.ModProperties;
@@ -35,6 +36,13 @@ public class GlowLilyPlantBlock extends PlantBlock implements Fertilizable {
     public GlowLilyPlantBlock(Settings settings) {
         super(settings);
         this.setDefaultState((this.stateManager.getDefaultState()).with(AGE, 0).with(CLIPPED, false));
+    }
+
+    public static final MapCodec<GlowLilyPlantBlock> CODEC = createCodec(GlowLilyPlantBlock::new);
+
+    @Override
+    protected MapCodec<? extends PlantBlock> getCodec() {
+        return CODEC;
     }
 
     public static ToIntFunction<BlockState> createLightLevelFromAge() {

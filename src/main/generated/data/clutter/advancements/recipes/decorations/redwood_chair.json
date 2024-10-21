@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_redwood_planks",
-      "has_redwood_log",
-      "has_the_recipe"
+      "has_redwood_log"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:redwood_chair"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

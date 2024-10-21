@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.block.entity.CardboardBoxInventoryBlockEntity;
 import net.minecraft.block.*;
@@ -45,6 +46,13 @@ public class CardboardBoxBlock extends BlockWithEntity implements Waterloggable 
     public CardboardBoxBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.stateManager.getDefaultState().with(WATERLOGGED, false).with(FACING, Direction.NORTH).with(OPEN, false));
+    }
+
+    public static final MapCodec<CardboardBoxBlock> CODEC = createCodec(CardboardBoxBlock::new);
+
+    @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return CODEC;
     }
 
     @Override
@@ -156,7 +164,7 @@ public class CardboardBoxBlock extends BlockWithEntity implements Waterloggable 
         }
     }
 
-    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+    public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof CardboardBoxInventoryBlockEntity cardboardBoxInventoryBlockEntity) {
             ItemStack itemStack = new ItemStack(ModBlocks.CARDBOARD_BOX);
@@ -174,7 +182,7 @@ public class CardboardBoxBlock extends BlockWithEntity implements Waterloggable 
             }
         }
 
-        super.onBreak(world, pos, state, player);
+        return super.onBreak(world, pos, state, player);
     }
 
     @Override

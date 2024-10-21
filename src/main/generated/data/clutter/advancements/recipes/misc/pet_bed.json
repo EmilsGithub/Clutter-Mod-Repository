@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_white_wool",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_white_wool"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:pet_bed"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

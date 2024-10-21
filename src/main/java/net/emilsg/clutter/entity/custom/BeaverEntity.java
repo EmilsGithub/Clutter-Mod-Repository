@@ -45,6 +45,7 @@ import java.util.List;
 
 public class BeaverEntity extends ClutterAnimalEntity {
     private static final TrackedData<BlockPos> HOME_POS = DataTracker.registerData(BeaverEntity.class, TrackedDataHandlerRegistry.BLOCK_POS);
+    private final int MAX_AIR = 4800;
 
     private static final Ingredient BREEDING_INGREDIENT = getIngredientWithName("sapling");
 
@@ -182,6 +183,7 @@ public class BeaverEntity extends ClutterAnimalEntity {
 
     @Override
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
+        this.setAir(this.getMaxAir());
         this.setHomePos(this.getBlockPos());
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
     }
@@ -236,8 +238,13 @@ public class BeaverEntity extends ClutterAnimalEntity {
     }
 
     @Override
-    public boolean canBreatheInWater() {
-        return true;
+    public int getMaxAir() {
+        return MAX_AIR;
+    }
+
+    @Override
+    protected int getNextAirOnLand(int air) {
+        return this.getMaxAir();
     }
 
     protected EntityNavigation createNavigation(World world) {

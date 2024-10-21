@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_birch_planks",
-      "has_birch_log",
-      "has_the_recipe"
+      "has_birch_log"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:birch_short_bench"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

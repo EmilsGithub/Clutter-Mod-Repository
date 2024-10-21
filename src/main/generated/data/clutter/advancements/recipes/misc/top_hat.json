@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_black_wool",
-      "has_red_dye",
-      "has_the_recipe"
+      "has_red_dye"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:top_hat"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

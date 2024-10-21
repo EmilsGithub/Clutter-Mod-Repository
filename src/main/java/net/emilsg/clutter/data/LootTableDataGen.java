@@ -42,7 +42,7 @@ public class LootTableDataGen extends FabricBlockLootTableProvider {
         this.addDrop(ModBlocks.NAUTILUS_SHELL_BLOCK, Items.NAUTILUS_SHELL);
 
         this.addDrop(ModBlocks.OVERGROWN_PACKED_MUD, this.silkTouchDrops(ModBlocks.OVERGROWN_PACKED_MUD, Blocks.PACKED_MUD));
-        this.addDrop(ModBlocks.GIANT_FERN, (block) -> this.tallGrassDrops(block, Blocks.LARGE_FERN));
+        this.addDrop(ModBlocks.GIANT_FERN, (block) -> this.tallPlantDrops(block, Blocks.LARGE_FERN));
 
         this.addPottedPlantGroupDrops(
                 ModBlocks.POTTED_SMALL_BLUE_LUPINE,

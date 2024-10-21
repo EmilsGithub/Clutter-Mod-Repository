@@ -106,17 +106,28 @@ public class PresentInventoryBlockEntity extends LootableContainerBlockEntity im
 
     protected void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
-        if (!this.serializeLootTable(nbt)) {
+        if (!this.writeLootTable(nbt)) {
             Inventories.writeNbt(nbt, this.inventory);
         }
+
     }
 
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
         this.inventory = DefaultedList.ofSize(this.size(), ItemStack.EMPTY);
-        if (!this.deserializeLootTable(nbt)) {
+        if (!this.readLootTable(nbt)) {
             Inventories.readNbt(nbt, this.inventory);
         }
+
+    }
+
+    protected DefaultedList<ItemStack> method_11282() {
+        return this.inventory;
+    }
+
+    @Override
+    protected void setInvStackList(DefaultedList<ItemStack> list) {
+        this.inventory = list;
     }
 
     void playSound(SoundEvent soundEvent) {
@@ -171,15 +182,5 @@ public class PresentInventoryBlockEntity extends LootableContainerBlockEntity im
         for (int i = 0; i < inventory.size(); i++) {
             this.inventory.set(i, inventory.get(i));
         }
-    }
-
-    @Override
-    protected DefaultedList<ItemStack> getInvStackList() {
-        return this.inventory;
-    }
-
-    @Override
-    protected void setInvStackList(DefaultedList<ItemStack> list) {
-        this.inventory = list;
     }
 }

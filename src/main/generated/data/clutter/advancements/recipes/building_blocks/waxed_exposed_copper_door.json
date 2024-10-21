@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_exposed_copper_door",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_exposed_copper_door"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:waxed_exposed_copper_door"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

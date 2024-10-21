@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_oxidized_copper_pressure_plate",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_oxidized_copper_pressure_plate"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:waxed_oxidized_copper_pressure_plate"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

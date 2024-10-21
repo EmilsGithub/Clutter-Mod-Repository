@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_emerald",
-      "has_gold_ingot",
-      "has_the_recipe"
+      "has_gold_ingot"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:crown"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

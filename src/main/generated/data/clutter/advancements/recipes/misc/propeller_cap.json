@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_cap",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_cap"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:propeller_cap"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

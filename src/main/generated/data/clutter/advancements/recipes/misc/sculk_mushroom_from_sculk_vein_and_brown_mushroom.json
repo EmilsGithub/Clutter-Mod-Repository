@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_sculk_vein",
-      "has_brown_mushroom",
-      "has_the_recipe"
+      "has_brown_mushroom"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:sculk_mushroom_from_sculk_vein_and_brown_mushroom"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

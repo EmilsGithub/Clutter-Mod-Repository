@@ -1,11 +1,11 @@
 {
   "type": "clutter:kilning",
-  "ingredients": [
-    {
-      "item": "minecraft:basalt"
-    }
-  ],
-  "output": {
-    "item": "minecraft:smooth_basalt"
-  }
+  "category": "blocks",
+  "cookingtime": 50,
+  "experience": 1.0,
+  "group": "smooth_basalt",
+  "ingredient": {
+    "item": "minecraft:basalt"
+  },
+  "result": "minecraft:smooth_basalt"
 }

@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_dark_oak_slab",
-      "has_dark_oak_planks",
-      "has_the_recipe"
+      "has_dark_oak_planks"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:dark_oak_wall_cupboard"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

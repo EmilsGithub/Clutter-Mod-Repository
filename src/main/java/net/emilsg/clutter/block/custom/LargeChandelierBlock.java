@@ -163,7 +163,7 @@ public class LargeChandelierBlock extends Block {
     }
 
     @Override
-    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+    public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         super.onBreak(world, pos, state, player);
 
 
@@ -187,6 +187,7 @@ public class LargeChandelierBlock extends Block {
                 world.breakBlock(pair.getLeft(), true);
             }
         }
+        return state;
     }
 
     public void placeWithDirection(World world, BlockPos pos) {

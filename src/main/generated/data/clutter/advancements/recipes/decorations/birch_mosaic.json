@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_birch_slab",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_birch_slab"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:birch_mosaic"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

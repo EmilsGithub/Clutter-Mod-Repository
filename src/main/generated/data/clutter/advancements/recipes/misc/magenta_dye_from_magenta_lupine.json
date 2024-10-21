@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_magenta_lupine",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_magenta_lupine"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:magenta_dye_from_magenta_lupine"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

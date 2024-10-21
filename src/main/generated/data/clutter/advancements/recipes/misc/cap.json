@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_light_blue_wool",
-      "has_white_dye",
-      "has_the_recipe"
+      "has_white_dye"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:cap"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

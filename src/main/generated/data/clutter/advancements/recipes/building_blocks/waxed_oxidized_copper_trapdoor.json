@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_oxidized_copper_trapdoor",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_oxidized_copper_trapdoor"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:waxed_oxidized_copper_trapdoor"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

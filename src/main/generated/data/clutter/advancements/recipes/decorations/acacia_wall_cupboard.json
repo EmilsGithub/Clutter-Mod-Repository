@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_acacia_slab",
-      "has_acacia_planks",
-      "has_the_recipe"
+      "has_acacia_planks"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:acacia_wall_cupboard"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

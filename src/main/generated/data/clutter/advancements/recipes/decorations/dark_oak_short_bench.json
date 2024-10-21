@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_dark_oak_planks",
-      "has_dark_oak_log",
-      "has_the_recipe"
+      "has_dark_oak_log"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:dark_oak_short_bench"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

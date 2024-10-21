@@ -83,16 +83,6 @@ public class WallCupboardInventoryBlockEntity extends LootableContainerBlockEnti
     }
 
     @Override
-    protected DefaultedList<ItemStack> getInvStackList() {
-        return this.inventory;
-    }
-
-    @Override
-    protected void setInvStackList(DefaultedList<ItemStack> list) {
-        this.inventory = list;
-    }
-
-    @Override
     protected Text getContainerName() {
         return Text.translatable("container.clutter.wall_cupboard");
     }
@@ -107,21 +97,30 @@ public class WallCupboardInventoryBlockEntity extends LootableContainerBlockEnti
         return 9;
     }
 
-    @Override
     protected void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
-        if (!this.serializeLootTable(nbt)) {
+        if (!this.writeLootTable(nbt)) {
             Inventories.writeNbt(nbt, this.inventory);
         }
+
     }
 
-    @Override
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
         this.inventory = DefaultedList.ofSize(this.size(), ItemStack.EMPTY);
-        if (!this.deserializeLootTable(nbt)) {
+        if (!this.readLootTable(nbt)) {
             Inventories.readNbt(nbt, this.inventory);
         }
+
+    }
+
+    protected DefaultedList<ItemStack> method_11282() {
+        return this.inventory;
+    }
+
+    @Override
+    protected void setInvStackList(DefaultedList<ItemStack> list) {
+        this.inventory = list;
     }
 
     void playSound(BlockState state, SoundEvent soundEvent) {

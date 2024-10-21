@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
@@ -83,6 +84,13 @@ public class TubeTvBlock extends HorizontalFacingBlock implements Waterloggable 
     public TubeTvBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.getDefaultState().with(WATERLOGGED, false).with(LIT, false));
+    }
+
+    public static final MapCodec<TubeTvBlock> CODEC = createCodec(TubeTvBlock::new);
+
+    @Override
+    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
+        return CODEC;
     }
 
     public static ToIntFunction<BlockState> createLightLevelFromLitBlockState(int litLevel) {

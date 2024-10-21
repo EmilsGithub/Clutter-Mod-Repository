@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.emilsg.clutter.util.ModProperties;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -23,14 +24,20 @@ import org.jetbrains.annotations.Nullable;
 
 public class BreadBlock extends HorizontalFacingBlock {
     public static final IntProperty SLICES = ModProperties.SLICES;
-    private final int food;
-    private final float saturation;
+    private final int food = 2;
+    private final float saturation = 0.25f;
 
-    public BreadBlock(Settings settings, int food, float saturation) {
+    public BreadBlock(Settings settings) {
         super(settings);
         this.getDefaultState().with(SLICES, 7).with(FACING, Direction.NORTH);
-        this.food = food;
-        this.saturation = saturation;
+
+    }
+
+    public static final MapCodec<BreadBlock> CODEC = createCodec(BreadBlock::new);
+
+    @Override
+    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
+        return CODEC;
     }
 
     @Override

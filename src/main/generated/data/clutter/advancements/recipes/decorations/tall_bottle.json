@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_green_dye",
-      "has_glass",
-      "has_the_recipe"
+      "has_glass"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:tall_bottle"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

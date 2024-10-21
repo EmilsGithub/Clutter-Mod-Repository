@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_glowlily_bulb",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_glowlily_bulb"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:glowlily_block"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

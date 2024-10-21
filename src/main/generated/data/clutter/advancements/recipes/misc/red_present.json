@@ -46,16 +46,15 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_paper",
       "has_cardboard_box",
-      "has_red_dye",
-      "has_the_recipe"
+      "has_red_dye"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:red_present"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

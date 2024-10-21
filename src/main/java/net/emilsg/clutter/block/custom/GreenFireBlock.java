@@ -1,10 +1,8 @@
 package net.emilsg.clutter.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.emilsg.clutter.util.ModBlockTags;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.AbstractFireBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
+import net.minecraft.block.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.WorldAccess;
@@ -13,6 +11,13 @@ import net.minecraft.world.WorldView;
 public class GreenFireBlock extends AbstractFireBlock {
     public GreenFireBlock(AbstractBlock.Settings settings) {
         super(settings, 1.0F);
+    }
+
+    public static final MapCodec<GreenFireBlock> CODEC = createCodec(GreenFireBlock::new);
+
+    @Override
+    protected MapCodec<? extends AbstractFireBlock> getCodec() {
+        return CODEC;
     }
 
     public static boolean isFireBase(BlockState state) {

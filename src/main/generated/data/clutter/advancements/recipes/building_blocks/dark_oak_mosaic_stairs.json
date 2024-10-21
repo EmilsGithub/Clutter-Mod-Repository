@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_dark_oak_mosaic",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_dark_oak_mosaic"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:dark_oak_mosaic_stairs"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

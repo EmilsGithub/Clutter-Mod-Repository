@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_cherry_planks",
-      "has_cherry_log",
-      "has_the_recipe"
+      "has_cherry_log"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:cherry_table"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

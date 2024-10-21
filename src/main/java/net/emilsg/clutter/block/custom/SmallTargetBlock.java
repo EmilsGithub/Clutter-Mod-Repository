@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.emilsg.clutter.util.ModProperties;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -75,6 +76,13 @@ public class SmallTargetBlock extends HorizontalFacingBlock {
     public SmallTargetBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.getDefaultState().with(UP, false));
+    }
+
+    public static final MapCodec<SmallTargetBlock> CODEC = createCodec(SmallTargetBlock::new);
+
+    @Override
+    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
+        return CODEC;
     }
 
     private static void spawnParticles(BlockState state, WorldAccess world, BlockPos pos) {

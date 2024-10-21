@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_mangrove_planks",
-      "has_stripped_mangrove_log",
-      "has_the_recipe"
+      "has_stripped_mangrove_log"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:stripped_mangrove_bench"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

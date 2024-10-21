@@ -4,7 +4,6 @@ import net.emilsg.clutter.config.Configs;
 import net.emilsg.clutter.config.ModConfigManager;
 import net.emilsg.clutter.entity.ModEntities;
 import net.emilsg.clutter.entity.custom.*;
-import net.emilsg.clutter.mixin.ServerWorldAccessor;
 import net.emilsg.clutter.util.ModBiomeTags;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
@@ -12,12 +11,7 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.SpawnRestriction;
 import net.minecraft.registry.tag.BiomeTags;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.Heightmap;
-import net.minecraft.world.spawner.Spawner;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static net.minecraft.world.biome.BiomeKeys.*;
 
@@ -125,13 +119,5 @@ public class ModEntitySpawning {
         SpawnRestriction.register(ModEntities.EMBER_TORTOISE, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, EmberTortoiseEntity::isValidNaturalSpawn);
         SpawnRestriction.register(ModEntities.ECHOFIN, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, EchofinEntity::isValidSpawn);
 
-    }
-
-    private static void registerSpawners(ServerWorld world, Spawner spawner) {
-        ServerWorldAccessor serverWorldAccessor = (ServerWorldAccessor) world;
-
-        List<Spawner> worldSpawners = new ArrayList<>(((serverWorldAccessor).getWorldSpawners()));
-        worldSpawners.add(spawner);
-        (serverWorldAccessor).setWorldSpawners(worldSpawners);
     }
 }

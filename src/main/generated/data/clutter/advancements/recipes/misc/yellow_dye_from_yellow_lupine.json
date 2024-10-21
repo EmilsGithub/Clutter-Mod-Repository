@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_yellow_lupine",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_yellow_lupine"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:yellow_dye_from_yellow_lupine"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

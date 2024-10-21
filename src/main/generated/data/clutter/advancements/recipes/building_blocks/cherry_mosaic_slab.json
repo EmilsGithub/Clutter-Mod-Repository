@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_cherry_mosaic",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_cherry_mosaic"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:cherry_mosaic_slab"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

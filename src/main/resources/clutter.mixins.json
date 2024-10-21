@@ -5,13 +5,13 @@
   "mixins": [
     "AbstractFireBlockMixin",
     "BrewingRecipeRegistryMixin",
+    "CookingRecipeJsonBuilderMixin",
     "FireBlockInvoker",
     "FoliagePlacerTypeInvoker",
     "LivingEntityMixin",
     "MossBlockMixin",
     "PistonBlockMixin",
     "PlayerEntityMixin",
-    "ServerWorldAccessor",
     "TreeDecoratorTypeInvoker",
     "TrunkPlacerTypeInvoker"
   ],

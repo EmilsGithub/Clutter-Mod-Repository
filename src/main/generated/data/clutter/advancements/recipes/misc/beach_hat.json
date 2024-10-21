@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_wheat",
-      "has_pink_dye",
-      "has_the_recipe"
+      "has_pink_dye"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:beach_hat"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

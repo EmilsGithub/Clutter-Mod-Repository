@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_redwood_planks",
-      "has_stripped_redwood_log",
-      "has_the_recipe"
+      "has_stripped_redwood_log"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:stripped_redwood_table"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

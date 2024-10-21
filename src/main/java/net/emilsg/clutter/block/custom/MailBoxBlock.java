@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.emilsg.clutter.block.entity.MailBoxInventoryBlockEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -41,6 +42,13 @@ public class MailBoxBlock extends BlockWithEntity implements Waterloggable {
     public MailBoxBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.stateManager.getDefaultState().with(HATCH_OPEN, false).with(WATERLOGGED, false).with(FLAG_UP, false).with(FACING, Direction.NORTH));
+    }
+
+    public static final MapCodec<MailBoxBlock> CODEC = createCodec(MailBoxBlock::new);
+
+    @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return CODEC;
     }
 
     private static boolean facingToBoolean(BlockState state, Direction direction) {

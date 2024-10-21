@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_blue_lupine",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_blue_lupine"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:blue_dye_from_blue_lupine"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

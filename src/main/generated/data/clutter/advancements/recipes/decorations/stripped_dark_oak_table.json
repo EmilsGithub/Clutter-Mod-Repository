@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_dark_oak_planks",
-      "has_stripped_dark_oak_log",
-      "has_the_recipe"
+      "has_stripped_dark_oak_log"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:stripped_dark_oak_table"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

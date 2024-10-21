@@ -1,13 +1,13 @@
 package net.emilsg.clutter.block.custom.oxidizable;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.block.GlassBlock;
 import net.minecraft.block.Oxidizable;
+import net.minecraft.block.TransparentBlock;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 
-public class OxidizableGlassBlock extends GlassBlock implements Oxidizable {
+public class OxidizableGlassBlock extends TransparentBlock implements Oxidizable {
     private final OxidationLevel oxidationLevel;
 
     public OxidizableGlassBlock(OxidationLevel oxidationLevel, Settings settings) {

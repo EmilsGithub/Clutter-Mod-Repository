@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalFacingBlock;
@@ -38,6 +39,13 @@ public class TowelBlock extends HorizontalFacingBlock {
 
     public TowelBlock(Settings settings) {
         super(settings);
+    }
+
+    public static final MapCodec<TowelBlock> CODEC = createCodec(TowelBlock::new);
+
+    @Override
+    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
+        return CODEC;
     }
 
     @Override

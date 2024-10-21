@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_warped_slab",
-      "has_flower_pot",
-      "has_the_recipe"
+      "has_flower_pot"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:warped_window_sill"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

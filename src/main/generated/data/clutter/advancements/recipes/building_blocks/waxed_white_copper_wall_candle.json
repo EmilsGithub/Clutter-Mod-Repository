@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_white_copper_wall_candle",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_white_copper_wall_candle"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:waxed_white_copper_wall_candle"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

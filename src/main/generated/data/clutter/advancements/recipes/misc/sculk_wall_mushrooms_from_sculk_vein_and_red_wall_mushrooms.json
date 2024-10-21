@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_sculk_vein",
-      "has_red_wall_mushrooms",
-      "has_the_recipe"
+      "has_red_wall_mushrooms"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:sculk_wall_mushrooms_from_sculk_vein_and_red_wall_mushrooms"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

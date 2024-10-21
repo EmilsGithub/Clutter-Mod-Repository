@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_oxidized_large_copper_chain",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_oxidized_large_copper_chain"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:waxed_oxidized_large_copper_chain"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

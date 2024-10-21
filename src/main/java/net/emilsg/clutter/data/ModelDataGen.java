@@ -299,10 +299,10 @@ public class ModelDataGen extends FabricModelProvider {
 
         registerLargeTintableCross(generator, ModBlocks.GIANT_FERN);
 
-        generator.registerCubeAllModelTexturePool(ModBlocks.REINFORCED_COPPER_GLASS).same(ModBlocks.WAXED_REINFORCED_COPPER_GLASS);
-        generator.registerCubeAllModelTexturePool(ModBlocks.EXPOSED_REINFORCED_COPPER_GLASS).same(ModBlocks.WAXED_EXPOSED_REINFORCED_COPPER_GLASS);
-        generator.registerCubeAllModelTexturePool(ModBlocks.WEATHERED_REINFORCED_COPPER_GLASS).same(ModBlocks.WAXED_WEATHERED_REINFORCED_COPPER_GLASS);
-        generator.registerCubeAllModelTexturePool(ModBlocks.OXIDIZED_REINFORCED_COPPER_GLASS).same(ModBlocks.WAXED_OXIDIZED_REINFORCED_COPPER_GLASS);
+        generator.registerCubeAllModelTexturePool(ModBlocks.REINFORCED_COPPER_GLASS).parented(ModBlocks.REINFORCED_COPPER_GLASS, ModBlocks.WAXED_REINFORCED_COPPER_GLASS);
+        generator.registerCubeAllModelTexturePool(ModBlocks.EXPOSED_REINFORCED_COPPER_GLASS).parented(ModBlocks.EXPOSED_REINFORCED_COPPER_GLASS, ModBlocks.WAXED_EXPOSED_REINFORCED_COPPER_GLASS);
+        generator.registerCubeAllModelTexturePool(ModBlocks.WEATHERED_REINFORCED_COPPER_GLASS).parented(ModBlocks.WEATHERED_REINFORCED_COPPER_GLASS, ModBlocks.WAXED_WEATHERED_REINFORCED_COPPER_GLASS);
+        generator.registerCubeAllModelTexturePool(ModBlocks.OXIDIZED_REINFORCED_COPPER_GLASS).parented(ModBlocks.OXIDIZED_REINFORCED_COPPER_GLASS, ModBlocks.WAXED_OXIDIZED_REINFORCED_COPPER_GLASS);
     }
 
     @Override

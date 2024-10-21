@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_oak_planks",
-      "has_oak_log",
-      "has_the_recipe"
+      "has_oak_log"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:oak_short_bench"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

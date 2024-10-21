@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_warped_mosaic",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_warped_mosaic"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:warped_mosaic_stairs"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_oak_slab",
-      "has_oak_planks",
-      "has_the_recipe"
+      "has_oak_planks"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:oak_cupboard"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

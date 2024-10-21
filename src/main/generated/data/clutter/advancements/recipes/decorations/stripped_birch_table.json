@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_birch_planks",
-      "has_stripped_birch_log",
-      "has_the_recipe"
+      "has_stripped_birch_log"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:stripped_birch_table"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

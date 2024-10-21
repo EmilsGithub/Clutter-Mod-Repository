@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_weathered_copper_soul_lantern",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_weathered_copper_soul_lantern"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:waxed_weathered_copper_soul_lantern"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

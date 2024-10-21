@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_oxidized_aquatic_torch",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_oxidized_aquatic_torch"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:waxed_oxidized_aquatic_torch"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

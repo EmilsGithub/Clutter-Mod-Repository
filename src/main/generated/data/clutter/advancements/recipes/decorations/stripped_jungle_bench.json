@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_jungle_planks",
-      "has_stripped_jungle_log",
-      "has_the_recipe"
+      "has_stripped_jungle_log"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:stripped_jungle_bench"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_pink_wool",
-      "has_black_dye",
-      "has_the_recipe"
+      "has_black_dye"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:beret"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

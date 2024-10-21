@@ -83,7 +83,7 @@ public class GiantLilyPadBlock extends LilyPadBlock implements Fertilizable {
     }
 
     @Override
-    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+    public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         if (state.get(LILY_PAD_DIRECTIONS) == LilyPadDirections.SOUTH_WEST) {
             getAndBreakBlock(world, pos.north());
             getAndBreakBlock(world, pos.north().east());
@@ -101,7 +101,7 @@ public class GiantLilyPadBlock extends LilyPadBlock implements Fertilizable {
             getAndBreakBlock(world, pos.south().west());
             getAndBreakBlock(world, pos.west());
         }
-        super.onBreak(world, pos, state, player);
+        return super.onBreak(world, pos, state, player);
     }
 
     private void getAndBreakBlock(WorldAccess world, BlockPos pos) {

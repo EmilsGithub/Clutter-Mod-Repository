@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_warped_planks",
-      "has_stripped_warped_stem",
-      "has_the_recipe"
+      "has_stripped_warped_stem"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:stripped_warped_chair"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

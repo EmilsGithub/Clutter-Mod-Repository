@@ -1,9 +1,11 @@
 package net.emilsg.clutter.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.util.ModBlockTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -127,6 +129,13 @@ public class WoodenBenchBlock extends SeatBlock {
 
     public WoodenBenchBlock(Settings settings) {
         super(settings);
+    }
+
+    public static final MapCodec<WoodenBenchBlock> CODEC = createCodec(WoodenBenchBlock::new);
+
+    @Override
+    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
+        return CODEC;
     }
 
     @Override

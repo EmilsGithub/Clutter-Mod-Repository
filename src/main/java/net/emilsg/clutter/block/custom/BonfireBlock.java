@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.emilsg.clutter.block.ModBlockEntities;
 import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.block.entity.BonfireBlockEntity;
@@ -85,6 +86,13 @@ public class BonfireBlock extends BlockWithEntity {
         this.setDefaultState(this.stateManager.getDefaultState().with(LIT, true));
     }
 
+    public static final MapCodec<BonfireBlock> CODEC = createCodec(BonfireBlock::new);
+
+    @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return CODEC;
+    }
+
     public static boolean checkAirAround(BlockPos pos, World world, boolean checkBonfireBlocks) {
         BlockPos[] positionsToCheck = {pos, pos.up()};
 
@@ -164,7 +172,7 @@ public class BonfireBlock extends BlockWithEntity {
     }
 
     @Override
-    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+    public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         if (!world.isClient() && !player.getAbilities().creativeMode) {
             super.onBreak(world, pos, state, player);
 
@@ -207,9 +215,9 @@ public class BonfireBlock extends BlockWithEntity {
                     }
                 }
             }
-        } else {
-            super.onBreak(world, pos, state, player);
         }
+
+        return super.onBreak(world, pos, state, player);
     }
 
     @Override

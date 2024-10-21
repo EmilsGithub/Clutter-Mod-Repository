@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_silver_ingot",
-      "has_diamond",
-      "has_the_recipe"
+      "has_diamond"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:silver_tiara"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

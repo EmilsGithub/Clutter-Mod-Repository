@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_mangrove_slab",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_mangrove_slab"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:mangrove_mosaic"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

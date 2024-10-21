@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_copper_ingot",
-      "has_copper_nugget",
-      "has_the_recipe"
+      "has_copper_nugget"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:aquatic_torch"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

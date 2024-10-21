@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_acacia_planks",
-      "has_stripped_acacia_log",
-      "has_the_recipe"
+      "has_stripped_acacia_log"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:stripped_acacia_bench"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

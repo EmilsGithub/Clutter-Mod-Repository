@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_string",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_string"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:butterfly_wings"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -1,11 +1,11 @@
 {
   "type": "clutter:kilning",
-  "ingredients": [
-    {
-      "item": "minecraft:sandstone"
-    }
-  ],
-  "output": {
-    "item": "minecraft:smooth_sandstone"
-  }
+  "category": "blocks",
+  "cookingtime": 50,
+  "experience": 1.0,
+  "group": "smooth_sandstone",
+  "ingredient": {
+    "item": "minecraft:sandstone"
+  },
+  "result": "minecraft:smooth_sandstone"
 }

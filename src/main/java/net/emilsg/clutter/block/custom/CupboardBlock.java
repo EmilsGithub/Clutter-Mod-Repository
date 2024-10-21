@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.emilsg.clutter.block.entity.CupboardInventoryBlockEntity;
 import net.emilsg.clutter.util.ModProperties;
 import net.minecraft.block.*;
@@ -36,6 +37,13 @@ public class CupboardBlock extends BlockWithEntity {
     public CupboardBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.getDefaultState().with(OPEN, false).with(FACING, Direction.NORTH));
+    }
+
+    public static final MapCodec<CupboardBlock> CODEC = createCodec(CupboardBlock::new);
+
+    @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return CODEC;
     }
 
     @Nullable

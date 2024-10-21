@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.emilsg.clutter.item.ModItems;
 import net.emilsg.clutter.util.ModProperties;
 import net.minecraft.block.*;
@@ -38,6 +39,13 @@ public class PearlClamBlock extends HorizontalFacingBlock implements Waterloggab
     public PearlClamBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.getDefaultState().with(WATERLOGGED, false).with(HAS_PEARL, false));
+    }
+
+    public static final MapCodec<PearlClamBlock> CODEC = createCodec(PearlClamBlock::new);
+
+    @Override
+    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
+        return CODEC;
     }
 
     @Override

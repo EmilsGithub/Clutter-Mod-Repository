@@ -11,6 +11,7 @@ import net.emilsg.clutter.recipe.KilningRecipe;
 import net.emilsg.clutter.screen.BrickKilnScreen;
 
 public class ClutterREIClientPlugin implements REIClientPlugin {
+
     @Override
     public void registerCategories(CategoryRegistry registry) {
         registry.add(new KilningCategory());

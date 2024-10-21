@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.emilsg.clutter.block.entity.ChimneyBlockEntity;
 import net.emilsg.clutter.block.ModBlockEntities;
 import net.emilsg.clutter.util.ModProperties;
@@ -46,6 +47,13 @@ public class ChimneyBlock extends BlockWithEntity implements FluidFillable, Wate
     public ChimneyBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.stateManager.getDefaultState().with(OPEN, true).with(WATERLOGGED, false));
+    }
+
+    public static final MapCodec<ChimneyBlock> CODEC = createCodec(ChimneyBlock::new);
+
+    @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return CODEC;
     }
 
     @Override

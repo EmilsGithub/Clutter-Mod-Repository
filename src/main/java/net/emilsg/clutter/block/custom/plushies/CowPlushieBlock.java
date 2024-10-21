@@ -1,6 +1,8 @@
 package net.emilsg.clutter.block.custom.plushies;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -17,6 +19,13 @@ public class CowPlushieBlock extends AbstractPlushieBlock {
 
     public CowPlushieBlock(Settings settings) {
         super(settings);
+    }
+
+    public static final MapCodec<CowPlushieBlock> CODEC = createCodec(CowPlushieBlock::new);
+
+    @Override
+    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
+        return CODEC;
     }
 
     @Override

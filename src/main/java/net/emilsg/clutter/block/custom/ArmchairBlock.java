@@ -1,7 +1,9 @@
 package net.emilsg.clutter.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.util.math.BlockPos;
@@ -46,6 +48,13 @@ public class ArmchairBlock extends SeatBlock {
 
     public ArmchairBlock(Settings settings) {
         super(settings);
+    }
+
+    public static final MapCodec<ArmchairBlock> CODEC = createCodec(ArmchairBlock::new);
+
+    @Override
+    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
+        return CODEC;
     }
 
     @Override

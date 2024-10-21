@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_crimson_mosaic",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_crimson_mosaic"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:crimson_mosaic_slab"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

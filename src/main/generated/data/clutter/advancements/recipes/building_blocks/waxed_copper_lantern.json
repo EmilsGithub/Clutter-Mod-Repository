@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_copper_lantern",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_copper_lantern"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:waxed_copper_lantern"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -11,7 +11,7 @@ import net.emilsg.clutter.entity.ClutterAttributes;
 import net.emilsg.clutter.item.ModItems;
 import net.emilsg.clutter.networking.ModMessages;
 import net.emilsg.clutter.potion.ModPotions;
-import net.emilsg.clutter.recipe.ModRecipeSerializers;
+import net.emilsg.clutter.recipe.ModRecipes;
 import net.emilsg.clutter.screen.ModScreenHandlers;
 import net.emilsg.clutter.util.*;
 import net.emilsg.clutter.world.gen.ModWorldGeneration;
@@ -43,7 +43,7 @@ public class Clutter implements ModInitializer {
         ModItems.registerModItems();
         ModBlocks.registerModBlocks();
 
-        ModRecipeSerializers.registerRecipeSerializers();
+        ModRecipes.registerRecipes();
 
         ModEnchantments.registerModEnchantments();
         ModLootTableModifiers.modifyLootTables();

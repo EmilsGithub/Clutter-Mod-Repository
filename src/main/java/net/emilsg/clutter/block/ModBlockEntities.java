@@ -2,7 +2,6 @@ package net.emilsg.clutter.block;
 
 import net.emilsg.clutter.Clutter;
 import net.emilsg.clutter.block.entity.*;
-import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -11,12 +10,12 @@ import net.minecraft.util.Identifier;
 import static net.emilsg.clutter.block.ModBlocks.*;
 
 public class ModBlockEntities {
+    public static BlockEntityType<BrickKilnFurnaceBlockEntity> BRICK_KILN_BLOCK_ENTITY;
     public static BlockEntityType<ChimneyBlockEntity> CHIMNEY;
     public static BlockEntityType<BonfireBlockEntity> BONFIRE;
     public static BlockEntityType<WallBookshelfInventoryBlockEntity> WALL_BOOKSHELF;
     public static BlockEntityType<WallCupboardInventoryBlockEntity> WALL_CUPBOARD;
     public static BlockEntityType<ShelfInventoryBlockEntity> SHELF;
-    public static BlockEntityType<BrickKilnBlockEntity> BRICK_KILN_ENTITY;
     public static BlockEntityType<CupboardInventoryBlockEntity> CUPBOARD;
     public static BlockEntityType<MailBoxInventoryBlockEntity> MAILBOX;
     public static BlockEntityType<CardboardBoxInventoryBlockEntity> CARDBOARD_BOX;
@@ -25,8 +24,8 @@ public class ModBlockEntities {
     public static BlockEntityType<ModHangingSignBlockEntity> MOD_HANGING_SIGN_BLOCK_ENTITY;
 
     public static void registerBlockEntities() {
-        CHIMNEY = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "chimney"),
-                FabricBlockEntityTypeBuilder.create(ChimneyBlockEntity::new,
+        CHIMNEY = Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(Clutter.MOD_ID, "chimney"),
+                BlockEntityType.Builder.create(ChimneyBlockEntity::new,
                         COBBLESTONE_CHIMNEY,
                         BRICK_CHIMNEY,
                         STONE_BRICK_CHIMNEY,
@@ -44,8 +43,8 @@ public class ModBlockEntities {
                         END_STONE_BRICK_CHIMNEY,
                         DEEPSLATE_TILE_CHIMNEY).build());
 
-        WALL_BOOKSHELF = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "wall_bookshelf"),
-                FabricBlockEntityTypeBuilder.create(WallBookshelfInventoryBlockEntity::new,
+        WALL_BOOKSHELF = Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(Clutter.MOD_ID, "wall_bookshelf"),
+                BlockEntityType.Builder.create(WallBookshelfInventoryBlockEntity::new,
                         OAK_WALL_BOOKSHELF,
                         DARK_OAK_WALL_BOOKSHELF,
                         BIRCH_WALL_BOOKSHELF,
@@ -59,8 +58,8 @@ public class ModBlockEntities {
                         CHERRY_WALL_BOOKSHELF,
                         REDWOOD_WALL_BOOKSHELF).build());
 
-        WALL_CUPBOARD = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "wall_cupboard"),
-                FabricBlockEntityTypeBuilder.create(WallCupboardInventoryBlockEntity::new,
+        WALL_CUPBOARD = Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(Clutter.MOD_ID, "wall_cupboard"),
+                BlockEntityType.Builder.create(WallCupboardInventoryBlockEntity::new,
                         OAK_WALL_CUPBOARD,
                         DARK_OAK_WALL_CUPBOARD,
                         BIRCH_WALL_CUPBOARD,
@@ -74,8 +73,8 @@ public class ModBlockEntities {
                         CHERRY_WALL_CUPBOARD,
                         REDWOOD_WALL_CUPBOARD).build());
 
-        CUPBOARD = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "cupboard"),
-                FabricBlockEntityTypeBuilder.create(CupboardInventoryBlockEntity::new,
+        CUPBOARD = Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(Clutter.MOD_ID, "cupboard"),
+                BlockEntityType.Builder.create(CupboardInventoryBlockEntity::new,
                         OAK_CUPBOARD,
                         DARK_OAK_CUPBOARD,
                         BIRCH_CUPBOARD,
@@ -89,8 +88,8 @@ public class ModBlockEntities {
                         CHERRY_CUPBOARD,
                         REDWOOD_CUPBOARD).build());
 
-        SHELF = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "shelf"),
-                FabricBlockEntityTypeBuilder.create(ShelfInventoryBlockEntity::new,
+        SHELF = Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(Clutter.MOD_ID, "shelf"),
+                BlockEntityType.Builder.create(ShelfInventoryBlockEntity::new,
                         OAK_SHELF,
                         DARK_OAK_SHELF,
                         BIRCH_SHELF,
@@ -104,34 +103,34 @@ public class ModBlockEntities {
                         CHERRY_SHELF,
                         REDWOOD_SHELF).build());
 
-        BONFIRE = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "bonfire"),
-                FabricBlockEntityTypeBuilder.create(BonfireBlockEntity::new,
+        BONFIRE = Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(Clutter.MOD_ID, "bonfire"),
+                BlockEntityType.Builder.create(BonfireBlockEntity::new,
                         ModBlocks.BONFIRE, SOUL_BONFIRE).build());
 
-        BRICK_KILN_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "brick_kiln"),
-                FabricBlockEntityTypeBuilder.create(BrickKilnBlockEntity::new,
+        BRICK_KILN_BLOCK_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(Clutter.MOD_ID, "brick_kiln_block_entity"),
+                BlockEntityType.Builder.create(BrickKilnFurnaceBlockEntity::new,
                         ModBlocks.BRICK_KILN).build(null));
 
-        MAILBOX = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "mailbox"),
-                FabricBlockEntityTypeBuilder.create(MailBoxInventoryBlockEntity::new,
+        MAILBOX = Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(Clutter.MOD_ID, "mailbox"),
+                BlockEntityType.Builder.create(MailBoxInventoryBlockEntity::new,
                         ModBlocks.MAILBOX).build());
 
-        CARDBOARD_BOX = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "cardboard_box"),
-                FabricBlockEntityTypeBuilder.create(CardboardBoxInventoryBlockEntity::new,
+        CARDBOARD_BOX = Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(Clutter.MOD_ID, "cardboard_box"),
+                BlockEntityType.Builder.create(CardboardBoxInventoryBlockEntity::new,
                         ModBlocks.CARDBOARD_BOX).build());
 
-        PRESENT = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Clutter.MOD_ID, "present"),
-                FabricBlockEntityTypeBuilder.create(PresentInventoryBlockEntity::new,
+        PRESENT = Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(Clutter.MOD_ID, "present"),
+                BlockEntityType.Builder.create(PresentInventoryBlockEntity::new,
                         ModBlocks.RED_PRESENT).build());
 
         MOD_SIGN_BLOCK_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE,
-                new Identifier(Clutter.MOD_ID, "sign_entity"),
-                FabricBlockEntityTypeBuilder.create(ModSignBlockEntity::new,
+                Identifier.of(Clutter.MOD_ID, "sign_entity"),
+                BlockEntityType.Builder.create(ModSignBlockEntity::new,
                         ModBlocks.REDWOOD_SIGN, ModBlocks.REDWOOD_WALL_SIGN).build());
 
         MOD_HANGING_SIGN_BLOCK_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE,
-                new Identifier(Clutter.MOD_ID, "hanging_sign_entity"),
-                FabricBlockEntityTypeBuilder.create(ModHangingSignBlockEntity::new,
+                Identifier.of(Clutter.MOD_ID, "hanging_sign_entity"),
+                BlockEntityType.Builder.create(ModHangingSignBlockEntity::new,
                         ModBlocks.REDWOOD_HANGING_SIGN, ModBlocks.REDWOOD_HANGING_WALL_SIGN).build(null));
     }
 }

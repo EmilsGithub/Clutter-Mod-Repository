@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_weathered_reinforced_copper_glass",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_weathered_reinforced_copper_glass"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:waxed_weathered_reinforced_copper_glass"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

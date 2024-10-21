@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_bamboo_slab",
-      "has_bamboo_planks",
-      "has_the_recipe"
+      "has_bamboo_planks"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:bamboo_cupboard"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

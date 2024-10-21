@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.emilsg.clutter.block.entity.CardboardBoxInventoryBlockEntity;
 import net.emilsg.clutter.block.entity.PresentInventoryBlockEntity;
 import net.emilsg.clutter.util.ModProperties;
@@ -45,6 +46,13 @@ public class PresentBlock extends BlockWithEntity implements Waterloggable {
     public PresentBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.stateManager.getDefaultState().with(OPEN, false).with(WATERLOGGED, false).with(FACING, Direction.NORTH));
+    }
+
+    public static final MapCodec<PresentBlock> CODEC = createCodec(PresentBlock::new);
+
+    @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return CODEC;
     }
 
     @Override
@@ -156,7 +164,7 @@ public class PresentBlock extends BlockWithEntity implements Waterloggable {
         }
     }
 
-    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+    public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof PresentInventoryBlockEntity presentBlockEntity) {
             ItemStack itemStack = new ItemStack(this);
@@ -173,7 +181,7 @@ public class PresentBlock extends BlockWithEntity implements Waterloggable {
             }
         }
 
-        super.onBreak(world, pos, state, player);
+        return super.onBreak(world, pos, state, player);
     }
 
     @Override

@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_mangrove_slab",
-      "has_mangrove_planks",
-      "has_the_recipe"
+      "has_mangrove_planks"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:mangrove_wall_cupboard"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

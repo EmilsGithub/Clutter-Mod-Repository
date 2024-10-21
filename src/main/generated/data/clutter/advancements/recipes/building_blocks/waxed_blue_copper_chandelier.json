@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_blue_copper_chandelier",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_blue_copper_chandelier"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:waxed_blue_copper_chandelier"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

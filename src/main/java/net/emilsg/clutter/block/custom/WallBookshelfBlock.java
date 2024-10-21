@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.emilsg.clutter.block.entity.WallBookshelfInventoryBlockEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -56,6 +57,13 @@ public class WallBookshelfBlock extends BlockWithEntity implements Waterloggable
     public WallBookshelfBlock(Settings settings) {
         super(settings.luminance(state -> state.get(LIT) ? 8 : 0));
         this.setDefaultState(this.getDefaultState().with(CURRENT_MODEL, 0).with(LIT, false).with(WATERLOGGED, false));
+    }
+
+    public static final MapCodec<WallBookshelfBlock> CODEC = createCodec(WallBookshelfBlock::new);
+
+    @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return CODEC;
     }
 
     private static void spawnCandleParticles(World world, Vec3d vec3d, Random random) {

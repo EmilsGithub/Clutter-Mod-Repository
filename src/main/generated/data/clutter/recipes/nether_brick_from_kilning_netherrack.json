@@ -1,11 +1,11 @@
 {
   "type": "clutter:kilning",
-  "ingredients": [
-    {
-      "item": "minecraft:netherrack"
-    }
-  ],
-  "output": {
-    "item": "minecraft:nether_brick"
-  }
+  "category": "misc",
+  "cookingtime": 50,
+  "experience": 1.0,
+  "group": "nether_brick",
+  "ingredient": {
+    "item": "minecraft:netherrack"
+  },
+  "result": "minecraft:nether_brick"
 }

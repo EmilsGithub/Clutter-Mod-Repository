@@ -5,25 +5,27 @@ import net.emilsg.clutter.block.ClutterWoodType;
 import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.item.ModItems;
 import net.emilsg.clutter.item.custom.ClutterElytraItem;
-import net.emilsg.clutter.recipe.KilningRecipeBuilder;
+import net.emilsg.clutter.recipe.KilningRecipe;
 import net.emilsg.clutter.util.ModItemTags;
 import net.emilsg.clutter.util.RegistryType;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.block.Blocks;
-import net.minecraft.data.server.recipe.RecipeExporter;
-import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
-import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
-import net.minecraft.data.server.recipe.SmithingTransformRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.*;
 import net.minecraft.item.HoneycombItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
+import net.minecraft.recipe.AbstractCookingRecipe;
 import net.minecraft.recipe.Ingredient;
+import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.Identifier;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RecipeDataGen extends FabricRecipeProvider {
     public RecipeDataGen(FabricDataOutput output) {
@@ -32,35 +34,35 @@ public class RecipeDataGen extends FabricRecipeProvider {
 
     @Override
     public void generate(RecipeExporter exporter) {
-        kilningRecipe(Items.SAND, Items.GLASS, 1, exporter);
-        kilningRecipe(Items.RED_SAND, Items.GLASS, 1, exporter);
-        kilningRecipe(Items.CLAY_BALL, Items.BRICK, 1, exporter);
-        kilningRecipe(Items.CLAY, Items.TERRACOTTA, 1, exporter);
-        kilningRecipe(Items.CHORUS_FRUIT, Items.POPPED_CHORUS_FRUIT, 1, exporter);
-        kilningRecipe(Items.NETHERRACK, Items.NETHER_BRICK, 1, exporter);
-        kilningRecipe(Items.COBBLESTONE, Items.STONE, 1, exporter);
-        kilningRecipe(Items.STONE, Items.SMOOTH_STONE, 1, exporter);
-        kilningRecipe(Items.COBBLED_DEEPSLATE, Items.DEEPSLATE, 1, exporter);
-        kilningRecipe(Items.QUARTZ_BLOCK, Items.SMOOTH_QUARTZ, 1, exporter);
-        kilningRecipe(Items.BASALT, Items.SMOOTH_BASALT, 1, exporter);
-        kilningRecipe(Items.SANDSTONE, Items.SMOOTH_SANDSTONE, 1, exporter);
-        kilningRecipe(Items.RED_SANDSTONE, Items.SMOOTH_RED_SANDSTONE, 1, exporter);
-        kilningRecipe(Items.WHITE_TERRACOTTA, Items.WHITE_GLAZED_TERRACOTTA, 1, exporter);
-        kilningRecipe(Items.LIGHT_GRAY_TERRACOTTA, Items.LIGHT_GRAY_GLAZED_TERRACOTTA, 1, exporter);
-        kilningRecipe(Items.GRAY_TERRACOTTA, Items.GRAY_GLAZED_TERRACOTTA, 1, exporter);
-        kilningRecipe(Items.BLACK_TERRACOTTA, Items.BLACK_GLAZED_TERRACOTTA, 1, exporter);
-        kilningRecipe(Items.BROWN_TERRACOTTA, Items.BROWN_GLAZED_TERRACOTTA, 1, exporter);
-        kilningRecipe(Items.RED_TERRACOTTA, Items.RED_GLAZED_TERRACOTTA, 1, exporter);
-        kilningRecipe(Items.ORANGE_TERRACOTTA, Items.ORANGE_GLAZED_TERRACOTTA, 1, exporter);
-        kilningRecipe(Items.YELLOW_TERRACOTTA, Items.YELLOW_GLAZED_TERRACOTTA, 1, exporter);
-        kilningRecipe(Items.LIME_TERRACOTTA, Items.LIME_GLAZED_TERRACOTTA, 1, exporter);
-        kilningRecipe(Items.GREEN_TERRACOTTA, Items.GREEN_GLAZED_TERRACOTTA, 1, exporter);
-        kilningRecipe(Items.CYAN_TERRACOTTA, Items.CYAN_GLAZED_TERRACOTTA, 1, exporter);
-        kilningRecipe(Items.LIGHT_BLUE_TERRACOTTA, Items.LIGHT_BLUE_GLAZED_TERRACOTTA, 1, exporter);
-        kilningRecipe(Items.BLUE_TERRACOTTA, Items.BLUE_GLAZED_TERRACOTTA, 1, exporter);
-        kilningRecipe(Items.PURPLE_TERRACOTTA, Items.PURPLE_GLAZED_TERRACOTTA, 1, exporter);
-        kilningRecipe(Items.MAGENTA_TERRACOTTA, Items.MAGENTA_GLAZED_TERRACOTTA, 1, exporter);
-        kilningRecipe(Items.PINK_TERRACOTTA, Items.PINK_GLAZED_TERRACOTTA, 1, exporter);
+        offerKilning(exporter, Items.SAND, Items.GLASS, 0.2f, 50, RecipeCategory.MISC, "glass");
+        offerKilning(exporter, Items.RED_SAND, Items.GLASS, 1, 50, RecipeCategory.MISC, "glass");
+        offerKilning(exporter, Items.CLAY_BALL, Items.BRICK, 1, 50, RecipeCategory.MISC, "brick");
+        offerKilning(exporter, Items.CLAY, Items.TERRACOTTA, 1, 50, RecipeCategory.MISC, "terracotta");
+        offerKilning(exporter, Items.CHORUS_FRUIT, Items.POPPED_CHORUS_FRUIT, 1, 50, RecipeCategory.MISC, "popped_chorus_fruit");
+        offerKilning(exporter, Items.NETHERRACK, Items.NETHER_BRICK, 1, 50, RecipeCategory.MISC, "nether_brick");
+        offerKilning(exporter, Items.COBBLESTONE, Items.STONE, 1, 50, RecipeCategory.MISC, "stone");
+        offerKilning(exporter, Items.STONE, Items.SMOOTH_STONE, 1, 50, RecipeCategory.MISC, "smooth_stone");
+        offerKilning(exporter, Items.COBBLED_DEEPSLATE, Items.DEEPSLATE, 1, 50, RecipeCategory.MISC, "deepslate");
+        offerKilning(exporter, Items.QUARTZ_BLOCK, Items.SMOOTH_QUARTZ, 1, 50, RecipeCategory.MISC, "smooth_quartz");
+        offerKilning(exporter, Items.BASALT, Items.SMOOTH_BASALT, 1, 50, RecipeCategory.MISC, "smooth_basalt");
+        offerKilning(exporter, Items.SANDSTONE, Items.SMOOTH_SANDSTONE, 1, 50, RecipeCategory.MISC, "smooth_sandstone");
+        offerKilning(exporter, Items.RED_SANDSTONE, Items.SMOOTH_RED_SANDSTONE, 1, 50, RecipeCategory.MISC, "smooth_red_sandstone");
+        offerKilning(exporter, Items.WHITE_TERRACOTTA, Items.WHITE_GLAZED_TERRACOTTA, 1, 50, RecipeCategory.MISC, "white_glazed_terracotta");
+        offerKilning(exporter, Items.LIGHT_GRAY_TERRACOTTA, Items.LIGHT_GRAY_GLAZED_TERRACOTTA, 1, 50, RecipeCategory.MISC, "light_gray_glazed_terracotta");
+        offerKilning(exporter, Items.GRAY_TERRACOTTA, Items.GRAY_GLAZED_TERRACOTTA, 1, 50, RecipeCategory.MISC, "gray_glazed_terracotta");
+        offerKilning(exporter, Items.BLACK_TERRACOTTA, Items.BLACK_GLAZED_TERRACOTTA, 1, 50, RecipeCategory.MISC, "black_glazed_terracotta");
+        offerKilning(exporter, Items.BROWN_TERRACOTTA, Items.BROWN_GLAZED_TERRACOTTA, 1, 50, RecipeCategory.MISC, "brown_glazed_terracotta");
+        offerKilning(exporter, Items.RED_TERRACOTTA, Items.RED_GLAZED_TERRACOTTA, 1, 50, RecipeCategory.MISC, "red_glazed_terracotta");
+        offerKilning(exporter, Items.ORANGE_TERRACOTTA, Items.ORANGE_GLAZED_TERRACOTTA, 1, 50, RecipeCategory.MISC, "orange_glazed_terracotta");
+        offerKilning(exporter, Items.YELLOW_TERRACOTTA, Items.YELLOW_GLAZED_TERRACOTTA, 1, 50, RecipeCategory.MISC, "yellow_glazed_terracotta");
+        offerKilning(exporter, Items.LIME_TERRACOTTA, Items.LIME_GLAZED_TERRACOTTA, 1, 50, RecipeCategory.MISC, "lime_glazed_terracotta");
+        offerKilning(exporter, Items.GREEN_TERRACOTTA, Items.GREEN_GLAZED_TERRACOTTA, 1, 50, RecipeCategory.MISC, "green_glazed_terracotta");
+        offerKilning(exporter, Items.CYAN_TERRACOTTA, Items.CYAN_GLAZED_TERRACOTTA, 1, 50, RecipeCategory.MISC, "cyan_glazed_terracotta");
+        offerKilning(exporter, Items.LIGHT_BLUE_TERRACOTTA, Items.LIGHT_BLUE_GLAZED_TERRACOTTA, 1, 50, RecipeCategory.MISC, "light_blue_glazed_terracotta");
+        offerKilning(exporter, Items.BLUE_TERRACOTTA, Items.BLUE_GLAZED_TERRACOTTA, 1, 50, RecipeCategory.MISC, "blue_glazed_terracotta");
+        offerKilning(exporter, Items.PURPLE_TERRACOTTA, Items.PURPLE_GLAZED_TERRACOTTA, 1, 50, RecipeCategory.MISC, "purple_glazed_terracotta");
+        offerKilning(exporter, Items.MAGENTA_TERRACOTTA, Items.MAGENTA_GLAZED_TERRACOTTA, 1, 50, RecipeCategory.MISC, "magenta_glazed_terracotta");
+        offerKilning(exporter, Items.PINK_TERRACOTTA, Items.PINK_GLAZED_TERRACOTTA, 1, 50, RecipeCategory.MISC, "pink_glazed_terracotta");
 
         offerWoodRecipes(exporter, ClutterWoodType.REDWOOD);
         offerWoodRecipes(exporter, ClutterWoodType.OAK);
@@ -288,10 +290,6 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .criterion(hasItem(input.asItem()), conditionsFromItem(input.asItem()))
                 .criterion(hasItem(input2.asItem()), conditionsFromItem(input2.asItem()))
                 .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output.asItem()) + "_from_" + input.asItem() + "_and_" + input2.asItem()));
-    }
-
-    private void kilningRecipe(ItemConvertible ingredient, ItemConvertible result, int count, RecipeExporter exporter) {
-        new KilningRecipeBuilder(ingredient, result, count).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(result)));
     }
 
     private void offerArmorRecipe(RecipeExporter exporter, ItemConvertible component, Item helmet, Item chestplate, Item leggings, Item boots) {
@@ -553,5 +551,30 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .criterion(hasItem(slab), conditionsFromItem(slab))
                 .criterion(hasItem(Items.BOOK), conditionsFromItem(Items.BOOK))
                 .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
+    }
+
+    public static void offerKilning(RecipeExporter exporter, ItemConvertible input, ItemConvertible output, float experience, int cookingTime, RecipeCategory category, String group) {
+        List<ItemConvertible> inputs = new ArrayList<>();
+        inputs.add(input);
+        offerMultipleOptions(exporter, KilningRecipe.Serializer.INSTANCE, KilningRecipe::new, inputs, output, experience, cookingTime, group, "_from_kilning");
+    }
+
+    public static <T extends AbstractCookingRecipe> void offerMultipleOptions(
+            RecipeExporter exporter,
+            RecipeSerializer<T> serializer,
+            AbstractCookingRecipe.RecipeFactory<T> recipeFactory,
+            List<ItemConvertible> inputs,
+            ItemConvertible output,
+            float experience,
+            int cookingTime,
+            String group,
+            String suffix
+    ) {
+        for (ItemConvertible itemConvertible : inputs) {
+            CookingRecipeJsonBuilder.create(Ingredient.ofItems(itemConvertible), RecipeCategory.MISC, output, experience, cookingTime, serializer, recipeFactory)
+                    .group(group)
+                    .criterion(hasItem(itemConvertible), conditionsFromItem(itemConvertible))
+                    .offerTo(exporter, getItemPath(output) + suffix + "_" + getItemPath(itemConvertible));
+        }
     }
 }

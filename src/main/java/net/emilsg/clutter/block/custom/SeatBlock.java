@@ -120,7 +120,7 @@ public abstract class SeatBlock extends HorizontalFacingBlock implements Waterlo
     }
 
     @Override
-    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+    public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         int xPos = pos.getX();
         int yPos = pos.getY();
         int zPos = pos.getZ();
@@ -134,5 +134,6 @@ public abstract class SeatBlock extends HorizontalFacingBlock implements Waterlo
         world.emitGameEvent(player, GameEvent.BLOCK_DESTROY, pos);
 
         IS_OCCUPIED.remove(new Vec3d(xPos, yPos, zPos));
+        return state;
     }
 }

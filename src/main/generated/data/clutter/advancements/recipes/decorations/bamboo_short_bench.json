@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_bamboo_planks",
-      "has_bamboo_block",
-      "has_the_recipe"
+      "has_bamboo_block"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:bamboo_short_bench"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

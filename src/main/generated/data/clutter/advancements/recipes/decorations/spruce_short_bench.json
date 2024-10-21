@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_spruce_planks",
-      "has_spruce_log",
-      "has_the_recipe"
+      "has_spruce_log"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:spruce_short_bench"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

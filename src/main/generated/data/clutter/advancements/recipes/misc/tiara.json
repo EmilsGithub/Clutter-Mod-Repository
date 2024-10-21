@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_gold_ingot",
-      "has_emerald",
-      "has_the_recipe"
+      "has_emerald"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:tiara"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_redwood_mosaic",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_redwood_mosaic"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:redwood_mosaic_stairs"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

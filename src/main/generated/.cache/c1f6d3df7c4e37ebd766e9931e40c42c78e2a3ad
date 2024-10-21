@@ -1,4 +1,4 @@
-// 1.20.1	2024-10-20T21:34:56.8393992	Clutter/Tags for minecraft:block
+// 1.20.4	2024-10-21T23:23:19.0902468	Clutter/Tags for minecraft:block
 12930356299b104f6f7bdbe08931f8cc384c1a1b data\minecraft\tags\blocks\wooden_slabs.json
 d825d51f61b7397f96c2bc8aea4f90793cc1c686 data\minecraft\tags\blocks\coral_plants.json
 330f59fcbee67b03468a990938347a6ba2f4369e data\clutter\tags\blocks\armchairs.json
@@ -24,8 +24,8 @@ cc1e13c42f33081929c2a443bc4d13915d391686 data\c\tags\blocks\ores.json
 55eba99f679873db4fd91826c664c2853d5bcfde data\minecraft\tags\blocks\logs_that_burn.json
 03100f4aa64ea73f51e5e10e67d4fd3ac457af75 data\clutter\tags\blocks\green_fire_base_blocks.json
 6f79bd8a255dce20a9cf3d608c864a8d492cc1b6 data\clutter\tags\blocks\chimneys.json
-e00bf3e34e0995f7680deaf357c2850955f0ef33 data\clutter\tags\blocks\flammable.json
 55eba99f679873db4fd91826c664c2853d5bcfde data\minecraft\tags\blocks\logs.json
+e00bf3e34e0995f7680deaf357c2850955f0ef33 data\clutter\tags\blocks\flammable.json
 73da1f42dbf6cf9cddd91ee94e7319886c13b050 data\minecraft\tags\blocks\enchantment_power_provider.json
 f4d9075b9b845e4bfdf833f7c25ccc8e8e402e76 data\minecraft\tags\blocks\wooden_trapdoors.json
 5b7ef7e84e647b2340b20105a638d804a739b213 data\clutter\tags\blocks\emperor_penguin_egg_hatch_boost.json
@@ -77,8 +77,8 @@ a58b6a7e68c88bec6c40a54ffefcff642e83917f data\c\tags\blocks\bookshelves.json
 c39f0fb4ee07768a5625ffac2d498a4baf501c28 data\minecraft\tags\blocks\tall_flowers.json
 0e199b10598b6bf53d4a430152e838347121e5b7 data\minecraft\tags\blocks\frog_prefer_jump_to.json
 3cfcefdab815dca0d8bfdf97b91c233b14b9f8d9 data\clutter\tags\blocks\kiwi_egg_hatch_boost.json
-deaa57d0817bfd1b604e2479d5b8db9ba623d0d7 data\minecraft\tags\blocks\combination_step_sound_blocks.json
 51a73041271339706bfe865514cf3c33586e7ba7 data\minecraft\tags\blocks\animals_spawnable_on.json
+deaa57d0817bfd1b604e2479d5b8db9ba623d0d7 data\minecraft\tags\blocks\combination_step_sound_blocks.json
 b35ba26b723fe9245e0d24e24c3f540e1c88e4c1 data\clutter\tags\blocks\wall_candles.json
 55a380cd9256f9671993e65b7436596fa240293f data\minecraft\tags\blocks\coral_blocks.json
 bece42c10bb29c259e7b96c7f8afa6a8fa7cdd94 data\minecraft\tags\blocks\small_flowers.json

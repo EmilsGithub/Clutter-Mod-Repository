@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_furnace",
-      "has_bricks",
-      "has_the_recipe"
+      "has_bricks"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:brick_kiln"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

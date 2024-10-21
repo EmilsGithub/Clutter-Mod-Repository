@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_bamboo_mosaic",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_bamboo_mosaic"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:bamboo_mosaic_slab"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.emilsg.clutter.item.ModItems;
 import net.minecraft.block.*;
 import net.minecraft.item.ItemPlacementContext;
@@ -23,8 +24,15 @@ public class MugBlock extends HorizontalFacingBlock {
         super(settings);
     }
 
+    public static final MapCodec<MugBlock> CODEC = createCodec(MugBlock::new);
+
     @Override
-    public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
+    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
+        return CODEC;
+    }
+
+    @Override
+    public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state) {
         return new ItemStack(ModItems.WOODEN_MUG);
     }
 

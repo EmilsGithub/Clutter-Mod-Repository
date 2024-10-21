@@ -20,12 +20,12 @@ import net.emilsg.clutter.block.custom.stacking.TallBottleBlock;
 import net.emilsg.clutter.entity.ModEntities;
 import net.emilsg.clutter.sound.ModSounds;
 import net.emilsg.clutter.util.ModBlockTags;
-import net.emilsg.clutter.util.ModWoodTypes;
-import net.emilsg.clutter.world.gen.tree.KiwiTreeSaplingGenerator;
-import net.emilsg.clutter.world.gen.tree.RedwoodTreeSaplingGenerator;
+import net.emilsg.clutter.world.gen.tree.ModSaplingGenerators;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.OxidizableBlocksRegistry;
+import net.minecraft.block.OxidizableDoorBlock;
+import net.minecraft.block.OxidizableTrapdoorBlock;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.Instrument;
 import net.minecraft.block.piston.PistonBehavior;
@@ -127,7 +127,7 @@ public class ModBlocks {
     public static final Block MAGENTA_BUNK_BED = registerBlock("magenta_bunk_bed", new BunkBedBlock(DyeColor.MAGENTA, FabricBlockSettings.copy(Blocks.MAGENTA_BED)));
     public static final Block PINK_BUNK_BED = registerBlock("pink_bunk_bed", new BunkBedBlock(DyeColor.PINK, FabricBlockSettings.copy(Blocks.PINK_BED)));
 
-    public static final Block REDWOOD_SAPLING = registerBlock("redwood_sapling", new SaplingBlock(new RedwoodTreeSaplingGenerator(), FabricBlockSettings.copy(Blocks.SPRUCE_SAPLING)));
+    public static final Block REDWOOD_SAPLING = registerBlock("redwood_sapling", new SaplingBlock(ModSaplingGenerators.REDWOOD_TREE, FabricBlockSettings.copy(Blocks.SPRUCE_SAPLING)));
     public static final Block REDWOOD_LEAVES = registerBlock("redwood_leaves", new LeavesBlock(FabricBlockSettings.copy(Blocks.SPRUCE_LEAVES)));
     public static final Block REDWOOD_LOG = registerBlock("redwood_log", new PillarBlock(FabricBlockSettings.copy(Blocks.SPRUCE_LOG)));
     public static final Block REDWOOD_WOOD = registerBlock("redwood_wood", new PillarBlock(FabricBlockSettings.copy(Blocks.SPRUCE_WOOD)));
@@ -137,28 +137,28 @@ public class ModBlocks {
     public static final Block REDWOOD_STAIRS = registerBlock("redwood_stairs", new StairsBlock(ModBlocks.REDWOOD_PLANKS.getDefaultState(), FabricBlockSettings.copy(Blocks.SPRUCE_STAIRS)));
     public static final Block REDWOOD_SLAB = registerBlock("redwood_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.SPRUCE_PLANKS)));
     public static final Block REDWOOD_FENCE = registerBlock("redwood_fence", new FenceBlock(FabricBlockSettings.copy(Blocks.SPRUCE_FENCE)));
-    public static final Block REDWOOD_FENCE_GATE = registerBlock("redwood_fence_gate", new FenceGateBlock(FabricBlockSettings.copy(Blocks.SPRUCE_FENCE), WoodType.SPRUCE));
-    public static final Block REDWOOD_BUTTON = registerBlock("redwood_button", new ButtonBlock(FabricBlockSettings.copy(Blocks.SPRUCE_BUTTON), BlockSetType.SPRUCE, 30, true));
-    public static final Block REDWOOD_PRESSURE_PLATE = registerBlock("redwood_pressure_plate", new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING, FabricBlockSettings.copy(Blocks.SPRUCE_FENCE), BlockSetType.SPRUCE));
+    public static final Block REDWOOD_FENCE_GATE = registerBlock("redwood_fence_gate", new FenceGateBlock(WoodType.SPRUCE, FabricBlockSettings.copy(Blocks.SPRUCE_FENCE)));
+    public static final Block REDWOOD_BUTTON = registerBlock("redwood_button", new ButtonBlock(BlockSetType.SPRUCE, 30, FabricBlockSettings.copy(Blocks.SPRUCE_BUTTON)));
+    public static final Block REDWOOD_PRESSURE_PLATE = registerBlock("redwood_pressure_plate", new PressurePlateBlock(BlockSetType.SPRUCE, FabricBlockSettings.copy(Blocks.SPRUCE_FENCE)));
 
     public static final Block REDWOOD_MOSAIC = registerBlock("redwood_mosaic", new Block(FabricBlockSettings.copy(Blocks.SPRUCE_PLANKS)));
     public static final Block REDWOOD_MOSAIC_STAIRS = registerBlock("redwood_mosaic_stairs", new StairsBlock(ModBlocks.REDWOOD_MOSAIC.getDefaultState(), FabricBlockSettings.copy(Blocks.SPRUCE_STAIRS)));
     public static final Block REDWOOD_MOSAIC_SLAB = registerBlock("redwood_mosaic_slab", new SlabBlock(FabricBlockSettings.copy(ModBlocks.REDWOOD_MOSAIC)));
 
-    public static final Block REDWOOD_DOOR = registerBlock("redwood_door", new DoorBlock(FabricBlockSettings.copy(Blocks.SPRUCE_DOOR), BlockSetType.SPRUCE));
-    public static final Block REDWOOD_TRAPDOOR = registerBlock("redwood_trapdoor", new TrapdoorBlock(FabricBlockSettings.copy(Blocks.SPRUCE_TRAPDOOR), BlockSetType.SPRUCE));
+    public static final Block REDWOOD_DOOR = registerBlock("redwood_door", new DoorBlock(BlockSetType.SPRUCE, FabricBlockSettings.copy(Blocks.SPRUCE_DOOR)));
+    public static final Block REDWOOD_TRAPDOOR = registerBlock("redwood_trapdoor", new TrapdoorBlock(BlockSetType.SPRUCE, FabricBlockSettings.copy(Blocks.SPRUCE_TRAPDOOR)));
 
-    public static final Block REDWOOD_SIGN = registerBlockWithoutItem("redwood_sign", new ModStandingSignBlock(FabricBlockSettings.copyOf(Blocks.CHERRY_SIGN), ModWoodTypes.REDWOOD));
-    public static final Block REDWOOD_WALL_SIGN = registerBlockWithoutItem("redwood_wall_sign", new ModWallSignBlock(FabricBlockSettings.copyOf(Blocks.CHERRY_WALL_SIGN), ModWoodTypes.REDWOOD));
-    public static final Block REDWOOD_HANGING_SIGN = registerBlockWithoutItem("redwood_hanging_sign", new ModHangingSignBlock(FabricBlockSettings.copyOf(Blocks.CHERRY_HANGING_SIGN), ModWoodTypes.REDWOOD));
-    public static final Block REDWOOD_HANGING_WALL_SIGN = registerBlockWithoutItem("redwood_hanging_wall_sign", new ModWallHangingSignBlock(FabricBlockSettings.copyOf(Blocks.CHERRY_WALL_HANGING_SIGN), ModWoodTypes.REDWOOD));
+    public static final Block REDWOOD_SIGN = registerBlockWithoutItem("redwood_sign", new ModStandingSignBlock(FabricBlockSettings.copyOf(Blocks.CHERRY_SIGN), WoodType.SPRUCE));
+    public static final Block REDWOOD_WALL_SIGN = registerBlockWithoutItem("redwood_wall_sign", new ModWallSignBlock(FabricBlockSettings.copyOf(Blocks.CHERRY_WALL_SIGN), WoodType.SPRUCE));
+    public static final Block REDWOOD_HANGING_SIGN = registerBlockWithoutItem("redwood_hanging_sign", new ModHangingSignBlock(FabricBlockSettings.copyOf(Blocks.CHERRY_HANGING_SIGN), WoodType.SPRUCE));
+    public static final Block REDWOOD_HANGING_WALL_SIGN = registerBlockWithoutItem("redwood_hanging_wall_sign", new ModWallHangingSignBlock(FabricBlockSettings.copyOf(Blocks.CHERRY_WALL_HANGING_SIGN), WoodType.SPRUCE));
 
-    public static final Block DEEPSLATE_SILVER_ORE = registerBlock("deepslate_silver_ore", new ExperienceDroppingBlock(FabricBlockSettings.copy(Blocks.DEEPSLATE).strength(4.5f, 3.0f).requiresTool().mapColor(MapColor.DEEPSLATE_GRAY), UniformIntProvider.create(4, 8)));
-    public static final Block SILVER_DOOR = registerBlock("silver_door", new DoorBlock(FabricBlockSettings.copy(Blocks.IRON_DOOR).requiresTool().strength(3.0f).sounds(BlockSoundGroup.METAL).nonOpaque(), BlockSetType.IRON));
-    public static final Block SILVER_ORE = registerBlock("silver_ore", new ExperienceDroppingBlock(FabricBlockSettings.copy(Blocks.STONE).strength(3.0f, 3.0f).requiresTool(), UniformIntProvider.create(4, 8)));
+    public static final Block DEEPSLATE_SILVER_ORE = registerBlock("deepslate_silver_ore", new ExperienceDroppingBlock(UniformIntProvider.create(4, 8), FabricBlockSettings.copy(Blocks.DEEPSLATE).strength(4.5f, 3.0f).requiresTool().mapColor(MapColor.DEEPSLATE_GRAY)));
+    public static final Block SILVER_DOOR = registerBlock("silver_door", new DoorBlock(BlockSetType.IRON, FabricBlockSettings.copy(Blocks.IRON_DOOR).requiresTool().strength(3.0f).sounds(BlockSoundGroup.METAL).nonOpaque()));
+    public static final Block SILVER_ORE = registerBlock("silver_ore", new ExperienceDroppingBlock(UniformIntProvider.create(4, 8), FabricBlockSettings.copy(Blocks.STONE).strength(3.0f, 3.0f).requiresTool()));
     public static final Block RAW_SILVER_BLOCK = registerBlock("raw_silver_block", new Block(FabricBlockSettings.copy(Blocks.RAW_GOLD_BLOCK).mapColor(MapColor.LIGHT_GRAY)));
     public static final Block SILVER_BLOCK = registerBlock("silver_block", new Block(FabricBlockSettings.copy(Blocks.GOLD_BLOCK).mapColor(MapColor.LIGHT_GRAY)));
-    public static final Block SILVER_BUTTON = registerBlock("silver_button", new ButtonBlock(FabricBlockSettings.copy(Blocks.STONE_BUTTON), BlockSetType.IRON, 30, false));
+    public static final Block SILVER_BUTTON = registerBlock("silver_button", new ButtonBlock(BlockSetType.IRON, 30, FabricBlockSettings.copy(Blocks.STONE_BUTTON)));
     public static final Block SILVER_PRESSURE_PLATE = registerBlock("silver_pressure_plate", new ReversedWeightedPressurePlateBlock(15, FabricBlockSettings.copy(Blocks.HEAVY_WEIGHTED_PRESSURE_PLATE), BlockSetType.IRON));
 
     public static final Block SILVER_CHAIN = registerBlock("silver_chain", new ChainBlock(FabricBlockSettings.copy(Blocks.CHAIN)));
@@ -171,20 +171,20 @@ public class ModBlocks {
     public static final Block WEATHERED_COPPER_BARS = registerBlock("weathered_copper_bars", new OxidizablePaneBlock(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.copy(Blocks.WEATHERED_COPPER).requiresTool().strength(3.0f, 6.0f).sounds(BlockSoundGroup.COPPER)));
     public static final Block OXIDIZED_COPPER_BARS = registerBlock("oxidized_copper_bars", new OxidizablePaneBlock(Oxidizable.OxidationLevel.OXIDIZED, FabricBlockSettings.copy(Blocks.OXIDIZED_COPPER).requiresTool().strength(3.0f, 6.0f).sounds(BlockSoundGroup.COPPER)));
 
-    public static final Block COPPER_BUTTON = registerBlock("copper_button", new OxidizableButtonBlock(Oxidizable.OxidationLevel.UNAFFECTED, FabricBlockSettings.copy(Blocks.STONE_BUTTON), BlockSetType.IRON, 6, false));
-    public static final Block EXPOSED_COPPER_BUTTON = registerBlock("exposed_copper_button", new OxidizableButtonBlock(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.copy(Blocks.STONE_BUTTON), BlockSetType.IRON, 12, false));
-    public static final Block WEATHERED_COPPER_BUTTON = registerBlock("weathered_copper_button", new OxidizableButtonBlock(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.copy(Blocks.STONE_BUTTON), BlockSetType.IRON, 18, false));
-    public static final Block OXIDIZED_COPPER_BUTTON = registerBlock("oxidized_copper_button", new OxidizableButtonBlock(Oxidizable.OxidationLevel.OXIDIZED, FabricBlockSettings.copy(Blocks.STONE_BUTTON), BlockSetType.IRON, 24, false));
+    public static final Block COPPER_BUTTON = registerBlock("copper_button", new OxidizableButtonBlock(Oxidizable.OxidationLevel.UNAFFECTED, FabricBlockSettings.copy(Blocks.STONE_BUTTON), BlockSetType.COPPER, 6));
+    public static final Block EXPOSED_COPPER_BUTTON = registerBlock("exposed_copper_button", new OxidizableButtonBlock(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.copy(Blocks.STONE_BUTTON), BlockSetType.COPPER, 12));
+    public static final Block WEATHERED_COPPER_BUTTON = registerBlock("weathered_copper_button", new OxidizableButtonBlock(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.copy(Blocks.STONE_BUTTON), BlockSetType.COPPER, 18));
+    public static final Block OXIDIZED_COPPER_BUTTON = registerBlock("oxidized_copper_button", new OxidizableButtonBlock(Oxidizable.OxidationLevel.OXIDIZED, FabricBlockSettings.copy(Blocks.STONE_BUTTON), BlockSetType.COPPER, 24));
 
     public static final Block COPPER_CHAIN = registerBlock("copper_chain", new OxidizableChainBlock(Oxidizable.OxidationLevel.UNAFFECTED, FabricBlockSettings.copy(Blocks.CHAIN)));
     public static final Block EXPOSED_COPPER_CHAIN = registerBlock("exposed_copper_chain", new OxidizableChainBlock(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.copy(Blocks.CHAIN)));
     public static final Block WEATHERED_COPPER_CHAIN = registerBlock("weathered_copper_chain", new OxidizableChainBlock(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.copy(Blocks.CHAIN)));
     public static final Block OXIDIZED_COPPER_CHAIN = registerBlock("oxidized_copper_chain", new OxidizableChainBlock(Oxidizable.OxidationLevel.OXIDIZED, FabricBlockSettings.copy(Blocks.CHAIN)));
 
-    public static final Block COPPER_DOOR = registerBlock("copper_door", new OxidizableDoorBlock(Oxidizable.OxidationLevel.UNAFFECTED, FabricBlockSettings.copy(Blocks.COPPER_BLOCK).requiresTool().strength(5.0f).sounds(BlockSoundGroup.METAL).nonOpaque(), BlockSetType.IRON));
-    public static final Block EXPOSED_COPPER_DOOR = registerBlock("exposed_copper_door", new OxidizableDoorBlock(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.copy(Blocks.EXPOSED_COPPER).requiresTool().strength(5.0f).sounds(BlockSoundGroup.METAL).nonOpaque(), BlockSetType.IRON));
-    public static final Block WEATHERED_COPPER_DOOR = registerBlock("weathered_copper_door", new OxidizableDoorBlock(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.copy(Blocks.WEATHERED_COPPER).requiresTool().strength(5.0f).sounds(BlockSoundGroup.METAL).nonOpaque(), BlockSetType.IRON));
-    public static final Block OXIDIZED_COPPER_DOOR = registerBlock("oxidized_copper_door", new OxidizableDoorBlock(Oxidizable.OxidationLevel.OXIDIZED, FabricBlockSettings.copy(Blocks.OXIDIZED_COPPER).requiresTool().strength(5.0f).sounds(BlockSoundGroup.METAL).nonOpaque(), BlockSetType.IRON));
+    public static final Block COPPER_DOOR = registerBlock("copper_door", new OxidizableDoorBlock(BlockSetType.COPPER, Oxidizable.OxidationLevel.UNAFFECTED, FabricBlockSettings.copy(Blocks.COPPER_BLOCK).requiresTool().strength(5.0f).sounds(BlockSoundGroup.METAL).nonOpaque()));
+    public static final Block EXPOSED_COPPER_DOOR = registerBlock("exposed_copper_door", new OxidizableDoorBlock(BlockSetType.COPPER, Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.copy(Blocks.EXPOSED_COPPER).requiresTool().strength(5.0f).sounds(BlockSoundGroup.METAL).nonOpaque()));
+    public static final Block WEATHERED_COPPER_DOOR = registerBlock("weathered_copper_door", new OxidizableDoorBlock(BlockSetType.COPPER, Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.copy(Blocks.WEATHERED_COPPER).requiresTool().strength(5.0f).sounds(BlockSoundGroup.METAL).nonOpaque()));
+    public static final Block OXIDIZED_COPPER_DOOR = registerBlock("oxidized_copper_door", new OxidizableDoorBlock(BlockSetType.COPPER, Oxidizable.OxidationLevel.OXIDIZED, FabricBlockSettings.copy(Blocks.OXIDIZED_COPPER).requiresTool().strength(5.0f).sounds(BlockSoundGroup.METAL).nonOpaque()));
 
     public static final Block COPPER_LANTERN = registerBlock("copper_lantern", new OxidizableLanternBlock(Oxidizable.OxidationLevel.UNAFFECTED, FabricBlockSettings.copy(Blocks.LANTERN)));
     public static final Block EXPOSED_COPPER_LANTERN = registerBlock("exposed_copper_lantern", new OxidizableLanternBlock(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.copy(Blocks.LANTERN)));
@@ -195,24 +195,24 @@ public class ModBlocks {
     public static final Block WEATHERED_COPPER_SOUL_LANTERN = registerBlock("weathered_copper_soul_lantern", new OxidizableLanternBlock(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.copy(Blocks.SOUL_LANTERN)));
     public static final Block OXIDIZED_COPPER_SOUL_LANTERN = registerBlock("oxidized_copper_soul_lantern", new OxidizableLanternBlock(Oxidizable.OxidationLevel.OXIDIZED, FabricBlockSettings.copy(Blocks.SOUL_LANTERN)));
 
-    public static final Block COPPER_PRESSURE_PLATE = registerBlock("copper_pressure_plate", new OxidizablePressurePlateBlock(Oxidizable.OxidationLevel.UNAFFECTED, PressurePlateBlock.ActivationRule.MOBS, FabricBlockSettings.copy(Blocks.OAK_PRESSURE_PLATE), BlockSetType.IRON));
-    public static final Block EXPOSED_COPPER_PRESSURE_PLATE = registerBlock("exposed_copper_pressure_plate", new OxidizablePressurePlateBlock(Oxidizable.OxidationLevel.EXPOSED, PressurePlateBlock.ActivationRule.MOBS, FabricBlockSettings.copy(Blocks.OAK_PRESSURE_PLATE), BlockSetType.IRON));
-    public static final Block WEATHERED_COPPER_PRESSURE_PLATE = registerBlock("weathered_copper_pressure_plate", new OxidizablePressurePlateBlock(Oxidizable.OxidationLevel.WEATHERED, PressurePlateBlock.ActivationRule.MOBS, FabricBlockSettings.copy(Blocks.OAK_PRESSURE_PLATE), BlockSetType.IRON));
-    public static final Block OXIDIZED_COPPER_PRESSURE_PLATE = registerBlock("oxidized_copper_pressure_plate", new OxidizablePressurePlateBlock(Oxidizable.OxidationLevel.OXIDIZED, PressurePlateBlock.ActivationRule.MOBS, FabricBlockSettings.copy(Blocks.OAK_PRESSURE_PLATE), BlockSetType.IRON));
-    public static final Block COPPER_TRAPDOOR = registerBlock("copper_trapdoor", new OxidizableTrapdoorBlock(Oxidizable.OxidationLevel.UNAFFECTED, FabricBlockSettings.copy(Blocks.IRON_TRAPDOOR), BlockSetType.IRON));
-    public static final Block EXPOSED_COPPER_TRAPDOOR = registerBlock("exposed_copper_trapdoor", new OxidizableTrapdoorBlock(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.copy(Blocks.IRON_TRAPDOOR), BlockSetType.IRON));
-    public static final Block WEATHERED_COPPER_TRAPDOOR = registerBlock("weathered_copper_trapdoor", new OxidizableTrapdoorBlock(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.copy(Blocks.IRON_TRAPDOOR), BlockSetType.IRON));
-    public static final Block OXIDIZED_COPPER_TRAPDOOR = registerBlock("oxidized_copper_trapdoor", new OxidizableTrapdoorBlock(Oxidizable.OxidationLevel.OXIDIZED, FabricBlockSettings.copy(Blocks.IRON_TRAPDOOR), BlockSetType.IRON));
+    public static final Block COPPER_PRESSURE_PLATE = registerBlock("copper_pressure_plate", new OxidizablePressurePlateBlock(Oxidizable.OxidationLevel.UNAFFECTED, FabricBlockSettings.copy(Blocks.OAK_PRESSURE_PLATE), BlockSetType.COPPER));
+    public static final Block EXPOSED_COPPER_PRESSURE_PLATE = registerBlock("exposed_copper_pressure_plate", new OxidizablePressurePlateBlock(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.copy(Blocks.OAK_PRESSURE_PLATE), BlockSetType.COPPER));
+    public static final Block WEATHERED_COPPER_PRESSURE_PLATE = registerBlock("weathered_copper_pressure_plate", new OxidizablePressurePlateBlock(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.copy(Blocks.OAK_PRESSURE_PLATE), BlockSetType.COPPER));
+    public static final Block OXIDIZED_COPPER_PRESSURE_PLATE = registerBlock("oxidized_copper_pressure_plate", new OxidizablePressurePlateBlock(Oxidizable.OxidationLevel.OXIDIZED, FabricBlockSettings.copy(Blocks.OAK_PRESSURE_PLATE), BlockSetType.COPPER));
+    public static final Block COPPER_TRAPDOOR = registerBlock("copper_trapdoor", new OxidizableTrapdoorBlock(BlockSetType.COPPER, Oxidizable.OxidationLevel.UNAFFECTED, FabricBlockSettings.copy(Blocks.IRON_TRAPDOOR)));
+    public static final Block EXPOSED_COPPER_TRAPDOOR = registerBlock("exposed_copper_trapdoor", new OxidizableTrapdoorBlock(BlockSetType.COPPER, Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.copy(Blocks.IRON_TRAPDOOR)));
+    public static final Block WEATHERED_COPPER_TRAPDOOR = registerBlock("weathered_copper_trapdoor", new OxidizableTrapdoorBlock(BlockSetType.COPPER, Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.copy(Blocks.IRON_TRAPDOOR)));
+    public static final Block OXIDIZED_COPPER_TRAPDOOR = registerBlock("oxidized_copper_trapdoor", new OxidizableTrapdoorBlock(BlockSetType.COPPER, Oxidizable.OxidationLevel.OXIDIZED, FabricBlockSettings.copy(Blocks.IRON_TRAPDOOR)));
 
     public static final Block WAXED_COPPER_BARS = registerBlock("waxed_copper_bars", new PaneBlock(FabricBlockSettings.copy(ModBlocks.COPPER_BARS)));
     public static final Block WAXED_EXPOSED_COPPER_BARS = registerBlock("waxed_exposed_copper_bars", new PaneBlock(FabricBlockSettings.copy(ModBlocks.EXPOSED_COPPER_BARS)));
     public static final Block WAXED_WEATHERED_COPPER_BARS = registerBlock("waxed_weathered_copper_bars", new PaneBlock(FabricBlockSettings.copy(ModBlocks.WEATHERED_COPPER_BARS)));
     public static final Block WAXED_OXIDIZED_COPPER_BARS = registerBlock("waxed_oxidized_copper_bars", new PaneBlock(FabricBlockSettings.copy(ModBlocks.OXIDIZED_COPPER_BARS)));
 
-    public static final Block WAXED_COPPER_BUTTON = registerBlock("waxed_copper_button", new ButtonBlock(FabricBlockSettings.copy(Blocks.STONE_BUTTON), BlockSetType.IRON, 10, false));
-    public static final Block WAXED_EXPOSED_COPPER_BUTTON = registerBlock("waxed_exposed_copper_button", new ButtonBlock(FabricBlockSettings.copy(Blocks.STONE_BUTTON), BlockSetType.IRON, 20, false));
-    public static final Block WAXED_WEATHERED_COPPER_BUTTON = registerBlock("waxed_weathered_copper_button", new ButtonBlock(FabricBlockSettings.copy(Blocks.STONE_BUTTON), BlockSetType.IRON, 30, false));
-    public static final Block WAXED_OXIDIZED_COPPER_BUTTON = registerBlock("waxed_oxidized_copper_button", new ButtonBlock(FabricBlockSettings.copy(Blocks.STONE_BUTTON), BlockSetType.IRON, 40, false));
+    public static final Block WAXED_COPPER_BUTTON = registerBlock("waxed_copper_button", new ButtonBlock(BlockSetType.COPPER, 10, FabricBlockSettings.copy(Blocks.STONE_BUTTON)));
+    public static final Block WAXED_EXPOSED_COPPER_BUTTON = registerBlock("waxed_exposed_copper_button", new ButtonBlock(BlockSetType.COPPER, 20, FabricBlockSettings.copy(Blocks.STONE_BUTTON)));
+    public static final Block WAXED_WEATHERED_COPPER_BUTTON = registerBlock("waxed_weathered_copper_button", new ButtonBlock(BlockSetType.COPPER, 30, FabricBlockSettings.copy(Blocks.STONE_BUTTON)));
+    public static final Block WAXED_OXIDIZED_COPPER_BUTTON = registerBlock("waxed_oxidized_copper_button", new ButtonBlock(BlockSetType.COPPER, 40, FabricBlockSettings.copy(Blocks.STONE_BUTTON)));
 
     public static final Block WAXED_COPPER_CHAIN = registerBlock("waxed_copper_chain", new ChainBlock(FabricBlockSettings.copy(ModBlocks.COPPER_CHAIN)));
     public static final Block WAXED_LARGE_COPPER_CHAIN = registerBlock("waxed_large_copper_chain", new OxidizableLargeChainBlock(Oxidizable.OxidationLevel.UNAFFECTED, FabricBlockSettings.copy(ModBlocks.WAXED_COPPER_CHAIN)));
@@ -222,10 +222,10 @@ public class ModBlocks {
     public static final Block WAXED_WEATHERED_LARGE_COPPER_CHAIN = registerBlock("waxed_weathered_large_copper_chain", new OxidizableLargeChainBlock(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.copy(ModBlocks.WAXED_WEATHERED_COPPER_CHAIN)));
     public static final Block WAXED_OXIDIZED_COPPER_CHAIN = registerBlock("waxed_oxidized_copper_chain", new ChainBlock(FabricBlockSettings.copy(ModBlocks.OXIDIZED_COPPER_CHAIN)));
     public static final Block WAXED_OXIDIZED_LARGE_COPPER_CHAIN = registerBlock("waxed_oxidized_large_copper_chain", new OxidizableLargeChainBlock(Oxidizable.OxidationLevel.OXIDIZED, FabricBlockSettings.copy(ModBlocks.WAXED_OXIDIZED_COPPER_CHAIN)));
-    public static final Block WAXED_COPPER_DOOR = registerBlock("waxed_copper_door", new WaxedOxidizableDoorBlock(FabricBlockSettings.copy(ModBlocks.COPPER_DOOR), BlockSetType.IRON));
-    public static final Block WAXED_EXPOSED_COPPER_DOOR = registerBlock("waxed_exposed_copper_door", new WaxedOxidizableDoorBlock(FabricBlockSettings.copy(ModBlocks.EXPOSED_COPPER_DOOR), BlockSetType.IRON));
-    public static final Block WAXED_WEATHERED_COPPER_DOOR = registerBlock("waxed_weathered_copper_door", new WaxedOxidizableDoorBlock(FabricBlockSettings.copy(ModBlocks.WEATHERED_COPPER_DOOR), BlockSetType.IRON));
-    public static final Block WAXED_OXIDIZED_COPPER_DOOR = registerBlock("waxed_oxidized_copper_door", new WaxedOxidizableDoorBlock(FabricBlockSettings.copy(ModBlocks.OXIDIZED_COPPER_DOOR), BlockSetType.IRON));
+    public static final Block WAXED_COPPER_DOOR = registerBlock("waxed_copper_door", new DoorBlock(BlockSetType.COPPER, FabricBlockSettings.copy(ModBlocks.COPPER_DOOR)));
+    public static final Block WAXED_EXPOSED_COPPER_DOOR = registerBlock("waxed_exposed_copper_door", new DoorBlock(BlockSetType.COPPER, FabricBlockSettings.copy(ModBlocks.EXPOSED_COPPER_DOOR)));
+    public static final Block WAXED_WEATHERED_COPPER_DOOR = registerBlock("waxed_weathered_copper_door", new DoorBlock(BlockSetType.COPPER, FabricBlockSettings.copy(ModBlocks.WEATHERED_COPPER_DOOR)));
+    public static final Block WAXED_OXIDIZED_COPPER_DOOR = registerBlock("waxed_oxidized_copper_door", new DoorBlock(BlockSetType.COPPER, FabricBlockSettings.copy(ModBlocks.OXIDIZED_COPPER_DOOR)));
     public static final Block WAXED_COPPER_LANTERN = registerBlock("waxed_copper_lantern", new LanternBlock(FabricBlockSettings.copy(Blocks.LANTERN)));
     public static final Block WAXED_EXPOSED_COPPER_LANTERN = registerBlock("waxed_exposed_copper_lantern", new LanternBlock(FabricBlockSettings.copy(Blocks.LANTERN)));
     public static final Block WAXED_WEATHERED_COPPER_LANTERN = registerBlock("waxed_weathered_copper_lantern", new LanternBlock(FabricBlockSettings.copy(Blocks.LANTERN)));
@@ -234,21 +234,21 @@ public class ModBlocks {
     public static final Block WAXED_EXPOSED_COPPER_SOUL_LANTERN = registerBlock("waxed_exposed_copper_soul_lantern", new LanternBlock(FabricBlockSettings.copy(Blocks.SOUL_LANTERN)));
     public static final Block WAXED_WEATHERED_COPPER_SOUL_LANTERN = registerBlock("waxed_weathered_copper_soul_lantern", new LanternBlock(FabricBlockSettings.copy(Blocks.SOUL_LANTERN)));
     public static final Block WAXED_OXIDIZED_COPPER_SOUL_LANTERN = registerBlock("waxed_oxidized_copper_soul_lantern", new LanternBlock(FabricBlockSettings.copy(Blocks.SOUL_LANTERN)));
-    public static final Block WAXED_COPPER_PRESSURE_PLATE = registerBlock("waxed_copper_pressure_plate", new PressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, FabricBlockSettings.copy(ModBlocks.COPPER_PRESSURE_PLATE), BlockSetType.IRON));
-    public static final Block WAXED_EXPOSED_COPPER_PRESSURE_PLATE = registerBlock("waxed_exposed_copper_pressure_plate", new PressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, FabricBlockSettings.copy(ModBlocks.EXPOSED_COPPER_PRESSURE_PLATE), BlockSetType.IRON));
-    public static final Block WAXED_WEATHERED_COPPER_PRESSURE_PLATE = registerBlock("waxed_weathered_copper_pressure_plate", new PressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, FabricBlockSettings.copy(ModBlocks.WEATHERED_COPPER_PRESSURE_PLATE), BlockSetType.IRON));
-    public static final Block WAXED_OXIDIZED_COPPER_PRESSURE_PLATE = registerBlock("waxed_oxidized_copper_pressure_plate", new PressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, FabricBlockSettings.copy(ModBlocks.OXIDIZED_COPPER_PRESSURE_PLATE), BlockSetType.IRON));
-    public static final Block WAXED_COPPER_TRAPDOOR = registerBlock("waxed_copper_trapdoor", new ModTrapdoorBlock(FabricBlockSettings.copy(Blocks.IRON_TRAPDOOR), BlockSetType.IRON));
-    public static final Block WAXED_EXPOSED_COPPER_TRAPDOOR = registerBlock("waxed_exposed_copper_trapdoor", new ModTrapdoorBlock(FabricBlockSettings.copy(Blocks.IRON_TRAPDOOR), BlockSetType.IRON));
-    public static final Block WAXED_WEATHERED_COPPER_TRAPDOOR = registerBlock("waxed_weathered_copper_trapdoor", new ModTrapdoorBlock(FabricBlockSettings.copy(Blocks.IRON_TRAPDOOR), BlockSetType.IRON));
-    public static final Block WAXED_OXIDIZED_COPPER_TRAPDOOR = registerBlock("waxed_oxidized_copper_trapdoor", new ModTrapdoorBlock(FabricBlockSettings.copy(Blocks.IRON_TRAPDOOR), BlockSetType.IRON));
-    public static final Block GOLDEN_BUTTON = registerBlock("golden_button", new ButtonBlock(FabricBlockSettings.copy(Blocks.STONE_BUTTON), BlockSetType.IRON, 2, false));
+    public static final Block WAXED_COPPER_PRESSURE_PLATE = registerBlock("waxed_copper_pressure_plate", new PressurePlateBlock(BlockSetType.COPPER, FabricBlockSettings.copy(ModBlocks.COPPER_PRESSURE_PLATE)));
+    public static final Block WAXED_EXPOSED_COPPER_PRESSURE_PLATE = registerBlock("waxed_exposed_copper_pressure_plate", new PressurePlateBlock(BlockSetType.COPPER, FabricBlockSettings.copy(ModBlocks.EXPOSED_COPPER_PRESSURE_PLATE)));
+    public static final Block WAXED_WEATHERED_COPPER_PRESSURE_PLATE = registerBlock("waxed_weathered_copper_pressure_plate", new PressurePlateBlock(BlockSetType.COPPER, FabricBlockSettings.copy(ModBlocks.WEATHERED_COPPER_PRESSURE_PLATE)));
+    public static final Block WAXED_OXIDIZED_COPPER_PRESSURE_PLATE = registerBlock("waxed_oxidized_copper_pressure_plate", new PressurePlateBlock(BlockSetType.COPPER, FabricBlockSettings.copy(ModBlocks.OXIDIZED_COPPER_PRESSURE_PLATE)));
+    public static final Block WAXED_COPPER_TRAPDOOR = registerBlock("waxed_copper_trapdoor", new ModTrapdoorBlock(FabricBlockSettings.copy(Blocks.IRON_TRAPDOOR), BlockSetType.COPPER));
+    public static final Block WAXED_EXPOSED_COPPER_TRAPDOOR = registerBlock("waxed_exposed_copper_trapdoor", new ModTrapdoorBlock(FabricBlockSettings.copy(Blocks.IRON_TRAPDOOR), BlockSetType.COPPER));
+    public static final Block WAXED_WEATHERED_COPPER_TRAPDOOR = registerBlock("waxed_weathered_copper_trapdoor", new ModTrapdoorBlock(FabricBlockSettings.copy(Blocks.IRON_TRAPDOOR), BlockSetType.COPPER));
+    public static final Block WAXED_OXIDIZED_COPPER_TRAPDOOR = registerBlock("waxed_oxidized_copper_trapdoor", new ModTrapdoorBlock(FabricBlockSettings.copy(Blocks.IRON_TRAPDOOR), BlockSetType.COPPER));
+    public static final Block GOLDEN_BUTTON = registerBlock("golden_button", new ButtonBlock(BlockSetType.IRON, 2, FabricBlockSettings.copy(Blocks.STONE_BUTTON)));
     public static final Block GOLDEN_CHAIN = registerBlock("golden_chain", new ChainBlock(FabricBlockSettings.copy(Blocks.CHAIN)));
-    public static final Block GOLDEN_DOOR = registerBlock("golden_door", new DoorBlock(FabricBlockSettings.copy(Blocks.IRON_DOOR), BlockSetType.IRON));
+    public static final Block GOLDEN_DOOR = registerBlock("golden_door", new DoorBlock(BlockSetType.IRON, FabricBlockSettings.copy(Blocks.IRON_DOOR)));
     public static final Block GOLDEN_LANTERN = registerBlock("golden_lantern", new LanternBlock(FabricBlockSettings.copy(Blocks.LANTERN)));
     public static final Block GOLDEN_SOUL_LANTERN = registerBlock("golden_soul_lantern", new LanternBlock(FabricBlockSettings.copy(Blocks.SOUL_LANTERN)));
     public static final Block GOLDEN_TRAPDOOR = registerBlock("golden_trapdoor", new ModTrapdoorBlock(FabricBlockSettings.copy(Blocks.IRON_TRAPDOOR), BlockSetType.IRON));
-    public static final Block IRON_BUTTON = registerBlock("iron_button", new ButtonBlock(FabricBlockSettings.copy(Blocks.STONE_BUTTON), BlockSetType.IRON, 40, false));
+    public static final Block IRON_BUTTON = registerBlock("iron_button", new ButtonBlock(BlockSetType.IRON, 40, FabricBlockSettings.copy(Blocks.STONE_BUTTON)));
     public static final Block ANDESITE_CHIMNEY = registerBlock("andesite_chimney", new ChimneyBlock(FabricBlockSettings.copy(Blocks.ANDESITE_WALL)));
     public static final Block BLACKSTONE_CHIMNEY = registerBlock("blackstone_chimney", new ChimneyBlock(FabricBlockSettings.copy(Blocks.BLACKSTONE_WALL)));
     public static final Block BRICK_CHIMNEY = registerBlock("brick_chimney", new ChimneyBlock(FabricBlockSettings.copy(Blocks.BRICK_WALL)));
@@ -270,10 +270,10 @@ public class ModBlocks {
     public static final Block EXPOSED_REINFORCED_COPPER_GLASS = registerBlock("exposed_reinforced_copper_glass", new OxidizableGlassBlock(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.copy(Blocks.GLASS)));
     public static final Block WEATHERED_REINFORCED_COPPER_GLASS = registerBlock("weathered_reinforced_copper_glass", new OxidizableGlassBlock(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.copy(Blocks.GLASS)));
     public static final Block OXIDIZED_REINFORCED_COPPER_GLASS = registerBlock("oxidized_reinforced_copper_glass", new OxidizableGlassBlock(Oxidizable.OxidationLevel.OXIDIZED, FabricBlockSettings.copy(Blocks.GLASS)));
-    public static final Block WAXED_REINFORCED_COPPER_GLASS = registerBlock("waxed_reinforced_copper_glass", new GlassBlock(FabricBlockSettings.copy(Blocks.GLASS)));
-    public static final Block WAXED_EXPOSED_REINFORCED_COPPER_GLASS = registerBlock("waxed_exposed_reinforced_copper_glass", new GlassBlock(FabricBlockSettings.copy(Blocks.GLASS)));
-    public static final Block WAXED_WEATHERED_REINFORCED_COPPER_GLASS = registerBlock("waxed_weathered_reinforced_copper_glass", new GlassBlock(FabricBlockSettings.copy(Blocks.GLASS)));
-    public static final Block WAXED_OXIDIZED_REINFORCED_COPPER_GLASS = registerBlock("waxed_oxidized_reinforced_copper_glass", new GlassBlock(FabricBlockSettings.copy(Blocks.GLASS)));
+    public static final Block WAXED_REINFORCED_COPPER_GLASS = registerBlock("waxed_reinforced_copper_glass", new TransparentBlock(FabricBlockSettings.copy(Blocks.GLASS)));
+    public static final Block WAXED_EXPOSED_REINFORCED_COPPER_GLASS = registerBlock("waxed_exposed_reinforced_copper_glass", new TransparentBlock(FabricBlockSettings.copy(Blocks.GLASS)));
+    public static final Block WAXED_WEATHERED_REINFORCED_COPPER_GLASS = registerBlock("waxed_weathered_reinforced_copper_glass", new TransparentBlock(FabricBlockSettings.copy(Blocks.GLASS)));
+    public static final Block WAXED_OXIDIZED_REINFORCED_COPPER_GLASS = registerBlock("waxed_oxidized_reinforced_copper_glass", new TransparentBlock(FabricBlockSettings.copy(Blocks.GLASS)));
     public static final Block OAK_WALL_BOOKSHELF = registerBlock("oak_wall_bookshelf", new WallBookshelfBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).luminance(createLightLevelFromLitBlockState(8))));
     public static final Block OAK_WINDOW_SILL = registerBlock("oak_window_sill", new WindowSillBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS)));
     public static final Block SPRUCE_WALL_BOOKSHELF = registerBlock("spruce_wall_bookshelf", new WallBookshelfBlock(FabricBlockSettings.copy(Blocks.SPRUCE_PLANKS).luminance(createLightLevelFromLitBlockState(8))));
@@ -562,7 +562,7 @@ public class ModBlocks {
     public static final Block SOUL_BONFIRE = registerBlock("soul_bonfire", new BonfireBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).nonOpaque().luminance(BonfireBlock.createLightLevelFromLitBlockState(13))));
     public static final Block CATTAILS = registerBlock("cattails", new CattailPlantBlock(FabricBlockSettings.copy(Blocks.ROSE_BUSH)));
     public static final Block LUSH_MOSS = registerBlock("lush_moss", new MossSproutBlock(FabricBlockSettings.copy(Blocks.NETHER_SPROUTS).sounds(BlockSoundGroup.MOSS_BLOCK)));
-    public static final Block BREAD = registerBlock("bread", new BreadBlock(FabricBlockSettings.copy(Blocks.CAKE).nonOpaque(), 2, 0.25f));
+    public static final Block BREAD = registerBlock("bread", new BreadBlock(FabricBlockSettings.copy(Blocks.CAKE).nonOpaque()));
 
     //public static final Block SINK = registerBlock("sink", new SinkBlock(FabricBlockSettings.copy(Blocks.WATER_CAULDRON).nonOpaque()));
     //public static final Block SHOWER = registerBlock("shower", new ShowerBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK).ticksRandomly()));
@@ -580,7 +580,7 @@ public class ModBlocks {
     public static final Block GOLDEN_COIN_STACK = registerBlock("golden_coin_stack", new GoldenCoinStackBlock(FabricBlockSettings.create().nonOpaque().strength(0.25f).sounds(ModSounds.COIN_PILE_SOUNDS).mapColor(MapColor.GOLD)));
     public static final Block RIPE_KIWI_LEAVES = registerBlock("ripe_kiwi_leaves", new KiwiLeafBlock(FabricBlockSettings.copy(Blocks.JUNGLE_LEAVES)));
     public static final Block KIWI_LEAVES = registerBlock("kiwi_leaves", new LeavesBlock(FabricBlockSettings.copy(Blocks.JUNGLE_LEAVES)));
-    public static final Block KIWI_TREE_SAPLING = registerBlock("kiwi_tree_sapling", new SaplingBlock(new KiwiTreeSaplingGenerator(), FabricBlockSettings.copy(Blocks.JUNGLE_SAPLING)));
+    public static final Block KIWI_TREE_SAPLING = registerBlock("kiwi_tree_sapling", new SaplingBlock(ModSaplingGenerators.KIWI_TREE, FabricBlockSettings.copy(Blocks.JUNGLE_SAPLING)));
     public static final Block LARGE_CHAIN = registerBlock("large_chain", new LargeChainBlock(FabricBlockSettings.copy(Blocks.CHAIN)));
     public static final Block LARGE_SILVER_CHAIN = registerBlock("large_silver_chain", new LargeChainBlock(FabricBlockSettings.copy(ModBlocks.SILVER_CHAIN)));
     public static final Block LARGE_GOLDEN_CHAIN = registerBlock("large_golden_chain", new LargeChainBlock(FabricBlockSettings.copy(ModBlocks.GOLDEN_CHAIN)));
@@ -606,10 +606,10 @@ public class ModBlocks {
     public static final Block LARGE_MAGENTA_CANDLE = registerBlock("large_magenta_candle", new LargeCandleBlock(FabricBlockSettings.copy(ModBlocks.LARGE_CANDLE).mapColor(MapColor.MAGENTA)));
     public static final Block LARGE_PINK_CANDLE = registerBlock("large_pink_candle", new LargeCandleBlock(FabricBlockSettings.copy(ModBlocks.LARGE_CANDLE).mapColor(MapColor.PINK)));
 
-    public static final Block BLACKSTONE_SULPHUR_ORE = registerBlock("blackstone_sulphur_ore", new ExperienceDroppingBlock(FabricBlockSettings.copy(Blocks.BLACKSTONE).mapColor(MapColor.PALE_YELLOW), UniformIntProvider.create(1, 2)));
+    public static final Block BLACKSTONE_SULPHUR_ORE = registerBlock("blackstone_sulphur_ore", new ExperienceDroppingBlock(UniformIntProvider.create(1, 2), FabricBlockSettings.copy(Blocks.BLACKSTONE).mapColor(MapColor.PALE_YELLOW)));
     public static final Block BASALT_SULPHUR_ORE = registerBlock("basalt_sulphur_ore", new ExperienceDroppingPillarBlock(FabricBlockSettings.copy(Blocks.BASALT).mapColor(MapColor.PALE_YELLOW), UniformIntProvider.create(1, 2)));
     public static final Block SULPHUR_BLOCK = registerBlock("sulphur_block", new Block(FabricBlockSettings.create().instrument(Instrument.BASEDRUM).strength(1f, 1.5f).mapColor(MapColor.TERRACOTTA_YELLOW).sounds(BlockSoundGroup.SAND)));
-    public static final Block ONYX_ORE = registerBlock("onyx_ore", new ExperienceDroppingBlock(FabricBlockSettings.create().instrument(Instrument.BASEDRUM).strength(1f, 1.5f).mapColor(MapColor.TERRACOTTA_YELLOW).sounds(BlockSoundGroup.SAND), UniformIntProvider.create(3, 7)));
+    public static final Block ONYX_ORE = registerBlock("onyx_ore", new ExperienceDroppingBlock(UniformIntProvider.create(3, 7), FabricBlockSettings.create().instrument(Instrument.BASEDRUM).strength(1f, 1.5f).mapColor(MapColor.TERRACOTTA_YELLOW).sounds(BlockSoundGroup.SAND)));
 
     public static final Block SMALL_ONYX_BUD = registerBlock("small_onyx_bud", new ClusterBlock(3, 4, FabricBlockSettings.create().mapColor(MapColor.BLACK).solid().nonOpaque().ticksRandomly().sounds(BlockSoundGroup.SMALL_AMETHYST_BUD).strength(1.5F).luminance((state) -> 1).pistonBehavior(PistonBehavior.DESTROY)));
     public static final Block MEDIUM_ONYX_BUD = registerBlock("medium_onyx_bud", new ClusterBlock(4, 3, FabricBlockSettings.copy(SMALL_ONYX_BUD).sounds(BlockSoundGroup.LARGE_AMETHYST_BUD).solid().luminance((state) -> 2).pistonBehavior(PistonBehavior.DESTROY)));
@@ -649,7 +649,7 @@ public class ModBlocks {
     public static final Block WAXED_WEATHERED_LARGE_COPPER_CHANDELIER = registerBlock("waxed_weathered_large_copper_chandelier", new LargeChandelierBlock(FabricBlockSettings.copy(Blocks.WAXED_WEATHERED_COPPER).nonOpaque().pistonBehavior(PistonBehavior.DESTROY)));
     public static final Block WAXED_OXIDIZED_LARGE_COPPER_CHANDELIER = registerBlock("waxed_oxidized_large_copper_chandelier", new LargeChandelierBlock(FabricBlockSettings.copy(Blocks.WAXED_OXIDIZED_COPPER).nonOpaque().pistonBehavior(PistonBehavior.DESTROY)));
 
-    public static final Block BRICK_KILN = registerBlock("brick_kiln", new BrickKilnBlock(FabricBlockSettings.copy(Blocks.BRICKS).luminance(createLightLevelFromLitBlockState(13))));
+    public static final Block BRICK_KILN = registerBlock("brick_kiln", new BrickKilnFurnaceBlock(FabricBlockSettings.copy(Blocks.BRICKS).luminance(createLightLevelFromLitBlockState(13))));
     public static final Block MAILBOX = registerBlock("mailbox", new MailBoxBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK).nonOpaque()));
     public static final Block CARDBOARD_BOX = registerBlock("cardboard_box", new CardboardBoxBlock(FabricBlockSettings.create().nonOpaque().mapColor(MapColor.BROWN).sounds(BlockSoundGroup.WOOL)), 1);
     public static final Block RED_PRESENT = registerBlock("red_present", new PresentBlock(FabricBlockSettings.create().nonOpaque().mapColor(MapColor.BROWN).sounds(BlockSoundGroup.WOOL)), 1);

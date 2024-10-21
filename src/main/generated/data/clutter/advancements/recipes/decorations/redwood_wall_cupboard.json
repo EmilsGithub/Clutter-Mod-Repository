@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_redwood_slab",
-      "has_redwood_planks",
-      "has_the_recipe"
+      "has_redwood_planks"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:redwood_wall_cupboard"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

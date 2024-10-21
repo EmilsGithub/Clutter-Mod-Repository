@@ -1,9 +1,9 @@
-// 1.20.1	2024-10-20T21:34:56.8142375	Clutter/Tags for minecraft:item
+// 1.20.4	2024-10-21T23:23:19.0631761	Clutter/Tags for minecraft:item
 55eba99f679873db4fd91826c664c2853d5bcfde data\clutter\tags\items\redwood_logs.json
-337a49036caf8f3e98268c3f3bc58315bf4bc30f data\c\tags\items\copper_nuggets.json
 27c633842914d7c1c14889f04be544b4c634cb22 data\clutter\tags\items\plushies.json
-9d0c67b286d9efdd039d39bb7323530cd4bc1205 data\c\tags\items\silver_blocks.json
+337a49036caf8f3e98268c3f3bc58315bf4bc30f data\c\tags\items\copper_nuggets.json
 f9a00c407878604596cade52dfd15c50f9da9092 data\c\tags\items\ores.json
+9d0c67b286d9efdd039d39bb7323530cd4bc1205 data\c\tags\items\silver_blocks.json
 d4ab1af1dd3f975f3b8f3aaea3d1e6908e551e26 data\clutter\tags\items\strippable_logs.json
 d543ae5a22a69e24edb31a69eac7f3515fab6cb8 data\c\tags\items\entity_water_buckets.json
 f2c6fde89a1c73b85509f604946e00fcd5ac4e78 data\c\tags\items\silver_nuggets.json

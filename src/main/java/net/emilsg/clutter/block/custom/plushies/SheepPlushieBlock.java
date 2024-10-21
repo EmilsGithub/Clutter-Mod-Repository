@@ -1,8 +1,10 @@
 package net.emilsg.clutter.block.custom.plushies;
 
+import com.mojang.serialization.MapCodec;
 import net.emilsg.clutter.util.ModItemTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -28,6 +30,13 @@ public class SheepPlushieBlock extends AbstractPlushieBlock {
     public SheepPlushieBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.getDefaultState().with(WATERLOGGED, false).with(COLOR, SheepColors.WHITE));
+    }
+
+    public static final MapCodec<SheepPlushieBlock> CODEC = createCodec(SheepPlushieBlock::new);
+
+    @Override
+    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
+        return CODEC;
     }
 
     @Override

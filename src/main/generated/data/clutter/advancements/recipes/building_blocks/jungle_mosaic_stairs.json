@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_jungle_mosaic",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_jungle_mosaic"
     ]
   ],
   "rewards": {
     "recipes": [
       "clutter:jungle_mosaic_stairs"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }
