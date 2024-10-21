@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "clutter:dyes"
+    },
+    {
+      "tag": "clutter:dyes"
+    },
+    {
+      "tag": "clutter:dyes"
+    },
+    {
+      "item": "clutter:cap"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "clutter:propeller_cap"
+  }
+}

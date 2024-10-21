@@ -65,7 +65,8 @@ public class KiwiLeafBlock extends LeavesBlock implements Fertilizable {
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+        Hand hand = player.getActiveHand();
         int age = state.get(AGE);
         boolean harvestable = age == 3;
         if (!harvestable && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
@@ -77,7 +78,7 @@ public class KiwiLeafBlock extends LeavesBlock implements Fertilizable {
             world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(player, state));
             return ActionResult.success(world.isClient);
         }
-        return super.onUse(state, world, pos, player, hand, hit);
+        return super.onUse(state, world, pos, player, hit);
     }
 
     public BlockState getPlacementState(ItemPlacementContext ctx) {

@@ -1,10 +1,13 @@
 package net.emilsg.clutter.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.util.ModBlockTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.block.ShapeContext;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.ItemStack;
@@ -20,7 +23,7 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class WoodenChairBlock extends SeatBlock {
+public class WoodenChairBlock extends AbstractSeatBlock {
 
     public final VoxelShape NORTH_SHAPE = VoxelShapes.union(
             Block.createCuboidShape(3, 8, 11, 13, 16, 12),
@@ -66,8 +69,15 @@ public class WoodenChairBlock extends SeatBlock {
             Block.createCuboidShape(3, 0, 3, 5, 6, 5)
     );
 
+    public static final MapCodec<WoodenChairBlock> CODEC = createCodec(WoodenChairBlock::new);
+
     public WoodenChairBlock(Settings settings) {
         super(settings);
+    }
+
+    @Override
+    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
+        return CODEC;
     }
 
     @Override
@@ -93,18 +103,19 @@ public class WoodenChairBlock extends SeatBlock {
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+        Hand hand = player.getActiveHand();
         ItemStack itemStack = player.getStackInHand(hand);
         if (itemStack.getItem() instanceof AxeItem && state.isIn(ModBlockTags.STRIPPABLE_CHAIRS)) {
             BlockState strippedState = getStrippedState(state);
             world.setBlockState(pos, strippedState);
             world.playSound(null, pos, SoundEvents.ITEM_AXE_STRIP, SoundCategory.BLOCKS, 1.0F, 1.0F);
             if (!player.isCreative()) {
-                itemStack.damage(1, player, (p) -> p.sendToolBreakStatus(hand));
+                itemStack.damage(1, player, LivingEntity.getSlotForHand(hand));
             }
             return ActionResult.SUCCESS;
         }
-        return super.onUse(state, world, pos, player, hand, hit);
+        return super.onUse(state, world, pos, player, hit);
     }
 
     private BlockState getStrippedState(BlockState state) {

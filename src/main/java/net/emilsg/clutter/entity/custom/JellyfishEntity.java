@@ -16,6 +16,7 @@ import net.minecraft.entity.mob.WaterCreatureEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.tag.EntityTypeTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Util;
@@ -35,14 +36,16 @@ import java.util.function.Predicate;
 public class JellyfishEntity extends WaterCreatureEntity {
 
     private static final TrackedData<Integer> DATA_ID_TYPE_VARIANT = DataTracker.registerData(JellyfishEntity.class, TrackedDataHandlerRegistry.INTEGER);
-
-    private static final Predicate<LivingEntity> TARGET_FILTER = entity -> {
-        if (entity instanceof PlayerEntity && ((PlayerEntity) entity).isCreative()) {
-            return false;
+    private static final Predicate<LivingEntity> BLOW_UP_FILTER = (entity) -> {
+        if (entity instanceof PlayerEntity playerEntity) {
+            if (playerEntity.isCreative()) {
+                return false;
+            }
         }
-        return entity.getType() == EntityType.AXOLOTL || entity.getGroup() != EntityGroup.AQUATIC;
+
+        return !entity.getType().isIn(EntityTypeTags.NOT_SCARY_FOR_PUFFERFISH);
     };
-    private static final TargetPredicate TARGET_PREDICATE = TargetPredicate.createNonAttackable().ignoreDistanceScalingFactor().ignoreVisibility().setPredicate(TARGET_FILTER);
+    private static final TargetPredicate TARGET_PREDICATE = TargetPredicate.createNonAttackable().ignoreDistanceScalingFactor().ignoreVisibility().setPredicate(BLOW_UP_FILTER);
     public final AnimationState swimmingAnimationState = new AnimationState();
     public float tiltAngle;
     public float prevTiltAngle;
@@ -85,14 +88,11 @@ public class JellyfishEntity extends WaterCreatureEntity {
     }
 
     @Override
-    public EntityGroup getGroup() {
-        return EntityGroup.AQUATIC;
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(DATA_ID_TYPE_VARIANT, 0);
     }
 
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(DATA_ID_TYPE_VARIANT, 0);
-    }
 
     @Override
     protected void initGoals() {
@@ -203,7 +203,7 @@ public class JellyfishEntity extends WaterCreatureEntity {
     }
 
     @Override
-    public boolean canBeLeashedBy(PlayerEntity player) {
+    public boolean canBeLeashed() {
         return !this.isLeashed();
     }
 
@@ -227,11 +227,12 @@ public class JellyfishEntity extends WaterCreatureEntity {
         return this.swimX != 0.0f || this.swimY != 0.0f || this.swimZ != 0.0f;
     }
 
+    @Nullable
     @Override
-    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
+    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData) {
         JellyfishVariant variant = Util.getRandom(JellyfishVariant.values(), this.random);
         this.setVariant(variant);
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
+        return super.initialize(world, difficulty, spawnReason, entityData);
     }
 
     public JellyfishVariant getVariant() {

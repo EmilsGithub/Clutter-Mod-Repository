@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "clutter:waxed_weathered_copper_wall_candle"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_weathered_copper_wall_candle": {
+      "conditions": {
+        "items": [
+          {
+            "items": "clutter:weathered_copper_wall_candle"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_weathered_copper_wall_candle"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "clutter:waxed_weathered_copper_wall_candle"
+    ]
+  }
+}

@@ -3,10 +3,11 @@ package net.emilsg.clutter.block.custom;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
-import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.text.Text;
@@ -163,7 +164,7 @@ public class LargeChandelierBlock extends Block {
     }
 
     @Override
-    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+    public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         super.onBreak(world, pos, state, player);
 
 
@@ -187,6 +188,7 @@ public class LargeChandelierBlock extends Block {
                 world.breakBlock(pair.getLeft(), true);
             }
         }
+        return state;
     }
 
     public void placeWithDirection(World world, BlockPos pos) {
@@ -200,9 +202,10 @@ public class LargeChandelierBlock extends Block {
         world.setBlockState(pos.north().west(), this.getDefaultState().with(BLOCK_SHAPE, LargeChandelierDirections.NORTH_WEST));
     }
 
-    public void appendTooltip(ItemStack stack, @Nullable BlockView world, List<Text> tooltip, TooltipContext context) {
+    @Override
+    public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType options) {
         tooltip.add(Text.translatable("block.clutter.3x1x3_area_tooltip.tooltip").formatted(Formatting.BLUE));
-        super.appendTooltip(stack, world, tooltip, context);
+        super.appendTooltip(stack, context, tooltip, options);
     }
 
     public enum LargeChandelierDirections implements StringIdentifiable {

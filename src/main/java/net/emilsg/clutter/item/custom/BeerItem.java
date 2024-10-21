@@ -12,6 +12,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AliasedBlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsage;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
@@ -68,7 +69,7 @@ public class BeerItem extends AliasedBlockItem {
         return stack;
     }
 
-    private void extendOrApplyEffect(LivingEntity user, StatusEffect effect, int duration, int amplifier) {
+    private void extendOrApplyEffect(LivingEntity user, RegistryEntry<StatusEffect> effect, int duration, int amplifier) {
         StatusEffectInstance currentEffect = user.getStatusEffect(effect);
 
         if (currentEffect != null) {
@@ -80,7 +81,7 @@ public class BeerItem extends AliasedBlockItem {
     }
 
     @Override
-    public int getMaxUseTime(ItemStack stack) {
+    public int getMaxUseTime(ItemStack stack, LivingEntity user) {
         return 32;
     }
 

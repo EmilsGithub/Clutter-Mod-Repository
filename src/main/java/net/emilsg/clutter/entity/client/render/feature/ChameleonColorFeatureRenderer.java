@@ -35,7 +35,7 @@ public class ChameleonColorFeatureRenderer extends FeatureRenderer<ChameleonEnti
         float blue = chameleonColor.getBlue() / 255.0f;
 
         VertexConsumer vertexConsumer = vertexConsumers.getBuffer(this.getContextModel().getLayer(this.getTexture(entity)));
-        this.getContextModel().render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, red, green, blue, 1.0f);
+        this.getContextModel().render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV);
     }
 
     private Color getChameleonColor(ChameleonEntity chameleon) {

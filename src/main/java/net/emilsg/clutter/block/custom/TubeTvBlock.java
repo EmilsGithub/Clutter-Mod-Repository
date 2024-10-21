@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
@@ -80,9 +81,17 @@ public class TubeTvBlock extends HorizontalFacingBlock implements Waterloggable 
     );
     private static final BooleanProperty LIT = Properties.LIT;
 
+    public static final MapCodec<TubeTvBlock> CODEC = createCodec(TubeTvBlock::new);
+
+
     public TubeTvBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.getDefaultState().with(WATERLOGGED, false).with(LIT, false));
+    }
+
+    @Override
+    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
+        return CODEC;
     }
 
     public static ToIntFunction<BlockState> createLightLevelFromLitBlockState(int litLevel) {
@@ -90,7 +99,8 @@ public class TubeTvBlock extends HorizontalFacingBlock implements Waterloggable 
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+        Hand hand = player.getActiveHand();
         boolean i = state.get(LIT);
         if (!world.isClient && hand.equals(Hand.MAIN_HAND) && player.getStackInHand(hand).isEmpty()) {
             if (!i) {

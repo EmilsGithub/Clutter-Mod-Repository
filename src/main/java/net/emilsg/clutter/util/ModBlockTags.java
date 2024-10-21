@@ -53,6 +53,6 @@ public class ModBlockTags {
 
 
     private static TagKey<Block> create(String namespace, String path) {
-        return TagKey.of(Registries.BLOCK.getKey(), new Identifier(namespace, path));
+        return TagKey.of(Registries.BLOCK.getKey(), Identifier.of(namespace, path));
     }
 }

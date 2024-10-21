@@ -27,6 +27,6 @@ public class EmissiveRenderer<E extends Entity, EM extends EntityModel<E>> exten
         if (emissiveTexture == null) return;
         RenderLayer emissiveLayer = RenderLayer.getEyes(emissiveTexture);
         VertexConsumer vertexConsumer = vertexConsumers.getBuffer(emissiveLayer);
-        this.getContextModel().render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 0.25f);
+        this.getContextModel().render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV);
     }
 }

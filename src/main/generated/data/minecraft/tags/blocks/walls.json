@@ -1,9 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "clutter:onyx_wall",
-    "clutter:black_onyx_wall",
-    "clutter:polished_black_onyx_wall",
-    "clutter:polished_onyx_wall"
-  ]
-}

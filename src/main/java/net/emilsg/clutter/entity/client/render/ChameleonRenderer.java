@@ -10,7 +10,7 @@ import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.util.Identifier;
 
 public class ChameleonRenderer extends MobEntityRenderer<ChameleonEntity, ChameleonModel<ChameleonEntity>> {
-    private static final Identifier TEXTURE = new Identifier(Clutter.MOD_ID, "textures/entity/chameleon_box.png");
+    private static final Identifier TEXTURE = Identifier.of(Clutter.MOD_ID, "textures/entity/chameleon_box.png");
 
     public ChameleonRenderer(EntityRendererFactory.Context ctx) {
         super(ctx, new ChameleonModel<>(ctx.getPart(ModModelLayers.CHAMELEON)), 0.4f);

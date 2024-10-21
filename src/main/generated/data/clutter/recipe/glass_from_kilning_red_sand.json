@@ -1,0 +1,13 @@
+{
+  "type": "clutter:kilning",
+  "category": "blocks",
+  "cookingtime": 50,
+  "experience": 1.0,
+  "group": "glass",
+  "ingredient": {
+    "item": "minecraft:red_sand"
+  },
+  "result": {
+    "id": "minecraft:glass"
+  }
+}

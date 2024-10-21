@@ -1,9 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "clutter:redwood_log",
-    "clutter:stripped_redwood_log",
-    "clutter:redwood_wood",
-    "clutter:stripped_redwood_wood"
-  ]
-}

@@ -1,12 +1,13 @@
 package net.emilsg.clutter.block.custom;
 
 import net.minecraft.block.*;
-import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
@@ -54,8 +55,9 @@ public class WindowSillBlock extends Block implements Waterloggable {
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         int i = state.get(CURRENT_MODEL);
+        Hand hand = player.getActiveHand();
         if (!world.isClient && player.isSneaking() && hand.equals(Hand.MAIN_HAND) && player.getStackInHand(hand).isEmpty()) {
             if (i < MAX_MODEL) {
                 world.setBlockState(pos, state.with(CURRENT_MODEL, i + 1), Block.NOTIFY_ALL);
@@ -92,9 +94,10 @@ public class WindowSillBlock extends Block implements Waterloggable {
         builder.add(FACING, CURRENT_MODEL, WATERLOGGED);
     }
 
-    public void appendTooltip(ItemStack stack, @Nullable BlockView world, List<Text> tooltip, TooltipContext context) {
+    @Override
+    public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType options) {
         tooltip.add(Text.translatable("block.clutter.cycle_blockstate_tooltip.tooltip").formatted(Formatting.BLUE));
-        super.appendTooltip(stack, world, tooltip, context);
+        super.appendTooltip(stack, context, tooltip, options);
     }
 
     @Override

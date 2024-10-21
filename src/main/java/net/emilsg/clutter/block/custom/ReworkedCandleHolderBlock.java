@@ -2,6 +2,7 @@ package net.emilsg.clutter.block.custom;
 
 import net.emilsg.clutter.util.ModProperties;
 import net.minecraft.block.*;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.fluid.FluidState;
@@ -174,9 +175,10 @@ public class ReworkedCandleHolderBlock extends Block implements Waterloggable {
         };
     }
 
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+        Hand hand = player.getActiveHand();
         if (!player.getAbilities().allowModifyWorld || state.get(WATERLOGGED)) {
-            return super.onUse(state, world, pos, player, hand, hit);
+            return super.onUse(state, world, pos, player, hit);
         }
 
 
@@ -224,7 +226,7 @@ public class ReworkedCandleHolderBlock extends Block implements Waterloggable {
             return ActionResult.success(world.isClient);
         }
 
-        return super.onUse(state, world, pos, player, hand, hit);
+        return super.onUse(state, world, pos, player, hit);
     }
 
     private void handleCandlePlacement(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, int requiredCount, CandleColor currentColor, boolean candles) {
@@ -256,8 +258,7 @@ public class ReworkedCandleHolderBlock extends Block implements Waterloggable {
     }
 
     private void damageItemIfNotCreative(PlayerEntity player, Hand hand) {
-        if (!player.getAbilities().creativeMode)
-            player.getStackInHand(hand).damage(1, player, playerEntity -> playerEntity.sendToolBreakStatus(hand));
+        if (!player.getAbilities().creativeMode) player.getStackInHand(hand).damage(1, player, LivingEntity.getSlotForHand(hand));
     }
 
     private void decrementItemIfNotCreative(PlayerEntity player, Hand hand, int count) {

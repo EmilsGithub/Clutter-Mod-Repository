@@ -21,10 +21,10 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public class ModItemGroups {
-    public static final RegistryKey<ItemGroup> CLUTTER_BLOCKS = RegistryKey.of(RegistryKeys.ITEM_GROUP, new Identifier(Clutter.MOD_ID, "clutter_blocks"));
-    public static final RegistryKey<ItemGroup> CLUTTER_ITEMS = RegistryKey.of(RegistryKeys.ITEM_GROUP, new Identifier(Clutter.MOD_ID, "clutter_items"));
-    public static final RegistryKey<ItemGroup> CLUTTER_SPAWN_EGGS = RegistryKey.of(RegistryKeys.ITEM_GROUP, new Identifier(Clutter.MOD_ID, "clutter_spawn_eggs"));
-    public static final RegistryKey<ItemGroup> CLUTTER_NATURE = RegistryKey.of(RegistryKeys.ITEM_GROUP, new Identifier(Clutter.MOD_ID, "clutter_nature"));
+    public static final RegistryKey<ItemGroup> CLUTTER_BLOCKS = RegistryKey.of(RegistryKeys.ITEM_GROUP, Identifier.of(Clutter.MOD_ID, "clutter_blocks"));
+    public static final RegistryKey<ItemGroup> CLUTTER_ITEMS = RegistryKey.of(RegistryKeys.ITEM_GROUP, Identifier.of(Clutter.MOD_ID, "clutter_items"));
+    public static final RegistryKey<ItemGroup> CLUTTER_SPAWN_EGGS = RegistryKey.of(RegistryKeys.ITEM_GROUP, Identifier.of(Clutter.MOD_ID, "clutter_spawn_eggs"));
+    public static final RegistryKey<ItemGroup> CLUTTER_NATURE = RegistryKey.of(RegistryKeys.ITEM_GROUP, Identifier.of(Clutter.MOD_ID, "clutter_nature"));
 
 
     public static void registerItemGroups() {

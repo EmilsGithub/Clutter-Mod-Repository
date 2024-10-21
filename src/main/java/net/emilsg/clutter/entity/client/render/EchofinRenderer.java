@@ -13,10 +13,10 @@ import net.minecraft.util.Identifier;
 
 public class EchofinRenderer extends MobEntityRenderer<EchofinEntity, EchofinModel<EchofinEntity>> {
 
-    public static final Identifier CHORUS_TEXTURE = new Identifier(Clutter.MOD_ID, "textures/entity/chorus_echofin_box.png");
-    public static final Identifier EMISSIVE_CHORUS_TEXTURE = new Identifier(Clutter.MOD_ID, "textures/entity/chorus_echofin_box_emissive.png");
-    public static final Identifier LEVITATING_TEXTURE = new Identifier(Clutter.MOD_ID, "textures/entity/levitating_echofin_box.png");
-    public static final Identifier EMISSIVE_LEVITATING_TEXTURE = new Identifier(Clutter.MOD_ID, "textures/entity/levitating_echofin_box_emissive.png");
+    public static final Identifier CHORUS_TEXTURE = Identifier.of(Clutter.MOD_ID, "textures/entity/chorus_echofin_box.png");
+    public static final Identifier EMISSIVE_CHORUS_TEXTURE = Identifier.of(Clutter.MOD_ID, "textures/entity/chorus_echofin_box_emissive.png");
+    public static final Identifier LEVITATING_TEXTURE = Identifier.of(Clutter.MOD_ID, "textures/entity/levitating_echofin_box.png");
+    public static final Identifier EMISSIVE_LEVITATING_TEXTURE = Identifier.of(Clutter.MOD_ID, "textures/entity/levitating_echofin_box_emissive.png");
 
     public EchofinRenderer(EntityRendererFactory.Context ctx) {
         super(ctx, new EchofinModel<>(ctx.getPart(ModModelLayers.ECHOFIN)), 0.4f);

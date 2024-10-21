@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.*;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
@@ -27,9 +28,16 @@ public class FoodBoxBlock extends HorizontalFacingBlock implements Waterloggable
             Block.createCuboidShape(0.0, 7.0, 0.0, 1.0, 8.0, 16.0),
             Block.createCuboidShape(0.0, 7.0, 0.0, 16.0, 8.0, 1.0));
 
+    public static final MapCodec<FoodBoxBlock> CODEC = createCodec(FoodBoxBlock::new);
+
     public FoodBoxBlock(Settings settings) {
         super(settings);
         this.setDefaultState((this.stateManager.getDefaultState()).with(WATERLOGGED, false));
+    }
+
+    @Override
+    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
+        return CODEC;
     }
 
     @Override

@@ -99,18 +99,18 @@ public class MossbloomModel<T extends MossbloomEntity> extends ClutterModel<T> {
     }
 
     @Override
-    public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
+    public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, int color) {
         if (this.child) {
             float babyScale = 0.75f;
             matrices.push();
             matrices.scale(babyScale, babyScale, babyScale);
             matrices.translate(0.0D, 0.5D, 0D);
-            this.getPart().render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
+            this.getPart().render(matrices, vertexConsumer, light, overlay, color);
             matrices.pop();
             this.getHeadPart().scale(createVec3f(1.0f));
         } else {
             matrices.push();
-            this.getPart().render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
+            this.getPart().render(matrices, vertexConsumer, light, overlay, color);
             matrices.pop();
         }
     }

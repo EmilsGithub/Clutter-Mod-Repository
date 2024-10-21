@@ -1,15 +1,13 @@
 package net.emilsg.clutter.block.entity;
 
-import net.emilsg.clutter.block.custom.SeatBlock;
+import net.emilsg.clutter.block.custom.AbstractSeatBlock;
 import net.emilsg.clutter.entity.ModEntities;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.listener.ClientPlayPacketListener;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -27,11 +25,6 @@ public class SeatEntity extends Entity {
     public SeatEntity(World world) {
         super(ModEntities.SEAT, world);
         noClip = true;
-    }
-
-    @Override
-    public Packet<ClientPlayPacketListener> createSpawnPacket() {
-        return new EntitySpawnS2CPacket(this);
     }
 
     @Override
@@ -53,7 +46,7 @@ public class SeatEntity extends Entity {
 
     @Override
     public void tick() {
-        if (!this.getWorld().isClient && !(!this.getPassengerList().isEmpty() || !(this.getWorld().getBlockState(this.getBlockPos()).getBlock() instanceof SeatBlock))) {
+        if (!this.getWorld().isClient && !(!this.getPassengerList().isEmpty() || !(this.getWorld().getBlockState(this.getBlockPos()).getBlock() instanceof AbstractSeatBlock))) {
             remove(RemovalReason.DISCARDED);
         }
     }
@@ -65,7 +58,7 @@ public class SeatEntity extends Entity {
     }
 
     @Override
-    protected void initDataTracker() {
+    protected void initDataTracker(DataTracker.Builder builder) {
     }
 
     @Override

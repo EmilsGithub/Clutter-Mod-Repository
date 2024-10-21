@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "clutter:onyx_stairs"
+    },
+    {
+      "item": "clutter:sulphur"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "clutter:black_onyx_stairs"
+  }
+}

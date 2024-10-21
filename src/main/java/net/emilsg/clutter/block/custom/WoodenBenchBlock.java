@@ -1,9 +1,11 @@
 package net.emilsg.clutter.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.util.ModBlockTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -28,7 +30,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
-public class WoodenBenchBlock extends SeatBlock {
+public class WoodenBenchBlock extends AbstractSeatBlock {
 
     public static final EnumProperty<WoodenBenchBlock.LegPosition> LEG_POSITIONS = EnumProperty.of("leg_positions", LegPosition.class);
 
@@ -125,8 +127,15 @@ public class WoodenBenchBlock extends SeatBlock {
             Block.createCuboidShape(2.0, 6.0, 14.0, 12.0, 7.0, 15.0), Block.createCuboidShape(3.0, 6.0, 0.0, 5.0, 7.0, 14.0),
             Block.createCuboidShape(9.0, 6.0, 0.0, 11.0, 7.0, 14.0));
 
+    public static final MapCodec<WoodenBenchBlock> CODEC = createCodec(WoodenBenchBlock::new);
+
     public WoodenBenchBlock(Settings settings) {
         super(settings);
+    }
+
+    @Override
+    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
+        return CODEC;
     }
 
     @Override
@@ -190,18 +199,19 @@ public class WoodenBenchBlock extends SeatBlock {
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+        Hand hand = player.getActiveHand();
         ItemStack itemStack = player.getStackInHand(hand);
         if (itemStack.getItem() instanceof AxeItem && state.isIn(ModBlockTags.STRIPPABLE_BENCHES)) {
             BlockState strippedState = getStrippedState(state);
             world.setBlockState(pos, strippedState);
             world.playSound(null, pos, SoundEvents.ITEM_AXE_STRIP, SoundCategory.BLOCKS, 1.0F, 1.0F);
             if (!player.isCreative()) {
-                itemStack.damage(1, player, (p) -> p.sendToolBreakStatus(hand));
+                itemStack.damage(1, player, LivingEntity.getSlotForHand(hand));
             }
             return ActionResult.SUCCESS;
         }
-        return super.onUse(state, world, pos, player, hand, hit);
+        return super.onUse(state, world, pos, player, hit);
     }
 
     private void updateBenchLegs(World world, BlockPos pos, BlockState state) {

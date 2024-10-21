@@ -13,8 +13,8 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
 public class EmperorPenguinRenderer extends MobEntityRenderer<EmperorPenguinEntity, ClutterModel<EmperorPenguinEntity>> {
-    public static final Identifier ADULT_TEXTURE = new Identifier(Clutter.MOD_ID, "textures/entity/adult_emperor_penguin_box.png");
-    public static final Identifier BABY_TEXTURE = new Identifier(Clutter.MOD_ID, "textures/entity/baby_emperor_penguin_box.png");
+    public static final Identifier ADULT_TEXTURE = Identifier.of(Clutter.MOD_ID, "textures/entity/adult_emperor_penguin_box.png");
+    public static final Identifier BABY_TEXTURE = Identifier.of(Clutter.MOD_ID, "textures/entity/baby_emperor_penguin_box.png");
 
     private final BabyEmperorPenguinModel<EmperorPenguinEntity> babyModel;
     private final EmperorPenguinModel<EmperorPenguinEntity> adultModel;

@@ -40,7 +40,7 @@ public class BeaconScreenMixin extends Screen {
             int backgroundHeight = 219;
             int i = (this.width - backgroundWidth) / 2;
             int j = (this.height - backgroundHeight) / 2;
-            context.drawTexture(new Identifier(Clutter.MOD_ID, "textures/gui/container/altered_beacon.png"), i, j, 0, 0, backgroundWidth, backgroundHeight);
+            context.drawTexture(Identifier.of(Clutter.MOD_ID, "textures/gui/container/altered_beacon.png"), i, j, 0, 0, backgroundWidth, backgroundHeight);
             context.getMatrices().push();
             context.getMatrices().translate(0.0F, 0.0F, 100.0F);
             List<Item> beaconPaymentItems = new ArrayList<>();

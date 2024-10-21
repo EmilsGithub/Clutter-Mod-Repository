@@ -1,20 +1,22 @@
 package net.emilsg.clutter.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.emilsg.clutter.block.entity.CupboardInventoryBlockEntity;
 import net.emilsg.clutter.util.ModProperties;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.BlockMirror;
+import net.minecraft.util.BlockRotation;
+import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -32,10 +34,16 @@ public class CupboardBlock extends BlockWithEntity {
     protected static final VoxelShape SOUTH_SHAPE = Block.createCuboidShape(0.0, 0.0, 1.0, 16.0, 16.0, 16.0);
     protected static final VoxelShape EAST_SHAPE = Block.createCuboidShape(1.0, 0.0, 0.0, 16.0, 16.0, 16.0);
     protected static final VoxelShape WEST_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 15.0, 16.0, 16.0);
+    public static final MapCodec<CupboardBlock> CODEC = createCodec(CupboardBlock::new);
 
     public CupboardBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.getDefaultState().with(OPEN, false).with(FACING, Direction.NORTH));
+    }
+
+    @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return CODEC;
     }
 
     @Nullable
@@ -58,14 +66,6 @@ public class CupboardBlock extends BlockWithEntity {
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(FACING, OPEN);
-    }
-
-    @Override
-    public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
-        BlockEntity blockEntity;
-        if (itemStack.hasCustomName() && (blockEntity = world.getBlockEntity(pos)) instanceof CupboardInventoryBlockEntity) {
-            ((CupboardInventoryBlockEntity) blockEntity).setCustomName(itemStack.getName());
-        }
     }
 
     @Override
@@ -111,7 +111,7 @@ public class CupboardBlock extends BlockWithEntity {
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         if (world.isClient) {
             return ActionResult.SUCCESS;
         }

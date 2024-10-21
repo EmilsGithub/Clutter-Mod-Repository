@@ -11,6 +11,7 @@ import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -26,27 +27,27 @@ public abstract class ItemRendererMixin {
     private static final Map<Item, ModelIdentifier> itemModelMap = new HashMap<>();
 
     @Unique
-    private static final ModelIdentifier CROWN = new ModelIdentifier(Clutter.MOD_ID, "crown_hat", "inventory");
+    private static final ModelIdentifier CROWN = new ModelIdentifier(Identifier.of(Clutter.MOD_ID, "crown_hat"), "inventory");
     @Unique
-    private static final ModelIdentifier BEACH_HAT = new ModelIdentifier(Clutter.MOD_ID, "beach_hat_hat", "inventory");
+    private static final ModelIdentifier BEACH_HAT = new ModelIdentifier(Identifier.of(Clutter.MOD_ID, "beach_hat_hat"), "inventory");
     @Unique
-    private static final ModelIdentifier TOP_HAT = new ModelIdentifier(Clutter.MOD_ID, "top_hat_hat", "inventory");
+    private static final ModelIdentifier TOP_HAT = new ModelIdentifier(Identifier.of(Clutter.MOD_ID, "top_hat_hat"), "inventory");
     @Unique
-    private static final ModelIdentifier BERET = new ModelIdentifier(Clutter.MOD_ID, "beret_hat", "inventory");
+    private static final ModelIdentifier BERET = new ModelIdentifier(Identifier.of(Clutter.MOD_ID, "beret_hat"), "inventory");
     @Unique
-    private static final ModelIdentifier COWBOY_HAT = new ModelIdentifier(Clutter.MOD_ID, "cowboy_hat_hat", "inventory");
+    private static final ModelIdentifier COWBOY_HAT = new ModelIdentifier(Identifier.of(Clutter.MOD_ID, "cowboy_hat_hat"), "inventory");
     @Unique
-    private static final ModelIdentifier CAP = new ModelIdentifier(Clutter.MOD_ID, "cap_hat", "inventory");
+    private static final ModelIdentifier CAP = new ModelIdentifier(Identifier.of(Clutter.MOD_ID, "cap_hat"), "inventory");
     @Unique
-    private static final ModelIdentifier BUTTERFLY_WINGS = new ModelIdentifier(Clutter.MOD_ID, "butterfly_wings_hat", "inventory");
+    private static final ModelIdentifier BUTTERFLY_WINGS = new ModelIdentifier(Identifier.of(Clutter.MOD_ID, "butterfly_wings_hat"), "inventory");
     @Unique
-    private static final ModelIdentifier PROPELLER_CAP = new ModelIdentifier(Clutter.MOD_ID, "propeller_cap_hat", "inventory");
+    private static final ModelIdentifier PROPELLER_CAP = new ModelIdentifier(Identifier.of(Clutter.MOD_ID, "propeller_cap_hat"), "inventory");
     @Unique
-    private static final ModelIdentifier TIARA = new ModelIdentifier(Clutter.MOD_ID, "tiara_hat", "inventory");
+    private static final ModelIdentifier TIARA = new ModelIdentifier(Identifier.of(Clutter.MOD_ID, "tiara_hat"), "inventory");
     @Unique
-    private static final ModelIdentifier SILVER_TIARA = new ModelIdentifier(Clutter.MOD_ID, "silver_tiara_hat", "inventory");
+    private static final ModelIdentifier SILVER_TIARA = new ModelIdentifier(Identifier.of(Clutter.MOD_ID, "silver_tiara_hat"), "inventory");
     @Unique
-    private static final ModelIdentifier VIKING_HELMET = new ModelIdentifier(Clutter.MOD_ID, "viking_helmet_hat", "inventory");
+    private static final ModelIdentifier VIKING_HELMET = new ModelIdentifier(Identifier.of(Clutter.MOD_ID, "viking_helmet_hat"), "inventory");
 
     static {
         itemModelMap.put(ModItems.CROWN, CROWN);

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_oxidized_reinforced_copper_glass": {
+      "conditions": {
+        "items": [
+          {
+            "items": "clutter:oxidized_reinforced_copper_glass"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "clutter:waxed_oxidized_reinforced_copper_glass"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_oxidized_reinforced_copper_glass"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "clutter:waxed_oxidized_reinforced_copper_glass"
+    ]
+  }
+}

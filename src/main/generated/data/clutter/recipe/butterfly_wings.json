@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "clutter:bottled_butterflies"
+    },
+    {
+      "tag": "clutter:bottled_butterflies"
+    },
+    {
+      "tag": "clutter:bottled_butterflies"
+    },
+    {
+      "item": "minecraft:string"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "clutter:butterfly_wings"
+  }
+}

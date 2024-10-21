@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "C": {
+      "item": "minecraft:prismarine_crystals"
+    },
+    "P": {
+      "item": "minecraft:prismarine_shard"
+    }
+  },
+  "pattern": [
+    " P ",
+    " C ",
+    " P "
+  ],
+  "result": {
+    "count": 1,
+    "id": "clutter:prismarine_torch"
+  }
+}

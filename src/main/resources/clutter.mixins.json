@@ -4,14 +4,12 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "AbstractFireBlockMixin",
-    "BrewingRecipeRegistryMixin",
+    "CookingRecipeJsonBuilderMixin",
     "FireBlockInvoker",
     "FoliagePlacerTypeInvoker",
     "LivingEntityMixin",
     "MossBlockMixin",
     "PistonBlockMixin",
-    "PlayerEntityMixin",
-    "ServerWorldAccessor",
     "TreeDecoratorTypeInvoker",
     "TrunkPlacerTypeInvoker"
   ],
@@ -22,7 +20,6 @@
     "BeaconScreenMixin",
     "ElytraFeatureRendererMixin",
     "ItemRendererAccessor",
-    "ItemRendererMixin",
-    "ModelLoaderMixin"
+    "ItemRendererMixin"
   ]
 }

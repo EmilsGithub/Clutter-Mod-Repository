@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom.plushies;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
@@ -20,6 +21,13 @@ import net.minecraft.world.World;
 public class ChickenPlushieBlock extends AbstractPlushieBlock {
     protected static final VoxelShape SHAPE = Block.createCuboidShape(5.0, 0.0, 5.0, 11.0, 6.0, 11.0);
 
+    public static final MapCodec<ChickenPlushieBlock> CODEC = createCodec(ChickenPlushieBlock::new);
+
+    @Override
+    protected MapCodec<? extends AbstractPlushieBlock> getCodec() {
+        return CODEC;
+    }
+
     public ChickenPlushieBlock(Settings settings) {
         super(settings);
     }
@@ -30,7 +38,8 @@ public class ChickenPlushieBlock extends AbstractPlushieBlock {
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+        Hand hand = player.getActiveHand();
         double random = Math.random();
         ItemStack stack = player.getStackInHand(hand);
 

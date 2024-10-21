@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "clutter:exposed_black_copper_chandelier"
+    },
+    {
+      "item": "minecraft:honeycomb"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "clutter:waxed_exposed_black_copper_chandelier"
+  }
+}

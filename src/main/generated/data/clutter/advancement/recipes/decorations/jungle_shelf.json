@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_jungle_slab": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:jungle_slab"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "clutter:jungle_shelf"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_jungle_slab"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "clutter:jungle_shelf"
+    ]
+  }
+}

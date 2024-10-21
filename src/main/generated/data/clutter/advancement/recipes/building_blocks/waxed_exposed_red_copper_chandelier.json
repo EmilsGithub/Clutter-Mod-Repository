@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_exposed_red_copper_chandelier": {
+      "conditions": {
+        "items": [
+          {
+            "items": "clutter:exposed_red_copper_chandelier"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "clutter:waxed_exposed_red_copper_chandelier"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_exposed_red_copper_chandelier"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "clutter:waxed_exposed_red_copper_chandelier"
+    ]
+  }
+}

@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom.plants;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.*;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.server.world.ServerWorld;
@@ -12,9 +13,15 @@ import net.minecraft.world.WorldView;
 
 public class ModMushroomPlantBlock extends PlantBlock implements Fertilizable {
     protected static final VoxelShape SHAPE = Block.createCuboidShape(5.0, 0.0, 5.0, 11.0, 6.0, 11.0);
+    public static final MapCodec<ModMushroomPlantBlock> CODEC = createCodec(ModMushroomPlantBlock::new);
 
     public ModMushroomPlantBlock(Settings settings) {
         super(settings);
+    }
+
+    @Override
+    protected MapCodec<? extends PlantBlock> getCodec() {
+        return CODEC;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.emilsg.clutter.item.ModItems;
 import net.emilsg.clutter.util.ModProperties;
 import net.minecraft.block.*;
@@ -35,9 +36,16 @@ public class PearlClamBlock extends HorizontalFacingBlock implements Waterloggab
 
     private final VoxelShape SHAPE = Block.createCuboidShape(4.5, 0, 4.5, 11.5, 2.5, 11.5);
 
+    public static final MapCodec<PearlClamBlock> CODEC = createCodec(PearlClamBlock::new);
+
     public PearlClamBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.getDefaultState().with(WATERLOGGED, false).with(HAS_PEARL, false));
+    }
+
+    @Override
+    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
+        return CODEC;
     }
 
     @Override
@@ -81,12 +89,13 @@ public class PearlClamBlock extends HorizontalFacingBlock implements Waterloggab
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+        Hand hand = player.getActiveHand();
         if (world.isClient) {
             return ActionResult.PASS;
         }
 
-        if (!world.isClient && state.get(HAS_PEARL) && hand == Hand.MAIN_HAND) {
+        if (state.get(HAS_PEARL) && hand == Hand.MAIN_HAND) {
             dropStack(world, pos, new ItemStack(ModItems.PEARL));
             world.setBlockState(pos, state.with(HAS_PEARL, false), Block.NOTIFY_ALL);
             world.playSound(null, pos, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.BLOCKS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);

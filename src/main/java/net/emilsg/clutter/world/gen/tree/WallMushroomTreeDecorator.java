@@ -1,6 +1,6 @@
 package net.emilsg.clutter.world.gen.tree;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.block.custom.plants.PolyporeBlock;
 import net.emilsg.clutter.world.gen.type.ModTreeDecoratorTypes;
@@ -14,7 +14,7 @@ import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
 
 public class WallMushroomTreeDecorator extends TreeDecorator {
     public static final WallMushroomTreeDecorator INSTANCE = new WallMushroomTreeDecorator();
-    public static final Codec<WallMushroomTreeDecorator> CODEC = Codec.unit(() -> INSTANCE);
+    public static final MapCodec<WallMushroomTreeDecorator> CODEC = MapCodec.unit(() -> INSTANCE);
 
     @Override
     protected TreeDecoratorType<?> getType() {

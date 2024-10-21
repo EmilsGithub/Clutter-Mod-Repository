@@ -1,0 +1,13 @@
+{
+  "type": "clutter:kilning",
+  "category": "blocks",
+  "cookingtime": 50,
+  "experience": 1.0,
+  "group": "white_glazed_terracotta",
+  "ingredient": {
+    "item": "minecraft:white_terracotta"
+  },
+  "result": {
+    "id": "minecraft:white_glazed_terracotta"
+  }
+}

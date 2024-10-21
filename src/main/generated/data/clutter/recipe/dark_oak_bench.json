@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "benches",
+  "key": {
+    "L": {
+      "item": "minecraft:dark_oak_log"
+    },
+    "P": {
+      "item": "minecraft:dark_oak_planks"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "PSP",
+    "PPP",
+    "L L"
+  ],
+  "result": {
+    "count": 4,
+    "id": "clutter:dark_oak_bench"
+  }
+}

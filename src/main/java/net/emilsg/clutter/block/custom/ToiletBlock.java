@@ -1,8 +1,10 @@
 package net.emilsg.clutter.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.emilsg.clutter.util.ModProperties;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundCategory;
@@ -21,7 +23,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 
-public class ToiletBlock extends SeatBlock {
+public class ToiletBlock extends AbstractSeatBlock {
     public static final BooleanProperty OPEN = ModProperties.OPEN;
     public static final BooleanProperty POWERED = Properties.POWERED;
     protected static final VoxelShape NORTH_SHAPE = VoxelShapes.union(
@@ -49,9 +51,16 @@ public class ToiletBlock extends SeatBlock {
             Block.createCuboidShape(12, 14, 5, 14, 16, 11)
     );
 
+    public static final MapCodec<ToiletBlock> CODEC = createCodec(ToiletBlock::new);
+
     public ToiletBlock(Settings settings) {
         super(settings);
         this.setDefaultState((this.stateManager.getDefaultState()).with(WATERLOGGED, false).with(OPEN, false).with(POWERED, false));
+    }
+
+    @Override
+    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
+        return CODEC;
     }
 
     @Override
@@ -84,8 +93,9 @@ public class ToiletBlock extends SeatBlock {
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        super.onUse(state, world, pos, player, hand, hit);
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+        Hand hand = player.getActiveHand();
+        super.onUse(state, world, pos, player, hit);
         if (world.isClient && player.getStackInHand(hand).isEmpty() && player.isSneaking()) return ActionResult.SUCCESS;
 
         if (!world.isClient && player.getStackInHand(hand).isEmpty() && player.isSneaking()) {
@@ -94,7 +104,7 @@ public class ToiletBlock extends SeatBlock {
             return ActionResult.SUCCESS;
         }
 
-        return super.onUse(state, world, pos, player, hand, hit);
+        return super.onUse(state, world, pos, player, hit);
     }
 
     @Override

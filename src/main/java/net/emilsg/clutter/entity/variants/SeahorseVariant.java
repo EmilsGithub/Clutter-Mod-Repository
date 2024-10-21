@@ -1,5 +1,7 @@
 package net.emilsg.clutter.entity.variants;
 
+import com.mojang.serialization.Codec;
+
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -12,6 +14,7 @@ public enum SeahorseVariant {
     private static final SeahorseVariant[] BY_ID = Arrays.stream(values()).sorted(Comparator.comparingInt(SeahorseVariant::getId)).toArray(SeahorseVariant[]::new);
     private final int id;
     private final String name;
+    public static final Codec<SeahorseVariant> CODEC = Codec.INT.xmap(SeahorseVariant::byId, SeahorseVariant::getId);
 
     SeahorseVariant(int id, String name) {
         this.id = id;

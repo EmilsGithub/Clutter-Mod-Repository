@@ -18,7 +18,8 @@ public class SilverCoinStackBlock extends AbstractCoinStackBlock {
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+        Hand hand = player.getActiveHand();
         if (world.isClient && player.getStackInHand(hand).isOf(ModBlocks.SILVER_COIN_STACK.asItem()) && hand.equals(Hand.MAIN_HAND) && state.get(COIN_LAYERS) < 8 && !player.isSneaking()) {
             return ActionResult.SUCCESS;
         }

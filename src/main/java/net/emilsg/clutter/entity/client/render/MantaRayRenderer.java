@@ -11,8 +11,8 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
 public class MantaRayRenderer extends MobEntityRenderer<MantaRayEntity, MantaRayModel<MantaRayEntity>> {
-    private static final Identifier TEXTURE = new Identifier(Clutter.MOD_ID, "textures/entity/manta_ray.png");
-    private static final Identifier OLD_TEXTURE = new Identifier(Clutter.MOD_ID, "textures/entity/manta_ray_old.png");
+    private static final Identifier TEXTURE = Identifier.of(Clutter.MOD_ID, "textures/entity/manta_ray.png");
+    private static final Identifier OLD_TEXTURE = Identifier.of(Clutter.MOD_ID, "textures/entity/manta_ray_old.png");
 
     public MantaRayRenderer(EntityRendererFactory.Context ctx) {
         super(ctx, new MantaRayModel<>(ctx.getPart(ModModelLayers.MANTA_RAY)), 0.7f);

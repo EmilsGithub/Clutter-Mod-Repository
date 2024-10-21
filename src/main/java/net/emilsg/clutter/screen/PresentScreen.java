@@ -7,7 +7,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public class PresentScreen extends HandledScreen<PresentScreenHandler> {
-    private static final Identifier TEXTURE = new Identifier("clutter:textures/gui/container/red_present.png");
+    private static final Identifier TEXTURE = Identifier.of("clutter:textures/gui/container/red_present.png");
 
     public PresentScreen(PresentScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);

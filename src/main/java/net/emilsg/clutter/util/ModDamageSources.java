@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class ModDamageSources {
 
-    public static final RegistryKey<DamageType> ANCHOR = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier(Clutter.MOD_ID, "anchor"));
+    public static final RegistryKey<DamageType> ANCHOR = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, Identifier.of(Clutter.MOD_ID, "anchor"));
 
     private static final Map<RegistryKey<DamageType>, DamageSource> sourceMap = new HashMap<>();
 

@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.*;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
@@ -22,10 +23,17 @@ public class KitchenCurtainBlock extends HorizontalFacingBlock implements Waterl
     protected static final VoxelShape SOUTH_SHAPE = Block.createCuboidShape(0.0, 1.0, 15.0, 16.0, 16.0, 16.0);
     protected static final VoxelShape EAST_SHAPE = Block.createCuboidShape(15.0, 1.0, 0.0, 16.0, 16.0, 16.0);
     protected static final VoxelShape WEST_SHAPE = Block.createCuboidShape(0.0, 1.0, 0.0, 1.0, 16.0, 16.0);
+    public static final MapCodec<KitchenCurtainBlock> CODEC = createCodec(KitchenCurtainBlock::new);
+
 
     public KitchenCurtainBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.stateManager.getDefaultState().with(WATERLOGGED, false).with(FACING, Direction.NORTH));
+    }
+
+    @Override
+    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
+        return CODEC;
     }
 
     @Override

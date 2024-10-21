@@ -64,8 +64,8 @@ public class MantaRayModel<T extends MantaRayEntity> extends ClutterAquaticModel
     }
 
     @Override
-    public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
-        this.getPart().render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
+    public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, int color) {
+        this.getPart().render(matrices, vertexConsumer, light, overlay, color);
     }
 
     @Override

@@ -7,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CropBlock;
 import net.minecraft.block.ShapeContext;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
@@ -42,12 +43,14 @@ public class GlowLilyCropBlock extends CropBlock {
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+        Hand hand = player.getActiveHand();
         ItemStack stackInHand = player.getStackInHand(hand);
         if (stackInHand.getItem() instanceof ShearsItem && !state.get(CLIPPED)) {
             if (!world.isClient) world.setBlockState(pos, state.with(CLIPPED, true), Block.NOTIFY_ALL);
             world.playSound(null, pos, SoundEvents.BLOCK_GROWING_PLANT_CROP, SoundCategory.BLOCKS, 1.0F, 1.0F);
-            if (!player.getAbilities().creativeMode) stackInHand.damage(1, player, (p) -> p.sendToolBreakStatus(hand));
+            if (!player.getAbilities().creativeMode) stackInHand.damage(1, player, LivingEntity.getSlotForHand(hand));
+
             return ActionResult.success(world.isClient);
         }
         return ActionResult.PASS;

@@ -14,9 +14,9 @@ import net.minecraft.util.math.RotationAxis;
 import org.jetbrains.annotations.Nullable;
 
 public class JellyfishRenderer extends MobEntityRenderer<JellyfishEntity, JellyfishModel<JellyfishEntity>> {
-    private static final Identifier PURPLE_TEXTURE = new Identifier(Clutter.MOD_ID, "textures/entity/purple_jellyfish.png");
-    private static final Identifier BLUE_TEXTURE = new Identifier(Clutter.MOD_ID, "textures/entity/blue_jellyfish.png");
-    private static final Identifier GREEN_TEXTURE = new Identifier(Clutter.MOD_ID, "textures/entity/green_jellyfish.png");
+    private static final Identifier PURPLE_TEXTURE = Identifier.of(Clutter.MOD_ID, "textures/entity/purple_jellyfish.png");
+    private static final Identifier BLUE_TEXTURE = Identifier.of(Clutter.MOD_ID, "textures/entity/blue_jellyfish.png");
+    private static final Identifier GREEN_TEXTURE = Identifier.of(Clutter.MOD_ID, "textures/entity/green_jellyfish.png");
 
     public JellyfishRenderer(EntityRendererFactory.Context ctx) {
         super(ctx, new JellyfishModel<>(ctx.getPart(ModModelLayers.JELLYFISH)), 0.4f);
@@ -29,7 +29,7 @@ public class JellyfishRenderer extends MobEntityRenderer<JellyfishEntity, Jellyf
     }
 
     @Override
-    protected void setupTransforms(JellyfishEntity jellyfishEntity, MatrixStack matrices, float animationProgress, float bodyYaw, float tickDelta) {
+    protected void setupTransforms(JellyfishEntity jellyfishEntity, MatrixStack matrices, float animationProgress, float bodyYaw, float tickDelta, float scale) {
         float i = MathHelper.lerp(tickDelta, jellyfishEntity.prevTiltAngle, jellyfishEntity.tiltAngle);
         float j = MathHelper.lerp(tickDelta, jellyfishEntity.prevRollAngle, jellyfishEntity.rollAngle);
         matrices.translate(0.0f, 0.25f, 0.0f);

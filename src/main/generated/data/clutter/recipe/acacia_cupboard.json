@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "cupboards",
+  "key": {
+    "P": {
+      "item": "minecraft:acacia_planks"
+    },
+    "S": {
+      "item": "minecraft:acacia_slab"
+    }
+  },
+  "pattern": [
+    "PSP",
+    "PSP",
+    "PSP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "clutter:acacia_cupboard"
+  }
+}

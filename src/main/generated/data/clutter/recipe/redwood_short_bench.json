@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "short_benches",
+  "key": {
+    "L": {
+      "item": "clutter:redwood_log"
+    },
+    "P": {
+      "item": "clutter:redwood_planks"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "L L"
+  ],
+  "result": {
+    "count": 6,
+    "id": "clutter:redwood_short_bench"
+  }
+}

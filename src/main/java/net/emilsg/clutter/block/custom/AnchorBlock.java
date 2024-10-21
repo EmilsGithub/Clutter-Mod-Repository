@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.emilsg.clutter.util.ModDamageSources;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
@@ -53,9 +54,16 @@ public class AnchorBlock extends HorizontalFacingBlock implements Waterloggable,
             Block.createCuboidShape(5.5, 14.5, 5.5, 10.5, 16, 10.5)
     );
 
+    public static final MapCodec<AnchorBlock> CODEC = createCodec(AnchorBlock::new);
+
     public AnchorBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.stateManager.getDefaultState().with(WATERLOGGED, false));
+    }
+
+    @Override
+    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
+        return CODEC;
     }
 
     @Override

@@ -99,13 +99,14 @@ public class EmberTortoiseEntity extends ClutterAnimalEntity {
         this.targetSelector.add(2, new ActiveTargetGoal<>(this, HoglinEntity.class, true));
     }
 
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(MOVING, false);
-        this.dataTracker.startTracking(ATTACKING, false);
-        this.dataTracker.startTracking(SHIELDING, false);
-        this.dataTracker.startTracking(SHIELDING_COOLDOWN, 0);
-        this.dataTracker.startTracking(SHIELDING_DURATION, 400);
+    @Override
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(MOVING, false);
+        builder.add(ATTACKING, false);
+        builder.add(SHIELDING, false);
+        builder.add(SHIELDING_COOLDOWN, 0);
+        builder.add(SHIELDING_DURATION, 400);
     }
 
     private void setupAnimationStates() {
@@ -215,11 +216,6 @@ public class EmberTortoiseEntity extends ClutterAnimalEntity {
         return ModEntities.EMBER_TORTOISE.create(world);
     }
 
-    protected float getActiveEyeHeight(EntityPose pose, EntityDimensions dimensions) {
-        return dimensions.height * 0.4F;
-    }
-
-
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
         nbt.putBoolean("Shielding", this.isShielding());
@@ -291,7 +287,7 @@ public class EmberTortoiseEntity extends ClutterAnimalEntity {
             }
         }
 
-        if (!world.isClient() && this.getHealth() < this.getMaxHealth() && random.nextInt(200) == 0 && this.getWorld().getDimensionKey() == DimensionTypes.THE_NETHER && this.isAlive()) {
+        if (!world.isClient() && this.getHealth() < this.getMaxHealth() && random.nextInt(200) == 0 && this.getWorld().getDimensionEntry() == DimensionTypes.THE_NETHER && this.isAlive()) {
             this.setHealth((float) (int) (this.getHealth() + 1));
         }
 

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "I": {
+      "item": "minecraft:glass"
+    },
+    "O": {
+      "item": "clutter:copper_nugget"
+    }
+  },
+  "pattern": [
+    " O ",
+    "OIO",
+    " O "
+  ],
+  "result": {
+    "count": 1,
+    "id": "clutter:reinforced_copper_glass"
+  }
+}

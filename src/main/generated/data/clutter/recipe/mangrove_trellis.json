@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "trellises",
+  "key": {
+    "S": {
+      "item": "minecraft:mangrove_slab"
+    }
+  },
+  "pattern": [
+    " S ",
+    "SSS",
+    " S "
+  ],
+  "result": {
+    "count": 2,
+    "id": "clutter:mangrove_trellis"
+  }
+}

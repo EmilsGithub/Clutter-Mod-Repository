@@ -1,0 +1,21 @@
+{
+  "values": [
+    "clutter:budding_onyx",
+    "clutter:onyx_block",
+    "clutter:onyx_slab",
+    "clutter:onyx_stairs",
+    "clutter:onyx_wall",
+    "clutter:polished_onyx",
+    "clutter:polished_onyx_slab",
+    "clutter:polished_onyx_stairs",
+    "clutter:polished_onyx_wall",
+    "clutter:black_onyx_block",
+    "clutter:black_onyx_slab",
+    "clutter:black_onyx_stairs",
+    "clutter:black_onyx_wall",
+    "clutter:polished_black_onyx",
+    "clutter:polished_black_onyx_slab",
+    "clutter:polished_black_onyx_stairs",
+    "clutter:polished_black_onyx_wall"
+  ]
+}

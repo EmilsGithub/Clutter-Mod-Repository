@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.emilsg.clutter.util.ModProperties;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -12,13 +13,20 @@ import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.WorldView;
 
 public class BookPileBlock extends HorizontalFacingBlock {
     public static final IntProperty LAYERS = ModProperties.LAYERS;
+    public static final MapCodec<BookPileBlock> CODEC = createCodec(BookPileBlock::new);
 
     public BookPileBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.getDefaultState().with(LAYERS, 0));
+    }
+
+    @Override
+    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
+        return CODEC;
     }
 
     @Override
@@ -27,7 +35,7 @@ public class BookPileBlock extends HorizontalFacingBlock {
     }
 
     @Override
-    public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
+    public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state) {
         return new ItemStack(Items.BOOK);
     }
 

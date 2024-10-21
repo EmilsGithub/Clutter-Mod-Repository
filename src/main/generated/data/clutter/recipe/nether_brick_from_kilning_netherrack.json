@@ -1,0 +1,13 @@
+{
+  "type": "clutter:kilning",
+  "category": "misc",
+  "cookingtime": 50,
+  "experience": 1.0,
+  "group": "nether_brick",
+  "ingredient": {
+    "item": "minecraft:netherrack"
+  },
+  "result": {
+    "id": "minecraft:nether_brick"
+  }
+}

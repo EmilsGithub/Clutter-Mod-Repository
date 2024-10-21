@@ -114,10 +114,10 @@ public class ModelDataGen extends FabricModelProvider {
         BlockStateVariantMap.DoubleProperty<Direction, Integer> builder = BlockStateVariantMap.create(Properties.HORIZONTAL_FACING, WindowSillBlock.CURRENT_MODEL);
 
         for (String flower : flowerNames) {
-            builder.register(Direction.NORTH, i, BlockStateVariant.create().put(VariantSettings.MODEL, new Identifier(Clutter.MOD_ID, "block/" + Registries.BLOCK.getId(windowSill).getPath() + "_" + flower)))
-                    .register(Direction.EAST, i, BlockStateVariant.create().put(VariantSettings.MODEL, new Identifier(Clutter.MOD_ID, "block/" + Registries.BLOCK.getId(windowSill).getPath() + "_" + flower)).put(VariantSettings.Y, VariantSettings.Rotation.R90))
-                    .register(Direction.SOUTH, i, BlockStateVariant.create().put(VariantSettings.MODEL, new Identifier(Clutter.MOD_ID, "block/" + Registries.BLOCK.getId(windowSill).getPath() + "_" + flower)).put(VariantSettings.Y, VariantSettings.Rotation.R180))
-                    .register(Direction.WEST, i, BlockStateVariant.create().put(VariantSettings.MODEL, new Identifier(Clutter.MOD_ID, "block/" + Registries.BLOCK.getId(windowSill).getPath() + "_" + flower)).put(VariantSettings.Y, VariantSettings.Rotation.R270));
+            builder.register(Direction.NORTH, i, BlockStateVariant.create().put(VariantSettings.MODEL, Identifier.of(Clutter.MOD_ID, "block/" + Registries.BLOCK.getId(windowSill).getPath() + "_" + flower)))
+                    .register(Direction.EAST, i, BlockStateVariant.create().put(VariantSettings.MODEL, Identifier.of(Clutter.MOD_ID, "block/" + Registries.BLOCK.getId(windowSill).getPath() + "_" + flower)).put(VariantSettings.Y, VariantSettings.Rotation.R90))
+                    .register(Direction.SOUTH, i, BlockStateVariant.create().put(VariantSettings.MODEL, Identifier.of(Clutter.MOD_ID, "block/" + Registries.BLOCK.getId(windowSill).getPath() + "_" + flower)).put(VariantSettings.Y, VariantSettings.Rotation.R180))
+                    .register(Direction.WEST, i, BlockStateVariant.create().put(VariantSettings.MODEL, Identifier.of(Clutter.MOD_ID, "block/" + Registries.BLOCK.getId(windowSill).getPath() + "_" + flower)).put(VariantSettings.Y, VariantSettings.Rotation.R270));
 
             i++;
         }
@@ -200,15 +200,15 @@ public class ModelDataGen extends FabricModelProvider {
     }
 
     private static Model block(String parent, TextureKey... requiredTextureKeys) {
-        return new Model(Optional.of(new Identifier("clutter", "block/parent/" + parent)), Optional.empty(), requiredTextureKeys);
+        return new Model(Optional.of(Identifier.of("clutter", "block/parent/" + parent)), Optional.empty(), requiredTextureKeys);
     }
 
     private static Model item(String parent, TextureKey... requiredTextureKeys) {
-        return new Model(Optional.of(new Identifier("clutter", "item/" + parent)), Optional.empty(), requiredTextureKeys);
+        return new Model(Optional.of(Identifier.of("clutter", "item/" + parent)), Optional.empty(), requiredTextureKeys);
     }
 
     private static Model block(String parent, String variant, TextureKey... requiredTextureKeys) {
-        return new Model(Optional.of(new Identifier("clutter", "block/parent/" + parent)), Optional.of(variant), requiredTextureKeys);
+        return new Model(Optional.of(Identifier.of("clutter", "block/parent/" + parent)), Optional.of(variant), requiredTextureKeys);
     }
 
     public static TextureMap logAndPlanksMap(Block logBlock, Block planksBlock) {
@@ -220,7 +220,7 @@ public class ModelDataGen extends FabricModelProvider {
     public static TextureMap largeCrossMap(Block crossBlock, boolean top) {
         Identifier cross = TextureMap.getId(crossBlock);
         String crossPath = cross.getPath() + (top ? "_top" : "_bottom");
-        Identifier finalCross = new Identifier(Clutter.MOD_ID, crossPath);
+        Identifier finalCross = Identifier.of(Clutter.MOD_ID, crossPath);
         return new TextureMap().put(TextureKey.CROSS, finalCross);
     }
 
@@ -232,13 +232,13 @@ public class ModelDataGen extends FabricModelProvider {
     public static TextureMap cupboardMap(Block planksBlock) {
         Identifier planks = TextureMap.getId(planksBlock);
         String woodType = planks.getPath().replace("_planks", "");
-        Identifier door = new Identifier(Clutter.MOD_ID, woodType + "_cupboard_door");
-        Identifier inside = new Identifier(Clutter.MOD_ID, woodType + "_cupboard_inside");
+        Identifier door = Identifier.of(Clutter.MOD_ID, woodType + "_cupboard_door");
+        Identifier inside = Identifier.of(Clutter.MOD_ID, woodType + "_cupboard_inside");
         return new TextureMap().put(PLANKS, planks).put(CUPBOARD_DOOR, door).put(CUPBOARD_INSIDE, inside);
     }
 
     public static TextureMap windowSillMap(Block planksBlock, String flower) {
-        Identifier flowerId = new Identifier("block/" + flower);
+        Identifier flowerId = Identifier.of("block/" + flower);
         Identifier planks = TextureMap.getId(planksBlock);
         return new TextureMap().put(PLANKS, planks).put(FLOWER, flowerId);
     }
@@ -299,10 +299,10 @@ public class ModelDataGen extends FabricModelProvider {
 
         registerLargeTintableCross(generator, ModBlocks.GIANT_FERN);
 
-        generator.registerCubeAllModelTexturePool(ModBlocks.REINFORCED_COPPER_GLASS).same(ModBlocks.WAXED_REINFORCED_COPPER_GLASS);
-        generator.registerCubeAllModelTexturePool(ModBlocks.EXPOSED_REINFORCED_COPPER_GLASS).same(ModBlocks.WAXED_EXPOSED_REINFORCED_COPPER_GLASS);
-        generator.registerCubeAllModelTexturePool(ModBlocks.WEATHERED_REINFORCED_COPPER_GLASS).same(ModBlocks.WAXED_WEATHERED_REINFORCED_COPPER_GLASS);
-        generator.registerCubeAllModelTexturePool(ModBlocks.OXIDIZED_REINFORCED_COPPER_GLASS).same(ModBlocks.WAXED_OXIDIZED_REINFORCED_COPPER_GLASS);
+        generator.registerCubeAllModelTexturePool(ModBlocks.REINFORCED_COPPER_GLASS).parented(ModBlocks.REINFORCED_COPPER_GLASS, ModBlocks.WAXED_REINFORCED_COPPER_GLASS);
+        generator.registerCubeAllModelTexturePool(ModBlocks.EXPOSED_REINFORCED_COPPER_GLASS).parented(ModBlocks.EXPOSED_REINFORCED_COPPER_GLASS, ModBlocks.WAXED_EXPOSED_REINFORCED_COPPER_GLASS);
+        generator.registerCubeAllModelTexturePool(ModBlocks.WEATHERED_REINFORCED_COPPER_GLASS).parented(ModBlocks.WEATHERED_REINFORCED_COPPER_GLASS, ModBlocks.WAXED_WEATHERED_REINFORCED_COPPER_GLASS);
+        generator.registerCubeAllModelTexturePool(ModBlocks.OXIDIZED_REINFORCED_COPPER_GLASS).parented(ModBlocks.OXIDIZED_REINFORCED_COPPER_GLASS, ModBlocks.WAXED_OXIDIZED_REINFORCED_COPPER_GLASS);
     }
 
     @Override
@@ -399,7 +399,7 @@ public class ModelDataGen extends FabricModelProvider {
     }
 
     private void registerSpawnEggItem(ItemModelGenerator itemModelGenerator, Item egg) {
-        itemModelGenerator.register(egg, new Model(Optional.of(new Identifier("item/template_spawn_egg")), Optional.empty()));
+        itemModelGenerator.register(egg, new Model(Optional.of(Identifier.of("item/template_spawn_egg")), Optional.empty()));
     }
 
     private void registerGeneratedItem(ItemModelGenerator itemModelGenerator, Item item) {
@@ -519,9 +519,9 @@ public class ModelDataGen extends FabricModelProvider {
 
     private void registerElytra(ItemModelGenerator itemGen, Item elytra) {
         String idString = ModelIds.getItemModelId(elytra).getPath().replace("item/", "item/broken_");
-        TextureMap brokenMap = (new TextureMap()).put(TextureKey.LAYER0, new Identifier(Clutter.MOD_ID, idString));
+        TextureMap brokenMap = (new TextureMap()).put(TextureKey.LAYER0, Identifier.of(Clutter.MOD_ID, idString));
 
-        Models.GENERATED.upload(new Identifier(Clutter.MOD_ID, idString), brokenMap, itemGen.writer);
+        Models.GENERATED.upload(Identifier.of(Clutter.MOD_ID, idString), brokenMap, itemGen.writer);
 
         Models.GENERATED.upload(ModelIds.getItemModelId(elytra), TextureMap.layer0(elytra), itemGen.writer, (id, textures) -> {
             JsonObject jsonObject = Models.GENERATED.createJson(id, textures);

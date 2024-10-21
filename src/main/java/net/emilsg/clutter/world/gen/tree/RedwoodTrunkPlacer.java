@@ -1,7 +1,7 @@
 package net.emilsg.clutter.world.gen.tree;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.world.gen.type.ModTrunkPlacerTypes;
@@ -23,7 +23,7 @@ import java.util.function.BiConsumer;
 
 public class RedwoodTrunkPlacer extends TrunkPlacer {
 
-    public static final Codec<RedwoodTrunkPlacer> CODEC = RecordCodecBuilder.create(instance -> fillTrunkPlacerFields(instance).apply(instance, RedwoodTrunkPlacer::new));
+    public static final MapCodec<RedwoodTrunkPlacer> CODEC = RecordCodecBuilder.mapCodec(instance -> fillTrunkPlacerFields(instance).apply(instance, RedwoodTrunkPlacer::new));
 
     public RedwoodTrunkPlacer(int baseHeight, int firstRandomHeight, int secondRandomHeight) {
         super(baseHeight, firstRandomHeight, secondRandomHeight);

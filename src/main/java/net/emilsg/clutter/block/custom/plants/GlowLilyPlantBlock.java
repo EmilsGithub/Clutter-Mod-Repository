@@ -1,9 +1,11 @@
 package net.emilsg.clutter.block.custom.plants;
 
+import com.mojang.serialization.MapCodec;
 import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.item.ModItems;
 import net.emilsg.clutter.util.ModProperties;
 import net.minecraft.block.*;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -32,9 +34,16 @@ public class GlowLilyPlantBlock extends PlantBlock implements Fertilizable {
     public static final IntProperty AGE = Properties.AGE_2;
     public static final BooleanProperty CLIPPED = ModProperties.CLIPPED;
 
+    public static final MapCodec<GlowLilyPlantBlock> CODEC = createCodec(GlowLilyPlantBlock::new);
+
     public GlowLilyPlantBlock(Settings settings) {
         super(settings);
         this.setDefaultState((this.stateManager.getDefaultState()).with(AGE, 0).with(CLIPPED, false));
+    }
+
+    @Override
+    protected MapCodec<? extends PlantBlock> getCodec() {
+        return CODEC;
     }
 
     public static ToIntFunction<BlockState> createLightLevelFromAge() {
@@ -74,7 +83,9 @@ public class GlowLilyPlantBlock extends PlantBlock implements Fertilizable {
 
     }
 
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    @Override
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+        Hand hand = player.getActiveHand();
         int i = state.get(AGE);
         boolean ageIsTwo = i == 2;
         ItemStack stackInHand = player.getStackInHand(hand);
@@ -83,7 +94,7 @@ public class GlowLilyPlantBlock extends PlantBlock implements Fertilizable {
         } else if (stackInHand.getItem() instanceof ShearsItem && !state.get(CLIPPED)) {
             if (!world.isClient) world.setBlockState(pos, state.with(CLIPPED, true), Block.NOTIFY_ALL);
             world.playSound(null, pos, SoundEvents.BLOCK_GROWING_PLANT_CROP, SoundCategory.BLOCKS, 1.0F, 1.0F);
-            if (!player.getAbilities().creativeMode) stackInHand.damage(1, player, (p) -> p.sendToolBreakStatus(hand));
+            if (!player.getAbilities().creativeMode) stackInHand.damage(1, player, LivingEntity.getSlotForHand(hand));
             return ActionResult.success(world.isClient);
         } else if (i > 1) {
             int count = 1 + world.random.nextInt(2);
@@ -94,7 +105,7 @@ public class GlowLilyPlantBlock extends PlantBlock implements Fertilizable {
             world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(player, stateWithAge));
             return ActionResult.success(world.isClient);
         } else {
-            return super.onUse(state, world, pos, player, hand, hit);
+            return super.onUse(state, world, pos, player, hit);
         }
     }
 

@@ -3,22 +3,21 @@ package net.emilsg.clutter.util;
 import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.config.Configs;
 import net.emilsg.clutter.config.ModConfigManager;
-import net.emilsg.clutter.enchantment.ModEnchantments;
 import net.emilsg.clutter.item.ModItems;
-import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
+import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Items;
 import net.minecraft.loot.LootPool;
+import net.minecraft.loot.LootTable;
 import net.minecraft.loot.condition.DamageSourcePropertiesLootCondition;
 import net.minecraft.loot.condition.InvertedLootCondition;
 import net.minecraft.loot.condition.MatchToolLootCondition;
 import net.minecraft.loot.condition.RandomChanceLootCondition;
 import net.minecraft.loot.entry.AlternativeEntry;
 import net.minecraft.loot.entry.ItemEntry;
-import net.minecraft.loot.function.EnchantRandomlyLootFunction;
 import net.minecraft.loot.function.SetCountLootFunction;
-import net.minecraft.loot.function.SetNbtLootFunction;
+import net.minecraft.loot.function.SetCustomDataLootFunction;
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import net.minecraft.nbt.NbtCompound;
@@ -26,45 +25,53 @@ import net.minecraft.predicate.NumberRange;
 import net.minecraft.predicate.TagPredicate;
 import net.minecraft.predicate.entity.DamageSourcePredicate;
 import net.minecraft.predicate.item.EnchantmentPredicate;
+import net.minecraft.predicate.item.EnchantmentsPredicate;
 import net.minecraft.predicate.item.ItemPredicate;
+import net.minecraft.predicate.item.ItemSubPredicateTypes;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.util.Identifier;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 
 public class ModLootTableModifiers {
+    private static final RegistryKey<Registry<LootTable>> LOOT = RegistryKeys.LOOT_TABLE;
 
-    private static final Identifier SNIFFER_DIGGING_ID = new Identifier("minecraft", "gameplay/sniffer_digging");
 
-    private static final Identifier FERN_ID = new Identifier("minecraft", "blocks/fern");
-    private static final Identifier CHERRY_LEAVES_ID = new Identifier("minecraft", "blocks/cherry_leaves");
+    private static final RegistryKey<LootTable> SNIFFER_DIGGING_ID = makeMCRegistryKey("gameplay/sniffer_digging");
 
-    private static final Identifier FISHING_JUNK_ID = new Identifier("minecraft", "gameplay/fishing/junk");
+    private static final RegistryKey<LootTable> FERN_ID = makeMCRegistryKey("blocks/fern");
+    private static final RegistryKey<LootTable> CHERRY_LEAVES_ID = makeMCRegistryKey("blocks/cherry_leaves");
 
-    private static final Identifier VILLAGE_FLETCHER_ID = new Identifier("minecraft", "chests/village/village_fletcher");
-    private static final Identifier VILLAGE_BUTCHER_ID = new Identifier("minecraft", "chests/village/village_butcher");
-    private static final Identifier VILLAGE_TANNERY_ID = new Identifier("minecraft", "chests/village/village_tannery");
-    private static final Identifier VILLAGE_SHEPHERD_ID = new Identifier("minecraft", "chests/village/village_shepherd");
-    private static final Identifier IGLOO_CHEST_ID = new Identifier("minecraft", "chests/igloo_chest");
-    private static final Identifier ABANDONED_MINESHAFT_ID = new Identifier("minecraft", "chests/abandoned_mineshaft");
-    private static final Identifier ANCIENT_CITY_ID = new Identifier("minecraft", "chests/ancient_city");
-    private static final Identifier BASTION_TREASURE_ID = new Identifier("minecraft", "chests/bastion_treasure");
-    private static final Identifier BURIED_TREASURE_ID = new Identifier("minecraft", "chests/buried_treasure");
-    private static final Identifier SHIPWRECK_TREASURE_ID = new Identifier("minecraft", "chests/shipwreck_treasure");
-    private static final Identifier DESERT_PYRAMID_ID = new Identifier("minecraft", "chests/desert_pyramid");
-    private static final Identifier END_CITY_TREASURE_ID = new Identifier("minecraft", "chests/end_city_treasure");
-    private static final Identifier JUNGLE_TEMPLE_ID = new Identifier("minecraft", "chests/jungle_temple");
-    private static final Identifier RUINED_PORTAL_ID = new Identifier("minecraft", "chests/ruined_portal");
-    private static final Identifier SIMPLE_DUNGEON_ID = new Identifier("minecraft", "chests/simple_dungeon");
-    private static final Identifier WOODLAND_MANSION_ID = new Identifier("minecraft", "chests/woodland_mansion");
+    private static final RegistryKey<LootTable> FISHING_JUNK_ID = makeMCRegistryKey("gameplay/fishing/junk");
+    private static final RegistryKey<LootTable> VILLAGE_FLETCHER_ID = makeMCRegistryKey( "chests/village/village_fletcher");
+    private static final RegistryKey<LootTable> VILLAGE_BUTCHER_ID = makeMCRegistryKey("chests/village/village_butcher");
+    private static final RegistryKey<LootTable> VILLAGE_TANNERY_ID = makeMCRegistryKey("chests/village/village_tannery");
+    private static final RegistryKey<LootTable> VILLAGE_SHEPHERD_ID = makeMCRegistryKey("chests/village/village_shepherd");
+    private static final RegistryKey<LootTable> IGLOO_CHEST_ID = makeMCRegistryKey("chests/igloo_chest");
+    private static final RegistryKey<LootTable> ABANDONED_MINESHAFT_ID = makeMCRegistryKey("chests/abandoned_mineshaft");
+    private static final RegistryKey<LootTable> ANCIENT_CITY_ID = makeMCRegistryKey("chests/ancient_city");
+    private static final RegistryKey<LootTable> BASTION_TREASURE_ID = makeMCRegistryKey("chests/bastion_treasure");
+    private static final RegistryKey<LootTable> BURIED_TREASURE_ID = makeMCRegistryKey("chests/buried_treasure");
+    private static final RegistryKey<LootTable> SHIPWRECK_TREASURE_ID = makeMCRegistryKey("chests/shipwreck_treasure");
+    private static final RegistryKey<LootTable> DESERT_PYRAMID_ID = makeMCRegistryKey("chests/desert_pyramid");
+    private static final RegistryKey<LootTable> END_CITY_TREASURE_ID = makeMCRegistryKey("chests/end_city_treasure");
+    private static final RegistryKey<LootTable> JUNGLE_TEMPLE_ID = makeMCRegistryKey("chests/jungle_temple");
+    private static final RegistryKey<LootTable> RUINED_PORTAL_ID = makeMCRegistryKey("chests/ruined_portal");
+    private static final RegistryKey<LootTable> SIMPLE_DUNGEON_ID = makeMCRegistryKey("chests/simple_dungeon");
+    private static final RegistryKey<LootTable> WOODLAND_MANSION_ID = makeMCRegistryKey("chests/woodland_mansion");
 
-    private static final Identifier BLAZE_ID = new Identifier("minecraft", "entities/blaze");
-    private static final Identifier PIGLIN_BRUTE_ID = new Identifier("minecraft", "entities/piglin_brute");
-    private static final Identifier ELDER_GUARDIAN_ID = new Identifier("minecraft", "entities/elder_guardian");
-    private static final Identifier WITHER_ID = new Identifier("minecraft", "entities/wither");
-    private static final Identifier ENDER_DRAGON_ID = new Identifier("minecraft", "entities/ender_dragon");
+    private static final RegistryKey<LootTable> BLAZE_ID = makeMCRegistryKey("entities/blaze");
+    private static final RegistryKey<LootTable> PIGLIN_BRUTE_ID = makeMCRegistryKey("entities/piglin_brute");
+    private static final RegistryKey<LootTable> ELDER_GUARDIAN_ID = makeMCRegistryKey("entities/elder_guardian");
+    private static final RegistryKey<LootTable> WITHER_ID = makeMCRegistryKey("entities/wither");
+    private static final RegistryKey<LootTable> ENDER_DRAGON_ID = makeMCRegistryKey("entities/ender_dragon");
 
-    static List<Identifier> structureIds = Arrays.asList(
+    static final List<RegistryKey<LootTable>> structureIds = Arrays.asList(
             ABANDONED_MINESHAFT_ID,
             ANCIENT_CITY_ID,
             BASTION_TREASURE_ID,
@@ -78,13 +85,14 @@ public class ModLootTableModifiers {
             WOODLAND_MANSION_ID
     );
 
+    private static RegistryKey<LootTable> makeMCRegistryKey(String path) {
+        return RegistryKey.of(RegistryKeys.LOOT_TABLE, Identifier.of("minecraft", path));
+    }
+
     public static void modifyLootTables() {
-        Map<Enchantment, Integer> enchantmentMap = new HashMap<>();
-        enchantmentMap.put(Enchantments.SILK_TOUCH, 1);
+        LootTableEvents.MODIFY.register(((key, tableBuilder, source, registries) -> {
 
-        LootTableEvents.MODIFY.register(((resourceManager, lootManager, id, tableBuilder, source) -> {
-
-            if (id.equals(FERN_ID)) {
+            if (key.equals(FERN_ID)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .conditionally(RandomChanceLootCondition.builder(0.05f))
@@ -95,17 +103,22 @@ public class ModLootTableModifiers {
                 tableBuilder.pool(poolBuilder.build());
             }
 
-            if (id.equals(CHERRY_LEAVES_ID)) {
+            if (key.equals(CHERRY_LEAVES_ID)) {
+                RegistryWrapper.Impl<Enchantment> impl = registries.getWrapperOrThrow(RegistryKeys.ENCHANTMENT);
+
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .conditionally(InvertedLootCondition.builder(MatchToolLootCondition.builder(ItemPredicate.Builder.create().items(Items.SHEARS))).build())
-                        .conditionally(InvertedLootCondition.builder(MatchToolLootCondition.builder(ItemPredicate.Builder.create().enchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, NumberRange.IntRange.atLeast(1))))).build())
+                        .conditionally(InvertedLootCondition.builder(MatchToolLootCondition.builder(ItemPredicate.Builder.create().subPredicate(
+                                ItemSubPredicateTypes.ENCHANTMENTS,
+                                EnchantmentsPredicate.enchantments(List.of(new EnchantmentPredicate(impl.getOrThrow(Enchantments.SILK_TOUCH), NumberRange.IntRange.atLeast(1))))
+                        ))).build())
                         .with(ItemEntry.builder(ModItems.CHERRIES).conditionally(RandomChanceLootCondition.builder(ModConfigManager.get(Configs.cherryDropRate, 0.075f))))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1, 2)).build());
                 tableBuilder.pool(poolBuilder.build());
             }
 
-            if (id.equals(SNIFFER_DIGGING_ID)) {
+            if (key.equals(SNIFFER_DIGGING_ID)) {
                 tableBuilder.modifyPools(builder -> {
                     builder
                             .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.THORNBLOOM_SEEDS)))
@@ -114,7 +127,7 @@ public class ModLootTableModifiers {
                 });
             }
 
-            if (id.equals(END_CITY_TREASURE_ID)) {
+            if (key.equals(END_CITY_TREASURE_ID)) {
                 tableBuilder.modifyPools(builder -> {
                     builder.with(AlternativeEntry.builder(ItemEntry.builder(ModItems.DECORATED_ELYTRA_SMITHING_TEMPLATE).weight(2)));
                 });
@@ -122,49 +135,41 @@ public class ModLootTableModifiers {
 
             //Coins
             if (ModConfigManager.get(Configs.doCoinDropsAndLootGeneration, true)) {
-                for (Identifier structureId : structureIds) {
-                    if (id.equals(structureId) && ModConfigManager.get(Configs.chestLootCoinPouches, true)) {
+                for (RegistryKey<LootTable> structureId : structureIds) {
+                    if (key.equals(structureId) && ModConfigManager.get(Configs.chestLootCoinPouches, true)) {
                         LootPool.Builder poolBuilder = LootPool.builder()
                                 .rolls(ConstantLootNumberProvider.create(2))
                                 .conditionally(RandomChanceLootCondition.builder(0.5f))
-                                .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.COIN_POUCH).weight(12).apply(SetNbtLootFunction.builder(createCoinPouchNbt(0)))))
-                                .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.COIN_POUCH).weight(4).apply(SetNbtLootFunction.builder(createCoinPouchNbt(1)))))
-                                .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.COIN_POUCH).weight(1).apply(SetNbtLootFunction.builder(createCoinPouchNbt(2)))))
+                                .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.COIN_POUCH).weight(12).apply(SetCustomDataLootFunction.builder(createCoinPouchNbt(0)))))
+                                .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.COIN_POUCH).weight(4).apply(SetCustomDataLootFunction.builder(createCoinPouchNbt(1)))))
+                                .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.COIN_POUCH).weight(1).apply(SetCustomDataLootFunction.builder(createCoinPouchNbt(2)))))
                                 .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1.0f)).build());
                         tableBuilder.pool(poolBuilder.build());
                     }
-                }
-
-                if (id.equals(END_CITY_TREASURE_ID) && ModConfigManager.get(Configs.doGreedGeneration, true)) {
-                    LootPool.Builder poolBuilder = LootPool.builder()
-                            .rolls(ConstantLootNumberProvider.create(1))
-                            .with(ItemEntry.builder(Items.BOOK).conditionally(RandomChanceLootCondition.builder(0.25f))).apply(EnchantRandomlyLootFunction.create().add(ModEnchantments.GREED))
-                            .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1.0f)).build());
-                    tableBuilder.pool(poolBuilder.build());
                 }
 
                 if (ModConfigManager.get(Configs.mobsDropCoinPouches, true)) {
-                    if (id.equals(PIGLIN_BRUTE_ID) || id.equals(ELDER_GUARDIAN_ID)) {
+                    if (key.equals(PIGLIN_BRUTE_ID) || key.equals(ELDER_GUARDIAN_ID)) {
                         LootPool.Builder poolBuilder = LootPool.builder()
                                 .rolls(ConstantLootNumberProvider.create(1))
-                                .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.COIN_POUCH).weight(10).apply(SetNbtLootFunction.builder(createCoinPouchNbt(1)))))
-                                .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.COIN_POUCH).weight(2).apply(SetNbtLootFunction.builder(createCoinPouchNbt(2)))))
+                                .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.COIN_POUCH).weight(10).apply(SetCustomDataLootFunction.builder(createCoinPouchNbt(1)))))
+                                .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.COIN_POUCH).weight(2).apply(SetCustomDataLootFunction.builder(createCoinPouchNbt(2)))))
                                 .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1.0f)).build());
                         tableBuilder.pool(poolBuilder.build());
                     }
 
-                    if (id.equals(WITHER_ID) || id.equals(ENDER_DRAGON_ID)) {
+                    if (key.equals(WITHER_ID) || key.equals(ENDER_DRAGON_ID)) {
                         LootPool.Builder poolBuilder = LootPool.builder()
                                 .rolls(ConstantLootNumberProvider.create(6))
-                                .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.COIN_POUCH).weight(2).apply(SetNbtLootFunction.builder(createCoinPouchNbt(2)))))
-                                .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.COIN_POUCH).weight(1).apply(SetNbtLootFunction.builder(createCoinPouchNbt(3)))))
+                                .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.COIN_POUCH).weight(2).apply(SetCustomDataLootFunction.builder(createCoinPouchNbt(2)))))
+                                .with(AlternativeEntry.builder(ItemEntry.builder(ModItems.COIN_POUCH).weight(1).apply(SetCustomDataLootFunction.builder(createCoinPouchNbt(3)))))
                                 .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1.0f)).build());
                         tableBuilder.pool(poolBuilder.build());
                     }
                 }
             }
 
-            if (id.equals(BLAZE_ID)) {
+            if (key.equals(BLAZE_ID)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .with(ItemEntry.builder(ModItems.SULPHUR))
@@ -173,7 +178,7 @@ public class ModLootTableModifiers {
                 tableBuilder.pool(poolBuilder.build());
             }
 
-            if (id.equals(ENDER_DRAGON_ID)) {
+            if (key.equals(ENDER_DRAGON_ID)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .with(AlternativeEntry.builder(ItemEntry.builder(ModBlocks.ENDER_DRAGON_PLUSHIE).weight(1).conditionally(RandomChanceLootCondition.builder(1.0f))))
@@ -181,7 +186,7 @@ public class ModLootTableModifiers {
                 tableBuilder.pool(poolBuilder.build());
             }
 
-            if (id.equals(JUNGLE_TEMPLE_ID)) {
+            if (key.equals(JUNGLE_TEMPLE_ID)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .with(AlternativeEntry.builder(ItemEntry.builder(ModBlocks.PANDA_PLUSHIE).weight(1).conditionally(RandomChanceLootCondition.builder(0.15f))))
@@ -190,7 +195,7 @@ public class ModLootTableModifiers {
                 tableBuilder.pool(poolBuilder.build());
             }
 
-            if (id.equals(BURIED_TREASURE_ID)) {
+            if (key.equals(BURIED_TREASURE_ID)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .with(ItemEntry.builder(ModBlocks.SQUID_PLUSHIE)).conditionally(RandomChanceLootCondition.builder(0.3f))
@@ -198,7 +203,7 @@ public class ModLootTableModifiers {
                 tableBuilder.pool(poolBuilder.build());
             }
 
-            if (id.equals(IGLOO_CHEST_ID)) {
+            if (key.equals(IGLOO_CHEST_ID)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .with(AlternativeEntry.builder(ItemEntry.builder(ModBlocks.FOX_PLUSHIE).weight(1).conditionally(RandomChanceLootCondition.builder(0.2f))))
@@ -207,7 +212,7 @@ public class ModLootTableModifiers {
                 tableBuilder.pool(poolBuilder.build());
             }
 
-            if (id.equals(VILLAGE_SHEPHERD_ID)) {
+            if (key.equals(VILLAGE_SHEPHERD_ID)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .with(ItemEntry.builder(ModBlocks.SHEEP_PLUSHIE)).conditionally(RandomChanceLootCondition.builder(0.4f))
@@ -215,7 +220,7 @@ public class ModLootTableModifiers {
                 tableBuilder.pool(poolBuilder.build());
             }
 
-            if (id.equals(VILLAGE_TANNERY_ID)) {
+            if (key.equals(VILLAGE_TANNERY_ID)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .with(ItemEntry.builder(ModBlocks.COW_PLUSHIE)).conditionally(RandomChanceLootCondition.builder(0.4f))
@@ -223,7 +228,7 @@ public class ModLootTableModifiers {
                 tableBuilder.pool(poolBuilder.build());
             }
 
-            if (id.equals(VILLAGE_BUTCHER_ID)) {
+            if (key.equals(VILLAGE_BUTCHER_ID)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .with(ItemEntry.builder(ModBlocks.PIG_PLUSHIE)).conditionally(RandomChanceLootCondition.builder(0.4f))
@@ -231,7 +236,7 @@ public class ModLootTableModifiers {
                 tableBuilder.pool(poolBuilder.build());
             }
 
-            if (id.equals(VILLAGE_FLETCHER_ID)) {
+            if (key.equals(VILLAGE_FLETCHER_ID)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .with(ItemEntry.builder(ModBlocks.CHICKEN_PLUSHIE)).conditionally(RandomChanceLootCondition.builder(0.4f))
@@ -239,7 +244,7 @@ public class ModLootTableModifiers {
                 tableBuilder.pool(poolBuilder.build());
             }
 
-            if (id.equals(FISHING_JUNK_ID)) {
+            if (key.equals(FISHING_JUNK_ID)) {
                 tableBuilder.modifyPools(builder -> {
                     builder.with(ItemEntry.builder(ModItems.SMALL_LILY_PADS).weight(10));
                     builder.with(ItemEntry.builder(ModItems.GIANT_LILY_PAD).weight(5));

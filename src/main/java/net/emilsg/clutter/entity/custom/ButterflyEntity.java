@@ -10,6 +10,8 @@ import net.emilsg.clutter.item.ModItems;
 import net.emilsg.clutter.util.ModBlockTags;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.BlockState;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.NbtComponent;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.control.FlightMoveControl;
 import net.minecraft.entity.ai.control.LookControl;
@@ -144,11 +146,12 @@ public class ButterflyEntity extends ClutterAnimalEntity {
         this.goalSelector.add(4, new ButterflyWanderOverworldGoal(this));
     }
 
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(HAS_COCOON, false);
-        this.dataTracker.startTracking(DUPE_TIMER, 0);
-        this.dataTracker.startTracking(DATA_ID_TYPE_VARIANT, 0);
+    @Override
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(HAS_COCOON, false);
+        builder.add(DUPE_TIMER, 0);
+        builder.add(DATA_ID_TYPE_VARIANT, 0);
     }
 
     public float getPathfindingFavor(BlockPos pos, WorldView world) {
@@ -168,7 +171,7 @@ public class ButterflyEntity extends ClutterAnimalEntity {
     }
 
     @Override
-    public boolean canBeLeashedBy(PlayerEntity player) {
+    public boolean canBeLeashed() {
         return false;
     }
 
@@ -270,7 +273,7 @@ public class ButterflyEntity extends ClutterAnimalEntity {
     }
 
     @Override
-    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
+    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData) {
         RegistryEntry<Biome> registryEntry = world.getBiome(this.getBlockPos());
         ButterflyVariant variant = ButterflyVariant.byId(0);
 
@@ -299,7 +302,7 @@ public class ButterflyEntity extends ClutterAnimalEntity {
         }
 
         this.setVariant(variant);
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
+        return super.initialize(world, difficulty, spawnReason, entityData);
     }
 
     @Nullable
@@ -351,34 +354,33 @@ public class ButterflyEntity extends ClutterAnimalEntity {
     }
 
     public void copyDataToStack(ButterflyEntity entity, ItemStack stack) {
-        NbtCompound nbtCompound = stack.getOrCreateNbt();
-        if (entity.hasCustomName()) {
-            stack.setCustomName(entity.getCustomName());
-        }
+        stack.set(DataComponentTypes.CUSTOM_NAME, entity.getCustomName());
+        NbtComponent.set(DataComponentTypes.BUCKET_ENTITY_DATA, stack, (nbtCompound) -> {
+            if (entity.isAiDisabled()) {
+                nbtCompound.putBoolean("NoAI", entity.isAiDisabled());
+            }
 
-        if (entity.isAiDisabled()) {
-            nbtCompound.putBoolean("NoAI", entity.isAiDisabled());
-        }
+            if (entity.isSilent()) {
+                nbtCompound.putBoolean("Silent", entity.isSilent());
+            }
 
-        if (entity.isSilent()) {
-            nbtCompound.putBoolean("Silent", entity.isSilent());
-        }
+            if (entity.hasNoGravity()) {
+                nbtCompound.putBoolean("NoGravity", entity.hasNoGravity());
+            }
 
-        if (entity.hasNoGravity()) {
-            nbtCompound.putBoolean("NoGravity", entity.hasNoGravity());
-        }
+            if (entity.isGlowing()) {
+                nbtCompound.putBoolean("Glowing", entity.isGlowing());
+            }
 
-        if (entity.isGlowingLocal()) {
-            nbtCompound.putBoolean("Glowing", entity.isGlowingLocal());
-        }
+            if (entity.isInvulnerable()) {
+                nbtCompound.putBoolean("Invulnerable", entity.isInvulnerable());
+            }
 
-        if (entity.isInvulnerable()) {
-            nbtCompound.putBoolean("Invulnerable", entity.isInvulnerable());
-        }
-
-        nbtCompound.putInt("Variant", entity.getTypeVariant());
-        nbtCompound.putFloat("Health", entity.getHealth());
+            nbtCompound.putFloat("Health", entity.getHealth());
+            nbtCompound.putInt("Variant", entity.getTypeVariant());
+        });
     }
+
 
     public void copyDataFromNbt(ButterflyEntity entity, NbtCompound nbt) {
         if (nbt.contains("NoAI")) {

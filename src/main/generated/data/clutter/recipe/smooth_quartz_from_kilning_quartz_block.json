@@ -1,0 +1,13 @@
+{
+  "type": "clutter:kilning",
+  "category": "blocks",
+  "cookingtime": 50,
+  "experience": 1.0,
+  "group": "smooth_quartz",
+  "ingredient": {
+    "item": "minecraft:quartz_block"
+  },
+  "result": {
+    "id": "minecraft:smooth_quartz"
+  }
+}

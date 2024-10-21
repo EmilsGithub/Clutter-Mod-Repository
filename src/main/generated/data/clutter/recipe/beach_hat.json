@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:wheat"
+    },
+    "S": {
+      "item": "minecraft:pink_dye"
+    }
+  },
+  "pattern": [
+    " C ",
+    "CSC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "clutter:beach_hat"
+  }
+}

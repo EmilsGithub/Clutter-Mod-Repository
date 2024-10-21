@@ -1,6 +1,7 @@
 package net.emilsg.clutter;
 
 import net.emilsg.clutter.data.*;
+import net.emilsg.clutter.enchantment.ModEnchantments;
 import net.emilsg.clutter.world.ModConfiguredFeatures;
 import net.emilsg.clutter.world.ModPlacedFeatures;
 import net.emilsg.clutter.world.biome.ModBiomes;
@@ -22,10 +23,12 @@ public class ClutterDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(RecipeDataGen::new);
         pack.addProvider(BiomeTagDataGen::new);
         pack.addProvider(WorldDataGen::new);
+        pack.addProvider(ModRegistryProvider::new);
     }
 
     @Override
     public void buildRegistry(RegistryBuilder registryBuilder) {
+        registryBuilder.addRegistry(RegistryKeys.ENCHANTMENT, ModEnchantments::bootstrap);
         registryBuilder.addRegistry(RegistryKeys.CONFIGURED_FEATURE, ModConfiguredFeatures::bootstrap);
         registryBuilder.addRegistry(RegistryKeys.PLACED_FEATURE, ModPlacedFeatures::bootstrap);
         registryBuilder.addRegistry(RegistryKeys.BIOME, ModBiomes::bootstrap);

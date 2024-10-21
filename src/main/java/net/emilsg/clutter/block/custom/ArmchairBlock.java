@@ -1,7 +1,9 @@
 package net.emilsg.clutter.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.util.math.BlockPos;
@@ -10,7 +12,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 
-public class ArmchairBlock extends SeatBlock {
+public class ArmchairBlock extends AbstractSeatBlock {
     private static final VoxelShape BASE = VoxelShapes.union(
             Block.createCuboidShape(0, 0, 0, 2, 2, 2),
             Block.createCuboidShape(14, 0, 0, 16, 2, 2),
@@ -44,8 +46,15 @@ public class ArmchairBlock extends SeatBlock {
             Block.createCuboidShape(12, 7, 0, 16, 16, 16)
     );
 
+    public static final MapCodec<ArmchairBlock> CODEC = createCodec(ArmchairBlock::new);
+
     public ArmchairBlock(Settings settings) {
         super(settings);
+    }
+
+    @Override
+    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
+        return CODEC;
     }
 
     @Override

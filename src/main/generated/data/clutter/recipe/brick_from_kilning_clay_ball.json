@@ -1,0 +1,13 @@
+{
+  "type": "clutter:kilning",
+  "category": "misc",
+  "cookingtime": 50,
+  "experience": 1.0,
+  "group": "brick",
+  "ingredient": {
+    "item": "minecraft:clay_ball"
+  },
+  "result": {
+    "id": "minecraft:brick"
+  }
+}

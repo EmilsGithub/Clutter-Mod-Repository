@@ -136,23 +136,19 @@ public class MossbloomEntity extends ClutterAnimalEntity{
         return (blockState.isOf(Blocks.GRASS_BLOCK) || blockState.isOf(Blocks.STONE) || blockState.isOf(Blocks.MOSS_BLOCK) || blockState.isOf(Blocks.CLAY));
     }
 
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(VARIANT, 0);
-        this.dataTracker.startTracking(HAS_HORNS, true);
-        this.dataTracker.startTracking(HORN_DROP_TIMER, 0);
-        this.dataTracker.startTracking(IS_SHAKING, false);
-        this.dataTracker.startTracking(TIME_TILL_DROP, 0);
+    @Override
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(VARIANT, 0);
+        builder.add(HAS_HORNS, true);
+        builder.add(HORN_DROP_TIMER, 0);
+        builder.add(IS_SHAKING, false);
+        builder.add(TIME_TILL_DROP, 0);
     }
 
     @Override
     public boolean isBreedingItem(ItemStack stack) {
         return stack.isOf(Items.BIG_DRIPLEAF);
-    }
-
-    @Override
-    public boolean canBeLeashedBy(PlayerEntity player) {
-        return true;
     }
 
     @Override
@@ -242,10 +238,10 @@ public class MossbloomEntity extends ClutterAnimalEntity{
     }
 
     @Override
-    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
+    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData) {
         MossbloomVariant variant = Util.getRandom(MossbloomVariant.values(), this.random);
         this.setVariant(variant);
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
+        return super.initialize(world, difficulty, spawnReason, entityData);
     }
 
     public void writeCustomDataToNbt(NbtCompound nbt) {

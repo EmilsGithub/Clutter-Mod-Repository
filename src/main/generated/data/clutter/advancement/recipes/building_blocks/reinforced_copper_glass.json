@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_copper_nugget": {
+      "conditions": {
+        "items": [
+          {
+            "items": "clutter:copper_nugget"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_glass": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:glass"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "clutter:reinforced_copper_glass"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_glass",
+      "has_copper_nugget"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "clutter:reinforced_copper_glass"
+    ]
+  }
+}

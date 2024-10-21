@@ -1,10 +1,8 @@
 package net.emilsg.clutter;
 
-import io.netty.buffer.Unpooled;
 import net.emilsg.clutter.block.ModBlockEntities;
 import net.emilsg.clutter.block.custom.WindowSillBlock;
 import net.emilsg.clutter.block.custom.cutout.ICutoutRenderable;
-import net.emilsg.clutter.block.entity.render.CardboardBoxBlockEntityRenderer;
 import net.emilsg.clutter.block.entity.render.ShelfBlockEntityRenderer;
 import net.emilsg.clutter.compat.trinkets.client.TrinketsIntegrationClient;
 import net.emilsg.clutter.entity.ModEntities;
@@ -13,29 +11,25 @@ import net.emilsg.clutter.entity.client.model.*;
 import net.emilsg.clutter.entity.client.player.RendererRegistration;
 import net.emilsg.clutter.entity.client.player.model.ScubaModel;
 import net.emilsg.clutter.entity.client.render.*;
-import net.emilsg.clutter.networking.ModMessages;
 import net.emilsg.clutter.screen.*;
 import net.emilsg.clutter.util.ModKeyInputHandler;
 import net.emilsg.clutter.util.ModModelPredicateProvider;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.color.world.BiomeColors;
-import net.minecraft.client.color.world.FoliageColors;
-import net.minecraft.client.color.world.GrassColors;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.client.render.block.entity.HangingSignBlockEntityRenderer;
 import net.minecraft.client.render.block.entity.SignBlockEntityRenderer;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.registry.Registries;
+import net.minecraft.world.biome.FoliageColors;
+import net.minecraft.world.biome.GrassColors;
 
 import java.util.Arrays;
 import java.util.List;
@@ -58,7 +52,7 @@ public class ClutterClient implements ClientModInitializer {
         this.registerEntityRenderers();
         this.registerBlockEntityRenderers();
         this.registerScreenHandlers();
-        this.registerConnectionEvents();
+        //this.registerConnectionEvents();
 
         ModModelPredicateProvider.registerModModels();
 
@@ -554,7 +548,7 @@ public class ClutterClient implements ClientModInitializer {
 
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(), blocksToRenderTranslucent.toArray(new Block[0]));
 
-        ModMessages.registerS2CPackets();
+        //ModMessages.registerS2CPackets();
     }
 
     private void registerColorProviders() {
@@ -628,11 +622,11 @@ public class ClutterClient implements ClientModInitializer {
 
     }
 
-    private void registerConnectionEvents() {
-        ClientPlayConnectionEvents.JOIN.register((handler, client, isConnected) -> {
-            handler.sendPacket(ClientPlayNetworking.createC2SPacket(ModMessages.VERSION_HANDSHAKE_PACKET_ID, new PacketByteBuf(Unpooled.buffer()).writeString(Clutter.MOD_VERSION)));
-        });
-    }
+    //private void registerConnectionEvents() {
+    //    ClientPlayConnectionEvents.JOIN.register((handler, client, isConnected) -> {
+    //        handler.sendPacket(ClientPlayNetworking.createC2SPacket(ModMessages.VERSION_HANDSHAKE_PACKET_ID, new PacketByteBuf(Unpooled.buffer()).writeString(Clutter.MOD_VERSION)));
+    //    });
+    //}
 
     private void registerEntityModelLayers() {
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.NETHER_NEWT, NetherNewtModel::getTexturedModelData);
@@ -675,7 +669,6 @@ public class ClutterClient implements ClientModInitializer {
 
     private void registerBlockEntityRenderers() {
         BlockEntityRendererFactories.register(ModBlockEntities.SHELF, ShelfBlockEntityRenderer::new);
-        BlockEntityRendererFactories.register(ModBlockEntities.CARDBOARD_BOX, CardboardBoxBlockEntityRenderer::new);
 
         BlockEntityRendererFactories.register(ModBlockEntities.MOD_SIGN_BLOCK_ENTITY, SignBlockEntityRenderer::new);
         BlockEntityRendererFactories.register(ModBlockEntities.MOD_HANGING_SIGN_BLOCK_ENTITY, HangingSignBlockEntityRenderer::new);

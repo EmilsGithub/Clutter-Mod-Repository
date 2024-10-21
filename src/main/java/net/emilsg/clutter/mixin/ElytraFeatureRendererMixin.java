@@ -45,12 +45,12 @@ public abstract class ElytraFeatureRendererMixin {
 
         if (elytraItem instanceof ButterflyElytraItem butterflyElytraItem) {
             String color = butterflyElytraItem.getColor();
-            return new Identifier(Clutter.MOD_ID, "textures/entity/elytra/" + color + "_butterfly_elytra.png");
+            return Identifier.of(Clutter.MOD_ID, "textures/entity/elytra/" + color + "_butterfly_elytra.png");
         }
 
         if (elytraItem instanceof GemstoneElytraItem gemstoneElytraItem) {
             String type = gemstoneElytraItem.getTypeString();
-            return new Identifier(Clutter.MOD_ID, "textures/entity/elytra/" + type + "_gemstone_elytra.png");
+            return Identifier.of(Clutter.MOD_ID, "textures/entity/elytra/" + type + "_gemstone_elytra.png");
         }
 
         return value;

@@ -1,5 +1,6 @@
 package net.emilsg.clutter.item.custom;
 
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -12,7 +13,7 @@ public class UseTimeFoodItem extends Item {
     }
 
     @Override
-    public int getMaxUseTime(ItemStack stack) {
+    public int getMaxUseTime(ItemStack stack, LivingEntity user) {
         return useTimeInTicks;
     }
 }

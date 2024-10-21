@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalFacingBlock;
@@ -15,8 +16,15 @@ public class FrogStatueBlock extends HorizontalFacingBlock {
 
     private static final VoxelShape SHAPE = Block.createCuboidShape(3.5, 0.0, 3.5, 12.5, 8.0, 12.5);
 
+    public static final MapCodec<FrogStatueBlock> CODEC = createCodec(FrogStatueBlock::new);
+
     public FrogStatueBlock(Settings settings) {
         super(settings);
+    }
+
+    @Override
+    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
+        return CODEC;
     }
 
     @Override

@@ -7,7 +7,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public class CardboardBoxScreen extends HandledScreen<CardboardBoxScreenHandler> {
-    private static final Identifier TEXTURE = new Identifier("clutter:textures/gui/container/cardboard_box.png");
+    private static final Identifier TEXTURE = Identifier.of("clutter:textures/gui/container/cardboard_box.png");
 
     public CardboardBoxScreen(CardboardBoxScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);

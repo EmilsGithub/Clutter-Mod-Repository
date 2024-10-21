@@ -6,12 +6,13 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class ClutterAnimalEntity extends AnimalEntity {
+public abstract class ClutterAnimalEntity extends AnimalEntity {
     private static final TrackedData<Boolean> MOVING = DataTracker.registerData(ClutterAnimalEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
     protected ClutterAnimalEntity(EntityType<? extends AnimalEntity> entityType, World world) {
@@ -19,9 +20,9 @@ public class ClutterAnimalEntity extends AnimalEntity {
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(MOVING, false);
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(MOVING, false);
     }
 
     @Override
@@ -33,6 +34,9 @@ public class ClutterAnimalEntity extends AnimalEntity {
         }
         super.tickMovement();
     }
+
+    @Override
+    public abstract boolean isBreedingItem(ItemStack stack);
 
     public boolean isMoving() {
         return this.dataTracker.get(MOVING);

@@ -2,13 +2,13 @@ package net.emilsg.clutter.world.biome;
 
 import net.emilsg.clutter.Clutter;
 import net.emilsg.clutter.entity.ModEntities;
-import net.minecraft.client.sound.MusicType;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.BiomeMoodSound;
+import net.minecraft.sound.MusicType;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.*;
@@ -19,7 +19,7 @@ public class ModBiomes {
     public static final RegistryKey<Biome> LUPINE_FIELDS = register("lupine_fields");
 
     public static RegistryKey<Biome> register(String id) {
-        return RegistryKey.of(RegistryKeys.BIOME, new Identifier(Clutter.MOD_ID, id));
+        return RegistryKey.of(RegistryKeys.BIOME, Identifier.of(Clutter.MOD_ID, id));
     }
 
     public static void bootstrap(Registerable<Biome> context) {

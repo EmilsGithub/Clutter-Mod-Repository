@@ -20,7 +20,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 
 public class ScubaFeatureRenderer<T extends LivingEntity, M extends EntityModel<T>> extends FeatureRenderer<T, M> {
-    private static final Identifier SCUBA_TANK_TEXTURE = new Identifier(Clutter.MOD_ID, "textures/entity/scuba_tank_texture.png");
+    private static final Identifier SCUBA_TANK_TEXTURE = Identifier.of(Clutter.MOD_ID, "textures/entity/scuba_tank_texture.png");
     private final ScubaModel<T> tank;
 
     public ScubaFeatureRenderer(FeatureRendererContext<T, M> context, EntityModelLoader loader) {
@@ -37,8 +37,8 @@ public class ScubaFeatureRenderer<T extends LivingEntity, M extends EntityModel<
         matrices.push();
         this.getContextModel().copyStateTo(tank);
         this.tank.setAngles(entity, limbAngle, limbDistance, animationProgress, headYaw, headPitch);
-        VertexConsumer vertexConsumer = ItemRenderer.getArmorGlintConsumer(vertexConsumers, RenderLayer.getArmorCutoutNoCull(SCUBA_TANK_TEXTURE), false, itemStack.hasGlint());
-        this.tank.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1.0f, 1.0f, 1.0f, 1.0f);
+        VertexConsumer vertexConsumer = ItemRenderer.getArmorGlintConsumer(vertexConsumers, RenderLayer.getArmorCutoutNoCull(SCUBA_TANK_TEXTURE), itemStack.hasGlint());
+        this.tank.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV);
         matrices.pop();
     }
 }

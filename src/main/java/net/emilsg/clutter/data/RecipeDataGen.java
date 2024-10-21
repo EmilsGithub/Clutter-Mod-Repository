@@ -5,62 +5,92 @@ import net.emilsg.clutter.block.ClutterWoodType;
 import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.item.ModItems;
 import net.emilsg.clutter.item.custom.ClutterElytraItem;
-import net.emilsg.clutter.recipe.KilningRecipeBuilder;
+import net.emilsg.clutter.recipe.KilningRecipe;
 import net.emilsg.clutter.util.ModItemTags;
 import net.emilsg.clutter.util.RegistryType;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.block.Blocks;
-import net.minecraft.data.server.recipe.RecipeExporter;
-import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
-import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
-import net.minecraft.data.server.recipe.SmithingTransformRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.*;
 import net.minecraft.item.HoneycombItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
+import net.minecraft.recipe.AbstractCookingRecipe;
 import net.minecraft.recipe.Ingredient;
+import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.Identifier;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+
 public class RecipeDataGen extends FabricRecipeProvider {
-    public RecipeDataGen(FabricDataOutput output) {
-        super(output);
+
+    public RecipeDataGen(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+        super(output, registriesFuture);
+    }
+
+    public static void offerKilning(RecipeExporter exporter, ItemConvertible input, ItemConvertible output, float experience, int cookingTime, RecipeCategory category, String group) {
+        List<ItemConvertible> inputs = new ArrayList<>();
+        inputs.add(input);
+        offerMultipleOptions(exporter, KilningRecipe.Serializer.INSTANCE, KilningRecipe::new, inputs, output, experience, cookingTime, group, "_from_kilning");
+    }
+
+    public static <T extends AbstractCookingRecipe> void offerMultipleOptions(
+            RecipeExporter exporter,
+            RecipeSerializer<T> serializer,
+            AbstractCookingRecipe.RecipeFactory<T> recipeFactory,
+            List<ItemConvertible> inputs,
+            ItemConvertible output,
+            float experience,
+            int cookingTime,
+            String group,
+            String suffix
+    ) {
+        for (ItemConvertible itemConvertible : inputs) {
+            CookingRecipeJsonBuilder.create(Ingredient.ofItems(itemConvertible), RecipeCategory.MISC, output, experience, cookingTime, serializer, recipeFactory)
+                    .group(group)
+                    .criterion(hasItem(itemConvertible), conditionsFromItem(itemConvertible))
+                    .offerTo(exporter, getItemPath(output) + suffix + "_" + getItemPath(itemConvertible));
+        }
     }
 
     @Override
     public void generate(RecipeExporter exporter) {
-        kilningRecipe(Items.SAND, Items.GLASS, 1, exporter);
-        kilningRecipe(Items.RED_SAND, Items.GLASS, 1, exporter);
-        kilningRecipe(Items.CLAY_BALL, Items.BRICK, 1, exporter);
-        kilningRecipe(Items.CLAY, Items.TERRACOTTA, 1, exporter);
-        kilningRecipe(Items.CHORUS_FRUIT, Items.POPPED_CHORUS_FRUIT, 1, exporter);
-        kilningRecipe(Items.NETHERRACK, Items.NETHER_BRICK, 1, exporter);
-        kilningRecipe(Items.COBBLESTONE, Items.STONE, 1, exporter);
-        kilningRecipe(Items.STONE, Items.SMOOTH_STONE, 1, exporter);
-        kilningRecipe(Items.COBBLED_DEEPSLATE, Items.DEEPSLATE, 1, exporter);
-        kilningRecipe(Items.QUARTZ_BLOCK, Items.SMOOTH_QUARTZ, 1, exporter);
-        kilningRecipe(Items.BASALT, Items.SMOOTH_BASALT, 1, exporter);
-        kilningRecipe(Items.SANDSTONE, Items.SMOOTH_SANDSTONE, 1, exporter);
-        kilningRecipe(Items.RED_SANDSTONE, Items.SMOOTH_RED_SANDSTONE, 1, exporter);
-        kilningRecipe(Items.WHITE_TERRACOTTA, Items.WHITE_GLAZED_TERRACOTTA, 1, exporter);
-        kilningRecipe(Items.LIGHT_GRAY_TERRACOTTA, Items.LIGHT_GRAY_GLAZED_TERRACOTTA, 1, exporter);
-        kilningRecipe(Items.GRAY_TERRACOTTA, Items.GRAY_GLAZED_TERRACOTTA, 1, exporter);
-        kilningRecipe(Items.BLACK_TERRACOTTA, Items.BLACK_GLAZED_TERRACOTTA, 1, exporter);
-        kilningRecipe(Items.BROWN_TERRACOTTA, Items.BROWN_GLAZED_TERRACOTTA, 1, exporter);
-        kilningRecipe(Items.RED_TERRACOTTA, Items.RED_GLAZED_TERRACOTTA, 1, exporter);
-        kilningRecipe(Items.ORANGE_TERRACOTTA, Items.ORANGE_GLAZED_TERRACOTTA, 1, exporter);
-        kilningRecipe(Items.YELLOW_TERRACOTTA, Items.YELLOW_GLAZED_TERRACOTTA, 1, exporter);
-        kilningRecipe(Items.LIME_TERRACOTTA, Items.LIME_GLAZED_TERRACOTTA, 1, exporter);
-        kilningRecipe(Items.GREEN_TERRACOTTA, Items.GREEN_GLAZED_TERRACOTTA, 1, exporter);
-        kilningRecipe(Items.CYAN_TERRACOTTA, Items.CYAN_GLAZED_TERRACOTTA, 1, exporter);
-        kilningRecipe(Items.LIGHT_BLUE_TERRACOTTA, Items.LIGHT_BLUE_GLAZED_TERRACOTTA, 1, exporter);
-        kilningRecipe(Items.BLUE_TERRACOTTA, Items.BLUE_GLAZED_TERRACOTTA, 1, exporter);
-        kilningRecipe(Items.PURPLE_TERRACOTTA, Items.PURPLE_GLAZED_TERRACOTTA, 1, exporter);
-        kilningRecipe(Items.MAGENTA_TERRACOTTA, Items.MAGENTA_GLAZED_TERRACOTTA, 1, exporter);
-        kilningRecipe(Items.PINK_TERRACOTTA, Items.PINK_GLAZED_TERRACOTTA, 1, exporter);
+        offerKilning(exporter, Items.SAND, Items.GLASS, 0.2f, 50, RecipeCategory.MISC, "glass");
+        offerKilning(exporter, Items.RED_SAND, Items.GLASS, 1, 50, RecipeCategory.MISC, "glass");
+        offerKilning(exporter, Items.CLAY_BALL, Items.BRICK, 1, 50, RecipeCategory.MISC, "brick");
+        offerKilning(exporter, Items.CLAY, Items.TERRACOTTA, 1, 50, RecipeCategory.MISC, "terracotta");
+        offerKilning(exporter, Items.CHORUS_FRUIT, Items.POPPED_CHORUS_FRUIT, 1, 50, RecipeCategory.MISC, "popped_chorus_fruit");
+        offerKilning(exporter, Items.NETHERRACK, Items.NETHER_BRICK, 1, 50, RecipeCategory.MISC, "nether_brick");
+        offerKilning(exporter, Items.COBBLESTONE, Items.STONE, 1, 50, RecipeCategory.MISC, "stone");
+        offerKilning(exporter, Items.STONE, Items.SMOOTH_STONE, 1, 50, RecipeCategory.MISC, "smooth_stone");
+        offerKilning(exporter, Items.COBBLED_DEEPSLATE, Items.DEEPSLATE, 1, 50, RecipeCategory.MISC, "deepslate");
+        offerKilning(exporter, Items.QUARTZ_BLOCK, Items.SMOOTH_QUARTZ, 1, 50, RecipeCategory.MISC, "smooth_quartz");
+        offerKilning(exporter, Items.BASALT, Items.SMOOTH_BASALT, 1, 50, RecipeCategory.MISC, "smooth_basalt");
+        offerKilning(exporter, Items.SANDSTONE, Items.SMOOTH_SANDSTONE, 1, 50, RecipeCategory.MISC, "smooth_sandstone");
+        offerKilning(exporter, Items.RED_SANDSTONE, Items.SMOOTH_RED_SANDSTONE, 1, 50, RecipeCategory.MISC, "smooth_red_sandstone");
+        offerKilning(exporter, Items.WHITE_TERRACOTTA, Items.WHITE_GLAZED_TERRACOTTA, 1, 50, RecipeCategory.MISC, "white_glazed_terracotta");
+        offerKilning(exporter, Items.LIGHT_GRAY_TERRACOTTA, Items.LIGHT_GRAY_GLAZED_TERRACOTTA, 1, 50, RecipeCategory.MISC, "light_gray_glazed_terracotta");
+        offerKilning(exporter, Items.GRAY_TERRACOTTA, Items.GRAY_GLAZED_TERRACOTTA, 1, 50, RecipeCategory.MISC, "gray_glazed_terracotta");
+        offerKilning(exporter, Items.BLACK_TERRACOTTA, Items.BLACK_GLAZED_TERRACOTTA, 1, 50, RecipeCategory.MISC, "black_glazed_terracotta");
+        offerKilning(exporter, Items.BROWN_TERRACOTTA, Items.BROWN_GLAZED_TERRACOTTA, 1, 50, RecipeCategory.MISC, "brown_glazed_terracotta");
+        offerKilning(exporter, Items.RED_TERRACOTTA, Items.RED_GLAZED_TERRACOTTA, 1, 50, RecipeCategory.MISC, "red_glazed_terracotta");
+        offerKilning(exporter, Items.ORANGE_TERRACOTTA, Items.ORANGE_GLAZED_TERRACOTTA, 1, 50, RecipeCategory.MISC, "orange_glazed_terracotta");
+        offerKilning(exporter, Items.YELLOW_TERRACOTTA, Items.YELLOW_GLAZED_TERRACOTTA, 1, 50, RecipeCategory.MISC, "yellow_glazed_terracotta");
+        offerKilning(exporter, Items.LIME_TERRACOTTA, Items.LIME_GLAZED_TERRACOTTA, 1, 50, RecipeCategory.MISC, "lime_glazed_terracotta");
+        offerKilning(exporter, Items.GREEN_TERRACOTTA, Items.GREEN_GLAZED_TERRACOTTA, 1, 50, RecipeCategory.MISC, "green_glazed_terracotta");
+        offerKilning(exporter, Items.CYAN_TERRACOTTA, Items.CYAN_GLAZED_TERRACOTTA, 1, 50, RecipeCategory.MISC, "cyan_glazed_terracotta");
+        offerKilning(exporter, Items.LIGHT_BLUE_TERRACOTTA, Items.LIGHT_BLUE_GLAZED_TERRACOTTA, 1, 50, RecipeCategory.MISC, "light_blue_glazed_terracotta");
+        offerKilning(exporter, Items.BLUE_TERRACOTTA, Items.BLUE_GLAZED_TERRACOTTA, 1, 50, RecipeCategory.MISC, "blue_glazed_terracotta");
+        offerKilning(exporter, Items.PURPLE_TERRACOTTA, Items.PURPLE_GLAZED_TERRACOTTA, 1, 50, RecipeCategory.MISC, "purple_glazed_terracotta");
+        offerKilning(exporter, Items.MAGENTA_TERRACOTTA, Items.MAGENTA_GLAZED_TERRACOTTA, 1, 50, RecipeCategory.MISC, "magenta_glazed_terracotta");
+        offerKilning(exporter, Items.PINK_TERRACOTTA, Items.PINK_GLAZED_TERRACOTTA, 1, 50, RecipeCategory.MISC, "pink_glazed_terracotta");
 
         offerWoodRecipes(exporter, ClutterWoodType.REDWOOD);
         offerWoodRecipes(exporter, ClutterWoodType.OAK);
@@ -107,7 +137,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .pattern("Q")
                 .input('Q', Items.QUARTZ)
                 .criterion(hasItem(Items.QUARTZ), conditionsFromItem(Items.QUARTZ))
-                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(ModBlocks.QUARTZ_CRYSTAL)));
+                .offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(ModBlocks.QUARTZ_CRYSTAL)));
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModItems.AQUATIC_TORCH)
                 .pattern(" N ")
@@ -118,7 +148,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .input('I', Items.COPPER_INGOT)
                 .criterion(hasItem(Items.COPPER_INGOT), conditionsFromItem(Items.COPPER_INGOT))
                 .criterion(hasItem(ModItems.COPPER_NUGGET), conditionsFromItem(ModItems.COPPER_NUGGET))
-                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(ModItems.AQUATIC_TORCH)));
+                .offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(ModItems.AQUATIC_TORCH)));
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModItems.PRISMARINE_TORCH)
                 .pattern(" P ")
@@ -128,7 +158,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .input('C', Items.PRISMARINE_CRYSTALS)
                 .criterion(hasItem(Items.PRISMARINE_SHARD), conditionsFromItem(Items.PRISMARINE_SHARD))
                 .criterion(hasItem(Items.PRISMARINE_CRYSTALS), conditionsFromItem(Items.PRISMARINE_CRYSTALS))
-                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(ModItems.PRISMARINE_TORCH)));
+                .offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(ModItems.PRISMARINE_TORCH)));
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, ModBlocks.TALL_BOTTLE)
                 .pattern(" G ")
@@ -138,13 +168,13 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .input('D', Items.GREEN_DYE)
                 .criterion(hasItem(Items.GREEN_DYE), conditionsFromItem(Items.GREEN_DYE))
                 .criterion(hasItem(Items.GLASS), conditionsFromItem(Items.GLASS))
-                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(ModBlocks.TALL_BOTTLE)));
+                .offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(ModBlocks.TALL_BOTTLE)));
 
         ShapelessRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, ModBlocks.LAB_BOTTLE)
                 .input(Items.GLASS_BOTTLE)
                 .criterion(hasItem(Items.GLASS_BOTTLE), conditionsFromItem(Items.GLASS_BOTTLE))
                 .criterion(hasItem(Items.GLASS), conditionsFromItem(Items.GLASS))
-                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(ModBlocks.LAB_BOTTLE)));
+                .offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(ModBlocks.LAB_BOTTLE)));
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.BRICK_KILN)
                 .pattern("SSS")
@@ -155,7 +185,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .input('F', Items.FURNACE)
                 .criterion(hasItem(Items.FURNACE), conditionsFromItem(Items.FURNACE))
                 .criterion(hasItem(Items.BRICKS), conditionsFromItem(Items.BRICKS))
-                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(ModBlocks.BRICK_KILN)));
+                .offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(ModBlocks.BRICK_KILN)));
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.CARDBOARD_BOX)
                 .pattern(" P ")
@@ -165,7 +195,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .input('C', Items.CHEST)
                 .criterion(hasItem(Items.PAPER), conditionsFromItem(Items.PAPER))
                 .criterion(hasItem(Items.CHEST), conditionsFromItem(Items.CHEST))
-                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(ModBlocks.CARDBOARD_BOX)));
+                .offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(ModBlocks.CARDBOARD_BOX)));
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.RED_PRESENT)
                 .pattern("RPR")
@@ -177,7 +207,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .criterion(hasItem(Items.PAPER), conditionsFromItem(Items.PAPER))
                 .criterion(hasItem(ModBlocks.CARDBOARD_BOX), conditionsFromItem(ModBlocks.CARDBOARD_BOX))
                 .criterion(hasItem(Items.RED_DYE), conditionsFromItem(Items.RED_DYE))
-                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(ModBlocks.RED_PRESENT)));
+                .offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(ModBlocks.RED_PRESENT)));
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.MAILBOX)
                 .pattern(" I ")
@@ -187,13 +217,13 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .input('C', Items.CHEST)
                 .input('R', Items.REDSTONE)
                 .criterion(hasItem(Items.IRON_INGOT), conditionsFromItem(Items.IRON_INGOT))
-                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(ModBlocks.MAILBOX)));
+                .offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(ModBlocks.MAILBOX)));
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.PET_BED)
                 .pattern("WWW")
                 .input('W', ItemTags.WOOL)
                 .criterion(hasItem(Items.WHITE_WOOL), conditionsFromTag(ItemTags.WOOL))
-                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(ModBlocks.PET_BED)));
+                .offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(ModBlocks.PET_BED)));
 
         offerCompactingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, Blocks.WET_SPONGE, ModItems.SPONGE_SHARD);
         offer2x2CompactingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GLOWLILY_BLOCK, ModItems.GLOWLILY_BULB);
@@ -206,7 +236,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
         //        .input('G', Items.GLASS)
         //        .criterion(hasItem(Items.COPPER_INGOT), conditionsFromItem(Items.COPPER_INGOT))
         //        .criterion(hasItem(Items.GLASS), conditionsFromItem(Items.GLASS))
-        //        .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(ModItems.COPPER_DIVING_HELMET)));
+        //        .offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(ModItems.COPPER_DIVING_HELMET)));
 
         //ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.COPPER_DIVING_CHESTPLATE)
         //        .pattern("# #").pattern("#H#").pattern("###")
@@ -214,7 +244,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
         //        .input('H', Items.HEART_OF_THE_SEA)
         //        .criterion(hasItem(Items.COPPER_INGOT), conditionsFromItem(Items.COPPER_INGOT))
         //        .criterion(hasItem(Items.HEART_OF_THE_SEA), conditionsFromItem(Items.HEART_OF_THE_SEA))
-        //        .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(ModItems.COPPER_DIVING_CHESTPLATE)));
+        //        .offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(ModItems.COPPER_DIVING_CHESTPLATE)));
 
         //offerLeggingsRecipe(exporter, Items.COPPER_INGOT, ModItems.COPPER_DIVING_LEGGINGS);
         //offerBootsRecipe(exporter, Items.COPPER_INGOT, ModItems.COPPER_DIVING_BOOTS);
@@ -244,7 +274,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .input(Ingredient.fromTag(ModItemTags.DYES))
                 .input(ModItems.CAP)
                 .criterion(hasItem(ModItems.CAP), conditionsFromItem(ModItems.CAP))
-                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(ModItems.PROPELLER_CAP)));
+                .offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(ModItems.PROPELLER_CAP)));
 
         ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.BUTTERFLY_WINGS)
                 .input(Ingredient.fromTag(ModItemTags.BOTTLED_BUTTERFLIES))
@@ -252,7 +282,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .input(Ingredient.fromTag(ModItemTags.BOTTLED_BUTTERFLIES))
                 .input(Items.STRING)
                 .criterion(hasItem(Items.STRING), conditionsFromItem(Items.STRING))
-                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(ModItems.BUTTERFLY_WINGS)));
+                .offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(ModItems.BUTTERFLY_WINGS)));
 
         for (Item elytra : Registries.ITEM) {
             if (elytra instanceof ClutterElytraItem clutterElytraItem) offerDecoratedElytraRecipes(exporter, elytra, clutterElytraItem.getComponent());
@@ -261,11 +291,12 @@ public class RecipeDataGen extends FabricRecipeProvider {
 
 
 
+
     public void offerDecoratedElytraRecipes(RecipeExporter exporter, Item result, Item addition) {
         SmithingTransformRecipeJsonBuilder
                 .create(Ingredient.ofItems(ModItems.DECORATED_ELYTRA_SMITHING_TEMPLATE), Ingredient.fromTag(ModItemTags.ELYTRON), Ingredient.ofItems(addition), RecipeCategory.MISC, result)
                 .criterion("has_elytra", conditionsFromItem(ModItems.BUTTERFLY_IN_A_BOTTLE))
-                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(result)));
+                .offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(result)));
     }
 
     public void offerClutterWaxingRecipes(RecipeExporter exporter) {
@@ -275,7 +306,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 ShapelessRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, result)
                         .input(input).input(Items.HONEYCOMB)
                         .criterion(hasItem(input), conditionsFromItem(input))
-                        .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(result)));
+                        .offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(result)));
 
             }
         });
@@ -287,11 +318,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .input(input2.asItem())
                 .criterion(hasItem(input.asItem()), conditionsFromItem(input.asItem()))
                 .criterion(hasItem(input2.asItem()), conditionsFromItem(input2.asItem()))
-                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output.asItem()) + "_from_" + input.asItem() + "_and_" + input2.asItem()));
-    }
-
-    private void kilningRecipe(ItemConvertible ingredient, ItemConvertible result, int count, RecipeExporter exporter) {
-        new KilningRecipeBuilder(ingredient, result, count).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(result)));
+                .offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(output.asItem()) + "_from_" + getRecipeName(input2.asItem())));
     }
 
     private void offerArmorRecipe(RecipeExporter exporter, ItemConvertible component, Item helmet, Item chestplate, Item leggings, Item boots) {
@@ -304,32 +331,32 @@ public class RecipeDataGen extends FabricRecipeProvider {
     private void offerHelmetRecipe(RecipeExporter exporter, ItemConvertible component, Item helmet) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, helmet)
                 .pattern("###").pattern("# #").input('#', component)
-                .criterion(hasItem(component), conditionsFromItem(component)).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(helmet)));
+                .criterion(hasItem(component), conditionsFromItem(component)).offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(helmet)));
     }
 
     private void offerChestplateRecipe(RecipeExporter exporter, ItemConvertible component, Item chestplate) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, chestplate)
                 .pattern("# #").pattern("###").pattern("###").input('#', component)
-                .criterion(hasItem(component), conditionsFromItem(component)).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(chestplate)));
+                .criterion(hasItem(component), conditionsFromItem(component)).offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(chestplate)));
     }
 
     private void offerLeggingsRecipe(RecipeExporter exporter, ItemConvertible component, Item leggings) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, leggings)
                 .pattern("###").pattern("# #").pattern("# #").input('#', component)
-                .criterion(hasItem(component), conditionsFromItem(component)).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(leggings)));
+                .criterion(hasItem(component), conditionsFromItem(component)).offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(leggings)));
     }
 
     private void offerBootsRecipe(RecipeExporter exporter, ItemConvertible component, Item boots) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, boots)
                 .pattern("# #").pattern("# #").input('#', component)
-                .criterion(hasItem(component), conditionsFromItem(component)).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(boots)));
+                .criterion(hasItem(component), conditionsFromItem(component)).offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(boots)));
     }
 
     private void offerSimpleDyeRecipeWithCount(RecipeExporter exporter, ItemConvertible component, ItemConvertible result, RecipeCategory category, int count) {
         ShapelessRecipeJsonBuilder.create(category, result, count)
                 .input(component)
                 .criterion(hasItem(component), conditionsFromItem(component))
-                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(result) + "_from_" + getRecipeName(component)));
+                .offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(result) + "_from_" + getRecipeName(component)));
     }
 
     private void offerSulphurRecipe(RecipeExporter exporter, ItemConvertible component, ItemConvertible result, RecipeCategory category) {
@@ -337,7 +364,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .input(component).input(ModItems.SULPHUR)
                 .criterion(hasItem(component), conditionsFromItem(component))
                 .criterion(hasItem(ModItems.SULPHUR), conditionsFromItem(ModItems.SULPHUR))
-                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(result)));
+                .offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(result)));
     }
 
     private void offerHatRecipe(RecipeExporter exporter, ItemConvertible component, ItemConvertible secondComponent, Item result) {
@@ -346,7 +373,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .input('C', component).input('S', secondComponent)
                 .criterion(hasItem(component), conditionsFromItem(component))
                 .criterion(hasItem(secondComponent), conditionsFromItem(secondComponent))
-                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(result)));
+                .offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(result)));
     }
 
     private void offerPlusRecipe(RecipeExporter exporter, ItemConvertible inner, ItemConvertible outer, ItemConvertible output, RecipeCategory category) {
@@ -358,7 +385,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .input('O', outer)
                 .criterion(hasItem(inner), conditionsFromItem(inner))
                 .criterion(hasItem(outer), conditionsFromItem(outer))
-                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
+                .offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(output)));
     }
 
     private void offerWoodRecipes(RecipeExporter exporter, ClutterWoodType woodType) {
@@ -398,39 +425,39 @@ public class RecipeDataGen extends FabricRecipeProvider {
     }
 
     private static void offerStairsRecipe(RecipeExporter exporter, ItemConvertible input, ItemConvertible output) {
-        createStairsRecipe(output, Ingredient.ofItems(input)).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
+        createStairsRecipe(output, Ingredient.ofItems(input)).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(output)));
     }
 
     public static void offerPressurePlateRecipe(RecipeExporter exporter, ItemConvertible output, ItemConvertible input) {
-        createPressurePlateRecipe(RecipeCategory.REDSTONE, output, Ingredient.ofItems(input)).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
+        createPressurePlateRecipe(RecipeCategory.REDSTONE, output, Ingredient.ofItems(input)).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(output)));
     }
 
     public static void offerSlabRecipe(RecipeExporter exporter, ItemConvertible output, ItemConvertible input) {
-        createSlabRecipe(RecipeCategory.BUILDING_BLOCKS, output, Ingredient.ofItems(input)).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
+        createSlabRecipe(RecipeCategory.BUILDING_BLOCKS, output, Ingredient.ofItems(input)).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(output)));
     }
 
     public static void offerTrapdoorRecipe(RecipeExporter exporter, ItemConvertible output, ItemConvertible input) {
-        createTrapdoorRecipe(output, Ingredient.ofItems(input)).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
+        createTrapdoorRecipe(output, Ingredient.ofItems(input)).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(output)));
     }
 
     public static void offerSingleItemRecipe(RecipeExporter exporter, ItemConvertible output, ItemConvertible input, RecipeCategory category) {
-        ShapelessRecipeJsonBuilder.create(category, output).input(input).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
+        ShapelessRecipeJsonBuilder.create(category, output).input(input).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(output)));
     }
 
     public static void offerFenceRecipe(RecipeExporter exporter, ItemConvertible output, ItemConvertible input) {
-        createFenceRecipe(output, Ingredient.ofItems(input)).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
+        createFenceRecipe(output, Ingredient.ofItems(input)).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(output)));
     }
 
     public static void offerFenceGateRecipe(RecipeExporter exporter, ItemConvertible output, ItemConvertible input) {
-        createFenceGateRecipe(output, Ingredient.ofItems(input)).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
+        createFenceGateRecipe(output, Ingredient.ofItems(input)).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(output)));
     }
 
     public static void offerDoorRecipe(RecipeExporter exporter, ItemConvertible output, ItemConvertible input) {
-        createDoorRecipe(output, Ingredient.ofItems(input)).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
+        createDoorRecipe(output, Ingredient.ofItems(input)).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(output)));
     }
 
     public static void offerSignRecipe(RecipeExporter exporter, ItemConvertible output, ItemConvertible input) {
-        createSignRecipe(output, Ingredient.ofItems(input)).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
+        createSignRecipe(output, Ingredient.ofItems(input)).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(output)));
     }
 
     private void offerShortBenchRecipe(RecipeExporter exporter, ItemConvertible planks, ItemConvertible log, ItemConvertible output) {
@@ -442,7 +469,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .group("short_benches")
                 .criterion(hasItem(planks), conditionsFromItem(planks))
                 .criterion(hasItem(log), conditionsFromItem(log))
-                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
+                .offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(output)));
     }
 
     private void offerChairRecipe(RecipeExporter exporter, ItemConvertible planks, ItemConvertible log, ItemConvertible output) {
@@ -455,7 +482,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .group("chairs")
                 .criterion(hasItem(planks), conditionsFromItem(planks))
                 .criterion(hasItem(log), conditionsFromItem(log))
-                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
+                .offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(output)));
     }
 
     private void offerBenchRecipe(RecipeExporter exporter, ItemConvertible planks, ItemConvertible log, ItemConvertible output) {
@@ -469,7 +496,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .group("benches")
                 .criterion(hasItem(planks), conditionsFromItem(planks))
                 .criterion(hasItem(log), conditionsFromItem(log))
-                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
+                .offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(output)));
     }
 
     private void offerTableRecipe(RecipeExporter exporter, ItemConvertible planks, ItemConvertible log, ItemConvertible output) {
@@ -482,7 +509,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .group("tables")
                 .criterion(hasItem(planks), conditionsFromItem(planks))
                 .criterion(hasItem(log), conditionsFromItem(log))
-                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
+                .offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(output)));
     }
 
     private void offerShelfRecipe(RecipeExporter exporter, ItemConvertible slab, ItemConvertible output) {
@@ -491,7 +518,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .input('S', slab)
                 .group("shelves")
                 .criterion(hasItem(slab), conditionsFromItem(slab))
-                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
+                .offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(output)));
     }
 
     private void offerTrellisRecipe(RecipeExporter exporter, ItemConvertible slab, ItemConvertible output) {
@@ -502,7 +529,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .input('S', slab)
                 .group("trellises")
                 .criterion(hasItem(slab), conditionsFromItem(slab))
-                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
+                .offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(output)));
     }
 
     private void offerCupboardRecipe(RecipeExporter exporter, ItemConvertible planks, ItemConvertible slab, ItemConvertible output) {
@@ -515,7 +542,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .group("cupboards")
                 .criterion(hasItem(slab), conditionsFromItem(slab))
                 .criterion(hasItem(planks), conditionsFromItem(planks))
-                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
+                .offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(output)));
     }
 
     private void offerWallCupboardRecipe(RecipeExporter exporter, ItemConvertible planks, ItemConvertible slab, ItemConvertible output) {
@@ -528,7 +555,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .group("wall_cupboards")
                 .criterion(hasItem(slab), conditionsFromItem(slab))
                 .criterion(hasItem(planks), conditionsFromItem(planks))
-                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
+                .offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(output)));
     }
 
     private void offerWindowSillRecipe(RecipeExporter exporter, ItemConvertible slab, ItemConvertible output) {
@@ -540,7 +567,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .group("window_sills")
                 .criterion(hasItem(slab), conditionsFromItem(slab))
                 .criterion(hasItem(Items.FLOWER_POT), conditionsFromItem(Items.FLOWER_POT))
-                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
+                .offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(output)));
     }
 
     private void offerWallBookshelfRecipe(RecipeExporter exporter, ItemConvertible slab, ItemConvertible output) {
@@ -552,6 +579,6 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .group("wall_bookshelves")
                 .criterion(hasItem(slab), conditionsFromItem(slab))
                 .criterion(hasItem(Items.BOOK), conditionsFromItem(Items.BOOK))
-                .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(output)));
+                .offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(output)));
     }
 }

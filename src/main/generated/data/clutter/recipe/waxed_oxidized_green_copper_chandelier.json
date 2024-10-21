@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "clutter:oxidized_green_copper_chandelier"
+    },
+    {
+      "item": "minecraft:honeycomb"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "clutter:waxed_oxidized_green_copper_chandelier"
+  }
+}

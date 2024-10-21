@@ -42,7 +42,6 @@ public class EmperorPenguinEntity extends ClutterAnimalEntity {
         this.setPathfindingPenalty(PathNodeType.DANGER_FIRE, -1.0F);
         this.setPathfindingPenalty(PathNodeType.DAMAGE_FIRE, -1.0F);
         this.setPathfindingPenalty(PathNodeType.COCOA, -1.0F);
-        this.setStepHeight(1.0f);
     }
 
     public static DefaultAttributeContainer.Builder setAttributes() {
@@ -127,10 +126,11 @@ public class EmperorPenguinEntity extends ClutterAnimalEntity {
         return ModEntities.EMPEROR_PENGUIN.create(world);
     }
 
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(HAS_EGG, false);
-        this.dataTracker.startTracking(EGG_TIMER, 0);
+    @Override
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(HAS_EGG, false);
+        builder.add(EGG_TIMER, 0);
     }
 
     public void writeCustomDataToNbt(NbtCompound nbt) {

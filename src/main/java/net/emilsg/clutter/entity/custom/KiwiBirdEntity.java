@@ -92,12 +92,12 @@ public class KiwiBirdEntity extends ClutterAnimalEntity {
         this.goalSelector.add(8, new LookAroundGoal(this));
     }
 
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(HAS_EGG, false);
-        this.dataTracker.startTracking(EGG_TIMER, 0);
-        this.dataTracker.startTracking(IS_DANCING, false);
-
+    @Override
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(HAS_EGG, false);
+        builder.add(EGG_TIMER, 0);
+        builder.add(IS_DANCING, false);
     }
 
     public void writeCustomDataToNbt(NbtCompound nbt) {

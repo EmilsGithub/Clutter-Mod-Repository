@@ -19,9 +19,9 @@ public abstract class ClutterFishEntity extends FishEntity {
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(MOVING, false);
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(MOVING, false);
     }
 
     @Override

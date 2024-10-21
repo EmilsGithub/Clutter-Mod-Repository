@@ -13,6 +13,8 @@ import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.GenericContainerScreenHandler;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.sound.SoundCategory;
@@ -89,16 +91,6 @@ public class MailBoxInventoryBlockEntity extends LootableContainerBlockEntity {
     }
 
     @Override
-    protected DefaultedList<ItemStack> getInvStackList() {
-        return this.inventory;
-    }
-
-    @Override
-    protected void setInvStackList(DefaultedList<ItemStack> list) {
-        this.inventory = list;
-    }
-
-    @Override
     protected Text getContainerName() {
         return Text.translatable("container.clutter.mailbox");
     }
@@ -114,19 +106,33 @@ public class MailBoxInventoryBlockEntity extends LootableContainerBlockEntity {
     }
 
     @Override
-    protected void writeNbt(NbtCompound nbt) {
-        super.writeNbt(nbt);
-        if (!this.serializeLootTable(nbt)) {
-            Inventories.writeNbt(nbt, this.inventory);
-        }
+    protected DefaultedList<ItemStack> getHeldStacks() {
+        return this.inventory;
     }
 
     @Override
-    public void readNbt(NbtCompound nbt) {
-        super.readNbt(nbt);
+    protected void setHeldStacks(DefaultedList<ItemStack> inventory) {
+        this.inventory = inventory;
+    }
+
+    @Override
+    protected void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+        super.readNbt(nbt, registryLookup);
+        this.readInventoryNbt(nbt, registryLookup);
+    }
+
+    @Override
+    protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+        super.writeNbt(nbt, registryLookup);
+        if (!this.writeLootTable(nbt)) {
+            Inventories.writeNbt(nbt, this.inventory, false, registryLookup);
+        }
+    }
+
+    public void readInventoryNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
         this.inventory = DefaultedList.ofSize(this.size(), ItemStack.EMPTY);
-        if (!this.deserializeLootTable(nbt)) {
-            Inventories.readNbt(nbt, this.inventory);
+        if (!this.readLootTable(nbt) && nbt.contains("Items", NbtElement.LIST_TYPE)) {
+            Inventories.readNbt(nbt, this.inventory, registries);
         }
     }
 

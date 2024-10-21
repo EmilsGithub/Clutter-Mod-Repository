@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "clutter:oxidized_brown_copper_wall_candle"
+    },
+    {
+      "item": "minecraft:honeycomb"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "clutter:waxed_oxidized_brown_copper_wall_candle"
+  }
+}

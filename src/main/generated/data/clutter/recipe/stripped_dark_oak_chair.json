@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "chairs",
+  "key": {
+    "L": {
+      "item": "minecraft:stripped_dark_oak_log"
+    },
+    "P": {
+      "item": "minecraft:dark_oak_planks"
+    }
+  },
+  "pattern": [
+    "P  ",
+    "PP ",
+    "LL "
+  ],
+  "result": {
+    "count": 4,
+    "id": "clutter:stripped_dark_oak_chair"
+  }
+}

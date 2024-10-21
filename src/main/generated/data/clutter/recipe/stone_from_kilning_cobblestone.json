@@ -1,0 +1,13 @@
+{
+  "type": "clutter:kilning",
+  "category": "blocks",
+  "cookingtime": 50,
+  "experience": 1.0,
+  "group": "stone",
+  "ingredient": {
+    "item": "minecraft:cobblestone"
+  },
+  "result": {
+    "id": "minecraft:stone"
+  }
+}

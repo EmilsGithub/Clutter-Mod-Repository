@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.emilsg.clutter.util.ModProperties;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -71,10 +72,16 @@ public class SmallTargetBlock extends HorizontalFacingBlock {
             Block.createCuboidShape(14, 14, 11, 15, 16, 14),
             Block.createCuboidShape(1, 14, 11, 2, 16, 14));
 
+    public static final MapCodec<SmallTargetBlock> CODEC = createCodec(SmallTargetBlock::new);
 
     public SmallTargetBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.getDefaultState().with(UP, false));
+    }
+
+    @Override
+    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
+        return CODEC;
     }
 
     private static void spawnParticles(BlockState state, WorldAccess world, BlockPos pos) {
@@ -96,7 +103,8 @@ public class SmallTargetBlock extends HorizontalFacingBlock {
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+        Hand hand = player.getActiveHand();
         state = state.cycle(UP);
         world.setBlockState(pos, state, Block.NOTIFY_ALL);
         world.playSound(null, pos, state.get(UP) ? SoundEvents.BLOCK_WOODEN_TRAPDOOR_OPEN : SoundEvents.BLOCK_WOODEN_TRAPDOOR_CLOSE, SoundCategory.BLOCKS, 1.0F, 1.25f);

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "cupboards",
+  "key": {
+    "P": {
+      "item": "minecraft:oak_planks"
+    },
+    "S": {
+      "item": "minecraft:oak_slab"
+    }
+  },
+  "pattern": [
+    "PSP",
+    "PSP",
+    "PSP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "clutter:oak_cupboard"
+  }
+}

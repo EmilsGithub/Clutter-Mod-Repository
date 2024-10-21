@@ -4,6 +4,7 @@ import dev.emi.trinkets.api.SlotReference;
 import dev.emi.trinkets.api.TrinketComponent;
 import dev.emi.trinkets.api.TrinketsApi;
 import net.fabricmc.fabric.api.entity.event.v1.EntityElytraEvents;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ElytraItem;
 import net.minecraft.item.ItemStack;
@@ -60,10 +61,12 @@ public class TrinketsElytraUse {
     }
 
     private static void doElytraTick(LivingEntity entity, ItemStack itemStack) {
-        int nextRoll = entity.getRoll() + 1;
+        int nextRoll = entity.getFallFlyingTicks() + 1;
 
         if (!entity.getWorld().isClient && nextRoll % 10 == 0) {
-            if ((nextRoll / 10) % 2 == 0) itemStack.damage(1, entity, null);
+            if (nextRoll / 10 % 2 == 0) {
+                itemStack.damage(1, entity, EquipmentSlot.CHEST);
+            }
 
             entity.emitGameEvent(GameEvent.ELYTRA_GLIDE);
         }

@@ -1,16 +1,17 @@
 package net.emilsg.clutter.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.emilsg.clutter.block.entity.WallBookshelfInventoryBlockEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.client.item.TooltipContext;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
@@ -51,11 +52,18 @@ public class WallBookshelfBlock extends BlockWithEntity implements Waterloggable
     protected static final VoxelShape WEST_SHAPE_EMPTY = Block.createCuboidShape(0.0, 0.0, 0.0, 8.0, 4.0, 16.0);
     private static final BooleanProperty LIT = Properties.LIT;
     public static IntProperty CURRENT_MODEL = IntProperty.of("current_model", 0, MAX_MODEL);
+    public static final MapCodec<WallBookshelfBlock> CODEC = createCodec(WallBookshelfBlock::new);
+
 
 
     public WallBookshelfBlock(Settings settings) {
         super(settings.luminance(state -> state.get(LIT) ? 8 : 0));
         this.setDefaultState(this.getDefaultState().with(CURRENT_MODEL, 0).with(LIT, false).with(WATERLOGGED, false));
+    }
+
+    @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return CODEC;
     }
 
     private static void spawnCandleParticles(World world, Vec3d vec3d, Random random) {
@@ -137,8 +145,9 @@ public class WallBookshelfBlock extends BlockWithEntity implements Waterloggable
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         int i = state.get(CURRENT_MODEL);
+        Hand hand = player.getActiveHand();
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (world.isClient) {
             return ActionResult.SUCCESS;
@@ -194,9 +203,10 @@ public class WallBookshelfBlock extends BlockWithEntity implements Waterloggable
 
     }
 
-    public void appendTooltip(ItemStack stack, @Nullable BlockView world, List<Text> tooltip, TooltipContext context) {
+    @Override
+    public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType options) {
         tooltip.add(Text.translatable("block.clutter.cycle_blockstate_tooltip.tooltip").formatted(Formatting.BLUE));
-        super.appendTooltip(stack, world, tooltip, context);
+        super.appendTooltip(stack, context, tooltip, options);
     }
 
     @Override
@@ -216,14 +226,6 @@ public class WallBookshelfBlock extends BlockWithEntity implements Waterloggable
             return true;
         }
         return false;
-    }
-
-    @Override
-    public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
-        BlockEntity blockEntity;
-        if (itemStack.hasCustomName() && (blockEntity = world.getBlockEntity(pos)) instanceof WallBookshelfInventoryBlockEntity) {
-            ((WallBookshelfInventoryBlockEntity) blockEntity).setCustomName(itemStack.getName());
-        }
     }
 
     @Override

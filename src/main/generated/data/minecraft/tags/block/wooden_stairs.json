@@ -1,0 +1,28 @@
+{
+  "values": [
+    "clutter:redwood_stairs",
+    "clutter:redwood_mosaic_stairs",
+    "minecraft:oak_stairs",
+    "clutter:oak_mosaic_stairs",
+    "minecraft:birch_stairs",
+    "clutter:birch_mosaic_stairs",
+    "minecraft:jungle_stairs",
+    "clutter:jungle_mosaic_stairs",
+    "minecraft:acacia_stairs",
+    "clutter:acacia_mosaic_stairs",
+    "minecraft:spruce_stairs",
+    "clutter:spruce_mosaic_stairs",
+    "minecraft:dark_oak_stairs",
+    "clutter:dark_oak_mosaic_stairs",
+    "minecraft:mangrove_stairs",
+    "clutter:mangrove_mosaic_stairs",
+    "minecraft:crimson_stairs",
+    "clutter:crimson_mosaic_stairs",
+    "minecraft:warped_stairs",
+    "clutter:warped_mosaic_stairs",
+    "minecraft:cherry_stairs",
+    "clutter:cherry_mosaic_stairs",
+    "minecraft:bamboo_stairs",
+    "minecraft:bamboo_mosaic_stairs"
+  ]
+}

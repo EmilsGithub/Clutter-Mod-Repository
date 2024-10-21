@@ -21,7 +21,7 @@ public class ButterflyWanderOverworldGoal extends Goal {
 
     @Override
     public boolean canStart() {
-        return butterfly.getWorld().getDimensionKey().equals(DimensionTypes.OVERWORLD) && butterfly.getNavigation().isIdle() && butterfly.getRandom().nextInt(10) == 0;
+        return butterfly.getWorld().getDimensionEntry() == (DimensionTypes.OVERWORLD) && butterfly.getNavigation().isIdle() && butterfly.getRandom().nextInt(10) == 0;
     }
 
     @Override

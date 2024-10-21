@@ -6,13 +6,13 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.passive.TameableEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.EntityView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class ClutterTameableEntity extends TameableEntity {
+public abstract class ClutterTameableEntity extends TameableEntity {
     private static final TrackedData<Boolean> MOVING = DataTracker.registerData(ClutterTameableEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
     protected ClutterTameableEntity(EntityType<? extends TameableEntity> entityType, World world) {
@@ -20,9 +20,9 @@ public class ClutterTameableEntity extends TameableEntity {
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(MOVING, false);
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(MOVING, false);
     }
 
     @Override
@@ -35,17 +35,15 @@ public class ClutterTameableEntity extends TameableEntity {
         super.tickMovement();
     }
 
+    @Override
+    public abstract boolean isBreedingItem(ItemStack stack);
+
     public boolean isMoving() {
         return this.dataTracker.get(MOVING);
     }
 
     public void setMoving(boolean moving) {
         this.dataTracker.set(MOVING, moving);
-    }
-
-    @Override
-    public EntityView method_48926() {
-        return this.getWorld();
     }
 
     @Nullable

@@ -36,6 +36,6 @@ public class ModItemTags {
     }
 
     private static TagKey<Item> create(String path, String namespace) {
-        return TagKey.of(Registries.ITEM.getKey(), new Identifier(namespace, path));
+        return TagKey.of(Registries.ITEM.getKey(), Identifier.of(namespace, path));
     }
 }

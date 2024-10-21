@@ -1,0 +1,13 @@
+{
+  "type": "clutter:kilning",
+  "category": "blocks",
+  "cookingtime": 50,
+  "experience": 1.0,
+  "group": "deepslate",
+  "ingredient": {
+    "item": "minecraft:cobbled_deepslate"
+  },
+  "result": {
+    "id": "minecraft:deepslate"
+  }
+}

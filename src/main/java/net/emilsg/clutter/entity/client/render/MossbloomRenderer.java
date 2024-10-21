@@ -18,11 +18,11 @@ import java.util.Map;
 
 public class MossbloomRenderer extends MobEntityRenderer<MossbloomEntity, MossbloomModel<MossbloomEntity>> {
     public static final Map<MossbloomVariant, Identifier> LOCATION_BY_VARIANT = Util.make(Maps.newEnumMap(MossbloomVariant.class), (map) -> {
-        map.put(MossbloomVariant.M, new Identifier(Clutter.MOD_ID, "textures/entity/mossbloom_m.png"));
-        map.put(MossbloomVariant.F, new Identifier(Clutter.MOD_ID, "textures/entity/mossbloom_f.png"));
+        map.put(MossbloomVariant.M, Identifier.of(Clutter.MOD_ID, "textures/entity/mossbloom_m.png"));
+        map.put(MossbloomVariant.F, Identifier.of(Clutter.MOD_ID, "textures/entity/mossbloom_f.png"));
     });
 
-    public static final Identifier GLOW_ID = new Identifier(Clutter.MOD_ID, "textures/entity/mossbloom_m_glowmask.png");
+    public static final Identifier GLOW_ID = Identifier.of(Clutter.MOD_ID, "textures/entity/mossbloom_m_glowmask.png");
 
     public MossbloomRenderer(EntityRendererFactory.Context ctx) {
         super(ctx, new MossbloomModel<>(ctx.getPart(ModModelLayers.MOSSBLOOM)), 0.5f);

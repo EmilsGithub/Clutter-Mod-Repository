@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.emilsg.clutter.util.ModProperties;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -45,9 +46,16 @@ public class TallCurtainBlock extends HorizontalFacingBlock implements Waterlogg
     protected static final VoxelShape EAST_SHAPE = Block.createCuboidShape(14.0, 0.0, 0.0, 16.0, 16.0, 16.0);
     protected static final VoxelShape WEST_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 2.0, 16.0, 16.0);
 
+    public static final MapCodec<TallCurtainBlock> CODEC = createCodec(TallCurtainBlock::new);
+
     public TallCurtainBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.stateManager.getDefaultState().with(WATERLOGGED, false).with(FACING, Direction.NORTH).with(HALF, DoubleBlockHalf.UPPER).with(OPEN, false).with(DIRECTION_SHAPE, DirectionShape.ALONE));
+    }
+
+    @Override
+    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
+        return CODEC;
     }
 
     protected static void onBreakInCreative(World world, BlockPos pos, BlockState state, PlayerEntity player) {
@@ -72,7 +80,8 @@ public class TallCurtainBlock extends HorizontalFacingBlock implements Waterlogg
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+        Hand hand = player.getActiveHand();
         if (!world.isClient && hand.equals(Hand.MAIN_HAND) && player.getStackInHand(hand).isEmpty()) {
             world.playSound(null, pos, SoundEvents.BLOCK_WOOL_STEP, SoundCategory.BLOCKS, 1.0f, 1.0f);
 
@@ -197,7 +206,7 @@ public class TallCurtainBlock extends HorizontalFacingBlock implements Waterlogg
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
-    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+    public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         if (!world.isClient) {
             if (player.isCreative()) {
                 onBreakInCreative(world, pos, state, player);
@@ -206,7 +215,7 @@ public class TallCurtainBlock extends HorizontalFacingBlock implements Waterlogg
             }
         }
 
-        super.onBreak(world, pos, state, player);
+        return super.onBreak(world, pos, state, player);
     }
 
     public void afterBreak(World world, PlayerEntity player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack tool) {

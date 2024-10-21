@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:bone"
+    },
+    "S": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    " C ",
+    "CSC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "clutter:viking_helmet"
+  }
+}

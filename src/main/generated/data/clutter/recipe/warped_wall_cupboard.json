@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "wall_cupboards",
+  "key": {
+    "P": {
+      "item": "minecraft:warped_planks"
+    },
+    "S": {
+      "item": "minecraft:warped_slab"
+    }
+  },
+  "pattern": [
+    "PS ",
+    "PS ",
+    "PS "
+  ],
+  "result": {
+    "count": 2,
+    "id": "clutter:warped_wall_cupboard"
+  }
+}

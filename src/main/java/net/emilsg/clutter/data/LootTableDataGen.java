@@ -7,7 +7,6 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.enums.DoubleBlockHalf;
-import net.minecraft.data.server.loottable.BlockLootTableGenerator;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.loot.LootPool;
@@ -16,14 +15,17 @@ import net.minecraft.loot.entry.AlternativeEntry;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.state.property.Properties;
+
+import java.util.concurrent.CompletableFuture;
 
 public class LootTableDataGen extends FabricBlockLootTableProvider {
     public static final float[] SAPLING_DROP_CHANCE = new float[]{0.05F, 0.0625F, 0.083333336F, 0.1F};
     public static final float[] LEAVES_STICK_DROP_CHANCE = new float[]{0.02F, 0.022222223F, 0.025F, 0.033333335F, 0.1F};
 
-    public LootTableDataGen(FabricDataOutput dataOutput) {
-        super(dataOutput);
+    public LootTableDataGen(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+        super(dataOutput, registryLookup);
     }
 
     @Override
@@ -42,7 +44,7 @@ public class LootTableDataGen extends FabricBlockLootTableProvider {
         this.addDrop(ModBlocks.NAUTILUS_SHELL_BLOCK, Items.NAUTILUS_SHELL);
 
         this.addDrop(ModBlocks.OVERGROWN_PACKED_MUD, this.silkTouchDrops(ModBlocks.OVERGROWN_PACKED_MUD, Blocks.PACKED_MUD));
-        this.addDrop(ModBlocks.GIANT_FERN, (block) -> this.tallGrassDrops(block, Blocks.LARGE_FERN));
+        this.addDrop(ModBlocks.GIANT_FERN, (block) -> this.tallPlantDrops(block, Blocks.LARGE_FERN));
 
         this.addPottedPlantGroupDrops(
                 ModBlocks.POTTED_SMALL_BLUE_LUPINE,
@@ -224,11 +226,15 @@ public class LootTableDataGen extends FabricBlockLootTableProvider {
     }
 
     private void coralBlockDrops(Block coralBlock, Block deadCoralBlock) {
-        LootTable.Builder tableBuilder = LootTable.builder().pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1)).with(AlternativeEntry.builder(ItemEntry.builder(coralBlock).conditionally(WITH_SILK_TOUCH), ItemEntry.builder(deadCoralBlock).conditionally(WITHOUT_SILK_TOUCH))));
+        LootTable.Builder tableBuilder = LootTable.builder().pool(LootPool.builder()
+                .rolls(ConstantLootNumberProvider.create(1))
+                .with(AlternativeEntry.builder(ItemEntry.builder(coralBlock)
+                        .conditionally(createSilkTouchCondition()), ItemEntry.builder(deadCoralBlock)
+                        .conditionally(createWithoutSilkTouchCondition()))));
         this.addDrop(coralBlock, tableBuilder);
     }
 
     public LootTable.Builder silkTouchDrops(Block dropWithSilkTouch, Block drop) {
-        return BlockLootTableGenerator.dropsWithSilkTouch(dropWithSilkTouch, this.applyExplosionDecay(dropWithSilkTouch, ItemEntry.builder(drop)));
+        return this.dropsWithSilkTouch(dropWithSilkTouch, this.applyExplosionDecay(dropWithSilkTouch, ItemEntry.builder(drop)));
     }
 }

@@ -22,7 +22,7 @@ public class Meltdown extends StatusEffect {
     }
 
     @Override
-    public void applyUpdateEffect(LivingEntity entity, int amplifier) {
+    public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
         World world = entity.getWorld();
         int duration = Objects.requireNonNull(entity.getStatusEffect(ModEffects.MELTDOWN)).getDuration();
 
@@ -57,7 +57,7 @@ public class Meltdown extends StatusEffect {
             }
         }
 
-        super.applyUpdateEffect(entity, amplifier);
+        return super.applyUpdateEffect(entity, amplifier);
     }
 
     @Override

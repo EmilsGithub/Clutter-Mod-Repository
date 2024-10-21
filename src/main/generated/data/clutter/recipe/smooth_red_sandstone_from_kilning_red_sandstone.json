@@ -1,0 +1,13 @@
+{
+  "type": "clutter:kilning",
+  "category": "blocks",
+  "cookingtime": 50,
+  "experience": 1.0,
+  "group": "smooth_red_sandstone",
+  "ingredient": {
+    "item": "minecraft:red_sandstone"
+  },
+  "result": {
+    "id": "minecraft:smooth_red_sandstone"
+  }
+}

@@ -18,7 +18,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class KilningCategory implements DisplayCategory<BasicDisplay> {
-    public static final Identifier TEXTURE = new Identifier(Clutter.MOD_ID, "textures/gui/container/brick_kiln_rei.png");
+    public static final Identifier TEXTURE = Identifier.of(Clutter.MOD_ID, "textures/gui/container/brick_kiln_rei.png");
     public static final CategoryIdentifier<KilningDisplay> KILNING = CategoryIdentifier.of(Clutter.MOD_ID, "kilning");
 
     @Override
@@ -35,6 +35,7 @@ public class KilningCategory implements DisplayCategory<BasicDisplay> {
     public Renderer getIcon() {
         return EntryStacks.of(ModBlocks.BRICK_KILN.asItem().getDefaultStack());
     }
+
 
     @Override
     public List<Widget> setupDisplay(BasicDisplay display, Rectangle bounds) {

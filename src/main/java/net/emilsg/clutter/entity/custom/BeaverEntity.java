@@ -45,6 +45,7 @@ import java.util.List;
 
 public class BeaverEntity extends ClutterAnimalEntity {
     private static final TrackedData<BlockPos> HOME_POS = DataTracker.registerData(BeaverEntity.class, TrackedDataHandlerRegistry.BLOCK_POS);
+    private final int MAX_AIR = 4800;
 
     private static final Ingredient BREEDING_INGREDIENT = getIngredientWithName("sapling");
 
@@ -60,7 +61,6 @@ public class BeaverEntity extends ClutterAnimalEntity {
         this.setPathfindingPenalty(PathNodeType.DANGER_FIRE, -1.0F);
         this.setPathfindingPenalty(PathNodeType.DAMAGE_FIRE, -1.0F);
         this.setPathfindingPenalty(PathNodeType.COCOA, -1.0F);
-        this.setStepHeight(1.0f);
         this.moveControl = new BeaverMoveControl(this);
         this.setPathfindingPenalty(PathNodeType.WATER, 0.0F);
         this.waterNavigation = new SwimNavigation(this, world);
@@ -87,7 +87,8 @@ public class BeaverEntity extends ClutterAnimalEntity {
                 .add(EntityAttributes.GENERIC_ATTACK_SPEED, 0.5f)
                 .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.1f)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0f)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0f);
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0f)
+                .add(EntityAttributes.GENERIC_STEP_HEIGHT, 1.0f);
     }
 
     public static boolean isValidNaturalSpawn(EntityType<? extends AnimalEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
@@ -131,9 +132,10 @@ public class BeaverEntity extends ClutterAnimalEntity {
         this.limbAnimator.updateLimbs(f, 0.5F);
     }
 
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(HOME_POS, BlockPos.ORIGIN);
+    @Override
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(HOME_POS, BlockPos.ORIGIN);
     }
 
     BlockPos getHomePos() {
@@ -181,9 +183,20 @@ public class BeaverEntity extends ClutterAnimalEntity {
     }
 
     @Override
-    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
+    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData) {
+        this.setAir(this.getMaxAir());
         this.setHomePos(this.getBlockPos());
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
+        return super.initialize(world, difficulty, spawnReason, entityData);
+    }
+
+    @Override
+    public int getMaxAir() {
+        return MAX_AIR;
+    }
+
+    @Override
+    protected int getNextAirOnLand(int air) {
+        return this.getMaxAir();
     }
 
     @Override
@@ -211,7 +224,7 @@ public class BeaverEntity extends ClutterAnimalEntity {
         }
 
         String strippedPath = itemID.replace(":", ":stripped_");
-        Identifier strippedID = new Identifier(strippedPath);
+        Identifier strippedID = Identifier.of(strippedPath);
         if (Registries.ITEM.containsId(strippedID)) {
             this.dropStack(new ItemStack(Registries.ITEM.get(strippedID)));
             this.getWorld().addBlockBreakParticles(this.getBlockPos(), heldBlock.getDefaultState());
@@ -235,10 +248,7 @@ public class BeaverEntity extends ClutterAnimalEntity {
         return false;
     }
 
-    @Override
-    public boolean canBreatheInWater() {
-        return true;
-    }
+
 
     protected EntityNavigation createNavigation(World world) {
         return new BeaverSwimNavigation(this, world);

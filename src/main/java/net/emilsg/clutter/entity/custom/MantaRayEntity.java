@@ -61,7 +61,7 @@ public class MantaRayEntity extends ClutterWaterEntity {
     }
 
     @Nullable
-    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
+    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData) {
         this.setPitch(0.0F);
         float scaledSize;
         float chance = random.nextFloat();
@@ -72,13 +72,13 @@ public class MantaRayEntity extends ClutterWaterEntity {
         else scaledSize = 1.5f;
 
         this.setSize(scaledSize);
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
+        return super.initialize(world, difficulty, spawnReason, entityData);
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(SIZE, 0f);
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(SIZE, 0f);
     }
 
     public static boolean isValidNaturalSpawn(EntityType<? extends WaterCreatureEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
@@ -92,10 +92,6 @@ public class MantaRayEntity extends ClutterWaterEntity {
     public void setSize(float size) {
         this.dataTracker.set(SIZE, MathHelper.clamp(size, 0f, 1.5f));
         this.calculateDimensions();
-    }
-
-    protected float getActiveEyeHeight(EntityPose pose, EntityDimensions dimensions) {
-        return dimensions.height * 0.4F;
     }
 
     public void onTrackedDataSet(TrackedData<?> data) {
@@ -117,13 +113,8 @@ public class MantaRayEntity extends ClutterWaterEntity {
     }
 
     @Override
-    public EntityDimensions getDimensions(EntityPose pose) {
-        return super.getDimensions(pose).scaled(0.65f * this.getSize());
-    }
-
-    @Override
-    public EntityGroup getGroup() {
-        return EntityGroup.AQUATIC;
+    public EntityDimensions getBaseDimensions(EntityPose pose) {
+        return super.getBaseDimensions(pose).scaled(0.65f * this.getSize());
     }
 
     private void setupAnimationStates() {

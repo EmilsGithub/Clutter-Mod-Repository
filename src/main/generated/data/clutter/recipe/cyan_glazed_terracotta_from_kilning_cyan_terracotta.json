@@ -1,0 +1,13 @@
+{
+  "type": "clutter:kilning",
+  "category": "blocks",
+  "cookingtime": 50,
+  "experience": 1.0,
+  "group": "cyan_glazed_terracotta",
+  "ingredient": {
+    "item": "minecraft:cyan_terracotta"
+  },
+  "result": {
+    "id": "minecraft:cyan_glazed_terracotta"
+  }
+}

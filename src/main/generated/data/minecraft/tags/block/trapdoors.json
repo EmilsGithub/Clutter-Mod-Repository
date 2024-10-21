@@ -1,0 +1,14 @@
+{
+  "values": [
+    "clutter:silver_trapdoor",
+    "clutter:golden_trapdoor",
+    "clutter:copper_trapdoor",
+    "clutter:exposed_copper_trapdoor",
+    "clutter:weathered_copper_trapdoor",
+    "clutter:oxidized_copper_trapdoor",
+    "clutter:waxed_copper_trapdoor",
+    "clutter:waxed_exposed_copper_trapdoor",
+    "clutter:waxed_weathered_copper_trapdoor",
+    "clutter:waxed_oxidized_copper_trapdoor"
+  ]
+}

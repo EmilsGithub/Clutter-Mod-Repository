@@ -3,6 +3,7 @@ package net.emilsg.clutter.block.custom;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Waterloggable;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.fluid.FluidState;
@@ -107,7 +108,8 @@ public class WaterloggableLitBlock extends Block implements Waterloggable {
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+        Hand hand = player.getActiveHand();
         ItemStack stackInHand = player.getStackInHand(hand);
 
         if (player.getAbilities().allowModifyWorld && !state.get(WATERLOGGED)) {
@@ -115,7 +117,7 @@ public class WaterloggableLitBlock extends Block implements Waterloggable {
                 world.playSound(null, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0f, world.getRandom().nextFloat() * 0.4F + 0.8F);
                 setLit(world, state, pos, true, player);
                 if (!player.getAbilities().creativeMode)
-                    player.getStackInHand(hand).damage(1, player, playerEntity -> playerEntity.sendToolBreakStatus(hand));
+                    stackInHand.damage(1, player, LivingEntity.getSlotForHand(hand));
                 return ActionResult.success(world.isClient);
             } else if (stackInHand.isOf(Items.FIRE_CHARGE) && !state.get(LIT)) {
                 world.playSound(null, pos, SoundEvents.ITEM_FIRECHARGE_USE, SoundCategory.BLOCKS, 1.0F, (world.getRandom().nextFloat() - world.getRandom().nextFloat()) * 0.2F + 1.0F);
@@ -126,8 +128,9 @@ public class WaterloggableLitBlock extends Block implements Waterloggable {
                 extinguish(player, state, world, pos);
                 return ActionResult.success(world.isClient);
             }
-            return super.onUse(state, world, pos, player, hand, hit);
+            return super.onUse(state, world, pos, player, hit);
         }
-        return super.onUse(state, world, pos, player, hand, hit);
+        return super.onUse(state, world, pos, player, hit);
     }
+
 }

@@ -69,7 +69,8 @@ public class TrellisBlock extends Block implements Waterloggable, ICutoutRendera
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+        Hand hand = player.getActiveHand();
         TrellisBlock.Plant i = state.get(PLANT);
         ItemStack stack = player.getStackInHand(hand);
 
@@ -185,7 +186,7 @@ public class TrellisBlock extends Block implements Waterloggable, ICutoutRendera
     }
 
     @Override
-    public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
+    protected boolean canPathfindThrough(BlockState state, NavigationType type) {
         return false;
     }
 

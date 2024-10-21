@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "clutter:weathered_reinforced_copper_glass"
+    },
+    {
+      "item": "minecraft:honeycomb"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "clutter:waxed_weathered_reinforced_copper_glass"
+  }
+}

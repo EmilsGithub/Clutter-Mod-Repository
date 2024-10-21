@@ -13,7 +13,7 @@ import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsage;
 import net.minecraft.item.Items;
-import net.minecraft.sound.SoundCategory;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
@@ -33,6 +33,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class BowlBlock extends Block implements Waterloggable {
@@ -54,29 +56,30 @@ public class BowlBlock extends Block implements Waterloggable {
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         boolean i = state.get(FILLED);
+        Hand hand = player.getActiveHand();
         int j = state.get(CURRENT_MODEL);
         if (!world.isClient && !player.isSneaking() && hand.equals(Hand.MAIN_HAND) && player.getStackInHand(hand).isEmpty()) {
             if (i && j == 1) {
                 world.setBlockState(pos, state.with(CURRENT_MODEL, 0).with(FILLED, false), Block.NOTIFY_ALL);
-                player.playSound(SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 1.0F, 1.0F);
+                player.playSound(SoundEvents.ENTITY_PLAYER_BURP, 1.0F, 1.0F);
                 player.getHungerManager().add(6, 0.0f);
             } else if (i && j == 2) {
                 world.setBlockState(pos, state.with(CURRENT_MODEL, 0).with(FILLED, false), Block.NOTIFY_ALL);
-                player.playSound(SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 1.0F, 1.0F);
+                player.playSound(SoundEvents.ENTITY_PLAYER_BURP, 1.0F, 1.0F);
                 player.getHungerManager().add(6, 0.0f);
             } else if (i && j == 3) {
                 world.setBlockState(pos, state.with(CURRENT_MODEL, 0).with(FILLED, false), Block.NOTIFY_ALL);
-                player.playSound(SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 1.0F, 1.0F);
+                player.playSound(SoundEvents.ENTITY_PLAYER_BURP, 1.0F, 1.0F);
                 player.getHungerManager().add(10, 0.0f);
             } else if (i && j == 4) {
                 world.setBlockState(pos, state.with(CURRENT_MODEL, 0).with(FILLED, false), Block.NOTIFY_ALL);
-                player.playSound(SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 1.0F, 1.0F);
+                player.playSound(SoundEvents.ENTITY_PLAYER_BURP, 1.0F, 1.0F);
                 player.getHungerManager().add(4, 0.0f);
             } else if (i && j == 5) {
                 world.setBlockState(pos, state.with(CURRENT_MODEL, 0).with(FILLED, false), Block.NOTIFY_ALL);
-                player.playSound(SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 1.0F, 1.0F);
+                player.playSound(SoundEvents.ENTITY_PLAYER_BURP, 1.0F, 1.0F);
                 giveRandomEffect(player);
                 player.getHungerManager().add(6, 0.0f);
             } else if (!i || j == 0) {
@@ -114,25 +117,26 @@ public class BowlBlock extends Block implements Waterloggable {
             }
             return ActionResult.SUCCESS;
         }
-        return ActionResult.PASS;
-    }
+        return ActionResult.PASS;    }
+
 
     public void giveRandomEffect(PlayerEntity player) {
         Random random = new Random();
         int effectIndex = random.nextInt(9);
-        StatusEffect[] effects = {
-                StatusEffects.SATURATION,
-                StatusEffects.NIGHT_VISION,
-                StatusEffects.FIRE_RESISTANCE,
-                StatusEffects.BLINDNESS,
-                StatusEffects.WEAKNESS,
-                StatusEffects.REGENERATION,
-                StatusEffects.JUMP_BOOST,
-                StatusEffects.POISON,
-                StatusEffects.WITHER
-        };
-        StatusEffect effect = effects[effectIndex];
-        int duration = effect == StatusEffects.SATURATION ? 2 : 100; // 0.1 seconds or 5 seconds in ticks
+        List<RegistryEntry<StatusEffect>> statusEffects = new ArrayList<>();
+
+        statusEffects.add(StatusEffects.SATURATION);
+        statusEffects.add(StatusEffects.NIGHT_VISION);
+        statusEffects.add(StatusEffects.FIRE_RESISTANCE);
+        statusEffects.add(StatusEffects.BLINDNESS);
+        statusEffects.add(StatusEffects.WEAKNESS);
+        statusEffects.add(StatusEffects.REGENERATION);
+        statusEffects.add(StatusEffects.JUMP_BOOST);
+        statusEffects.add(StatusEffects.POISON);
+        statusEffects.add(StatusEffects.WITHER);
+
+        RegistryEntry<StatusEffect> effect = statusEffects.get(effectIndex);
+        int duration = effect == StatusEffects.SATURATION ? 2 : 100;
         int amplifier = 0;
         StatusEffectInstance effectInstance = new StatusEffectInstance(effect, duration, amplifier);
         player.addStatusEffect(effectInstance);

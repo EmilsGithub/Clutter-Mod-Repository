@@ -79,7 +79,8 @@ public class FishTankBlock extends Block implements Waterloggable, ICutoutRender
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+        Hand hand = player.getActiveHand();
         ItemStack stackInHand = player.getStackInHand(hand);
         InteriorType currentType = state.get(INTERIOR);
         InteriorType newType = getTypeFromItemStack(stackInHand);
@@ -107,7 +108,7 @@ public class FishTankBlock extends Block implements Waterloggable, ICutoutRender
     }
 
     @Override
-    public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
+    protected boolean canPathfindThrough(BlockState state, NavigationType type) {
         return true;
     }
 

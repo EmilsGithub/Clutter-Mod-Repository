@@ -1,22 +1,24 @@
 package net.emilsg.clutter.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.emilsg.clutter.block.entity.ShelfInventoryBlockEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.BlockMirror;
+import net.minecraft.util.BlockRotation;
+import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -36,10 +38,16 @@ public class ShelfBlock extends BlockWithEntity implements Waterloggable {
     protected static final VoxelShape EAST_SHAPE = Block.createCuboidShape(8.0, 3.0, 0.0, 16.0, 7.0, 16.0);
     protected static final VoxelShape WEST_SHAPE = Block.createCuboidShape(0.0, 3.0, 0.0, 8.0, 7.0, 16.0);
 
+    public static final MapCodec<ShelfBlock> CODEC = createCodec(ShelfBlock::new);
 
     public ShelfBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.getDefaultState().with(WATERLOGGED, false));
+    }
+
+    @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return CODEC;
     }
 
 
@@ -55,7 +63,7 @@ public class ShelfBlock extends BlockWithEntity implements Waterloggable {
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         if (world.isClient) {
             return ActionResult.SUCCESS;
         }
@@ -109,14 +117,6 @@ public class ShelfBlock extends BlockWithEntity implements Waterloggable {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
-        BlockEntity blockEntity;
-        if (itemStack.hasCustomName() && (blockEntity = world.getBlockEntity(pos)) instanceof ShelfInventoryBlockEntity) {
-            ((ShelfInventoryBlockEntity) blockEntity).setCustomName(itemStack.getName());
-        }
     }
 
     @Override

@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.emilsg.clutter.block.ModBlockEntities;
 import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.block.entity.BonfireBlockEntity;
@@ -7,15 +8,16 @@ import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.client.item.TooltipContext;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.ShovelItem;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -26,7 +28,6 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.Hand;
 import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -80,9 +81,16 @@ public class BonfireBlock extends BlockWithEntity {
             Direction.WEST
     };
 
+    public static final MapCodec<BonfireBlock> CODEC = createCodec(BonfireBlock::new);
+
     public BonfireBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.stateManager.getDefaultState().with(LIT, true));
+    }
+
+    @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return CODEC;
     }
 
     public static boolean checkAirAround(BlockPos pos, World world, boolean checkBonfireBlocks) {
@@ -164,7 +172,7 @@ public class BonfireBlock extends BlockWithEntity {
     }
 
     @Override
-    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+    public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         if (!world.isClient() && !player.getAbilities().creativeMode) {
             super.onBreak(world, pos, state, player);
 
@@ -210,16 +218,17 @@ public class BonfireBlock extends BlockWithEntity {
         } else {
             super.onBreak(world, pos, state, player);
         }
+        return state;
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        ItemStack itemInHand = player.getStackInHand(hand);
+    protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+        ItemStack itemInHand = player.getStackInHand(player.getActiveHand());
         if (player.getAbilities().allowModifyWorld && itemInHand.getItem() == Items.FLINT_AND_STEEL && !state.get(LIT)) {
             setLitStateForConnectedBonfires(world, pos, true, player);
             world.playSound(null, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0f, 1.0f);
             if (!player.getAbilities().creativeMode) {
-                itemInHand.damage(1, player, (playerEntity) -> playerEntity.sendToolBreakStatus(hand));
+                itemInHand.damage(1, player, EquipmentSlot.MAINHAND);
             }
             return ActionResult.SUCCESS;
         } else if (player.getAbilities().allowModifyWorld && itemInHand.getItem() == Items.FIRE_CHARGE && !state.get(LIT)) {
@@ -233,7 +242,7 @@ public class BonfireBlock extends BlockWithEntity {
             setLitStateForConnectedBonfires(world, pos, false, player);
             world.playSound(null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1.0f, 0.8f);
             if (!player.getAbilities().creativeMode) {
-                itemInHand.damage(1, player, (playerEntity) -> playerEntity.sendToolBreakStatus(hand));
+                itemInHand.damage(1, player, EquipmentSlot.MAINHAND);
             }
             return ActionResult.SUCCESS;
         }
@@ -263,7 +272,7 @@ public class BonfireBlock extends BlockWithEntity {
     }
 
     @Override
-    public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
+    protected boolean canPathfindThrough(BlockState state, NavigationType type) {
         return false;
     }
 
@@ -277,10 +286,15 @@ public class BonfireBlock extends BlockWithEntity {
         placeBonfireBlocks(pos, world);
     }
 
-    public void appendTooltip(ItemStack stack, @Nullable BlockView world, List<Text> tooltip, TooltipContext context) {
+    public void appendTooltip(ItemStack stack, @Nullable BlockView world, List<Text> tooltip, Item.TooltipContext context) {
+
+    }
+
+    @Override
+    public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType options) {
         tooltip.add(Text.translatable("block.clutter.3x2x3_area_tooltip.tooltip").formatted(Formatting.BLUE));
         tooltip.add(Text.translatable("block.clutter.not_next_to_tooltip.tooltip").formatted(Formatting.BLUE));
-        super.appendTooltip(stack, world, tooltip, context);
+        super.appendTooltip(stack, context, tooltip, options);
     }
 
     @Override
@@ -307,7 +321,7 @@ public class BonfireBlock extends BlockWithEntity {
     }
 
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        if (state.get(LIT) && entity instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity) entity)) {
+        if (state.get(LIT) && entity instanceof LivingEntity) {
             entity.damage(world.getDamageSources().inFire(), 2);
         }
     }

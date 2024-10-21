@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom.plushies;
 
+import com.mojang.serialization.MapCodec;
 import net.emilsg.clutter.util.ModItemTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -35,8 +36,16 @@ public class SheepPlushieBlock extends AbstractPlushieBlock {
         builder.add(FACING, WATERLOGGED, COLOR);
     }
 
+    public static final MapCodec<SheepPlushieBlock> CODEC = createCodec(SheepPlushieBlock::new);
+
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    protected MapCodec<? extends AbstractPlushieBlock> getCodec() {
+        return CODEC;
+    }
+
+    @Override
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+        Hand hand = player.getActiveHand();
         double random = Math.random();
         ItemStack stack = player.getStackInHand(hand);
 

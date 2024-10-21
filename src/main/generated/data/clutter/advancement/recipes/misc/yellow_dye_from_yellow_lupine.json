@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "clutter:yellow_dye_from_yellow_lupine"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_yellow_lupine": {
+      "conditions": {
+        "items": [
+          {
+            "items": "clutter:yellow_lupine"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_yellow_lupine"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "clutter:yellow_dye_from_yellow_lupine"
+    ]
+  }
+}

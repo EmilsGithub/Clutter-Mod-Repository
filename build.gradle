@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.6-SNAPSHOT'
+	id 'fabric-loom' version '1.8-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -59,8 +59,8 @@ dependencies {
 	modCompileOnly "dev.emi:trinkets:${project.trinkets_version}"
 
 	// REI. Optional
-	modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:${project.rei_version}"
-	modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}"
+	modCompileOnly "me.shedaniel:RoughlyEnoughItems-fabric:$project.rei_version"
+	modCompileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:$project.rei_version"
 
 	// Uncomment the following line to enable the deprecated Fabric API modules.
 	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.
@@ -77,7 +77,7 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
-	it.options.release = 17
+	it.options.release = 21
 }
 
 java {

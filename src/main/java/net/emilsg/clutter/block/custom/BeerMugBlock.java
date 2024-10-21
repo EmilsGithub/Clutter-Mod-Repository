@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.emilsg.clutter.item.ModItems;
 import net.minecraft.block.*;
 import net.minecraft.item.ItemPlacementContext;
@@ -14,9 +15,13 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Map;
+
 public class BeerMugBlock extends HorizontalFacingBlock {
     protected static final VoxelShape SHAPE = VoxelShapes.union(
             Block.createCuboidShape(5.0, 0.0, 5.0, 11.0, 7.0, 11.0));
+
+    public static final MapCodec<BeerMugBlock> CODEC = createCodec(BeerMugBlock::new);
 
 
     public BeerMugBlock(Settings settings) {
@@ -24,7 +29,12 @@ public class BeerMugBlock extends HorizontalFacingBlock {
     }
 
     @Override
-    public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
+    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
+        return CODEC;
+    }
+
+    @Override
+    public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state) {
         return new ItemStack(ModItems.BEER_MUG);
     }
 

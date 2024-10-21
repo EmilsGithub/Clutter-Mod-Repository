@@ -6,16 +6,17 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.world.World;
 
 public class FoodWithEffectItem extends Item {
-    private final StatusEffect effect;
+    private final RegistryEntry<StatusEffect> effect;
     private final int duration;
     private final int amplifier;
     private final int useTimeInTicks;
     private final int cooldownInTicks;
 
-    public FoodWithEffectItem(Settings settings, StatusEffect effect, int duration, int amplifier, int useTimeInTicks, int cooldownInTicks) {
+    public FoodWithEffectItem(Settings settings, RegistryEntry<StatusEffect> effect, int duration, int amplifier, int useTimeInTicks, int cooldownInTicks) {
         super(settings);
         this.effect = effect;
         this.duration = duration;
@@ -34,7 +35,7 @@ public class FoodWithEffectItem extends Item {
     }
 
     @Override
-    public int getMaxUseTime(ItemStack stack) {
+    public int getMaxUseTime(ItemStack stack, LivingEntity user) {
         return useTimeInTicks;
     }
 }

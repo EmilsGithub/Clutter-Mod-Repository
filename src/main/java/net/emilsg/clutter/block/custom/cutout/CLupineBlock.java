@@ -3,6 +3,7 @@ package net.emilsg.clutter.block.custom.cutout;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Fertilizable;
 import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
@@ -12,7 +13,7 @@ import net.minecraft.world.WorldView;
 public class CLupineBlock extends CFlowerBlock implements Fertilizable {
     private final BlockState tallBlockState;
 
-    public CLupineBlock(StatusEffect stewEffect, BlockState tallBlockState, int duration, Settings settings) {
+    public CLupineBlock(RegistryEntry<StatusEffect> stewEffect, BlockState tallBlockState, int duration, Settings settings) {
         super(stewEffect, duration, settings);
         this.tallBlockState = tallBlockState;
     }

@@ -18,7 +18,7 @@ public class ModSounds {
     public static SoundEvent ENTITY_NETHER_NEWT_HURT = registerSoundEvent("entity_nether_newt_hurt");
 
     private static SoundEvent registerSoundEvent(String name) {
-        Identifier id = new Identifier(Clutter.MOD_ID, name);
+        Identifier id = Identifier.of(Clutter.MOD_ID, name);
         return Registry.register(Registries.SOUND_EVENT, id, SoundEvent.of(id));
     }
 }

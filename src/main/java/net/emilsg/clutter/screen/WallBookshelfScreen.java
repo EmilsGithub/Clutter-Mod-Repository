@@ -7,7 +7,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public class WallBookshelfScreen extends HandledScreen<WallBookshelfScreenHandler> {
-    private static final Identifier TEXTURE = new Identifier("clutter:textures/gui/container/wall_bookshelf.png");
+    private static final Identifier TEXTURE = Identifier.of("clutter:textures/gui/container/wall_bookshelf.png");
 
     public WallBookshelfScreen(WallBookshelfScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);

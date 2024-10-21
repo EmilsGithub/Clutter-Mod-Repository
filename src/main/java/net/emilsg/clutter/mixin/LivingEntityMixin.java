@@ -9,6 +9,7 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
@@ -30,20 +31,15 @@ public abstract class LivingEntityMixin {
 
     @Final
     @Shadow
-    private static TrackedData<Integer> POTION_SWIRLS_COLOR;
-
-    @Final
-    @Shadow
     private static TrackedData<Boolean> POTION_SWIRLS_AMBIENT;
 
     @Shadow
     public abstract Map<StatusEffect, StatusEffectInstance> getActiveStatusEffects();
 
-    @Shadow
-    public abstract boolean hasStatusEffect(StatusEffect effect);
 
-    @Shadow
-    public abstract @Nullable StatusEffectInstance getStatusEffect(StatusEffect effect);
+    @Shadow public abstract boolean hasStatusEffect(RegistryEntry<StatusEffect> effect);
+
+    @Shadow public abstract @Nullable StatusEffectInstance getStatusEffect(RegistryEntry<StatusEffect> effect);
 
     @Inject(method = "damage", at = @At("HEAD"), cancellable = true)
     private void onDamage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
@@ -67,7 +63,6 @@ public abstract class LivingEntityMixin {
         LivingEntity livingEntity = (LivingEntity) (Object) this;
         if (!this.getActiveStatusEffects().isEmpty() && this.hasStatusEffect(ModEffects.SHIMMER) && livingEntity instanceof PlayerEntity) {
             livingEntity.getDataTracker().set(POTION_SWIRLS_AMBIENT, false);
-            livingEntity.getDataTracker().set(POTION_SWIRLS_COLOR, 0);
             ci.cancel();
         }
     }

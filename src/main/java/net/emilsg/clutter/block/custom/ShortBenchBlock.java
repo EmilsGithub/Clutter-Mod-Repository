@@ -1,7 +1,9 @@
 package net.emilsg.clutter.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -9,7 +11,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 
-public class ShortBenchBlock extends SeatBlock {
+public class ShortBenchBlock extends AbstractSeatBlock {
 
     public final VoxelShape NS_SHAPE = VoxelShapes.union(
             Block.createCuboidShape(0, 2, 4, 16, 6, 12),
@@ -23,9 +25,16 @@ public class ShortBenchBlock extends SeatBlock {
             Block.createCuboidShape(3, 0, 11, 13, 2, 14)
     );
 
+    public static final MapCodec<ShortBenchBlock> CODEC = createCodec(ShortBenchBlock::new);
+
     public ShortBenchBlock(Settings settings) {
         super(settings);
         this.setDefaultState((this.stateManager.getDefaultState()).with(WATERLOGGED, false).with(HORIZONTAL_FACING, Direction.NORTH));
+    }
+
+    @Override
+    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
+        return CODEC;
     }
 
     @Override

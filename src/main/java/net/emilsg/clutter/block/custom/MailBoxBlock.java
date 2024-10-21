@@ -1,15 +1,14 @@
 package net.emilsg.clutter.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.emilsg.clutter.block.entity.MailBoxInventoryBlockEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
@@ -18,7 +17,10 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.BlockMirror;
+import net.minecraft.util.BlockRotation;
+import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -34,6 +36,7 @@ public class MailBoxBlock extends BlockWithEntity implements Waterloggable {
     public static final BooleanProperty FLAG_UP = BooleanProperty.of("flag_up");
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
+    public static final MapCodec<MailBoxBlock> CODEC = createCodec(MailBoxBlock::new);
 
     protected static final VoxelShape NS_SHAPE = Block.createCuboidShape(4, 0, 2, 12, 7, 14);
     protected static final VoxelShape EW_SHAPE = Block.createCuboidShape(2, 0, 4, 14, 7, 12);
@@ -48,6 +51,11 @@ public class MailBoxBlock extends BlockWithEntity implements Waterloggable {
     }
 
     @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return CODEC;
+    }
+
+    @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(HATCH_OPEN, WATERLOGGED, FLAG_UP, FACING);
     }
@@ -58,7 +66,7 @@ public class MailBoxBlock extends BlockWithEntity implements Waterloggable {
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         if (world.isClient) {
             return ActionResult.SUCCESS;
         }
@@ -112,14 +120,6 @@ public class MailBoxBlock extends BlockWithEntity implements Waterloggable {
         World worldAccess = ctx.getWorld();
         boolean bl = worldAccess.getFluidState(blockPos = ctx.getBlockPos()).getFluid() == Fluids.WATER;
         return this.getDefaultState().with(WATERLOGGED, bl).with(FACING, ctx.getHorizontalPlayerFacing());
-    }
-
-    @Override
-    public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
-        BlockEntity blockEntity;
-        if (itemStack.hasCustomName() && (blockEntity = world.getBlockEntity(pos)) instanceof MailBoxInventoryBlockEntity) {
-            ((MailBoxInventoryBlockEntity) blockEntity).setCustomName(itemStack.getName());
-        }
     }
 
     public BlockState rotate(BlockState state, BlockRotation rotation) {

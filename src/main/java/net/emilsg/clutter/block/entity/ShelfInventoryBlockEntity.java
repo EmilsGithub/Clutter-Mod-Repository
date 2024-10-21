@@ -2,11 +2,7 @@ package net.emilsg.clutter.block.entity;
 
 import net.emilsg.clutter.block.ModBlockEntities;
 import net.emilsg.clutter.block.custom.ShelfBlock;
-import net.emilsg.clutter.networking.ModMessages;
 import net.emilsg.clutter.util.ModScreenHandler;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.LootableContainerBlockEntity;
 import net.minecraft.block.entity.ViewerCountManager;
@@ -17,14 +13,13 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.PacketByteBuf;
+import net.minecraft.nbt.NbtElement;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.GenericContainerScreenHandler;
 import net.minecraft.screen.ScreenHandler;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -77,31 +72,8 @@ public class ShelfInventoryBlockEntity extends LootableContainerBlockEntity impl
         return BlockEntityUpdateS2CPacket.create(this);
     }
 
-    @Override
-    public NbtCompound toInitialChunkDataNbt() {
-        return createNbt();
-    }
-
     public ItemStack getRenderStack(int slot) {
         return this.getStack(slot);
-    }
-
-    @Override
-    public void markDirty() {
-        assert world != null;
-        if (!world.isClient) {
-            PacketByteBuf data = PacketByteBufs.create();
-            data.writeInt(inventory.size());
-            for (int i = 0; i < inventory.size(); i++) {
-                data.writeItemStack(inventory.get(i));
-            }
-            data.writeBlockPos(getPos());
-
-            for (ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) world, getPos())) {
-                ServerPlayNetworking.send(player, ModMessages.SYNC_ITEMS, data);
-            }
-        }
-        super.markDirty();
     }
 
     public void setInventory(DefaultedList<ItemStack> inventory) {
@@ -128,16 +100,6 @@ public class ShelfInventoryBlockEntity extends LootableContainerBlockEntity impl
         if (!this.removed) {
             this.stateManager.updateViewerCount(this.getWorld(), this.getPos(), this.getCachedState());
         }
-    }
-
-    @Override
-    protected DefaultedList<ItemStack> getInvStackList() {
-        return this.inventory;
-    }
-
-    @Override
-    protected void setInvStackList(DefaultedList<ItemStack> list) {
-        this.inventory = list;
     }
 
     @Override
@@ -171,19 +133,33 @@ public class ShelfInventoryBlockEntity extends LootableContainerBlockEntity impl
     }
 
     @Override
-    protected void writeNbt(NbtCompound nbt) {
-        super.writeNbt(nbt);
-        if (!this.serializeLootTable(nbt)) {
-            Inventories.writeNbt(nbt, this.inventory);
-        }
+    protected DefaultedList<ItemStack> getHeldStacks() {
+        return this.inventory;
     }
 
     @Override
-    public void readNbt(NbtCompound nbt) {
-        super.readNbt(nbt);
+    protected void setHeldStacks(DefaultedList<ItemStack> inventory) {
+        this.inventory = inventory;
+    }
+
+    @Override
+    protected void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+        super.readNbt(nbt, registryLookup);
+        this.readInventoryNbt(nbt, registryLookup);
+    }
+
+    @Override
+    protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+        super.writeNbt(nbt, registryLookup);
+        if (!this.writeLootTable(nbt)) {
+            Inventories.writeNbt(nbt, this.inventory, false, registryLookup);
+        }
+    }
+
+    public void readInventoryNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
         this.inventory = DefaultedList.ofSize(this.size(), ItemStack.EMPTY);
-        if (!this.deserializeLootTable(nbt)) {
-            Inventories.readNbt(nbt, this.inventory);
+        if (!this.readLootTable(nbt) && nbt.contains("Items", NbtElement.LIST_TYPE)) {
+            Inventories.readNbt(nbt, this.inventory, registries);
         }
     }
 

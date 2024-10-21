@@ -5,6 +5,8 @@ import net.emilsg.clutter.entity.custom.goal.*;
 import net.emilsg.clutter.entity.custom.parent.ClutterFishEntity;
 import net.emilsg.clutter.entity.variants.SeahorseVariant;
 import net.emilsg.clutter.item.ModItems;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.NbtComponent;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.EscapeDangerGoal;
 import net.minecraft.entity.ai.goal.TemptGoal;
@@ -101,13 +103,10 @@ public class SeahorseEntity extends ClutterFishEntity implements Bucketable {
         return world.getBlockState(pos).getFluidState().isOf(Fluids.WATER);
     }
 
-
-
     @Override
     public void copyDataToStack(ItemStack stack) {
-        NbtCompound nbtCompound = stack.getOrCreateNbt();
-        nbtCompound.putInt("Variant", this.getTypeVariant());
         super.copyDataToStack(stack);
+        NbtComponent.set(DataComponentTypes.BUCKET_ENTITY_DATA, stack, nbtCompound -> nbtCompound.putInt("BucketVariantTag", this.getTypeVariant()));
     }
 
     @Override
@@ -119,12 +118,13 @@ public class SeahorseEntity extends ClutterFishEntity implements Bucketable {
         super.copyDataFromNbt(nbt);
     }
 
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(VARIANT, 0);
-        this.dataTracker.startTracking(HAS_CHILDREN, false);
-        this.dataTracker.startTracking(HAS_CHILDREN_TIMER, 0.0f);
-        this.dataTracker.startTracking(CHILD, false);
+    @Override
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(VARIANT, 0);
+        builder.add(HAS_CHILDREN, false);
+        builder.add(HAS_CHILDREN_TIMER, 0.0f);
+        builder.add(CHILD, false);
     }
 
     public void writeCustomDataToNbt(NbtCompound nbt) {
@@ -155,10 +155,6 @@ public class SeahorseEntity extends ClutterFishEntity implements Bucketable {
     @Nullable
     public SeahorseEntity createChild(ServerWorld world, SeahorseEntity entity) {
         return ModEntities.SEAHORSE.create(world);
-    }
-
-    public boolean isReadyToBreed() {
-        return false;
     }
 
     public int getBreedingAge() {
@@ -366,8 +362,9 @@ public class SeahorseEntity extends ClutterFishEntity implements Bucketable {
         this.dataTracker.set(HAS_CHILDREN_TIMER, hasChildrenTimer);
     }
 
+    @Nullable
     @Override
-    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
+    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData) {
         if (entityData == null) {
             entityData = new PassiveEntity.PassiveData(true);
         }
@@ -380,7 +377,7 @@ public class SeahorseEntity extends ClutterFishEntity implements Bucketable {
         passiveData.countSpawned();
         SeahorseVariant variant = Util.getRandom(SeahorseVariant.values(), this.random);
         this.setVariant(variant);
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
+        return super.initialize(world, difficulty, spawnReason, entityData);
     }
 
     @Override

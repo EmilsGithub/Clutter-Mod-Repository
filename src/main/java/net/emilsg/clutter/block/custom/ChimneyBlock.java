@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.emilsg.clutter.block.entity.ChimneyBlockEntity;
 import net.emilsg.clutter.block.ModBlockEntities;
 import net.emilsg.clutter.util.ModProperties;
@@ -7,13 +8,14 @@ import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
@@ -42,10 +44,17 @@ public class ChimneyBlock extends BlockWithEntity implements FluidFillable, Wate
             Block.createCuboidShape(2.0, 0.0, 2.0, 14.0, 13.0, 14.0),
             Block.createCuboidShape(1.0, 13.0, 1.0, 15.0, 16.0, 15.0)
     );
+    public static final MapCodec<ChimneyBlock> CODEC = createCodec(ChimneyBlock::new);
+
 
     public ChimneyBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.stateManager.getDefaultState().with(OPEN, true).with(WATERLOGGED, false));
+    }
+
+    @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return CODEC;
     }
 
     @Override
@@ -63,8 +72,9 @@ public class ChimneyBlock extends BlockWithEntity implements FluidFillable, Wate
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         boolean i = state.get(OPEN);
+        Hand hand = player.getActiveHand();
         if (!world.isClient && hand.equals(Hand.MAIN_HAND) && !player.isSneaking() && player.getStackInHand(hand).isEmpty()) {
             if (!i) {
                 world.setBlockState(pos, state.with(OPEN, true), Block.NOTIFY_ALL);
@@ -73,8 +83,7 @@ public class ChimneyBlock extends BlockWithEntity implements FluidFillable, Wate
             }
             return ActionResult.SUCCESS;
         }
-        return ActionResult.PASS;
-    }
+        return ActionResult.PASS;    }
 
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
@@ -150,9 +159,9 @@ public class ChimneyBlock extends BlockWithEntity implements FluidFillable, Wate
         return world.isClient() && type == ModBlockEntities.CHIMNEY ? ChimneyBlockEntity::clientTick : null;
     }
 
-    public void appendTooltip(ItemStack stack, @Nullable BlockView world, List<Text> tooltip, TooltipContext context) {
+    @Override
+    public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType options) {
         tooltip.add(Text.translatable("block.clutter.toggle_smoke.tooltip").formatted(Formatting.BLUE));
-        super.appendTooltip(stack, world, tooltip, context);
+        super.appendTooltip(stack, context, tooltip, options);
     }
-
 }

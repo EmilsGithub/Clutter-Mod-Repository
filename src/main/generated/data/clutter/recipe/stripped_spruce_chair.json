@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "chairs",
+  "key": {
+    "L": {
+      "item": "minecraft:stripped_spruce_log"
+    },
+    "P": {
+      "item": "minecraft:spruce_planks"
+    }
+  },
+  "pattern": [
+    "P  ",
+    "PP ",
+    "LL "
+  ],
+  "result": {
+    "count": 4,
+    "id": "clutter:stripped_spruce_chair"
+  }
+}

@@ -1,6 +1,8 @@
 package net.emilsg.clutter.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.*;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.fluid.FluidState;
@@ -66,9 +68,17 @@ public class WallCandleBlock extends HorizontalFacingBlock implements Waterlogga
             Block.createCuboidShape(11, 7, 7, 13, 13, 9)
     );
 
+    public static final MapCodec<WallCandleBlock> CODEC = createCodec(WallCandleBlock::new);
+
+
     public WallCandleBlock(Settings settings) {
         super(settings);
         this.setDefaultState((this.stateManager.getDefaultState()).with(WATERLOGGED, false).with(LIT, false));
+    }
+
+    @Override
+    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
+        return CODEC;
     }
 
     public static ToIntFunction<BlockState> createLightLevelFromLitBlockState(int litLevel) {
@@ -205,14 +215,15 @@ public class WallCandleBlock extends HorizontalFacingBlock implements Waterlogga
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+        Hand hand = player.getActiveHand();
         if (player.getAbilities().allowModifyWorld && player.getStackInHand(hand).isEmpty() && state.get(LIT)) {
             WallCandleBlock.extinguish(player, state, world, pos);
             return ActionResult.success(world.isClient);
         } else if (player.getAbilities().allowModifyWorld && player.getStackInHand(hand).isOf(Items.FLINT_AND_STEEL) && !state.get(LIT)) {
             WallCandleBlock.setLit(world, state, pos, true);
             if (!player.getAbilities().creativeMode) {
-                player.getStackInHand(hand).damage(1, player, playerEntity -> playerEntity.sendToolBreakStatus(hand));
+                player.getStackInHand(hand).damage(1, player, LivingEntity.getSlotForHand(hand));
             }
             return ActionResult.success(world.isClient);
         } else if (player.getAbilities().allowModifyWorld && player.getStackInHand(hand).isOf(Items.FIRE_CHARGE) && !state.get(LIT) && !player.getAbilities().creativeMode) {

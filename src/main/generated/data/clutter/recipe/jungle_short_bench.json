@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "short_benches",
+  "key": {
+    "L": {
+      "item": "minecraft:jungle_log"
+    },
+    "P": {
+      "item": "minecraft:jungle_planks"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "L L"
+  ],
+  "result": {
+    "count": 6,
+    "id": "clutter:jungle_short_bench"
+  }
+}

@@ -65,18 +65,18 @@ public class ChameleonModel<T extends ChameleonEntity> extends TameableClutterMo
     }
 
     @Override
-    public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
+    public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, int color) {
         if (this.child) {
             float babyScale = 0.5f;
             matrices.push();
             matrices.scale(babyScale, babyScale, babyScale);
             matrices.translate(0.0D, 1.5D, 0D);
-            this.getPart().render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
+            this.getPart().render(matrices, vertexConsumer, light, overlay, color);
             matrices.pop();
             this.head.scale(createVec3f(0.9f));
         } else {
             matrices.push();
-            this.getPart().render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
+            this.getPart().render(matrices, vertexConsumer, light, overlay, color);
             matrices.pop();
         }
     }

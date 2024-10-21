@@ -1,6 +1,6 @@
 package net.emilsg.clutter.world.gen.tree;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.emilsg.clutter.world.gen.type.ModFoliagePlacerTypes;
 import net.minecraft.util.math.intprovider.IntProvider;
@@ -12,7 +12,7 @@ import net.minecraft.world.gen.foliage.FoliagePlacerType;
 
 public class EmptyFoliagePlacer extends FoliagePlacer {
 
-    public static final Codec<EmptyFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) ->
+    public static final MapCodec<EmptyFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec((instance) ->
             fillFoliagePlacerFields(instance).and(
                     IntProvider.POSITIVE_CODEC.fieldOf("crown_height").forGetter((placer) -> placer.crownHeight)
             ).apply(instance, EmptyFoliagePlacer::new)

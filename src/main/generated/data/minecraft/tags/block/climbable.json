@@ -1,0 +1,10 @@
+{
+  "values": [
+    "clutter:red_wall_mushrooms",
+    "clutter:brown_wall_mushrooms",
+    "clutter:sculk_wall_mushrooms",
+    "clutter:crimson_wall_fungi",
+    "clutter:warped_wall_fungi",
+    "#clutter:trellises"
+  ]
+}

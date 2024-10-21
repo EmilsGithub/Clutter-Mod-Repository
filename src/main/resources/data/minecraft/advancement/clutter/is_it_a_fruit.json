@@ -1,0 +1,45 @@
+{
+  "display": {
+    "icon": {
+      "id": "minecraft:spyglass",
+      "count": 1
+    },
+    "title": {
+      "translate": "advancements.clutter.is_it_a_fruit.title"
+    },
+    "description": {
+      "translate": "advancements.clutter.is_it_a_fruit.description"
+    }
+  },
+  "parent": "minecraft:clutter/root",
+  "criteria": {
+    "is_it_a_fruit": {
+      "trigger": "minecraft:using_item",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type_specific": {
+                "type": "minecraft:player",
+                "looking_at": {
+                  "type": "clutter:kiwi_bird"
+                }
+              }
+            }
+          }
+        ],
+        "item": {
+          "items": "minecraft:spyglass"
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "is_it_a_fruit"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

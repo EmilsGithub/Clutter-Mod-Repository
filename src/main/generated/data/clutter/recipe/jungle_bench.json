@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "benches",
+  "key": {
+    "L": {
+      "item": "minecraft:jungle_log"
+    },
+    "P": {
+      "item": "minecraft:jungle_planks"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "PSP",
+    "PPP",
+    "L L"
+  ],
+  "result": {
+    "count": 4,
+    "id": "clutter:jungle_bench"
+  }
+}

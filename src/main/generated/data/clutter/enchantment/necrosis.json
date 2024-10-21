@@ -1,0 +1,34 @@
+{
+  "anvil_cost": 2,
+  "description": {
+    "translate": "enchantment.clutter.necrosis"
+  },
+  "effects": {
+    "minecraft:post_attack": [
+      {
+        "affected": "victim",
+        "effect": {
+          "type": "clutter:necrosis",
+          "level": 1
+        },
+        "enchanted": "attacker"
+      }
+    ]
+  },
+  "exclusive_set": "#minecraft:exclusive_set/damage",
+  "max_cost": {
+    "base": 25,
+    "per_level_above_first": 7
+  },
+  "max_level": 4,
+  "min_cost": {
+    "base": 5,
+    "per_level_above_first": 8
+  },
+  "primary_items": "#minecraft:enchantable/sword",
+  "slots": [
+    "mainhand"
+  ],
+  "supported_items": "#minecraft:enchantable/weapon",
+  "weight": 4
+}

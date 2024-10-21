@@ -1,5 +1,6 @@
 package net.emilsg.clutter.entity.variants;
 
+import com.mojang.serialization.Codec;
 import net.minecraft.util.Formatting;
 
 import java.util.Arrays;
@@ -30,6 +31,7 @@ public enum ButterflyVariant {
     private final int id;
     private final String name;
     private final Formatting colorFormatting;
+    public static final Codec<ButterflyVariant> CODEC = Codec.INT.xmap(ButterflyVariant::byId, ButterflyVariant::getId);
 
     ButterflyVariant(int id, String name, Formatting colorFormatting) {
         this.id = id;

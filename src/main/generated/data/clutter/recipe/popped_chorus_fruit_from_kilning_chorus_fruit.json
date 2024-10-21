@@ -1,0 +1,13 @@
+{
+  "type": "clutter:kilning",
+  "category": "misc",
+  "cookingtime": 50,
+  "experience": 1.0,
+  "group": "popped_chorus_fruit",
+  "ingredient": {
+    "item": "minecraft:chorus_fruit"
+  },
+  "result": {
+    "id": "minecraft:popped_chorus_fruit"
+  }
+}

@@ -6,7 +6,7 @@ import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.util.Identifier;
 
 public class WarpedNewtRenderer extends AbstractNetherNewtRenderer {
-    private static final Identifier TEXTURE = new Identifier(Clutter.MOD_ID, "textures/entity/warped_newt_box.png");
+    private static final Identifier TEXTURE = Identifier.of(Clutter.MOD_ID, "textures/entity/warped_newt_box.png");
 
     public WarpedNewtRenderer(EntityRendererFactory.Context ctx) {
         super(ctx);

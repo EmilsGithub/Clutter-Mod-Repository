@@ -12,11 +12,10 @@ public class OxidizableButtonBlock extends ButtonBlock implements Oxidizable {
 
     private final OxidationLevel oxidationLevel;
 
-    public OxidizableButtonBlock(OxidationLevel oxidationLevel, Settings settings, BlockSetType blockSetType, int pressTicks, boolean wooden) {
-        super(settings, blockSetType, pressTicks, wooden);
+    public OxidizableButtonBlock(OxidationLevel oxidationLevel, BlockSetType blockSetType, int pressTicks, Settings settings) {
+        super(blockSetType, pressTicks, settings);
         this.oxidationLevel = oxidationLevel;
     }
-
 
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         this.tickDegradation(state, world, pos, random);

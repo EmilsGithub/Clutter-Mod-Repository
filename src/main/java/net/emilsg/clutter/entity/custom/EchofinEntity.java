@@ -33,7 +33,6 @@ import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
@@ -94,11 +93,12 @@ public class EchofinEntity extends ClutterAnimalEntity {
         this.targetSelector.add(1, new EchofinConditionalActiveTargetGoal(this, PlayerEntity.class, false));
     }
 
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(HOME_POS, BlockPos.ORIGIN);
-        this.dataTracker.startTracking(DATA_ID_TYPE_VARIANT, 0);
-        this.dataTracker.startTracking(ABILITY_TIMER, 0);
+    @Override
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(HOME_POS, BlockPos.ORIGIN);
+        builder.add(DATA_ID_TYPE_VARIANT, 0);
+        builder.add(ABILITY_TIMER, 0);
     }
 
     public float getPathfindingFavor(BlockPos pos, WorldView world) {
@@ -168,7 +168,7 @@ public class EchofinEntity extends ClutterAnimalEntity {
                     this.dropItem(returnItem);
                 }
             }
-            player.playSound(SoundEvents.ITEM_BUCKET_FILL_FISH, SoundCategory.PLAYERS, 1.0f, 1.5f);
+            player.playSound(SoundEvents.ITEM_BUCKET_FILL_FISH, 1.0f, 1.5f);
             this.remove(RemovalReason.DISCARDED);
             return ActionResult.SUCCESS;
         }
@@ -176,7 +176,7 @@ public class EchofinEntity extends ClutterAnimalEntity {
     }
 
     @Override
-    public boolean canBeLeashedBy(PlayerEntity player) {
+    public boolean canBeLeashed() {
         return false;
     }
 
@@ -226,15 +226,13 @@ public class EchofinEntity extends ClutterAnimalEntity {
     }
 
     @Override
-    public void applyDamageEffects(LivingEntity attacker, Entity target) {
-        super.applyDamageEffects(attacker, target);
+    protected void attackLivingEntity(LivingEntity target) {
         World world = target.getWorld();
 
         if (world.isClient || !(target instanceof PlayerEntity player)) return;
 
         if (shouldTeleportPlayers()) teleportPlayer(player, world);
         else if (shouldLevitatePlayers()) levitatePlayer(player);
-
     }
 
     private void teleportPlayer(PlayerEntity player, World world) {
@@ -317,19 +315,23 @@ public class EchofinEntity extends ClutterAnimalEntity {
     }
 
     @Override
-    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason,
-                                 @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
+    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData) {
         EchofinVariant variant = Util.getRandom(EchofinVariant.values(), this.random);
 
         setVariant(variant);
         this.setHomePos(this.getBlockPos());
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
+        return super.initialize(world, difficulty, spawnReason, entityData);
     }
 
     @Override
     public void refreshPositionAndAngles(BlockPos pos, float yaw, float pitch) {
         this.setHomePos(pos);
         super.refreshPositionAndAngles(pos, yaw, pitch);
+    }
+
+    @Override
+    public boolean isBreedingItem(ItemStack stack) {
+        return false;
     }
 
     @Nullable

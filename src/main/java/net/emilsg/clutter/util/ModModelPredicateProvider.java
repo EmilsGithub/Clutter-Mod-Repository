@@ -1,14 +1,20 @@
 package net.emilsg.clutter.util;
 
 import net.emilsg.clutter.block.custom.SeahorseBucketItem;
+import net.emilsg.clutter.entity.variants.ButterflyVariant;
+import net.emilsg.clutter.entity.variants.SeahorseVariant;
 import net.emilsg.clutter.item.custom.ButterflyBottleItem;
 import net.emilsg.clutter.item.custom.ClutterElytraItem;
 import net.emilsg.clutter.item.custom.CoinPouchItem;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.NbtComponent;
 import net.minecraft.item.Item;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
+
+import java.util.Optional;
 
 public class ModModelPredicateProvider {
 
@@ -22,7 +28,7 @@ public class ModModelPredicateProvider {
     }
 
     private static void registerElytra(Item elytra) {
-        ModelPredicateProviderRegistry.register(elytra, new Identifier("broken"), (stack, world, entity, seed) -> {
+        ModelPredicateProviderRegistry.register(elytra, Identifier.of("broken"), (stack, world, entity, seed) -> {
             if (!(stack.getItem() instanceof ClutterElytraItem clutterElytraItem)) return 0;
 
             return clutterElytraItem.isBroken(stack) ? 1 : 0;
@@ -30,44 +36,40 @@ public class ModModelPredicateProvider {
     }
 
     private static void registerButterflyInABottle(Item bottle) {
-        ModelPredicateProviderRegistry.register(bottle, new Identifier("type"), (stack, world, entity, seed) -> {
+        ModelPredicateProviderRegistry.register(bottle, Identifier.of("type"), (stack, world, entity, seed) -> {
             if (!(stack.getItem() instanceof ButterflyBottleItem)) return 0;
+            NbtComponent nbtComponent = stack.getOrDefault(DataComponentTypes.BUCKET_ENTITY_DATA, NbtComponent.DEFAULT);
+            Optional<ButterflyVariant> optional = nbtComponent.get(ButterflyBottleItem.BUTTERFLY_VARIANT_MAP_CODEC).result();
 
-            NbtCompound nbtCompound = stack.getNbt();
+            if (optional.isEmpty()) return 0;
 
-            if (nbtCompound == null || !nbtCompound.contains("Variant", 3)) return 0;
-
-            int id = nbtCompound.getInt("Variant");
+            int id = optional.get().getId();
 
             return (float) id / 100;
         });
     }
 
     private static void registerSeahorseBucket(Item bucket) {
-        ModelPredicateProviderRegistry.register(bucket, new Identifier("type"), (stack, world, entity, seed) -> {
+        ModelPredicateProviderRegistry.register(bucket, Identifier.of("type"), (stack, world, entity, seed) -> {
             if (!(stack.getItem() instanceof SeahorseBucketItem)) return 0;
+            NbtComponent nbtComponent = stack.getOrDefault(DataComponentTypes.BUCKET_ENTITY_DATA, NbtComponent.DEFAULT);
+            Optional<SeahorseVariant> optional = nbtComponent.get(SeahorseBucketItem.SEAHORSE_VARIANT_MAP_CODEC).result();
 
-            NbtCompound nbtCompound = stack.getNbt();
+            if (optional.isEmpty()) return 0;
 
-            if (nbtCompound == null || !nbtCompound.contains("Variant", 3)) return 0;
-
-            int id = nbtCompound.getInt("Variant");
+            int id = optional.get().getId();
 
             return (float) id / 10;
         });
     }
 
     private static void registerCoinPouch(Item pouch) {
-        ModelPredicateProviderRegistry.register(pouch, new Identifier("coins"), (stack, world, entity, seed) -> {
+        ModelPredicateProviderRegistry.register(pouch, Identifier.of("coins"), (stack, world, entity, seed) -> {
             if (!(stack.getItem() instanceof CoinPouchItem)) return 0;
+            Rarity rarity = stack.getOrDefault(DataComponentTypes.RARITY, Rarity.COMMON);
+            int rarityInt = CoinPouchItem.getIntFromRarity(rarity);
 
-            NbtCompound nbtCompound = stack.getNbt();
-
-            if (nbtCompound == null || !nbtCompound.contains("Rarity", 3)) return 0;
-
-            int rarity = nbtCompound.getInt("Rarity");
-
-            return (float) (rarity + 1) / 10;
+            return (float) (rarityInt + 1) / 10;
         });
     }
 }

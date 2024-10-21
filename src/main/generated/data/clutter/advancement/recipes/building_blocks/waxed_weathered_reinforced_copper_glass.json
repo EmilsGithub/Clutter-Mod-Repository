@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "clutter:waxed_weathered_reinforced_copper_glass"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_weathered_reinforced_copper_glass": {
+      "conditions": {
+        "items": [
+          {
+            "items": "clutter:weathered_reinforced_copper_glass"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_weathered_reinforced_copper_glass"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "clutter:waxed_weathered_reinforced_copper_glass"
+    ]
+  }
+}

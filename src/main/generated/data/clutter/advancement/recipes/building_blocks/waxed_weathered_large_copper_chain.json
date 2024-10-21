@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "clutter:waxed_weathered_large_copper_chain"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_weathered_large_copper_chain": {
+      "conditions": {
+        "items": [
+          {
+            "items": "clutter:weathered_large_copper_chain"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_weathered_large_copper_chain"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "clutter:waxed_weathered_large_copper_chain"
+    ]
+  }
+}

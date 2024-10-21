@@ -1,19 +1,18 @@
 package net.emilsg.clutter.block.custom;
 
-import net.emilsg.clutter.block.ModBlocks;
+import com.mojang.serialization.MapCodec;
 import net.emilsg.clutter.block.entity.CardboardBoxInventoryBlockEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.client.item.TooltipContext;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.ItemEntity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
@@ -21,7 +20,10 @@ import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.BlockMirror;
+import net.minecraft.util.BlockRotation;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -41,10 +43,16 @@ public class CardboardBoxBlock extends BlockWithEntity implements Waterloggable 
     public static final BooleanProperty OPEN = Properties.OPEN;
     protected static final VoxelShape SHAPE = Block.createCuboidShape(2, 0, 2, 14, 11, 14);
     private final VoxelShape OPEN_SHAPE = VoxelShapes.union(Block.createCuboidShape(2, 0, 2.0999999999999996, 2.1, 11, 13.9), Block.createCuboidShape(13.9, 0, 2.0999999999999996, 14, 11, 13.9), Block.createCuboidShape(2, 0, 2, 14, 11, 2.1), Block.createCuboidShape(2, 0, 13.9, 14, 11, 14), Block.createCuboidShape(2, 0, 2, 14, 0.1, 14));
+    public static final MapCodec<CardboardBoxBlock> CODEC = createCodec(CardboardBoxBlock::new);
 
     public CardboardBoxBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.stateManager.getDefaultState().with(WATERLOGGED, false).with(FACING, Direction.NORTH).with(OPEN, false));
+    }
+
+    @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return CODEC;
     }
 
     @Override
@@ -58,12 +66,12 @@ public class CardboardBoxBlock extends BlockWithEntity implements Waterloggable 
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         if (world.isClient) {
             return ActionResult.SUCCESS;
         }
 
-        if (player.isSneaking() && player.getStackInHand(hand).isEmpty()) {
+        if (player.isSneaking() && player.getStackInHand(player.getActiveHand()).isEmpty()) {
             world.setBlockState(pos, state.cycle(OPEN));
         } else if (!player.isSneaking()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
@@ -87,14 +95,6 @@ public class CardboardBoxBlock extends BlockWithEntity implements Waterloggable 
         World worldAccess = ctx.getWorld();
         boolean bl = worldAccess.getFluidState(blockPos = ctx.getBlockPos()).getFluid() == Fluids.WATER;
         return this.getDefaultState().with(WATERLOGGED, bl).with(FACING, ctx.getHorizontalPlayerFacing());
-    }
-
-    @Override
-    public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
-        BlockEntity blockEntity;
-        if (itemStack.hasCustomName() && (blockEntity = world.getBlockEntity(pos)) instanceof CardboardBoxInventoryBlockEntity) {
-            ((CardboardBoxInventoryBlockEntity) blockEntity).setCustomName(itemStack.getName());
-        }
     }
 
     public BlockState rotate(BlockState state, BlockRotation rotation) {
@@ -146,35 +146,30 @@ public class CardboardBoxBlock extends BlockWithEntity implements Waterloggable 
         }
     }
 
-    public void appendTooltip(ItemStack stack, @Nullable BlockView world, List<Text> tooltip, TooltipContext options) {
-        super.appendTooltip(stack, world, tooltip, options);
-        NbtCompound nbtCompound = BlockItem.getBlockEntityNbt(stack);
-        if (nbtCompound != null) {
+    public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType options) {
+        super.appendTooltip(stack, context, tooltip, options);
+        if (stack.contains(DataComponentTypes.CONTAINER_LOOT)) {
             tooltip.add(Text.translatable("tooltip.container.clutter.not_empty").formatted(Formatting.YELLOW));
         } else {
-            tooltip.add(Text.translatable("tooltip.container.clutter.empty").formatted(Formatting.YELLOW));
+            tooltip.add(Text.translatable("tooltip.container.clutter.empty"));
         }
     }
 
-    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+    public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
-        if (blockEntity instanceof CardboardBoxInventoryBlockEntity cardboardBoxInventoryBlockEntity) {
-            ItemStack itemStack = new ItemStack(ModBlocks.CARDBOARD_BOX);
-            if (!world.isClient) {
-
-                if (!cardboardBoxInventoryBlockEntity.isEmpty()) blockEntity.setStackNbt(itemStack);
-                if (cardboardBoxInventoryBlockEntity.hasCustomName())
-                    itemStack.setCustomName(cardboardBoxInventoryBlockEntity.getCustomName());
-
-                ItemEntity itemEntity = new ItemEntity(world, (double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, itemStack);
+        if (blockEntity instanceof CardboardBoxInventoryBlockEntity cardboardBoxInventoryBlock) {
+            if (!world.isClient && player.isCreative() && !cardboardBoxInventoryBlock.isEmpty()) {
+                ItemStack itemStack = new ItemStack(this);
+                itemStack.applyComponentsFrom(blockEntity.createComponentMap());
+                ItemEntity itemEntity = new ItemEntity(world, (double)pos.getX() + 0.5, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.5, itemStack);
                 itemEntity.setToDefaultPickupDelay();
-
-                if ((player.getAbilities().creativeMode && !cardboardBoxInventoryBlockEntity.isEmpty() || !player.getAbilities().creativeMode))
-                    world.spawnEntity(itemEntity);
+                world.spawnEntity(itemEntity);
+            } else {
+                cardboardBoxInventoryBlock.generateLoot(player);
             }
         }
 
-        super.onBreak(world, pos, state, player);
+        return super.onBreak(world, pos, state, player);
     }
 
     @Override

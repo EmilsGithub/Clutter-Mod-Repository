@@ -11,7 +11,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
 public class BeaverRenderer extends MobEntityRenderer<BeaverEntity, BeaverModel<BeaverEntity>> {
-    private static final Identifier TEXTURE = new Identifier(Clutter.MOD_ID, "textures/entity/beaver_box.png");
+    private static final Identifier TEXTURE = Identifier.of(Clutter.MOD_ID, "textures/entity/beaver_box.png");
 
     public BeaverRenderer(EntityRendererFactory.Context ctx) {
         super(ctx, new BeaverModel<>(ctx.getPart(ModModelLayers.BEAVER)), 0.4f);

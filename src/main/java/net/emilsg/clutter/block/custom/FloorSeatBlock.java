@@ -1,10 +1,8 @@
 package net.emilsg.clutter.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.emilsg.clutter.block.entity.SeatEntity;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.block.Waterloggable;
+import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
@@ -29,16 +27,23 @@ import java.util.List;
 
 import static net.emilsg.clutter.block.entity.SeatEntity.IS_OCCUPIED;
 
-public class FloorSeatBlock extends SeatBlock implements Waterloggable {
+public class FloorSeatBlock extends AbstractSeatBlock implements Waterloggable {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 
     protected static final VoxelShape SHAPE = VoxelShapes.union(
             Block.createCuboidShape(1.0, 0.0, 1.0, 15.0, 4.0, 15.0)
     );
 
+    public static final MapCodec<FloorSeatBlock> CODEC = createCodec(FloorSeatBlock::new);
+
     public FloorSeatBlock(Settings settings) {
         super(settings);
         this.setDefaultState((this.stateManager.getDefaultState()).with(WATERLOGGED, false));
+    }
+
+    @Override
+    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
+        return CODEC;
     }
 
     @Override
@@ -98,7 +103,7 @@ public class FloorSeatBlock extends SeatBlock implements Waterloggable {
     }
 
     @Override
-    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+    public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
 
         int xPos = pos.getX();
         int yPos = pos.getY();
@@ -113,5 +118,6 @@ public class FloorSeatBlock extends SeatBlock implements Waterloggable {
         world.emitGameEvent(player, GameEvent.BLOCK_DESTROY, pos);
 
         IS_OCCUPIED.remove(new Vec3d(xPos, yPos, zPos));
+        return state;
     }
 }

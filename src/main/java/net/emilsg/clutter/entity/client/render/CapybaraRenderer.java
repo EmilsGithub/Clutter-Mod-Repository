@@ -11,7 +11,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
 public class CapybaraRenderer extends MobEntityRenderer<CapybaraEntity, CapybaraModel<CapybaraEntity>> {
-    private static final Identifier TEXTURE = new Identifier(Clutter.MOD_ID, "textures/entity/capybara_box.png");
+    private static final Identifier TEXTURE = Identifier.of(Clutter.MOD_ID, "textures/entity/capybara_box.png");
 
     public CapybaraRenderer(EntityRendererFactory.Context ctx) {
         super(ctx, new CapybaraModel<>(ctx.getPart(ModModelLayers.CAPYBARA)), 0.4f);

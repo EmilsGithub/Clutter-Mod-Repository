@@ -24,6 +24,7 @@ import net.minecraft.item.Items;
 import net.minecraft.item.ShearsItem;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.recipe.Ingredient;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
@@ -85,12 +86,13 @@ public abstract class AbstractNetherNewtEntity extends ClutterAnimalEntity imple
         this.targetSelector.add(2, new UniversalAngerGoal<>(this, true));
     }
 
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(ANGER_TIME, 0);
-        this.dataTracker.startTracking(SIZE, 0f);
-        this.dataTracker.startTracking(MOVING, false);
-        this.dataTracker.startTracking(FUNGI, 1);
+    @Override
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(ANGER_TIME, 0);
+        builder.add(SIZE, 0f);
+        builder.add(MOVING, false);
+        builder.add(FUNGI, 1);
     }
 
     private void setupAnimationStates() {
@@ -157,7 +159,7 @@ public abstract class AbstractNetherNewtEntity extends ClutterAnimalEntity imple
         return super.damage(source, amount);
     }
 
-    public abstract StatusEffect getOnAttackEffect();
+    public abstract RegistryEntry<StatusEffect> getOnAttackEffect();
 
     @Override
     public void breed(ServerWorld world, AnimalEntity other) {
@@ -180,7 +182,7 @@ public abstract class AbstractNetherNewtEntity extends ClutterAnimalEntity imple
         world.spawnEntityAndPassengers(crimsonNewtEntity);
     }
 
-    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
+    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData) {
         float scaledSize;
         switch (random.nextInt(3) + 1) {
             default -> scaledSize = 1;
@@ -189,7 +191,7 @@ public abstract class AbstractNetherNewtEntity extends ClutterAnimalEntity imple
         }
         this.setNewtSize(scaledSize);
         this.setFungiCount(random.nextInt(5) + 1);
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
+        return super.initialize(world, difficulty, spawnReason, entityData);
     }
 
     public float getNewtSize() {
@@ -199,10 +201,6 @@ public abstract class AbstractNetherNewtEntity extends ClutterAnimalEntity imple
     public void setNewtSize(float size) {
         this.dataTracker.set(SIZE, MathHelper.clamp(size, 0f, 1.5f));
         this.calculateDimensions();
-    }
-
-    protected float getActiveEyeHeight(EntityPose pose, EntityDimensions dimensions) {
-        return dimensions.height * 0.4F;
     }
 
     public void onTrackedDataSet(TrackedData<?> data) {
@@ -234,8 +232,8 @@ public abstract class AbstractNetherNewtEntity extends ClutterAnimalEntity imple
     }
 
     @Override
-    public EntityDimensions getDimensions(EntityPose pose) {
-        return super.getDimensions(pose).scaled(0.65f * this.getNewtSize());
+    public EntityDimensions getBaseDimensions(EntityPose pose) {
+        return super.getBaseDimensions(pose).scaled(0.65f * this.getNewtSize());
     }
 
     @Override
@@ -257,7 +255,7 @@ public abstract class AbstractNetherNewtEntity extends ClutterAnimalEntity imple
         int fungiCount = this.getFungiCount();
 
         if (stackInHand.getItem() instanceof ShearsItem && !world.isClient && fungiCount != 0) {
-            if (!player.getAbilities().creativeMode) stackInHand.damage(1, player, (p) -> p.sendToolBreakStatus(hand));
+            if (!player.getAbilities().creativeMode) stackInHand.damage(1, player, LivingEntity.getSlotForHand(hand));
             this.dropStack(new ItemStack(Items.CRIMSON_FUNGUS, fungiCount));
             world.playSound(null, pos, SoundEvents.BLOCK_GROWING_PLANT_CROP, SoundCategory.BLOCKS, 1.0F, 1.0F);
             this.setFungiCount(0);
@@ -309,8 +307,9 @@ public abstract class AbstractNetherNewtEntity extends ClutterAnimalEntity imple
         this.setAngerTime(ANGER_TIME_RANGE.get(this.random));
     }
 
-    public boolean canBeLeashedBy(PlayerEntity player) {
-        return !this.hasAngerTime() && super.canBeLeashedBy(player);
+    @Override
+    public boolean canBeLeashed() {
+        return !this.hasAngerTime();
     }
 
     public boolean shouldAngerAt(LivingEntity entity) {

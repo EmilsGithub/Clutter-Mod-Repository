@@ -5,8 +5,9 @@ import net.emilsg.clutter.entity.custom.parent.ClutterTameableEntity;
 import net.emilsg.clutter.item.ModItems;
 import net.emilsg.clutter.item.custom.ButterflyBottleItem;
 import net.minecraft.block.BlockState;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.FoodComponent;
 import net.minecraft.entity.AnimationState;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.*;
@@ -24,18 +25,17 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.recipe.Ingredient;
-import net.minecraft.scoreboard.AbstractTeam;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.EntityView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 public class ChameleonEntity extends ClutterTameableEntity {
@@ -94,17 +94,12 @@ public class ChameleonEntity extends ClutterTameableEntity {
     }
 
     @Override
-    protected float getUnscaledRidingOffset(Entity vehicle) {
-        return 0.15F;
-    }
-
-    @Override
     protected void initGoals() {
         this.goalSelector.add(0, new RideAdultChameleonGoal(this));
         this.goalSelector.add(1, new SwimGoal(this));
         this.goalSelector.add(2, new SitGoal(this));
         this.goalSelector.add(3, new ChameleonEscapeDangerGoal(1.5));
-        this.goalSelector.add(4, new FollowOwnerGoal(this, 1.2, 10.0F, 2.0F, false));
+        this.goalSelector.add(4, new FollowOwnerGoal(this, 1.2, 10.0F, 2.0F));
         this.goalSelector.add(5, new AnimalMateGoal(this, 1));
         this.goalSelector.add(6, new TemptGoal(this, 1.2, BREEDING_INGREDIENT, false));
         this.goalSelector.add(7, new FollowParentGoal(this, 1.2));
@@ -114,11 +109,6 @@ public class ChameleonEntity extends ClutterTameableEntity {
         this.goalSelector.add(11, new LookAroundGoal(this));
 
         this.targetSelector.add(8, new ActiveTargetGoal<>(this, ButterflyEntity.class, true));
-    }
-
-    @Override
-    public EntityView method_48926() {
-        return this.getWorld();
     }
 
     @Override
@@ -157,7 +147,7 @@ public class ChameleonEntity extends ClutterTameableEntity {
             UUID uUID = this.getOwnerUuid();
             if (uUID != null) {
                 chameleonEntity.setOwnerUuid(uUID);
-                chameleonEntity.setTamed(true);
+                chameleonEntity.setTamed(true, true);
             }
         }
 
@@ -181,7 +171,9 @@ public class ChameleonEntity extends ClutterTameableEntity {
                 itemStack.decrement(1);
             }
 
-            this.heal((float) item.getFoodComponent().getHunger());
+            FoodComponent foodComponent = itemStack.get(DataComponentTypes.FOOD);
+            float f = foodComponent != null ? (float)foodComponent.nutrition() : 1.0F;
+            this.heal(f);
             return ActionResult.SUCCESS;
         }
 
@@ -230,16 +222,9 @@ public class ChameleonEntity extends ClutterTameableEntity {
         return this.dataTracker.get(SITTING);
     }
 
-    @Override
-    public void setTamed(boolean tamed) {
-        super.setTamed(tamed);
-        if (tamed) {
-            getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue(18.0D);
-            getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE).setBaseValue(6.0f);
-        } else {
-            getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue(6.0D);
-            getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE).setBaseValue(3.0f);
-        }
+    protected void updateAttributesForTamed() {
+        Objects.requireNonNull(getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH)).setBaseValue(18.0D);
+        Objects.requireNonNull(getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE)).setBaseValue(6.0f);
     }
 
     @Override
@@ -255,18 +240,14 @@ public class ChameleonEntity extends ClutterTameableEntity {
     }
 
     @Override
-    public AbstractTeam getScoreboardTeam() {
-        return super.getScoreboardTeam();
-    }
-
-    public boolean canBeLeashedBy(PlayerEntity player) {
-        return !this.isSitting() && this.isOwner(player);
+    public boolean canBeLeashed() {
+        return !this.isSitting();
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(SITTING, false);
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(SITTING, false);
     }
 
     public static class RideAdultChameleonGoal extends Goal {

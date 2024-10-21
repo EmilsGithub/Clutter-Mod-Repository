@@ -20,6 +20,6 @@ public class ModBiomeTags {
 
 
     private static TagKey<Biome> create(String namespace, String path) {
-        return TagKey.of(RegistryKeys.BIOME, new Identifier(namespace, path));
+        return TagKey.of(RegistryKeys.BIOME, Identifier.of(namespace, path));
     }
 }

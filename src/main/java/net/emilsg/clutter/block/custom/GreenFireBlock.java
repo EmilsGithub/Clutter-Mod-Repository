@@ -1,5 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.emilsg.clutter.util.ModBlockTags;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.AbstractFireBlock;
@@ -11,6 +12,8 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 
 public class GreenFireBlock extends AbstractFireBlock {
+    public static final MapCodec<GreenFireBlock> CODEC = createCodec(GreenFireBlock::new);
+
     public GreenFireBlock(AbstractBlock.Settings settings) {
         super(settings, 1.0F);
     }
@@ -25,6 +28,11 @@ public class GreenFireBlock extends AbstractFireBlock {
 
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         return isFireBase(world.getBlockState(pos.down()));
+    }
+
+    @Override
+    protected MapCodec<? extends AbstractFireBlock> getCodec() {
+        return CODEC;
     }
 
     protected boolean isFlammable(BlockState state) {

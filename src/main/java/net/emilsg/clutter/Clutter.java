@@ -6,12 +6,12 @@ import net.emilsg.clutter.compat.trinkets.TrinketsElytraUse;
 import net.emilsg.clutter.config.Configs;
 import net.emilsg.clutter.config.ModConfigManager;
 import net.emilsg.clutter.effect.ModEffects;
+import net.emilsg.clutter.enchantment.ModEnchantmentEffects;
 import net.emilsg.clutter.enchantment.ModEnchantments;
 import net.emilsg.clutter.entity.ClutterAttributes;
 import net.emilsg.clutter.item.ModItems;
-import net.emilsg.clutter.networking.ModMessages;
 import net.emilsg.clutter.potion.ModPotions;
-import net.emilsg.clutter.recipe.ModRecipeSerializers;
+import net.emilsg.clutter.recipe.ModRecipes;
 import net.emilsg.clutter.screen.ModScreenHandlers;
 import net.emilsg.clutter.util.*;
 import net.emilsg.clutter.world.gen.ModWorldGeneration;
@@ -43,9 +43,9 @@ public class Clutter implements ModInitializer {
         ModItems.registerModItems();
         ModBlocks.registerModBlocks();
 
-        ModRecipeSerializers.registerRecipeSerializers();
-
         ModEnchantments.registerModEnchantments();
+        ModEnchantmentEffects.registerEnchantmentEffects();
+
         ModLootTableModifiers.modifyLootTables();
         ModScreenHandlers.registerScreenHandlers();
         ModBlockEntities.registerBlockEntities();
@@ -55,14 +55,16 @@ public class Clutter implements ModInitializer {
         ModFoliagePlacerTypes.register();
         ModTreeDecoratorTypes.register();
 
+        ModRecipes.registerRecipes();
         ModWorldGeneration.generateModWorldGen();
 
         ModUtil.registerModUtil();
         ModTradeOffers.addTrades();
 
         ModCallbackRegistry.handleCallbacks();
-        ModMessages.registerC2SPackets();
+        //ModMessages.registerC2SPackets();
 
+        ModPotions.registerPotions();
         ModPotions.registerPotionRecipes();
 
         ModBlocks.registerCopperBlockPairs();
@@ -71,7 +73,7 @@ public class Clutter implements ModInitializer {
 
         if (IS_TRINKETS_LOADED && ModConfigManager.get(Configs.doTrinketsElytraFlight, true)) TrinketsElytraUse.doFlight();
 
-        ModMessages.registerHandshakePackets();
+        //ModMessages.registerHandshakePackets();
         LOGGER.info("[Clutter] Finished initializing.");
 
     }

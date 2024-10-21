@@ -2,6 +2,8 @@ package net.emilsg.clutter.entity.custom;
 
 import net.emilsg.clutter.entity.ModEntities;
 import net.emilsg.clutter.entity.custom.parent.ClutterTameableEntity;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.FoodComponent;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.ai.pathing.PathNodeType;
@@ -116,7 +118,7 @@ public class CapybaraEntity extends ClutterTameableEntity {
         this.goalSelector.add(2, new CapybaraSitGoal(this));
         this.goalSelector.add(3, new CapybaraEscapeDangerGoal(this, 1.25));
         this.goalSelector.add(4, new CapybaraMateGoal(this, 1));
-        this.goalSelector.add(5, new CapybaraFollowOwnerGoal(this, 1.2, 10.0F, 2.0F, false));
+        this.goalSelector.add(5, new CapybaraFollowOwnerGoal(this, 1.2, 10.0F, 2.0F));
         this.goalSelector.add(6, new CapybaraTemptGoal(this, 1.2, BREEDING_INGREDIENT, false));
         this.goalSelector.add(7, new FollowParentGoal(this, 1.2));
         this.goalSelector.add(8, new CapybaraWanderGoal(this, 1.0, 0.3f));
@@ -135,7 +137,9 @@ public class CapybaraEntity extends ClutterTameableEntity {
                 itemStack.decrement(1);
             }
 
-            this.heal((float) item.getFoodComponent().getHunger());
+            FoodComponent foodComponent = itemStack.get(DataComponentTypes.FOOD);
+            float f = foodComponent != null ? (float)foodComponent.nutrition() : 1.0F;
+            this.heal(f);
             return ActionResult.SUCCESS;
         }
 
@@ -177,20 +181,19 @@ public class CapybaraEntity extends ClutterTameableEntity {
         return super.interactMob(player, hand);
     }
 
-
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(IS_SLEEPING, false);
-        this.dataTracker.startTracking(FORCE_SLEEPING, false);
-        this.dataTracker.startTracking(SLEEPER, 0);
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(IS_SLEEPING, false);
+        builder.add(FORCE_SLEEPING, false);
+        builder.add(SLEEPER, 0);
     }
 
     @Override
-    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
+    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData) {
         int sleeperType = random.nextBetween(0, 2);
         setSleeperType(sleeperType);
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
+        return super.initialize(world, difficulty, spawnReason, entityData);
     }
 
     public void writeCustomDataToNbt(NbtCompound nbt) {
@@ -323,8 +326,8 @@ public class CapybaraEntity extends ClutterTameableEntity {
 
     private class CapybaraFollowOwnerGoal extends FollowOwnerGoal {
 
-        public CapybaraFollowOwnerGoal(ClutterTameableEntity tameable, double speed, float minDistance, float maxDistance, boolean leavesAllowed) {
-            super(tameable, speed, minDistance, maxDistance, leavesAllowed);
+        public CapybaraFollowOwnerGoal(ClutterTameableEntity tameable, double speed, float minDistance, float maxDistance) {
+            super(tameable, speed, minDistance, maxDistance);
         }
 
         @Override

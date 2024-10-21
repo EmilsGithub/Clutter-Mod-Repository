@@ -75,8 +75,7 @@ public class NautilusShellBlock extends Block implements Waterloggable {
     }
 
     @Override
-    public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
+    public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state) {
         return new ItemStack(Items.NAUTILUS_SHELL);
     }
-
 }
