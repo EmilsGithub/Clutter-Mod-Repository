@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "bunk_beds",
+  "pattern": [
+    "P P",
+    "###",
+    "PPP"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:lime_wool"
+    },
+    "P": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "result": {
+    "id": "clutter:lime_bunk_bed",
+    "count": 1
+  }
+}

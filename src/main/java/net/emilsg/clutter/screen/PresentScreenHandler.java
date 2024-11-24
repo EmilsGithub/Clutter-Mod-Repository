@@ -16,7 +16,7 @@ public class PresentScreenHandler extends ScreenHandler {
     }
 
     public PresentScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory) {
-        super(ModScreenHandlers.PRESENT_SCREEN_HANDLER, syncId);
+        super(ModScreenHandlerTypes.PRESENT_SCREEN_HANDLER, syncId);
         checkSize(inventory, 1);
         this.inventory = inventory;
         inventory.onOpen(playerInventory.player);

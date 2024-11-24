@@ -33,7 +33,7 @@ public class ShelfBlockEntityRenderer implements BlockEntityRenderer<ShelfInvent
         int itemRot = 181;
 
         for (int i = 0; i < entity.size(); i++) {
-            ItemStack itemStack = entity.getRenderStack(i);
+            ItemStack itemStack = entity.getStack(i);
             matrices.push();
 
             float translateZ;

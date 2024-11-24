@@ -1,7 +1,7 @@
 package net.emilsg.clutter.entity.custom;
 
 import net.emilsg.clutter.block.ModBlocks;
-import net.emilsg.clutter.entity.ModEntities;
+import net.emilsg.clutter.entity.ModEntityTypes;
 import net.emilsg.clutter.entity.custom.goal.EmperorPenguinLayEggGoal;
 import net.emilsg.clutter.entity.custom.goal.EmperorPenguinMateGoal;
 import net.emilsg.clutter.entity.custom.parent.ClutterAnimalEntity;
@@ -123,7 +123,7 @@ public class EmperorPenguinEntity extends ClutterAnimalEntity {
     @Nullable
     @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
-        return ModEntities.EMPEROR_PENGUIN.create(world);
+        return ModEntityTypes.EMPEROR_PENGUIN.create(world);
     }
 
     @Override

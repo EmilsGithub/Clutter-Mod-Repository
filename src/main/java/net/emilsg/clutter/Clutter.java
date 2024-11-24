@@ -10,9 +10,10 @@ import net.emilsg.clutter.enchantment.ModEnchantmentEffects;
 import net.emilsg.clutter.enchantment.ModEnchantments;
 import net.emilsg.clutter.entity.ClutterAttributes;
 import net.emilsg.clutter.item.ModItems;
+import net.emilsg.clutter.networking.ModMessages;
 import net.emilsg.clutter.potion.ModPotions;
 import net.emilsg.clutter.recipe.ModRecipes;
-import net.emilsg.clutter.screen.ModScreenHandlers;
+import net.emilsg.clutter.screen.ModScreenHandlerTypes;
 import net.emilsg.clutter.util.*;
 import net.emilsg.clutter.world.gen.ModWorldGeneration;
 import net.emilsg.clutter.world.gen.features.ModFeatures;
@@ -47,7 +48,7 @@ public class Clutter implements ModInitializer {
         ModEnchantmentEffects.registerEnchantmentEffects();
 
         ModLootTableModifiers.modifyLootTables();
-        ModScreenHandlers.registerScreenHandlers();
+        ModScreenHandlerTypes.registerScreenHandlers();
         ModBlockEntities.registerBlockEntities();
 
         ModFeatures.registerModFeatures();
@@ -62,7 +63,7 @@ public class Clutter implements ModInitializer {
         ModTradeOffers.addTrades();
 
         ModCallbackRegistry.handleCallbacks();
-        //ModMessages.registerC2SPackets();
+        ModMessages.registerC2SPackets();
 
         ModPotions.registerPotions();
         ModPotions.registerPotionRecipes();
@@ -73,7 +74,6 @@ public class Clutter implements ModInitializer {
 
         if (IS_TRINKETS_LOADED && ModConfigManager.get(Configs.doTrinketsElytraFlight, true)) TrinketsElytraUse.doFlight();
 
-        //ModMessages.registerHandshakePackets();
         LOGGER.info("[Clutter] Finished initializing.");
 
     }

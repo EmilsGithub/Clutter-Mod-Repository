@@ -17,7 +17,7 @@ import net.emilsg.clutter.block.custom.sign.ModWallHangingSignBlock;
 import net.emilsg.clutter.block.custom.sign.ModWallSignBlock;
 import net.emilsg.clutter.block.custom.stacking.LabBottleBlock;
 import net.emilsg.clutter.block.custom.stacking.TallBottleBlock;
-import net.emilsg.clutter.entity.ModEntities;
+import net.emilsg.clutter.entity.ModEntityTypes;
 import net.emilsg.clutter.sound.ModSounds;
 import net.emilsg.clutter.util.ModBlockTags;
 import net.emilsg.clutter.world.gen.tree.ModSaplingGenerators;
@@ -789,8 +789,8 @@ public class ModBlocks {
     public static final Block LAB_BOTTLE = registerBlock("lab_bottle", new LabBottleBlock(AbstractBlock.Settings.copy(Blocks.GLASS).strength(0.05f).nonOpaque().pistonBehavior(PistonBehavior.DESTROY)));
 
     public static final Block BUTTERFLY_COCOON = registerBlockWithoutItem("butterfly_cocoon", new ButterflyCocoonBlock(AbstractBlock.Settings.copy(Blocks.MOSS_BLOCK).breakInstantly().nonOpaque().sounds(BlockSoundGroup.MOSS_BLOCK)));
-    public static final Block KIWI_BIRD_EGG = registerBlockWithoutItem("kiwi_bird_egg", new HatchingEggBlock(AbstractBlock.Settings.copy(Blocks.SNIFFER_EGG).nonOpaque(), ModEntities.KIWI_BIRD, 5, ModBlockTags.KIWI_EGG_HATCH_BOOST, 7.5, 7));
-    public static final Block EMPEROR_PENGUIN_EGG = registerBlockWithoutItem("emperor_penguin_egg", new HatchingEggBlock(AbstractBlock.Settings.copy(Blocks.SNIFFER_EGG).nonOpaque(), ModEntities.EMPEROR_PENGUIN, 8, ModBlockTags.EMPEROR_PENGUIN_EGG_HATCH_BOOST, 6.5, 5));
+    public static final Block KIWI_BIRD_EGG = registerBlockWithoutItem("kiwi_bird_egg", new HatchingEggBlock(AbstractBlock.Settings.copy(Blocks.SNIFFER_EGG).nonOpaque(), ModEntityTypes.KIWI_BIRD, 5, ModBlockTags.KIWI_EGG_HATCH_BOOST, 7.5, 7));
+    public static final Block EMPEROR_PENGUIN_EGG = registerBlockWithoutItem("emperor_penguin_egg", new HatchingEggBlock(AbstractBlock.Settings.copy(Blocks.SNIFFER_EGG).nonOpaque(), ModEntityTypes.EMPEROR_PENGUIN, 8, ModBlockTags.EMPEROR_PENGUIN_EGG_HATCH_BOOST, 6.5, 5));
 
     public static final Block BEER_MUG = registerBlockWithoutItem("beer_mug", new BeerMugBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS).breakInstantly()));
     public static final Block WOODEN_MUG = registerBlockWithoutItem("wooden_mug", new MugBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS).breakInstantly()));

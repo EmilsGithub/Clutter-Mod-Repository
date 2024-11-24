@@ -17,7 +17,7 @@ public class CardboardBoxScreenHandler extends ScreenHandler {
     }
 
     public CardboardBoxScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory) {
-        super(ModScreenHandlers.CARDBOARD_BOX_SCREEN_HANDLER, syncId);
+        super(ModScreenHandlerTypes.CARDBOARD_BOX_SCREEN_HANDLER, syncId);
         checkSize(inventory, 9);
         this.inventory = inventory;
         inventory.onOpen(playerInventory.player);

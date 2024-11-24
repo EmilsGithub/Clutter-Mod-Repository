@@ -1,6 +1,6 @@
 package net.emilsg.clutter.entity.custom;
 
-import net.emilsg.clutter.entity.ModEntities;
+import net.emilsg.clutter.entity.ModEntityTypes;
 import net.emilsg.clutter.entity.custom.goal.HighWanderAroundFarGoal;
 import net.emilsg.clutter.entity.custom.parent.ClutterAnimalEntity;
 import net.minecraft.block.Block;
@@ -257,7 +257,7 @@ public class BeaverEntity extends ClutterAnimalEntity {
     @Nullable
     @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
-        return ModEntities.BEAVER.create(world);
+        return ModEntityTypes.BEAVER.create(world);
     }
 
     public void travel(Vec3d movementInput) {

@@ -25,7 +25,7 @@ public class ModArmorMaterials {
                 map.put(ArmorItem.Type.HELMET, 2);
                 map.put(ArmorItem.Type.BODY, 4);
             }), 14, SoundEvents.ITEM_ARMOR_EQUIP_IRON, () -> Ingredient.ofItems(ModItems.SILVER_INGOT),
-                    List.of(new ArmorMaterial.Layer(Identifier.of(Clutter.MOD_ID, "silver"))), 0,0));
+                    List.of(new ArmorMaterial.Layer(Identifier.of(Clutter.MOD_ID, "silver"))), 0, 0));
 
     public static RegistryEntry<ArmorMaterial> registerArmorMaterial(String name, Supplier<ArmorMaterial> material) {
         return Registry.registerReference(Registries.ARMOR_MATERIAL, Identifier.of(Clutter.MOD_ID, name), material.get());

@@ -1122,7 +1122,8 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
 
         getOrCreateTagBuilder(ModBlockTags.ECHOFINS_SPAWN_ON).add(
                 Blocks.CHORUS_FLOWER,
-                Blocks.CHORUS_PLANT
+                Blocks.CHORUS_PLANT,
+                Blocks.END_STONE
         );
 
         getOrCreateTagBuilder(ModBlockTags.BUTTERFLIES_SPAWN_ON).add(

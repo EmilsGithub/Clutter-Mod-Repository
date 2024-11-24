@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": {
+      "tag": "c:copper_ingots"
+    },
+    "N": {
+      "tag": "c:copper_nuggets"
+    }
+  },
+  "pattern": [
+    "N",
+    "C",
+    "N"
+  ],
+  "result": {
+    "id": "clutter:copper_chain"
+  }
+}

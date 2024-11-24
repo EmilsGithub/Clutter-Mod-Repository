@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "tall_curtains",
+  "pattern": [
+    "C",
+    "C"
+  ],
+  "key": {
+    "C": {
+      "item": "clutter:long_red_kitchen_curtains"
+    }
+  },
+  "result": {
+    "id": "clutter:tall_red_curtains",
+    "count": 1
+  }
+}

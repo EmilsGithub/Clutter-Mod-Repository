@@ -1,7 +1,8 @@
 {
   "display": {
     "icon": {
-      "id": "clutter:redwood_sapling"
+      "id": "clutter:redwood_sapling",
+      "count": 1
     },
     "title": {
       "translate": "advancements.clutter.bet_i_could_climb_that.title"
@@ -24,7 +25,7 @@
             "entity": "this",
             "predicate": {
               "location": {
-                "biome": "clutter:giant_redwood_forest"
+                "biomes": "clutter:giant_redwood_forest"
               }
             }
           }

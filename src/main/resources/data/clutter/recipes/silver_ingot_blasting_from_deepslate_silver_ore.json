@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:blasting",
-  "ingredient": {
-    "item": "clutter:deepslate_silver_ore"
-  },
-  "result": "clutter:silver_ingot",
-  "experience": 1.0,
-  "cookingtime": 100
-}

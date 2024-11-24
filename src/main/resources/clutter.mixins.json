@@ -5,7 +5,6 @@
   "mixins": [
     "AbstractFireBlockMixin",
     "CookingRecipeJsonBuilderMixin",
-    "FireBlockInvoker",
     "FoliagePlacerTypeInvoker",
     "LivingEntityMixin",
     "MossBlockMixin",
@@ -19,7 +18,7 @@
   "client": [
     "BeaconScreenMixin",
     "ElytraFeatureRendererMixin",
-    "ItemRendererAccessor",
-    "ItemRendererMixin"
+    "ItemRendererAccessor"
+
   ]
 }

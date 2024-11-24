@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "golden_chandeliers",
+  "pattern": [
+    " N ",
+    "CIC",
+    "CIC"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:gold_ingot"
+    },
+    "N": {
+      "item": "minecraft:gold_nugget"
+    },
+    "C": {
+      "item": "minecraft:gray_candle"
+    }
+  },
+  "result": {
+    "id": "clutter:gray_golden_chandelier",
+    "count": 1
+  }
+}

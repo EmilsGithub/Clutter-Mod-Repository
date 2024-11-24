@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "clutter:copper_coin"
+    },
+    {
+      "item": "clutter:copper_coin"
+    },
+    {
+      "item": "clutter:copper_coin"
+    },
+    {
+      "item": "clutter:copper_coin"
+    },
+    {
+      "item": "clutter:copper_coin"
+    },
+    {
+      "item": "clutter:copper_coin"
+    },
+    {
+      "item": "clutter:copper_coin"
+    },
+    {
+      "item": "clutter:copper_coin"
+    }
+  ],
+  "result": {
+    "id": "clutter:copper_coin_stack"
+  }
+}
+

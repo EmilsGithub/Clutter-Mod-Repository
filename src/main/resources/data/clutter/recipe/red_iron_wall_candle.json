@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "iron_wall_candles",
+  "pattern": [
+    "C ",
+    "NI"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "N": {
+      "item": "minecraft:iron_nugget"
+    },
+    "C": {
+      "item": "minecraft:red_candle"
+    }
+  },
+  "result": {
+    "id": "clutter:red_iron_wall_candle",
+    "count": 1
+  }
+}

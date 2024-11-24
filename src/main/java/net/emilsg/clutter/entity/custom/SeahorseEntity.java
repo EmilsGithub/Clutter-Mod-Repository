@@ -1,6 +1,6 @@
 package net.emilsg.clutter.entity.custom;
 
-import net.emilsg.clutter.entity.ModEntities;
+import net.emilsg.clutter.entity.ModEntityTypes;
 import net.emilsg.clutter.entity.custom.goal.*;
 import net.emilsg.clutter.entity.custom.parent.ClutterFishEntity;
 import net.emilsg.clutter.entity.variants.SeahorseVariant;
@@ -24,6 +24,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUsage;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
@@ -42,7 +43,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
-public class SeahorseEntity extends ClutterFishEntity implements Bucketable {
+public class SeahorseEntity extends ClutterFishEntity {
     private static final TrackedData<Integer> VARIANT = DataTracker.registerData(SeahorseEntity.class, TrackedDataHandlerRegistry.INTEGER);
     private static final TrackedData<Boolean> HAS_CHILDREN = DataTracker.registerData(SeahorseEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private static final TrackedData<Float> HAS_CHILDREN_TIMER = DataTracker.registerData(SeahorseEntity.class, TrackedDataHandlerRegistry.FLOAT);
@@ -103,11 +104,6 @@ public class SeahorseEntity extends ClutterFishEntity implements Bucketable {
         return world.getBlockState(pos).getFluidState().isOf(Fluids.WATER);
     }
 
-    @Override
-    public void copyDataToStack(ItemStack stack) {
-        super.copyDataToStack(stack);
-        NbtComponent.set(DataComponentTypes.BUCKET_ENTITY_DATA, stack, nbtCompound -> nbtCompound.putInt("BucketVariantTag", this.getTypeVariant()));
-    }
 
     @Override
     public void copyDataFromNbt(NbtCompound nbt) {
@@ -116,6 +112,83 @@ public class SeahorseEntity extends ClutterFishEntity implements Bucketable {
         }
 
         super.copyDataFromNbt(nbt);
+    }
+
+    public void copyDataToStack(SeahorseEntity entity, ItemStack stack) {
+        stack.set(DataComponentTypes.CUSTOM_NAME, entity.getCustomName());
+        NbtComponent.set(DataComponentTypes.BUCKET_ENTITY_DATA, stack, (nbtCompound) -> {
+            if (entity.isAiDisabled()) {
+                nbtCompound.putBoolean("NoAI", entity.isAiDisabled());
+            }
+
+            if (entity.isSilent()) {
+                nbtCompound.putBoolean("Silent", entity.isSilent());
+            }
+
+            if (entity.hasNoGravity()) {
+                nbtCompound.putBoolean("NoGravity", entity.hasNoGravity());
+            }
+
+            if (entity.isGlowing()) {
+                nbtCompound.putBoolean("Glowing", entity.isGlowing());
+            }
+
+            if (entity.isInvulnerable()) {
+                nbtCompound.putBoolean("Invulnerable", entity.isInvulnerable());
+            }
+
+            nbtCompound.putFloat("Health", entity.getHealth());
+            nbtCompound.putInt("Variant", entity.getTypeVariant());
+        });
+    }
+
+
+    public void copyDataFromNbt(SeahorseEntity entity, NbtCompound nbt) {
+        if (nbt.contains("NoAI")) {
+            entity.setAiDisabled(nbt.getBoolean("NoAI"));
+        }
+
+        if (nbt.contains("Silent")) {
+            entity.setSilent(nbt.getBoolean("Silent"));
+        }
+
+        if (nbt.contains("NoGravity")) {
+            entity.setNoGravity(nbt.getBoolean("NoGravity"));
+        }
+
+        if (nbt.contains("Glowing")) {
+            entity.setGlowing(nbt.getBoolean("Glowing"));
+        }
+
+        if (nbt.contains("Invulnerable")) {
+            entity.setInvulnerable(nbt.getBoolean("Invulnerable"));
+        }
+
+        if (nbt.contains("Variant")) {
+            entity.setVariant(SeahorseVariant.byId(nbt.getInt("Variant")));
+        }
+
+        if (nbt.contains("Health", 99)) {
+            entity.setHealth(nbt.getFloat("Health"));
+        }
+
+    }
+
+    private ActionResult tryBucket(PlayerEntity player, Hand hand, SeahorseEntity seahorse) {
+        ItemStack itemStack = player.getStackInHand(hand);
+        if (itemStack.getItem() == Items.WATER_BUCKET && seahorse.isAlive()) {
+            seahorse.playSound(SoundEvents.ITEM_BUCKET_FILL_FISH, 1.0F, 1.0F);
+            ItemStack bottleStack = new ItemStack(ModItems.SEAHORSE_BUCKET);
+            copyDataToStack(seahorse, bottleStack);
+            ItemStack seahorseBucketStack = ItemUsage.exchangeStack(itemStack, player, bottleStack, false);
+            player.setStackInHand(hand, seahorseBucketStack);
+            World world = seahorse.getWorld();
+
+            seahorse.discard();
+            return ActionResult.success(world.isClient);
+        }
+
+        return ActionResult.PASS;
     }
 
     @Override
@@ -154,7 +227,7 @@ public class SeahorseEntity extends ClutterFishEntity implements Bucketable {
 
     @Nullable
     public SeahorseEntity createChild(ServerWorld world, SeahorseEntity entity) {
-        return ModEntities.SEAHORSE.create(world);
+        return ModEntityTypes.SEAHORSE.create(world);
     }
 
     public int getBreedingAge() {
@@ -264,7 +337,7 @@ public class SeahorseEntity extends ClutterFishEntity implements Bucketable {
             }
         }
 
-        return super.interactMob(player, hand);
+        return tryBucket(player, hand, this);
     }
 
     protected void eat(PlayerEntity player, Hand hand, ItemStack stack) {

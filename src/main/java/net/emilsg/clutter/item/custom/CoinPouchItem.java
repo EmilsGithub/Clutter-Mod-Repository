@@ -2,7 +2,6 @@ package net.emilsg.clutter.item.custom;
 
 import net.emilsg.clutter.item.ModItems;
 import net.emilsg.clutter.sound.ModSounds;
-import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -24,75 +23,60 @@ public class CoinPouchItem extends Item {
         super(settings);
     }
 
+    public static int getIntFromRarity(Rarity rarity) {
+        return switch (rarity) {
+            default -> 0;
+            case UNCOMMON -> 1;
+            case RARE -> 2;
+            case EPIC -> 3;
+        };
+    }
+
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
-        Rarity rarity = itemStack.getOrDefault(DataComponentTypes.RARITY, Rarity.COMMON);
-        int rarityInt = getIntFromRarity(rarity);
+        Rarity rarity = itemStack.getRarity();
         Random random = new Random();
         ItemStack copperCoins = new ItemStack(ModItems.COPPER_COIN);
-        copperCoins.setCount(getMaxFromRarity(rarityInt) + random.nextInt(getMaxFromRarity(rarityInt) - getMinFromRarity(rarityInt) + 1));
+        copperCoins.setCount(getMaxFromRarity(rarity) + random.nextInt(getMaxFromRarity(rarity) - getMinFromRarity(rarity) + 1));
         if (world.isClient) {
             user.swingHand(hand);
         }
         if (!world.isClient()) {
             user.dropItem(copperCoins, true);
-            if (rarityInt == 3) {
+            if (rarity == Rarity.EPIC) {
                 ItemStack silverCoins = new ItemStack(ModItems.SILVER_COIN);
                 silverCoins.setCount(random.nextInt(2));
                 user.dropItem(silverCoins, true);
             }
-            itemStack.decrement(1);
+            if (!user.getAbilities().creativeMode) itemStack.decrement(1);
             world.playSound(null, user.getBlockPos(), ModSounds.COIN_POUCH_USE, SoundCategory.PLAYERS, 1f, 1f);
         }
         return super.use(world, user, hand);
     }
 
-    private int getMinFromRarity(int rarity) {
+    private int getMinFromRarity(Rarity rarity) {
         return switch (rarity) {
             default -> 2;
-            case 1 -> 3;
-            case 2 -> 6;
-            case 3 -> 9;
+            case UNCOMMON -> 3;
+            case RARE -> 6;
+            case EPIC -> 9;
         };
     }
 
-    private int getMaxFromRarity(int rarity) {
+    private int getMaxFromRarity(Rarity rarity) {
         return switch (rarity) {
             default -> 3;
-            case 1 -> 6;
-            case 2 -> 9;
-            case 3 -> 12;
+            case UNCOMMON -> 6;
+            case RARE -> 9;
+            case EPIC -> 12;
         };
     }
-
-    public static int getIntFromRarity(Rarity rarity) {
-        return switch (rarity) {
-            default -> 1;
-            case UNCOMMON -> 2;
-            case RARE -> 3;
-            case EPIC -> 4;
-        };
-    }
-
-    //@Override
-    //public Rarity getRarity(ItemStack stack) {
-    //    if (stack.getNbt() == null || !stack.getNbt().contains("Rarity", 3)) return super.getRarity(stack);
-
-    //    int rarity = stack.getNbt().getInt("Rarity");
-
-    //    return switch (rarity) {
-    //        default -> Rarity.COMMON;
-    //        case 1 -> Rarity.UNCOMMON;
-    //        case 2 -> Rarity.RARE;
-    //        case 3 -> Rarity.EPIC;
-    //    };
-    //}
 
     @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
-        Rarity rarity = stack.getOrDefault(DataComponentTypes.RARITY, Rarity.COMMON);
-        String string = "clutter.coin_pouch_" + getIntFromRarity(rarity);
+        Rarity rarity = stack.getRarity();
+        String string = "clutter.coin_pouch_" + rarity.toString().toLowerCase();
         MutableText mutableText = Text.translatable(string);
         mutableText.formatted(rarity.getFormatting());
         tooltip.add(mutableText);

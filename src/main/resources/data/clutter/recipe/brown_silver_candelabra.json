@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "silver_candelabras",
+  "pattern": [
+    "CCC",
+    "NIN",
+    " I "
+  ],
+  "key": {
+    "I": {
+      "tag": "c:silver_ingots"
+    },
+    "N": {
+      "tag": "c:silver_nuggets"
+    },
+    "C": {
+      "item": "minecraft:brown_candle"
+    }
+  },
+  "result": {
+    "id": "clutter:brown_silver_candelabra",
+    "count": 1
+  }
+}

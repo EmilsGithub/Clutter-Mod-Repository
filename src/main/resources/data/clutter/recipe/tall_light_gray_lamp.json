@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "tall_lamps",
+  "pattern": [
+    "W",
+    "G",
+    "S"
+  ],
+  "key": {
+    "W": {
+      "item": "clutter:light_gray_lamp"
+    },
+    "G": {
+      "item": "minecraft:stick"
+    },
+    "S": {
+      "tag": "minecraft:wooden_slabs"
+    }
+  },
+  "result": {
+    "id": "clutter:tall_light_gray_lamp",
+    "count": 1
+  }
+}

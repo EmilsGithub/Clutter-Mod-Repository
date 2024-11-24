@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "iron_chandeliers",
+  "pattern": [
+    " N ",
+    "CIC",
+    "CIC"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "N": {
+      "item": "minecraft:iron_nugget"
+    },
+    "C": {
+      "item": "minecraft:red_candle"
+    }
+  },
+  "result": {
+    "id": "clutter:red_iron_chandelier",
+    "count": 1
+  }
+}

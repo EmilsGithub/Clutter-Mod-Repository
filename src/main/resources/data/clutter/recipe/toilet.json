@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "W",
+    "B",
+    "W"
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:white_terracotta"
+    },
+    "B": {
+      "item": "minecraft:water_bucket"
+    }
+  },
+  "result": {
+    "id": "clutter:toilet",
+    "count": 1
+  }
+}

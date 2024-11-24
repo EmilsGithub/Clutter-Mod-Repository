@@ -17,7 +17,7 @@ public class WallBookshelfScreenHandler extends ScreenHandler {
     }
 
     public WallBookshelfScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory) {
-        super(ModScreenHandlers.WALL_BOOKSHELF_SCREEN_HANDLER, syncId);
+        super(ModScreenHandlerTypes.WALL_BOOKSHELF_SCREEN_HANDLER, syncId);
         this.inventory = inventory;
         checkSize(inventory, 5);
         inventory.onOpen(playerInventory.player);

@@ -413,17 +413,17 @@ public class ButterflyEntity extends ClutterAnimalEntity {
 
     }
 
-    private ActionResult tryBottle(PlayerEntity player, Hand hand, ButterflyEntity entity) {
+    private ActionResult tryBottle(PlayerEntity player, Hand hand, ButterflyEntity butterfly) {
         ItemStack itemStack = player.getStackInHand(hand);
-        if (itemStack.getItem() == Items.GLASS_BOTTLE && entity.isAlive()) {
-            entity.playSound(SoundEvents.ITEM_BOTTLE_FILL_DRAGONBREATH, 1.0F, 1.0F);
+        if (itemStack.getItem() == Items.GLASS_BOTTLE && butterfly.isAlive()) {
+            butterfly.playSound(SoundEvents.ITEM_BOTTLE_FILL_DRAGONBREATH, 1.0F, 1.0F);
             ItemStack bottleStack = new ItemStack(ModItems.BUTTERFLY_IN_A_BOTTLE);
-            copyDataToStack(entity, bottleStack);
+            copyDataToStack(butterfly, bottleStack);
             ItemStack butterflyBottleStack = ItemUsage.exchangeStack(itemStack, player, bottleStack, false);
             player.setStackInHand(hand, butterflyBottleStack);
-            World world = entity.getWorld();
+            World world = butterfly.getWorld();
 
-            entity.discard();
+            butterfly.discard();
             return ActionResult.success(world.isClient);
         }
 

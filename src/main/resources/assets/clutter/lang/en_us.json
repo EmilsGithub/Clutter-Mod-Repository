@@ -1294,11 +1294,6 @@
 
   "item.clutter.mossbloom_antler": "Mossbloom Antler",
 
-  "item.clutter.common_coin_pouch": "Coin Pouch",
-  "item.clutter.uncommon_coin_pouch": "Coin Pouch",
-  "item.clutter.rare_coin_pouch": "Coin Pouch",
-  "item.clutter.epic_coin_pouch": "Coin Pouch",
-
   "item.clutter.butterfly_cocoon": "Butterfly Cocoon",
   "item.clutter.kiwi_bird_egg": "Kiwi Bird Egg",
 
@@ -1475,10 +1470,10 @@
   "clutter.soul.butterfly": "Soul Butterfly",
 
   "item.clutter.coin_pouch": "Coin Pouch",
-  "clutter.coin_pouch_0": "Common",
-  "clutter.coin_pouch_1": "Uncommon",
-  "clutter.coin_pouch_2": "Rare",
-  "clutter.coin_pouch_3": "Epic",
+  "clutter.coin_pouch_common": "Common",
+  "clutter.coin_pouch_uncommon": "Uncommon",
+  "clutter.coin_pouch_rare": "Rare",
+  "clutter.coin_pouch_epic": "Epic",
   "clutter.coin_pouch_empty": "Empty",
 
   "block.clutter.anchor": "Anchor",
@@ -1525,6 +1520,11 @@
 
   "item.clutter.seahorse_bucket": "Bucket of Seahorse",
 
+  "clutter.yellow.seahorse": "Yellow Seahorse",
+  "clutter.light_blue.seahorse": "Light Blue Seahorse",
+  "clutter.red.seahorse": "Red Seahorse",
+  "clutter.purple.seahorse": "Purple Seahorse",
+
   "advancements.clutter.bet_i_could_climb_that.title": "Bet I Could Climb That!",
   "advancements.clutter.bet_i_could_climb_that.description": "Discover a Giant Redwood Forest!",
 
@@ -1532,5 +1532,8 @@
   "advancements.clutter.tiny_water_dragon.description": "It Looks Like a Dragon at Least!",
 
   "biome.clutter.lupine_fields": "Lupine Fields",
-  "biome.clutter.giant_redwood_forest": "Giant Redwood Forest"
+  "biome.clutter.giant_redwood_forest": "Giant Redwood Forest",
+
+  "item.clutter.petting_glove": "Petting Glove",
+  "item.clutter.petting_glove.tooltip": "Has a Slight Chance of Healing Hurt Entities on Use"
 }

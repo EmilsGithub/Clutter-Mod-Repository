@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "clutter:red_wall_mushrooms"
+    }
+  ],
+  "result": {
+    "id": "minecraft:red_mushroom",
+    "count": 2
+  }
+}

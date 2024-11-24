@@ -9,10 +9,10 @@ import net.minecraft.screen.PropertyDelegate;
 
 public class BrickKilnScreenHandler extends AbstractFurnaceScreenHandler {
     public BrickKilnScreenHandler(int syncId, PlayerInventory playerInventory) {
-        super(ModScreenHandlers.BRICK_KILN_SCREEN_HANDLER, KilningRecipe.Type.INSTANCE, RecipeBookCategory.FURNACE, syncId, playerInventory);
+        super(ModScreenHandlerTypes.BRICK_KILN_SCREEN_HANDLER, KilningRecipe.Type.INSTANCE, RecipeBookCategory.FURNACE, syncId, playerInventory);
     }
 
     public BrickKilnScreenHandler(int syncId, PlayerInventory playerInventory, BrickKilnFurnaceBlockEntity blockEntity, PropertyDelegate propertyDelegate) {
-        super(ModScreenHandlers.BRICK_KILN_SCREEN_HANDLER, KilningRecipe.Type.INSTANCE, RecipeBookCategory.FURNACE, syncId, playerInventory, blockEntity, propertyDelegate);
+        super(ModScreenHandlerTypes.BRICK_KILN_SCREEN_HANDLER, KilningRecipe.Type.INSTANCE, RecipeBookCategory.FURNACE, syncId, playerInventory, blockEntity, propertyDelegate);
     }
 }

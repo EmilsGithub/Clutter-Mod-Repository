@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "silver_wall_candles",
+  "pattern": [
+    "C ",
+    "NI"
+  ],
+  "key": {
+    "I": {
+      "tag": "c:silver_ingots"
+    },
+    "N": {
+      "tag": "c:silver_nuggets"
+    },
+    "C": {
+      "item": "minecraft:yellow_candle"
+    }
+  },
+  "result": {
+    "id": "clutter:yellow_silver_wall_candle",
+    "count": 1
+  }
+}

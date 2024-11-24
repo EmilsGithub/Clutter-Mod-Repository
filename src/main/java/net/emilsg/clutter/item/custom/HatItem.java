@@ -11,7 +11,6 @@ import net.minecraft.world.World;
 
 public class HatItem extends Item implements Equipment {
 
-
     public HatItem(Settings settings) {
         super(settings);
     }

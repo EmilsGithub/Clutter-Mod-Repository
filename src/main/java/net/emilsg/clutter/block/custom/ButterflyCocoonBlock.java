@@ -1,6 +1,6 @@
 package net.emilsg.clutter.block.custom;
 
-import net.emilsg.clutter.entity.ModEntities;
+import net.emilsg.clutter.entity.ModEntityTypes;
 import net.emilsg.clutter.entity.custom.ButterflyEntity;
 import net.emilsg.clutter.entity.variants.ButterflyVariant;
 import net.emilsg.clutter.item.ModItems;
@@ -91,7 +91,7 @@ public class ButterflyCocoonBlock extends Block {
 
                 for (int j = 0; j < 1; ++j) {
                     world.syncWorldEvent(2001, pos, Block.getRawIdFromState(state));
-                    ButterflyEntity butterflyEntity = ModEntities.BUTTERFLY.create(world);
+                    ButterflyEntity butterflyEntity = ModEntityTypes.BUTTERFLY.create(world);
                     if (butterflyEntity != null) {
                         RegistryEntry<Biome> registryEntry = world.getBiome(pos);
                         ButterflyVariant variant = ButterflyVariant.byId(1);

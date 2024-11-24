@@ -1,9 +1,11 @@
 package net.emilsg.clutter.easter_egg;
 
-import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.FrogEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
+import net.minecraft.world.World;
 
 import java.util.Objects;
 import java.util.Random;
@@ -31,22 +33,24 @@ public class NameOnPet {
             "Aatrox", "Xolaani"
     };
 
-    public static Entity giveName(Entity finalClosestEntity, PlayerEntity player) {
-        if (!(finalClosestEntity instanceof FrogEntity)) {
-            player.sendMessage(Text.of("You pet " + finalClosestEntity.getName().getString() + "."));
-        } else if (!Objects.equals(finalClosestEntity.getName().getString(), "Frog")) {
-            player.sendMessage(Text.of("You pet " + finalClosestEntity.getName().getString() + "."));
-        } else if (player.getName().getString().equals("E7Smy")) {
-            String randomFrogName = getRandomFrogName(finalClosestEntity);
-            player.sendMessage(Text.of("You bequeathed " + finalClosestEntity.getName().getString() + " with the name: " + randomFrogName + "."));
-            finalClosestEntity.setCustomName(Text.of(randomFrogName));
+    public static LivingEntity giveName(LivingEntity finalClosestEntity, PlayerEntity player, World world) {
+        if (world instanceof ServerWorld) {
+            if (!(finalClosestEntity instanceof FrogEntity)) {
+                player.sendMessage(Text.of("You pet " + finalClosestEntity.getName().getString() + "."));
+            } else if (!Objects.equals(finalClosestEntity.getName().getString(), "Frog")) {
+                player.sendMessage(Text.of("You pet " + finalClosestEntity.getName().getString() + "."));
+            } else if (player.getName().getString().equals("E7Smy")) {
+                String randomFrogName = getRandomFrogName(finalClosestEntity);
+                player.sendMessage(Text.of("You bequeathed " + finalClosestEntity.getName().getString() + " with the name: " + randomFrogName + "."));
+                finalClosestEntity.setCustomName(Text.of(randomFrogName));
+            }
         }
 
         return finalClosestEntity;
     }
 
 
-    private static String getRandomFrogName(Entity entity) {
+    private static String getRandomFrogName(LivingEntity entity) {
         String entityId = String.valueOf(entity.getUuid());
         long idAsLong = stingToHash(entityId);
         int longAsInt = (int) Math.abs(idAsLong);

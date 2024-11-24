@@ -33,6 +33,7 @@ import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
@@ -85,10 +86,15 @@ public class EchofinEntity extends ClutterAnimalEntity {
     }
 
     @Override
+    public boolean canImmediatelyDespawn(double distanceSquared) {
+        return true;
+    }
+
+    @Override
     protected void initGoals() {
         this.goalSelector.add(0, new AnimalMateGoal(this, 1.0));
         this.goalSelector.add(1, new EscapeDangerGoal(this, 1.25));
-        this.goalSelector.add(2, new MeleeAttackGoal(this, 3.0, true));
+        this.goalSelector.add(2, new TeleportOrLevitateAttackGoal(this, 3.0, true));
         this.goalSelector.add(3, new EchofinWanderAroundGoal(this));
         this.targetSelector.add(1, new EchofinConditionalActiveTargetGoal(this, PlayerEntity.class, false));
     }
@@ -225,29 +231,26 @@ public class EchofinEntity extends ClutterAnimalEntity {
         return true;
     }
 
-    @Override
-    protected void attackLivingEntity(LivingEntity target) {
-        World world = target.getWorld();
-
-        if (world.isClient || !(target instanceof PlayerEntity player)) return;
-
-        if (shouldTeleportPlayers()) teleportPlayer(player, world);
-        else if (shouldLevitatePlayers()) levitatePlayer(player);
-    }
 
     private void teleportPlayer(PlayerEntity player, World world) {
-        for(int i = 0; i < 16; ++i) {
-            double x = player.getX() + (player.getWorld().getRandom().nextDouble() - 0.5) * 512.0;
-            double y = MathHelper.clamp(player.getY() + (double)(player.getWorld().getRandom().nextInt(16) - 8), (double)world.getBottomY(), (double)(world.getBottomY() + ((ServerWorld)world).getLogicalHeight() - 1));
-            double z = player.getZ() + (player.getWorld().getRandom().nextDouble() - 0.5) * 512.0;
+        for (int i = 0; i < 16; i++) {
+            double d = player.getX() + (player.getRandom().nextDouble() - 0.5) * 512.0;
+            double e = MathHelper.clamp(player.getY() + (double)(player.getRandom().nextInt(16) - 8), (double)world.getBottomY(), (double)(world.getBottomY() + ((ServerWorld)world).getLogicalHeight() - 1));
+            double f = player.getZ() + (player.getRandom().nextDouble() - 0.5) * 512.0;
+
             if (player.hasVehicle()) {
                 player.stopRiding();
             }
 
             Vec3d vec3d = player.getPos();
-            if (player.teleport(x, y, z, true)) {
+            if (player.teleport(d, e, f, true)) {
                 world.emitGameEvent(GameEvent.TELEPORT, vec3d, GameEvent.Emitter.of(player));
+                SoundEvent soundEvent = SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT;
+                SoundCategory soundCategory = SoundCategory.PLAYERS;
                 this.setEntityAbilityTimer(0);
+
+                world.playSound(null, player.getX(), player.getY(), player.getZ(), soundEvent, soundCategory);
+                player.onLanding();
                 break;
             }
         }
@@ -327,6 +330,28 @@ public class EchofinEntity extends ClutterAnimalEntity {
     public void refreshPositionAndAngles(BlockPos pos, float yaw, float pitch) {
         this.setHomePos(pos);
         super.refreshPositionAndAngles(pos, yaw, pitch);
+    }
+
+    private static class TeleportOrLevitateAttackGoal extends MeleeAttackGoal {
+        private final EchofinEntity echofinEntity;
+
+        public TeleportOrLevitateAttackGoal(EchofinEntity echofinEntity, double speed, boolean pauseWhenMobIdle) {
+            super(echofinEntity, speed, pauseWhenMobIdle);
+            this.echofinEntity = echofinEntity;
+        }
+
+        @Override
+        protected void attack(LivingEntity target) {
+            World world = this.echofinEntity.getWorld();
+            if (this.canAttack(target)) {
+                this.resetCooldown();
+                this.mob.swingHand(Hand.MAIN_HAND);
+                if(this.mob.tryAttack(target) && target instanceof PlayerEntity player) {
+                    if (echofinEntity.shouldTeleportPlayers()) echofinEntity.teleportPlayer(player, world);
+                    else if (echofinEntity.shouldLevitatePlayers()) echofinEntity.levitatePlayer(player);
+                }
+            }
+        }
     }
 
     @Override

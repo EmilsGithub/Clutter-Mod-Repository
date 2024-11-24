@@ -596,6 +596,7 @@ public class ModItemGroups {
                 .icon(() -> new ItemStack(ModItems.CYAN_BUTTERFLY_ELYTRA))
                 .entries((displayContext, entries) -> {
                     entries.add(ModItems.CLUTTER_RECIPE_BOOK);
+                    entries.add(ModItems.PETTING_GLOVE);
 
                     entries.add(ModItems.ONYX);
                     entries.add(ModItems.RAW_ONYX);

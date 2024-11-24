@@ -1,6 +1,6 @@
 package net.emilsg.clutter.data;
 
-import net.emilsg.clutter.entity.ModEntities;
+import net.emilsg.clutter.entity.ModEntityTypes;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.registry.RegistryWrapper;
@@ -19,7 +19,7 @@ public class EntityTagDataGen extends FabricTagProvider.EntityTypeTagProvider {
         /** Vanilla **/
 
         getOrCreateTagBuilder(EntityTypeTags.POWDER_SNOW_WALKABLE_MOBS)
-                .add(ModEntities.EMPEROR_PENGUIN);
+                .add(ModEntityTypes.EMPEROR_PENGUIN);
 
         /** Modded **/
 

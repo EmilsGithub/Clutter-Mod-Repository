@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SS",
+    "SS"
+  ],
+  "key": {
+    "S": {
+      "item": "clutter:sulphur"
+    }
+  },
+  "result": {
+    "id": "clutter:sulphur_block",
+    "count": 1
+  }
+}

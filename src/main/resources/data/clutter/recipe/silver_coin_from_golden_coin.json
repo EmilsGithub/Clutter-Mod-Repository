@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "silver_coins",
+  "pattern": [
+    "C"
+  ],
+  "key": {
+    "C": {
+      "item": "clutter:golden_coin"
+    }
+  },
+  "result": {
+    "id": "clutter:silver_coin",
+    "count": 4
+  }
+}

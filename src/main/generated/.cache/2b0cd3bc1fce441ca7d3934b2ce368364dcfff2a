@@ -1,4 +1,4 @@
-// 1.21.1	2024-10-21T19:20:17.1575195	Clutter/Block Loot Tables
+// 1.21.1	2024-11-24T20:34:00.8194436	Clutter/Block Loot Tables
 8b882c0a3e7542c56f77e0583d8062f3a4962a84 data\clutter\loot_table\blocks\slate_coral_block.json
 cd2523132db1e6b41a637a5f87832ae2f7e769be data\minecraft\loot_table\blocks\warped_slab.json
 69857d16afe425e0bea35b951c1f5decbfc9ab6b data\clutter\loot_table\blocks\dark_oak_wall_cupboard.json
@@ -241,8 +241,8 @@ b3b7a010146c3b52297466f58193489fcb3c08a7 data\clutter\loot_table\blocks\cherry_m
 2ab99c6e18251c94d8106ab595989a156f67e4b1 data\minecraft\loot_table\blocks\stripped_jungle_wood.json
 2c0d83f2ee372ed0121407de0a9856aaefe7d24a data\clutter\loot_table\blocks\mangrove_cupboard.json
 34124970421649d2dabb05a3ce9a9d92978438be data\clutter\loot_table\blocks\dead_cocoa_coral_fan.json
-4ce31fd6720ae69b8a761b1f0e6ff907625c3734 data\minecraft\loot_table\blocks\bamboo_slab.json
 bf0089624cef975b60f4d429693a0288cb4ce7da data\clutter\loot_table\blocks\crimson_wall_cupboard.json
+4ce31fd6720ae69b8a761b1f0e6ff907625c3734 data\minecraft\loot_table\blocks\bamboo_slab.json
 8405ecdf07802e623a5107157813862c1957e1c3 data\clutter\loot_table\blocks\waxed_exposed_aquatic_torch.json
 d7b292195feff3731b8417331a93e246e2b2c9ce data\minecraft\loot_table\blocks\mangrove_hanging_sign.json
 c753f81a9ee54e21e2a3249855de1b562fe39763 data\clutter\loot_table\blocks\redwood_fence_gate.json

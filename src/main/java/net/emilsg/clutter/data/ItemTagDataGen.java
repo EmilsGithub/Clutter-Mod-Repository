@@ -26,10 +26,33 @@ public class ItemTagDataGen extends FabricTagProvider.ItemTagProvider {
                 ModItems.SILVER_CHESTPLATE,
                 ModItems.SILVER_LEGGINGS,
                 ModItems.SILVER_BOOTS
-                //ModItems.COPPER_DIVING_HELMET,
-                //ModItems.COPPER_DIVING_CHESTPLATE,
-                //ModItems.COPPER_DIVING_LEGGINGS,
-                //ModItems.COPPER_DIVING_BOOTS
+        );
+
+        getOrCreateTagBuilder(ItemTags.BOOKSHELF_BOOKS).add(
+                ModItems.CLUTTER_RECIPE_BOOK
+        );
+
+        getOrCreateTagBuilder(ItemTags.ARMOR_ENCHANTABLE).add(
+                ModItems.SILVER_HELMET,
+                ModItems.SILVER_CHESTPLATE,
+                ModItems.SILVER_LEGGINGS,
+                ModItems.SILVER_BOOTS
+        );
+
+        getOrCreateTagBuilder(ItemTags.HEAD_ARMOR_ENCHANTABLE).add(
+                ModItems.SILVER_HELMET
+        );
+
+        getOrCreateTagBuilder(ItemTags.CHEST_ARMOR_ENCHANTABLE).add(
+                ModItems.SILVER_CHESTPLATE
+        );
+
+        getOrCreateTagBuilder(ItemTags.LEG_ARMOR).add(
+                ModItems.SILVER_LEGGINGS
+        );
+
+        getOrCreateTagBuilder(ItemTags.FOOT_ARMOR_ENCHANTABLE).add(
+                ModItems.SILVER_BOOTS
         );
 
         getOrCreateTagBuilder(ItemTags.TRIM_MATERIALS).add(
@@ -46,28 +69,6 @@ public class ItemTagDataGen extends FabricTagProvider.ItemTagProvider {
                 Items.GLOW_BERRIES,
                 Items.SWEET_BERRIES
         );
-
-        //getOrCreateTagBuilder(ModItemTags.BOTTLED_BUTTERFLIES).add(
-        //        ModItems.WHITE_BUTTERFLY_IN_A_BOTTLE,
-        //        ModItems.LIGHT_GRAY_BUTTERFLY_IN_A_BOTTLE,
-        //        ModItems.GRAY_BUTTERFLY_IN_A_BOTTLE,
-        //        ModItems.BLACK_BUTTERFLY_IN_A_BOTTLE,
-        //        ModItems.BROWN_BUTTERFLY_IN_A_BOTTLE,
-        //        ModItems.RED_BUTTERFLY_IN_A_BOTTLE,
-        //        ModItems.ORANGE_BUTTERFLY_IN_A_BOTTLE,
-        //        ModItems.YELLOW_BUTTERFLY_IN_A_BOTTLE,
-        //        ModItems.LIME_BUTTERFLY_IN_A_BOTTLE,
-        //        ModItems.GREEN_BUTTERFLY_IN_A_BOTTLE,
-        //        ModItems.CYAN_BUTTERFLY_IN_A_BOTTLE,
-        //        ModItems.LIGHT_BLUE_BUTTERFLY_IN_A_BOTTLE,
-        //        ModItems.BLUE_BUTTERFLY_IN_A_BOTTLE,
-        //        ModItems.PURPLE_BUTTERFLY_IN_A_BOTTLE,
-        //        ModItems.MAGENTA_BUTTERFLY_IN_A_BOTTLE,
-        //        ModItems.PINK_BUTTERFLY_IN_A_BOTTLE,
-        //        ModItems.CRIMSON_BUTTERFLY_IN_A_BOTTLE,
-        //        ModItems.WARPED_BUTTERFLY_IN_A_BOTTLE,
-        //        ModItems.SOUL_BUTTERFLY_IN_A_BOTTLE
-        //);
 
         getOrCreateTagBuilder(ModItemTags.REDWOOD_LOGS).add(
                 ModBlocks.REDWOOD_LOG.asItem(),

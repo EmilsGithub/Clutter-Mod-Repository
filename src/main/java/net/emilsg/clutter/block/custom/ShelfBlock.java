@@ -10,7 +10,6 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.screen.ScreenHandler;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
@@ -22,7 +21,6 @@ import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
@@ -30,7 +28,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
-public class ShelfBlock extends BlockWithEntity implements Waterloggable {
+public class ShelfBlock extends BlockWithEntity implements BlockEntityProvider, Waterloggable {
     public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
     protected static final VoxelShape NORTH_SHAPE = Block.createCuboidShape(0.0, 3.0, 0.0, 16.0, 7.0, 8.0);
@@ -68,10 +66,11 @@ public class ShelfBlock extends BlockWithEntity implements Waterloggable {
             return ActionResult.SUCCESS;
         }
 
-        BlockEntity blockEntity = world.getBlockEntity(pos);
-        if (blockEntity instanceof ShelfInventoryBlockEntity) {
-            player.openHandledScreen((ShelfInventoryBlockEntity) blockEntity);
+        if(world.getBlockEntity(pos) instanceof ShelfInventoryBlockEntity shelfInventoryBlockEntity && !world.isClient()) {
+            world.updateListeners(pos, state, state, 0);
+            player.openHandledScreen(shelfInventoryBlockEntity);
         }
+
         return ActionResult.CONSUME;
     }
 
@@ -136,14 +135,6 @@ public class ShelfBlock extends BlockWithEntity implements Waterloggable {
     @Override
     public BlockRenderType getRenderType(BlockState state) {
         return BlockRenderType.MODEL;
-    }
-
-    @Override
-    public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        BlockEntity blockEntity = world.getBlockEntity(pos);
-        if (blockEntity instanceof ShelfInventoryBlockEntity) {
-            ((ShelfInventoryBlockEntity) blockEntity).tick();
-        }
     }
 
     @Override

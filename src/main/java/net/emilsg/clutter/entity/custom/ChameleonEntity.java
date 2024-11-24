@@ -1,6 +1,6 @@
 package net.emilsg.clutter.entity.custom;
 
-import net.emilsg.clutter.entity.ModEntities;
+import net.emilsg.clutter.entity.ModEntityTypes;
 import net.emilsg.clutter.entity.custom.parent.ClutterTameableEntity;
 import net.emilsg.clutter.item.ModItems;
 import net.emilsg.clutter.item.custom.ButterflyBottleItem;
@@ -142,7 +142,7 @@ public class ChameleonEntity extends ClutterTameableEntity {
 
     @Nullable
     public ChameleonEntity createChild(ServerWorld serverWorld, PassiveEntity passiveEntity) {
-        ChameleonEntity chameleonEntity = ModEntities.CHAMELEON.create(serverWorld);
+        ChameleonEntity chameleonEntity = ModEntityTypes.CHAMELEON.create(serverWorld);
         if (chameleonEntity != null) {
             UUID uUID = this.getOwnerUuid();
             if (uUID != null) {

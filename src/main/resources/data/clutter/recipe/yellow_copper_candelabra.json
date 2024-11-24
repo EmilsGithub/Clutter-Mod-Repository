@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "copper_candelabras",
+  "pattern": [
+    "CCC",
+    "NIN",
+    " I "
+  ],
+  "key": {
+    "I": {
+      "tag": "c:copper_ingots"
+    },
+    "N": {
+      "tag": "c:copper_nuggets"
+    },
+    "C": {
+      "item": "minecraft:yellow_candle"
+    }
+  },
+  "result": {
+    "id": "clutter:yellow_copper_candelabra",
+    "count": 1
+  }
+}

@@ -1,6 +1,6 @@
 package net.emilsg.clutter.entity.custom;
 
-import net.emilsg.clutter.entity.ModEntities;
+import net.emilsg.clutter.entity.ModEntityTypes;
 import net.emilsg.clutter.entity.custom.parent.ClutterAnimalEntity;
 import net.emilsg.clutter.util.ModBlockTags;
 import net.minecraft.entity.EntityType;
@@ -36,7 +36,7 @@ public class WarpedNewtEntity extends AbstractNetherNewtEntity {
 
     @Override
     public @Nullable PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
-        return ModEntities.WARPED_NEWT.create(world);
+        return ModEntityTypes.WARPED_NEWT.create(world);
     }
 
     @Override

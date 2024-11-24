@@ -225,29 +225,20 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .criterion(hasItem(Items.WHITE_WOOL), conditionsFromTag(ItemTags.WOOL))
                 .offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(ModBlocks.PET_BED)));
 
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.PETTING_GLOVE)
+                .pattern(" LL")
+                .pattern("LLL")
+                .pattern(" WW")
+                .input('L', Items.LEATHER)
+                .input('W', ItemTags.WOOL)
+                .criterion(hasItem(Items.LEATHER), conditionsFromItem(Items.LEATHER))
+                .criterion(hasItem(Items.WHITE_WOOL), conditionsFromTag(ItemTags.WOOL))
+                .offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(ModItems.PETTING_GLOVE)));
+
         offerCompactingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, Blocks.WET_SPONGE, ModItems.SPONGE_SHARD);
         offer2x2CompactingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GLOWLILY_BLOCK, ModItems.GLOWLILY_BULB);
 
         offerArmorRecipe(exporter, ModItems.SILVER_INGOT, ModItems.SILVER_HELMET, ModItems.SILVER_CHESTPLATE, ModItems.SILVER_LEGGINGS, ModItems.SILVER_BOOTS);
-
-        //ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.COPPER_DIVING_HELMET)
-        //        .pattern("###").pattern("#G#")
-        //        .input('#', Items.COPPER_INGOT)
-        //        .input('G', Items.GLASS)
-        //        .criterion(hasItem(Items.COPPER_INGOT), conditionsFromItem(Items.COPPER_INGOT))
-        //        .criterion(hasItem(Items.GLASS), conditionsFromItem(Items.GLASS))
-        //        .offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(ModItems.COPPER_DIVING_HELMET)));
-
-        //ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.COPPER_DIVING_CHESTPLATE)
-        //        .pattern("# #").pattern("#H#").pattern("###")
-        //        .input('#', Items.COPPER_INGOT)
-        //        .input('H', Items.HEART_OF_THE_SEA)
-        //        .criterion(hasItem(Items.COPPER_INGOT), conditionsFromItem(Items.COPPER_INGOT))
-        //        .criterion(hasItem(Items.HEART_OF_THE_SEA), conditionsFromItem(Items.HEART_OF_THE_SEA))
-        //        .offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(ModItems.COPPER_DIVING_CHESTPLATE)));
-
-        //offerLeggingsRecipe(exporter, Items.COPPER_INGOT, ModItems.COPPER_DIVING_LEGGINGS);
-        //offerBootsRecipe(exporter, Items.COPPER_INGOT, ModItems.COPPER_DIVING_BOOTS);
 
         offerSulphurRecipe(exporter, ModBlocks.ONYX_BLOCK, ModBlocks.BLACK_ONYX_BLOCK, RecipeCategory.BUILDING_BLOCKS);
         offerSulphurRecipe(exporter, ModBlocks.ONYX_SLAB, ModBlocks.BLACK_ONYX_SLAB, RecipeCategory.BUILDING_BLOCKS);
@@ -277,9 +268,9 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(ModItems.PROPELLER_CAP)));
 
         ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.BUTTERFLY_WINGS)
-                .input(Ingredient.fromTag(ModItemTags.BOTTLED_BUTTERFLIES))
-                .input(Ingredient.fromTag(ModItemTags.BOTTLED_BUTTERFLIES))
-                .input(Ingredient.fromTag(ModItemTags.BOTTLED_BUTTERFLIES))
+                .input(ModItems.BUTTERFLY_IN_A_BOTTLE)
+                .input(ModItems.BUTTERFLY_IN_A_BOTTLE)
+                .input(ModItems.BUTTERFLY_IN_A_BOTTLE)
                 .input(Items.STRING)
                 .criterion(hasItem(Items.STRING), conditionsFromItem(Items.STRING))
                 .offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(ModItems.BUTTERFLY_WINGS)));

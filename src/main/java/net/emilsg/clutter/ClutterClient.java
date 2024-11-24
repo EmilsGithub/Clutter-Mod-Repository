@@ -5,14 +5,14 @@ import net.emilsg.clutter.block.custom.WindowSillBlock;
 import net.emilsg.clutter.block.custom.cutout.ICutoutRenderable;
 import net.emilsg.clutter.block.entity.render.ShelfBlockEntityRenderer;
 import net.emilsg.clutter.compat.trinkets.client.TrinketsIntegrationClient;
-import net.emilsg.clutter.entity.ModEntities;
+import net.emilsg.clutter.entity.ModEntityTypes;
 import net.emilsg.clutter.entity.client.layer.ModModelLayers;
 import net.emilsg.clutter.entity.client.model.*;
 import net.emilsg.clutter.entity.client.player.RendererRegistration;
 import net.emilsg.clutter.entity.client.player.model.ScubaModel;
 import net.emilsg.clutter.entity.client.render.*;
+import net.emilsg.clutter.networking.ModMessages;
 import net.emilsg.clutter.screen.*;
-import net.emilsg.clutter.util.ModKeyInputHandler;
 import net.emilsg.clutter.util.ModModelPredicateProvider;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
@@ -46,13 +46,12 @@ public class ClutterClient implements ClientModInitializer {
 
         RendererRegistration.register();
 
-        ModKeyInputHandler.register();
         this.registerColorProviders();
         this.registerEntityModelLayers();
         this.registerEntityRenderers();
         this.registerBlockEntityRenderers();
         this.registerScreenHandlers();
-        //this.registerConnectionEvents();
+        ModMessages.registerS2CPackets();
 
         ModModelPredicateProvider.registerModModels();
 
@@ -547,8 +546,6 @@ public class ClutterClient implements ClientModInitializer {
         );
 
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(), blocksToRenderTranslucent.toArray(new Block[0]));
-
-        //ModMessages.registerS2CPackets();
     }
 
     private void registerColorProviders() {
@@ -622,11 +619,7 @@ public class ClutterClient implements ClientModInitializer {
 
     }
 
-    //private void registerConnectionEvents() {
-    //    ClientPlayConnectionEvents.JOIN.register((handler, client, isConnected) -> {
-    //        handler.sendPacket(ClientPlayNetworking.createC2SPacket(ModMessages.VERSION_HANDSHAKE_PACKET_ID, new PacketByteBuf(Unpooled.buffer()).writeString(Clutter.MOD_VERSION)));
-    //    });
-    //}
+
 
     private void registerEntityModelLayers() {
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.NETHER_NEWT, NetherNewtModel::getTexturedModelData);
@@ -649,22 +642,22 @@ public class ClutterClient implements ClientModInitializer {
     }
 
     private void registerEntityRenderers() {
-        EntityRendererRegistry.register(ModEntities.SEAT, EmptySeatRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.SEAT, EmptySeatRenderer::new);
 
-        EntityRendererRegistry.register(ModEntities.CHAMELEON, ChameleonRenderer::new);
-        EntityRendererRegistry.register(ModEntities.BUTTERFLY, ButterflyRenderer::new);
-        EntityRendererRegistry.register(ModEntities.CRIMSON_NEWT, CrimsonNewtRenderer::new);
-        EntityRendererRegistry.register(ModEntities.WARPED_NEWT, WarpedNewtRenderer::new);
-        EntityRendererRegistry.register(ModEntities.BEAVER, BeaverRenderer::new);
-        EntityRendererRegistry.register(ModEntities.EMBER_TORTOISE, EmberTortoiseRenderer::new);
-        EntityRendererRegistry.register(ModEntities.JELLYFISH, JellyfishRenderer::new);
-        EntityRendererRegistry.register(ModEntities.MANTA_RAY, MantaRayRenderer::new);
-        EntityRendererRegistry.register(ModEntities.CAPYBARA, CapybaraRenderer::new);
-        EntityRendererRegistry.register(ModEntities.ECHOFIN, EchofinRenderer::new);
-        EntityRendererRegistry.register(ModEntities.SEAHORSE, SeahorseRenderer::new);
-        EntityRendererRegistry.register(ModEntities.KIWI_BIRD, KiwiBirdRenderer::new);
-        EntityRendererRegistry.register(ModEntities.MOSSBLOOM, MossbloomRenderer::new);
-        EntityRendererRegistry.register(ModEntities.EMPEROR_PENGUIN, EmperorPenguinRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.CHAMELEON, ChameleonRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.BUTTERFLY, ButterflyRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.CRIMSON_NEWT, CrimsonNewtRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.WARPED_NEWT, WarpedNewtRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.BEAVER, BeaverRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.EMBER_TORTOISE, EmberTortoiseRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.JELLYFISH, JellyfishRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.MANTA_RAY, MantaRayRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.CAPYBARA, CapybaraRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.ECHOFIN, EchofinRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.SEAHORSE, SeahorseRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.KIWI_BIRD, KiwiBirdRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.MOSSBLOOM, MossbloomRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.EMPEROR_PENGUIN, EmperorPenguinRenderer::new);
     }
 
     private void registerBlockEntityRenderers() {
@@ -675,9 +668,10 @@ public class ClutterClient implements ClientModInitializer {
     }
 
     private void registerScreenHandlers() {
-        HandledScreens.register(ModScreenHandlers.BRICK_KILN_SCREEN_HANDLER, BrickKilnScreen::new);
-        HandledScreens.register(ModScreenHandlers.CARDBOARD_BOX_SCREEN_HANDLER, CardboardBoxScreen::new);
-        HandledScreens.register(ModScreenHandlers.WALL_BOOKSHELF_SCREEN_HANDLER, WallBookshelfScreen::new);
-        HandledScreens.register(ModScreenHandlers.PRESENT_SCREEN_HANDLER, PresentScreen::new);
+        HandledScreens.register(ModScreenHandlerTypes.BRICK_KILN_SCREEN_HANDLER, BrickKilnScreen::new);
+        HandledScreens.register(ModScreenHandlerTypes.CARDBOARD_BOX_SCREEN_HANDLER, CardboardBoxScreen::new);
+        HandledScreens.register(ModScreenHandlerTypes.WALL_BOOKSHELF_SCREEN_HANDLER, WallBookshelfScreen::new);
+        HandledScreens.register(ModScreenHandlerTypes.PRESENT_SCREEN_HANDLER, PresentScreen::new);
+        HandledScreens.register(ModScreenHandlerTypes.SHELF_SCREEN_HANDLER, ShelfScreen::new);
     }
 }

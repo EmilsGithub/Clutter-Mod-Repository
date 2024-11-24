@@ -64,7 +64,7 @@ public abstract class ElytraFeatureRendererMixin {
         if (Clutter.IS_TRINKETS_LOADED && !(chestItemStack.getItem() instanceof ElytraItem) && !Clutter.IS_ELYTRA_SLOT_LOADED && !Clutter.IS_ELYTRA_TRINKET_LOADED) {
             List<ItemStack> trinketsStack = TrinketsElytraUse.getEquippedElytra(livingEntity);
             if (!trinketsStack.isEmpty()) {
-                itemStack = trinketsStack.get(0);
+                itemStack = trinketsStack.getFirst();
             }
         }
 
