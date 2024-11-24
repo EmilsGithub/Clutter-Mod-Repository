@@ -55,7 +55,7 @@ public class PolyporeBlock extends LadderBlock implements Fertilizable {
 
     @Override
     public boolean canReplace(BlockState state, ItemPlacementContext context) {
-        if (!context.shouldCancelInteraction() && state.getBlock() == this && context.getStack().isOf(this.asItem()) && state.get(POLYPORE_COUNT) != 2) {
+        if (!context.shouldCancelInteraction() && state.getBlock() == this && context.getStack().isOf(this.asItem()) && state.get(POLYPORE_COUNT) < 2) {
             return true;
         }
         return super.canReplace(state, context);
@@ -66,7 +66,8 @@ public class PolyporeBlock extends LadderBlock implements Fertilizable {
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         BlockState blockState = ctx.getWorld().getBlockState(ctx.getBlockPos());
         if (blockState.isOf(this)) {
-            return blockState.with(POLYPORE_COUNT, blockState.get(POLYPORE_COUNT) + 1);
+            int polyPoreCount = blockState.get(POLYPORE_COUNT);
+            return blockState.with(POLYPORE_COUNT,  polyPoreCount == 1 ? polyPoreCount + 1 : polyPoreCount);
         }
         if (!ctx.canReplaceExisting() && (blockState = ctx.getWorld().getBlockState(ctx.getBlockPos().offset(ctx.getSide().getOpposite()))).isOf(this) && blockState.get(FACING) == ctx.getSide()) {
             return null;

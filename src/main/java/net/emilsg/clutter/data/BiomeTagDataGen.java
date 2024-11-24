@@ -31,10 +31,14 @@ public class BiomeTagDataGen extends FabricTagProvider<Biome> {
         getOrCreateTagBuilder(ModBiomeTags.SPAWNS_WARPED_NEWTS)
                 .add(BiomeKeys.WARPED_FOREST);
 
-        getOrCreateTagBuilder(ModBiomeTags.SPAWNS_NETHER_BUTTERFLIES).add(
+        getOrCreateTagBuilder(ModBiomeTags.SPAWNS_BUTTERFLIES).add(
                 BiomeKeys.CRIMSON_FOREST,
                 BiomeKeys.WARPED_FOREST,
-                BiomeKeys.SOUL_SAND_VALLEY
+                BiomeKeys.SOUL_SAND_VALLEY,
+                BiomeKeys.FLOWER_FOREST,
+                BiomeKeys.SUNFLOWER_PLAINS,
+                BiomeKeys.MEADOW,
+                BiomeKeys.CHERRY_GROVE
         );
 
         getOrCreateTagBuilder(ModBiomeTags.SPAWNS_EMBER_TORTOISES).add(

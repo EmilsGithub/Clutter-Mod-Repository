@@ -1,7 +1,7 @@
 package net.emilsg.clutter.world.biome;
 
 import net.emilsg.clutter.Clutter;
-import net.emilsg.clutter.entity.ModEntities;
+import net.emilsg.clutter.entity.ModEntityTypes;
 import net.minecraft.client.sound.MusicType;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
@@ -88,7 +88,7 @@ public class ModBiomes {
     private static Biome lupineFields(Registerable<Biome> context) {
         SpawnSettings.Builder spawnBuilder = new SpawnSettings.Builder();
 
-        spawnBuilder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(ModEntities.BUTTERFLY, 10, 5, 8));
+        spawnBuilder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(ModEntityTypes.BUTTERFLY, 10, 5, 8));
 
         DefaultBiomeFeatures.addBatsAndMonsters(spawnBuilder);
 

@@ -7,7 +7,7 @@ import net.emilsg.clutter.block.custom.cutout.ICutoutRenderable;
 import net.emilsg.clutter.block.entity.render.CardboardBoxBlockEntityRenderer;
 import net.emilsg.clutter.block.entity.render.ShelfBlockEntityRenderer;
 import net.emilsg.clutter.compat.trinkets.client.TrinketsIntegrationClient;
-import net.emilsg.clutter.entity.ModEntities;
+import net.emilsg.clutter.entity.ModEntityTypes;
 import net.emilsg.clutter.entity.client.layer.ModModelLayers;
 import net.emilsg.clutter.entity.client.model.*;
 import net.emilsg.clutter.entity.client.player.RendererRegistration;
@@ -655,22 +655,22 @@ public class ClutterClient implements ClientModInitializer {
     }
 
     private void registerEntityRenderers() {
-        EntityRendererRegistry.register(ModEntities.SEAT, EmptySeatRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.SEAT, EmptySeatRenderer::new);
 
-        EntityRendererRegistry.register(ModEntities.CHAMELEON, ChameleonRenderer::new);
-        EntityRendererRegistry.register(ModEntities.BUTTERFLY, ButterflyRenderer::new);
-        EntityRendererRegistry.register(ModEntities.CRIMSON_NEWT, CrimsonNewtRenderer::new);
-        EntityRendererRegistry.register(ModEntities.WARPED_NEWT, WarpedNewtRenderer::new);
-        EntityRendererRegistry.register(ModEntities.BEAVER, BeaverRenderer::new);
-        EntityRendererRegistry.register(ModEntities.EMBER_TORTOISE, EmberTortoiseRenderer::new);
-        EntityRendererRegistry.register(ModEntities.JELLYFISH, JellyfishRenderer::new);
-        EntityRendererRegistry.register(ModEntities.MANTA_RAY, MantaRayRenderer::new);
-        EntityRendererRegistry.register(ModEntities.CAPYBARA, CapybaraRenderer::new);
-        EntityRendererRegistry.register(ModEntities.ECHOFIN, EchofinRenderer::new);
-        EntityRendererRegistry.register(ModEntities.SEAHORSE, SeahorseRenderer::new);
-        EntityRendererRegistry.register(ModEntities.KIWI_BIRD, KiwiBirdRenderer::new);
-        EntityRendererRegistry.register(ModEntities.MOSSBLOOM, MossbloomRenderer::new);
-        EntityRendererRegistry.register(ModEntities.EMPEROR_PENGUIN, EmperorPenguinRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.CHAMELEON, ChameleonRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.BUTTERFLY, ButterflyRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.CRIMSON_NEWT, CrimsonNewtRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.WARPED_NEWT, WarpedNewtRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.BEAVER, BeaverRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.EMBER_TORTOISE, EmberTortoiseRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.JELLYFISH, JellyfishRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.MANTA_RAY, MantaRayRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.CAPYBARA, CapybaraRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.ECHOFIN, EchofinRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.SEAHORSE, SeahorseRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.KIWI_BIRD, KiwiBirdRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.MOSSBLOOM, MossbloomRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.EMPEROR_PENGUIN, EmperorPenguinRenderer::new);
     }
 
     private void registerBlockEntityRenderers() {

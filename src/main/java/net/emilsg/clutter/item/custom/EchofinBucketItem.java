@@ -1,6 +1,6 @@
 package net.emilsg.clutter.item.custom;
 
-import net.emilsg.clutter.entity.ModEntities;
+import net.emilsg.clutter.entity.ModEntityTypes;
 import net.emilsg.clutter.entity.custom.EchofinEntity;
 import net.emilsg.clutter.entity.variants.EchofinVariant;
 import net.minecraft.block.BlockState;
@@ -42,7 +42,7 @@ public class EchofinBucketItem extends Item {
                 blockPos2 = blockPos.offset(direction);
             }
 
-            EchofinEntity echofinEntity = ModEntities.ECHOFIN.create(world);
+            EchofinEntity echofinEntity = ModEntityTypes.ECHOFIN.create(world);
             assert echofinEntity != null;
             echofinEntity.setVariant(variant);
             echofinEntity.setPersistent();

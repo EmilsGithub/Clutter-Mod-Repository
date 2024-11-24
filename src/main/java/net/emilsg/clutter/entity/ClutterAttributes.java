@@ -5,20 +5,20 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRe
 
 public class ClutterAttributes {
     public static void registerAttributes() {
-        FabricDefaultAttributeRegistry.register(ModEntities.BUTTERFLY, ButterflyEntity.setAttributes());
-        FabricDefaultAttributeRegistry.register(ModEntities.CHAMELEON, ChameleonEntity.setAttributes());
-        FabricDefaultAttributeRegistry.register(ModEntities.ECHOFIN, EchofinEntity.setAttributes());
-        FabricDefaultAttributeRegistry.register(ModEntities.MOSSBLOOM, MossbloomEntity.setAttributes());
-        FabricDefaultAttributeRegistry.register(ModEntities.KIWI_BIRD, KiwiBirdEntity.setAttributes());
-        FabricDefaultAttributeRegistry.register(ModEntities.EMPEROR_PENGUIN, EmperorPenguinEntity.setAttributes());
-        FabricDefaultAttributeRegistry.register(ModEntities.BEAVER, BeaverEntity.setAttributes());
-        FabricDefaultAttributeRegistry.register(ModEntities.CAPYBARA, CapybaraEntity.setAttributes());
-        FabricDefaultAttributeRegistry.register(ModEntities.CRIMSON_NEWT, CrimsonNewtEntity.setAttributes());
-        FabricDefaultAttributeRegistry.register(ModEntities.WARPED_NEWT, WarpedNewtEntity.setAttributes());
-        FabricDefaultAttributeRegistry.register(ModEntities.EMBER_TORTOISE, EmberTortoiseEntity.setAttributes());
-        FabricDefaultAttributeRegistry.register(ModEntities.JELLYFISH, JellyfishEntity.setAttributes());
-        FabricDefaultAttributeRegistry.register(ModEntities.MANTA_RAY, MantaRayEntity.setAttributes());
-        FabricDefaultAttributeRegistry.register(ModEntities.SEAHORSE, SeahorseEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntityTypes.BUTTERFLY, ButterflyEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntityTypes.CHAMELEON, ChameleonEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntityTypes.ECHOFIN, EchofinEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntityTypes.MOSSBLOOM, MossbloomEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntityTypes.KIWI_BIRD, KiwiBirdEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntityTypes.EMPEROR_PENGUIN, EmperorPenguinEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntityTypes.BEAVER, BeaverEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntityTypes.CAPYBARA, CapybaraEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntityTypes.CRIMSON_NEWT, CrimsonNewtEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntityTypes.WARPED_NEWT, WarpedNewtEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntityTypes.EMBER_TORTOISE, EmberTortoiseEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntityTypes.JELLYFISH, JellyfishEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntityTypes.MANTA_RAY, MantaRayEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntityTypes.SEAHORSE, SeahorseEntity.setAttributes());
 
     }
 }

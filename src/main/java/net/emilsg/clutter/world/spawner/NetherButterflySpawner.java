@@ -1,6 +1,6 @@
 package net.emilsg.clutter.world.spawner;
 
-import net.emilsg.clutter.entity.ModEntities;
+import net.emilsg.clutter.entity.ModEntityTypes;
 import net.emilsg.clutter.entity.custom.ButterflyEntity;
 import net.emilsg.clutter.entity.variants.ButterflyVariant;
 import net.minecraft.block.BlockState;
@@ -84,17 +84,17 @@ public class NetherButterflySpawner implements Spawner {
             BlockState blockState = world.getBlockState(spawnPos);
             FluidState fluidState = world.getFluidState(spawnPos);
 
-            if (!SpawnHelper.isClearForSpawn(world, spawnPos, blockState, fluidState, ModEntities.BUTTERFLY)) {
+            if (!SpawnHelper.isClearForSpawn(world, spawnPos, blockState, fluidState, ModEntityTypes.BUTTERFLY)) {
                 return 0;
             }
 
-            ButterflyEntity butterfly = ModEntities.BUTTERFLY.create(world);
+            ButterflyEntity butterfly = ModEntityTypes.BUTTERFLY.create(world);
 
             if (butterfly == null) {
                 return 0;
             }
 
-            if (SpawnHelper.canSpawn(SpawnRestriction.Location.ON_GROUND, world, spawnPos, ModEntities.BUTTERFLY)) {
+            if (SpawnHelper.canSpawn(SpawnRestriction.Location.ON_GROUND, world, spawnPos, ModEntityTypes.BUTTERFLY)) {
                 this.cooldown = maxCooldown;
                 return this.spawn(spawnPos, world, butterfly);
             }

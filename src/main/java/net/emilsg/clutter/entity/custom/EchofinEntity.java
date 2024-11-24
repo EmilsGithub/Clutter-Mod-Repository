@@ -86,6 +86,11 @@ public class EchofinEntity extends ClutterAnimalEntity {
     }
 
     @Override
+    public boolean canImmediatelyDespawn(double distanceSquared) {
+        return true;
+    }
+
+    @Override
     protected void initGoals() {
         this.goalSelector.add(0, new AnimalMateGoal(this, 1.0));
         this.goalSelector.add(1, new EscapeDangerGoal(this, 1.25));

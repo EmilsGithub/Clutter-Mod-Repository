@@ -1,6 +1,6 @@
 package net.emilsg.clutter.entity.custom;
 
-import net.emilsg.clutter.entity.ModEntities;
+import net.emilsg.clutter.entity.ModEntityTypes;
 import net.emilsg.clutter.entity.custom.goal.MossbloomDropHornsGoal;
 import net.emilsg.clutter.entity.custom.parent.ClutterAnimalEntity;
 import net.emilsg.clutter.entity.variants.MossbloomVariant;
@@ -235,7 +235,7 @@ public class MossbloomEntity extends ClutterAnimalEntity{
     @Nullable
     @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
-        MossbloomEntity child = ModEntities.MOSSBLOOM.create(world);
+        MossbloomEntity child = ModEntityTypes.MOSSBLOOM.create(world);
         assert child != null;
         child.setVariant(Util.getRandom(MossbloomVariant.values(), this.random));
         return child;

@@ -1,7 +1,7 @@
 package net.emilsg.clutter.block.entity;
 
 import net.emilsg.clutter.block.custom.SeatBlock;
-import net.emilsg.clutter.entity.ModEntities;
+import net.emilsg.clutter.entity.ModEntityTypes;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -21,11 +21,11 @@ public class SeatEntity extends Entity {
     public static final HashMap<Vec3d, BlockPos> IS_OCCUPIED = new HashMap<>();
 
     public SeatEntity(EntityType<? extends Entity> type, World world) {
-        super(ModEntities.SEAT, world);
+        super(ModEntityTypes.SEAT, world);
     }
 
     public SeatEntity(World world) {
-        super(ModEntities.SEAT, world);
+        super(ModEntityTypes.SEAT, world);
         noClip = true;
     }
 

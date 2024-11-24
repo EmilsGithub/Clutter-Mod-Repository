@@ -13,7 +13,6 @@ public class ModItemTags {
     public static final TagKey<Item> SEEDS = create("seeds");
     public static final TagKey<Item> DYES = create("dyes");
     public static final TagKey<Item> STRIPPABLE_LOGS = create("strippable_logs");
-    public static final TagKey<Item> BOTTLED_BUTTERFLIES = create("bottled_butterflies");
     public static final TagKey<Item> REDWOOD_LOGS = create("redwood_logs");
 
     public static final TagKey<Item> PLUSHIES = create("plushies");

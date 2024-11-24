@@ -1,6 +1,6 @@
 package net.emilsg.clutter.entity.custom;
 
-import net.emilsg.clutter.entity.ModEntities;
+import net.emilsg.clutter.entity.ModEntityTypes;
 import net.emilsg.clutter.entity.custom.goal.*;
 import net.emilsg.clutter.entity.custom.parent.ClutterAnimalEntity;
 import net.emilsg.clutter.util.ModBlockTags;
@@ -212,7 +212,7 @@ public class EmberTortoiseEntity extends ClutterAnimalEntity {
     @Nullable
     @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
-        return ModEntities.EMBER_TORTOISE.create(world);
+        return ModEntityTypes.EMBER_TORTOISE.create(world);
     }
 
     protected float getActiveEyeHeight(EntityPose pose, EntityDimensions dimensions) {

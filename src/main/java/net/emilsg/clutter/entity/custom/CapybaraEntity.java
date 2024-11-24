@@ -1,6 +1,6 @@
 package net.emilsg.clutter.entity.custom;
 
-import net.emilsg.clutter.entity.ModEntities;
+import net.emilsg.clutter.entity.ModEntityTypes;
 import net.emilsg.clutter.entity.custom.parent.ClutterTameableEntity;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
@@ -265,7 +265,7 @@ public class CapybaraEntity extends ClutterTameableEntity {
     @Nullable
     @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
-        return ModEntities.CAPYBARA.create(world);
+        return ModEntityTypes.CAPYBARA.create(world);
     }
 
     public void applyEffectToNearbyEntities(Entity centerEntity, StatusEffectInstance effect, double radius) {

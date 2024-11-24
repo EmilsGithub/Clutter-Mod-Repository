@@ -249,9 +249,9 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(ModItems.PROPELLER_CAP)));
 
         ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.BUTTERFLY_WINGS)
-                .input(Ingredient.fromTag(ModItemTags.BOTTLED_BUTTERFLIES))
-                .input(Ingredient.fromTag(ModItemTags.BOTTLED_BUTTERFLIES))
-                .input(Ingredient.fromTag(ModItemTags.BOTTLED_BUTTERFLIES))
+                .input(ModItems.BUTTERFLY_IN_A_BOTTLE)
+                .input(ModItems.BUTTERFLY_IN_A_BOTTLE)
+                .input(ModItems.BUTTERFLY_IN_A_BOTTLE)
                 .input(Items.STRING)
                 .criterion(hasItem(Items.STRING), conditionsFromItem(Items.STRING))
                 .offerTo(exporter, new Identifier(Clutter.MOD_ID, getRecipeName(ModItems.BUTTERFLY_WINGS)));

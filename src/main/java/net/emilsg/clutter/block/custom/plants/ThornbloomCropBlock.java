@@ -1,7 +1,7 @@
 package net.emilsg.clutter.block.custom.plants;
 
 import net.emilsg.clutter.block.ModBlocks;
-import net.emilsg.clutter.entity.ModEntities;
+import net.emilsg.clutter.entity.ModEntityTypes;
 import net.emilsg.clutter.item.ModItems;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.TorchflowerBlock;
@@ -32,7 +32,7 @@ public class ThornbloomCropBlock extends TorchflowerBlock {
 
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        if (entity instanceof LivingEntity && entity.getType() != EntityType.FOX && entity.getType() != EntityType.BEE && entity.getType() != ModEntities.BUTTERFLY && entity.getType() != ModEntities.MOSSBLOOM && entity.getType() != EntityType.SNIFFER) {
+        if (entity instanceof LivingEntity && entity.getType() != EntityType.FOX && entity.getType() != EntityType.BEE && entity.getType() != ModEntityTypes.BUTTERFLY && entity.getType() != ModEntityTypes.MOSSBLOOM && entity.getType() != EntityType.SNIFFER) {
             entity.slowMovement(state, new Vec3d(0.800000011920929, 0.75, 0.800000011920929));
             if (!world.isClient && (entity.lastRenderX != entity.getX() || entity.lastRenderZ != entity.getZ())) {
                 double d = Math.abs(entity.getX() - entity.lastRenderX);

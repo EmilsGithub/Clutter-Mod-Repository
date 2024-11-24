@@ -1,7 +1,7 @@
 package net.emilsg.clutter.entity.custom;
 
 import net.emilsg.clutter.block.ModBlocks;
-import net.emilsg.clutter.entity.ModEntities;
+import net.emilsg.clutter.entity.ModEntityTypes;
 import net.emilsg.clutter.entity.custom.goal.KiwiBirdLayEggGoal;
 import net.emilsg.clutter.entity.custom.goal.KiwiBirdMateGoal;
 import net.emilsg.clutter.entity.custom.goal.KiwiBirdWanderAroundFarGoal;
@@ -163,7 +163,7 @@ public class KiwiBirdEntity extends ClutterAnimalEntity {
     @Nullable
     @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
-        return ModEntities.KIWI_BIRD.create(world);
+        return ModEntityTypes.KIWI_BIRD.create(world);
     }
 
     @Nullable

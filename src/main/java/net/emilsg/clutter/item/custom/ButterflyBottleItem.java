@@ -1,6 +1,6 @@
 package net.emilsg.clutter.item.custom;
 
-import net.emilsg.clutter.entity.ModEntities;
+import net.emilsg.clutter.entity.ModEntityTypes;
 import net.emilsg.clutter.entity.custom.ButterflyEntity;
 import net.emilsg.clutter.entity.variants.ButterflyVariant;
 import net.minecraft.client.item.TooltipContext;
@@ -52,7 +52,7 @@ public class ButterflyBottleItem extends Item {
     }
 
     private void spawnEntity(ServerWorld world, ItemStack stack, BlockPos pos) {
-        ButterflyEntity butterfly = ModEntities.BUTTERFLY.spawnFromItemStack(world, stack, (PlayerEntity)null, pos, SpawnReason.BUCKET, true, false);
+        ButterflyEntity butterfly = ModEntityTypes.BUTTERFLY.spawnFromItemStack(world, stack, (PlayerEntity)null, pos, SpawnReason.BUCKET, true, false);
         if (butterfly != null) {
             butterfly.copyDataFromNbt(butterfly, stack.getOrCreateNbt());
         }

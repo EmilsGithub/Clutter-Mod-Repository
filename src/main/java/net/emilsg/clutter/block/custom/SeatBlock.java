@@ -1,7 +1,7 @@
 package net.emilsg.clutter.block.custom;
 
 import net.emilsg.clutter.block.entity.SeatEntity;
-import net.emilsg.clutter.entity.ModEntities;
+import net.emilsg.clutter.entity.ModEntityTypes;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalFacingBlock;
@@ -102,7 +102,7 @@ public abstract class SeatBlock extends HorizontalFacingBlock implements Waterlo
     }
 
     private ActionResult spawnAndSitOnSeat(World world, PlayerEntity player, BlockPos blockPos, double yOffset, Vec3d comparePos) {
-        SeatEntity seatEntity = ModEntities.SEAT.create(world);
+        SeatEntity seatEntity = ModEntityTypes.SEAT.create(world);
         if(seatEntity != null) {
             Vec3d pos = new Vec3d(
                     blockPos.getX() + 0.5f,

@@ -1,6 +1,6 @@
 package net.emilsg.clutter.entity.custom;
 
-import net.emilsg.clutter.entity.ModEntities;
+import net.emilsg.clutter.entity.ModEntityTypes;
 import net.emilsg.clutter.entity.custom.goal.*;
 import net.emilsg.clutter.entity.custom.parent.ClutterFishEntity;
 import net.emilsg.clutter.entity.variants.SeahorseVariant;
@@ -154,7 +154,7 @@ public class SeahorseEntity extends ClutterFishEntity implements Bucketable {
 
     @Nullable
     public SeahorseEntity createChild(ServerWorld world, SeahorseEntity entity) {
-        return ModEntities.SEAHORSE.create(world);
+        return ModEntityTypes.SEAHORSE.create(world);
     }
 
     public boolean isReadyToBreed() {
