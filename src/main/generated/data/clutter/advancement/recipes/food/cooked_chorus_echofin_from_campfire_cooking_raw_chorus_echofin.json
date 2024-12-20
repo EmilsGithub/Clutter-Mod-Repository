@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_raw_chorus_echofin": {
+      "conditions": {
+        "items": [
+          {
+            "items": "clutter:raw_chorus_echofin"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:cooked_chorus_echofin_from_campfire_cooking_raw_chorus_echofin"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_raw_chorus_echofin"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:cooked_chorus_echofin_from_campfire_cooking_raw_chorus_echofin"
+    ]
+  }
+}

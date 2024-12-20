@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_raw_onyx": {
+      "conditions": {
+        "items": [
+          {
+            "items": "clutter:raw_onyx"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:onyx_from_blasting_raw_onyx"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_raw_onyx"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:onyx_from_blasting_raw_onyx"
+    ]
+  }
+}

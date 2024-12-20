@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 1.0,
+  "group": "sulphur",
+  "ingredient": {
+    "item": "clutter:blackstone_sulphur_ore"
+  },
+  "result": {
+    "id": "clutter:sulphur"
+  }
+}

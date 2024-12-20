@@ -1,4 +1,4 @@
-// 1.21.1	2024-11-24T20:34:00.7871923	Clutter/Tags for minecraft:item
+// 1.21.1	2024-12-20T12:08:27.6603844	Clutter/Tags for minecraft:item
 1836f0a5f054f60ae47c05258cc612c908d6b77c data\c\tags\item\silver_blocks.json
 4bfc71b3a1ac233840eb8b96fd700b1326a52059 data\minecraft\tags\item\trim_materials.json
 f3ab109c8a97095a2b9ad79247a177dab77a2dfb data\c\tags\item\raw_silvers.json
@@ -10,8 +10,8 @@ bf509848ecc1fe34cbf69fc3032d8e539e756116 data\clutter\tags\item\fruits_and_berri
 13c2c4f194e34fbf00983fcefdc91a78ac70e1d8 data\minecraft\tags\item\enchantable\chest_armor.json
 e6efa37501a98ea6bfa16839bd5c4933e68f686e data\clutter\tags\item\redwood_logs.json
 4f1a776ea07ee85827ed2e396cc3de6d56dffcb1 data\c\tags\item\raw_silver_ores.json
-4eed15e69e9e468f7f3701f69f97f8cc91324544 data\minecraft\tags\item\enchantable\armor.json
 d8ab1b6c8c134d04651007858e965224af072786 data\c\tags\item\copper_nuggets.json
+4eed15e69e9e468f7f3701f69f97f8cc91324544 data\minecraft\tags\item\enchantable\armor.json
 729c3b3ac96909f2b8a1b2ead8c4e1aaa4c466fd data\minecraft\tags\item\enchantable\foot_armor.json
 e4c6782443bf9ac18b225673f782d7f85727a791 data\c\tags\item\silver_ingots.json
 ebb2f6e72dd38a00965415b1337c048bb5bd7417 data\clutter\tags\item\elytron.json

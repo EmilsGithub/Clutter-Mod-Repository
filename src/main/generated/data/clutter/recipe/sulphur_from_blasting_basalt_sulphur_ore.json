@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 1.0,
+  "group": "sulphur",
+  "ingredient": {
+    "item": "clutter:basalt_sulphur_ore"
+  },
+  "result": {
+    "id": "clutter:sulphur"
+  }
+}

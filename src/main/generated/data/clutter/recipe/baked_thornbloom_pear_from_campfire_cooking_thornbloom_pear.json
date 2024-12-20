@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "cookingtime": 600,
+  "experience": 0.35,
+  "group": "thornbloom_pear",
+  "ingredient": {
+    "item": "clutter:thornbloom_pear"
+  },
+  "result": {
+    "id": "clutter:baked_thornbloom_pear"
+  }
+}

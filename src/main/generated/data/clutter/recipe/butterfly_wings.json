@@ -3,13 +3,13 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "clutter:bottled_butterflies"
+      "item": "clutter:butterfly_in_a_bottle"
     },
     {
-      "tag": "clutter:bottled_butterflies"
+      "item": "clutter:butterfly_in_a_bottle"
     },
     {
-      "tag": "clutter:bottled_butterflies"
+      "item": "clutter:butterfly_in_a_bottle"
     },
     {
       "item": "minecraft:string"

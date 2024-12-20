@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_polished_onyx_wall": {
+      "conditions": {
+        "items": [
+          {
+            "items": "clutter:polished_onyx_wall"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:polished_onyx_from_polished_onyx_wall_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_polished_onyx_wall"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:polished_onyx_from_polished_onyx_wall_stonecutting"
+    ]
+  }
+}

@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:blasting",
-  "ingredient": {
-    "id": "clutter:raw_silver"
-  },
-  "result": "clutter:silver_ingot",
-  "experience": 1.0,
-  "cookingtime": 100
-}

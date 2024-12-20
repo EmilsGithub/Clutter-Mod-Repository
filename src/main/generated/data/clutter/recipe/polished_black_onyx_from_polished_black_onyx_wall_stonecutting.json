@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "clutter:polished_black_onyx_wall"
+  },
+  "result": {
+    "count": 1,
+    "id": "clutter:polished_black_onyx"
+  }
+}

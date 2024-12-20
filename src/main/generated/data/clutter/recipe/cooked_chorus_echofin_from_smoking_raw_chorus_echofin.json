@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smoking",
+  "category": "food",
+  "cookingtime": 100,
+  "experience": 0.35,
+  "group": "chorus_echofin",
+  "ingredient": {
+    "item": "clutter:raw_chorus_echofin"
+  },
+  "result": {
+    "id": "clutter:cooked_chorus_echofin"
+  }
+}

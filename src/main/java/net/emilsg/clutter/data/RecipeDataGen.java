@@ -16,9 +16,7 @@ import net.minecraft.item.HoneycombItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
-import net.minecraft.recipe.AbstractCookingRecipe;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.recipe.RecipeSerializer;
+import net.minecraft.recipe.*;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryWrapper;
@@ -275,13 +273,63 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .criterion(hasItem(Items.STRING), conditionsFromItem(Items.STRING))
                 .offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(ModItems.BUTTERFLY_WINGS)));
 
+        offerAllCookingRecipes(exporter, ModItems.THORNBLOOM_PEAR, ModItems.BAKED_THORNBLOOM_PEAR, 0.35f, "thornbloom_pear");
+        offerAllCookingRecipes(exporter, ModItems.RAW_CHORUS_ECHOFIN, ModItems.COOKED_CHORUS_ECHOFIN, 0.35f, "chorus_echofin");
+        offerAllCookingRecipes(exporter, ModItems.RAW_LEVITATING_ECHOFIN, ModItems.COOKED_LEVITATING_ECHOFIN, 0.35f, "levitating_echofin");
+        offerAllCookingRecipes(exporter, ModItems.RAW_VENISON, ModItems.COOKED_VENISON, 0.35f, "venison");
+        offerAllCookingRecipes(exporter, ModItems.RAW_VENISON_RIBS, ModItems.COOKED_VENISON_RIBS, 0.35f, "venison_ribs");
+
+        offerAllSmeltingRecipes(exporter, ModItems.RAW_SILVER, ModItems.SILVER_INGOT, 1f, "silver");
+        offerAllSmeltingRecipes(exporter, ModBlocks.SILVER_ORE.asItem(), ModItems.SILVER_INGOT, 1f, "silver");
+        offerAllSmeltingRecipes(exporter, ModBlocks.DEEPSLATE_SILVER_ORE.asItem(), ModItems.SILVER_INGOT, 1f, "silver");
+
+        offerAllSmeltingRecipes(exporter, ModItems.RAW_ONYX, ModItems.ONYX, 1f, "onyx");
+        offerAllSmeltingRecipes(exporter, ModBlocks.ONYX_ORE.asItem(), ModItems.ONYX, 1f, "onyx");
+
+        offerAllSmeltingRecipes(exporter, ModBlocks.BASALT_SULPHUR_ORE.asItem(), ModItems.SULPHUR, 1f, "sulphur");
+        offerAllSmeltingRecipes(exporter, ModBlocks.BLACKSTONE_SULPHUR_ORE.asItem(), ModItems.SULPHUR, 1f, "sulphur");
+
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.ONYX_BLOCK, ModBlocks.ONYX_SLAB, 2);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.ONYX_BLOCK, ModBlocks.ONYX_STAIRS, 1);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.ONYX_BLOCK, ModBlocks.ONYX_WALL, 1);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.ONYX_BLOCK, ModBlocks.POLISHED_ONYX, 1);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_ONYX, ModBlocks.POLISHED_ONYX_SLAB, 2);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_ONYX, ModBlocks.POLISHED_ONYX_STAIRS, 1);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_ONYX, ModBlocks.POLISHED_ONYX_WALL, 1);
+
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.BLACK_ONYX_BLOCK, ModBlocks.BLACK_ONYX_SLAB, 2);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.BLACK_ONYX_BLOCK, ModBlocks.BLACK_ONYX_STAIRS, 1);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.BLACK_ONYX_BLOCK, ModBlocks.BLACK_ONYX_WALL, 1);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.BLACK_ONYX_BLOCK, ModBlocks.POLISHED_BLACK_ONYX, 1);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_BLACK_ONYX, ModBlocks.POLISHED_BLACK_ONYX_SLAB, 2);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_BLACK_ONYX, ModBlocks.POLISHED_BLACK_ONYX_STAIRS, 1);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_BLACK_ONYX, ModBlocks.POLISHED_BLACK_ONYX_WALL, 1);
+
         for (Item elytra : Registries.ITEM) {
             if (elytra instanceof ClutterElytraItem clutterElytraItem) offerDecoratedElytraRecipes(exporter, elytra, clutterElytraItem.getComponent());
         }
     }
 
+    public void offerAllCookingRecipes(RecipeExporter exporter, Item component, Item result, float experience, String group) {
+        List<ItemConvertible> COOKING_LIST = List.of(component);
+        offerSmoking(exporter, COOKING_LIST, RecipeCategory.FOOD, result, experience, 100, group);
+        offerSmelting(exporter, COOKING_LIST, RecipeCategory.FOOD, result, experience, 200, group);
+        offerCampfireCooking(exporter, COOKING_LIST, RecipeCategory.FOOD, result, experience, 600, group);
+    }
 
+    public void offerAllSmeltingRecipes(RecipeExporter exporter, Item component, Item result, float experience, String group) {
+        List<ItemConvertible> SMELTING_LIST = List.of(component);
+        offerBlasting(exporter, SMELTING_LIST, RecipeCategory.MISC, result, experience, 100, group);
+        offerSmelting(exporter, SMELTING_LIST, RecipeCategory.MISC, result, experience, 200, group);
+    }
 
+    public static void offerCampfireCooking(RecipeExporter exporter, List<ItemConvertible> inputs, RecipeCategory category, ItemConvertible output, float experience, int cookingTime, String group) {
+        offerMultipleOptions(exporter, RecipeSerializer.CAMPFIRE_COOKING, CampfireCookingRecipe::new, inputs, category, output, experience, cookingTime, group, "_from_campfire_cooking");
+    }
+
+    public static void offerSmoking(RecipeExporter exporter, List<ItemConvertible> inputs, RecipeCategory category, ItemConvertible output, float experience, int cookingTime, String group) {
+        offerMultipleOptions(exporter, RecipeSerializer.SMOKING, SmokingRecipe::new, inputs, category, output, experience, cookingTime, group, "_from_smoking");
+    }
 
     public void offerDecoratedElytraRecipes(RecipeExporter exporter, Item result, Item addition) {
         SmithingTransformRecipeJsonBuilder
