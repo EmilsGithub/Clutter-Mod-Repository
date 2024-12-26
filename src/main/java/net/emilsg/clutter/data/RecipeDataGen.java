@@ -289,21 +289,20 @@ public class RecipeDataGen extends FabricRecipeProvider {
         offerAllSmeltingRecipes(exporter, ModBlocks.BASALT_SULPHUR_ORE.asItem(), ModItems.SULPHUR, 1f, "sulphur");
         offerAllSmeltingRecipes(exporter, ModBlocks.BLACKSTONE_SULPHUR_ORE.asItem(), ModItems.SULPHUR, 1f, "sulphur");
 
-        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.ONYX_BLOCK, ModBlocks.ONYX_SLAB, 2);
-        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.ONYX_BLOCK, ModBlocks.ONYX_STAIRS, 1);
-        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.ONYX_BLOCK, ModBlocks.ONYX_WALL, 1);
-        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.ONYX_BLOCK, ModBlocks.POLISHED_ONYX, 1);
-        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_ONYX, ModBlocks.POLISHED_ONYX_SLAB, 2);
-        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_ONYX, ModBlocks.POLISHED_ONYX_STAIRS, 1);
-        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_ONYX, ModBlocks.POLISHED_ONYX_WALL, 1);
-
-        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.BLACK_ONYX_BLOCK, ModBlocks.BLACK_ONYX_SLAB, 2);
-        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.BLACK_ONYX_BLOCK, ModBlocks.BLACK_ONYX_STAIRS, 1);
-        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.BLACK_ONYX_BLOCK, ModBlocks.BLACK_ONYX_WALL, 1);
-        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.BLACK_ONYX_BLOCK, ModBlocks.POLISHED_BLACK_ONYX, 1);
-        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_BLACK_ONYX, ModBlocks.POLISHED_BLACK_ONYX_SLAB, 2);
-        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_BLACK_ONYX, ModBlocks.POLISHED_BLACK_ONYX_STAIRS, 1);
-        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_BLACK_ONYX, ModBlocks.POLISHED_BLACK_ONYX_WALL, 1);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.ONYX_SLAB, ModBlocks.ONYX_BLOCK, 2);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.ONYX_STAIRS, ModBlocks.ONYX_BLOCK, 1);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.ONYX_WALL, ModBlocks.ONYX_BLOCK, 1);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_ONYX, ModBlocks.ONYX_BLOCK, 1);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_ONYX_SLAB, ModBlocks.POLISHED_ONYX, 2);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_ONYX_STAIRS, ModBlocks.POLISHED_ONYX, 1);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_ONYX_WALL, ModBlocks.POLISHED_ONYX, 1);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.BLACK_ONYX_SLAB, ModBlocks.BLACK_ONYX_BLOCK, 2);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.BLACK_ONYX_STAIRS, ModBlocks.BLACK_ONYX_BLOCK, 1);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.BLACK_ONYX_WALL, ModBlocks.BLACK_ONYX_BLOCK, 1);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_BLACK_ONYX, ModBlocks.BLACK_ONYX_BLOCK, 1);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_BLACK_ONYX_SLAB, ModBlocks.POLISHED_BLACK_ONYX, 2);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_BLACK_ONYX_STAIRS, ModBlocks.POLISHED_BLACK_ONYX, 1);
+        offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_BLACK_ONYX_WALL, ModBlocks.POLISHED_BLACK_ONYX, 1);
 
         for (Item elytra : Registries.ITEM) {
             if (elytra instanceof ClutterElytraItem clutterElytraItem) offerDecoratedElytraRecipes(exporter, elytra, clutterElytraItem.getComponent());

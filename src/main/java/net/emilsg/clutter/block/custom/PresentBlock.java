@@ -1,9 +1,7 @@
 package net.emilsg.clutter.block.custom;
 
 import com.mojang.serialization.MapCodec;
-import net.emilsg.clutter.block.entity.CardboardBoxInventoryBlockEntity;
 import net.emilsg.clutter.block.entity.PresentInventoryBlockEntity;
-import net.emilsg.clutter.util.ModProperties;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.component.DataComponentTypes;
@@ -39,11 +37,10 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class PresentBlock extends BlockWithEntity implements Waterloggable {
-    public static final BooleanProperty OPEN = ModProperties.OPEN;
+    public static final BooleanProperty OPEN = Properties.OPEN;
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
     public static final MapCodec<PresentBlock> CODEC = createCodec(PresentBlock::new);
-
 
     protected static final VoxelShape SHAPE = Block.createCuboidShape(2.5, 0, 2.5, 13.5, 10.5, 13.5);
 
@@ -142,8 +139,8 @@ public class PresentBlock extends BlockWithEntity implements Waterloggable {
     @Override
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
-        if (blockEntity instanceof CardboardBoxInventoryBlockEntity) {
-            ((CardboardBoxInventoryBlockEntity) blockEntity).tick();
+        if (blockEntity instanceof PresentInventoryBlockEntity) {
+            ((PresentInventoryBlockEntity) blockEntity).tick();
         }
     }
 

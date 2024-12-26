@@ -1,6 +1,6 @@
 package net.emilsg.clutter.screen;
 
-import net.emilsg.clutter.screen.slot.CardboardBoxSlot;
+import net.emilsg.clutter.screen.slot.NonNestableStorageSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -26,7 +26,7 @@ public class CardboardBoxScreenHandler extends ScreenHandler {
         int j;
         for (i = 0; i < 3; ++i) {
             for (j = 0; j < 3; ++j) {
-                this.addSlot(new CardboardBoxSlot(inventory, j + i * 3, 62 + j * 18, 17 + i * 18));
+                this.addSlot(new NonNestableStorageSlot(inventory, j + i * 3, 62 + j * 18, 17 + i * 18));
             }
         }
 

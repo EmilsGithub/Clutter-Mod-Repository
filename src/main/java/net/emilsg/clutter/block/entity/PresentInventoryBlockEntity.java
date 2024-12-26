@@ -139,7 +139,7 @@ public class PresentInventoryBlockEntity extends LootableContainerBlockEntity im
     }
 
     public boolean canInsert(int slot, ItemStack stack, @Nullable Direction dir) {
-        return true;
+        return stack.getItem().canBeNested();
     }
 
     public boolean canExtract(int slot, ItemStack stack, Direction dir) {

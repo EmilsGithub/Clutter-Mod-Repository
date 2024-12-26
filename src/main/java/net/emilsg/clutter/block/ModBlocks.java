@@ -647,8 +647,8 @@ public class ModBlocks {
 
     public static final Block BRICK_KILN = registerBlock("brick_kiln", new BrickKilnFurnaceBlock(AbstractBlock.Settings.copy(Blocks.BRICKS).luminance(createLightLevelFromLitBlockState(13))));
     public static final Block MAILBOX = registerBlock("mailbox", new MailBoxBlock(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK).nonOpaque()));
-    public static final Block CARDBOARD_BOX = registerBlock("cardboard_box", new CardboardBoxBlock(AbstractBlock.Settings.create().nonOpaque().mapColor(MapColor.BROWN).sounds(BlockSoundGroup.WOOL)), 1);
-    public static final Block RED_PRESENT = registerBlock("red_present", new PresentBlock(AbstractBlock.Settings.create().nonOpaque().mapColor(MapColor.BROWN).sounds(BlockSoundGroup.WOOL)), 1);
+    public static final Block CARDBOARD_BOX = registerNonNestableBlock("cardboard_box", new CardboardBoxBlock(AbstractBlock.Settings.create().nonOpaque().mapColor(MapColor.BROWN).sounds(BlockSoundGroup.WOOL)));
+    public static final Block RED_PRESENT = registerNonNestableBlock("red_present", new PresentBlock(AbstractBlock.Settings.create().nonOpaque().mapColor(MapColor.BROWN).sounds(BlockSoundGroup.WOOL)));
 
     //public static final Block IRON_CANDLE_HOLDER = registerBlock("iron_candle_holder_block", new ReworkedCandleHolderBlock(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK).luminance(createLightLevelFromLitBlockState(13))));
 
@@ -1409,6 +1409,11 @@ public class ModBlocks {
         return Registry.register(Registries.BLOCK, Identifier.of(Clutter.MOD_ID, name), block);
     }
 
+    private static Block registerNonNestableBlock(String name, Block block) {
+        registerNonNestableBlockItem(name, block);
+        return Registry.register(Registries.BLOCK, Identifier.of(Clutter.MOD_ID, name), block);
+    }
+
     private static Block registerBlock(String name, Block block, int stackSize) {
         registerBlockItem(name, block, stackSize);
         return Registry.register(Registries.BLOCK, Identifier.of(Clutter.MOD_ID, name), block);
@@ -1421,6 +1426,17 @@ public class ModBlocks {
     private static Item registerBlockItem(String name, Block block) {
         Item item = Registry.register(Registries.ITEM, Identifier.of(Clutter.MOD_ID, name),
                 new BlockItem(block, new Item.Settings()));
+        return item;
+    }
+
+    private static Item registerNonNestableBlockItem(String name, Block block) {
+        Item item = Registry.register(Registries.ITEM, Identifier.of(Clutter.MOD_ID, name),
+                new BlockItem(block, new Item.Settings().maxCount(1)) {
+                    @Override
+                    public boolean canBeNested() {
+                        return false;
+                    }
+                });
         return item;
     }
 

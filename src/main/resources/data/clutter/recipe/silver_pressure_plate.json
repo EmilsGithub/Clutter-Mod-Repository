@@ -1,15 +1,14 @@
 {
   "type": "minecraft:crafting_shaped",
   "key": {
-    "#": {
-      "tag": "c:ingots/copper"
+    "I": {
+      "tag": "c:silver_ingots"
     }
   },
   "pattern": [
-    "##",
-    "##"
+    "II"
   ],
   "result": {
-    "id": "clutter:copper_trapdoor"
+    "id": "clutter:silver_pressure_plate"
   }
 }

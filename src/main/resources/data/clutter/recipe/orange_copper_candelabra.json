@@ -8,7 +8,7 @@
   ],
   "key": {
     "I": {
-      "tag": "c:copper_ingots"
+      "tag": "c:ingots/copper"
     },
     "N": {
       "tag": "c:copper_nuggets"

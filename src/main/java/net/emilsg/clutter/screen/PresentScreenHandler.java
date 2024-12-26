@@ -1,5 +1,6 @@
 package net.emilsg.clutter.screen;
 
+import net.emilsg.clutter.screen.slot.NonNestableStorageSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -26,7 +27,7 @@ public class PresentScreenHandler extends ScreenHandler {
         int x = 62 + 18;
         int y = 17 + 14;
 
-        this.addSlot(new Slot(inventory, 0, x, y));
+        this.addSlot(new NonNestableStorageSlot(inventory, 0, x, y));
 
 
         for (i = 0; i < 3; ++i) {

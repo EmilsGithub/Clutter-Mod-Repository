@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "#": {
-      "tag": "c:copper_ingots"
+      "tag": "c:ingots/copper"
     }
   },
   "pattern": [

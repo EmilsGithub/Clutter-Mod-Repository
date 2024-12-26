@@ -1,11 +1,8 @@
 package net.emilsg.clutter.block.entity;
 
 import net.emilsg.clutter.block.ModBlockEntities;
-import net.emilsg.clutter.block.custom.CardboardBoxBlock;
 import net.emilsg.clutter.util.ModScreenHandler;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.ShulkerBoxBlock;
 import net.minecraft.block.entity.LootableContainerBlockEntity;
 import net.minecraft.block.entity.ViewerCountManager;
 import net.minecraft.entity.player.PlayerEntity;
@@ -145,7 +142,7 @@ public class CardboardBoxInventoryBlockEntity extends LootableContainerBlockEnti
     }
 
     public boolean canInsert(int slot, ItemStack stack, @Nullable Direction dir) {
-        return !(Block.getBlockFromItem(stack.getItem()) instanceof CardboardBoxBlock) && !(Block.getBlockFromItem(stack.getItem()) instanceof ShulkerBoxBlock);
+        return stack.getItem().canBeNested();
     }
 
     public boolean canExtract(int slot, ItemStack stack, Direction dir) {

@@ -1,14 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
   "key": {
-    "#": {
-      "tag": "c:copper_ingots"
+    "I": {
+      "tag": "c:ingots/copper"
+    },
+    "N": {
+      "tag": "c:copper_nuggets"
     }
   },
   "pattern": [
-    "##",
-    "##",
-    "##"
+    "II",
+    "IN",
+    "II"
   ],
   "result": {
     "id": "clutter:copper_door",
