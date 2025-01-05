@@ -1,7 +1,7 @@
 package net.emilsg.clutter.block.custom;
 
+import net.emilsg.clutter.block.entity.BunkBedBlockEntity;
 import net.minecraft.block.*;
-import net.minecraft.block.entity.BedBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.enums.BedPart;
 import net.minecraft.entity.LivingEntity;
@@ -22,7 +22,6 @@ public class BunkBedBlock extends BedBlock {
     public BunkBedBlock(DyeColor color, Settings settings) {
         super(color, settings);
     }
-
 
     @Override
     @Nullable
@@ -85,6 +84,8 @@ public class BunkBedBlock extends BedBlock {
 
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new BedBlockEntity(pos, state, this.getColor());
+        return new BunkBedBlockEntity(pos, state, this.getColor());
     }
+
+
 }

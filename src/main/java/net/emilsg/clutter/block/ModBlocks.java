@@ -1,5 +1,9 @@
 package net.emilsg.clutter.block;
 
+import com.terraformersmc.terraform.sign.api.block.TerraformHangingSignBlock;
+import com.terraformersmc.terraform.sign.api.block.TerraformSignBlock;
+import com.terraformersmc.terraform.sign.api.block.TerraformWallHangingSignBlock;
+import com.terraformersmc.terraform.sign.api.block.TerraformWallSignBlock;
 import net.emilsg.clutter.Clutter;
 import net.emilsg.clutter.block.custom.*;
 import net.emilsg.clutter.block.custom.coins.CopperCoinStackBlock;
@@ -11,10 +15,6 @@ import net.emilsg.clutter.block.custom.cutout.CTallFlowerBlock;
 import net.emilsg.clutter.block.custom.oxidizable.*;
 import net.emilsg.clutter.block.custom.plants.*;
 import net.emilsg.clutter.block.custom.plushies.*;
-import net.emilsg.clutter.block.custom.sign.ModHangingSignBlock;
-import net.emilsg.clutter.block.custom.sign.ModStandingSignBlock;
-import net.emilsg.clutter.block.custom.sign.ModWallHangingSignBlock;
-import net.emilsg.clutter.block.custom.sign.ModWallSignBlock;
 import net.emilsg.clutter.block.custom.stacking.LabBottleBlock;
 import net.emilsg.clutter.block.custom.stacking.TallBottleBlock;
 import net.emilsg.clutter.entity.ModEntityTypes;
@@ -144,10 +144,17 @@ public class ModBlocks {
     public static final Block REDWOOD_DOOR = registerBlock("redwood_door", new DoorBlock(BlockSetType.SPRUCE, AbstractBlock.Settings.copy(Blocks.SPRUCE_DOOR)));
     public static final Block REDWOOD_TRAPDOOR = registerBlock("redwood_trapdoor", new TrapdoorBlock(BlockSetType.SPRUCE, AbstractBlock.Settings.copy(Blocks.SPRUCE_TRAPDOOR)));
 
-    public static final Block REDWOOD_SIGN = registerBlockWithoutItem("redwood_sign", new ModStandingSignBlock(AbstractBlock.Settings.copy(Blocks.CHERRY_SIGN), WoodType.SPRUCE));
-    public static final Block REDWOOD_WALL_SIGN = registerBlockWithoutItem("redwood_wall_sign", new ModWallSignBlock(AbstractBlock.Settings.copy(Blocks.CHERRY_WALL_SIGN), WoodType.SPRUCE));
-    public static final Block REDWOOD_HANGING_SIGN = registerBlockWithoutItem("redwood_hanging_sign", new ModHangingSignBlock(AbstractBlock.Settings.copy(Blocks.CHERRY_HANGING_SIGN), WoodType.SPRUCE));
-    public static final Block REDWOOD_HANGING_WALL_SIGN = registerBlockWithoutItem("redwood_hanging_wall_sign", new ModWallHangingSignBlock(AbstractBlock.Settings.copy(Blocks.CHERRY_WALL_HANGING_SIGN), WoodType.SPRUCE));
+
+    static final Identifier REDWOOD_SIGN_TEXTURE = Identifier.of(Clutter.MOD_ID, "entity/signs/redwood");
+    static final Identifier REDWOOD_HANGING_SIGN_TEXTURE = Identifier.of(Clutter.MOD_ID, "entity/signs/hanging/redwood");
+    static final Identifier REDWOOD_HANGING_SIGN_GUI_TEXTURE = Identifier.of(Clutter.MOD_ID, "textures/gui/hanging_signs/redwood");
+    public static final Block REDWOOD_SIGN = registerBlockWithoutItem("redwood_sign", new TerraformSignBlock(REDWOOD_SIGN_TEXTURE, AbstractBlock.Settings.copy(Blocks.CHERRY_SIGN)));
+    public static final Block REDWOOD_WALL_SIGN = registerBlockWithoutItem("redwood_wall_sign", new TerraformWallSignBlock(REDWOOD_SIGN_TEXTURE, AbstractBlock.Settings.copy(Blocks.CHERRY_WALL_SIGN)));
+    public static final Block REDWOOD_HANGING_SIGN = registerBlockWithoutItem("redwood_hanging_sign", new TerraformHangingSignBlock(REDWOOD_HANGING_SIGN_TEXTURE, REDWOOD_HANGING_SIGN_GUI_TEXTURE, AbstractBlock.Settings.copy(Blocks.CHERRY_HANGING_SIGN)));
+    public static final Block REDWOOD_HANGING_WALL_SIGN = registerBlockWithoutItem("redwood_hanging_wall_sign", new TerraformWallHangingSignBlock(REDWOOD_HANGING_SIGN_TEXTURE, REDWOOD_HANGING_SIGN_GUI_TEXTURE, AbstractBlock.Settings.copy(Blocks.CHERRY_WALL_HANGING_SIGN)));
+
+
+
 
     public static final Block DEEPSLATE_SILVER_ORE = registerBlock("deepslate_silver_ore", new ExperienceDroppingBlock(UniformIntProvider.create(4, 8), AbstractBlock.Settings.copy(Blocks.DEEPSLATE).strength(4.5f, 3.0f).requiresTool().mapColor(MapColor.DEEPSLATE_GRAY)));
     public static final Block SILVER_DOOR = registerBlock("silver_door", new DoorBlock(BlockSetType.IRON, AbstractBlock.Settings.copy(Blocks.IRON_DOOR).requiresTool().strength(3.0f).sounds(BlockSoundGroup.METAL).nonOpaque()));

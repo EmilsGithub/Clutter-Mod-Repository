@@ -1,9 +1,10 @@
-// 1.21.1	2024-12-20T12:08:27.6603844	Clutter/Tags for minecraft:item
+// 1.21.1	2025-01-05T19:21:25.9900193	Clutter/Tags for minecraft:item
 1836f0a5f054f60ae47c05258cc612c908d6b77c data\c\tags\item\silver_blocks.json
 4bfc71b3a1ac233840eb8b96fd700b1326a52059 data\minecraft\tags\item\trim_materials.json
 f3ab109c8a97095a2b9ad79247a177dab77a2dfb data\c\tags\item\raw_silvers.json
 0e6759252251db391181e350c7f27865e2283df6 data\clutter\tags\item\strippable_logs.json
 1ed977f50ceebe9a18b1f20a160b5a98a321a17c data\clutter\tags\item\trellis_items.json
+21363cfe3344242e9bc3b48ffe6f3d093c9782cf data\minecraft\tags\item\chest_boats.json
 d82e9c9783c12f3a6e538d40b1a9276ab15374ee data\c\tags\item\ores.json
 bf509848ecc1fe34cbf69fc3032d8e539e756116 data\clutter\tags\item\fruits_and_berries.json
 74cc3d1685a7650896c3a7d77c002a05c3e318c7 data\clutter\tags\item\seeds.json
@@ -12,12 +13,13 @@ e6efa37501a98ea6bfa16839bd5c4933e68f686e data\clutter\tags\item\redwood_logs.jso
 4f1a776ea07ee85827ed2e396cc3de6d56dffcb1 data\c\tags\item\raw_silver_ores.json
 d8ab1b6c8c134d04651007858e965224af072786 data\c\tags\item\copper_nuggets.json
 4eed15e69e9e468f7f3701f69f97f8cc91324544 data\minecraft\tags\item\enchantable\armor.json
-729c3b3ac96909f2b8a1b2ead8c4e1aaa4c466fd data\minecraft\tags\item\enchantable\foot_armor.json
 e4c6782443bf9ac18b225673f782d7f85727a791 data\c\tags\item\silver_ingots.json
+729c3b3ac96909f2b8a1b2ead8c4e1aaa4c466fd data\minecraft\tags\item\enchantable\foot_armor.json
 ebb2f6e72dd38a00965415b1337c048bb5bd7417 data\clutter\tags\item\elytron.json
 cabcc5392542df4fe60a5151fa4c223cdf929d40 data\clutter\tags\item\dyes.json
 b9f9b0c6a85f54c78fa1707fa3609d788edae83a data\minecraft\tags\item\enchantable\head_armor.json
 616c11aaf4af4a0de99ee7bcca0f6bcb8e8ad6c4 data\trinkets\tags\item\chest\cape.json
+7169fe42daeef2a51e4ba6909121b94a9d48a8b5 data\minecraft\tags\item\boats.json
 7dbb07ae9e360c5b148bf72b70bd73abfee3135a data\c\tags\item\silver_nuggets.json
 9204702c1896403b6c59156e0e28febd7ed94464 data\minecraft\tags\item\leg_armor.json
 55d65b697eb3288b0c6bc3c1327c80c9078e109f data\c\tags\item\raw_silver_blocks.json

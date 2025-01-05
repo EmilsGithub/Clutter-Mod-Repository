@@ -20,8 +20,8 @@ public class ModBlockEntities {
     public static BlockEntityType<MailBoxInventoryBlockEntity> MAILBOX;
     public static BlockEntityType<CardboardBoxInventoryBlockEntity> CARDBOARD_BOX;
     public static BlockEntityType<PresentInventoryBlockEntity> PRESENT;
-    public static BlockEntityType<ModSignBlockEntity> MOD_SIGN_BLOCK_ENTITY;
-    public static BlockEntityType<ModHangingSignBlockEntity> MOD_HANGING_SIGN_BLOCK_ENTITY;
+    public static BlockEntityType<BunkBedBlockEntity> MOD_BUNK_BED_BLOCK_ENTITY;
+
 
     public static void registerBlockEntities() {
         CHIMNEY = Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(Clutter.MOD_ID, "chimney"),
@@ -123,14 +123,25 @@ public class ModBlockEntities {
                 BlockEntityType.Builder.create(PresentInventoryBlockEntity::new,
                         ModBlocks.RED_PRESENT).build());
 
-        MOD_SIGN_BLOCK_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE,
-                Identifier.of(Clutter.MOD_ID, "sign_entity"),
-                BlockEntityType.Builder.create(ModSignBlockEntity::new,
-                        ModBlocks.REDWOOD_SIGN, ModBlocks.REDWOOD_WALL_SIGN).build());
-
-        MOD_HANGING_SIGN_BLOCK_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE,
-                Identifier.of(Clutter.MOD_ID, "hanging_sign_entity"),
-                BlockEntityType.Builder.create(ModHangingSignBlockEntity::new,
-                        ModBlocks.REDWOOD_HANGING_SIGN, ModBlocks.REDWOOD_HANGING_WALL_SIGN).build(null));
+        MOD_BUNK_BED_BLOCK_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE,
+                Identifier.of(Clutter.MOD_ID, "bunk_bed_entity"),
+                BlockEntityType.Builder.create(BunkBedBlockEntity::new,
+                        ModBlocks.WHITE_BUNK_BED,
+                        ModBlocks.LIGHT_GRAY_BUNK_BED,
+                        ModBlocks.GRAY_BUNK_BED,
+                        ModBlocks.BLACK_BUNK_BED,
+                        ModBlocks.BROWN_BUNK_BED,
+                        ModBlocks.RED_BUNK_BED,
+                        ModBlocks.ORANGE_BUNK_BED,
+                        ModBlocks.YELLOW_BUNK_BED,
+                        ModBlocks.LIME_BUNK_BED,
+                        ModBlocks.GREEN_BUNK_BED,
+                        ModBlocks.CYAN_BUNK_BED,
+                        ModBlocks.LIGHT_BLUE_BUNK_BED,
+                        ModBlocks.BLUE_BUNK_BED,
+                        ModBlocks.PURPLE_BUNK_BED,
+                        ModBlocks.MAGENTA_BUNK_BED,
+                        ModBlocks.PINK_BUNK_BED
+                ).build());
     }
 }

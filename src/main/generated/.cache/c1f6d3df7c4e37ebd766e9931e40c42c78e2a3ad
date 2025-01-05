@@ -1,4 +1,4 @@
-// 1.21.1	2024-12-20T12:08:27.6844068	Clutter/Tags for minecraft:block
+// 1.21.1	2025-01-05T19:21:26.0162415	Clutter/Tags for minecraft:block
 17136995cca2ea7f6547add9f3e41f676aec5d8c data\clutter\tags\block\flammable.json
 cfc62213e43366e724dfc6dab5d7d1a1ea771338 data\minecraft\tags\block\replaceable.json
 41ee32c5ce8425a135801a8285bb1d65b9a0bbc1 data\clutter\tags\block\green_fire_base_blocks.json
@@ -21,8 +21,8 @@ e6efa37501a98ea6bfa16839bd5c4933e68f686e data\minecraft\tags\block\logs.json
 faeca8159542a4dd6a58ccdbde430ce64b9a875b data\c\tags\block\ores.json
 a1808d88e6ca185571bbdfb7e075514c844a0dea data\minecraft\tags\block\mineable\hoe.json
 10353b666fdddb0192425281151c83360e68cb31 data\c\tags\block\bookshelves.json
-e6efa37501a98ea6bfa16839bd5c4933e68f686e data\minecraft\tags\block\logs_that_burn.json
 4eb6740d9120cfafadead01dcab7535276dc012a data\minecraft\tags\block\planks.json
+e6efa37501a98ea6bfa16839bd5c4933e68f686e data\minecraft\tags\block\logs_that_burn.json
 baa81060393184ca0143f32790644e393bc11a70 data\minecraft\tags\block\walls.json
 9095efdbf2e483fa90fcb1ddc803485a90829241 data\minecraft\tags\block\piglin_repellents.json
 a4638672b0e5fbe631148fc7f7cb4d8c23889f87 data\minecraft\tags\block\needs_iron_tool.json

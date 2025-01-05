@@ -1,5 +1,6 @@
 package net.emilsg.clutter;
 
+import com.terraformersmc.terraform.boat.api.client.TerraformBoatClientHelper;
 import net.emilsg.clutter.block.ModBlockEntities;
 import net.emilsg.clutter.block.custom.WindowSillBlock;
 import net.emilsg.clutter.block.custom.cutout.ICutoutRenderable;
@@ -11,6 +12,7 @@ import net.emilsg.clutter.entity.client.model.*;
 import net.emilsg.clutter.entity.client.player.RendererRegistration;
 import net.emilsg.clutter.entity.client.player.model.ScubaModel;
 import net.emilsg.clutter.entity.client.render.*;
+import net.emilsg.clutter.entity.custom.parent.ModBoats;
 import net.emilsg.clutter.networking.ModMessages;
 import net.emilsg.clutter.screen.*;
 import net.emilsg.clutter.util.ModModelPredicateProvider;
@@ -25,8 +27,6 @@ import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
-import net.minecraft.client.render.block.entity.HangingSignBlockEntityRenderer;
-import net.minecraft.client.render.block.entity.SignBlockEntityRenderer;
 import net.minecraft.registry.Registries;
 import net.minecraft.world.biome.FoliageColors;
 import net.minecraft.world.biome.GrassColors;
@@ -45,6 +45,8 @@ public class ClutterClient implements ClientModInitializer {
         if (IS_TRINKETS_LOADED) TrinketsIntegrationClient.registerTrinkets();
 
         RendererRegistration.register();
+
+        TerraformBoatClientHelper.registerModelLayers(ModBoats.REDWOOD_BOAT_ID, false);
 
         this.registerColorProviders();
         this.registerEntityModelLayers();
@@ -662,9 +664,6 @@ public class ClutterClient implements ClientModInitializer {
 
     private void registerBlockEntityRenderers() {
         BlockEntityRendererFactories.register(ModBlockEntities.SHELF, ShelfBlockEntityRenderer::new);
-
-        BlockEntityRendererFactories.register(ModBlockEntities.MOD_SIGN_BLOCK_ENTITY, SignBlockEntityRenderer::new);
-        BlockEntityRendererFactories.register(ModBlockEntities.MOD_HANGING_SIGN_BLOCK_ENTITY, HangingSignBlockEntityRenderer::new);
     }
 
     private void registerScreenHandlers() {

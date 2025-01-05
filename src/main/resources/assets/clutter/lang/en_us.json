@@ -1535,5 +1535,8 @@
   "biome.clutter.giant_redwood_forest": "Giant Redwood Forest",
 
   "item.clutter.petting_glove": "Petting Glove",
-  "item.clutter.petting_glove.tooltip": "Has a Slight Chance of Healing Hurt Entities on Use"
+  "item.clutter.petting_glove.tooltip": "Has a Slight Chance of Healing Hurt Entities on Use",
+
+  "item.clutter.redwood_boat": "Redwood Boat",
+  "item.clutter.redwood_chest_boat": "Redwood Chest Boat"
 }

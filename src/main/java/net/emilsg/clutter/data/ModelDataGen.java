@@ -328,7 +328,9 @@ public class ModelDataGen extends FabricModelProvider {
 
         groupRegisterGeneratedItemModels(generator,
                 ModItems.DECORATED_ELYTRA_SMITHING_TEMPLATE,
-                ModItems.DECORATED_ELYTRA_SMITHING_TEMPLATE_SHARDS
+                ModItems.DECORATED_ELYTRA_SMITHING_TEMPLATE_SHARDS,
+                ModItems.REDWOOD_BOAT,
+                ModItems.REDWOOD_CHEST_BOAT
         );
 
         for (Item item : Registries.ITEM) {

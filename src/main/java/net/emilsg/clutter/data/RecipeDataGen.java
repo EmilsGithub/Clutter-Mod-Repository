@@ -304,6 +304,9 @@ public class RecipeDataGen extends FabricRecipeProvider {
         offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_BLACK_ONYX_STAIRS, ModBlocks.POLISHED_BLACK_ONYX, 1);
         offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_BLACK_ONYX_WALL, ModBlocks.POLISHED_BLACK_ONYX, 1);
 
+        offerBoatRecipe(exporter, ModItems.REDWOOD_BOAT, ModBlocks.REDWOOD_PLANKS);
+        offerChestBoatRecipe(exporter, ModItems.REDWOOD_CHEST_BOAT, ModBlocks.REDWOOD_PLANKS);
+
         for (Item elytra : Registries.ITEM) {
             if (elytra instanceof ClutterElytraItem clutterElytraItem) offerDecoratedElytraRecipes(exporter, elytra, clutterElytraItem.getComponent());
         }

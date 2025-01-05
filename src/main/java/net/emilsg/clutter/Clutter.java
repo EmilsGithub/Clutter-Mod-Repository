@@ -9,6 +9,7 @@ import net.emilsg.clutter.effect.ModEffects;
 import net.emilsg.clutter.enchantment.ModEnchantmentEffects;
 import net.emilsg.clutter.enchantment.ModEnchantments;
 import net.emilsg.clutter.entity.ClutterAttributes;
+import net.emilsg.clutter.entity.custom.parent.ModBoats;
 import net.emilsg.clutter.item.ModItems;
 import net.emilsg.clutter.networking.ModMessages;
 import net.emilsg.clutter.potion.ModPotions;
@@ -26,7 +27,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Clutter implements ModInitializer {
-    public static final String MOD_VERSION = "0.6.2";
+    public static final String MOD_VERSION = "0.6.3";
     public static final String MOD_ID = "clutter";
     public static final Logger LOGGER = LoggerFactory.getLogger("Clutter");
     public static final boolean IS_TRINKETS_LOADED = FabricLoader.getInstance().getModContainer("trinkets").isPresent();
@@ -67,6 +68,8 @@ public class Clutter implements ModInitializer {
 
         ModPotions.registerPotions();
         ModPotions.registerPotionRecipes();
+
+        ModBoats.registerBoats();
 
         ModBlocks.registerCopperBlockPairs();
 

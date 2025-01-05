@@ -598,6 +598,9 @@ public class ModItemGroups {
                     entries.add(ModItems.CLUTTER_RECIPE_BOOK);
                     entries.add(ModItems.PETTING_GLOVE);
 
+                    entries.add(ModItems.REDWOOD_BOAT);
+                    entries.add(ModItems.REDWOOD_CHEST_BOAT);
+
                     entries.add(ModItems.ONYX);
                     entries.add(ModItems.RAW_ONYX);
                     entries.add(ModItems.SULPHUR);

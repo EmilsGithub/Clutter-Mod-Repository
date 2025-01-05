@@ -70,6 +70,14 @@ public class ItemTagDataGen extends FabricTagProvider.ItemTagProvider {
                 Items.SWEET_BERRIES
         );
 
+        getOrCreateTagBuilder(ItemTags.BOATS).add(
+                ModItems.REDWOOD_BOAT
+        );
+
+        getOrCreateTagBuilder(ItemTags.CHEST_BOATS).add(
+                ModItems.REDWOOD_CHEST_BOAT
+        );
+
         getOrCreateTagBuilder(ModItemTags.REDWOOD_LOGS).add(
                 ModBlocks.REDWOOD_LOG.asItem(),
                 ModBlocks.STRIPPED_REDWOOD_LOG.asItem(),

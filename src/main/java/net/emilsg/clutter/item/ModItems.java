@@ -1,9 +1,11 @@
 package net.emilsg.clutter.item;
 
+import com.terraformersmc.terraform.boat.api.item.TerraformBoatItemHelper;
 import net.emilsg.clutter.Clutter;
 import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.block.custom.SeahorseBucketItem;
 import net.emilsg.clutter.entity.ModEntityTypes;
+import net.emilsg.clutter.entity.custom.parent.ModBoats;
 import net.emilsg.clutter.entity.variants.EchofinVariant;
 import net.emilsg.clutter.item.custom.*;
 import net.minecraft.component.type.FoodComponent;
@@ -35,6 +37,9 @@ public class ModItems {
 
     public static final Item REDWOOD_SIGN = registerItem("redwood_sign", new SignItem(new Item.Settings().maxCount(16), ModBlocks.REDWOOD_SIGN, ModBlocks.REDWOOD_WALL_SIGN));
     public static final Item REDWOOD_HANGING_SIGN = registerItem("redwood_hanging_sign", new HangingSignItem(ModBlocks.REDWOOD_HANGING_SIGN, ModBlocks.REDWOOD_HANGING_WALL_SIGN, new Item.Settings().maxCount(16)));
+
+    public static final Item REDWOOD_BOAT = TerraformBoatItemHelper.registerBoatItem(ModBoats.REDWOOD_BOAT_ID, ModBoats.REDWOOD_BOAT_KEY, false);
+    public static final Item REDWOOD_CHEST_BOAT = TerraformBoatItemHelper.registerBoatItem(ModBoats.REDWOOD_CHEST_BOAT_ID, ModBoats.REDWOOD_BOAT_KEY, true);
 
     public static final Item DEAD_CUP_CORAL_FAN = registerItem("dead_cup_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.DEAD_CUP_CORAL_FAN, ModBlocks.DEAD_CUP_CORAL_WALL_FAN, new Item.Settings(), Direction.DOWN));
     public static final Item CUP_CORAL_FAN = registerItem("cup_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.CUP_CORAL_FAN, ModBlocks.CUP_CORAL_WALL_FAN, new Item.Settings(), Direction.DOWN));
