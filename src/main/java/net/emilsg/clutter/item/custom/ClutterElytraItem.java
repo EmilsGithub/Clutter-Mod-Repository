@@ -6,7 +6,7 @@ import net.minecraft.item.Equipment;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class ClutterElytraItem extends ElytraItem implements FabricElytraItem, Equipment {
+public class ClutterElytraItem extends Item implements Equipment {
     private final Item component;
 
     public ClutterElytraItem(Settings settings, Item component) {

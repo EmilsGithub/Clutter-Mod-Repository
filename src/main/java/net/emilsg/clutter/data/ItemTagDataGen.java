@@ -62,6 +62,10 @@ public class ItemTagDataGen extends FabricTagProvider.ItemTagProvider {
 
         /** Modded **/
 
+        getOrCreateTagBuilder(ModItemTags.REPAIRS_SILVER_ARMOR).add(
+                ModItems.SILVER_INGOT
+        );
+
         getOrCreateTagBuilder(ModItemTags.FRUITS_AND_BERRIES).add(
                 ModItems.CHERRIES,
                 Items.APPLE,

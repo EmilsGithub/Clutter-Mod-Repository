@@ -25,6 +25,9 @@ import net.fabricmc.fabric.api.registry.OxidizableBlocksRegistry;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.block.piston.PistonBehavior;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.EquippableComponent;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -525,16 +528,18 @@ public class ModBlocks {
     public static final Block CRIMSON_MOSAIC_SLAB = registerBlock("crimson_mosaic_slab", new SlabBlock(AbstractBlock.Settings.copy(Blocks.CRIMSON_SLAB)));
     public static final Block WARPED_MOSAIC_SLAB = registerBlock("warped_mosaic_slab", new SlabBlock(AbstractBlock.Settings.copy(Blocks.WARPED_SLAB)));
     public static final Block CHERRY_MOSAIC_SLAB = registerBlock("cherry_mosaic_slab", new SlabBlock(AbstractBlock.Settings.copy(Blocks.CHERRY_SLAB)));
-    public static final Block SHEEP_PLUSHIE = registerBlock("sheep_plushie", new SheepPlushieBlock(AbstractBlock.Settings.copy(Blocks.WHITE_WOOL).breakInstantly()), 1);
-    public static final Block COW_PLUSHIE = registerBlock("cow_plushie", new CowPlushieBlock(AbstractBlock.Settings.copy(Blocks.BROWN_WOOL).breakInstantly()), 1);
-    public static final Block PIG_PLUSHIE = registerBlock("pig_plushie", new PigPlushieBlock(AbstractBlock.Settings.copy(Blocks.PINK_WOOL).breakInstantly()), 1);
-    public static final Block SQUID_PLUSHIE = registerBlock("squid_plushie", new SquidPlushieBlock(AbstractBlock.Settings.copy(Blocks.CYAN_WOOL).breakInstantly()), 1);
-    public static final Block CHICKEN_PLUSHIE = registerBlock("chicken_plushie", new ChickenPlushieBlock(AbstractBlock.Settings.copy(Blocks.WHITE_WOOL).breakInstantly()), 1);
-    public static final Block FOX_PLUSHIE = registerBlock("fox_plushie", new FoxPlushieBlock(AbstractBlock.Settings.copy(Blocks.ORANGE_WOOL).breakInstantly()), 1);
-    public static final Block SNOW_FOX_PLUSHIE = registerBlock("snow_fox_plushie", new FoxPlushieBlock(AbstractBlock.Settings.copy(Blocks.WHITE_WOOL).breakInstantly()), 1);
-    public static final Block OCELOT_PLUSHIE = registerBlock("ocelot_plushie", new OcelotPlushieBlock(AbstractBlock.Settings.copy(Blocks.YELLOW_WOOL).breakInstantly()), 1);
-    public static final Block PANDA_PLUSHIE = registerBlock("panda_plushie", new PandaPlushieBlock(AbstractBlock.Settings.copy(Blocks.WHITE_WOOL).breakInstantly().nonOpaque()), 1);
-    public static final Block ENDER_DRAGON_PLUSHIE = registerBlock("ender_dragon_plushie", new EnderDragonPlushieBlock(AbstractBlock.Settings.copy(Blocks.BLACK_WOOL).breakInstantly().nonOpaque()), 1);
+
+    public static final Block SHEEP_PLUSHIE = registerHeadEquippableBlock("sheep_plushie", new SheepPlushieBlock(AbstractBlock.Settings.copy(Blocks.WHITE_WOOL).breakInstantly()));
+    public static final Block COW_PLUSHIE = registerHeadEquippableBlock("cow_plushie", new CowPlushieBlock(AbstractBlock.Settings.copy(Blocks.BROWN_WOOL).breakInstantly()));
+    public static final Block PIG_PLUSHIE = registerHeadEquippableBlock("pig_plushie", new PigPlushieBlock(AbstractBlock.Settings.copy(Blocks.PINK_WOOL).breakInstantly()));
+    public static final Block SQUID_PLUSHIE = registerHeadEquippableBlock("squid_plushie", new SquidPlushieBlock(AbstractBlock.Settings.copy(Blocks.CYAN_WOOL).breakInstantly()));
+    public static final Block CHICKEN_PLUSHIE = registerHeadEquippableBlock("chicken_plushie", new ChickenPlushieBlock(AbstractBlock.Settings.copy(Blocks.WHITE_WOOL).breakInstantly()));
+    public static final Block FOX_PLUSHIE = registerHeadEquippableBlock("fox_plushie", new FoxPlushieBlock(AbstractBlock.Settings.copy(Blocks.ORANGE_WOOL).breakInstantly()));
+    public static final Block SNOW_FOX_PLUSHIE = registerHeadEquippableBlock("snow_fox_plushie", new FoxPlushieBlock(AbstractBlock.Settings.copy(Blocks.WHITE_WOOL).breakInstantly()));
+    public static final Block OCELOT_PLUSHIE = registerHeadEquippableBlock("ocelot_plushie", new OcelotPlushieBlock(AbstractBlock.Settings.copy(Blocks.YELLOW_WOOL).breakInstantly()));
+    public static final Block PANDA_PLUSHIE = registerHeadEquippableBlock("panda_plushie", new PandaPlushieBlock(AbstractBlock.Settings.copy(Blocks.WHITE_WOOL).breakInstantly().nonOpaque()));
+    public static final Block ENDER_DRAGON_PLUSHIE = registerHeadEquippableBlock("ender_dragon_plushie", new EnderDragonPlushieBlock(AbstractBlock.Settings.copy(Blocks.BLACK_WOOL).breakInstantly().nonOpaque()));
+
     public static final Block TOWEL = registerBlock("towel", new TowelBlock(AbstractBlock.Settings.copy(Blocks.WHITE_WOOL).breakInstantly()));
     public static final Block BOWL = registerBlock("bowl", new BowlBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS).breakInstantly()));
     public static final Block TALL_WHITE_LAMP = registerBlock("tall_white_lamp", new TallLampBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS).luminance(createLightLevelFromLitBlockState(12))));
@@ -1403,6 +1408,10 @@ public class ModBlocks {
     public static final Block MAGENTA_IRON_CANDELABRA = registerBlock("magenta_iron_candelabra", new CandelabraBlock(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK).luminance(createLightLevelFromLitBlockState(12))));
     public static final Block PINK_IRON_CANDELABRA = registerBlock("pink_iron_candelabra", new CandelabraBlock(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK).luminance(createLightLevelFromLitBlockState(12))));
 
+    private static Block registerHeadEquippableBlock(String name, Block block) {
+        registerHeadEquippableBlockItem(name, block);
+        return Registry.register(Registries.BLOCK, Identifier.of(Clutter.MOD_ID, name), block);
+    }
 
     private static Block registerBlock(String name, Block block) {
         registerBlockItem(name, block);
@@ -1426,6 +1435,12 @@ public class ModBlocks {
     private static Item registerBlockItem(String name, Block block) {
         Item item = Registry.register(Registries.ITEM, Identifier.of(Clutter.MOD_ID, name),
                 new BlockItem(block, new Item.Settings()));
+        return item;
+    }
+
+    private static Item registerHeadEquippableBlockItem(String name, Block block) {
+        Item item = Registry.register(Registries.ITEM, Identifier.of(Clutter.MOD_ID, name),
+                new BlockItem(block, new Item.Settings().maxCount(1).component(DataComponentTypes.EQUIPPABLE, EquippableComponent.builder(EquipmentSlot.HEAD).swappable(false).build())));
         return item;
     }
 

@@ -55,7 +55,7 @@ dependencies {
 	modImplementation "com.github.glitchfiend:TerraBlender-fabric:${project.terrablender_version}"
 
 	// Trinkets. Optional
-	modApi "dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cca_version}"
+	modApi "org.ladysnake.cardinal-components-api:cardinal-components-base:${project.cca_version}"
 	modCompileOnly "dev.emi:trinkets:${project.trinkets_version}"
 
 	// REI. Optional

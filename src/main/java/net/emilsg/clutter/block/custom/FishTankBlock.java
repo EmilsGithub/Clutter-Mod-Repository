@@ -13,22 +13,23 @@ import net.minecraft.registry.Registries;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.*;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.world.WorldView;
+import net.minecraft.world.tick.ScheduledTickView;
 import org.jetbrains.annotations.Nullable;
 
 public class FishTankBlock extends Block implements Waterloggable, ICutoutRenderable {
-    public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
+    public static final EnumProperty<Direction> FACING = Properties.HORIZONTAL_FACING;
     public static final EnumProperty<TankType> TYPE = EnumProperty.of("type", TankType.class);
     public static final EnumProperty<InteriorType> INTERIOR = EnumProperty.of("interior", InteriorType.class);
     private static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
@@ -91,7 +92,7 @@ public class FishTankBlock extends Block implements Waterloggable, ICutoutRender
             serverWorld.setBlockState(pos, state.with(INTERIOR, newType), Block.NOTIFY_ALL);
         }
 
-        return ActionResult.success(world.isClient);
+        return ActionResult.SUCCESS;
     }
 
     private @Nullable InteriorType getTypeFromItemStack(ItemStack stackInHand) {
@@ -163,9 +164,9 @@ public class FishTankBlock extends Block implements Waterloggable, ICutoutRender
         return blockState.isOf(this) && blockState.get(TYPE) == TankType.SINGLE ? blockState.get(FACING) : null;
     }
 
-    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+    protected BlockState getStateForNeighborUpdate(BlockState state, WorldView world, ScheduledTickView tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, Random random) {
         if (state.get(WATERLOGGED)) {
-            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+            tickView.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
 
         if (neighborState.isOf(this) && direction.getAxis().isHorizontal()) {
@@ -177,7 +178,7 @@ public class FishTankBlock extends Block implements Waterloggable, ICutoutRender
             return state.with(TYPE, TankType.SINGLE);
         }
 
-        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+        return super.getStateForNeighborUpdate(state, world, tickView, pos, direction, neighborPos, neighborState, random);
     }
 
     public static DoubleBlockProperties.Type getDoubleBlockType(BlockState state) {

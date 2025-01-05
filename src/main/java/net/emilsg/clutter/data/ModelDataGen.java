@@ -1,7 +1,5 @@
 package net.emilsg.clutter.data;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import net.emilsg.clutter.Clutter;
 import net.emilsg.clutter.block.ClutterWoodType;
 import net.emilsg.clutter.block.ModBlocks;
@@ -9,16 +7,18 @@ import net.emilsg.clutter.block.custom.TableBlock;
 import net.emilsg.clutter.block.custom.WallBookshelfBlock;
 import net.emilsg.clutter.block.custom.WindowSillBlock;
 import net.emilsg.clutter.block.custom.WoodenBenchBlock;
+import net.emilsg.clutter.item.ModEquipmentAssetKeys;
 import net.emilsg.clutter.item.ModItems;
 import net.emilsg.clutter.item.custom.ClutterElytraItem;
 import net.emilsg.clutter.item.custom.ClutterSpawnEggItem;
 import net.emilsg.clutter.util.ModProperties;
+import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.block.Block;
-import net.minecraft.data.client.*;
+import net.minecraft.client.data.*;
+import net.minecraft.client.render.item.model.ItemModel;
+import net.minecraft.client.render.item.property.bool.BrokenProperty;
 import net.minecraft.data.family.BlockFamilies;
-import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.state.property.Properties;
@@ -250,18 +250,18 @@ public class ModelDataGen extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator generator) {
-        generator.registerFlowerPotPlant(ModBlocks.SMALL_BLUE_LUPINE, ModBlocks.POTTED_SMALL_BLUE_LUPINE, BlockStateModelGenerator.TintType.NOT_TINTED);
-        generator.registerFlowerPotPlant(ModBlocks.SMALL_PURPLE_LUPINE, ModBlocks.POTTED_SMALL_PURPLE_LUPINE, BlockStateModelGenerator.TintType.NOT_TINTED);
-        generator.registerFlowerPotPlant(ModBlocks.SMALL_MAGENTA_LUPINE, ModBlocks.POTTED_SMALL_MAGENTA_LUPINE, BlockStateModelGenerator.TintType.NOT_TINTED);
-        generator.registerFlowerPotPlant(ModBlocks.SMALL_YELLOW_LUPINE, ModBlocks.POTTED_SMALL_YELLOW_LUPINE, BlockStateModelGenerator.TintType.NOT_TINTED);
-        generator.registerFlowerPotPlant(ModBlocks.SMALL_RED_LUPINE, ModBlocks.POTTED_SMALL_RED_LUPINE, BlockStateModelGenerator.TintType.NOT_TINTED);
-        generator.registerFlowerPotPlant(ModBlocks.SMALL_WHITE_LUPINE, ModBlocks.POTTED_SMALL_WHITE_LUPINE, BlockStateModelGenerator.TintType.NOT_TINTED);
-        generator.registerDoubleBlock(ModBlocks.MAGENTA_LUPINE, BlockStateModelGenerator.TintType.NOT_TINTED);
-        generator.registerDoubleBlock(ModBlocks.BLUE_LUPINE, BlockStateModelGenerator.TintType.NOT_TINTED);
-        generator.registerDoubleBlock(ModBlocks.PURPLE_LUPINE, BlockStateModelGenerator.TintType.NOT_TINTED);
-        generator.registerDoubleBlock(ModBlocks.YELLOW_LUPINE, BlockStateModelGenerator.TintType.NOT_TINTED);
-        generator.registerDoubleBlock(ModBlocks.RED_LUPINE, BlockStateModelGenerator.TintType.NOT_TINTED);
-        generator.registerDoubleBlock(ModBlocks.WHITE_LUPINE, BlockStateModelGenerator.TintType.NOT_TINTED);
+        generator.registerFlowerPotPlant(ModBlocks.SMALL_BLUE_LUPINE, ModBlocks.POTTED_SMALL_BLUE_LUPINE, BlockStateModelGenerator.CrossType.NOT_TINTED);
+        generator.registerFlowerPotPlant(ModBlocks.SMALL_PURPLE_LUPINE, ModBlocks.POTTED_SMALL_PURPLE_LUPINE, BlockStateModelGenerator.CrossType.NOT_TINTED);
+        generator.registerFlowerPotPlant(ModBlocks.SMALL_MAGENTA_LUPINE, ModBlocks.POTTED_SMALL_MAGENTA_LUPINE, BlockStateModelGenerator.CrossType.NOT_TINTED);
+        generator.registerFlowerPotPlant(ModBlocks.SMALL_YELLOW_LUPINE, ModBlocks.POTTED_SMALL_YELLOW_LUPINE, BlockStateModelGenerator.CrossType.NOT_TINTED);
+        generator.registerFlowerPotPlant(ModBlocks.SMALL_RED_LUPINE, ModBlocks.POTTED_SMALL_RED_LUPINE, BlockStateModelGenerator.CrossType.NOT_TINTED);
+        generator.registerFlowerPotPlant(ModBlocks.SMALL_WHITE_LUPINE, ModBlocks.POTTED_SMALL_WHITE_LUPINE, BlockStateModelGenerator.CrossType.NOT_TINTED);
+        generator.registerDoubleBlock(ModBlocks.MAGENTA_LUPINE, BlockStateModelGenerator.CrossType.NOT_TINTED);
+        generator.registerDoubleBlock(ModBlocks.BLUE_LUPINE, BlockStateModelGenerator.CrossType.NOT_TINTED);
+        generator.registerDoubleBlock(ModBlocks.PURPLE_LUPINE, BlockStateModelGenerator.CrossType.NOT_TINTED);
+        generator.registerDoubleBlock(ModBlocks.YELLOW_LUPINE, BlockStateModelGenerator.CrossType.NOT_TINTED);
+        generator.registerDoubleBlock(ModBlocks.RED_LUPINE, BlockStateModelGenerator.CrossType.NOT_TINTED);
+        generator.registerDoubleBlock(ModBlocks.WHITE_LUPINE, BlockStateModelGenerator.CrossType.NOT_TINTED);
 
         BlockStateModelGenerator.BlockTexturePool blackOnyxTexturePool = generator.registerCubeAllModelTexturePool(ModBlocks.BLACK_ONYX_BLOCK);
         BlockStateModelGenerator.BlockTexturePool polishedBlackOnyxTexturePool = generator.registerCubeAllModelTexturePool(ModBlocks.POLISHED_BLACK_ONYX);
@@ -307,10 +307,11 @@ public class ModelDataGen extends FabricModelProvider {
 
     @Override
     public void generateItemModels(ItemModelGenerator generator) {
-        generator.registerArmor(((ArmorItem) ModItems.SILVER_HELMET));
-        generator.registerArmor(((ArmorItem) ModItems.SILVER_CHESTPLATE));
-        generator.registerArmor(((ArmorItem) ModItems.SILVER_LEGGINGS));
-        generator.registerArmor(((ArmorItem) ModItems.SILVER_BOOTS));
+        generator.registerArmor(ModItems.SILVER_HELMET, ModEquipmentAssetKeys.SILVER, "helmet", false);
+        generator.registerArmor(ModItems.SILVER_CHESTPLATE, ModEquipmentAssetKeys.SILVER, "chestplate", false);
+        generator.registerArmor(ModItems.SILVER_LEGGINGS, ModEquipmentAssetKeys.SILVER, "leggings", false);
+        generator.registerArmor(ModItems.SILVER_BOOTS, ModEquipmentAssetKeys.SILVER, "boots", false);
+
 
         //generator.registerArmor(((ArmorItem) ModItems.COPPER_DIVING_HELMET));
         //generator.registerArmor(((ArmorItem) ModItems.COPPER_DIVING_CHESTPLATE));
@@ -332,7 +333,7 @@ public class ModelDataGen extends FabricModelProvider {
         );
 
         for (Item item : Registries.ITEM) {
-            if (item instanceof ClutterElytraItem elytra) registerElytra(generator, elytra);
+            if (item instanceof ClutterElytraItem elytra) registerWithBrokenCondition(generator, elytra);
             if (item instanceof ClutterSpawnEggItem spawnEggItem) registerSpawnEggItem(generator, spawnEggItem);
         }
     }
@@ -350,7 +351,6 @@ public class ModelDataGen extends FabricModelProvider {
     }
 
     public final void registerCluster(BlockStateModelGenerator generator, Block block) {
-        generator.excludeFromSimpleItemModelGeneration(block);
         generator.blockStateCollector.accept(VariantsBlockStateSupplier.create(block, BlockStateVariant.create().put(VariantSettings.MODEL, Models.CROSS.upload(block, TextureMap.cross(block), generator.modelCollector))).coordinate(generator.createUpDefaultFacingVariantMap()));
     }
 
@@ -360,7 +360,7 @@ public class ModelDataGen extends FabricModelProvider {
         if(woodType.log() != null && woodType.wood() != null) generator.registerLog(woodType.log()).log(woodType.log()).wood(woodType.wood());
         if(woodType.strippedLog() != null && woodType.strippedWood() != null) generator.registerLog(woodType.strippedLog()).log(woodType.strippedLog()).wood(woodType.strippedWood());
         if(woodType.leaves() != null) generator.registerSingleton(woodType.leaves(), TexturedModel.LEAVES);
-        if(woodType.sapling() != null) generator.registerTintableCross(woodType.sapling(), BlockStateModelGenerator.TintType.NOT_TINTED);
+        if(woodType.sapling() != null) generator.registerTintableCross(woodType.sapling(), BlockStateModelGenerator.CrossType.NOT_TINTED);
         if(woodType.door() != null) generator.registerDoor(woodType.door());
         if(woodType.trapdoor() != null) generator.registerTrapdoor(woodType.trapdoor());
         registerClutterWoodSet(generator, woodType);
@@ -505,7 +505,6 @@ public class ModelDataGen extends FabricModelProvider {
     }
 
     private void registerLargeTintableCross(BlockStateModelGenerator generator, Block block) {
-        generator.excludeFromSimpleItemModelGeneration(block);
         Identifier top = generator.createSubModel(block, "_top", LARGE_TINTED_CROSS, id -> largeCrossMap(block, true));
         Identifier bottom = generator.createSubModel(block, "_bottom", LARGE_TINTED_CROSS, id -> largeCrossMap(block, false));
         generator.registerDoubleBlock(block, top, bottom);
@@ -517,25 +516,9 @@ public class ModelDataGen extends FabricModelProvider {
         generator.registerDoubleBlock(block, top, bottom);
     }
 
-    private void registerElytra(ItemModelGenerator itemGen, Item elytra) {
-        String idString = ModelIds.getItemModelId(elytra).getPath().replace("item/", "item/broken_");
-        TextureMap brokenMap = (new TextureMap()).put(TextureKey.LAYER0, Identifier.of(Clutter.MOD_ID, idString));
-
-        Models.GENERATED.upload(Identifier.of(Clutter.MOD_ID, idString), brokenMap, itemGen.writer);
-
-        Models.GENERATED.upload(ModelIds.getItemModelId(elytra), TextureMap.layer0(elytra), itemGen.writer, (id, textures) -> {
-            JsonObject jsonObject = Models.GENERATED.createJson(id, textures);
-            JsonArray overrides = new JsonArray();
-            JsonObject override = new JsonObject();
-            JsonObject predicate = new JsonObject();
-            predicate.addProperty("broken", 1);
-            override.add("predicate", predicate);
-
-            override.addProperty("model", "clutter:item/" + (id.getPath().replace("item/", "broken_")));
-            overrides.add(override);
-            jsonObject.add("overrides", overrides);
-
-            return jsonObject;
-        });
+    public final void registerWithBrokenCondition(ItemModelGenerator itemGen, Item item) {
+        ItemModel.Unbaked unbaked = ItemModels.basic(itemGen.upload(item, Models.GENERATED));
+        ItemModel.Unbaked unbaked2 = ItemModels.basic(itemGen.registerSubModel(item, "_broken", Models.GENERATED));
+        itemGen.registerCondition(item, new BrokenProperty(), unbaked2, unbaked);
     }
 }

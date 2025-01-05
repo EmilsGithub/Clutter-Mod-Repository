@@ -6,58 +6,71 @@ import net.emilsg.clutter.block.custom.SeahorseBucketItem;
 import net.emilsg.clutter.entity.ModEntityTypes;
 import net.emilsg.clutter.entity.variants.EchofinVariant;
 import net.emilsg.clutter.item.custom.*;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.ConsumableComponent;
+import net.minecraft.component.type.EquippableComponent;
 import net.minecraft.component.type.FoodComponent;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
+import net.minecraft.item.consume.ApplyEffectsConsumeEffect;
+import net.minecraft.item.consume.UseAction;
+import net.minecraft.item.equipment.EquipmentAssetKeys;
+import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
+import net.minecraft.util.Unit;
 import net.minecraft.util.math.Direction;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Optional;
 
 
 public class ModItems {
 
-    public static final Item AQUATIC_TORCH = registerItem("aquatic_torch", new VerticallyAttachableBlockItem(ModBlocks.AQUATIC_TORCH, ModBlocks.AQUATIC_WALL_TORCH, new Item.Settings(), Direction.DOWN));
-    public static final Item EXPOSED_AQUATIC_TORCH = registerItem("exposed_aquatic_torch", new VerticallyAttachableBlockItem(ModBlocks.EXPOSED_AQUATIC_TORCH, ModBlocks.EXPOSED_AQUATIC_WALL_TORCH, new Item.Settings(), Direction.DOWN));
-    public static final Item WEATHERED_AQUATIC_TORCH = registerItem("weathered_aquatic_torch", new VerticallyAttachableBlockItem(ModBlocks.WEATHERED_AQUATIC_TORCH, ModBlocks.WEATHERED_AQUATIC_WALL_TORCH, new Item.Settings(), Direction.DOWN));
-    public static final Item OXIDIZED_AQUATIC_TORCH = registerItem("oxidized_aquatic_torch", new VerticallyAttachableBlockItem(ModBlocks.OXIDIZED_AQUATIC_TORCH, ModBlocks.OXIDIZED_AQUATIC_WALL_TORCH, new Item.Settings(), Direction.DOWN));
+    public static final Item AQUATIC_TORCH = registerItem("aquatic_torch", new VerticallyAttachableBlockItem(ModBlocks.AQUATIC_TORCH, ModBlocks.AQUATIC_WALL_TORCH, Direction.DOWN, new Item.Settings()));
+    public static final Item EXPOSED_AQUATIC_TORCH = registerItem("exposed_aquatic_torch", new VerticallyAttachableBlockItem(ModBlocks.EXPOSED_AQUATIC_TORCH, ModBlocks.EXPOSED_AQUATIC_WALL_TORCH, Direction.DOWN, new Item.Settings()));
+    public static final Item WEATHERED_AQUATIC_TORCH = registerItem("weathered_aquatic_torch", new VerticallyAttachableBlockItem(ModBlocks.WEATHERED_AQUATIC_TORCH, ModBlocks.WEATHERED_AQUATIC_WALL_TORCH, Direction.DOWN, new Item.Settings()));
+    public static final Item OXIDIZED_AQUATIC_TORCH = registerItem("oxidized_aquatic_torch", new VerticallyAttachableBlockItem(ModBlocks.OXIDIZED_AQUATIC_TORCH, ModBlocks.OXIDIZED_AQUATIC_WALL_TORCH, Direction.DOWN, new Item.Settings()));
 
-    public static final Item WAXED_AQUATIC_TORCH = registerItem("waxed_aquatic_torch", new VerticallyAttachableBlockItem(ModBlocks.WAXED_AQUATIC_TORCH, ModBlocks.WAXED_AQUATIC_WALL_TORCH, new Item.Settings(), Direction.DOWN));
-    public static final Item WAXED_EXPOSED_AQUATIC_TORCH = registerItem("waxed_exposed_aquatic_torch", new VerticallyAttachableBlockItem(ModBlocks.WAXED_EXPOSED_AQUATIC_TORCH, ModBlocks.WAXED_EXPOSED_AQUATIC_WALL_TORCH, new Item.Settings(), Direction.DOWN));
-    public static final Item WAXED_WEATHERED_AQUATIC_TORCH = registerItem("waxed_weathered_aquatic_torch", new VerticallyAttachableBlockItem(ModBlocks.WAXED_WEATHERED_AQUATIC_TORCH, ModBlocks.WAXED_WEATHERED_AQUATIC_WALL_TORCH, new Item.Settings(), Direction.DOWN));
-    public static final Item WAXED_OXIDIZED_AQUATIC_TORCH = registerItem("waxed_oxidized_aquatic_torch", new VerticallyAttachableBlockItem(ModBlocks.WAXED_OXIDIZED_AQUATIC_TORCH, ModBlocks.WAXED_OXIDIZED_AQUATIC_WALL_TORCH, new Item.Settings(), Direction.DOWN));
+    public static final Item WAXED_AQUATIC_TORCH = registerItem("waxed_aquatic_torch", new VerticallyAttachableBlockItem(ModBlocks.WAXED_AQUATIC_TORCH, ModBlocks.WAXED_AQUATIC_WALL_TORCH, Direction.DOWN, new Item.Settings()));
+    public static final Item WAXED_EXPOSED_AQUATIC_TORCH = registerItem("waxed_exposed_aquatic_torch", new VerticallyAttachableBlockItem(ModBlocks.WAXED_EXPOSED_AQUATIC_TORCH, ModBlocks.WAXED_EXPOSED_AQUATIC_WALL_TORCH, Direction.DOWN, new Item.Settings()));
+    public static final Item WAXED_WEATHERED_AQUATIC_TORCH = registerItem("waxed_weathered_aquatic_torch", new VerticallyAttachableBlockItem(ModBlocks.WAXED_WEATHERED_AQUATIC_TORCH, ModBlocks.WAXED_WEATHERED_AQUATIC_WALL_TORCH, Direction.DOWN, new Item.Settings()));
+    public static final Item WAXED_OXIDIZED_AQUATIC_TORCH = registerItem("waxed_oxidized_aquatic_torch", new VerticallyAttachableBlockItem(ModBlocks.WAXED_OXIDIZED_AQUATIC_TORCH, ModBlocks.WAXED_OXIDIZED_AQUATIC_WALL_TORCH, Direction.DOWN, new Item.Settings()));
 
-    public static final Item PRISMARINE_TORCH = registerItem("prismarine_torch", new VerticallyAttachableBlockItem(ModBlocks.PRISMARINE_TORCH, ModBlocks.PRISMARINE_WALL_TORCH, new Item.Settings(), Direction.DOWN));
+    public static final Item PRISMARINE_TORCH = registerItem("prismarine_torch", new VerticallyAttachableBlockItem(ModBlocks.PRISMARINE_TORCH, ModBlocks.PRISMARINE_WALL_TORCH, Direction.DOWN, new Item.Settings()));
 
-    public static final Item REDWOOD_SIGN = registerItem("redwood_sign", new SignItem(new Item.Settings().maxCount(16), ModBlocks.REDWOOD_SIGN, ModBlocks.REDWOOD_WALL_SIGN));
+    public static final Item REDWOOD_SIGN = registerItem("redwood_sign", new SignItem(ModBlocks.REDWOOD_SIGN, ModBlocks.REDWOOD_WALL_SIGN, new Item.Settings().maxCount(16)));
     public static final Item REDWOOD_HANGING_SIGN = registerItem("redwood_hanging_sign", new HangingSignItem(ModBlocks.REDWOOD_HANGING_SIGN, ModBlocks.REDWOOD_HANGING_WALL_SIGN, new Item.Settings().maxCount(16)));
 
-    public static final Item DEAD_CUP_CORAL_FAN = registerItem("dead_cup_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.DEAD_CUP_CORAL_FAN, ModBlocks.DEAD_CUP_CORAL_WALL_FAN, new Item.Settings(), Direction.DOWN));
-    public static final Item CUP_CORAL_FAN = registerItem("cup_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.CUP_CORAL_FAN, ModBlocks.CUP_CORAL_WALL_FAN, new Item.Settings(), Direction.DOWN));
-    public static final Item DEAD_GHOST_CORAL_FAN = registerItem("dead_ghost_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.DEAD_GHOST_CORAL_FAN, ModBlocks.DEAD_GHOST_CORAL_WALL_FAN, new Item.Settings(), Direction.DOWN));
-    public static final Item GHOST_CORAL_FAN = registerItem("ghost_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.GHOST_CORAL_FAN, ModBlocks.GHOST_CORAL_WALL_FAN, new Item.Settings(), Direction.DOWN));
-    public static final Item DEAD_DIAMOND_CORAL_FAN = registerItem("dead_diamond_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.DEAD_DIAMOND_CORAL_FAN, ModBlocks.DEAD_DIAMOND_CORAL_WALL_FAN, new Item.Settings(), Direction.DOWN));
-    public static final Item DIAMOND_CORAL_FAN = registerItem("diamond_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.DIAMOND_CORAL_FAN, ModBlocks.DIAMOND_CORAL_WALL_FAN, new Item.Settings(), Direction.DOWN));
-    public static final Item DEAD_PASSION_CORAL_FAN = registerItem("dead_passion_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.DEAD_PASSION_CORAL_FAN, ModBlocks.DEAD_PASSION_CORAL_WALL_FAN, new Item.Settings(), Direction.DOWN));
-    public static final Item PASSION_CORAL_FAN = registerItem("passion_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.PASSION_CORAL_FAN, ModBlocks.PASSION_CORAL_WALL_FAN, new Item.Settings(), Direction.DOWN));
-    public static final Item DEAD_ANCHOR_CORAL_FAN = registerItem("dead_anchor_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.DEAD_ANCHOR_CORAL_FAN, ModBlocks.DEAD_ANCHOR_CORAL_WALL_FAN, new Item.Settings(), Direction.DOWN));
-    public static final Item ANCHOR_CORAL_FAN = registerItem("anchor_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.ANCHOR_CORAL_FAN, ModBlocks.ANCHOR_CORAL_WALL_FAN, new Item.Settings(), Direction.DOWN));
-    public static final Item DEAD_GEM_CORAL_FAN = registerItem("dead_gem_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.DEAD_GEM_CORAL_FAN, ModBlocks.DEAD_GEM_CORAL_WALL_FAN, new Item.Settings(), Direction.DOWN));
-    public static final Item GEM_CORAL_FAN = registerItem("gem_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.GEM_CORAL_FAN, ModBlocks.GEM_CORAL_WALL_FAN, new Item.Settings(), Direction.DOWN));
-    public static final Item DEAD_STONE_CORAL_FAN = registerItem("dead_stone_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.DEAD_STONE_CORAL_FAN, ModBlocks.DEAD_STONE_CORAL_WALL_FAN, new Item.Settings(), Direction.DOWN));
-    public static final Item STONE_CORAL_FAN = registerItem("stone_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.STONE_CORAL_FAN, ModBlocks.STONE_CORAL_WALL_FAN, new Item.Settings(), Direction.DOWN));
-    public static final Item DEAD_SLATE_CORAL_FAN = registerItem("dead_slate_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.DEAD_SLATE_CORAL_FAN, ModBlocks.DEAD_SLATE_CORAL_WALL_FAN, new Item.Settings(), Direction.DOWN));
-    public static final Item SLATE_CORAL_FAN = registerItem("slate_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.SLATE_CORAL_FAN, ModBlocks.SLATE_CORAL_WALL_FAN, new Item.Settings(), Direction.DOWN));
-    public static final Item DEAD_THORN_CORAL_FAN = registerItem("dead_thorn_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.DEAD_THORN_CORAL_FAN, ModBlocks.DEAD_THORN_CORAL_WALL_FAN, new Item.Settings(), Direction.DOWN));
-    public static final Item THORN_CORAL_FAN = registerItem("thorn_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.THORN_CORAL_FAN, ModBlocks.THORN_CORAL_WALL_FAN, new Item.Settings(), Direction.DOWN));
-    public static final Item DEAD_COCOA_CORAL_FAN = registerItem("dead_cocoa_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.DEAD_COCOA_CORAL_FAN, ModBlocks.DEAD_COCOA_CORAL_WALL_FAN, new Item.Settings(), Direction.DOWN));
-    public static final Item COCOA_CORAL_FAN = registerItem("cocoa_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.COCOA_CORAL_FAN, ModBlocks.COCOA_CORAL_WALL_FAN, new Item.Settings(), Direction.DOWN));
-    public static final Item DEAD_TOXIC_CORAL_FAN = registerItem("dead_toxic_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.DEAD_TOXIC_CORAL_FAN, ModBlocks.DEAD_TOXIC_CORAL_WALL_FAN, new Item.Settings(), Direction.DOWN));
-    public static final Item TOXIC_CORAL_FAN = registerItem("toxic_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.TOXIC_CORAL_FAN, ModBlocks.TOXIC_CORAL_WALL_FAN, new Item.Settings(), Direction.DOWN));
+    public static final Item DEAD_CUP_CORAL_FAN = registerItem("dead_cup_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.DEAD_CUP_CORAL_FAN, ModBlocks.DEAD_CUP_CORAL_WALL_FAN, Direction.DOWN, new Item.Settings()));
+    public static final Item CUP_CORAL_FAN = registerItem("cup_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.CUP_CORAL_FAN, ModBlocks.CUP_CORAL_WALL_FAN, Direction.DOWN, new Item.Settings()));
+    public static final Item DEAD_GHOST_CORAL_FAN = registerItem("dead_ghost_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.DEAD_GHOST_CORAL_FAN, ModBlocks.DEAD_GHOST_CORAL_WALL_FAN, Direction.DOWN, new Item.Settings()));
+    public static final Item GHOST_CORAL_FAN = registerItem("ghost_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.GHOST_CORAL_FAN, ModBlocks.GHOST_CORAL_WALL_FAN, Direction.DOWN, new Item.Settings()));
+    public static final Item DEAD_DIAMOND_CORAL_FAN = registerItem("dead_diamond_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.DEAD_DIAMOND_CORAL_FAN, ModBlocks.DEAD_DIAMOND_CORAL_WALL_FAN, Direction.DOWN, new Item.Settings()));
+    public static final Item DIAMOND_CORAL_FAN = registerItem("diamond_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.DIAMOND_CORAL_FAN, ModBlocks.DIAMOND_CORAL_WALL_FAN, Direction.DOWN, new Item.Settings()));
+    public static final Item DEAD_PASSION_CORAL_FAN = registerItem("dead_passion_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.DEAD_PASSION_CORAL_FAN, ModBlocks.DEAD_PASSION_CORAL_WALL_FAN, Direction.DOWN, new Item.Settings()));
+    public static final Item PASSION_CORAL_FAN = registerItem("passion_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.PASSION_CORAL_FAN, ModBlocks.PASSION_CORAL_WALL_FAN, Direction.DOWN, new Item.Settings()));
+    public static final Item DEAD_ANCHOR_CORAL_FAN = registerItem("dead_anchor_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.DEAD_ANCHOR_CORAL_FAN, ModBlocks.DEAD_ANCHOR_CORAL_WALL_FAN, Direction.DOWN, new Item.Settings()));
+    public static final Item ANCHOR_CORAL_FAN = registerItem("anchor_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.ANCHOR_CORAL_FAN, ModBlocks.ANCHOR_CORAL_WALL_FAN, Direction.DOWN, new Item.Settings()));
+    public static final Item DEAD_GEM_CORAL_FAN = registerItem("dead_gem_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.DEAD_GEM_CORAL_FAN, ModBlocks.DEAD_GEM_CORAL_WALL_FAN, Direction.DOWN, new Item.Settings()));
+    public static final Item GEM_CORAL_FAN = registerItem("gem_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.GEM_CORAL_FAN, ModBlocks.GEM_CORAL_WALL_FAN, Direction.DOWN, new Item.Settings()));
+    public static final Item DEAD_STONE_CORAL_FAN = registerItem("dead_stone_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.DEAD_STONE_CORAL_FAN, ModBlocks.DEAD_STONE_CORAL_WALL_FAN, Direction.DOWN, new Item.Settings()));
+    public static final Item STONE_CORAL_FAN = registerItem("stone_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.STONE_CORAL_FAN, ModBlocks.STONE_CORAL_WALL_FAN, Direction.DOWN, new Item.Settings()));
+    public static final Item DEAD_SLATE_CORAL_FAN = registerItem("dead_slate_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.DEAD_SLATE_CORAL_FAN, ModBlocks.DEAD_SLATE_CORAL_WALL_FAN, Direction.DOWN, new Item.Settings()));
+    public static final Item SLATE_CORAL_FAN = registerItem("slate_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.SLATE_CORAL_FAN, ModBlocks.SLATE_CORAL_WALL_FAN, Direction.DOWN, new Item.Settings()));
+    public static final Item DEAD_THORN_CORAL_FAN = registerItem("dead_thorn_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.DEAD_THORN_CORAL_FAN, ModBlocks.DEAD_THORN_CORAL_WALL_FAN, Direction.DOWN, new Item.Settings()));
+    public static final Item THORN_CORAL_FAN = registerItem("thorn_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.THORN_CORAL_FAN, ModBlocks.THORN_CORAL_WALL_FAN, Direction.DOWN, new Item.Settings()));
+    public static final Item DEAD_COCOA_CORAL_FAN = registerItem("dead_cocoa_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.DEAD_COCOA_CORAL_FAN, ModBlocks.DEAD_COCOA_CORAL_WALL_FAN, Direction.DOWN, new Item.Settings()));
+    public static final Item COCOA_CORAL_FAN = registerItem("cocoa_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.COCOA_CORAL_FAN, ModBlocks.COCOA_CORAL_WALL_FAN, Direction.DOWN, new Item.Settings()));
+    public static final Item DEAD_TOXIC_CORAL_FAN = registerItem("dead_toxic_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.DEAD_TOXIC_CORAL_FAN, ModBlocks.DEAD_TOXIC_CORAL_WALL_FAN, Direction.DOWN, new Item.Settings()));
+    public static final Item TOXIC_CORAL_FAN = registerItem("toxic_coral_fan", new VerticallyAttachableBlockItem(ModBlocks.TOXIC_CORAL_FAN, ModBlocks.TOXIC_CORAL_WALL_FAN, Direction.DOWN, new Item.Settings()));
 
     public static final Item COPPER_NUGGET = registerItem("copper_nugget", new Item(new Item.Settings()));
     public static final Item SILVER_NUGGET = registerItem("silver_nugget", new Item(new Item.Settings()));
@@ -68,14 +81,14 @@ public class ModItems {
     public static final Item SULPHUR = registerItem("sulphur", new SulphurItem(new Item.Settings()));
 
     public static final Item SEA_CONCH = registerItem("sea_conch", new Item(new Item.Settings()));
-    public static final Item SEASHELL = registerItem("seashell", new AliasedBlockItem(ModBlocks.SEASHELL_BLOCK, new Item.Settings()));
-    public static final Item CLAM = registerItem("clam", new AliasedBlockItem(ModBlocks.PEARL_CLAM_BLOCK, new Item.Settings()));
+    public static final Item SEASHELL = registerItem("seashell", new BlockItem(ModBlocks.SEASHELL_BLOCK, new Item.Settings()));
+    public static final Item CLAM = registerItem("clam", new BlockItem(ModBlocks.PEARL_CLAM_BLOCK, new Item.Settings()));
     public static final Item PEARL = registerItem("pearl", new Item(new Item.Settings()));
 
-    public static final Item SILVER_HELMET = registerItem("silver_helmet", new ArmorItem(ModArmorMaterials.SILVER_ARMOR_MATERIAL, ArmorItem.Type.HELMET, new Item.Settings().maxDamage(ArmorItem.Type.HELMET.getMaxDamage(14))));
-    public static final Item SILVER_CHESTPLATE = registerItem("silver_chestplate", new ArmorItem(ModArmorMaterials.SILVER_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Settings().maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(14))));
-    public static final Item SILVER_LEGGINGS = registerItem("silver_leggings", new ArmorItem(ModArmorMaterials.SILVER_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Settings().maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(14))));
-    public static final Item SILVER_BOOTS = registerItem("silver_boots", new ArmorItem(ModArmorMaterials.SILVER_ARMOR_MATERIAL, ArmorItem.Type.BOOTS, new Item.Settings().maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(14))));
+    public static final Item SILVER_HELMET = registerItem("silver_helmet", new ArmorItem(ModArmorMaterials.SILVER, EquipmentType.HELMET, new Item.Settings().maxDamage(EquipmentType.HELMET.getMaxDamage(14))));
+    public static final Item SILVER_CHESTPLATE = registerItem("silver_chestplate", new ArmorItem(ModArmorMaterials.SILVER, EquipmentType.CHESTPLATE, new Item.Settings().maxDamage(EquipmentType.CHESTPLATE.getMaxDamage(14))));
+    public static final Item SILVER_LEGGINGS = registerItem("silver_leggings", new ArmorItem(ModArmorMaterials.SILVER, EquipmentType.LEGGINGS, new Item.Settings().maxDamage(EquipmentType.LEGGINGS.getMaxDamage(14))));
+    public static final Item SILVER_BOOTS = registerItem("silver_boots", new ArmorItem(ModArmorMaterials.SILVER, EquipmentType.BOOTS, new Item.Settings().maxDamage(EquipmentType.BOOTS.getMaxDamage(14))));
 
     //public static final Item COPPER_DIVING_HELMET = registerItem("copper_diving_helmet", new CopperDivingArmorItem(ModArmorMaterials.COPPER, ArmorItem.Type.HELMET, new Item.Settings()));
     //public static final Item COPPER_DIVING_CHESTPLATE = registerItem("copper_diving_chestplate", new CopperDivingArmorItem(ModArmorMaterials.COPPER, ArmorItem.Type.CHESTPLATE, new Item.Settings()));
@@ -83,18 +96,25 @@ public class ModItems {
     //public static final Item COPPER_DIVING_BOOTS = registerItem("copper_diving_boots", new CopperDivingArmorItem(ModArmorMaterials.COPPER, ArmorItem.Type.BOOTS, new Item.Settings()));
 
     public static final Item HOPS = registerItem("hops", new Item(new Item.Settings().food(new FoodComponent.Builder().nutrition(1).saturationModifier(0).build())));
-    public static final Item HOPS_SEEDS = registerItem("hops_seeds", new AliasedBlockItem(ModBlocks.HOPS_CROP, new Item.Settings()));
+    public static final Item HOPS_SEEDS = registerItem("hops_seeds", new BlockItem(ModBlocks.HOPS_CROP, new Item.Settings()));
     public static final Item COTTON = registerItem("cotton", new Item(new Item.Settings().food(new FoodComponent.Builder().nutrition(1).saturationModifier(0).build())));
-    public static final Item COTTON_SEEDS = registerItem("cotton_seeds", new AliasedBlockItem(ModBlocks.COTTON_CROP, new Item.Settings()));
-    public static final Item THORNBLOOM_SEEDS = registerItem("thornbloom_seeds", new AliasedBlockItem(ModBlocks.THORNBLOOM_CROP, new Item.Settings()));
-    public static final Item KIWI_SEEDS = registerItem("kiwi_seeds", new AliasedBlockItem(ModBlocks.KIWI_CROP, new Item.Settings()));
-    public static final Item GLOWLILY_SEEDLING = registerItem("glowlily_seedling", new AliasedBlockItem(ModBlocks.GLOWLILY_CROP, new Item.Settings()));
-    public static final Item SPONGE_SHARD = registerItem("sponge_shard", new AliasedBlockItem(ModBlocks.SMALL_SPONGE, new Item.Settings()));
+    public static final Item COTTON_SEEDS = registerItem("cotton_seeds", new BlockItem(ModBlocks.COTTON_CROP, new Item.Settings()));
+    public static final Item THORNBLOOM_SEEDS = registerItem("thornbloom_seeds", new BlockItem(ModBlocks.THORNBLOOM_CROP, new Item.Settings()));
+    public static final Item KIWI_SEEDS = registerItem("kiwi_seeds", new BlockItem(ModBlocks.KIWI_CROP, new Item.Settings()));
+    public static final Item GLOWLILY_SEEDLING = registerItem("glowlily_seedling", new BlockItem(ModBlocks.GLOWLILY_CROP, new Item.Settings()));
+    public static final Item SPONGE_SHARD = registerItem("sponge_shard", new BlockItem(ModBlocks.SMALL_SPONGE, new Item.Settings()));
 
     public static final Item RAW_CHORUS_ECHOFIN = registerItem("raw_chorus_echofin", new RandomTeleportItem(new Item.Settings().food(new FoodComponent.Builder().nutrition(3).saturationModifier(0.1f).alwaysEdible().build()), 200, 10, 48));
     public static final Item COOKED_CHORUS_ECHOFIN = registerItem("cooked_chorus_echofin", new RandomTeleportItem(new Item.Settings().food(new FoodComponent.Builder().nutrition(6).saturationModifier(0.2f).alwaysEdible().build()), 150, 20, 96));
-    public static final Item RAW_LEVITATING_ECHOFIN = registerItem("raw_levitating_echofin", new UseTimeFoodItem(new Item.Settings().food(new FoodComponent.Builder().nutrition(3).saturationModifier(0.1f).alwaysEdible().statusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 100, 0), 1.0f).build()), 10));
-    public static final Item COOKED_LEVITATING_ECHOFIN = registerItem("cooked_levitating_echofin", new UseTimeFoodItem(new Item.Settings().food(new FoodComponent.Builder().nutrition(6).saturationModifier(0.2f).alwaysEdible().statusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 100, 1), 1.0f).build()), 10));
+
+    public static final FoodComponent RAW_LEVITATING_ECHOFIN_FOOD_COMPONENT = (new FoodComponent.Builder()).nutrition(3).saturationModifier(0.1F).alwaysEdible().build();
+    public static final ConsumableComponent RAW_LEVITATING_ECHOFIN_CONSUMABLE_COMPONENT = food(0.8F).consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 100, 0))).build();
+    public static final Item RAW_LEVITATING_ECHOFIN = registerItem("raw_levitating_echofin", new Item(new Item.Settings().food(RAW_LEVITATING_ECHOFIN_FOOD_COMPONENT, RAW_LEVITATING_ECHOFIN_CONSUMABLE_COMPONENT)));
+
+    public static final FoodComponent COOKED_LEVITATING_ECHOFIN_FOOD_COMPONENT = (new FoodComponent.Builder()).nutrition(6).saturationModifier(0.2F).alwaysEdible().build();
+    public static final ConsumableComponent COOKED_LEVITATING_ECHOFIN_CONSUMABLE_COMPONENT = food(null).consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 100, 1))).build();
+    public static final Item COOKED_LEVITATING_ECHOFIN = registerItem("cooked_levitating_echofin", new Item(new Item.Settings().food(COOKED_LEVITATING_ECHOFIN_FOOD_COMPONENT, COOKED_LEVITATING_ECHOFIN_CONSUMABLE_COMPONENT)));
+
     public static final Item RAW_VENISON = registerItem("raw_venison", new Item(new Item.Settings().food(new FoodComponent.Builder().nutrition(3).saturationModifier(0.2f).build())));
     public static final Item COOKED_VENISON = registerItem("cooked_venison", new Item(new Item.Settings().food(new FoodComponent.Builder().nutrition(6).saturationModifier(0.4f).build())));
     public static final Item RAW_VENISON_RIBS = registerItem("raw_venison_ribs", new Item(new Item.Settings().food(new FoodComponent.Builder().nutrition(5).saturationModifier(0.2f).build())));
@@ -103,16 +123,26 @@ public class ModItems {
     public static final Item BAKED_THORNBLOOM_PEAR = registerItem("baked_thornbloom_pear", new UseTimeFoodItem(new Item.Settings().food(new FoodComponent.Builder().nutrition(6).saturationModifier(0.4f).build()), 10));
     public static final Item KIWI = registerItem("kiwi", new Item(new Item.Settings().food(new FoodComponent.Builder().nutrition(2).saturationModifier(0.5f).build())));
     public static final Item KIWI_PIE = registerItem("kiwi_pie", new Item(new Item.Settings().food(new FoodComponent.Builder().nutrition(6).saturationModifier(0.5f).alwaysEdible().build())));
-    public static final Item CHERRY_PIE = registerItem("cherry_pie", new UseTimeFoodItem(new Item.Settings().food(new FoodComponent.Builder().nutrition(6).saturationModifier(0.5f).statusEffect(new StatusEffectInstance(StatusEffects.SPEED, 100, 1), 1.0f).alwaysEdible().build()), 20));
-    public static final Item CHERRIES = registerItem("cherries", new UseTimeFoodItem(new Item.Settings().food(new FoodComponent.Builder().nutrition(2).saturationModifier(0.5f).statusEffect(new StatusEffectInstance(StatusEffects.SPEED, 100, 0), 1.0f).alwaysEdible().build()), 20));
+
+    public static final FoodComponent CHERRY_PIE_FOOD_COMPONENT = (new FoodComponent.Builder()).nutrition(6).saturationModifier(0.5F).alwaysEdible().build();
+    public static final ConsumableComponent CHERRY_PIE_CONSUMABLE_COMPONENT = food(null).consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.SPEED, 100, 1))).build();
+    public static final Item CHERRY_PIE = registerItem("cherry_pie", new Item(new Item.Settings().food(CHERRY_PIE_FOOD_COMPONENT, CHERRY_PIE_CONSUMABLE_COMPONENT)));
+
+    public static final FoodComponent CHERRIES_FOOD_COMPONENT = (new FoodComponent.Builder()).nutrition(2).saturationModifier(0.5F).alwaysEdible().build();
+    public static final ConsumableComponent CHERRIES_CONSUMABLE_COMPONENT = food(0.8F).consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.SPEED, 100, 0))).build();
+    public static final Item CHERRIES = registerItem("cherries", new Item(new Item.Settings().food(CHERRIES_FOOD_COMPONENT, CHERRIES_CONSUMABLE_COMPONENT)));
+
     public static final Item GLOWLILY_BULB = registerItem("glowlily_bulb", new GlowlilyBulbItem(new Item.Settings().food(new FoodComponent.Builder().nutrition(2).saturationModifier(0.5f).build())));
 
     public static final Item MOSSBLOOM_ANTLER = registerItem("mossbloom_antler", new Item(new Item.Settings()));
 
     public static final Item PETTING_GLOVE = registerItem("petting_glove", new PettingGloveItem(new Item.Settings().maxDamage(432)));
 
-    public static final Item BEER_MUG = registerItem("beer_mug", new BeerItem(ModBlocks.BEER_MUG, new Item.Settings()));
-    public static final Item WOODEN_MUG = registerItem("wooden_mug", new AliasedBlockItem(ModBlocks.WOODEN_MUG, new Item.Settings()));
+    public static final FoodComponent BEER_MUG_FOOD_COMPONENT = (new FoodComponent.Builder()).nutrition(0).saturationModifier(0f).alwaysEdible().build();
+    public static final ConsumableComponent BEER_MUG_CONSUMABLE_COMPONENT = drink(0.8F).build();
+    public static final Item BEER_MUG = registerItem("beer_mug", new BeerItem(ModBlocks.BEER_MUG, new Item.Settings().food(BEER_MUG_FOOD_COMPONENT, BEER_MUG_CONSUMABLE_COMPONENT)));
+
+    public static final Item WOODEN_MUG = registerItem("wooden_mug", new BlockItem(ModBlocks.WOODEN_MUG, new Item.Settings()));
 
     public static final Item COPPER_COIN = registerItem("copper_coin", new CoinItem(new Item.Settings().rarity(Rarity.UNCOMMON), ModBlocks.COPPER_COIN_STACK));
     public static final Item SILVER_COIN = registerItem("silver_coin", new CoinItem(new Item.Settings().rarity(Rarity.RARE), ModBlocks.SILVER_COIN_STACK));
@@ -120,9 +150,9 @@ public class ModItems {
 
     public static final Item COIN_POUCH = registerItem("coin_pouch", new CoinPouchItem(new Item.Settings()));
 
-    public static final Item BUTTERFLY_COCOON = registerItem("butterfly_cocoon", new AliasedBlockItem(ModBlocks.BUTTERFLY_COCOON, new Item.Settings()));
-    public static final Item KIWI_BIRD_EGG = registerItem("kiwi_bird_egg", new AliasedBlockItem(ModBlocks.KIWI_BIRD_EGG, new Item.Settings()));
-    public static final Item EMPEROR_PENGUIN_EGG = registerItem("emperor_penguin_egg", new AliasedBlockItem(ModBlocks.EMPEROR_PENGUIN_EGG, new Item.Settings()));
+    public static final Item BUTTERFLY_COCOON = registerItem("butterfly_cocoon", new BlockItem(ModBlocks.BUTTERFLY_COCOON, new Item.Settings()));
+    public static final Item KIWI_BIRD_EGG = registerItem("kiwi_bird_egg", new BlockItem(ModBlocks.KIWI_BIRD_EGG, new Item.Settings()));
+    public static final Item EMPEROR_PENGUIN_EGG = registerItem("emperor_penguin_egg", new BlockItem(ModBlocks.EMPEROR_PENGUIN_EGG, new Item.Settings()));
 
     public static final Item SMALL_LILY_PADS = registerItem("small_lily_pads", new SmallLilyPadBlockItem(ModBlocks.SMALL_LILY_PADS, new Item.Settings()));
     public static final Item GIANT_LILY_PAD = registerItem("giant_lily_pad", new GiantLilyPadItem(ModBlocks.GIANT_LILY_PAD, new Item.Settings()));
@@ -139,25 +169,27 @@ public class ModItems {
 
     public static final Item BUTTERFLY_IN_A_BOTTLE = registerItem("butterfly_in_a_bottle", new ButterflyBottleItem(new Item.Settings().recipeRemainder(Items.GLASS_BOTTLE).maxCount(1)));
 
-    public static final Item WHITE_BUTTERFLY_ELYTRA = registerItem("white_butterfly_elytra", new ButterflyElytraItem(new Item.Settings().maxDamage(432), Items.WHITE_DYE,  "white"));
-    public static final Item LIGHT_GRAY_BUTTERFLY_ELYTRA = registerItem("light_gray_butterfly_elytra", new ButterflyElytraItem(new Item.Settings().maxDamage(432), Items.LIGHT_GRAY_DYE,  "light_gray"));
-    public static final Item GRAY_BUTTERFLY_ELYTRA = registerItem("gray_butterfly_elytra", new ButterflyElytraItem(new Item.Settings().maxDamage(432), Items.GRAY_DYE,  "gray"));
-    public static final Item BLACK_BUTTERFLY_ELYTRA = registerItem("black_butterfly_elytra", new ButterflyElytraItem(new Item.Settings().maxDamage(432), Items.BLACK_DYE,  "black"));
-    public static final Item BROWN_BUTTERFLY_ELYTRA = registerItem("brown_butterfly_elytra", new ButterflyElytraItem(new Item.Settings().maxDamage(432), Items.BROWN_DYE,  "brown"));
-    public static final Item RED_BUTTERFLY_ELYTRA = registerItem("red_butterfly_elytra", new ButterflyElytraItem(new Item.Settings().maxDamage(432), Items.RED_DYE,  "red"));
-    public static final Item ORANGE_BUTTERFLY_ELYTRA = registerItem("orange_butterfly_elytra", new ButterflyElytraItem(new Item.Settings().maxDamage(432), Items.ORANGE_DYE,  "orange"));
-    public static final Item YELLOW_BUTTERFLY_ELYTRA = registerItem("yellow_butterfly_elytra", new ButterflyElytraItem(new Item.Settings().maxDamage(432), Items.YELLOW_DYE,  "yellow"));
-    public static final Item LIME_BUTTERFLY_ELYTRA = registerItem("lime_butterfly_elytra", new ButterflyElytraItem(new Item.Settings().maxDamage(432), Items.LIME_DYE,  "lime"));
-    public static final Item GREEN_BUTTERFLY_ELYTRA = registerItem("green_butterfly_elytra", new ButterflyElytraItem(new Item.Settings().maxDamage(432), Items.GREEN_DYE,  "green"));
-    public static final Item CYAN_BUTTERFLY_ELYTRA = registerItem("cyan_butterfly_elytra", new ButterflyElytraItem(new Item.Settings().maxDamage(432), Items.CYAN_DYE,  "cyan"));
-    public static final Item LIGHT_BLUE_BUTTERFLY_ELYTRA = registerItem("light_blue_butterfly_elytra", new ButterflyElytraItem(new Item.Settings().maxDamage(432), Items.LIGHT_BLUE_DYE,  "light_blue"));
-    public static final Item BLUE_BUTTERFLY_ELYTRA = registerItem("blue_butterfly_elytra", new ButterflyElytraItem(new Item.Settings().maxDamage(432), Items.BLUE_DYE,  "blue"));
-    public static final Item PURPLE_BUTTERFLY_ELYTRA = registerItem("purple_butterfly_elytra", new ButterflyElytraItem(new Item.Settings().maxDamage(432), Items.PURPLE_DYE,  "purple"));
-    public static final Item MAGENTA_BUTTERFLY_ELYTRA = registerItem("magenta_butterfly_elytra", new ButterflyElytraItem(new Item.Settings().maxDamage(432), Items.MAGENTA_DYE,  "magenta"));
-    public static final Item PINK_BUTTERFLY_ELYTRA = registerItem("pink_butterfly_elytra", new ButterflyElytraItem(new Item.Settings().maxDamage(432), Items.PINK_DYE,  "pink"));
-    public static final Item CRIMSON_BUTTERFLY_ELYTRA = registerItem("crimson_butterfly_elytra", new ButterflyElytraItem(new Item.Settings().maxDamage(432), Items.CRIMSON_ROOTS,  "crimson"));
-    public static final Item WARPED_BUTTERFLY_ELYTRA = registerItem("warped_butterfly_elytra", new ButterflyElytraItem(new Item.Settings().maxDamage(432), Items.WARPED_ROOTS,  "warped"));
-    public static final Item SOUL_BUTTERFLY_ELYTRA = registerItem("soul_butterfly_elytra", new ButterflyElytraItem(new Item.Settings().maxDamage(432), Items.BONE,  "soul"));
+    private static final Item.Settings ELYTRA_SETTINGS = new Item.Settings().maxDamage(432).rarity(Rarity.EPIC).component(DataComponentTypes.GLIDER, Unit.INSTANCE).component(DataComponentTypes.EQUIPPABLE, EquippableComponent.builder(EquipmentSlot.CHEST).equipSound(SoundEvents.ITEM_ARMOR_EQUIP_ELYTRA).model(EquipmentAssetKeys.ELYTRA).damageOnHurt(false).build()).repairable(ModItems.BUTTERFLY_IN_A_BOTTLE);
+
+    public static final Item WHITE_BUTTERFLY_ELYTRA = registerItem("white_butterfly_elytra", new ButterflyElytraItem(ELYTRA_SETTINGS, Items.WHITE_DYE,  "white"));
+    public static final Item LIGHT_GRAY_BUTTERFLY_ELYTRA = registerItem("light_gray_butterfly_elytra", new ButterflyElytraItem(ELYTRA_SETTINGS, Items.LIGHT_GRAY_DYE,  "light_gray"));
+    public static final Item GRAY_BUTTERFLY_ELYTRA = registerItem("gray_butterfly_elytra", new ButterflyElytraItem(ELYTRA_SETTINGS, Items.GRAY_DYE,  "gray"));
+    public static final Item BLACK_BUTTERFLY_ELYTRA = registerItem("black_butterfly_elytra", new ButterflyElytraItem(ELYTRA_SETTINGS, Items.BLACK_DYE,  "black"));
+    public static final Item BROWN_BUTTERFLY_ELYTRA = registerItem("brown_butterfly_elytra", new ButterflyElytraItem(ELYTRA_SETTINGS, Items.BROWN_DYE,  "brown"));
+    public static final Item RED_BUTTERFLY_ELYTRA = registerItem("red_butterfly_elytra", new ButterflyElytraItem(ELYTRA_SETTINGS, Items.RED_DYE,  "red"));
+    public static final Item ORANGE_BUTTERFLY_ELYTRA = registerItem("orange_butterfly_elytra", new ButterflyElytraItem(ELYTRA_SETTINGS, Items.ORANGE_DYE,  "orange"));
+    public static final Item YELLOW_BUTTERFLY_ELYTRA = registerItem("yellow_butterfly_elytra", new ButterflyElytraItem(ELYTRA_SETTINGS, Items.YELLOW_DYE,  "yellow"));
+    public static final Item LIME_BUTTERFLY_ELYTRA = registerItem("lime_butterfly_elytra", new ButterflyElytraItem(ELYTRA_SETTINGS, Items.LIME_DYE,  "lime"));
+    public static final Item GREEN_BUTTERFLY_ELYTRA = registerItem("green_butterfly_elytra", new ButterflyElytraItem(ELYTRA_SETTINGS, Items.GREEN_DYE,  "green"));
+    public static final Item CYAN_BUTTERFLY_ELYTRA = registerItem("cyan_butterfly_elytra", new ButterflyElytraItem(ELYTRA_SETTINGS, Items.CYAN_DYE,  "cyan"));
+    public static final Item LIGHT_BLUE_BUTTERFLY_ELYTRA = registerItem("light_blue_butterfly_elytra", new ButterflyElytraItem(ELYTRA_SETTINGS, Items.LIGHT_BLUE_DYE,  "light_blue"));
+    public static final Item BLUE_BUTTERFLY_ELYTRA = registerItem("blue_butterfly_elytra", new ButterflyElytraItem(ELYTRA_SETTINGS, Items.BLUE_DYE,  "blue"));
+    public static final Item PURPLE_BUTTERFLY_ELYTRA = registerItem("purple_butterfly_elytra", new ButterflyElytraItem(ELYTRA_SETTINGS, Items.PURPLE_DYE,  "purple"));
+    public static final Item MAGENTA_BUTTERFLY_ELYTRA = registerItem("magenta_butterfly_elytra", new ButterflyElytraItem(ELYTRA_SETTINGS, Items.MAGENTA_DYE,  "magenta"));
+    public static final Item PINK_BUTTERFLY_ELYTRA = registerItem("pink_butterfly_elytra", new ButterflyElytraItem(ELYTRA_SETTINGS, Items.PINK_DYE,  "pink"));
+    public static final Item CRIMSON_BUTTERFLY_ELYTRA = registerItem("crimson_butterfly_elytra", new ButterflyElytraItem(ELYTRA_SETTINGS, Items.CRIMSON_ROOTS,  "crimson"));
+    public static final Item WARPED_BUTTERFLY_ELYTRA = registerItem("warped_butterfly_elytra", new ButterflyElytraItem(ELYTRA_SETTINGS, Items.WARPED_ROOTS,  "warped"));
+    public static final Item SOUL_BUTTERFLY_ELYTRA = registerItem("soul_butterfly_elytra", new ButterflyElytraItem(ELYTRA_SETTINGS, Items.BONE,  "soul"));
 
     public static final Item AMETHYST_GEMSTONE_ELYTRA = registerItem("amethyst_gemstone_elytra", new GemstoneElytraItem(new Item.Settings().maxDamage(459), Items.AMETHYST_SHARD, "amethyst"));
     public static final Item DIAMOND_GEMSTONE_ELYTRA = registerItem("diamond_gemstone_elytra", new GemstoneElytraItem(new Item.Settings().maxDamage(540), Items.DIAMOND, "diamond"));
@@ -193,6 +225,17 @@ public class ModItems {
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, Identifier.of(Clutter.MOD_ID, name), item);
+    }
+
+    public static ConsumableComponent.Builder food(@Nullable Float useTimeInSeconds) {
+        float useTime = Optional.ofNullable(useTimeInSeconds).orElse(1.6f);
+        return ConsumableComponent.builder().consumeSeconds(useTime).useAction(UseAction.EAT).sound(SoundEvents.ENTITY_GENERIC_EAT).consumeParticles(true);
+    }
+
+
+    public static ConsumableComponent.Builder drink(@Nullable Float useTimeInSeconds) {
+        float useTime = Optional.ofNullable(useTimeInSeconds).orElse(1.6f);
+        return ConsumableComponent.builder().consumeSeconds(useTime).useAction(UseAction.DRINK).sound(SoundEvents.ENTITY_GENERIC_DRINK).consumeParticles(false);
     }
 
     public static void registerModItems() {

@@ -8,14 +8,13 @@ import net.minecraft.block.IceBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.item.AliasedBlockItem;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -24,24 +23,24 @@ import net.minecraft.world.World;
 
 import static net.emilsg.clutter.block.custom.plants.GiantLilyPadBlock.LILY_PAD_DIRECTIONS;
 
-public class GiantLilyPadItem extends AliasedBlockItem {
+public class GiantLilyPadItem extends BlockItem {
 
     public GiantLilyPadItem(Block block, Settings settings) {
         super(block, settings);
     }
 
     @Override
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+    public ActionResult use(World world, PlayerEntity user, Hand hand) {
         BlockHitResult rayTraceResult = raycast(world, user, RaycastContext.FluidHandling.SOURCE_ONLY);
         ItemStack stackInHand = user.getStackInHand(hand);
 
         if (rayTraceResult.getType() == BlockHitResult.Type.MISS)
-            return new TypedActionResult<>(ActionResult.PASS, stackInHand);
+            return ActionResult.PASS;
         else if (rayTraceResult.getType() == BlockHitResult.Type.BLOCK) {
             BlockPos blockpos = rayTraceResult.getBlockPos();
             Direction direction = rayTraceResult.getSide();
             if (!world.canPlayerModifyAt(user, blockpos) || !user.canPlaceOn(blockpos.offset(direction), direction, stackInHand)) {
-                return new TypedActionResult<>(ActionResult.FAIL, stackInHand);
+                return ActionResult.FAIL;
             }
 
             BlockPos blockPosUp = blockpos.up();
@@ -65,11 +64,11 @@ public class GiantLilyPadItem extends AliasedBlockItem {
                     }
                     user.incrementStat(Stats.USED.getOrCreateStat(this));
                     world.playSound(null, blockpos, SoundEvents.BLOCK_LILY_PAD_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                    return new TypedActionResult<>(ActionResult.SUCCESS, stackInHand);
+                    return ActionResult.SUCCESS;
                 }
             }
         }
-        return new TypedActionResult<>(ActionResult.FAIL, stackInHand);
+        return ActionResult.FAIL;
     }
 
     public void place(World world, BlockPos pos, BlockState state) {

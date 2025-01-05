@@ -51,7 +51,7 @@ public class RandomTeleportItem extends Item {
                 }
             }
             if (user instanceof PlayerEntity) {
-                ((PlayerEntity) user).getItemCooldownManager().set(this, cooldownInTicks);
+                ((PlayerEntity) user).getItemCooldownManager().set(itemStack, cooldownInTicks);
             }
         }
 

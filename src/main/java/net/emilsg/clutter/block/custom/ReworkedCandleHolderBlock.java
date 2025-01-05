@@ -17,7 +17,6 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
@@ -33,7 +32,9 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
+import net.minecraft.world.WorldView;
 import net.minecraft.world.event.GameEvent;
+import net.minecraft.world.tick.ScheduledTickView;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
@@ -41,7 +42,7 @@ import java.util.Map;
 
 public class ReworkedCandleHolderBlock extends Block implements Waterloggable {
     public static final EnumProperty<Type> TYPE = EnumProperty.of("type", Type.class);
-    public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
+    public static final EnumProperty<Direction> FACING = Properties.HORIZONTAL_FACING;
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
     public static final BooleanProperty LIT = Properties.LIT;
     public static final BooleanProperty CANDLES = ModProperties.CANDLES;
@@ -201,19 +202,19 @@ public class ReworkedCandleHolderBlock extends Block implements Waterloggable {
             playSound(world, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE);
             setLit(world, state, pos, true, player);
             damageItemIfNotCreative(player, hand);
-            return ActionResult.success(world.isClient);
+            return ActionResult.SUCCESS;
         }
 
         if (stackInHand.isOf(Items.FIRE_CHARGE) && !isLit && candles) {
             playSound(world, pos, SoundEvents.ITEM_FIRECHARGE_USE);
             setLit(world, state, pos, true, player);
             decrementItemIfNotCreative(player, hand, 1);
-            return ActionResult.success(world.isClient);
+            return ActionResult.SUCCESS;
         }
 
         if (stackInHand.isEmpty() && isLit) {
             extinguish(player, state, world, pos);
-            return ActionResult.success(world.isClient);
+            return ActionResult.SUCCESS;
         }
 
         if (stackInHand.isEmpty() && candles && !isLit) {
@@ -223,7 +224,7 @@ public class ReworkedCandleHolderBlock extends Block implements Waterloggable {
                         ItemStack oldCandlesStack = new ItemStack(oldCandles, requiredCount);
                         dropStack(world, pos, oldCandlesStack);
                     });
-            return ActionResult.success(world.isClient);
+            return ActionResult.SUCCESS;
         }
 
         return super.onUse(state, world, pos, player, hit);
@@ -286,15 +287,14 @@ public class ReworkedCandleHolderBlock extends Block implements Waterloggable {
     }
 
     @Override
-    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+    protected BlockState getStateForNeighborUpdate(BlockState state, WorldView world, ScheduledTickView tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, Random random) {
         if (direction.getOpposite() == state.get(FACING) && !state.canPlaceAt(world, pos)) {
             return Blocks.AIR.getDefaultState();
         }
         if (state.get(WATERLOGGED)) {
-            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
-            world.setBlockState(pos, state.with(LIT, false), Block.NOTIFY_ALL);
+            tickView.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
-        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+        return super.getStateForNeighborUpdate(state.with(LIT, !state.get(WATERLOGGED)), world, tickView, pos, direction, neighborPos, neighborState, random);
     }
 
     @Override

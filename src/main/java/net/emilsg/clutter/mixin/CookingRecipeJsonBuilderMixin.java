@@ -1,7 +1,7 @@
 package net.emilsg.clutter.mixin;
 
 import net.emilsg.clutter.recipe.KilningRecipe;
-import net.minecraft.data.server.recipe.CookingRecipeJsonBuilder;
+import net.minecraft.data.recipe.CookingRecipeJsonBuilder;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.recipe.AbstractCookingRecipe;
