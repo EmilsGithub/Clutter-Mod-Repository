@@ -1,20 +1,28 @@
 package net.emilsg.clutter.data;
 
+import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.annotation.Nullable;
 import net.emilsg.clutter.block.ClutterWoodType;
 import net.emilsg.clutter.block.ModBlocks;
+import net.emilsg.clutter.item.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.enums.DoubleBlockHalf;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.entry.AlternativeEntry;
 import net.minecraft.loot.entry.ItemEntry;
+import net.minecraft.loot.function.ApplyBonusLootFunction;
 import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
+import net.minecraft.loot.provider.number.UniformLootNumberProvider;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.state.property.Properties;
 
@@ -45,6 +53,24 @@ public class LootTableDataGen extends FabricBlockLootTableProvider {
 
         this.addDrop(ModBlocks.OVERGROWN_PACKED_MUD, this.silkTouchDrops(ModBlocks.OVERGROWN_PACKED_MUD, Blocks.PACKED_MUD));
         this.addDrop(ModBlocks.GIANT_FERN, (block) -> this.tallPlantDrops(block, Blocks.LARGE_FERN));
+
+        this.addFoodBoxDrops(ModBlocks.FOOD_BOX, null);
+        this.addFoodBoxDrops(ModBlocks.APPLE_FOOD_BOX, Items.APPLE);
+        this.addFoodBoxDrops(ModBlocks.BEETROOT_FOOD_BOX, Items.BEETROOT);
+        this.addFoodBoxDrops(ModBlocks.BREAD_FOOD_BOX, Items.BREAD);
+        this.addFoodBoxDrops(ModBlocks.CARROT_FOOD_BOX, Items.CARROT);
+        this.addFoodBoxDrops(ModBlocks.MELON_FOOD_BOX, Items.MELON);
+        this.addFoodBoxDrops(ModBlocks.POTATO_FOOD_BOX, Items.POTATO);
+        this.addFoodBoxDrops(ModBlocks.CHORUS_FRUIT_FOOD_BOX, Items.CHORUS_FRUIT);
+        this.addFoodBoxDrops(ModBlocks.SWEET_BERRY_FOOD_BOX, Items.SWEET_BERRIES);
+        this.addFoodBoxDrops(ModBlocks.GLOW_BERRY_FOOD_BOX, Items.GLOW_BERRIES);
+
+        this.addOreDropsWithCount(ModBlocks.SILVER_ORE, ModItems.RAW_SILVER, 2.0f, 4.0f);
+        this.addOreDropsWithCount(ModBlocks.DEEPSLATE_SILVER_ORE, ModItems.RAW_SILVER, 2.0f, 4.0f);
+        this.addOreDropsWithCount(ModBlocks.BASALT_SULPHUR_ORE, ModItems.SULPHUR, 1.0f, 2.0f);
+        this.addOreDropsWithCount(ModBlocks.BLACKSTONE_SULPHUR_ORE, ModItems.SULPHUR, 1.0f, 2.0f);
+        this.addOreDropsWithCount(ModBlocks.ONYX_ORE, ModItems.RAW_ONYX, 2.0f, 4.0f);
+
 
         this.addPottedPlantGroupDrops(
                 ModBlocks.POTTED_SMALL_BLUE_LUPINE,
@@ -237,4 +263,40 @@ public class LootTableDataGen extends FabricBlockLootTableProvider {
     public LootTable.Builder silkTouchDrops(Block dropWithSilkTouch, Block drop) {
         return this.dropsWithSilkTouch(dropWithSilkTouch, this.applyExplosionDecay(dropWithSilkTouch, ItemEntry.builder(drop)));
     }
+
+    public void addFoodBoxDrops(Block foodBox, @Nullable Item food) {
+        if (food == null) {
+            this.addDrop(foodBox, ModBlocks.FOOD_BOX);
+            return;
+        }
+
+        LootTable.Builder tableBuilder = LootTable.builder().pool(LootPool.builder()
+                .rolls(ConstantLootNumberProvider.create(1))
+                .with(AlternativeEntry.builder(
+                        ItemEntry.builder(foodBox)
+                                .conditionally(createSilkTouchCondition()),
+                        ItemEntry.builder(ModBlocks.FOOD_BOX)
+                                .conditionally(createWithoutSilkTouchCondition())))
+        );
+
+        tableBuilder.pool(LootPool.builder()
+                .rolls(ConstantLootNumberProvider.create(1))
+                .with(ItemEntry.builder(food).apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(8)))
+                        .conditionally(createWithoutSilkTouchCondition()))
+        );
+
+        this.addDrop(foodBox, tableBuilder);
+    }
+
+
+
+    public void addOreDropsWithCount(Block oreBlock, ItemConvertible rawOreItem, float countMin, float countMax) {
+        this.addDrop(oreBlock, this.oreDropsWithCount(oreBlock, rawOreItem, countMin, countMax));
+    }
+
+    public LootTable.Builder oreDropsWithCount(Block oreBlock, ItemConvertible rawOreItem, float countMin, float countMax) {
+        RegistryWrapper.Impl<Enchantment> impl = this.registryLookup.getWrapperOrThrow(RegistryKeys.ENCHANTMENT);
+        return this.dropsWithSilkTouch(oreBlock, this.applyExplosionDecay(oreBlock, ItemEntry.builder(rawOreItem).apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(countMin,countMax))).apply(ApplyBonusLootFunction.oreDrops(impl.getOrThrow(Enchantments.FORTUNE)))));
+    }
+
 }
