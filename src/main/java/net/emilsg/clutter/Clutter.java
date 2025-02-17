@@ -27,7 +27,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Clutter implements ModInitializer {
-    public static final String MOD_VERSION = "0.6.3";
+    public static final String MOD_VERSION = "0.6.4";
     public static final String MOD_ID = "clutter";
     public static final Logger LOGGER = LoggerFactory.getLogger("Clutter");
     public static final boolean IS_TRINKETS_LOADED = FabricLoader.getInstance().getModContainer("trinkets").isPresent();

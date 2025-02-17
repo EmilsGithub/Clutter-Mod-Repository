@@ -29,7 +29,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.stream.IntStream;
 
-public class PresentInventoryBlockEntity extends LootableContainerBlockEntity implements SidedInventory {
+public class PresentBlockEntity extends LootableContainerBlockEntity implements SidedInventory {
     private static final int[] AVAILABLE_SLOTS = IntStream.range(0, 1).toArray();
     private final ViewerCountManager stateManager = new ViewerCountManager() {
 
@@ -47,14 +47,14 @@ public class PresentInventoryBlockEntity extends LootableContainerBlockEntity im
         protected boolean isPlayerViewing(PlayerEntity player) {
             if (player.currentScreenHandler instanceof GenericContainerScreenHandler) {
                 Inventory inventory = ((GenericContainerScreenHandler) player.currentScreenHandler).getInventory();
-                return inventory == PresentInventoryBlockEntity.this;
+                return inventory == PresentBlockEntity.this;
             }
             return false;
         }
     };
     private DefaultedList<ItemStack> inventory = DefaultedList.ofSize(1, ItemStack.EMPTY);
 
-    public PresentInventoryBlockEntity(BlockPos blockPos, BlockState blockState) {
+    public PresentBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.PRESENT, blockPos, blockState);
     }
 
@@ -64,7 +64,7 @@ public class PresentInventoryBlockEntity extends LootableContainerBlockEntity im
             if (!this.getCachedState().get(Properties.OPEN)) {
                 this.world.setBlockState(this.getPos(), this.getCachedState().with(Properties.OPEN, true));
             }
-            PresentInventoryBlockEntity.this.playSound(SoundEvents.BLOCK_WOOL_HIT);
+            PresentBlockEntity.this.playSound(SoundEvents.BLOCK_WOOL_HIT);
         }
     }
 
@@ -74,7 +74,7 @@ public class PresentInventoryBlockEntity extends LootableContainerBlockEntity im
             if (this.getCachedState().get(Properties.OPEN)) {
                 this.world.setBlockState(this.getPos(), this.getCachedState().with(Properties.OPEN, false));
             }
-            PresentInventoryBlockEntity.this.playSound(SoundEvents.BLOCK_WOOL_FALL);
+            PresentBlockEntity.this.playSound(SoundEvents.BLOCK_WOOL_FALL);
         }
     }
 

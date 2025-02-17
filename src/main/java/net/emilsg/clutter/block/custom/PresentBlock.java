@@ -1,10 +1,9 @@
 package net.emilsg.clutter.block.custom;
 
 import com.mojang.serialization.MapCodec;
-import net.emilsg.clutter.block.entity.PresentInventoryBlockEntity;
+import net.emilsg.clutter.block.entity.PresentBlockEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
@@ -13,6 +12,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.loot.context.LootContextParameterSet;
+import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
@@ -23,7 +24,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
-import net.minecraft.util.Formatting;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -41,6 +42,8 @@ public class PresentBlock extends BlockWithEntity implements Waterloggable {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
     public static final MapCodec<PresentBlock> CODEC = createCodec(PresentBlock::new);
+    public static final Identifier CONTENTS_DYNAMIC_DROP_ID = Identifier.ofVanilla("contents");
+
 
     protected static final VoxelShape SHAPE = Block.createCuboidShape(2.5, 0, 2.5, 13.5, 10.5, 13.5);
 
@@ -74,8 +77,8 @@ public class PresentBlock extends BlockWithEntity implements Waterloggable {
             world.setBlockState(pos, state.cycle(OPEN));
         } else if (!player.isSneaking()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof PresentInventoryBlockEntity) {
-                player.openHandledScreen((PresentInventoryBlockEntity) blockEntity);
+            if (blockEntity instanceof PresentBlockEntity) {
+                player.openHandledScreen((PresentBlockEntity) blockEntity);
             }
         }
 
@@ -133,30 +136,31 @@ public class PresentBlock extends BlockWithEntity implements Waterloggable {
     @Nullable
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new PresentInventoryBlockEntity(pos, state);
+        return new PresentBlockEntity(pos, state);
     }
 
     @Override
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
-        if (blockEntity instanceof PresentInventoryBlockEntity) {
-            ((PresentInventoryBlockEntity) blockEntity).tick();
+        if (blockEntity instanceof PresentBlockEntity) {
+            ((PresentBlockEntity) blockEntity).tick();
         }
     }
 
     @Override
     public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType options) {
         super.appendTooltip(stack, context, tooltip, options);
-        if (stack.contains(DataComponentTypes.CONTAINER_LOOT)) {
-            tooltip.add(Text.translatable("tooltip.container.clutter.not_empty").formatted(Formatting.YELLOW));
-        } else {
-            tooltip.add(Text.translatable("tooltip.container.clutter.empty"));
-        }
+        //TODO Fix Tooltips
+        //if (stack.contains(DataComponentTypes.CONTAINER_LOOT)) {
+        //    tooltip.add(Text.translatable("tooltip.container.clutter.not_empty").formatted(Formatting.YELLOW));
+        //} else {
+        //    tooltip.add(Text.translatable("tooltip.container.clutter.empty"));
+        //}
     }
 
     public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
-        if (blockEntity instanceof PresentInventoryBlockEntity presentInventoryBlock) {
+        if (blockEntity instanceof PresentBlockEntity presentInventoryBlock) {
             if (!world.isClient && player.isCreative() && !presentInventoryBlock.isEmpty()) {
                 ItemStack itemStack = new ItemStack(this);
                 itemStack.applyComponentsFrom(blockEntity.createComponentMap());
@@ -172,6 +176,21 @@ public class PresentBlock extends BlockWithEntity implements Waterloggable {
     }
 
     @Override
+    protected List<ItemStack> getDroppedStacks(BlockState state, LootContextParameterSet.Builder builder) {
+        BlockEntity blockEntity = builder.getOptional(LootContextParameters.BLOCK_ENTITY);
+        if (blockEntity instanceof PresentBlockEntity presentBlockEntity) {
+            builder = builder.addDynamicDrop(CONTENTS_DYNAMIC_DROP_ID, (lootConsumer) -> {
+                for(int i = 0; i < presentBlockEntity.size(); ++i) {
+                    lootConsumer.accept(presentBlockEntity.getStack(i));
+                }
+
+            });
+        }
+
+        return super.getDroppedStacks(state, builder);
+    }
+
+    @Override
     public boolean hasComparatorOutput(BlockState state) {
         return true;
     }
@@ -183,7 +202,7 @@ public class PresentBlock extends BlockWithEntity implements Waterloggable {
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (!state.isOf(newState.getBlock())) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof PresentInventoryBlockEntity) {
+            if (blockEntity instanceof PresentBlockEntity) {
                 world.updateComparators(pos, state.getBlock());
             }
 

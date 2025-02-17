@@ -18,8 +18,8 @@ public class ModBlockEntities {
     public static BlockEntityType<ShelfInventoryBlockEntity> SHELF;
     public static BlockEntityType<CupboardInventoryBlockEntity> CUPBOARD;
     public static BlockEntityType<MailBoxInventoryBlockEntity> MAILBOX;
-    public static BlockEntityType<CardboardBoxInventoryBlockEntity> CARDBOARD_BOX;
-    public static BlockEntityType<PresentInventoryBlockEntity> PRESENT;
+    public static BlockEntityType<CardboardBoxBlockEntity> CARDBOARD_BOX;
+    public static BlockEntityType<PresentBlockEntity> PRESENT;
     public static BlockEntityType<BunkBedBlockEntity> MOD_BUNK_BED_BLOCK_ENTITY;
 
 
@@ -116,11 +116,11 @@ public class ModBlockEntities {
                         ModBlocks.MAILBOX).build());
 
         CARDBOARD_BOX = Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(Clutter.MOD_ID, "cardboard_box"),
-                BlockEntityType.Builder.create(CardboardBoxInventoryBlockEntity::new,
+                BlockEntityType.Builder.create(CardboardBoxBlockEntity::new,
                         ModBlocks.CARDBOARD_BOX).build());
 
         PRESENT = Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(Clutter.MOD_ID, "present"),
-                BlockEntityType.Builder.create(PresentInventoryBlockEntity::new,
+                BlockEntityType.Builder.create(PresentBlockEntity::new,
                         ModBlocks.RED_PRESENT).build());
 
         MOD_BUNK_BED_BLOCK_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE,

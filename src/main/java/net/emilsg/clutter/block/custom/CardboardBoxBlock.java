@@ -1,10 +1,10 @@
 package net.emilsg.clutter.block.custom;
 
 import com.mojang.serialization.MapCodec;
-import net.emilsg.clutter.block.entity.CardboardBoxInventoryBlockEntity;
+import net.emilsg.clutter.Clutter;
+import net.emilsg.clutter.block.entity.CardboardBoxBlockEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
@@ -13,6 +13,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.loot.context.LootContextParameterSet;
+import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
@@ -23,7 +25,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
-import net.minecraft.util.Formatting;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -44,6 +46,7 @@ public class CardboardBoxBlock extends BlockWithEntity implements Waterloggable 
     protected static final VoxelShape SHAPE = Block.createCuboidShape(2, 0, 2, 14, 11, 14);
     private final VoxelShape OPEN_SHAPE = VoxelShapes.union(Block.createCuboidShape(2, 0, 2.0999999999999996, 2.1, 11, 13.9), Block.createCuboidShape(13.9, 0, 2.0999999999999996, 14, 11, 13.9), Block.createCuboidShape(2, 0, 2, 14, 11, 2.1), Block.createCuboidShape(2, 0, 13.9, 14, 11, 14), Block.createCuboidShape(2, 0, 2, 14, 0.1, 14));
     public static final MapCodec<CardboardBoxBlock> CODEC = createCodec(CardboardBoxBlock::new);
+    public static final Identifier CONTENTS_DYNAMIC_DROP_ID = Identifier.of(Clutter.MOD_ID, "contents");
 
     public CardboardBoxBlock(Settings settings) {
         super(settings);
@@ -75,8 +78,8 @@ public class CardboardBoxBlock extends BlockWithEntity implements Waterloggable 
             world.setBlockState(pos, state.cycle(OPEN));
         } else if (!player.isSneaking()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof CardboardBoxInventoryBlockEntity) {
-                player.openHandledScreen((CardboardBoxInventoryBlockEntity) blockEntity);
+            if (blockEntity instanceof CardboardBoxBlockEntity) {
+                player.openHandledScreen((CardboardBoxBlockEntity) blockEntity);
             }
         }
 
@@ -135,29 +138,30 @@ public class CardboardBoxBlock extends BlockWithEntity implements Waterloggable 
     @Nullable
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new CardboardBoxInventoryBlockEntity(pos, state);
+        return new CardboardBoxBlockEntity(pos, state);
     }
 
     @Override
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
-        if (blockEntity instanceof CardboardBoxInventoryBlockEntity) {
-            ((CardboardBoxInventoryBlockEntity) blockEntity).tick();
+        if (blockEntity instanceof CardboardBoxBlockEntity) {
+            ((CardboardBoxBlockEntity) blockEntity).tick();
         }
     }
 
     public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType options) {
         super.appendTooltip(stack, context, tooltip, options);
-        if (stack.contains(DataComponentTypes.CONTAINER_LOOT)) {
-            tooltip.add(Text.translatable("tooltip.container.clutter.not_empty").formatted(Formatting.YELLOW));
-        } else {
-            tooltip.add(Text.translatable("tooltip.container.clutter.empty"));
-        }
+        //TODO Fix Tooltips
+        //if (stack.contains(DataComponentTypes.CONTAINER_LOOT)) {
+        //    tooltip.add(Text.translatable("tooltip.container.clutter.not_empty").formatted(Formatting.YELLOW));
+        //} else {
+        //    tooltip.add(Text.translatable("tooltip.container.clutter.empty"));
+        //}
     }
 
     public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
-        if (blockEntity instanceof CardboardBoxInventoryBlockEntity cardboardBoxInventoryBlock) {
+        if (blockEntity instanceof CardboardBoxBlockEntity cardboardBoxInventoryBlock) {
             if (!world.isClient && player.isCreative() && !cardboardBoxInventoryBlock.isEmpty()) {
                 ItemStack itemStack = new ItemStack(this);
                 itemStack.applyComponentsFrom(blockEntity.createComponentMap());
@@ -173,6 +177,21 @@ public class CardboardBoxBlock extends BlockWithEntity implements Waterloggable 
     }
 
     @Override
+    protected List<ItemStack> getDroppedStacks(BlockState state, LootContextParameterSet.Builder builder) {
+        BlockEntity blockEntity = builder.getOptional(LootContextParameters.BLOCK_ENTITY);
+        if (blockEntity instanceof CardboardBoxBlockEntity cardboardBoxBlockEntity) {
+            builder = builder.addDynamicDrop(CONTENTS_DYNAMIC_DROP_ID, (lootConsumer) -> {
+                for(int i = 0; i < cardboardBoxBlockEntity.size(); ++i) {
+                    lootConsumer.accept(cardboardBoxBlockEntity.getStack(i));
+                }
+
+            });
+        }
+
+        return super.getDroppedStacks(state, builder);
+    }
+
+    @Override
     public boolean hasComparatorOutput(BlockState state) {
         return true;
     }
@@ -184,7 +203,7 @@ public class CardboardBoxBlock extends BlockWithEntity implements Waterloggable 
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (!state.isOf(newState.getBlock())) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof CardboardBoxInventoryBlockEntity) {
+            if (blockEntity instanceof CardboardBoxBlockEntity) {
                 world.updateComparators(pos, state.getBlock());
             }
 

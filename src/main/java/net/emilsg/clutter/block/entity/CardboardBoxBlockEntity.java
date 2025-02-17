@@ -32,7 +32,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.stream.IntStream;
 
-public class CardboardBoxInventoryBlockEntity extends LootableContainerBlockEntity implements SidedInventory {
+public class CardboardBoxBlockEntity extends LootableContainerBlockEntity implements SidedInventory {
     private static final int[] AVAILABLE_SLOTS = IntStream.range(0, 9).toArray();
     private final ViewerCountManager stateManager = new ViewerCountManager() {
 
@@ -50,14 +50,14 @@ public class CardboardBoxInventoryBlockEntity extends LootableContainerBlockEnti
         protected boolean isPlayerViewing(PlayerEntity player) {
             if (player.currentScreenHandler instanceof GenericContainerScreenHandler) {
                 Inventory inventory = ((GenericContainerScreenHandler) player.currentScreenHandler).getInventory();
-                return inventory == CardboardBoxInventoryBlockEntity.this;
+                return inventory == CardboardBoxBlockEntity.this;
             }
             return false;
         }
     };
     private DefaultedList<ItemStack> inventory = DefaultedList.ofSize(9, ItemStack.EMPTY);
 
-    public CardboardBoxInventoryBlockEntity(BlockPos blockPos, BlockState blockState) {
+    public CardboardBoxBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.CARDBOARD_BOX, blockPos, blockState);
     }
 
@@ -67,7 +67,7 @@ public class CardboardBoxInventoryBlockEntity extends LootableContainerBlockEnti
             if (!this.getCachedState().get(Properties.OPEN)) {
                 this.world.setBlockState(this.getPos(), this.getCachedState().with(Properties.OPEN, true));
             }
-            CardboardBoxInventoryBlockEntity.this.playSound(SoundEvents.BLOCK_WOOL_HIT);
+            CardboardBoxBlockEntity.this.playSound(SoundEvents.BLOCK_WOOL_HIT);
         }
     }
 
@@ -77,7 +77,7 @@ public class CardboardBoxInventoryBlockEntity extends LootableContainerBlockEnti
             if (this.getCachedState().get(Properties.OPEN)) {
                 this.world.setBlockState(this.getPos(), this.getCachedState().with(Properties.OPEN, false));
             }
-            CardboardBoxInventoryBlockEntity.this.playSound(SoundEvents.BLOCK_WOOL_FALL);
+            CardboardBoxBlockEntity.this.playSound(SoundEvents.BLOCK_WOOL_FALL);
         }
     }
 
