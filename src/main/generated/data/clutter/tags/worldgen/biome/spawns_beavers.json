@@ -1,0 +1,17 @@
+{
+  "values": [
+    "minecraft:river",
+    {
+      "id": "terralith:warm_river",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:bayou",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:wetland",
+      "required": false
+    }
+  ]
+}

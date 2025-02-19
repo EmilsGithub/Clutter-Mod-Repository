@@ -43,6 +43,11 @@ public class MantaRayEntity extends ClutterWaterEntity {
         this.lookControl = new YawAdjustingLookControl(this, 10);
     }
 
+    @Override
+    public boolean canBeLeashed() {
+        return true;
+    }
+
     protected void initGoals() {
         this.goalSelector.add(0, new MoveIntoWaterGoal(this));
         this.goalSelector.add(1, new SwimAroundGoal(this, 1.0, 10));

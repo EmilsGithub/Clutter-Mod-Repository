@@ -1,5 +1,9 @@
 {
   "values": [
-    "minecraft:basalt_deltas"
+    "minecraft:basalt_deltas",
+    {
+      "id": "biomesoplenty:volcano",
+      "required": false
+    }
   ]
 }

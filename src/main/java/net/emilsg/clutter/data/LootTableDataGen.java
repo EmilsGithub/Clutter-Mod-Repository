@@ -3,6 +3,11 @@ package net.emilsg.clutter.data;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.annotation.Nullable;
 import net.emilsg.clutter.block.ClutterWoodType;
 import net.emilsg.clutter.block.ModBlocks;
+import net.emilsg.clutter.block.custom.CandelabraBlock;
+import net.emilsg.clutter.block.custom.ChandelierBlock;
+import net.emilsg.clutter.block.custom.ChimneyBlock;
+import net.emilsg.clutter.block.custom.WallCandleBlock;
+import net.emilsg.clutter.block.custom.plushies.AbstractPlushieBlock;
 import net.emilsg.clutter.item.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
@@ -22,6 +27,7 @@ import net.minecraft.loot.function.ApplyBonusLootFunction;
 import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
+import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.state.property.Properties;
@@ -71,6 +77,19 @@ public class LootTableDataGen extends FabricBlockLootTableProvider {
         this.addOreDropsWithCount(ModBlocks.BLACKSTONE_SULPHUR_ORE, ModItems.SULPHUR, 1.0f, 2.0f);
         this.addOreDropsWithCount(ModBlocks.ONYX_ORE, ModItems.RAW_ONYX, 2.0f, 4.0f);
 
+        this.addOreDropsWithCount(ModBlocks.ONYX_CLUSTER, ModItems.ONYX, 2.0f, 4.0f);
+        this.addDropOnlyWithSilkTouch(ModBlocks.LARGE_ONYX_BUD);
+        this.addDropOnlyWithSilkTouch(ModBlocks.MEDIUM_ONYX_BUD);
+        this.addDropOnlyWithSilkTouch(ModBlocks.SMALL_ONYX_BUD);
+
+        for (Block block : Registries.BLOCK) {
+            if (block instanceof AbstractPlushieBlock plushieBlock) this.addDrop(plushieBlock);
+            if (block instanceof ChimneyBlock chimneyBlock) this.addDrop(chimneyBlock);
+
+            if (block instanceof ChandelierBlock chandelierBlock) this.addDrop(chandelierBlock);
+            if (block instanceof CandelabraBlock candelabraBlock) this.addDrop(candelabraBlock);
+            if (block instanceof WallCandleBlock wallCandleBlock) this.addDrop(wallCandleBlock);
+        }
 
         this.addPottedPlantGroupDrops(
                 ModBlocks.POTTED_SMALL_BLUE_LUPINE,
@@ -95,7 +114,8 @@ public class LootTableDataGen extends FabricBlockLootTableProvider {
                 ModBlocks.YELLOW_LUPINE,
                 ModBlocks.WHITE_LUPINE,
                 ModBlocks.RED_LUPINE,
-                ModBlocks.REDWOOD_DOOR
+                ModBlocks.REDWOOD_DOOR,
+                ModBlocks.CATTAILS
         );
 
         this.addSingleGroupDrops(
@@ -166,13 +186,6 @@ public class LootTableDataGen extends FabricBlockLootTableProvider {
             return dropsWithSilkTouch(block, (ItemEntry.builder(Items.QUARTZ).apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(2)))));
         });
     }
-
-    public void silkTouchWithCount(Block dropWithSilkTouch, Item drop, int count) {
-        dropsWithSilkTouch(dropWithSilkTouch, this.applyExplosionDecay(dropWithSilkTouch, ItemEntry.builder(drop)
-                .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(count)))));
-    }
-
-
 
     private void addWoodDrops(ClutterWoodType woodType) {
         if(woodType.sapling() != null) this.addDrop(woodType.sapling());
@@ -288,8 +301,6 @@ public class LootTableDataGen extends FabricBlockLootTableProvider {
         this.addDrop(foodBox, tableBuilder);
     }
 
-
-
     public void addOreDropsWithCount(Block oreBlock, ItemConvertible rawOreItem, float countMin, float countMax) {
         this.addDrop(oreBlock, this.oreDropsWithCount(oreBlock, rawOreItem, countMin, countMax));
     }
@@ -297,6 +308,24 @@ public class LootTableDataGen extends FabricBlockLootTableProvider {
     public LootTable.Builder oreDropsWithCount(Block oreBlock, ItemConvertible rawOreItem, float countMin, float countMax) {
         RegistryWrapper.Impl<Enchantment> impl = this.registryLookup.getWrapperOrThrow(RegistryKeys.ENCHANTMENT);
         return this.dropsWithSilkTouch(oreBlock, this.applyExplosionDecay(oreBlock, ItemEntry.builder(rawOreItem).apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(countMin,countMax))).apply(ApplyBonusLootFunction.oreDrops(impl.getOrThrow(Enchantments.FORTUNE)))));
+    }
+
+    public void addDropOnlyWithSilkTouch(Block block) {
+        LootTable.Builder tableBuilder = LootTable.builder().pool(LootPool.builder()
+                .rolls(ConstantLootNumberProvider.create(1))
+                .with(ItemEntry.builder(block).conditionally(createSilkTouchCondition()))
+        );
+
+        this.addDrop(block, tableBuilder);
+    }
+
+    public void addDropOnlyWithSilkTouch(Block block, ItemConvertible drop) {
+        LootTable.Builder tableBuilder = LootTable.builder().pool(LootPool.builder()
+                .rolls(ConstantLootNumberProvider.create(1))
+                .with(ItemEntry.builder(drop).conditionally(createSilkTouchCondition()))
+        );
+
+        this.addDrop(block, tableBuilder);
     }
 
 }

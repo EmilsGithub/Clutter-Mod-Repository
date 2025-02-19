@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-17T22:42:05.198156	Clutter/Tags for minecraft:item
+// 1.21.1	2025-02-19T23:42:02.7712434	Clutter/Tags for minecraft:item
 bf509848ecc1fe34cbf69fc3032d8e539e756116 data\clutter\tags\item\fruits_and_berries.json
 4eed15e69e9e468f7f3701f69f97f8cc91324544 data\minecraft\tags\item\enchantable\armor.json
 4f1a776ea07ee85827ed2e396cc3de6d56dffcb1 data\c\tags\item\raw_silver_ores.json
@@ -23,9 +23,9 @@ cabcc5392542df4fe60a5151fa4c223cdf929d40 data\clutter\tags\item\dyes.json
 e4c6782443bf9ac18b225673f782d7f85727a791 data\c\tags\item\silver_ingots.json
 74cc3d1685a7650896c3a7d77c002a05c3e318c7 data\clutter\tags\item\seeds.json
 b9f9b0c6a85f54c78fa1707fa3609d788edae83a data\minecraft\tags\item\enchantable\head_armor.json
-4bfc71b3a1ac233840eb8b96fd700b1326a52059 data\minecraft\tags\item\trim_materials.json
 7169fe42daeef2a51e4ba6909121b94a9d48a8b5 data\minecraft\tags\item\boats.json
+4bfc71b3a1ac233840eb8b96fd700b1326a52059 data\minecraft\tags\item\trim_materials.json
 0d418887e84a63790cc2ec45e5b15ac8f5633f4f data\minecraft\tags\item\beacon_payment_items.json
-d82e9c9783c12f3a6e538d40b1a9276ab15374ee data\c\tags\item\ores.json
 7dbb07ae9e360c5b148bf72b70bd73abfee3135a data\c\tags\item\silver_nuggets.json
+d82e9c9783c12f3a6e538d40b1a9276ab15374ee data\c\tags\item\ores.json
 d8ab1b6c8c134d04651007858e965224af072786 data\c\tags\item\copper_nuggets.json
