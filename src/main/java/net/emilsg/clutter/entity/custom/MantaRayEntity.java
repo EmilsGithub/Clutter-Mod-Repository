@@ -15,6 +15,7 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.WaterCreatureEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.sound.SoundEvent;
@@ -58,6 +59,11 @@ public class MantaRayEntity extends ClutterWaterEntity {
         return ClutterAnimalEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 16.0D)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0D);
+    }
+
+    @Override
+    public boolean canBeLeashedBy(PlayerEntity player) {
+        return true;
     }
 
     @Nullable

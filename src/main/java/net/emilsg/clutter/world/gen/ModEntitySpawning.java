@@ -49,32 +49,32 @@ public class ModEntitySpawning {
         }
 
         if (ModConfigManager.get(Configs.spawnChameleons, true)) {
-            BiomeModifications.addSpawn(BiomeSelectors.tag(BiomeTags.IS_JUNGLE), SpawnGroup.CREATURE,
+            BiomeModifications.addSpawn(BiomeSelectors.tag(ModBiomeTags.SPAWNS_CHAMELEONS), SpawnGroup.CREATURE,
                     ModEntityTypes.CHAMELEON, 15, 1, 2);
         }
 
         if (ModConfigManager.get(Configs.spawnMossblooms, true)) {
-            BiomeModifications.addSpawn(BiomeSelectors.includeByKey(LUSH_CAVES), SpawnGroup.AMBIENT,
+            BiomeModifications.addSpawn(BiomeSelectors.tag(ModBiomeTags.SPAWNS_MOSSBLOOMS), SpawnGroup.AMBIENT,
                     ModEntityTypes.MOSSBLOOM, 30, 1, 2);
         }
 
         if (ModConfigManager.get(Configs.spawnKiwis, true)) {
-            BiomeModifications.addSpawn(BiomeSelectors.tag(BiomeTags.IS_JUNGLE), SpawnGroup.CREATURE,
+            BiomeModifications.addSpawn(BiomeSelectors.tag(ModBiomeTags.SPAWNS_KIWIS), SpawnGroup.CREATURE,
                     ModEntityTypes.KIWI_BIRD, 30, 2, 3);
         }
 
         if (ModConfigManager.get(Configs.spawnEmperorPenguins, true)) {
-            BiomeModifications.addSpawn(BiomeSelectors.includeByKey(ICE_SPIKES, SNOWY_PLAINS, SNOWY_BEACH), SpawnGroup.CREATURE,
+            BiomeModifications.addSpawn(BiomeSelectors.tag(ModBiomeTags.SPAWNS_EMPEROR_PENGUINS), SpawnGroup.CREATURE,
                     ModEntityTypes.EMPEROR_PENGUIN, 5, 2, 4);
         }
 
         if (ModConfigManager.get(Configs.spawnBeavers, true)) {
-            BiomeModifications.addSpawn(BiomeSelectors.includeByKey(RIVER), SpawnGroup.CREATURE,
+            BiomeModifications.addSpawn(BiomeSelectors.tag(ModBiomeTags.SPAWNS_BEAVERS), SpawnGroup.CREATURE,
                     ModEntityTypes.BEAVER, 5, 2, 3);
         }
 
         if (ModConfigManager.get(Configs.spawnCapybaras, true)) {
-            BiomeModifications.addSpawn(BiomeSelectors.tag(BiomeTags.IS_SAVANNA), SpawnGroup.CREATURE,
+            BiomeModifications.addSpawn(BiomeSelectors.tag(ModBiomeTags.SPAWNS_CAPYBARAS), SpawnGroup.CREATURE,
                     ModEntityTypes.CAPYBARA, 5, 3, 5);
         }
         if (ModConfigManager.get(Configs.spawnJellyfishes, true)) {
@@ -108,13 +108,5 @@ public class ModEntitySpawning {
         SpawnRestriction.register(ModEntityTypes.EMBER_TORTOISE, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, EmberTortoiseEntity::isValidNaturalSpawn);
         SpawnRestriction.register(ModEntityTypes.ECHOFIN, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, EchofinEntity::isValidSpawn);
 
-    }
-
-    private static void registerSpawners(ServerWorld world, Spawner spawner) {
-        ServerWorldAccessor serverWorldAccessor = (ServerWorldAccessor) world;
-
-        List<Spawner> worldSpawners = new ArrayList<>(((serverWorldAccessor).getWorldSpawners()));
-        worldSpawners.add(spawner);
-        (serverWorldAccessor).setWorldSpawners(worldSpawners);
     }
 }
