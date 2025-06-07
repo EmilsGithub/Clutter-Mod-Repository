@@ -24,6 +24,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
+import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -125,6 +126,28 @@ public class ChimneyBlock extends BlockWithEntity implements FluidFillable, Wate
         if (!state.get(WATERLOGGED)) {
             world.addImportantParticle(ParticleTypes.CAMPFIRE_SIGNAL_SMOKE, true, (double) pos.getX() + 0.5 + random.nextDouble() / 3.0 * (double) (random.nextBoolean() ? 1 : -1), (double) pos.getY() + random.nextDouble() + random.nextDouble() + 0.65, (double) pos.getZ() + 0.5 + random.nextDouble() / 3.0 * (double) (random.nextBoolean() ? 1 : -1), random.nextDouble() * 0.02 - 0.01, 0.07, random.nextDouble() * 0.02 - 0.01);
         }
+    }
+
+    public static boolean isChimneyInRange(World world, BlockPos pos) {
+        for(int i = 1; i <= 5; ++i) {
+            BlockPos blockPos = pos.down(i);
+            BlockState blockState = world.getBlockState(blockPos);
+            if (isChimneyOn(blockState)) {
+                return true;
+            }
+
+            boolean bl = VoxelShapes.matchesAnywhere(Block.createCuboidShape(6.0F, 0.0F, 6.0F, 10.0F, 16.0F, 10.0F), blockState.getCollisionShape(world, pos, ShapeContext.absent()), BooleanBiFunction.AND);
+            if (bl) {
+                BlockState blockState2 = world.getBlockState(blockPos.down());
+                return isChimneyOn(blockState2);
+            }
+        }
+
+        return false;
+    }
+
+    public static boolean isChimneyOn(BlockState state) {
+        return state.contains(OPEN) && state.getBlock() instanceof ChimneyBlock;
     }
 
     @Override
