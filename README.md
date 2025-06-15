@@ -3,7 +3,7 @@
 The source code for the different versions of the mod can be found under the Branches named accordingly.
 Update Logs Below or in the [Wiki](https://github.com/EmilsGithub/Clutter-Mod-Repository/wiki).
 
-![Bisect](https://github.com/EmilsGithub/Clutter-Mod-Repository/blob/main/Images/Clutter-Roadmap%202025-2026-2027+.png?raw=true)
+![Roadmap](https://github.com/EmilsGithub/Clutter-Mod-Repository/blob/main/Images/Clutter-Roadmap%202025-2026-2027+.png?raw=true)
 
 ## Links  
 
