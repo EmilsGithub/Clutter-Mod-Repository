@@ -1,0 +1,24 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:savanna_plateau",
+    "minecraft:windswept_savanna",
+    "minecraft:savanna",
+    {
+      "id": "terralith:fractured_savanna",
+      "required": false
+    },
+    {
+      "id": "terralith:savanna_badlands",
+      "required": false
+    },
+    {
+      "id": "terralith:savanna_slopes",
+      "required": false
+    },
+    {
+      "id": "terralith:lush_desert",
+      "required": false
+    }
+  ]
+}

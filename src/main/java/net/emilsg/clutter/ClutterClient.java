@@ -63,8 +63,7 @@ public class ClutterClient implements ClientModInitializer {
         ModModelPredicateProvider.registerModModels();
 
         for (Block block : Registries.BLOCK) {
-            if (block instanceof ICutoutRenderable)
-                BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getCutout());
+            if (block instanceof ICutoutRenderable) BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getCutout());
         }
 
         List<Block> blocksToRender = Arrays.asList(

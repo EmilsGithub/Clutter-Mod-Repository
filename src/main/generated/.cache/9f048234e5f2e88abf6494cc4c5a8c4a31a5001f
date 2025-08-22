@@ -1,10 +1,16 @@
-// 1.20.1	2024-10-20T21:34:56.8383986	Clutter/Tags for minecraft:worldgen/biome
-85c39d767e49df328354e9e98ca0ea1624bd6ede data\clutter\tags\worldgen\biome\spawns_seahorses.json
-b3235b8457ee029f4b83b07b6c8e8cf9c6578c23 data\clutter\tags\worldgen\biome\spawns_manta_rays.json
-0742a65a3fec9bc40a1473db359be9cb844844c7 data\clutter\tags\worldgen\biome\spawns_echofins.json
-e92ee3348f9ddee60357b75b089aafd71348efeb data\minecraft\tags\worldgen\biome\is_overworld.json
-e1c68db131bb6e95e587abee48f5d52971cf226a data\clutter\tags\worldgen\biome\spawns_ember_tortoises.json
-05d858a614165375893da65d55ec5c3bfb04df2e data\clutter\tags\worldgen\biome\spawns_crimson_newts.json
-2ebd83139988003e7e09aa944a90ac44d84f31a4 data\clutter\tags\worldgen\biome\spawns_warped_newts.json
+// 1.20.1	2025-06-07T23:19:21.8174812	Clutter/Tags for minecraft:worldgen/biome
+89c103ab9135ccb8c3bbd801ccc27420c2effe07 data\clutter\tags\worldgen\biome\spawns_butterflies.json
+6449b4c2be9a8953517f828041f359e89c889913 data\clutter\tags\worldgen\biome\spawns_ember_tortoises.json
 b3235b8457ee029f4b83b07b6c8e8cf9c6578c23 data\clutter\tags\worldgen\biome\spawns_jellyfishes.json
-f4dbe208d601489c428cfb2ad9d48ca33a6d3ca6 data\clutter\tags\worldgen\biome\spawns_nether_butterflies.json
+61d29912c637647999b314c433613214ec0c5ca0 data\clutter\tags\worldgen\biome\spawns_mossblooms.json
+b3235b8457ee029f4b83b07b6c8e8cf9c6578c23 data\clutter\tags\worldgen\biome\spawns_manta_rays.json
+05d858a614165375893da65d55ec5c3bfb04df2e data\clutter\tags\worldgen\biome\spawns_crimson_newts.json
+7ea9001db2be49b468f5ee8590be4bbc311c1990 data\clutter\tags\worldgen\biome\spawns_beavers.json
+985ff44a11b2158fb9ea125603c6adcbb016f65b data\clutter\tags\worldgen\biome\spawns_kiwis.json
+64355468a6b6bb8bf667395a6093989dd800526f data\clutter\tags\worldgen\biome\spawns_capybaras.json
+aada34b09a3af55af65791a8774938c0a8af6c22 data\clutter\tags\worldgen\biome\spawns_echofins.json
+985ff44a11b2158fb9ea125603c6adcbb016f65b data\clutter\tags\worldgen\biome\spawns_chameleons.json
+2ebd83139988003e7e09aa944a90ac44d84f31a4 data\clutter\tags\worldgen\biome\spawns_warped_newts.json
+e92ee3348f9ddee60357b75b089aafd71348efeb data\minecraft\tags\worldgen\biome\is_overworld.json
+85c39d767e49df328354e9e98ca0ea1624bd6ede data\clutter\tags\worldgen\biome\spawns_seahorses.json
+e3ce769aae3c8dd4d68ee564e0844c307c80e273 data\clutter\tags\worldgen\biome\spawns_emperor_penguins.json

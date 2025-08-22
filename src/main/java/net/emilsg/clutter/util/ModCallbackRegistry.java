@@ -5,6 +5,7 @@ import net.emilsg.clutter.block.ModBlocks;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.render.block.BlockRenderManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Items;
@@ -23,6 +24,7 @@ public class ModCallbackRegistry {
     public static void handleCallbacks() {
         if (!Clutter.IS_SUPPLEMENTARIES_LOADED) handlePlacingBooks();
         handlePlacingNautilusShells();
+
     }
 
     public static void handlePlacingBooks() {
