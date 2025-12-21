@@ -25,6 +25,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
@@ -70,9 +71,13 @@ public class BeaverEntity extends ClutterAnimalEntity {
     private static Ingredient getIngredientWithName(String name) {
         List<Item> items = new ArrayList<>();
 
+        Registries.ITEM.iterateEntries(ItemTags.SAPLINGS).forEach(entry -> {
+            items.add(entry.value());
+        });
+
         Registries.ITEM.forEach(item -> {
             Identifier id = Registries.ITEM.getId(item);
-            if (id.getPath().contains(name)) {
+            if (id.getPath().contains(name) && !items.contains(item)) {
                 items.add(item);
             }
         });
@@ -222,7 +227,7 @@ public class BeaverEntity extends ClutterAnimalEntity {
             return ActionResult.SUCCESS;
         }
 
-        return ActionResult.PASS;
+        return super.interactMob(player, hand);
     }
 
     @Override

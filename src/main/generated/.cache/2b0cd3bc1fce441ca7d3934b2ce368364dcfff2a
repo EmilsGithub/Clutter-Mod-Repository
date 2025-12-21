@@ -1,4 +1,4 @@
-// 1.20.1	2025-06-07T23:19:21.8184851	Clutter/Block Loot Tables
+// 1.20.1	2025-12-21T13:42:42.3127429	Clutter/Block Loot Tables
 4911635c40886e29edc3482c241bb4822b68988b data\minecraft\loot_tables\blocks\bamboo_mosaic_slab.json
 89a3339dd36ca8f49aaacedaf75215404183ea63 data\minecraft\loot_tables\blocks\cherry_hanging_sign.json
 d939ecfde0d9afb2cbf3347d7418b4b9a26259bd data\clutter\loot_tables\blocks\black_onyx_block.json
@@ -314,9 +314,9 @@ a747bcdfe73898063a1991cb93096dc41227f277 data\clutter\loot_tables\blocks\strippe
 4638de3a56d3ec3ed6bba51b322b2505d8d5dc0e data\clutter\loot_tables\blocks\small_blue_lupine.json
 0c779c4f8aa5552d9762931536cf3b0d023f379b data\clutter\loot_tables\blocks\redwood_leaves.json
 65d1ff0679a09c65e2bfbba2fea44283f91082be data\minecraft\loot_tables\blocks\jungle_wood.json
+efae2fadbfce172fe5f982ff08ed8c1a2789538c data\clutter\loot_tables\blocks\redwood_shelf.json
 215f906a5eff6f6056712da2b4c70c8edb1bdcc2 data\clutter\loot_tables\blocks\spruce_wall_cupboard.json
 0818b9233e253489f747259a25e9350582fc09c0 data\clutter\loot_tables\blocks\dark_oak_shelf.json
-efae2fadbfce172fe5f982ff08ed8c1a2789538c data\clutter\loot_tables\blocks\redwood_shelf.json
 be0e192a4aa3edebfb26330cf3bcb84420639614 data\minecraft\loot_tables\blocks\spruce_log.json
 003263e0be598710ffdb611f950da83fd214d73f data\clutter\loot_tables\blocks\dead_thorn_coral.json
 98a77e861b408cd7f34eda599cba358d470a0d13 data\minecraft\loot_tables\blocks\oak_wood.json

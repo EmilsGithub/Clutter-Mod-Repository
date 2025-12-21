@@ -1,4 +1,4 @@
-// 1.20.1	2025-06-07T23:19:21.8028831	Clutter/Tags for minecraft:item
+// 1.20.1	2025-12-21T13:42:42.2980531	Clutter/Tags for minecraft:item
 ee1379f54e03c6ac340ede9c6d8142cd5106162e data\clutter\tags\items\dyes.json
 f2c6fde89a1c73b85509f604946e00fcd5ac4e78 data\c\tags\items\silver_nuggets.json
 ddf83c1690f6020511466d803a6399af68816ef2 data\c\tags\items\raw_silver_ores.json
@@ -17,8 +17,8 @@ a39a568971c9d554105bb247b313bf8527a1cac3 data\c\tags\items\silver_ingots.json
 bd4f42f4bbf16603f22e6b9933c76db711fb3592 data\clutter\tags\items\seeds.json
 d4ab1af1dd3f975f3b8f3aaea3d1e6908e551e26 data\clutter\tags\items\strippable_logs.json
 ab661de794e38b8d773b43c88ac0b18befc1f6ea data\clutter\tags\items\trellis_items.json
-337a49036caf8f3e98268c3f3bc58315bf4bc30f data\c\tags\items\copper_nuggets.json
 d543ae5a22a69e24edb31a69eac7f3515fab6cb8 data\c\tags\items\entity_water_buckets.json
+337a49036caf8f3e98268c3f3bc58315bf4bc30f data\c\tags\items\copper_nuggets.json
 bdaf475ade390798213392fdce25b375ba1a1600 data\minecraft\tags\items\bookshelf_books.json
 e0d8bbd7d177e6b2fc3ea850b144af545f687907 data\minecraft\tags\items\trimmable_armor.json
 55eba99f679873db4fd91826c664c2853d5bcfde data\clutter\tags\items\redwood_logs.json
