@@ -18,13 +18,13 @@ import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
@@ -40,13 +40,11 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class BeaverEntity extends ClutterAnimalEntity {
     private static final TrackedData<BlockPos> HOME_POS = DataTracker.registerData(BeaverEntity.class, TrackedDataHandlerRegistry.BLOCK_POS);
 
-    private static final Ingredient BREEDING_INGREDIENT = getIngredientWithName("sapling");
+    private static final Ingredient BREEDING_INGREDIENT = Ingredient.fromTag(ItemTags.SAPLINGS);
 
     public final AnimationState waterAnimationState = new AnimationState();
     public final AnimationState idleAnimationState = new AnimationState();
@@ -65,19 +63,6 @@ public class BeaverEntity extends ClutterAnimalEntity {
         this.setPathfindingPenalty(PathNodeType.WATER, 0.0F);
         this.waterNavigation = new SwimNavigation(this, world);
         this.landNavigation = new MobNavigation(this, world);
-    }
-
-    private static Ingredient getIngredientWithName(String name) {
-        List<Item> items = new ArrayList<>();
-
-        Registries.ITEM.forEach(item -> {
-            Identifier id = Registries.ITEM.getId(item);
-            if (id.getPath().contains(name)) {
-                items.add(item);
-            }
-        });
-
-        return Ingredient.ofItems(items.toArray(new Item[0]));
     }
 
     public static DefaultAttributeContainer.Builder setAttributes() {
@@ -194,6 +179,10 @@ public class BeaverEntity extends ClutterAnimalEntity {
     @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
         ItemStack stackInHand = player.getStackInHand(hand);
+
+        if (this.isBreedingItem(stackInHand)) {
+            return super.interactMob(player, hand);
+        }
 
         String itemID = Registries.ITEM.getId(stackInHand.getItem()).toString();
         Block heldBlock = Block.getBlockFromItem(stackInHand.getItem());

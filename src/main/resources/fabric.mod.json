@@ -7,6 +7,9 @@
 	"authors": [
 		"EmilSG"
 	],
+	"contributors": [
+		"Michael Bartosh"
+	],
 	"contact": {
 		"homepage": "https://modrinth.com/mod/clutter",
 		"issues": "https://github.com/EmilsGithub/Clutter-Mod-Repository/issues",
@@ -53,8 +56,5 @@
 		],
 		"java": ">=17",
 		"fabric-api": "*"
-	},
-	"suggests": {
-		"another-mod": "*"
 	}
 }
