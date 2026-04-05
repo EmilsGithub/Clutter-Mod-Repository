@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-19T23:42:02.798858	Clutter/Tags for minecraft:block
+// 1.21.1	2026-04-04T23:25:35.3550409	Clutter/Tags for minecraft:block
 b289a25219889f56e95ebc5f458f7abbbda8f3a0 data\clutter\tags\block\crimson_newts_spawn_on.json
 a376bfe440a1ced1d26b8e49b3e70941e812d12f data\minecraft\tags\block\wooden_fences.json
 f4fe05d004efb8da3163a60a99a9571bdac6054d data\minecraft\tags\block\wooden_pressure_plates.json
@@ -23,8 +23,8 @@ b9126495978e670f361a59fb63a694d5b0baa0d1 data\minecraft\tags\block\climbable.jso
 49e64d00a3a53f33d08b2b3a78e9e0d643a17d12 data\minecraft\tags\block\mineable\shovel.json
 8ebbb6bb1bf97749794e2875b667f3e0ae9b02d8 data\minecraft\tags\block\wall_corals.json
 67cbbd5080050ea1383f6d53569885e655d9c152 data\minecraft\tags\block\frogs_spawnable_on.json
-a04291307cb11f58aab3e40a45f016a43b5dd088 data\clutter\tags\block\tables.json
 dce2dc7fc0bc6601269146ee2165f7c0a076b1ca data\clutter\tags\block\bookshelves.json
+a04291307cb11f58aab3e40a45f016a43b5dd088 data\clutter\tags\block\tables.json
 949b41a1c1dd9ab5e6a21ce4d05dd294d24bdca0 data\minecraft\tags\block\crops.json
 e9548fef38c906871904fb6044fb648c42dca45b data\clutter\tags\block\armchairs.json
 f87a4fda8fd07f578284873c23221c37f6de81d9 data\clutter\tags\block\chimneys.json

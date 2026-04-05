@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-19T23:42:02.7909991	Clutter/Recipes
+// 1.21.1	2026-04-04T23:25:35.3473891	Clutter/Recipes
 af651f0bc980cb5638320693f0c2c5c9b897d37d data\clutter\advancement\recipes\building_blocks\waxed_pink_copper_candelabra.json
 a793201bc1e10559c9ef2a3a9c9522f13e5926ed data\clutter\advancement\recipes\building_blocks\waxed_exposed_blue_copper_candelabra.json
 0b3c9cb4cce3357b5562445dc5f0e1e6e78f1416 data\clutter\advancement\recipes\building_blocks\waxed_magenta_copper_chandelier.json
@@ -1118,7 +1118,7 @@ d6cd685c084dbb674a39e6d4fcef45bb7ec89a51 data\clutter\recipe\polished_onyx_stair
 e10012a4a39c6ee7d69846363161dcdd71e79cf8 data\clutter\recipe\warped_wall_bookshelf.json
 9ceabb4055db864045e513f5eda5863e3337a095 data\clutter\advancement\recipes\decorations\stripped_jungle_bench.json
 44531a4b46dcad322709c8f411f4edf7c4ce7c8a data\clutter\advancement\recipes\building_blocks\polished_black_onyx.json
-e653c1b1a0179c5f4f60484aadc5eba9e7aebac6 data\clutter\recipe\redwood_chest_boat.json
+b23fa19d597dcb243b0382663febee104891be3d data\clutter\recipe\redwood_chest_boat.json
 f99e8f79f57d4991b5197b4cdf1bf4b35c8058cf data\clutter\recipe\redwood_table.json
 564858f395af22a02c480f05f3ce21f09a7b0ec8 data\clutter\recipe\waxed_weathered_large_copper_chandelier.json
 e97c22c04c337a4ebc8a6acc144f129bab17b75f data\clutter\recipe\cooked_venison_from_smelting_raw_venison.json

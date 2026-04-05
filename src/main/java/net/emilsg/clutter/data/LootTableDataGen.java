@@ -166,7 +166,15 @@ public class LootTableDataGen extends FabricBlockLootTableProvider {
                 ModBlocks.SMALL_YELLOW_LUPINE,
                 ModBlocks.SMALL_RED_LUPINE,
                 ModBlocks.SMALL_WHITE_LUPINE,
-                ModBlocks.ANCHOR_BLOCK
+                ModBlocks.ANCHOR_BLOCK,
+                ModBlocks.REINFORCED_COPPER_GLASS,
+                ModBlocks.EXPOSED_REINFORCED_COPPER_GLASS,
+                ModBlocks.WEATHERED_REINFORCED_COPPER_GLASS,
+                ModBlocks.OXIDIZED_REINFORCED_COPPER_GLASS,
+                ModBlocks.WAXED_REINFORCED_COPPER_GLASS,
+                ModBlocks.WAXED_EXPOSED_REINFORCED_COPPER_GLASS,
+                ModBlocks.WAXED_WEATHERED_REINFORCED_COPPER_GLASS,
+                ModBlocks.WAXED_OXIDIZED_REINFORCED_COPPER_GLASS
         );
 
         this.addWoodDrops(ClutterWoodType.REDWOOD);

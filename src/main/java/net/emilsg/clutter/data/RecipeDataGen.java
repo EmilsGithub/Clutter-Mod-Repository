@@ -58,6 +58,18 @@ public class RecipeDataGen extends FabricRecipeProvider {
         }
     }
 
+    public static void offerNormalWoodAndPlanksRecipes(
+            RecipeExporter exporter,
+            List<ItemConvertible> planks
+    ) {
+        ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, ModBlocks.QUARTZ_CRYSTAL)
+                .pattern("Q")
+                .pattern("Q")
+                .input('Q', Items.QUARTZ)
+                .criterion(hasItem(Items.QUARTZ), conditionsFromItem(Items.QUARTZ))
+                .offerTo(exporter, Identifier.of(Clutter.MOD_ID, getRecipeName(ModBlocks.QUARTZ_CRYSTAL)));
+    }
+
     @Override
     public void generate(RecipeExporter exporter) {
         offerKilning(exporter, Items.SAND, Items.GLASS, 0.2f, 50, RecipeCategory.MISC, "glass");
@@ -305,7 +317,7 @@ public class RecipeDataGen extends FabricRecipeProvider {
         offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_BLACK_ONYX_WALL, ModBlocks.POLISHED_BLACK_ONYX, 1);
 
         offerBoatRecipe(exporter, ModItems.REDWOOD_BOAT, ModBlocks.REDWOOD_PLANKS);
-        offerChestBoatRecipe(exporter, ModItems.REDWOOD_CHEST_BOAT, ModBlocks.REDWOOD_PLANKS);
+        offerChestBoatRecipe(exporter, ModItems.REDWOOD_CHEST_BOAT, ModItems.REDWOOD_BOAT);
 
         for (Item elytra : Registries.ITEM) {
             if (elytra instanceof ClutterElytraItem clutterElytraItem) offerDecoratedElytraRecipes(exporter, elytra, clutterElytraItem.getComponent());
