@@ -72,6 +72,13 @@ public class ModUtil {
 
         registry.add(ModBlocks.SULPHUR_BLOCK, 400);
 
+        registry.add(ModBlocks.REDWOOD_LOG, 300);
+        registry.add(ModBlocks.REDWOOD_WOOD, 300);
+        registry.add(ModBlocks.STRIPPED_REDWOOD_LOG, 300);
+        registry.add(ModBlocks.STRIPPED_REDWOOD_WOOD, 300);
+        registry.add(ModBlocks.REDWOOD_PLANKS, 300);
+        registry.add(ModBlocks.REDWOOD_SAPLING, 100);
+
         registry.add(ModItems.SULPHUR, 100);
         registry.add(ModItems.WOODEN_MUG, 100);
 

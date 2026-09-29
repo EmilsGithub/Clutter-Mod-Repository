@@ -7,7 +7,6 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.item.Items;
 import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.ItemTags;
 
 import java.util.concurrent.CompletableFuture;
@@ -84,6 +83,16 @@ public class ItemTagDataGen extends FabricTagProvider.ItemTagProvider {
                 ModBlocks.STRIPPED_REDWOOD_LOG.asItem(),
                 ModBlocks.REDWOOD_WOOD.asItem(),
                 ModBlocks.STRIPPED_REDWOOD_WOOD.asItem()
+        );
+
+        getOrCreateTagBuilder(ItemTags.LOGS)
+                .addTag(ModItemTags.REDWOOD_LOGS);
+
+        getOrCreateTagBuilder(ItemTags.LOGS_THAT_BURN)
+                .addTag(ModItemTags.REDWOOD_LOGS);
+
+        getOrCreateTagBuilder(ItemTags.SAPLINGS).add(
+                ModBlocks.REDWOOD_SAPLING.asItem()
         );
 
         getOrCreateTagBuilder(ModItemTags.PLUSHIES).add(

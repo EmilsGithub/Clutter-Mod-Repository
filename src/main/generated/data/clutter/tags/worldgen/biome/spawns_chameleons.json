@@ -4,6 +4,10 @@
     "minecraft:jungle",
     "minecraft:sparse_jungle",
     {
+      "id": "#c:is_jungle",
+      "required": false
+    },
+    {
       "id": "terralith:jungle_mountains",
       "required": false
     },

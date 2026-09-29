@@ -2,6 +2,14 @@
   "values": [
     "minecraft:river",
     {
+      "id": "#c:is_river",
+      "required": false
+    },
+    {
+      "id": "#c:is_swamp",
+      "required": false
+    },
+    {
       "id": "terralith:warm_river",
       "required": false
     },

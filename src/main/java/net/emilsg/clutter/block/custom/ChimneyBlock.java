@@ -136,7 +136,7 @@ public class ChimneyBlock extends BlockWithEntity implements FluidFillable, Wate
                 return true;
             }
 
-            boolean bl = VoxelShapes.matchesAnywhere(Block.createCuboidShape(6.0F, 0.0F, 6.0F, 10.0F, 16.0F, 10.0F), blockState.getCollisionShape(world, pos, ShapeContext.absent()), BooleanBiFunction.AND);
+            boolean bl = VoxelShapes.matchesAnywhere(Block.createCuboidShape(6.0F, 0.0F, 6.0F, 10.0F, 16.0F, 10.0F), blockState.getCollisionShape(world, blockPos, ShapeContext.absent()), BooleanBiFunction.AND);
             if (bl) {
                 BlockState blockState2 = world.getBlockState(blockPos.down());
                 return isChimneyOn(blockState2);
@@ -147,7 +147,7 @@ public class ChimneyBlock extends BlockWithEntity implements FluidFillable, Wate
     }
 
     public static boolean isChimneyOn(BlockState state) {
-        return state.contains(OPEN) && state.getBlock() instanceof ChimneyBlock;
+        return state.getBlock() instanceof ChimneyBlock && state.get(OPEN) && !state.get(WATERLOGGED);
     }
 
     @Override

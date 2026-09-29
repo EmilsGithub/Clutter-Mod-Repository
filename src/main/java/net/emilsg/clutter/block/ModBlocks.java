@@ -352,22 +352,22 @@ public class ModBlocks {
     public static final Block LONG_MAGENTA_KITCHEN_CURTAINS = registerBlock("long_magenta_kitchen_curtains", new KitchenCurtainBlock(AbstractBlock.Settings.copy(Blocks.MAGENTA_WOOL).noCollision()));
     public static final Block LONG_PINK_KITCHEN_CURTAINS = registerBlock("long_pink_kitchen_curtains", new KitchenCurtainBlock(AbstractBlock.Settings.copy(Blocks.PINK_WOOL).noCollision()));
     public static final Block PRIDE_KITCHEN_CURTAINS = registerBlock("pride_kitchen_curtains", new KitchenCurtainBlock(AbstractBlock.Settings.copy(Blocks.BLACK_WOOL).noCollision()));
-    public static final Block TALL_WHITE_CURTAINS = registerBlock("tall_white_curtains", new TallCurtainBlock(AbstractBlock.Settings.copy(Blocks.WHITE_WOOL).noCollision()));
-    public static final Block TALL_LIGHT_GRAY_CURTAINS = registerBlock("tall_light_gray_curtains", new TallCurtainBlock(AbstractBlock.Settings.copy(Blocks.LIGHT_GRAY_WOOL).noCollision()));
-    public static final Block TALL_GRAY_CURTAINS = registerBlock("tall_gray_curtains", new TallCurtainBlock(AbstractBlock.Settings.copy(Blocks.GRAY_WOOL).noCollision()));
-    public static final Block TALL_BLACK_CURTAINS = registerBlock("tall_black_curtains", new TallCurtainBlock(AbstractBlock.Settings.copy(Blocks.BLACK_WOOL).noCollision()));
-    public static final Block TALL_BROWN_CURTAINS = registerBlock("tall_brown_curtains", new TallCurtainBlock(AbstractBlock.Settings.copy(Blocks.BROWN_WOOL).noCollision()));
-    public static final Block TALL_RED_CURTAINS = registerBlock("tall_red_curtains", new TallCurtainBlock(AbstractBlock.Settings.copy(Blocks.RED_WOOL).noCollision()));
-    public static final Block TALL_ORANGE_CURTAINS = registerBlock("tall_orange_curtains", new TallCurtainBlock(AbstractBlock.Settings.copy(Blocks.ORANGE_WOOL).noCollision()));
-    public static final Block TALL_YELLOW_CURTAINS = registerBlock("tall_yellow_curtains", new TallCurtainBlock(AbstractBlock.Settings.copy(Blocks.YELLOW_WOOL).noCollision()));
-    public static final Block TALL_LIME_CURTAINS = registerBlock("tall_lime_curtains", new TallCurtainBlock(AbstractBlock.Settings.copy(Blocks.LIME_WOOL).noCollision()));
-    public static final Block TALL_GREEN_CURTAINS = registerBlock("tall_green_curtains", new TallCurtainBlock(AbstractBlock.Settings.copy(Blocks.GREEN_WOOL).noCollision()));
-    public static final Block TALL_CYAN_CURTAINS = registerBlock("tall_cyan_curtains", new TallCurtainBlock(AbstractBlock.Settings.copy(Blocks.CYAN_WOOL).noCollision()));
-    public static final Block TALL_LIGHT_BLUE_CURTAINS = registerBlock("tall_light_blue_curtains", new TallCurtainBlock(AbstractBlock.Settings.copy(Blocks.LIGHT_BLUE_WOOL).noCollision()));
-    public static final Block TALL_BLUE_CURTAINS = registerBlock("tall_blue_curtains", new TallCurtainBlock(AbstractBlock.Settings.copy(Blocks.BLUE_WOOL).noCollision()));
-    public static final Block TALL_PURPLE_CURTAINS = registerBlock("tall_purple_curtains", new TallCurtainBlock(AbstractBlock.Settings.copy(Blocks.PURPLE_WOOL).noCollision()));
-    public static final Block TALL_MAGENTA_CURTAINS = registerBlock("tall_magenta_curtains", new TallCurtainBlock(AbstractBlock.Settings.copy(Blocks.MAGENTA_WOOL).noCollision()));
-    public static final Block TALL_PINK_CURTAINS = registerBlock("tall_pink_curtains", new TallCurtainBlock(AbstractBlock.Settings.copy(Blocks.PINK_WOOL).noCollision()));
+    public static final Block TALL_WHITE_CURTAINS = registerBlock("tall_white_curtains", new TallCurtainBlock(AbstractBlock.Settings.copy(Blocks.WHITE_WOOL)));
+    public static final Block TALL_LIGHT_GRAY_CURTAINS = registerBlock("tall_light_gray_curtains", new TallCurtainBlock(AbstractBlock.Settings.copy(Blocks.LIGHT_GRAY_WOOL)));
+    public static final Block TALL_GRAY_CURTAINS = registerBlock("tall_gray_curtains", new TallCurtainBlock(AbstractBlock.Settings.copy(Blocks.GRAY_WOOL)));
+    public static final Block TALL_BLACK_CURTAINS = registerBlock("tall_black_curtains", new TallCurtainBlock(AbstractBlock.Settings.copy(Blocks.BLACK_WOOL)));
+    public static final Block TALL_BROWN_CURTAINS = registerBlock("tall_brown_curtains", new TallCurtainBlock(AbstractBlock.Settings.copy(Blocks.BROWN_WOOL)));
+    public static final Block TALL_RED_CURTAINS = registerBlock("tall_red_curtains", new TallCurtainBlock(AbstractBlock.Settings.copy(Blocks.RED_WOOL)));
+    public static final Block TALL_ORANGE_CURTAINS = registerBlock("tall_orange_curtains", new TallCurtainBlock(AbstractBlock.Settings.copy(Blocks.ORANGE_WOOL)));
+    public static final Block TALL_YELLOW_CURTAINS = registerBlock("tall_yellow_curtains", new TallCurtainBlock(AbstractBlock.Settings.copy(Blocks.YELLOW_WOOL)));
+    public static final Block TALL_LIME_CURTAINS = registerBlock("tall_lime_curtains", new TallCurtainBlock(AbstractBlock.Settings.copy(Blocks.LIME_WOOL)));
+    public static final Block TALL_GREEN_CURTAINS = registerBlock("tall_green_curtains", new TallCurtainBlock(AbstractBlock.Settings.copy(Blocks.GREEN_WOOL)));
+    public static final Block TALL_CYAN_CURTAINS = registerBlock("tall_cyan_curtains", new TallCurtainBlock(AbstractBlock.Settings.copy(Blocks.CYAN_WOOL)));
+    public static final Block TALL_LIGHT_BLUE_CURTAINS = registerBlock("tall_light_blue_curtains", new TallCurtainBlock(AbstractBlock.Settings.copy(Blocks.LIGHT_BLUE_WOOL)));
+    public static final Block TALL_BLUE_CURTAINS = registerBlock("tall_blue_curtains", new TallCurtainBlock(AbstractBlock.Settings.copy(Blocks.BLUE_WOOL)));
+    public static final Block TALL_PURPLE_CURTAINS = registerBlock("tall_purple_curtains", new TallCurtainBlock(AbstractBlock.Settings.copy(Blocks.PURPLE_WOOL)));
+    public static final Block TALL_MAGENTA_CURTAINS = registerBlock("tall_magenta_curtains", new TallCurtainBlock(AbstractBlock.Settings.copy(Blocks.MAGENTA_WOOL)));
+    public static final Block TALL_PINK_CURTAINS = registerBlock("tall_pink_curtains", new TallCurtainBlock(AbstractBlock.Settings.copy(Blocks.PINK_WOOL)));
     public static final Block FLOOR_SEATING = registerBlock("floor_seating", new FloorSeatBlock(AbstractBlock.Settings.copy(Blocks.LIGHT_GRAY_WOOL)));
     public static final Block TOILET = registerBlock("toilet", new ToiletBlock(AbstractBlock.Settings.copy(Blocks.WHITE_CONCRETE)));
     public static final Block PET_BED = registerBlock("pet_bed", new PetBedBlock(AbstractBlock.Settings.copy(Blocks.LIGHT_BLUE_WOOL)));
@@ -697,8 +697,8 @@ public class ModBlocks {
     public static final Block CUP_CORAL = registerBlock("cup_coral", new CoralBlock(ModBlocks.DEAD_CUP_CORAL, AbstractBlock.Settings.copy(Blocks.HORN_CORAL)));
     public static final Block DEAD_CUP_CORAL_FAN = registerBlockWithoutItem("dead_cup_coral_fan", new DeadCoralFanBlock(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_FAN)));
     public static final Block CUP_CORAL_FAN = registerBlockWithoutItem("cup_coral_fan", new CoralFanBlock(ModBlocks.DEAD_CUP_CORAL_FAN, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_FAN)));
-    public static final Block DEAD_CUP_CORAL_WALL_FAN = registerBlockWithoutItem("dead_cup_coral_wall_fan", new DeadCoralWallFanBlock(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN)));
-    public static final Block CUP_CORAL_WALL_FAN = registerBlockWithoutItem("cup_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_CUP_CORAL_WALL_FAN, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_WALL_FAN)));
+    public static final Block DEAD_CUP_CORAL_WALL_FAN = registerBlockWithoutItem("dead_cup_coral_wall_fan", new DeadCoralWallFanBlock(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN).dropsLike(ModBlocks.DEAD_CUP_CORAL_FAN)));
+    public static final Block CUP_CORAL_WALL_FAN = registerBlockWithoutItem("cup_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_CUP_CORAL_WALL_FAN, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_WALL_FAN).dropsLike(ModBlocks.CUP_CORAL_FAN)));
 
     public static final Block DEAD_GHOST_CORAL_BLOCK = registerBlock("dead_ghost_coral_block", new Block(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_BLOCK)));
     public static final Block GHOST_CORAL_BLOCK = registerBlock("ghost_coral_block", new CoralBlockBlock(ModBlocks.DEAD_GHOST_CORAL_BLOCK, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_BLOCK)));
@@ -706,8 +706,8 @@ public class ModBlocks {
     public static final Block GHOST_CORAL = registerBlock("ghost_coral", new CoralBlock(ModBlocks.DEAD_GHOST_CORAL, AbstractBlock.Settings.copy(Blocks.HORN_CORAL)));
     public static final Block DEAD_GHOST_CORAL_FAN = registerBlockWithoutItem("dead_ghost_coral_fan", new DeadCoralFanBlock(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_FAN)));
     public static final Block GHOST_CORAL_FAN = registerBlockWithoutItem("ghost_coral_fan", new CoralFanBlock(ModBlocks.DEAD_GHOST_CORAL_FAN, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_FAN)));
-    public static final Block DEAD_GHOST_CORAL_WALL_FAN = registerBlockWithoutItem("dead_ghost_coral_wall_fan", new DeadCoralWallFanBlock(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN)));
-    public static final Block GHOST_CORAL_WALL_FAN = registerBlockWithoutItem("ghost_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_GHOST_CORAL_WALL_FAN, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_WALL_FAN)));
+    public static final Block DEAD_GHOST_CORAL_WALL_FAN = registerBlockWithoutItem("dead_ghost_coral_wall_fan", new DeadCoralWallFanBlock(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN).dropsLike(ModBlocks.DEAD_GHOST_CORAL_FAN)));
+    public static final Block GHOST_CORAL_WALL_FAN = registerBlockWithoutItem("ghost_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_GHOST_CORAL_WALL_FAN, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_WALL_FAN).dropsLike(ModBlocks.GHOST_CORAL_FAN)));
 
     public static final Block DEAD_SLATE_CORAL_BLOCK = registerBlock("dead_slate_coral_block", new Block(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_BLOCK)));
     public static final Block SLATE_CORAL_BLOCK = registerBlock("slate_coral_block", new CoralBlockBlock(ModBlocks.DEAD_SLATE_CORAL_BLOCK, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_BLOCK)));
@@ -715,8 +715,8 @@ public class ModBlocks {
     public static final Block SLATE_CORAL = registerBlock("slate_coral", new CoralBlock(ModBlocks.DEAD_SLATE_CORAL, AbstractBlock.Settings.copy(Blocks.HORN_CORAL)));
     public static final Block DEAD_SLATE_CORAL_FAN = registerBlockWithoutItem("dead_slate_coral_fan", new DeadCoralFanBlock(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_FAN)));
     public static final Block SLATE_CORAL_FAN = registerBlockWithoutItem("slate_coral_fan", new CoralFanBlock(ModBlocks.DEAD_SLATE_CORAL_FAN, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_FAN)));
-    public static final Block DEAD_SLATE_CORAL_WALL_FAN = registerBlockWithoutItem("dead_slate_coral_wall_fan", new DeadCoralWallFanBlock(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN)));
-    public static final Block SLATE_CORAL_WALL_FAN = registerBlockWithoutItem("slate_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_SLATE_CORAL_WALL_FAN, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_WALL_FAN)));
+    public static final Block DEAD_SLATE_CORAL_WALL_FAN = registerBlockWithoutItem("dead_slate_coral_wall_fan", new DeadCoralWallFanBlock(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN).dropsLike(ModBlocks.DEAD_SLATE_CORAL_FAN)));
+    public static final Block SLATE_CORAL_WALL_FAN = registerBlockWithoutItem("slate_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_SLATE_CORAL_WALL_FAN, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_WALL_FAN).dropsLike(ModBlocks.SLATE_CORAL_FAN)));
 
     public static final Block DEAD_STONE_CORAL_BLOCK = registerBlock("dead_stone_coral_block", new Block(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_BLOCK)));
     public static final Block STONE_CORAL_BLOCK = registerBlock("stone_coral_block", new CoralBlockBlock(ModBlocks.DEAD_STONE_CORAL_BLOCK, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_BLOCK)));
@@ -724,8 +724,8 @@ public class ModBlocks {
     public static final Block STONE_CORAL = registerBlock("stone_coral", new CoralBlock(ModBlocks.DEAD_STONE_CORAL, AbstractBlock.Settings.copy(Blocks.HORN_CORAL)));
     public static final Block DEAD_STONE_CORAL_FAN = registerBlockWithoutItem("dead_stone_coral_fan", new DeadCoralFanBlock(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_FAN)));
     public static final Block STONE_CORAL_FAN = registerBlockWithoutItem("stone_coral_fan", new CoralFanBlock(ModBlocks.DEAD_STONE_CORAL_FAN, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_FAN)));
-    public static final Block DEAD_STONE_CORAL_WALL_FAN = registerBlockWithoutItem("dead_stone_coral_wall_fan", new DeadCoralWallFanBlock(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN)));
-    public static final Block STONE_CORAL_WALL_FAN = registerBlockWithoutItem("stone_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_STONE_CORAL_WALL_FAN, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_WALL_FAN)));
+    public static final Block DEAD_STONE_CORAL_WALL_FAN = registerBlockWithoutItem("dead_stone_coral_wall_fan", new DeadCoralWallFanBlock(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN).dropsLike(ModBlocks.DEAD_STONE_CORAL_FAN)));
+    public static final Block STONE_CORAL_WALL_FAN = registerBlockWithoutItem("stone_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_STONE_CORAL_WALL_FAN, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_WALL_FAN).dropsLike(ModBlocks.STONE_CORAL_FAN)));
 
     public static final Block DEAD_THORN_CORAL_BLOCK = registerBlock("dead_thorn_coral_block", new Block(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_BLOCK)));
     public static final Block THORN_CORAL_BLOCK = registerBlock("thorn_coral_block", new CoralBlockBlock(ModBlocks.DEAD_THORN_CORAL_BLOCK, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_BLOCK)));
@@ -733,8 +733,8 @@ public class ModBlocks {
     public static final Block THORN_CORAL = registerBlock("thorn_coral", new CoralBlock(ModBlocks.DEAD_THORN_CORAL, AbstractBlock.Settings.copy(Blocks.HORN_CORAL)));
     public static final Block DEAD_THORN_CORAL_FAN = registerBlockWithoutItem("dead_thorn_coral_fan", new DeadCoralFanBlock(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_FAN)));
     public static final Block THORN_CORAL_FAN = registerBlockWithoutItem("thorn_coral_fan", new CoralFanBlock(ModBlocks.DEAD_THORN_CORAL_FAN, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_FAN)));
-    public static final Block DEAD_THORN_CORAL_WALL_FAN = registerBlockWithoutItem("dead_thorn_coral_wall_fan", new DeadCoralWallFanBlock(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN)));
-    public static final Block THORN_CORAL_WALL_FAN = registerBlockWithoutItem("thorn_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_THORN_CORAL_WALL_FAN, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_WALL_FAN)));
+    public static final Block DEAD_THORN_CORAL_WALL_FAN = registerBlockWithoutItem("dead_thorn_coral_wall_fan", new DeadCoralWallFanBlock(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN).dropsLike(ModBlocks.DEAD_THORN_CORAL_FAN)));
+    public static final Block THORN_CORAL_WALL_FAN = registerBlockWithoutItem("thorn_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_THORN_CORAL_WALL_FAN, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_WALL_FAN).dropsLike(ModBlocks.THORN_CORAL_FAN)));
 
     public static final Block DEAD_COCOA_CORAL_BLOCK = registerBlock("dead_cocoa_coral_block", new Block(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_BLOCK)));
     public static final Block COCOA_CORAL_BLOCK = registerBlock("cocoa_coral_block", new CoralBlockBlock(ModBlocks.DEAD_COCOA_CORAL_BLOCK, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_BLOCK)));
@@ -742,8 +742,8 @@ public class ModBlocks {
     public static final Block COCOA_CORAL = registerBlock("cocoa_coral", new CoralBlock(ModBlocks.DEAD_COCOA_CORAL, AbstractBlock.Settings.copy(Blocks.HORN_CORAL)));
     public static final Block DEAD_COCOA_CORAL_FAN = registerBlockWithoutItem("dead_cocoa_coral_fan", new DeadCoralFanBlock(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_FAN)));
     public static final Block COCOA_CORAL_FAN = registerBlockWithoutItem("cocoa_coral_fan", new CoralFanBlock(ModBlocks.DEAD_COCOA_CORAL_FAN, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_FAN)));
-    public static final Block DEAD_COCOA_CORAL_WALL_FAN = registerBlockWithoutItem("dead_cocoa_coral_wall_fan", new DeadCoralWallFanBlock(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN)));
-    public static final Block COCOA_CORAL_WALL_FAN = registerBlockWithoutItem("cocoa_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_COCOA_CORAL_WALL_FAN, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_WALL_FAN)));
+    public static final Block DEAD_COCOA_CORAL_WALL_FAN = registerBlockWithoutItem("dead_cocoa_coral_wall_fan", new DeadCoralWallFanBlock(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN).dropsLike(ModBlocks.DEAD_COCOA_CORAL_FAN)));
+    public static final Block COCOA_CORAL_WALL_FAN = registerBlockWithoutItem("cocoa_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_COCOA_CORAL_WALL_FAN, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_WALL_FAN).dropsLike(ModBlocks.COCOA_CORAL_FAN)));
 
     public static final Block DEAD_PASSION_CORAL_BLOCK = registerBlock("dead_passion_coral_block", new Block(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_BLOCK)));
     public static final Block PASSION_CORAL_BLOCK = registerBlock("passion_coral_block", new CoralBlockBlock(ModBlocks.DEAD_PASSION_CORAL_BLOCK, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_BLOCK)));
@@ -751,8 +751,8 @@ public class ModBlocks {
     public static final Block PASSION_CORAL = registerBlock("passion_coral", new CoralBlock(ModBlocks.DEAD_PASSION_CORAL, AbstractBlock.Settings.copy(Blocks.HORN_CORAL)));
     public static final Block DEAD_PASSION_CORAL_FAN = registerBlockWithoutItem("dead_passion_coral_fan", new DeadCoralFanBlock(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_FAN)));
     public static final Block PASSION_CORAL_FAN = registerBlockWithoutItem("passion_coral_fan", new CoralFanBlock(ModBlocks.DEAD_PASSION_CORAL_FAN, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_FAN)));
-    public static final Block DEAD_PASSION_CORAL_WALL_FAN = registerBlockWithoutItem("dead_passion_coral_wall_fan", new DeadCoralWallFanBlock(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN)));
-    public static final Block PASSION_CORAL_WALL_FAN = registerBlockWithoutItem("passion_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_PASSION_CORAL_WALL_FAN, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_WALL_FAN)));
+    public static final Block DEAD_PASSION_CORAL_WALL_FAN = registerBlockWithoutItem("dead_passion_coral_wall_fan", new DeadCoralWallFanBlock(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN).dropsLike(ModBlocks.DEAD_PASSION_CORAL_FAN)));
+    public static final Block PASSION_CORAL_WALL_FAN = registerBlockWithoutItem("passion_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_PASSION_CORAL_WALL_FAN, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_WALL_FAN).dropsLike(ModBlocks.PASSION_CORAL_FAN)));
 
     public static final Block DEAD_TOXIC_CORAL_BLOCK = registerBlock("dead_toxic_coral_block", new Block(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_BLOCK)));
     public static final Block TOXIC_CORAL_BLOCK = registerBlock("toxic_coral_block", new CoralBlockBlock(ModBlocks.DEAD_TOXIC_CORAL_BLOCK, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_BLOCK)));
@@ -760,8 +760,8 @@ public class ModBlocks {
     public static final Block TOXIC_CORAL = registerBlock("toxic_coral", new CoralBlock(ModBlocks.DEAD_TOXIC_CORAL, AbstractBlock.Settings.copy(Blocks.HORN_CORAL)));
     public static final Block DEAD_TOXIC_CORAL_FAN = registerBlockWithoutItem("dead_toxic_coral_fan", new DeadCoralFanBlock(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_FAN)));
     public static final Block TOXIC_CORAL_FAN = registerBlockWithoutItem("toxic_coral_fan", new CoralFanBlock(ModBlocks.DEAD_TOXIC_CORAL_FAN, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_FAN)));
-    public static final Block DEAD_TOXIC_CORAL_WALL_FAN = registerBlockWithoutItem("dead_toxic_coral_wall_fan", new DeadCoralWallFanBlock(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN)));
-    public static final Block TOXIC_CORAL_WALL_FAN = registerBlockWithoutItem("toxic_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_TOXIC_CORAL_WALL_FAN, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_WALL_FAN)));
+    public static final Block DEAD_TOXIC_CORAL_WALL_FAN = registerBlockWithoutItem("dead_toxic_coral_wall_fan", new DeadCoralWallFanBlock(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN).dropsLike(ModBlocks.DEAD_TOXIC_CORAL_FAN)));
+    public static final Block TOXIC_CORAL_WALL_FAN = registerBlockWithoutItem("toxic_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_TOXIC_CORAL_WALL_FAN, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_WALL_FAN).dropsLike(ModBlocks.TOXIC_CORAL_FAN)));
 
     public static final Block DEAD_GEM_CORAL_BLOCK = registerBlock("dead_gem_coral_block", new Block(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_BLOCK)));
     public static final Block GEM_CORAL_BLOCK = registerBlock("gem_coral_block", new CoralBlockBlock(ModBlocks.DEAD_GEM_CORAL_BLOCK, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_BLOCK)));
@@ -769,8 +769,8 @@ public class ModBlocks {
     public static final Block GEM_CORAL = registerBlock("gem_coral", new CoralBlock(ModBlocks.DEAD_GEM_CORAL, AbstractBlock.Settings.copy(Blocks.HORN_CORAL)));
     public static final Block DEAD_GEM_CORAL_FAN = registerBlockWithoutItem("dead_gem_coral_fan", new DeadCoralFanBlock(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_FAN)));
     public static final Block GEM_CORAL_FAN = registerBlockWithoutItem("gem_coral_fan", new CoralFanBlock(ModBlocks.DEAD_GEM_CORAL_FAN, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_FAN)));
-    public static final Block DEAD_GEM_CORAL_WALL_FAN = registerBlockWithoutItem("dead_gem_coral_wall_fan", new DeadCoralWallFanBlock(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN)));
-    public static final Block GEM_CORAL_WALL_FAN = registerBlockWithoutItem("gem_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_GEM_CORAL_WALL_FAN, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_WALL_FAN)));
+    public static final Block DEAD_GEM_CORAL_WALL_FAN = registerBlockWithoutItem("dead_gem_coral_wall_fan", new DeadCoralWallFanBlock(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN).dropsLike(ModBlocks.DEAD_GEM_CORAL_FAN)));
+    public static final Block GEM_CORAL_WALL_FAN = registerBlockWithoutItem("gem_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_GEM_CORAL_WALL_FAN, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_WALL_FAN).dropsLike(ModBlocks.GEM_CORAL_FAN)));
 
     public static final Block DEAD_DIAMOND_CORAL_BLOCK = registerBlock("dead_diamond_coral_block", new Block(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_BLOCK)));
     public static final Block DIAMOND_CORAL_BLOCK = registerBlock("diamond_coral_block", new CoralBlockBlock(ModBlocks.DEAD_DIAMOND_CORAL_BLOCK, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_BLOCK)));
@@ -778,8 +778,8 @@ public class ModBlocks {
     public static final Block DIAMOND_CORAL = registerBlock("diamond_coral", new CoralBlock(ModBlocks.DEAD_DIAMOND_CORAL, AbstractBlock.Settings.copy(Blocks.HORN_CORAL)));
     public static final Block DEAD_DIAMOND_CORAL_FAN = registerBlockWithoutItem("dead_diamond_coral_fan", new DeadCoralFanBlock(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_FAN)));
     public static final Block DIAMOND_CORAL_FAN = registerBlockWithoutItem("diamond_coral_fan", new CoralFanBlock(ModBlocks.DEAD_DIAMOND_CORAL_FAN, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_FAN)));
-    public static final Block DEAD_DIAMOND_CORAL_WALL_FAN = registerBlockWithoutItem("dead_diamond_coral_wall_fan", new DeadCoralWallFanBlock(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN)));
-    public static final Block DIAMOND_CORAL_WALL_FAN = registerBlockWithoutItem("diamond_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_DIAMOND_CORAL_WALL_FAN, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_WALL_FAN)));
+    public static final Block DEAD_DIAMOND_CORAL_WALL_FAN = registerBlockWithoutItem("dead_diamond_coral_wall_fan", new DeadCoralWallFanBlock(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN).dropsLike(ModBlocks.DEAD_DIAMOND_CORAL_FAN)));
+    public static final Block DIAMOND_CORAL_WALL_FAN = registerBlockWithoutItem("diamond_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_DIAMOND_CORAL_WALL_FAN, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_WALL_FAN).dropsLike(ModBlocks.DIAMOND_CORAL_FAN)));
 
     public static final Block DEAD_ANCHOR_CORAL_BLOCK = registerBlock("dead_anchor_coral_block", new Block(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_BLOCK)));
     public static final Block ANCHOR_CORAL_BLOCK = registerBlock("anchor_coral_block", new CoralBlockBlock(ModBlocks.DEAD_ANCHOR_CORAL_BLOCK, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_BLOCK)));
@@ -787,8 +787,8 @@ public class ModBlocks {
     public static final Block ANCHOR_CORAL = registerBlock("anchor_coral", new CoralBlock(ModBlocks.DEAD_ANCHOR_CORAL, AbstractBlock.Settings.copy(Blocks.HORN_CORAL)));
     public static final Block DEAD_ANCHOR_CORAL_FAN = registerBlockWithoutItem("dead_anchor_coral_fan", new DeadCoralFanBlock(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_FAN)));
     public static final Block ANCHOR_CORAL_FAN = registerBlockWithoutItem("anchor_coral_fan", new CoralFanBlock(ModBlocks.DEAD_ANCHOR_CORAL_FAN, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_FAN)));
-    public static final Block DEAD_ANCHOR_CORAL_WALL_FAN = registerBlockWithoutItem("dead_anchor_coral_wall_fan", new DeadCoralWallFanBlock(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN)));
-    public static final Block ANCHOR_CORAL_WALL_FAN = registerBlockWithoutItem("anchor_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_ANCHOR_CORAL_WALL_FAN, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_WALL_FAN)));
+    public static final Block DEAD_ANCHOR_CORAL_WALL_FAN = registerBlockWithoutItem("dead_anchor_coral_wall_fan", new DeadCoralWallFanBlock(AbstractBlock.Settings.copy(Blocks.DEAD_HORN_CORAL_WALL_FAN).dropsLike(ModBlocks.DEAD_ANCHOR_CORAL_FAN)));
+    public static final Block ANCHOR_CORAL_WALL_FAN = registerBlockWithoutItem("anchor_coral_wall_fan", new CoralWallFanBlock(ModBlocks.DEAD_ANCHOR_CORAL_WALL_FAN, AbstractBlock.Settings.copy(Blocks.HORN_CORAL_WALL_FAN).dropsLike(ModBlocks.ANCHOR_CORAL_FAN)));
 
     public static final Block GREEN_FIRE = registerBlockWithoutItem("green_fire", new GreenFireBlock(AbstractBlock.Settings.copy(Blocks.FIRE)));
 

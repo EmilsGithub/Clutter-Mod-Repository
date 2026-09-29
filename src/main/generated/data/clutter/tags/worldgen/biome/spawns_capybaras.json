@@ -4,6 +4,10 @@
     "minecraft:windswept_savanna",
     "minecraft:savanna",
     {
+      "id": "#c:is_savanna",
+      "required": false
+    },
+    {
       "id": "terralith:fractured_savanna",
       "required": false
     },

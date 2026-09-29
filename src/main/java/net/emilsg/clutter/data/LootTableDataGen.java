@@ -76,6 +76,9 @@ public class LootTableDataGen extends FabricBlockLootTableProvider {
         this.addOreDropsWithCount(ModBlocks.BASALT_SULPHUR_ORE, ModItems.SULPHUR, 1.0f, 2.0f);
         this.addOreDropsWithCount(ModBlocks.BLACKSTONE_SULPHUR_ORE, ModItems.SULPHUR, 1.0f, 2.0f);
         this.addOreDropsWithCount(ModBlocks.ONYX_ORE, ModItems.RAW_ONYX, 2.0f, 4.0f);
+        this.addDrop(ModBlocks.SULPHUR_BLOCK, this.dropsWithSilkTouch(ModBlocks.SULPHUR_BLOCK,
+                this.applyExplosionDecay(ModBlocks.SULPHUR_BLOCK, ItemEntry.builder(ModItems.SULPHUR)
+                        .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(4.0f))))));
 
         this.addOreDropsWithCount(ModBlocks.ONYX_CLUSTER, ModItems.ONYX, 2.0f, 4.0f);
         this.addDropOnlyWithSilkTouch(ModBlocks.LARGE_ONYX_BUD);
@@ -268,8 +271,6 @@ public class LootTableDataGen extends FabricBlockLootTableProvider {
         this.addDrop(deadCoralBlock);
         this.addDropWithSilkTouch(coralFan);
         this.addDropWithSilkTouch(deadCoralFan);
-        this.addDropWithSilkTouch(coralWallFan);
-        this.addDropWithSilkTouch(deadCoralWallFan);
     }
 
     private void coralBlockDrops(Block coralBlock, Block deadCoralBlock) {

@@ -3,6 +3,7 @@ package net.emilsg.clutter.util;
 import net.emilsg.clutter.block.ModBlocks;
 import net.emilsg.clutter.config.Configs;
 import net.emilsg.clutter.config.ModConfigManager;
+import net.emilsg.clutter.enchantment.ModEnchantments;
 import net.emilsg.clutter.item.ModItems;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.minecraft.component.DataComponentTypes;
@@ -17,6 +18,7 @@ import net.minecraft.loot.condition.MatchToolLootCondition;
 import net.minecraft.loot.condition.RandomChanceLootCondition;
 import net.minecraft.loot.entry.AlternativeEntry;
 import net.minecraft.loot.entry.ItemEntry;
+import net.minecraft.loot.function.EnchantRandomlyLootFunction;
 import net.minecraft.loot.function.SetComponentsLootFunction;
 import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
@@ -132,6 +134,17 @@ public class ModLootTableModifiers {
                 tableBuilder.modifyPools(builder -> {
                     builder.with(AlternativeEntry.builder(ItemEntry.builder(ModItems.DECORATED_ELYTRA_SMITHING_TEMPLATE).weight(2)));
                 });
+            }
+
+            if (key.equals(ANCIENT_CITY_ID) && ModConfigManager.get(Configs.doGreedGeneration, true)) {
+                RegistryWrapper.Impl<Enchantment> enchantments = registries.getWrapperOrThrow(RegistryKeys.ENCHANTMENT);
+
+                LootPool.Builder poolBuilder = LootPool.builder()
+                        .rolls(ConstantLootNumberProvider.create(1))
+                        .conditionally(RandomChanceLootCondition.builder(0.25f))
+                        .with(ItemEntry.builder(Items.BOOK)
+                                .apply(EnchantRandomlyLootFunction.create().option(enchantments.getOrThrow(ModEnchantments.GREED))));
+                tableBuilder.pool(poolBuilder.build());
             }
 
             //Coins

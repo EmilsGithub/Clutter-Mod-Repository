@@ -4,6 +4,10 @@
     "minecraft:snowy_plains",
     "minecraft:snowy_beach",
     {
+      "id": "#c:is_snowy",
+      "required": false
+    },
+    {
       "id": "terralith:ice_marsh",
       "required": false
     },

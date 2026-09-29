@@ -2,6 +2,7 @@ package net.emilsg.clutter.data;
 
 import net.emilsg.clutter.util.ModBiomeTags;
 import net.emilsg.clutter.world.biome.ModBiomes;
+import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBiomeTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.registry.RegistryKey;
@@ -41,6 +42,7 @@ public class BiomeTagDataGen extends FabricTagProvider<Biome> {
                 BiomeKeys.MEADOW,
                 BiomeKeys.CHERRY_GROVE
         )
+                .addOptionalTag(ConventionalBiomeTags.IS_FLORAL.id())
                 .addOptional(Identifier.of("biomesoplenty", "cherry_blossom_grove"))
                 .addOptional(Identifier.of("biomesoplenty", "bamboo_grove"))
                 .addOptional(Identifier.of("biomesoplenty", "lavender_field"))
@@ -76,6 +78,7 @@ public class BiomeTagDataGen extends FabricTagProvider<Biome> {
                         BiomeKeys.WINDSWEPT_SAVANNA,
                         BiomeKeys.SAVANNA
                 )
+                .addOptionalTag(ConventionalBiomeTags.IS_SAVANNA.id())
                 .addOptional(Identifier.of("terralith", "fractured_savanna"))
                 .addOptional(Identifier.of("terralith", "savanna_badlands"))
                 .addOptional(Identifier.of("terralith", "savanna_slopes"))
@@ -84,6 +87,8 @@ public class BiomeTagDataGen extends FabricTagProvider<Biome> {
 
         getOrCreateTagBuilder(ModBiomeTags.SPAWNS_BEAVERS)
                 .add(BiomeKeys.RIVER)
+                .addOptionalTag(ConventionalBiomeTags.IS_RIVER.id())
+                .addOptionalTag(ConventionalBiomeTags.IS_SWAMP.id())
                 .addOptional(Identifier.of("terralith", "warm_river"))
                 .addOptional(Identifier.of("biomesoplenty", "bayou"))
                 .addOptional(Identifier.of("biomesoplenty", "wetland"))
@@ -94,6 +99,7 @@ public class BiomeTagDataGen extends FabricTagProvider<Biome> {
                 BiomeKeys.SNOWY_PLAINS,
                 BiomeKeys.SNOWY_BEACH
         )
+                .addOptionalTag(ConventionalBiomeTags.IS_SNOWY.id())
                 .addOptional(Identifier.of("terralith", "ice_marsh"))
                 .addOptional(Identifier.of("terralith", "muskeg"))
         ;
@@ -104,6 +110,7 @@ public class BiomeTagDataGen extends FabricTagProvider<Biome> {
                         BiomeKeys.JUNGLE,
                         BiomeKeys.SPARSE_JUNGLE
                 )
+                .addOptionalTag(ConventionalBiomeTags.IS_JUNGLE.id())
                 .addOptional(Identifier.of("terralith", "jungle_mountains"))
                 .addOptional(Identifier.of("terralith", "rocky_jungle"))
                 .addOptional(Identifier.of("terralith", "tropical_jungle"))
@@ -119,6 +126,7 @@ public class BiomeTagDataGen extends FabricTagProvider<Biome> {
                         BiomeKeys.JUNGLE,
                         BiomeKeys.SPARSE_JUNGLE
                 )
+                .addOptionalTag(ConventionalBiomeTags.IS_JUNGLE.id())
                 .addOptional(Identifier.of("terralith", "jungle_mountains"))
                 .addOptional(Identifier.of("terralith", "rocky_jungle"))
                 .addOptional(Identifier.of("terralith", "tropical_jungle"))

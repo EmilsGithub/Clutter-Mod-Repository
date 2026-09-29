@@ -1,16 +1,16 @@
-// 1.21.1	2026-04-04T23:25:35.3535248	Clutter/Tags for minecraft:worldgen/biome
-c8220e673a408198ff90e0d5138fde37d109d55a data\clutter\tags\worldgen\biome\spawns_butterflies.json
+// 1.21.1	2026-09-29T18:27:41.4351418	Clutter/Tags for minecraft:worldgen/biome
+259b195dfb7aa5b4172827a677deced67dbbdf8a data\clutter\tags\worldgen\biome\spawns_butterflies.json
 61980f86c77c4aa265daf3eac3172e7cb492c789 data\clutter\tags\worldgen\biome\spawns_ember_tortoises.json
 10dde44afb6e27fc296fd5110fce5047622c8cd6 data\clutter\tags\worldgen\biome\spawns_jellyfishes.json
 0f241c94b10e4b16b4304f66ad949bb089955b1e data\clutter\tags\worldgen\biome\spawns_mossblooms.json
 10dde44afb6e27fc296fd5110fce5047622c8cd6 data\clutter\tags\worldgen\biome\spawns_manta_rays.json
 b95f2e5677841946d287305b14c97c69f59b6db1 data\clutter\tags\worldgen\biome\spawns_crimson_newts.json
-90338919bb91ed14b6c44ceeb34176a12a2ad78e data\clutter\tags\worldgen\biome\spawns_beavers.json
-8ac6959a9d02b36f593e9048eb9ed700db8033e9 data\clutter\tags\worldgen\biome\spawns_kiwis.json
-fc26736ffd09d236a36eb158d1682d05890ed2a0 data\clutter\tags\worldgen\biome\spawns_capybaras.json
+57c25622c9db4db3d843f13cf9318eaa1b8a9329 data\clutter\tags\worldgen\biome\spawns_beavers.json
+430daf42e5a40568f635d04141b5170120b42df6 data\clutter\tags\worldgen\biome\spawns_kiwis.json
+bafd335577fe0ce09da5d3ffab9d86fec64d1885 data\clutter\tags\worldgen\biome\spawns_capybaras.json
 cda6293db681f770e7df5daf2a245897ebf08fe5 data\clutter\tags\worldgen\biome\spawns_echofins.json
-8ac6959a9d02b36f593e9048eb9ed700db8033e9 data\clutter\tags\worldgen\biome\spawns_chameleons.json
+430daf42e5a40568f635d04141b5170120b42df6 data\clutter\tags\worldgen\biome\spawns_chameleons.json
 45a7fce7990fceb93e22529d0a7ef778bfac4a99 data\clutter\tags\worldgen\biome\spawns_warped_newts.json
 8c52026036e4fbe3e05aa23066a7cf7596158d4b data\minecraft\tags\worldgen\biome\is_overworld.json
 6410267e4c6c6e433ffa5df5cb5f1fefed919409 data\clutter\tags\worldgen\biome\spawns_seahorses.json
-efe3397e4879e5b9096df97a2215a211c235127b data\clutter\tags\worldgen\biome\spawns_emperor_penguins.json
+294357c8bf206b37d3eb0581030d41ae23e4b36d data\clutter\tags\worldgen\biome\spawns_emperor_penguins.json

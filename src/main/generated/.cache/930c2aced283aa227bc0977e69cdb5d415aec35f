@@ -1,4 +1,4 @@
-// 1.21.1	2026-04-04T23:25:35.3321432	Clutter/Tags for minecraft:item
+// 1.21.1	2026-09-29T18:27:41.3930111	Clutter/Tags for minecraft:item
 bf509848ecc1fe34cbf69fc3032d8e539e756116 data\clutter\tags\item\fruits_and_berries.json
 4eed15e69e9e468f7f3701f69f97f8cc91324544 data\minecraft\tags\item\enchantable\armor.json
 4f1a776ea07ee85827ed2e396cc3de6d56dffcb1 data\c\tags\item\raw_silver_ores.json
@@ -12,14 +12,17 @@ fd7e1ad85f1011305a3fd48802b28419f9bbda02 data\c\tags\item\entity_water_buckets.j
 1ed977f50ceebe9a18b1f20a160b5a98a321a17c data\clutter\tags\item\trellis_items.json
 9204702c1896403b6c59156e0e28febd7ed94464 data\minecraft\tags\item\leg_armor.json
 b49d55c787acc8247e921cda407f0107d85b421b data\trinkets\tags\item\head\hat.json
+b7c4f00612e454030fc9ffcbcc1bca329bdce280 data\minecraft\tags\item\saplings.json
 1836f0a5f054f60ae47c05258cc612c908d6b77c data\c\tags\item\silver_blocks.json
-ebb2f6e72dd38a00965415b1337c048bb5bd7417 data\clutter\tags\item\elytron.json
 0e6759252251db391181e350c7f27865e2283df6 data\clutter\tags\item\strippable_logs.json
+ebb2f6e72dd38a00965415b1337c048bb5bd7417 data\clutter\tags\item\elytron.json
 e6efa37501a98ea6bfa16839bd5c4933e68f686e data\clutter\tags\item\redwood_logs.json
+ef93b07e70392de65e1479ef32905725ee68a59a data\minecraft\tags\item\logs.json
 729c3b3ac96909f2b8a1b2ead8c4e1aaa4c466fd data\minecraft\tags\item\enchantable\foot_armor.json
 cabcc5392542df4fe60a5151fa4c223cdf929d40 data\clutter\tags\item\dyes.json
 3c7ac40ed6599c62170b2b7b2c1f756574aab493 data\minecraft\tags\item\bookshelf_books.json
 13c2c4f194e34fbf00983fcefdc91a78ac70e1d8 data\minecraft\tags\item\enchantable\chest_armor.json
+ef93b07e70392de65e1479ef32905725ee68a59a data\minecraft\tags\item\logs_that_burn.json
 21363cfe3344242e9bc3b48ffe6f3d093c9782cf data\minecraft\tags\item\chest_boats.json
 e4c6782443bf9ac18b225673f782d7f85727a791 data\c\tags\item\silver_ingots.json
 74cc3d1685a7650896c3a7d77c002a05c3e318c7 data\clutter\tags\item\seeds.json
